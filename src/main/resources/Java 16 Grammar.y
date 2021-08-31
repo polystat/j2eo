@@ -121,6 +121,7 @@
 
 %start CompilationUnit
 
+
 %language "Java"
 %define api.parser.class {JavaParser}
 %define api.parser.public
