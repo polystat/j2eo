@@ -31,6 +31,13 @@ dependencies {
     testRuntimeOnly("org.junit.jupiter:junit-jupiter-engine")
 }
 
+tasks.withType(JavaCompile::class).configureEach {
+    options.forkOptions.jvmArgs!!.addAll(arrayOf(
+        "--add-opens",
+        "jdk.compiler/com.sun.tools.javac.code=ALL-UNNAMED"
+    ))
+}
+
 tasks.getByName("build") {
     createOutDirs()
 
