@@ -24,11 +24,6 @@ jobs:
         with:
           java-version: 16
 
-      # Setup Bison on Linux
-      - name: Install Bison
-        run: sudo apt install bison
-        if: matrix.os == 'ubuntu-latest'
-
       - uses: gradle/gradle-build-action@v1
         with:
           arguments: build
