@@ -4,6 +4,6 @@ package tree;
 //    : ClassDeclaration
 //    | InterfaceDeclaration
 //    ;
-public class TopLevelComponent extends Entity
+public class TopLevelComponent  extends Entity
 {
 }
