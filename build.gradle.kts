@@ -97,7 +97,18 @@ fun runBison() =
                     javaGrammarFilePath
                 )
             }
-        // TODO: add Linux support
+        Os.isFamily(Os.FAMILY_UNIX) ->
+            exec {
+                workingDir = File(".")
+                executable = "bison"
+                args = mutableListOf(
+                    "-r",
+                    "all",
+                    "--report-file=${reportFilePath}",
+                    "--output=${javaParserFilePath}",
+                    javaGrammarFilePath
+                )
+            }
         else ->
             throw kotlin.UnsupportedOperationException("Your OS is not yet supported. File a GitHub or issue or " +
                     "provide a Pull Request with support for Bison execution for your OS.")
