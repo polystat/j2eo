@@ -5,9 +5,9 @@
 %token <Token> RPAREN       //  )
 %token <Token> LBRACE       //  {
 %token <Token> RBRACE       //  }
-%token <Token> LBRACKET     //  [
-%token <Token> RBRACKET     //  ]
-%token <Token> COMMA        //  ,
+%token <Token> LBRACKET     /*  [ */
+%token <Token> RBRACKET     /*  ] */
+%token <Token> COMMA        /*  , */
 %token <Token> DOT
 %token <Token> SEMICOLON    //  ;
 %token <Token> COLON        /*  :  */
