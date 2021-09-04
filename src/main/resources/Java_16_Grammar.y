@@ -8,10 +8,10 @@
 %token <Token> LBRACKET     //  [
 %token <Token> RBRACKET     //  ]
 %token <Token> COMMA        //  ,
-%token <Token> DOT          //  .
+%token <Token> DOT
 %token <Token> SEMICOLON    //  ;
-%token <Token> COLON        //  :
-%token <Token> DBL_COLON    //  ::
+%token <Token> COLON        /*  :  */
+%token <Token> DBL_COLON    /*  :: */
 %token <Token> STAR         //  *
 %token <Token> SLASH        //  /
 %token <Token> PERCENT      //  %
@@ -1118,7 +1118,7 @@ LambdaParameter
 //LambdaParameterType
 //    : UnannotatedType
 //    | VAR
-    ;
+//    ;
 
 LambdaBody
     : Expression

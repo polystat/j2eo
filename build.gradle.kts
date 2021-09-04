@@ -80,6 +80,7 @@ fun runBison() =
                 args = mutableListOf(
                     "-r",
                     "all",
+                    "--debug",
                     "--report-file=${reportFilePath}",
                     "--output=${javaParserFilePath}",
                     javaGrammarFilePath
