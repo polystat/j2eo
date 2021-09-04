@@ -39,6 +39,13 @@ package parser;
 
 
 import java.text.MessageFormat;
+/* "%code imports" blocks.  */
+/* "src/main/resources/Java_16_Grammar.y":131  */
+ import lexer.*; 
+/* "src/main/resources/Java_16_Grammar.y":132  */
+ import tree.*; 
+
+/* "src/main/java/parser/JavaParser.java":49  */
 
 /**
  * A Bison parser, automatically generated from <tt>src/main/resources/Java_16_Grammar.y</tt>.
@@ -1078,7 +1085,7 @@ public class JavaParser
      * Method to retrieve the semantic value of the last scanned token.
      * @return the semantic value of the last scanned token.
      */
-    Object getLVal();
+    Entity getLVal();
 
     /**
      * Entry point for the scanner.  Returns the token identifier corresponding
@@ -1142,12 +1149,12 @@ public class JavaParser
 
   private final class YYStack {
     private int[] stateStack = new int[16];
-    private Object[] valueStack = new Object[16];
+    private Entity[] valueStack = new Entity[16];
 
     public int size = 16;
     public int height = -1;
 
-    public final void push (int state, Object value) {
+    public final void push (int state, Entity value) {
       height++;
       if (size == height)
         {
@@ -1155,7 +1162,7 @@ public class JavaParser
           System.arraycopy (stateStack, 0, newStateStack, 0, height);
           stateStack = newStateStack;
 
-          Object[] newValueStack = new Object[size * 2];
+          Entity[] newValueStack = new Entity[size * 2];
           System.arraycopy (valueStack, 0, newValueStack, 0, height);
           valueStack = newValueStack;
 
@@ -1182,7 +1189,7 @@ public class JavaParser
       return stateStack[height - i];
     }
 
-    public final Object valueAt (int i) {
+    public final Entity valueAt (int i) {
       return valueStack[height - i];
     }
 
@@ -1265,12 +1272,12 @@ public class JavaParser
        Otherwise, the following line sets YYVAL to garbage.
        This behavior is undocumented and Bison
        users should not rely upon it.  */
-    Object yyval = (0 < yylen) ? yystack.valueAt(yylen - 1) : yystack.valueAt(0);
+    Entity yyval = (0 < yylen) ? yystack.valueAt(yylen - 1) : yystack.valueAt(0);
 
     switch (yyn)
       {
         
-/* "src/main/java/parser/JavaParser.java":1274  */
+/* "src/main/java/parser/JavaParser.java":1281  */
 
         default: break;
       }
@@ -1313,7 +1320,7 @@ public class JavaParser
 
 
     /* Semantic value of the lookahead.  */
-    Object yylval = null;
+    Entity yylval = null;
 
     yyerrstatus_ = 0;
     yynerrs = 0;
@@ -3075,5 +3082,5 @@ private static final short[] yycheck_ = yycheck_init();
 
 
 }
-/* "src/main/resources/Java_16_Grammar.y":1324  */
+/* "src/main/resources/Java_16_Grammar.y":1328  */
 

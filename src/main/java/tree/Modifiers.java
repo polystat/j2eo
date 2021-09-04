@@ -46,11 +46,11 @@ public class Modifiers extends Entity
     }
 
     // Structure
-    public ArrayList<Annotation> annotations;
+    public Annotations annotations;
     public ArrayList<modifier> modifiers;
 
     // Creation
-    public Modifiers(ArrayList<Annotation> anns, ArrayList<modifier> mods)
+    public Modifiers(Annotations anns, ArrayList<modifier> mods)
     {
         this.annotations = anns;
         this.modifiers = mods;

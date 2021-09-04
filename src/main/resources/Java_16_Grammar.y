@@ -1,123 +1,123 @@
 
 //// Tokens ////////////////////////
 
-%token LPAREN       //  (
-%token RPAREN       //  )
-%token LBRACE       //  {
-%token RBRACE       //  }
-%token LBRACKET     //  [
-%token RBRACKET     //  ]
-%token COMMA        //  ,
-%token DOT          //  .
-%token SEMICOLON    //  ;
-%token COLON        //  :
-%token DBL_COLON    //  ::
-%token STAR         //  *
-%token SLASH        //  /
-%token PERCENT      //  %
-%token AMPERSAND    //  &
-%token AT           //  @
-%token LESS         //  <
-%token GREATER      //  >
-%token VERTICAL     //  |
-%token PLUS         //  +
-%token MINUS        //  -
-%token ARROW        //  ->
-%token DIAMOND      //  <>
-%token QUESTION     //  ?
-%token CARET        //  ^
-%token EQUAL        //  =
-%token TILDE        //  ~
-%token EXCLAMATION  //  !
+%token <Token> LPAREN       //  (
+%token <Token> RPAREN       //  )
+%token <Token> LBRACE       //  {
+%token <Token> RBRACE       //  }
+%token <Token> LBRACKET     //  [
+%token <Token> RBRACKET     //  ]
+%token <Token> COMMA        //  ,
+%token <Token> DOT          //  .
+%token <Token> SEMICOLON    //  ;
+%token <Token> COLON        //  :
+%token <Token> DBL_COLON    //  ::
+%token <Token> STAR         //  *
+%token <Token> SLASH        //  /
+%token <Token> PERCENT      //  %
+%token <Token> AMPERSAND    //  &
+%token <Token> AT           //  @
+%token <Token> LESS         //  <
+%token <Token> GREATER      //  >
+%token <Token> VERTICAL     //  |
+%token <Token> PLUS         //  +
+%token <Token> MINUS        //  -
+%token <Token> ARROW        //  ->
+%token <Token> DIAMOND      //  <>
+%token <Token> QUESTION     //  ?
+%token <Token> CARET        //  ^
+%token <Token> EQUAL        //  =
+%token <Token> TILDE        //  ~
+%token <Token> EXCLAMATION  //  !
 
-%token ELLIPSIS     //  ...
+%token <Token> ELLIPSIS     //  ...
 
-%token LESS_EQUAL          //  <=
-%token GREATER_EQUAL       //  >=
-%token STAR_EQUAL          //  *=
-%token SLASH_EQUAL         //  /=
-%token PERCENT_EQUAL       //  %=
-%token PLUS_EQUAL          //  +=
-%token MINUS_EQUAL         //  -=
-%token LESS_LESS_EQUAL     //  <<=
-%token GR_GR_EQUAL         //  >>=
-%token GR_GR_GR_EQUAL      //  >>>=
-%token AMP_EQUAL           //  &=
-%token CARET_EQUAL         //  ^=
-%token VERTICAL_EQUAL      //  |=
+%token <Token> LESS_EQUAL          //  <=
+%token <Token> GREATER_EQUAL       //  >=
+%token <Token> STAR_EQUAL          //  *=
+%token <Token> SLASH_EQUAL         //  /=
+%token <Token> PERCENT_EQUAL       //  %=
+%token <Token> PLUS_EQUAL          //  +=
+%token <Token> MINUS_EQUAL         //  -=
+%token <Token> LESS_LESS_EQUAL     //  <<=
+%token <Token> GR_GR_EQUAL         //  >>=
+%token <Token> GR_GR_GR_EQUAL      //  >>>=
+%token <Token> AMP_EQUAL           //  &=
+%token <Token> CARET_EQUAL         //  ^=
+%token <Token> VERTICAL_EQUAL      //  |=
 
-%token DBL_PLUS            //  ++
-%token DBL_MINUS           //  --
-%token DBL_VERTICAL        //  ||
-%token DBL_AMPERSAND       //  &&
-%token DBL_EQUAL           //  ==
-%token NON_EQUAL           //  !=
-%token DBL_LESS            //  <<
-%token DBL_GREATER         //  >>
-%token TRIPL_GREATER       //  >>>
+%token <Token> DBL_PLUS            //  ++
+%token <Token> DBL_MINUS           //  --
+%token <Token> DBL_VERTICAL        //  ||
+%token <Token> DBL_AMPERSAND       //  &&
+%token <Token> DBL_EQUAL           //  ==
+%token <Token> NON_EQUAL           //  !=
+%token <Token> DBL_LESS            //  <<
+%token <Token> DBL_GREATER         //  >>
+%token <Token> TRIPL_GREATER       //  >>>
 
-%token IDENTIFIER
-%token INTEGER_LITERAL
-%token FLOATING_POINT_LITERAL
-%token CHARACTER_LITERAL
-%token STRING_LITERAL
+%token <Token> IDENTIFIER
+%token <Token> INTEGER_LITERAL
+%token <Token> FLOATING_POINT_LITERAL
+%token <Token> CHARACTER_LITERAL
+%token <Token> STRING_LITERAL
 
-%token ABSTRACT
-%token ASSERT
-%token BOOLEAN
-%token BREAK
-%token BYTE
-%token CASE
-%token CATCH
-%token CHAR
-%token CLASS
-%token CONTINUE
-%token DEFAULT
-%token DO
-%token DOUBLE
-%token ELSE
-%token ENUM
-%token EXTENDS
-%token FALSE
-%token FINAL
-%token FINALLY
-%token FLOAT
-%token FOR
-%token IF
-%token IMPLEMENTS
-%token IMPORT
-%token INSTANCEOF
-%token INT
-%token INTERFACE
-%token LONG
-%token MODULE
-%token NEW
-%token NULL
-%token OPEN
-%token PACKAGE
-%token PRIVATE
-%token PROTECTED
-%token PUBLIC
-%token RECORD
-%token RETURN
-%token SHORT
-%token STATIC
-%token STRICTFP
-%token SUPER
-%token SWITCH
-%token SYNCHRONIZED
-%token THIS
-%token THROW
-%token THROWS
-%token TRANSIENT
-%token TRANSITIVE
-%token TRUE
-%token TRY
-%token VAR
-%token VOID
-%token VOLATILE
-%token WHILE
-%token YIELD
+%token <Token> ABSTRACT
+%token <Token> ASSERT
+%token <Token> BOOLEAN
+%token <Token> BREAK
+%token <Token> BYTE
+%token <Token> CASE
+%token <Token> CATCH
+%token <Token> CHAR
+%token <Token> CLASS
+%token <Token> CONTINUE
+%token <Token> DEFAULT
+%token <Token> DO
+%token <Token> DOUBLE
+%token <Token> ELSE
+%token <Token> ENUM
+%token <Token> EXTENDS
+%token <Token> FALSE
+%token <Token> FINAL
+%token <Token> FINALLY
+%token <Token> FLOAT
+%token <Token> FOR
+%token <Token> IF
+%token <Token> IMPLEMENTS
+%token <Token> IMPORT
+%token <Token> INSTANCEOF
+%token <Token> INT
+%token <Token> INTERFACE
+%token <Token> LONG
+%token <Token> MODULE
+%token <Token> NEW
+%token <Token> NULL
+%token <Token> OPEN
+%token <Token> PACKAGE
+%token <Token> PRIVATE
+%token <Token> PROTECTED
+%token <Token> PUBLIC
+%token <Token> RECORD
+%token <Token> RETURN
+%token <Token> SHORT
+%token <Token> STATIC
+%token <Token> STRICTFP
+%token <Token> SUPER
+%token <Token> SWITCH
+%token <Token> SYNCHRONIZED
+%token <Token> THIS
+%token <Token> THROW
+%token <Token> THROWS
+%token <Token> TRANSIENT
+%token <Token> TRANSITIVE
+%token <Token> TRUE
+%token <Token> TRY
+%token <Token> VAR
+%token <Token> VOID
+%token <Token> VOLATILE
+%token <Token> WHILE
+%token <Token> YIELD
 
 %start CompilationUnit
 
@@ -125,7 +125,20 @@
 %language "Java"
 %define api.parser.class {JavaParser}
 %define api.parser.public
-%define package {parser}
+%define api.package {parser}
+%define api.value.type {Entity}
+
+%code imports { import lexer.*; }
+%code imports { import tree.*; }
+
+// Nonterminal types
+// =================
+/*
+%nterm <CompoundName> CompoundName
+%nterm <Annotation> Annotation
+%nterm <Annotations> AnnotationSeq AnnotationSeqOpt
+%nterm <Modifiers.modifier> StandardModifier
+*/
 
 %%
 
@@ -145,12 +158,12 @@ Literal
 //// Basic Constructs ////////////////////////////////////////
 
 CompoundName
-    :                  IDENTIFIER
-    | CompoundName DOT IDENTIFIER
+    :                  IDENTIFIER { $$ = new CompoundName($1.image); }
+    | CompoundName DOT IDENTIFIER { $$ = $1.add($3.image); }
     ;
 
 ModifierSeqOpt
-    :  // empty
+    : %empty
     | ModifierSeq
     ;
 
@@ -166,18 +179,18 @@ StandardModifierSeq
 
 StandardModifier
 //  : Annotation
-	: DEFAULT
-    | FINAL
-    | PUBLIC
-    | PROTECTED
-    | PRIVATE
-    | ABSTRACT
-    | STATIC
-    | STRICTFP
-    | SYNCHRONIZED
-    | TRANSIENT
-    | VOLATILE
-    | OPEN  // for modules only
+	: DEFAULT       { $$ = Modifiers.modifier.mod_default; }
+    | FINAL         { $$ = Modifiers.modifier.mod_final; }
+    | PUBLIC        { $$ = Modifiers.modifier.mod_public; }
+    | PROTECTED     { $$ = Modifiers.modifier.mod_protected; }
+    | PRIVATE       { $$ = Modifiers.modifier.mod_private; }
+    | ABSTRACT      { $$ = Modifiers.modifier.mod_abstract; }
+    | STATIC        { $$ = Modifiers.modifier.mod_static; }
+    | STRICTFP      { $$ = Modifiers.modifier.mod_static; }
+    | SYNCHRONIZED  { $$ = Modifiers.modifier.mod_synchronized; }
+    | TRANSIENT     { $$ = Modifiers.modifier.mod_transient; }
+    | VOLATILE      { $$ = Modifiers.modifier.mod_volatile; }
+    | OPEN          { $$ = Modifiers.modifier.mod_open; }  // for modules only
     ;
 
 //// Compilation units, Packages and Modules ////////////////////
@@ -1283,8 +1296,8 @@ AnnotationOpt
     ;
 */
 AnnotationSeqOpt
-    :  // empty
-    | AnnotationSeq
+    : %empty           { $$ = null; }
+    | AnnotationSeq    { $$ = $1; }
     ;
 
 AnnotationSeq
@@ -1293,14 +1306,10 @@ AnnotationSeq
     ;
 
 Annotation
-    : AT CompoundName AnnotationTailOpt
-    ;
-
-AnnotationTailOpt
-    :  // empty
-    | AT CompoundName LPAREN                   RPAREN
-    | AT CompoundName LPAREN AnnoParameterList RPAREN
-    | AT CompoundName LPAREN ElementValue      RPAREN
+    : AT CompoundName                                  { $$ = new Annotation($2,null); }
+    | AT CompoundName LPAREN                   RPAREN  { $$ = new Annotation($2,null); }
+    | AT CompoundName LPAREN AnnoParameterList RPAREN  { $$ = new Annotation($2,$4); }
+    | AT CompoundName LPAREN ElementValue      RPAREN  { $$ = new Annotation($2,null); } // not implemented
     ;
 
 AnnoParameterList
@@ -1322,3 +1331,4 @@ ElementValueListOpt
     ;
 
 %%
+
