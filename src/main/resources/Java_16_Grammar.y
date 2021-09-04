@@ -1,20 +1,20 @@
 
 //// Tokens ////////////////////////
 
-%token <Token> LPAREN       //  (
-%token <Token> RPAREN       //  )
-%token <Token> LBRACE       //  {
-%token <Token> RBRACE       //  }
-%token <Token> LBRACKET     /*  [ */
-%token <Token> RBRACKET     /*  ] */
-%token <Token> COMMA        /*  , */
-%token <Token> DOT
-%token <Token> SEMICOLON    //  ;
-%token <Token> COLON        /*  :  */
-%token <Token> DBL_COLON    /*  :: */
-%token <Token> STAR         //  *
-%token <Token> SLASH        //  /
-%token <Token> PERCENT      //  %
+%token <Token> LPAREN     //  (
+%token <Token> RPAREN     //  )
+%token <Token> LBRACE     //  {
+%token <Token> RBRACE     //  }
+%token <Token> LBRACKET   //  [
+%token <Token> RBRACKET   //  ]
+%token <Token> COMMA      //  ,
+%token <Token> DOT        //  .
+%token <Token> SEMICOLON  //  ;
+%token <Token> COLON
+%token <Token> DBL_COLON
+%token <Token> STAR
+%token <Token> SLASH
+%token <Token> PERCENT
 %token <Token> AMPERSAND    //  &
 %token <Token> AT           //  @
 %token <Token> LESS         //  <
@@ -133,12 +133,12 @@
 
 // Nonterminal types
 // =================
-/*
+
 %nterm <CompoundName> CompoundName
 %nterm <Annotation> Annotation
 %nterm <Annotations> AnnotationSeq AnnotationSeqOpt
 %nterm <Modifiers.modifier> StandardModifier
-*/
+
 
 %%
 
