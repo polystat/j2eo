@@ -137,10 +137,20 @@
 %nterm <CompoundName> CompoundName
 %nterm <Annotation> Annotation
 %nterm <Annotations> AnnotationSeq AnnotationSeqOpt
+
 %nterm <StandardModifiers.modifier> StandardModifier
 %nterm <StandardModifiers> StandardModifiers
 %nterm <Modifiers> ModifierSeq ModifierSeqOpt
 
+%nterm <Declaration> TopLevelComponent
+%nterm <CompilationUnit> CompilationUnit
+
+%nterm <boolean> StaticOpt
+%nterm <ImportDeclaration> ImportDeclaration
+%nterm <ImportDeclarations> ImportDeclarationSeq ImportDeclarationSeqOpt
+
+%nterm <TopLevelComponent> TopLevelComponent
+%nterm <TopLevelComponents> TopLevelComponentSeq TopLevelComponentSeqOpt
 
 %%
 
@@ -199,9 +209,9 @@ StandardModifier
 
 CompilationUnit
     :  // empty
-    | Package
-    | Module
-    | ImportDeclarationSeqOpt TopLevelComponentSeq
+    | Package                                       { $$ = $1; }
+    | Module                                        { $$ = $1; }
+    | ImportDeclarationSeqOpt TopLevelComponentSeq  { $$ = new SimpleCompilationUnit($1,$2); }
     ;
 
 Package
@@ -213,34 +223,34 @@ Module
     ;
 
 ImportDeclarationSeqOpt
-    :  // empty
-    |                         ImportDeclaration
-    | ImportDeclarationSeqOpt ImportDeclaration
+    :  // empty                                  { $$ = null; }
+    |                         ImportDeclaration  { $$ = new ImportDeclarations($1); }
+    | ImportDeclarationSeqOpt ImportDeclaration  { $$ = $1.add($2); }
     ;
 
 ImportDeclaration
-    : IMPORT StaticOpt CompoundName          SEMICOLON
-    | IMPORT StaticOpt CompoundName DOT STAR SEMICOLON
+    : IMPORT StaticOpt CompoundName          SEMICOLON  { $$ = new ImportDeclaration($2,$3,false); }
+    | IMPORT StaticOpt CompoundName DOT STAR SEMICOLON  { $$ = new ImportDeclaration($2,$3,true); }
     ;
 
 StaticOpt
-    : // empty
-    | STATIC
+    : %empty   { $$ = false; }
+    | STATIC   { $$ = true; }
     ;
 
 TopLevelComponentSeqOpt
-    :  // empty
-    | TopLevelComponentSeq
+    : %empty                { $$ = null; }
+    | TopLevelComponentSeq  { $$ = $1; }
     ;
 
 TopLevelComponentSeq
-    :                      ModifierSeqOpt TopLevelComponent
-    | TopLevelComponentSeq ModifierSeqOpt TopLevelComponent
+    :                      ModifierSeqOpt TopLevelComponent { $2.addModifiers($1); $$ = new TopLevelComponents($2); }
+    | TopLevelComponentSeq ModifierSeqOpt TopLevelComponent { $3.addModifiers($2); $$ = $1.add($3); }
     ;
 
 TopLevelComponent
-    : ClassDeclaration
-    | InterfaceDeclaration
+    : ClassDeclaration     { $$ = $1; }
+    | InterfaceDeclaration { $$ = $1; }
     ;
 
 ModuleDirectiveSeqOpt
