@@ -137,7 +137,9 @@
 %nterm <CompoundName> CompoundName
 %nterm <Annotation> Annotation
 %nterm <Annotations> AnnotationSeq AnnotationSeqOpt
-%nterm <Modifiers.modifier> StandardModifier
+%nterm <StandardModifiers.modifier> StandardModifier
+%nterm <StandardModifiers> StandardModifiers
+%nterm <Modifiers> ModifierSeq ModifierSeqOpt
 
 
 %%
@@ -163,34 +165,34 @@ CompoundName
     ;
 
 ModifierSeqOpt
-    : %empty
-    | ModifierSeq
+    : %empty       { $$ = null }
+    | ModifierSeq  { $$ = $1; }
     ;
 
 ModifierSeq
-    :               StandardModifierSeq
-    | AnnotationSeq StandardModifierSeq
+    :               StandardModifierSeq { $$ = new Modifiers(null,$1); }
+    | AnnotationSeq StandardModifierSeq { $$ = new Modifiers($1,$2); }
     ;
 
 StandardModifierSeq
-    :                     StandardModifier
-    | StandardModifierSeq StandardModifier
+    :                     StandardModifier { $$ = new StandardModifiers($1); }
+    | StandardModifierSeq StandardModifier { $$ = $1.add($2); }
     ;
 
 StandardModifier
 //  : Annotation
-	: DEFAULT       { $$ = Modifiers.modifier.mod_default; }
-    | FINAL         { $$ = Modifiers.modifier.mod_final; }
-    | PUBLIC        { $$ = Modifiers.modifier.mod_public; }
-    | PROTECTED     { $$ = Modifiers.modifier.mod_protected; }
-    | PRIVATE       { $$ = Modifiers.modifier.mod_private; }
-    | ABSTRACT      { $$ = Modifiers.modifier.mod_abstract; }
-    | STATIC        { $$ = Modifiers.modifier.mod_static; }
-    | STRICTFP      { $$ = Modifiers.modifier.mod_static; }
-    | SYNCHRONIZED  { $$ = Modifiers.modifier.mod_synchronized; }
-    | TRANSIENT     { $$ = Modifiers.modifier.mod_transient; }
-    | VOLATILE      { $$ = Modifiers.modifier.mod_volatile; }
-    | OPEN          { $$ = Modifiers.modifier.mod_open; }  // for modules only
+	: DEFAULT       { $$ = StandardModifiers.modifier.mod_default; }
+    | FINAL         { $$ = StandardModifiers.modifier.mod_final; }
+    | PUBLIC        { $$ = StandardModifiers.modifier.mod_public; }
+    | PROTECTED     { $$ = StandardModifiers.modifier.mod_protected; }
+    | PRIVATE       { $$ = StandardModifiers.modifier.mod_private; }
+    | ABSTRACT      { $$ = StandardModifiers.modifier.mod_abstract; }
+    | STATIC        { $$ = StandardModifiers.modifier.mod_static; }
+    | STRICTFP      { $$ = StandardModifiers.modifier.mod_static; }
+    | SYNCHRONIZED  { $$ = StandardModifiers.modifier.mod_synchronized; }
+    | TRANSIENT     { $$ = StandardModifiers.modifier.mod_transient; }
+    | VOLATILE      { $$ = StandardModifiers.modifier.mod_volatile; }
+    | OPEN          { $$ = StandardModifiers.modifier.mod_open; }  // for modules only
     ;
 
 //// Compilation units, Packages and Modules ////////////////////

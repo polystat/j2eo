@@ -6,51 +6,14 @@ import java.util.ArrayList;
 //    :               StandardModifierSeq
 //    | AnnotationSeq StandardModifierSeq
 //    ;
-//
-// StandardModifierSeq
-//    :                     StandardModifier
-//    | StandardModifierSeq StandardModifier
-//    ;
-//
-// StandardModifier
-//     //    : Annotation
-//	  : DEFAULT
-//    | FINAL
-//    | PUBLIC
-//    | PROTECTED
-//    | PRIVATE
-//    | ABSTRACT
-//    | STATIC
-//    | STRICTFP
-//    | SYNCHRONIZED
-//    | TRANSIENT
-//    | VOLATILE
-//    | OPEN  // for modules only
-//    ;
 public class Modifiers extends Entity
 {
-    public enum modifier
-    {
-        mod_default,
-        mod_final,
-        mod_public,
-        mod_protected,
-        mod_private,
-        mod_abstract,
-        mod_static,
-        mod_strictfp,
-        mod_synchronized,
-        mod_transient,
-        mod_volatile,
-        mod_open
-    }
-
     // Structure
     public Annotations annotations;
-    public ArrayList<modifier> modifiers;
+    public Modifiers modifiers;
 
     // Creation
-    public Modifiers(Annotations anns, ArrayList<modifier> mods)
+    public Modifiers(Annotations anns, Modifiers mods)
     {
         this.annotations = anns;
         this.modifiers = mods;
@@ -59,7 +22,13 @@ public class Modifiers extends Entity
     // Reporting
     public void report(int sh)
     {
-
+        if ( annotations != null )
+        {
+            annotations.report(sh);
+            System.out.println();
+        }
+        modifiers.report(sh);
+        System.out.println();
     }
 
     // Generation
