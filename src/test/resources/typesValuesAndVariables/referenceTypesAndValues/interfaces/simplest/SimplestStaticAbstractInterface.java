@@ -1,0 +1,3 @@
+
+static abstract interface Simplest{
+}
