@@ -1,0 +1,3 @@
+
+final interface Simplest{
+}

@@ -1,0 +1,3 @@
+
+protected static class Simplest{
+}
