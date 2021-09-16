@@ -9,7 +9,7 @@ import eotree.data.EOData;
  * </code>
  */
 public class EOCharData extends EOData {
-    Character c;
+    public Character c;
 
     public EOCharData(Character c) {
         this.c = c;

@@ -5,10 +5,10 @@ import java.util.Optional;
 import java.util.stream.Collectors;
 
 public class EOObject extends EOExpr {
-    List<EOBndName>     freeAttrs;
-    Optional<EOBndName> varargAttr;
-    List<EOBndExpr>     bndAttrs;
-    Optional<String>    name;
+    public List<EOBndName>     freeAttrs;
+    public Optional<EOBndName> varargAttr;
+    public List<EOBndExpr>     bndAttrs;
+    public Optional<String>    name;
 
     public EOObject(List<EOBndName> freeAttrs,
                     Optional<EOBndName> varargAttr,

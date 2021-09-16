@@ -1,7 +1,7 @@
 package eotree;
 
 public class EOBndName extends EONode {
-    String name;
+    public String name;
 
     public EOBndName(String name) {
         this.name = name;

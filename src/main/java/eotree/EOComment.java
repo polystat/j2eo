@@ -7,7 +7,7 @@ package eotree;
  * </code>
  */
 public class EOComment extends EONode {
-    String comment;
+    public String comment;
 
     public EOComment(String comment) {
         this.comment = comment;

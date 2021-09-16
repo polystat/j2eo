@@ -11,8 +11,8 @@ public class EOAttribute extends EONode {
     public static final EOAttribute PARENT    = new EOAttribute("^", false);
     public static final EOAttribute CURRENT   = new EOAttribute("$", false);
 
-    String  name;
-    boolean isVarArg;
+    public String  name;
+    public boolean isVarArg;
 
     public EOAttribute(String name, boolean isVarArg) {
         this.name = name;

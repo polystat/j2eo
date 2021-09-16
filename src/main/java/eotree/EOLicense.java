@@ -10,7 +10,7 @@ import java.util.stream.Collectors;
  * </code>
  */
 public class EOLicense extends EONode {
-    List<EOComment> comments;
+    public List<EOComment> comments;
 
     public EOLicense(List<EOComment> comments) {
         this.comments = comments;

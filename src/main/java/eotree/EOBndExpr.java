@@ -1,7 +1,7 @@
 package eotree;
 
 public class EOBndExpr extends EOBnd {
-    EOBndName bndName;
+    public EOBndName bndName;
 
     public EOBndExpr(EOExpr expr) {
         super(expr);

@@ -7,8 +7,8 @@ package eotree;
  * </code>
  */
 public abstract class EOMeta extends EONode {
-    String name;
-    String value;
+    public String name;
+    public String value;
 
     public EOMeta(String name, String value) {
         this.name = name;

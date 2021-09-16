@@ -4,7 +4,7 @@ package eotree;
  * name > @
  */
 public class EODecoration extends EONode {
-    EOBndName name;
+    public EOBndName name;
 
     public EODecoration(EOBndName name) {
         this.name = name;

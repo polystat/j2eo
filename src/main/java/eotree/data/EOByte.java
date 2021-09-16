@@ -9,7 +9,7 @@ import eotree.EONode;
  * </code>
  */
 public class EOByte extends EONode {
-    Byte b;
+    public Byte b;
 
     public EOByte(Byte b) {
         this.b = b;

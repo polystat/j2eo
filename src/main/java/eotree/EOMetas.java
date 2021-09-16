@@ -11,8 +11,8 @@ import java.util.stream.Collectors;
  * </code>
  */
 public class EOMetas extends EONode {
-    Optional<String> packageName;
-    List<EOMeta>     metas;
+    public Optional<String> packageName;
+    public List<EOMeta>     metas;
 
     public EOMetas(Optional<String> packageName, List<EOMeta> metas) {
         this.packageName = packageName;

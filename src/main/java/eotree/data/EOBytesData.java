@@ -15,7 +15,7 @@ public class EOBytesData extends EOData {
         this.bytes = bytes;
     }
 
-    List<EOByte> bytes;
+    public List<EOByte> bytes;
 
     @Override
     public String generateEO(int indent) {

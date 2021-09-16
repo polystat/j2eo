@@ -7,7 +7,7 @@ package eotree.data;
  * </code>
  */
 public class EORegexData extends EOData {
-    String regex;
+    public String regex;
 
     public EORegexData(String regex) {
         this.regex = regex;

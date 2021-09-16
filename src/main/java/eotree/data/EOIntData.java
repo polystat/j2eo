@@ -7,7 +7,7 @@ package eotree.data;
  * </code>
  */
 public class EOIntData extends EOData {
-    Integer i;
+    public Integer i;
 
     public EOIntData(Integer i) {
         this.i = i;

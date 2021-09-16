@@ -10,9 +10,9 @@ import java.util.stream.Collectors;
  * </code>
  */
 public class EOProgram extends EONode {
-    EOLicense   license;
-    EOMetas     metas;
-    List<EOBnd> bnds;
+    public EOLicense   license;
+    public EOMetas     metas;
+    public List<EOBnd> bnds;
 
     public EOProgram(EOLicense license, EOMetas metas, List<EOBnd> bnds) {
         this.license = license;

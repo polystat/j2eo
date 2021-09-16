@@ -1,8 +1,8 @@
 package eotree;
 
 public class EODot extends EOExpr {
-    EOExpr src;
-    String name;
+    public EOExpr src;
+    public String name;
 
     public EODot(EOExpr src, String name) {
         this.src = src;

@@ -7,7 +7,7 @@ package eotree.data;
  * </code>
  */
 public class EOFloatData extends EOData {
-    Float f;
+    public Float f;
 
     public EOFloatData(Float f) {
         this.f = f;
