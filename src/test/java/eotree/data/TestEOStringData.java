@@ -8,14 +8,14 @@ public class TestEOStringData {
 
     @Test
     public void TestGenerateEOZeroIndent() {
-        var f = new EORegexData("hello world");
+        var s = new EOStringData("hello world");
 
-        assertEquals(f.generateEO(0), "\"hello world\"");
+        assertEquals(s.generateEO(0), "\"hello world\"");
     }
 
     @Test
     public void TestGenerateEONonZeroIndent() {
-        var f = new EORegexData("hello world");
+        var f = new EOStringData("hello world");
 
         assertEquals(f.generateEO(1), "\"hello world\"");
     }
