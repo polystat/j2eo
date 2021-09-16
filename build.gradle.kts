@@ -78,7 +78,7 @@ fun runBison() =
                 workingDir = File(".")
                 executable = "bin/win_bison.exe"
                 args = mutableListOf(
-                    "-r all",
+                    "-r", "all",
                  //   "--debug", "--help", "--stacktrace",
                     "--report-file=${reportFilePath}",
                     "--output=${javaParserFilePath}",

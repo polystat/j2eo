@@ -130,6 +130,12 @@
 
 %code imports { import lexer.*; }
 %code imports { import tree.*; }
+%code imports { import tree.Compilation.*; }
+%code imports { import tree.Declaration.*; }
+%code imports { import tree.Expression.*; }
+%code imports { import tree.Expression.Primary.*; }
+%code imports { import tree.Statement.*; }
+%code imports { import tree.Type.*; }
 
 // Nonterminal types
 // =================
@@ -137,34 +143,71 @@
 %nterm <CompoundName> CompoundName
 %nterm <Annotation> Annotation
 %nterm <Annotations> AnnotationSeq AnnotationSeqOpt
+%nterm <AnnoParameterList> AnnoParameterList
 
-%nterm <StandardModifiers.modifier> StandardModifier
-%nterm <StandardModifiers> StandardModifiers
+%nterm <Token> StandardModifier
+%nterm <StandardModifiers> StandardModifierSeq
 %nterm <Modifiers> ModifierSeq ModifierSeqOpt
 
-%nterm <Declaration> TopLevelComponent
-%nterm <CompilationUnit> CompilationUnit
+%nterm <tree.Compilation.CompilationUnit> CompilationUnit Package
+%nterm <tree.Compilation.Module> Module
 
-%nterm <boolean> StaticOpt
-%nterm <ImportDeclaration> ImportDeclaration
-%nterm <ImportDeclarations> ImportDeclarationSeq ImportDeclarationSeqOpt
+%nterm <tree.Declaration.ImportDeclaration> ImportDeclaration
+%nterm <tree.Declaration.ImportDeclarations> ImportDeclarationSeq ImportDeclarationSeqOpt
 
-%nterm <TopLevelComponent> TopLevelComponent
-%nterm <TopLevelComponents> TopLevelComponentSeq TopLevelComponentSeqOpt
+%nterm <tree.Compilation.TopLevelComponent> TopLevelComponent
+%nterm <tree.Compilation.TopLevelComponents> TopLevelComponentSeq TopLevelComponentSeqOpt
+
+%nterm <Dims> Dims DimsOpt
+%nterm <Dim> Dim
+
+%nterm <tree.Type.TypeArgument> TypeArgument
+%nterm <tree.Type.TypeArguments> TypeArguments TypeArgumentList TypeArgumentsOpt
+
+%nterm <tree.Declaration.Declaration> EnumDeclaration ClassDeclaration NormalClassDeclaration
+                     InterfaceDeclaration NormalInterfaceDeclaration RecordDeclaration
+                     AnnotationInterfaceDeclaration Pattern
+%nterm <tree.Type.Type> Type
+%nterm <tree.Type.UnannotatedType> UnannotatedType
+%nterm <Token> PrimitiveType AssignmentOperator Literal
+
+%nterm <tree.Type.TypeList> TypeList TargetType ClassTypeList1 ClassTypeList2
+
+%nterm <AnnoElementValue> ElementValue
+
+%nterm <tree.Expression.Expression> Expression Assignment AssignmentExpression ConditionalExpression
+                    SwitchExpression PostfixExpression Primary UnaryExpression UnaryExpressionNotPlusMinus
+                    InstanceofExpression CastExpression LambdaExpression
+                    LeftHandSide FieldAccess ArrayAccess
+
+%nterm<tree.Expression.Binary> ConditionalOrTail ConditionalOrExpression ConditionalAndExpression
+               InclusiveOrExpression ExclusiveOrExpression AndExpression EqualityExpression RelationalExpression
+               ShiftExpression AdditiveExpression MultiplicativeExpression
+
+%nterm <UnaryPrefix> PreIncrementExpression PreDecrementExpression
+%nterm <UnaryPostfix> PostIncrementExpression PostDecrementExpression
+
+%nterm <tree.Expression.ArgumentList> Arguments ArgumentList
+
+%nterm <ParameterDeclaration> LambdaParameter
+%nterm <ParameterDeclarations> LambdaParameters LambdaParameterList1 LambdaParameterList2
+%nterm <tree.Statement.Block> Block
+%nterm <tree.Statement.BlockStatement> BlockStatement
+%nterm <tree.Statement.BlockStatements> BlockStatementSeq
 
 %%
 
 //// Literals ////////////////////////////////////////////////
 
 Literal
-    : INTEGER_LITERAL
-    | FLOATING_POINT_LITERAL
-    | TRUE                      // BOOLEAN_LITERAL
-    | FALSE                     // BOOLEAN_LITERAL
-    | CHARACTER_LITERAL
-    | STRING_LITERAL
-//  | TextBlock   // ???
-    | NULL   // NullLiteral
+    : INTEGER_LITERAL         { $$ = $1; }
+    | FLOATING_POINT_LITERAL  { $$ = $1; }
+    | TRUE                    { $$ = $1; }  // BOOLEAN_LITERAL
+    | FALSE                   { $$ = $1; }  // BOOLEAN_LITERAL
+    | CHARACTER_LITERAL       { $$ = $1; }
+    | STRING_LITERAL          { $$ = $1; }
+//  | TextBlock                             // ???
+    | NULL                    { $$ = $1; }  // NullLiteral
     ;
 
 //// Basic Constructs ////////////////////////////////////////
@@ -175,7 +218,7 @@ CompoundName
     ;
 
 ModifierSeqOpt
-    : %empty       { $$ = null }
+    : %empty       { $$ = null; }
     | ModifierSeq  { $$ = $1; }
     ;
 
@@ -191,24 +234,24 @@ StandardModifierSeq
 
 StandardModifier
 //  : Annotation
-	: DEFAULT       { $$ = StandardModifiers.modifier.mod_default; }
-    | FINAL         { $$ = StandardModifiers.modifier.mod_final; }
-    | PUBLIC        { $$ = StandardModifiers.modifier.mod_public; }
-    | PROTECTED     { $$ = StandardModifiers.modifier.mod_protected; }
-    | PRIVATE       { $$ = StandardModifiers.modifier.mod_private; }
-    | ABSTRACT      { $$ = StandardModifiers.modifier.mod_abstract; }
-    | STATIC        { $$ = StandardModifiers.modifier.mod_static; }
-    | STRICTFP      { $$ = StandardModifiers.modifier.mod_static; }
-    | SYNCHRONIZED  { $$ = StandardModifiers.modifier.mod_synchronized; }
-    | TRANSIENT     { $$ = StandardModifiers.modifier.mod_transient; }
-    | VOLATILE      { $$ = StandardModifiers.modifier.mod_volatile; }
-    | OPEN          { $$ = StandardModifiers.modifier.mod_open; }  // for modules only
+	: DEFAULT       { $$ = $1; }
+    | FINAL         { $$ = $1; }
+    | PUBLIC        { $$ = $1; }
+    | PROTECTED     { $$ = $1; }
+    | PRIVATE       { $$ = $1; }
+    | ABSTRACT      { $$ = $1; }
+    | STATIC        { $$ = $1; }
+    | STRICTFP      { $$ = $1; }
+    | SYNCHRONIZED  { $$ = $1; }
+    | TRANSIENT     { $$ = $1; }
+    | VOLATILE      { $$ = $1; }
+    | OPEN          { $$ = $1; }  // for modules only
     ;
 
 //// Compilation units, Packages and Modules ////////////////////
 
 CompilationUnit
-    :  // empty
+    : %empty                                        { $$ = null; }
     | Package                                       { $$ = $1; }
     | Module                                        { $$ = $1; }
     | ImportDeclarationSeqOpt TopLevelComponentSeq  { $$ = new SimpleCompilationUnit($1,$2); }
@@ -216,26 +259,30 @@ CompilationUnit
 
 Package
     : PACKAGE CompoundName SEMICOLON ImportDeclarationSeqOpt TopLevelComponentSeqOpt
+                                                    { $$ = new tree.Compilation.Package($2,$4,$5); }
     ;
 
+/////// Java modules are not supported (yet)
+///////
 Module
-    : ModifierSeqOpt MODULE CompoundName LBRACE ModuleDirectiveSeqOpt RBRACE
+    : ModifierSeqOpt MODULE CompoundName LBRACE ModuleDirectiveSeqOpt RBRACE { $$ = null; }  // not implemented
     ;
 
 ImportDeclarationSeqOpt
-    :  // empty                                  { $$ = null; }
-    |                         ImportDeclaration  { $$ = new ImportDeclarations($1); }
+    : %empty                                     { $$ = null; }
+    | ImportDeclarationSeq                       { $$ = $1; }
+    ;
+
+ImportDeclarationSeq
+    :                         ImportDeclaration  { $$ = new ImportDeclarations($1); }
     | ImportDeclarationSeqOpt ImportDeclaration  { $$ = $1.add($2); }
     ;
 
 ImportDeclaration
-    : IMPORT StaticOpt CompoundName          SEMICOLON  { $$ = new ImportDeclaration($2,$3,false); }
-    | IMPORT StaticOpt CompoundName DOT STAR SEMICOLON  { $$ = new ImportDeclaration($2,$3,true); }
-    ;
-
-StaticOpt
-    : %empty   { $$ = false; }
-    | STATIC   { $$ = true; }
+    : IMPORT        CompoundName          SEMICOLON  { $$ = new ImportDeclaration(false,$2,false); }
+    | IMPORT STATIC CompoundName          SEMICOLON  { $$ = new ImportDeclaration(true,$3,false); }
+    | IMPORT        CompoundName DOT STAR SEMICOLON  { $$ = new ImportDeclaration(false,$2,true); }
+    | IMPORT STATIC CompoundName DOT STAR SEMICOLON  { $$ = new ImportDeclaration(true,$3,true); }
     ;
 
 TopLevelComponentSeqOpt
@@ -253,8 +300,12 @@ TopLevelComponent
     | InterfaceDeclaration { $$ = $1; }
     ;
 
+/////// Java modules are not supported (yet)
+///////
+
 ModuleDirectiveSeqOpt
-    : ModuleDirectiveSeq
+    : %empty              //{ $$ = null; }
+    | ModuleDirectiveSeq  //{ $$ = $1; }
     ;
 
 ModuleDirectiveSeq
@@ -278,7 +329,7 @@ ModuleNameList
     ;
 
 RequiresModifierSeqOpt
-    :  // empty
+    : %empty
     | TRANSITIVE
     | TRANSITIVE STATIC
 	| STATIC
@@ -293,17 +344,17 @@ RequiresModifierSeqOpt
 //    ;
 
 Type
-    :               UnannotatedType
-    | AnnotationSeq UnannotatedType
+    :               UnannotatedType { $$ = $1; }
+    | AnnotationSeq UnannotatedType { $$ = $2.addAnnotations($1); }
     ;
 
 UnannotatedType
-    : PrimitiveType
+    : PrimitiveType              { $$ = new PrimitiveType($1); }
 	  // ReferenceType
-    | CompoundName
-    | CompoundName TypeArguments
+    | CompoundName               { $$ = new TypeName($1,null); }
+    | CompoundName TypeArguments { $$ = new TypeName($1,$2); }
 	  // ArrayType
-	| UnannotatedType Dim
+	| UnannotatedType Dim        { $$ = $1.addDimension($2); }
     ;
 
 //PrimitiveType
@@ -312,15 +363,15 @@ UnannotatedType
 
 PrimitiveType
       // NumericType -- IntegralType
-    : BYTE
-    | SHORT
-    | INT
-    | LONG
-    | CHAR
+    : BYTE       { $$ = $1; }
+    | SHORT      { $$ = $1; }
+    | INT        { $$ = $1; }
+    | LONG       { $$ = $1; }
+    | CHAR       { $$ = $1; }
 	  // NumericType -- FloatingPointType
-    | FLOAT
-    | DOUBLE
-    | BOOLEAN
+    | FLOAT      { $$ = $1; }
+    | DOUBLE     { $$ = $1; }
+    | BOOLEAN    { $$ = $1; }
     ;
 
 //ReferenceType
@@ -341,17 +392,17 @@ PrimitiveType
 //// Classes ////////////////////////
 
 ClassDeclaration
-    : NormalClassDeclaration
-    | EnumDeclaration
-    | RecordDeclaration
+    : NormalClassDeclaration   { $$ = $1; }
+    | EnumDeclaration          { $$ = $1; }
+    | RecordDeclaration        { $$ = $1; }
     ;
 
 NormalClassDeclaration
-    : /*ModifierSeqOpt*/ CLASS IDENTIFIER TypeParametersOpt ClassExtendsOpt ClassImplementsOpt ClassBody
+    : /*ModifierSeqOpt*/ CLASS IDENTIFIER TypeParametersOpt ClassExtendsOpt ClassImplementsOpt ClassBody { $$ = null; }
     ;
 
 TypeParametersOpt
-    :  // empty
+    : %empty
     | TypeParameters
     ;
 
@@ -382,27 +433,27 @@ TypeParameterTail
     ;
 
 ClassExtendsOpt
-    : // empty
+    : %empty
     | EXTENDS Type
     ;
 
 ClassImplementsOpt
-    : // empty
+    : %empty
     | IMPLEMENTS ClassTypeList1
     ;
 
 ClassTypeList1
-    :                      Type
-    | ClassTypeList1 COMMA Type
+    :                      Type { $$ = new TypeList($1); }
+    | ClassTypeList1 COMMA Type { $$ = $1.add($3); }
     ;
 
 ClassTypeList2
-    :                          Type
-    | ClassTypeList2 AMPERSAND Type
+    :                          Type { $$ = new TypeList($1); }
+    | ClassTypeList2 AMPERSAND Type { $$ = $1.add($3); }
     ;
 
 ClassBodyOpt
-    :  // empty
+    : %empty
     | ClassBody
     ;
 
@@ -458,7 +509,7 @@ ExplicitConstructorInvocation
 //// EnumDeclaration ////////////////////////////////////
 
 EnumDeclaration
-    : /*ModifierSeqOpt*/ ENUM IDENTIFIER ClassImplementsOpt EnumBody
+    : /*ModifierSeqOpt*/ ENUM IDENTIFIER ClassImplementsOpt EnumBody { $$ = null; }
     ;
 
 EnumBody
@@ -467,7 +518,7 @@ EnumBody
     ;
 
 EnumConstantListOpt
-    :  // empty
+    : %empty
     |                           EnumConstant
     | EnumConstantListOpt COMMA EnumConstant
     ;
@@ -478,7 +529,7 @@ EnumConstant
     ;
 
 EnumBodyDeclarationsOpt
-    :  // empty
+    : %empty
     | SEMICOLON
     | SEMICOLON ClassBodyDeclarationSeq
     ;
@@ -486,7 +537,7 @@ EnumBodyDeclarationsOpt
 //// RecordDeclaration //////////////////////////////////
 
 RecordDeclaration
-    : /*ModifierSeqOpt*/ RECORD IDENTIFIER TypeParametersOpt RecordHeader ClassImplementsOpt RecordBody
+    : /*ModifierSeqOpt*/ RECORD IDENTIFIER TypeParametersOpt RecordHeader ClassImplementsOpt RecordBody { $$ = null; }
     ;
 
 RecordHeader
@@ -494,7 +545,7 @@ RecordHeader
     ;
 
 RecordComponentListOpt
-    :  // empty
+    : %empty
     |                              RecordComponent
     | RecordComponentListOpt COMMA RecordComponent
     ;
@@ -543,7 +594,7 @@ ArrayInitializer
     ;
 
 VariableInitializerListOpt
-    :  // empty
+    : %empty
     | VariableInitializerList
     ;
 
@@ -624,7 +675,7 @@ FormalParameterTail
 //    ;
 
 ThrowsOpt
-    :  // empty
+    : %empty
     | THROWS ClassTypeList1
     ;
 
@@ -636,18 +687,18 @@ MethodBody
 ////             //////////////////////////////////
 
 DimsOpt
-    : // empty
-    | Dims
+    : %empty     { $$ = null; }
+    | Dims       { $$ = $1; }
     ;
 
 Dims
-    :      Dim
-    | Dims Dim
+    :      Dim  { $$ = new Dims($1); }
+    | Dims Dim  { $$ = $1.add($2); }
     ;
 
 Dim
-    : AnnotationSeq LBRACKET RBRACKET
-    |               LBRACKET RBRACKET
+    : AnnotationSeq LBRACKET RBRACKET { $$ = new Dim($1); }
+    |               LBRACKET RBRACKET { $$ = new Dim(null); }
     ;
 
 //// InterfaceDeclaration ////////////////////////
@@ -658,11 +709,11 @@ InterfaceDeclaration
     ;
 
 NormalInterfaceDeclaration
-    : INTERFACE IDENTIFIER TypeParametersOpt InterfaceExtendsOpt InterfaceBody
+    : INTERFACE IDENTIFIER TypeParametersOpt InterfaceExtendsOpt InterfaceBody { $$ = null; }
     ;
 
 InterfaceExtendsOpt
-    :  // empty
+    : %empty
     | InterfaceExtends
     ;
 
@@ -697,7 +748,7 @@ InterfaceMethodDeclaration
     ;
 
 AnnotationInterfaceDeclaration
-    : AT INTERFACE IDENTIFIER AnnotationInterfaceBody
+    : AT INTERFACE IDENTIFIER AnnotationInterfaceBody { $$ = null; }
     ;
 
 AnnotationInterfaceBody
@@ -722,20 +773,20 @@ AnnotationInterfaceElementDeclaration
     ;
 
 DefaultValueOpt
-    :  // empty
+    : %empty
     | DEFAULT ElementValue
     ;
 
 //// Blocks & Statements /////////////////////////////////////
 
 Block
-    : LBRACE                   RBRACE
-    | LBRACE BlockStatementSeq RBRACE
+    : LBRACE                   RBRACE { $$ = null; }
+    | LBRACE BlockStatementSeq RBRACE { $$ = $2; }
     ;
 
 BlockStatementSeq
-	:                   BlockStatement
-    | BlockStatementSeq BlockStatement
+	:                   BlockStatement { $$ = new BlockStatements($1); }
+    | BlockStatementSeq BlockStatement { $$ = $1.add($2); }
     ;
 
 BlockStatement
@@ -813,7 +864,7 @@ IfThenElseStatement
     ;
 
 ElsePartOpt
-    :  // empty
+    : %empty
     | ELSE Statement
     ;
 
@@ -835,7 +886,7 @@ SwitchRule
     ;
 
 SwitchBlockStatementGroupSeqOpt
-    :  // empty
+    : %empty
     |                                 SwitchBlockStatementGroup
     | SwitchBlockStatementGroupSeqOpt SwitchBlockStatementGroup
     ;
@@ -877,13 +928,13 @@ BasicForStatement
     ;
 
 ForInitOpt
-    :  // empty
+    : %empty
     | StatementExpressionList
     | LocalVariableDeclaration
     ;
 
 ExpressionOpt
-    :  // empty
+    : %empty
     | Expression
     ;
 
@@ -896,7 +947,7 @@ StatementExpressionList
     ;
 
 StatementExpressionListOpt
-    :  // empty
+    : %empty
     | StatementExpressionList
     ;
 
@@ -905,7 +956,7 @@ EnhancedForStatement
     ;
 
 CatchesOpt
-    :  // empty
+    : %empty
     | Catches
     ;
 
@@ -928,7 +979,7 @@ CatchType
     ;
 
 FinallyOpt
-    :  // empty
+    : %empty
     | Finally
     ;
 
@@ -951,8 +1002,8 @@ Resource
     | FieldAccess  // VariableAccess? - doesn't exist in the grammar?
     ;
 
-Pattern:
-	LocalVariableDeclaration	// TypePattern
+Pattern
+    : LocalVariableDeclaration  // TypePattern
 
 //// Primaries /////////////////////////////////
 
@@ -961,15 +1012,15 @@ Pattern:
 //    ArrayCreationExpression
 
 Primary
-    : Literal
-    | Type DimsOpt DOT CLASS // ClassLiteral
-    | VOID DimsOpt DOT CLASS // ClassLiteral
-    | THIS
-    | Type DOT THIS
-    | LPAREN Expression RPAREN
+    : Literal                           { $$ = $1; }
+    | Type DimsOpt DOT CLASS            { $$ = new ClassLiteral($1,$2); }   // ClassLiteral
+    | VOID DimsOpt DOT CLASS            { $$ = new ClassLiteral(null,$2); } // ClassLiteral
+    | THIS                              { $$ = new This(null); }
+    | Type DOT THIS                     { $$ = new This($1); }
+    | LPAREN Expression RPAREN          { $$ = new Parenthesized($2); }
     | ClassInstanceCreationExpression
-    | FieldAccess
-    | ArrayAccess
+    | FieldAccess                       { $$ = $1; }
+    | ArrayAccess                       { $$ = $1; }
     | MethodInvocation
     | MethodReference
     | ArrayCreationExpression
@@ -1002,40 +1053,44 @@ AnnotatedCompoundName
     ;
 
 TypeArgumentsOpt
-    :  // empty
-    | TypeArguments
+    : %empty          { $$ = null; }
+    | TypeArguments   { $$ = $1; }
     ;
 
 TypeArguments
-    : LESS TypeArgumentList GREATER
+    : LESS TypeArgumentList GREATER  { $$ = $2; }
     ;
 
 TypeArgumentList
-    :                        TypeArgument
-    | TypeArgumentList COMMA TypeArgument
+    :                        TypeArgument  { $$ = new TypeArguments($1); }
+    | TypeArgumentList COMMA TypeArgument  { $$ = $1.add($3); }
     ;
 
 TypeArgument
-    : Type
-    |               QUESTION WildcardBoundsOpt
-    | AnnotationSeq QUESTION WildcardBoundsOpt
+    : Type                                     { $$ = new TypeArgument($1,0,null); }
+    |               QUESTION                   { $$ = new TypeArgument(null,1,null); }
+    |               QUESTION EXTENDS Type      { $$ = new TypeArgument($3,1,null); }
+    |               QUESTION SUPER   Type      { $$ = new TypeArgument($3,2,null); }
+    | AnnotationSeq QUESTION                   { $$ = new TypeArgument(null,1,$1); }
+    | AnnotationSeq QUESTION EXTENDS Type      { $$ = new TypeArgument($4,2,$1); }
+    | AnnotationSeq QUESTION SUPER   Type      { $$ = new TypeArgument($4,3,$1); }
     ;
-
+/*
 WildcardBoundsOpt
-    :  // empty
+    : %empty
     | EXTENDS Type
     | SUPER   Type
     ;
-
+*/
 FieldAccess
-    : Primary                DOT IDENTIFIER
-    |                  SUPER DOT IDENTIFIER
-    | CompoundName DOT SUPER DOT IDENTIFIER
+    : Primary                DOT IDENTIFIER  { $$ = new FieldAccess($1,  false,$3); }
+    |                  SUPER DOT IDENTIFIER  { $$ = new FieldAccess(null,true, $3); }
+    | CompoundName DOT SUPER DOT IDENTIFIER  { $$ = new FieldAccess(new SimpleReference($1),true,$5); }
     ;
 
 ArrayAccess
-    : CompoundName LBRACKET Expression RBRACKET
-    | Primary      LBRACKET Expression RBRACKET
+    : CompoundName LBRACKET Expression RBRACKET  { $$ = new ArrayAccess(new SimpleReference($1),$3); }
+    | Primary      LBRACKET Expression RBRACKET  { $$ = new ArrayAccess($1,$3); }
     ;
 
 MethodInvocation
@@ -1047,8 +1102,8 @@ MethodInvocation
     ;
 
 Arguments
-    : LPAREN              RPAREN
-    | LPAREN ArgumentList RPAREN
+    : LPAREN              RPAREN { $$ = null; }
+    | LPAREN ArgumentList RPAREN { $$ = $2; }
     ;
 
 //ArgumentListOpt
@@ -1057,8 +1112,8 @@ Arguments
 //    ;
 
 ArgumentList
-    :                    Expression
-    | ArgumentList COMMA Expression
+    :                    Expression { $$ = new ArgumentList($1); }
+    | ArgumentList COMMA Expression { $$ = $1.add($3); }
     ;
 
 MethodReference
@@ -1088,30 +1143,39 @@ DimExpr
 //// Expressions //////////////////////////////////////////////////
 
 Expression
-    : LambdaExpression
-    | AssignmentExpression
+    : LambdaExpression      { $$ = $1; }
+    | AssignmentExpression  { $$ = $1; }
     ;
 
 LambdaExpression
-    : IDENTIFIER       ARROW LambdaBody
-    | LambdaParameters ARROW LambdaBody
+    : IDENTIFIER       ARROW Expression
+                        { $$ = new Lambda(new ParameterDeclarations(new ParameterDeclaration($1)),$3); }
+    | IDENTIFIER       ARROW Block
+                        { $$ = new Lambda(new ParameterDeclarations(new ParameterDeclaration($1)),$3); }
+    | LambdaParameters ARROW Expression  { $$ = new Lambda($1,$3); }
+    | LambdaParameters ARROW Block       { $$ = new Lambda($1,$3); }
     ;
 
+//LambdaBody
+//   : Expression
+//   | Block
+//   ;
+
 LambdaParameters
-    : LPAREN                      RPAREN
-    | LPAREN LambdaParameterList1 RPAREN
-    | LPAREN LambdaParameterList2 RPAREN
+    : LPAREN                      RPAREN   { $$ = null; }
+    | LPAREN LambdaParameterList1 RPAREN   { $$ = $2; }
+    | LPAREN LambdaParameterList2 RPAREN   { $$ = $2; }
 //  | IDENTIFIER
     ;
 
 LambdaParameterList1
-    :                            IDENTIFIER
-    | LambdaParameterList1 COMMA IDENTIFIER
+    :                            IDENTIFIER  { $$ = new ParameterDeclarations(new ParameterDeclaration($1)); }
+    | LambdaParameterList1 COMMA IDENTIFIER  { $$ = $1.add(new ParameterDeclaration($3)); }
     ;
 
 LambdaParameterList2
-    :                            LambdaParameter
-    | LambdaParameterList2 COMMA LambdaParameter
+    :                            LambdaParameter { $$ = new ParameterDeclarations($1); }
+    | LambdaParameterList2 COMMA LambdaParameter { $$ = $1.add($3); }
     ;
 
 //LambdaParameter
@@ -1122,9 +1186,11 @@ LambdaParameterList2
 
 LambdaParameter
 //  :                                IDENTIFIER
-    : ModifierSeqOpt UnannotatedType IDENTIFIER DimsOpt
-    | ModifierSeqOpt VAR             IDENTIFIER DimsOpt
-    | ModifierSeqOpt UnannotatedType AnnotationSeqOpt ELLIPSIS IDENTIFIER  // VariableArityParameter
+    : ModifierSeqOpt UnannotatedType IDENTIFIER DimsOpt  { $$ = new ParameterDeclaration($1,$2,$3.image,null,false,$4); }
+    | ModifierSeqOpt VAR             IDENTIFIER DimsOpt  { $$ = new ParameterDeclaration($1,null,$3.image,null,false,$4); }
+    | ModifierSeqOpt UnannotatedType AnnotationSeqOpt ELLIPSIS IDENTIFIER
+                                                         { $$ = new ParameterDeclaration($1,$2,$5.image,$3,true,null); }
+                                                         // VariableArityParameter
     ;
 
 //LambdaParameterType
@@ -1132,167 +1198,163 @@ LambdaParameter
 //    | VAR
 //    ;
 
-LambdaBody
-    : Expression
-    | Block
-    ;
-
 AssignmentExpression
-    : ConditionalExpression
-    | Assignment
+    : ConditionalExpression  { $$ = $1; }
+    | Assignment             { $$ = $1; }
     ;
 
 Assignment
-    : LeftHandSide AssignmentOperator Expression
+    : LeftHandSide AssignmentOperator Expression { $$ = new Binary($1,$3,$2); }
     ;
 
 LeftHandSide
-    : CompoundName
-    | FieldAccess
-    | ArrayAccess
+    : CompoundName { $$ = new SimpleReference($1); }
+    | FieldAccess  { $$ = $1; }
+    | ArrayAccess  { $$ = $1; }
     ;
 
 AssignmentOperator
-    : EQUAL             //  =
-    | STAR_EQUAL        //  *=
-    | SLASH_EQUAL       //  /=
-    | PERCENT_EQUAL     //  %=
-    | PLUS_EQUAL        //  +=
-    | MINUS_EQUAL       //  -=
-    | LESS_LESS_EQUAL   //  <<=
-    | GR_GR_EQUAL       //  >>=
-    | GR_GR_GR_EQUAL    //  >>>=
-    | AMP_EQUAL         //  &=
-    | CARET_EQUAL       //  ^=
-    | VERTICAL_EQUAL    //  |=
+    : EQUAL             { $$ = $1; }  //  =
+    | STAR_EQUAL        { $$ = $1; }  //  *=
+    | SLASH_EQUAL       { $$ = $1; }  //  /=
+    | PERCENT_EQUAL     { $$ = $1; }  //  %=
+    | PLUS_EQUAL        { $$ = $1; }  //  +=
+    | MINUS_EQUAL       { $$ = $1; }  //  -=
+    | LESS_LESS_EQUAL   { $$ = $1; }  //  <<=
+    | GR_GR_EQUAL       { $$ = $1; }  //  >>=
+    | GR_GR_GR_EQUAL    { $$ = $1; }  //  >>>=
+    | AMP_EQUAL         { $$ = $1; }  //  &=
+    | CARET_EQUAL       { $$ = $1; }  //  ^=
+    | VERTICAL_EQUAL    { $$ = $1; }  //  |=
     ;
 
 ConditionalExpression
-    : ConditionalOrExpression ConditionalOrTail
+    : ConditionalOrExpression ConditionalOrTail { if ( $2 == null ) $$ = $1;
+                                                  else              $$ = new Conditional($1,$2.left,$2.right); }
     ;
 
 ConditionalOrTail
-    :  // empty
-    | QUESTION Expression COLON ConditionalExpression
-    | QUESTION Expression COLON LambdaExpression
+    : %empty                                           { $$ = null; }
+    | QUESTION Expression COLON ConditionalExpression  { $$ = new Binary($2,$4,null); }
+    | QUESTION Expression COLON LambdaExpression       { $$ = new Binary($2,$4,null); }
     ;
 
 ConditionalOrExpression
-    :                                      ConditionalAndExpression
-    | ConditionalOrExpression DBL_VERTICAL ConditionalAndExpression
+    :                                      ConditionalAndExpression { $$ = $1; }
+    | ConditionalOrExpression DBL_VERTICAL ConditionalAndExpression { $$ = new Binary($1,$3,$2); }
     ;
 
 ConditionalAndExpression
-    :                                        InclusiveOrExpression
-    | ConditionalAndExpression DBL_AMPERSAND InclusiveOrExpression
+    :                                        InclusiveOrExpression { $$ = $1; }
+    | ConditionalAndExpression DBL_AMPERSAND InclusiveOrExpression { $$ = new Binary($1,$3,$2); }
     ;
 
 InclusiveOrExpression
-    :                                ExclusiveOrExpression
-    | InclusiveOrExpression VERTICAL ExclusiveOrExpression
+    :                                ExclusiveOrExpression { $$ = $1; }
+    | InclusiveOrExpression VERTICAL ExclusiveOrExpression { $$ = new Binary($1,$3,$2); }
     ;
 
 ExclusiveOrExpression
-    :                             AndExpression
-    | ExclusiveOrExpression CARET AndExpression
+    :                             AndExpression { $$ = $1; }
+    | ExclusiveOrExpression CARET AndExpression { $$ = new Binary($1,$3,$2); }
     ;
 
 AndExpression
-    :                         EqualityExpression
-    | AndExpression AMPERSAND EqualityExpression
+    :                         EqualityExpression { $$ = $1; }
+    | AndExpression AMPERSAND EqualityExpression { $$ = new Binary($1,$3,$2); }
     ;
 
 EqualityExpression
-    :                              RelationalExpression
-    | EqualityExpression DBL_EQUAL RelationalExpression
-    | EqualityExpression NON_EQUAL RelationalExpression
+    :                              RelationalExpression { $$ = $1; }
+    | EqualityExpression DBL_EQUAL RelationalExpression { $$ = new Binary($1,$3,$2); }
+    | EqualityExpression NON_EQUAL RelationalExpression { $$ = new Binary($1,$3,$2); }
     ;
 
 RelationalExpression
-    :                                    ShiftExpression
-    | RelationalExpression LESS          ShiftExpression
-    | RelationalExpression GREATER       ShiftExpression
-    | RelationalExpression LESS_EQUAL    ShiftExpression
-    | RelationalExpression GREATER_EQUAL ShiftExpression
-    | InstanceofExpression
+    :                                    ShiftExpression { $$ = $1; }
+    | RelationalExpression LESS          ShiftExpression { $$ = new Binary($1,$3,$2); }
+    | RelationalExpression GREATER       ShiftExpression { $$ = new Binary($1,$3,$2); }
+    | RelationalExpression LESS_EQUAL    ShiftExpression { $$ = new Binary($1,$3,$2); }
+    | RelationalExpression GREATER_EQUAL ShiftExpression { $$ = new Binary($1,$3,$2); }
+    | InstanceofExpression                               { $$ = $1; }
     ;
 
 InstanceofExpression
-    : RelationalExpression INSTANCEOF Type
-    | RelationalExpression INSTANCEOF Pattern
+    : RelationalExpression INSTANCEOF Type     { $$ = new InstanceOf($1,$3); }
+    | RelationalExpression INSTANCEOF Pattern  { $$ = new InstanceOf($1,$3); }
     ;
 
 ShiftExpression
-    :                               AdditiveExpression
-    | ShiftExpression DBL_LESS      AdditiveExpression
-    | ShiftExpression DBL_GREATER   AdditiveExpression
-    | ShiftExpression TRIPL_GREATER AdditiveExpression
+    :                               AdditiveExpression { $$ = $1; }
+    | ShiftExpression DBL_LESS      AdditiveExpression { $$ = new Binary($1,$3,$2); }
+    | ShiftExpression DBL_GREATER   AdditiveExpression { $$ = new Binary($1,$3,$2); }
+    | ShiftExpression TRIPL_GREATER AdditiveExpression { $$ = new Binary($1,$3,$2); }
     ;
 
 AdditiveExpression
-    :                          MultiplicativeExpression
-    | AdditiveExpression PLUS  MultiplicativeExpression
-    | AdditiveExpression MINUS MultiplicativeExpression
+    :                          MultiplicativeExpression { $$ = $1; }
+    | AdditiveExpression PLUS  MultiplicativeExpression { $$ = new Binary($1,$3,$2); }
+    | AdditiveExpression MINUS MultiplicativeExpression { $$ = new Binary($1,$3,$2); }
     ;
 
 MultiplicativeExpression
-    :                                  UnaryExpression
-    | MultiplicativeExpression STAR    UnaryExpression
-    | MultiplicativeExpression SLASH   UnaryExpression
-    | MultiplicativeExpression PERCENT UnaryExpression
+    :                                  UnaryExpression { $$ = $1; }
+    | MultiplicativeExpression STAR    UnaryExpression { $$ = new Binary($1,$3,$2); }
+    | MultiplicativeExpression SLASH   UnaryExpression { $$ = new Binary($1,$3,$2); }
+    | MultiplicativeExpression PERCENT UnaryExpression { $$ = new Binary($1,$3,$2); }
     ;
 
 UnaryExpression
-    : PreIncrementExpression
-    | PreDecrementExpression
-    | PLUS UnaryExpression
-    | MINUS UnaryExpression
-    | UnaryExpressionNotPlusMinus
+    : PreIncrementExpression      { $$ = $1; }
+    | PreDecrementExpression      { $$ = $1; }
+    | PLUS UnaryExpression        { $$ = new UnaryPrefix($1,$2); }
+    | MINUS UnaryExpression       { $$ = new UnaryPrefix($1,$2); }
+    | UnaryExpressionNotPlusMinus { $$ = $1; }
     ;
 
 PreIncrementExpression
-    : DBL_PLUS UnaryExpression
+    : DBL_PLUS UnaryExpression { $$ = new UnaryPrefix($1,$2); }
     ;
 
 PreDecrementExpression
-    : DBL_MINUS UnaryExpression
+    : DBL_MINUS UnaryExpression  { $$ = new UnaryPrefix($1,$2); }
     ;
 
 UnaryExpressionNotPlusMinus
     : PostfixExpression
-    | TILDE       UnaryExpression
-    | EXCLAMATION UnaryExpression
-    | CastExpression
-    | SwitchExpression
+    | TILDE       UnaryExpression { $$ = new UnaryPrefix($1,$2); }
+    | EXCLAMATION UnaryExpression { $$ = new UnaryPrefix($1,$2); }
+    | CastExpression              { $$ = $1; }
+    | SwitchExpression            { $$ = $1; }
     ;
 
 PostfixExpression
-    : Primary
-    | CompoundName  // ExpressionName
-    | PostIncrementExpression
-    | PostDecrementExpression
+    : Primary                  { $$ = $1; }
+    | CompoundName             { $$ = new SimpleReference($1); } // ExpressionName
+    | PostIncrementExpression  { $$ = $1; }
+    | PostDecrementExpression  { $$ = $1; }
     ;
 
 PostIncrementExpression
-    : PostfixExpression DBL_PLUS
+    : PostfixExpression DBL_PLUS { $$ = new UnaryPostfix($2,$1); }
     ;
 
 PostDecrementExpression
-    : PostfixExpression DBL_MINUS
+    : PostfixExpression DBL_MINUS { $$ = new UnaryPostfix($2,$1); }
     ;
 
 CastExpression
-    : TargetType UnaryExpression
-    | TargetType LambdaExpression
+    : TargetType UnaryExpression   { $$ = new Cast($1,$2); }
+    | TargetType LambdaExpression  { $$ = new Cast($1,$2); }
     ;
 
 TargetType
-    : LPAREN TypeList RPAREN
+    : LPAREN TypeList RPAREN { $$ = $2; }
     ;
 
 TypeList
-    :                    Type
-    | TypeList AMPERSAND Type
+    :                    Type { $$ = new TypeList($1); }
+    | TypeList AMPERSAND Type { $$ = $1.add($3); }
     ;
 
 SwitchExpression
@@ -1313,15 +1375,15 @@ AnnotationSeqOpt
     ;
 
 AnnotationSeq
-    :               Annotation
-    | AnnotationSeq Annotation
+    :               Annotation  { $$ = new Annotations($1); }
+    | AnnotationSeq Annotation  { $$ = $1.add($2); }
     ;
 
 Annotation
-    : AT CompoundName                                  { $$ = new Annotation($2,null); }
-    | AT CompoundName LPAREN                   RPAREN  { $$ = new Annotation($2,null); }
-    | AT CompoundName LPAREN AnnoParameterList RPAREN  { $$ = new Annotation($2,$4); }
-    | AT CompoundName LPAREN ElementValue      RPAREN  { $$ = new Annotation($2,null); } // not implemented
+    : AT CompoundName                                  { $$ = new Annotation($2,(AnnoParameterList)null); }
+    | AT CompoundName LPAREN                   RPAREN  { $$ = new Annotation($2,(AnnoParameterList)null); }
+    | AT CompoundName LPAREN AnnoParameterList RPAREN  { $$ = new Annotation($2,/*$4*/ (AnnoParameterList)null); }   // not implemented
+    | AT CompoundName LPAREN ElementValue      RPAREN  { $$ = new Annotation($2,(AnnoElementValue)null); } // not implemented
     ;
 
 AnnoParameterList
@@ -1330,14 +1392,14 @@ AnnoParameterList
     ;
 
 ElementValue
-    : ConditionalExpression
-    | LBRACE ElementValueListOpt        RBRACE
-    | LBRACE                      COMMA RBRACE
-    | Annotation
+    : ConditionalExpression                      { $$ = null; }
+    | LBRACE ElementValueListOpt        RBRACE   { $$ = null; }
+    | LBRACE                      COMMA RBRACE   { $$ = null; }
+    | Annotation                                 { $$ = null; }
     ;
 
 ElementValueListOpt
-    :  //empty
+    : %empty
     |                           ElementValue
     | ElementValueListOpt COMMA ElementValue
     ;

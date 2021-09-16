@@ -1,0 +1,47 @@
+package tree.Type;
+
+import tree.Annotations;
+import tree.Entity;
+
+// TypeArgument
+//    : Type                                     { $$ = new TypeArgument($1,0,null); }
+//    |               QUESTION                   { $$ = new TypeArgument(null,1,null); }
+//    |               QUESTION EXTENDS Type      { $$ = new TypeArgument($3,1,null); }
+//    |               QUESTION SUPER   Type      { $$ = new TypeArgument($3,2,null); }
+//    | AnnotationSeq QUESTION                   { $$ = new TypeArgument(null,1,$1); }
+//    | AnnotationSeq QUESTION EXTENDS Type      { $$ = new TypeArgument($4,2,$1); }
+//    | AnnotationSeq QUESTION SUPER   Type      { $$ = new TypeArgument($4,3,$1); }
+//    ;
+public class TypeArgument extends Entity
+{
+    // Structure
+    public Type type;
+    public boolean signExtends;
+    public boolean signSuper;
+    public Annotations annotations;
+
+    // Creation
+    public TypeArgument(Type t, int sign, Annotations anns)
+    {
+        this.type = t;
+        signExtends = false; signSuper = false;
+        switch ( sign )
+        {
+            case 1: signExtends = true; break;
+            case 2: signSuper = true; break;
+        }
+        this.annotations = anns;
+    }
+
+    // Reporting
+    public void report(int sh)
+    {
+
+    }
+
+    // Generation
+    public void generateEO()
+    {
+
+    }
+}

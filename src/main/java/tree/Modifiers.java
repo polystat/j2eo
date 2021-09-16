@@ -10,10 +10,10 @@ public class Modifiers extends Entity
 {
     // Structure
     public Annotations annotations;
-    public Modifiers modifiers;
+    public StandardModifiers modifiers;
 
     // Creation
-    public Modifiers(Annotations anns, Modifiers mods)
+    public Modifiers(Annotations anns, StandardModifiers mods)
     {
         this.annotations = anns;
         this.modifiers = mods;
