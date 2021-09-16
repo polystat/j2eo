@@ -1,5 +1,9 @@
 package eotree;
 
-public class EOBnd<T> extends EONode {
-    T expr;
+public abstract class EOBnd extends EONode {
+    public EOExpr expr;
+
+    public EOBnd(EOExpr expr) {
+        this.expr = expr;
+    }
 }

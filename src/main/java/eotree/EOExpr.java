@@ -1,4 +1,4 @@
 package eotree;
 
-public abstract class EOExpr<T> {
+public abstract class EOExpr extends EONode {
 }

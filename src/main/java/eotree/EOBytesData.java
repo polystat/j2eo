@@ -1,11 +1,26 @@
 package eotree;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
-public class EOBytesData<T> extends EOData<T> {
-    public EOBytesData(List<EOSingleByte> bytes) {
+/**
+ * EBNF representation:
+ * <code>
+ * byte { '-' byte }
+ * </code>
+ *
+ */
+public class EOBytesData extends EOData {
+    public EOBytesData(List<EOByte> bytes) {
         this.bytes = bytes;
     }
 
-    List<EOSingleByte> bytes;
+    List<EOByte> bytes;
+
+    @Override
+    public String generateEO(int indent) {
+        return bytes.stream()
+                .map(b -> b.generateEO(indent))
+                .collect(Collectors.joining("-"));
+    }
 }
