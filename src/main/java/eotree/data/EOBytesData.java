@@ -1,5 +1,8 @@
 package eotree.data;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -8,11 +11,14 @@ import java.util.stream.Collectors;
  * <code>
  * byte { '-' byte }
  * </code>
- *
  */
 public class EOBytesData extends EOData {
     public EOBytesData(List<EOByte> bytes) {
         this.bytes = bytes;
+    }
+
+    public EOBytesData(EOByte... bytes) {
+        this.bytes = Arrays.stream(bytes).collect(Collectors.toList());
     }
 
     public List<EOByte> bytes;

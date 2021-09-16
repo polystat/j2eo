@@ -17,6 +17,6 @@ public class EOByte extends EONode {
 
     @Override
     public String generateEO(int indent) {
-        return String.format("%02x", b);
+        return String.format("%02x", b).toUpperCase();
     }
 }
