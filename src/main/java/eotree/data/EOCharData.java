@@ -1,4 +1,6 @@
-package eotree;
+package eotree.data;
+
+import eotree.data.EOData;
 
 /**
  * EBNF representation:

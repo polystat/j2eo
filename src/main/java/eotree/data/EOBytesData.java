@@ -1,4 +1,4 @@
-package eotree;
+package eotree.data;
 
 import java.util.List;
 import java.util.stream.Collectors;

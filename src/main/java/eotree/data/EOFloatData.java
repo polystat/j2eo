@@ -1,4 +1,4 @@
-package eotree;
+package eotree.data;
 
 /**
  * EBNF representation:
