@@ -1,7 +1,5 @@
 package tree;
 
-import java.util.ArrayList;
-
 // Dim
 //    : AnnotationSeq LBRACKET RBRACKET
 //    |               LBRACKET RBRACKET
@@ -9,10 +7,10 @@ import java.util.ArrayList;
 public class Dim extends Entity
 {
     // Structure
-    public ArrayList<Annotation> annotations;
+    public Annotations annotations;
 
     // Creation
-    public Dim(ArrayList<Annotation> anns)
+    public Dim(Annotations anns)
     {
         this.annotations = anns;
     }
@@ -20,7 +18,8 @@ public class Dim extends Entity
     // Reporting
     public void report(int sh)
     {
-
+        annotations.report(sh);
+        System.out.print("[]");
     }
 
     // Generation

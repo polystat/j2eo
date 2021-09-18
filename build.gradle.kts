@@ -78,8 +78,8 @@ fun runBison() =
                 workingDir = File(".")
                 executable = "bin/win_bison.exe"
                 args = mutableListOf(
-                    "-r",
-                    "all",
+                    "-r", "all",
+                 //   "--debug", "--help", "--stacktrace",
                     "--report-file=${reportFilePath}",
                     "--output=${javaParserFilePath}",
                     javaGrammarFilePath
@@ -90,8 +90,7 @@ fun runBison() =
                 workingDir = File(".")
                 executable = "bin/bison_mac"
                 args = mutableListOf(
-                    "-r",
-                    "all",
+                    "-r all",
                     "--report-file=${reportFilePath}",
                     "--output=${javaParserFilePath}",
                     javaGrammarFilePath
@@ -102,8 +101,7 @@ fun runBison() =
                 workingDir = File(".")
                 executable = "bison"
                 args = mutableListOf(
-                    "-r",
-                    "all",
+                    "-r all",
                     "--report-file=${reportFilePath}",
                     "--output=${javaParserFilePath}",
                     javaGrammarFilePath
@@ -125,7 +123,7 @@ fun generateMD5(filepath: String): String {
         val buffer = ByteArray(8192)
         var read = 0
         do {
-            digest.update(buffer, 0, read);
+            digest.update(buffer, 0, read)
             read = inputStream.read(buffer)
         } while (read > 0)
     }
