@@ -164,36 +164,60 @@
 %nterm <tree.Type.TypeArgument> TypeArgument
 %nterm <tree.Type.TypeArguments> TypeArguments TypeArgumentList TypeArgumentsOpt
 
+%nterm <TypeParameter> TypeParameter
+%nterm <TypeParameterTail> TypeParameterTail
+%nterm <TypeParameters> TypeParameterList TypeParameters TypeParametersOpt
+
 %nterm <tree.Declaration.Declaration> EnumDeclaration ClassDeclaration NormalClassDeclaration
                      InterfaceDeclaration NormalInterfaceDeclaration RecordDeclaration
-                     AnnotationInterfaceDeclaration Pattern
-%nterm <tree.Type.Type> Type
+                     AnnotationInterfaceDeclaration Pattern InterfaceMemberDeclaration
+                     ClassBodyDeclaration PureBodyDeclaration FieldDeclaration MethodDeclaration
+                     ConstantDeclaration InterfaceMethodDeclaration BlockDeclaration
+%nterm <ConstructorDeclaration> ConstructorDeclaration
+%nterm <Declarations> InterfaceMemberDeclarationSeq InterfaceBody ClassBodyDeclarationSeq ClassBody ClassBodyOpt
+
+%nterm <tree.Type.Type> Type ClassExtendsOpt
 %nterm <tree.Type.UnannotatedType> UnannotatedType
 %nterm <Token> PrimitiveType AssignmentOperator Literal
 
-%nterm <tree.Type.TypeList> TypeList TargetType ClassTypeList1 ClassTypeList2
+%nterm <tree.Type.TypeList> TypeList TargetType ClassTypeList1 ClassTypeList2 ClassImplementsOpt
+                            InterfaceExtends InterfaceExtendsOpt ThrowsOpt CatchType
 
 %nterm <AnnoElementValue> ElementValue
 
-%nterm <tree.Expression.Expression> Expression Assignment AssignmentExpression ConditionalExpression
+%nterm <tree.Expression.Expression> Expression ExpressionOpt Assignment AssignmentExpression ConditionalExpression
                     SwitchExpression PostfixExpression Primary UnaryExpression UnaryExpressionNotPlusMinus
                     InstanceofExpression CastExpression LambdaExpression
-                    LeftHandSide FieldAccess ArrayAccess
+                    LeftHandSide FieldAccess ArrayAccess StatementExpression
 
 %nterm<tree.Expression.Binary> ConditionalOrTail ConditionalOrExpression ConditionalAndExpression
                InclusiveOrExpression ExclusiveOrExpression AndExpression EqualityExpression RelationalExpression
                ShiftExpression AdditiveExpression MultiplicativeExpression
+
+%nterm <Expressions> StatementExpressionList StatementExpressionListOpt
 
 %nterm <UnaryPrefix> PreIncrementExpression PreDecrementExpression
 %nterm <UnaryPostfix> PostIncrementExpression PostDecrementExpression
 
 %nterm <tree.Expression.ArgumentList> Arguments ArgumentList
 
-%nterm <ParameterDeclaration> LambdaParameter
-%nterm <ParameterDeclarations> LambdaParameters LambdaParameterList1 LambdaParameterList2
+%nterm <ParameterDeclaration> LambdaParameter FormalParameter
+%nterm <ParameterDeclarations> LambdaParameters LambdaParameterList1 LambdaParameterList2 FormalParameterList
+%nterm <ParameterTail> FormalParameterTail
+%nterm <tree.Statement.Statement> Statement SimpleStatement LabeledStatement
+                                  IfThenElseStatement WhileStatement ForStatement ElsePartOpt
+                                  BasicForStatement EnhancedForStatement
 %nterm <tree.Statement.Block> Block
 %nterm <tree.Statement.BlockStatement> BlockStatement
 %nterm <tree.Statement.BlockStatements> BlockStatementSeq
+
+%nterm <CatchParameter> CatchFormalParameter
+%nterm <CatchClause> CatchClause
+%nterm <CatchClauses> Catches CatchesOpt
+
+%nterm <ConstructorBody> ConstructorBody
+%nterm <ConstructorDeclarator> ConstructorDeclarator
+%nterm <ExplicitConstructorInvocation> ExplicitConstructorInvocation
 
 %%
 
@@ -398,21 +422,22 @@ ClassDeclaration
     ;
 
 NormalClassDeclaration
-    : /*ModifierSeqOpt*/ CLASS IDENTIFIER TypeParametersOpt ClassExtendsOpt ClassImplementsOpt ClassBody { $$ = null; }
+    : /*ModifierSeqOpt*/ CLASS IDENTIFIER TypeParametersOpt ClassExtendsOpt ClassImplementsOpt ClassBody
+                              { $$ = new NormalClassDeclaration($2,$3,$4,$5,$6); }
     ;
 
 TypeParametersOpt
-    : %empty
-    | TypeParameters
+    : %empty           { $$ = null; }
+    | TypeParameters   { $$ = $1; }
     ;
 
 TypeParameters
-    : LESS TypeParameterList GREATER
+    : LESS TypeParameterList GREATER  { $$ = $2; }
     ;
 
 TypeParameterList
-    :                         TypeParameter
-    | TypeParameterList COMMA TypeParameter
+    :                         TypeParameter { $$ = new TypeParameters($1); }
+    | TypeParameterList COMMA TypeParameter { $$ = $1.add($3); }
     ;
 
 //TypeParameter
@@ -422,24 +447,24 @@ TypeParameterList
 //    ;
 
 TypeParameter
-    : AnnotationSeq TypeParameterTail
-    |               TypeParameterTail
+    : AnnotationSeq TypeParameterTail { $$ = new TypeParameter($1,$2); }
+    |               TypeParameterTail { $$ = new TypeParameter(null,$1); }
     ;
 
 TypeParameterTail
-    : IDENTIFIER
-    | IDENTIFIER EXTENDS AnnotationSeqOpt IDENTIFIER
-    | IDENTIFIER EXTENDS ClassTypeList2
+    : IDENTIFIER                                      { $$ = new TypeParameterTail($1,null); }
+    | IDENTIFIER EXTENDS AnnotationSeqOpt IDENTIFIER  { $$ = new TypeParameterTail($1,$3,$4); }
+    | IDENTIFIER EXTENDS ClassTypeList2               { $$ = new TypeParameterTail($1,$3); }
     ;
 
 ClassExtendsOpt
-    : %empty
-    | EXTENDS Type
+    : %empty        { $$ = null; }
+    | EXTENDS Type  { $$ = $2; }
     ;
 
 ClassImplementsOpt
-    : %empty
-    | IMPLEMENTS ClassTypeList1
+    : %empty                     { $$ = null; }
+    | IMPLEMENTS ClassTypeList1  { $$ = $2; }
     ;
 
 ClassTypeList1
@@ -453,57 +478,62 @@ ClassTypeList2
     ;
 
 ClassBodyOpt
-    : %empty
-    | ClassBody
+    : %empty        { $$ = null; }
+    | ClassBody     { $$ = $1; }
     ;
 
 ClassBody
-    : LBRACE                         RBRACE
-	| LBRACE ClassBodyDeclarationSeq RBRACE
+    : LBRACE                         RBRACE  { $$ = null; }
+	| LBRACE ClassBodyDeclarationSeq RBRACE  { $$ = $2; }
     ;
 
 ClassBodyDeclarationSeq
-    :                         ClassBodyDeclaration
-    | ClassBodyDeclarationSeq ClassBodyDeclaration
+    :                         ClassBodyDeclaration { $$ = new Declarations($1); }
+    | ClassBodyDeclarationSeq ClassBodyDeclaration { $$ = $1.add($2); }
     ;
 
 ClassBodyDeclaration
-    : ModifierSeqOpt PureBodyDeclaration
-    |         Block          // InstanceInitializer
-    | STATIC Block           // StaticInitializer
-    | SEMICOLON
+    : ModifierSeqOpt PureBodyDeclaration { $$ = $2.addModifiers($1); }
+    |        Block    { $$ = new ClassInitializer($1,false); }     // InstanceInitializer
+    | STATIC Block    { $$ = new ClassInitializer($2,true); }      // StaticInitializer
+    | SEMICOLON       { $$ = null; }
  	;
 
 PureBodyDeclaration
-    : FieldDeclaration         // ClassMemberDeclaration
-    | MethodDeclaration        // ClassMemberDeclaration
-    | ClassDeclaration         // ClassMemberDeclaration
-    | InterfaceDeclaration     // ClassMemberDeclaration
-    | ConstructorDeclaration
+    : FieldDeclaration         { $$ = $1; }  // ClassMemberDeclaration
+    | MethodDeclaration        { $$ = $1; }  // ClassMemberDeclaration
+    | ClassDeclaration         { $$ = $1; }  // ClassMemberDeclaration
+    | InterfaceDeclaration     { $$ = $1; }  // ClassMemberDeclaration
+    | ConstructorDeclaration   { $$ = $1; }
     ;
 
 //// Constructors ///////////////////////////////////////
 
 ConstructorDeclaration
     : /*ModifierSeqOpt*/ ConstructorDeclarator ThrowsOpt ConstructorBody
+                            { $$ = new ConstructorDeclaration(null,
+                                                              $1.typeParameters,$1.receiver,$1.parameters,
+                                                              $2,$3.invocation,$3.block); }
     ;
 
 ConstructorDeclarator
     : TypeParametersOpt IDENTIFIER LPAREN FormalParameterList/*FormalParameters*/ RPAREN
+                                      { $$ = new ConstructorDeclarator($1,$4); }
     ;
 
 ConstructorBody
-    : LBRACE                                                 RBRACE
-    | LBRACE ExplicitConstructorInvocation                   RBRACE
-    | LBRACE                               BlockStatementSeq RBRACE
-    | LBRACE ExplicitConstructorInvocation BlockStatementSeq RBRACE
+    : LBRACE                                                 RBRACE { $$ = new ConstructorBody(null,null); }
+    | LBRACE ExplicitConstructorInvocation                   RBRACE { $$ = new ConstructorBody($2,null); }
+    | LBRACE                               BlockStatementSeq RBRACE { $$ = new ConstructorBody(null,$2); }
+    | LBRACE ExplicitConstructorInvocation BlockStatementSeq RBRACE { $$ = new ConstructorBody($2,$3); }
     ;
 
 ExplicitConstructorInvocation
-    :                  TypeArgumentsOpt THIS  Arguments SEMICOLON
-    |                  TypeArgumentsOpt SUPER Arguments SEMICOLON
-	| CompoundName DOT TypeArgumentsOpt SUPER Arguments SEMICOLON
-    | Primary      DOT TypeArgumentsOpt SUPER Arguments SEMICOLON
+    :                  TypeArgumentsOpt THIS  Arguments SEMICOLON { $$ = ExplicitConstructorInvocation(null,$1,false,$3); }
+    |                  TypeArgumentsOpt SUPER Arguments SEMICOLON { $$ = ExplicitConstructorInvocation(null,$1,true,$3); }
+    | CompoundName DOT TypeArgumentsOpt SUPER Arguments SEMICOLON { Expression expr = new SimpleReference($1);
+                                                                    $$ = ExplicitConstructorInvocation(expr,$3,true,$5); }
+    | Primary      DOT TypeArgumentsOpt SUPER Arguments SEMICOLON { $$ = ExplicitConstructorInvocation(n$1,$3,true,$5); }
     ;
 
 //// EnumDeclaration ////////////////////////////////////
@@ -650,24 +680,24 @@ MethodDeclarator
 //    ;
 
 FormalParameterList
-    :                           FormalParameter
-    | FormalParameterList COMMA FormalParameter
+    :                           FormalParameter { $$ = new ParameterDeclarations($1); }
+    | FormalParameterList COMMA FormalParameter { $$ = $1.add($3);}
     ;
 
 FormalParameter
-    : ModifierSeq UnannotatedType FormalParameterTail
-    |             UnannotatedType FormalParameterTail
+    : ModifierSeq UnannotatedType FormalParameterTail { $$ = ParameterDeclaration.create($1,$2,$3); }
+    |             UnannotatedType FormalParameterTail { $$ = ParameterDeclaration.create(null,$1,$2); }
     ;
 
 FormalParameterTail
-    :                           IDENTIFIER DimsOpt
-    | AnnotationSeqOpt ELLIPSIS IDENTIFIER
-    |                  THIS
-    | IDENTIFIER DOT   THIS
+    :                           IDENTIFIER DimsOpt { $$ = new ParameterTail(null,$1,$2,false,false); }
+    | AnnotationSeqOpt ELLIPSIS IDENTIFIER         { $$ = new ParameterTail($1,$3,null,true,false); }
+    |                  THIS                        { $$ = new ParameterTail(null,null,null,false,true); } // receiver
+    | IDENTIFIER DOT   THIS                        { $$ = new ParameterTail(null,$1,null,false,true); }   // receiver
     ;
 
 //FormalParameter
-//    : ModifierSeqOpt UnannotatedType                              IDENTIFIER DimsOpt
+//    : ModifierSeqOpt UnannotatedType                           IDENTIFIER DimsOpt
 //    | ModifierSeqOpt UnannotatedType AnnotationSeqOpt ELLIPSIS IDENTIFIER // VariableArityParameter
 //
 //    | AnnotationSeqOpt UnannotatedType                THIS
@@ -675,8 +705,8 @@ FormalParameterTail
 //    ;
 
 ThrowsOpt
-    : %empty
-    | THROWS ClassTypeList1
+    : %empty                 { $$ = null; }
+    | THROWS ClassTypeList1  { $$ = $2; }
     ;
 
 MethodBody
@@ -704,39 +734,40 @@ Dim
 //// InterfaceDeclaration ////////////////////////
 
 InterfaceDeclaration
-    : NormalInterfaceDeclaration
-    | AnnotationInterfaceDeclaration
+    : NormalInterfaceDeclaration      { $$ = $1; }
+    | AnnotationInterfaceDeclaration  { $$ = null; }  // not implemented
     ;
 
 NormalInterfaceDeclaration
-    : INTERFACE IDENTIFIER TypeParametersOpt InterfaceExtendsOpt InterfaceBody { $$ = null; }
+    : INTERFACE IDENTIFIER TypeParametersOpt InterfaceExtendsOpt InterfaceBody
+                                         { $$ = new NormalInterfaceDeclaration($2,$3,$4,$5); }
     ;
 
 InterfaceExtendsOpt
-    : %empty
-    | InterfaceExtends
+    : %empty            { $$ = null; }
+    | InterfaceExtends  { $$ = $1; }
     ;
 
 InterfaceExtends
-    : EXTENDS Type
-    | InterfaceExtends COMMA Type
+    : EXTENDS Type                 { $$ = new TypeList($2); }
+    | InterfaceExtends COMMA Type  { $$ = $1.add($3); }
     ;
 
 InterfaceBody
-    : LBRACE                               RBRACE
-    | LBRACE InterfaceMemberDeclarationSeq RBRACE
+    : LBRACE                               RBRACE { $$ = null; }
+    | LBRACE InterfaceMemberDeclarationSeq RBRACE { $$ = $2; }
     ;
 
 InterfaceMemberDeclarationSeq
-    :                               ModifierSeqOpt InterfaceMemberDeclaration
-    | InterfaceMemberDeclarationSeq ModifierSeqOpt InterfaceMemberDeclaration
+    :                               ModifierSeqOpt InterfaceMemberDeclaration { $$ = new Declarations($2.addModifiers($1)); }
+    | InterfaceMemberDeclarationSeq ModifierSeqOpt InterfaceMemberDeclaration { $$ = $1.add($3.addModifiers($2)); }
     ;
 
 InterfaceMemberDeclaration
-    : ConstantDeclaration
-    | InterfaceMethodDeclaration
-    | ClassDeclaration
-    | InterfaceDeclaration
+    : ConstantDeclaration         { $$ = $1; }
+    | InterfaceMethodDeclaration  { $$ = $1; }
+    | ClassDeclaration            { $$ = $1; }
+    | InterfaceDeclaration        { $$ = $1; }
     ;
 
 ConstantDeclaration
@@ -790,14 +821,14 @@ BlockStatementSeq
     ;
 
 BlockStatement
-    : ModifierSeqOpt BlockDeclaration
-    | Statement
+    : ModifierSeqOpt BlockDeclaration { $$ = new Statement($2.addModifiers($1)); }
+    | Statement                       { $$ = $1; }
     ;
 
 BlockDeclaration
-    : ClassDeclaration                   // LocalClassOrInterfaceDeclaration
-    | NormalInterfaceDeclaration         // LocalClassOrInterfaceDeclaration
-    | LocalVariableDeclaration SEMICOLON // LocalVariableDeclarationStatement
+    : ClassDeclaration                   { $$ = $1; } // LocalClassOrInterfaceDeclaration
+    | NormalInterfaceDeclaration         { $$ = $1; } // LocalClassOrInterfaceDeclaration
+    | LocalVariableDeclaration SEMICOLON { $$ = $1; } // LocalVariableDeclarationStatement
     ;
 
 LocalVariableDeclaration
@@ -814,58 +845,59 @@ Statement
     ;
 
 SimpleStatement
-    : Block
-	| SEMICOLON                                      // EmptyStatement
-    | StatementExpression SEMICOLON                  // ExpressionStatement
+    : Block                             { $$ = $1; }
+	| SEMICOLON                         { $$ = null; }                         // EmptyStatement
+    | StatementExpression SEMICOLON     { $$ = new StatementExpression($1); }  // ExpressionStatement
 
-    | ASSERT Expression                  SEMICOLON // AssertStatement
-    | ASSERT Expression COLON Expression SEMICOLON // AssertStatement
+    | ASSERT Expression                  SEMICOLON { $$ = new Assert(null,$2,null); } // AssertStatement
+    | ASSERT Expression COLON Expression SEMICOLON { $$ = new Assert(null,$2,$4); }   // AssertStatement
 
     | SWITCH LPAREN Expression RPAREN SwitchBlock  // SwitchStatement
     | DO Statement WHILE LPAREN Expression RPAREN SEMICOLON // DoStatement
 
-    | BREAK            SEMICOLON             // BreakStatement
-    | BREAK IDENTIFIER SEMICOLON             // BreakStatement
+    | BREAK            SEMICOLON  { $$ = new Break(null,null); }           // BreakStatement
+    | BREAK IDENTIFIER SEMICOLON  { $$ = new Break(null,$2); }             // BreakStatement
 
-    | CONTINUE             SEMICOLON         // ContinueStatement
-    | CONTINUE IDENTIFIER  SEMICOLON         // ContinueStatement
+    | CONTINUE             SEMICOLON  { $$ = new Continue(null,null); }       // ContinueStatement
+    | CONTINUE IDENTIFIER  SEMICOLON  { $$ = new Continue(null,$2); }         // ContinueStatement
 
-    | RETURN            SEMICOLON            // ReturnStatement
-    | RETURN Expression SEMICOLON            // ReturnStatement
+    | RETURN            SEMICOLON     { $$ = new Return(null,null); }         // ReturnStatement
+    | RETURN Expression SEMICOLON     { $$ = new Return(null,$2); }           // ReturnStatement
 
-    | SYNCHRONIZED LPAREN Expression RPAREN Block  // SynchronizedStatement
+    | SYNCHRONIZED LPAREN Expression RPAREN Block  { $$ = new Synchronized(null,$3,$5); } // SynchronizedStatement
 
-    | THROW Expression SEMICOLON      // ThrowStatement
-    | YIELD Expression SEMICOLON      // YieldStatement
+    | THROW Expression SEMICOLON  { $$ = new Throw(null,$2); }    // ThrowStatement
+    | YIELD Expression SEMICOLON  { $$ = new Yield(null,$2); }    // YieldStatement
 
       // TryStatement
-    | TRY Block Catches
-    | TRY Block Catches Finally
-    | TRY Block         Finally
+    | TRY Block Catches            { $$ = null; } // not implemented yet
+    | TRY Block Catches Finally    { $$ = null; } // not implemented yet
+    | TRY Block         Finally    { $$ = null; } // not implemented yet
     | TRY ResourceSpecification Block CatchesOpt FinallyOpt // TryWithResourcesStatement
+                                   { $$ = null; } // not implemented yet
     ;
 
 LabeledStatement
-    : IDENTIFIER COLON Statement
+    : IDENTIFIER COLON Statement { $$ = $3.addLabel($1); }
     ;
 
 StatementExpression
-    : Assignment
-    | PreIncrementExpression
-    | PreDecrementExpression
-    | PostIncrementExpression
-    | PostDecrementExpression
-    | MethodInvocation
-    | ClassInstanceCreationExpression
+    : Assignment                   { $$ = $1; }
+    | PreIncrementExpression       { $$ = $1; }
+    | PreDecrementExpression       { $$ = $1; }
+    | PostIncrementExpression      { $$ = $1; }
+    | PostDecrementExpression      { $$ = $1; }
+    | MethodInvocation             { $$ = $1; }
+    | ClassInstanceCreationExpression  { $$ = $1; }
     ;
 
 IfThenElseStatement
-    : IF LPAREN Expression RPAREN Statement ElsePartOpt
+    : IF LPAREN Expression RPAREN Statement ElsePartOpt { $$ = null; } // not implemented yet
     ;
 
 ElsePartOpt
-    : %empty
-    | ELSE Statement
+    : %empty          { $$ = null; }
+    | ELSE Statement  { $$ = $2; }
     ;
 
 SwitchBlock
@@ -915,16 +947,17 @@ CaseExpressionList
 //    : Expression // ConditionalExpression
 
 WhileStatement
-    : WHILE LPAREN Expression RPAREN Statement
+    : WHILE LPAREN Expression RPAREN Statement  { $$ = new While(null,$3,$5); }
     ;
 
 ForStatement
-    : BasicForStatement
-    | EnhancedForStatement
+    : BasicForStatement    { $$ = $1; }
+    | EnhancedForStatement { $$ = $1; }
     ;
 
 BasicForStatement
     : FOR LPAREN ForInitOpt SEMICOLON ExpressionOpt SEMICOLON StatementExpressionListOpt RPAREN Statement
+                          { $$ = null; } // not implemented yet
     ;
 
 ForInitOpt
@@ -934,21 +967,21 @@ ForInitOpt
     ;
 
 ExpressionOpt
-    : %empty
-    | Expression
+    : %empty      { $$ = null; }
+    | Expression  { $$ = $1; }
     ;
 
 // ForUpdate
 //    : StatementExpressionList
 
 StatementExpressionList
-    :                               StatementExpression
-    | StatementExpressionList COMMA StatementExpression
+    :                               StatementExpression { $$ = new StatementExpressions($1); }
+    | StatementExpressionList COMMA StatementExpression { $$ = $1.add($2); }
     ;
 
 StatementExpressionListOpt
-    : %empty
-    | StatementExpressionList
+    : %empty                   { $$ = null; }
+    | StatementExpressionList  { $$ = $1; }
     ;
 
 EnhancedForStatement
@@ -956,26 +989,26 @@ EnhancedForStatement
     ;
 
 CatchesOpt
-    : %empty
-    | Catches
+    : %empty   { $$ = null; }
+    | Catches  { $$ = $1; }
     ;
 
 Catches
-    :         CatchClause
-    | Catches CatchClause
+    :         CatchClause   { $$ = new CatchClauses($1); }
+    | Catches CatchClause   { $$ = $1.add($2); }
     ;
 
 CatchClause
-    : CATCH LPAREN CatchFormalParameter RPAREN Block
+    : CATCH LPAREN CatchFormalParameter RPAREN Block { $$ = new CatchClause($3,$5); }
     ;
 
 CatchFormalParameter
-    : ModifierSeqOpt CatchType IDENTIFIER DimsOpt
+    : ModifierSeqOpt CatchType IDENTIFIER DimsOpt { $$ = new CatchParameter($1,$2,$3,$4); }
     ;
 
 CatchType
-    :                    Type
-    | CatchType VERTICAL Type
+    :                    Type { $$ = new TypeList($1); }
+    | CatchType VERTICAL Type { $$ = $1.add($3); }
     ;
 
 FinallyOpt
@@ -1392,10 +1425,10 @@ AnnoParameterList
     ;
 
 ElementValue
-    : ConditionalExpression                      { $$ = null; }
-    | LBRACE ElementValueListOpt        RBRACE   { $$ = null; }
-    | LBRACE                      COMMA RBRACE   { $$ = null; }
-    | Annotation                                 { $$ = null; }
+    : ConditionalExpression                      { $$ = null; }  // not implemented yet
+    | LBRACE ElementValueListOpt        RBRACE   { $$ = null; }  // not implemented yet
+    | LBRACE                      COMMA RBRACE   { $$ = null; }  // not implemented yet
+    | Annotation                                 { $$ = null; }  // not implemented yet
     ;
 
 ElementValueListOpt

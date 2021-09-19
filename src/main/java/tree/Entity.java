@@ -48,6 +48,13 @@ public class Entity
             System.out.print(" ");
     }
 
+    public void title(String n, int sh)
+    {
+        doShift(sh);
+        outUnique();
+        System.out.println(n);
+    }
+
     public void report(int sh)
     {
 

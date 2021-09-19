@@ -28,8 +28,7 @@ public class Assert extends Statement
     // Reporting
     public void report(int sh)
     {
-        Entity.doShift(sh);
-        System.out.println("ASSERT");
+        title("ASSERT",sh);
         expression.report(sh+Entity.shift);
         if ( expression2 != null )
         {

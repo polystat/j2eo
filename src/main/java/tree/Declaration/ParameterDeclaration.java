@@ -1,12 +1,10 @@
 package tree.Declaration;
 
+import lexer.Token;
 import tree.*;
-import tree.Dim;
 import tree.Modifiers;
 import tree.Type.*;
-import lexer.Token;
-
-import java.util.ArrayList;
+import tree.Declaration.*;
 
 // FormalParameter
 //    : ModifierSeq UnannotatedType FormalParameterTail
@@ -47,12 +45,33 @@ public class ParameterDeclaration extends Declaration
     }
     public ParameterDeclaration(Token token)
     {
+        // For the single lambda parameter
         this(null,null,token.image,null,false,null);
     }
-
+    public static ParameterDeclaration create(Modifiers mods,Type type,ParameterTail tail)
+    {
+        if ( tail.thisSign ) // this is the receiver declaration
+            return createReceiver(mods,type,tail.identifier);
+        else // this is a usual parameter declaration
+            return createParameter(mods,type,tail.identifier,tail.annotations,tail.ellipsisSign,tail.dims);
+    }
+    private static ParameterDeclaration createParameter(Modifiers mods,Type t,String n,
+                                                       Annotations ellAnns, boolean signEll,Dims dims)
+    {
+        return new ParameterDeclaration(mods,t,n,ellAnns,signEll,dims);
+    }
+    private static ReceiverDeclaration createReceiver(Modifiers mods,Type t,String n)
+    {
+        ReceiverDeclaration receiver = new ReceiverDeclaration(null,t,n);
+        receiver.modifiers = mods;
+        receiver.dims = null;
+        receiver.ellAnnotations = null;
+        receiver.signEllipsis = false;
+        return receiver;
+    }
 
     // Reporting
-    public void report(int csh)
+    public void report(int sh)
     {
 
     }

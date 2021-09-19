@@ -1,5 +1,6 @@
 package tree.Statement;
 
+import lexer.*;
 import tree.Entity;
 import tree.Statement.Statement;
 
@@ -18,10 +19,10 @@ public class Continue extends Statement
     public String label;
 
     // Creation
-    public Continue(ArrayList<String> ls, String label)
+    public Continue(ArrayList<String> ls, Token label)
     {
         super(ls);
-        this.label = label;
+        this.label = label.image;
     }
 
     // Reporting

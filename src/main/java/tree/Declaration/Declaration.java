@@ -50,4 +50,21 @@ public class Declaration extends Entity
         this.name = n;
         this.type = t;
     }
+    public Declaration addModifiers(Modifiers mods)
+    {
+        this.modifiers = mods;
+        return this;
+    }
+
+    // Reporting
+    public void report(int sg)
+    {
+
+    }
+
+    // Generation
+    public void generateEO()
+    {
+
+    }
 }
