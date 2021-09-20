@@ -1,0 +1,3 @@
+
+public final interface Simplest{
+}

@@ -1,0 +1,3 @@
+
+protected final class Simplest{
+}
