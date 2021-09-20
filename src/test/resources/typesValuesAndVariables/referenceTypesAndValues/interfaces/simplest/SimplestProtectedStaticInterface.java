@@ -1,3 +1,0 @@
-
-protected static interface Simplest{
-}

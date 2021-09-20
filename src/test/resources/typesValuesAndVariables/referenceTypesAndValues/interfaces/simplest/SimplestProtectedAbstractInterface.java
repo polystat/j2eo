@@ -1,3 +1,0 @@
-
-protected abstract interface Simplest{
-}

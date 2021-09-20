@@ -1,3 +1,0 @@
-
-private final class Simplest{
-}

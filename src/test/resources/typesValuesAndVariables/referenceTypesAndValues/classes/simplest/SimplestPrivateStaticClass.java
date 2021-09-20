@@ -1,3 +1,0 @@
-
-private static class Simplest{
-}

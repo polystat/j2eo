@@ -1,3 +1,0 @@
-
-private interface Simplest{
-}

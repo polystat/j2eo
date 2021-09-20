@@ -1,3 +1,0 @@
-
-protected final interface Simplest{
-}

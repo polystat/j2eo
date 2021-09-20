@@ -1,3 +1,0 @@
-
-static final class Simplest{
-}
