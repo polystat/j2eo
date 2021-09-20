@@ -1,7 +1,8 @@
 package tree.Declaration;
 
+import lexer.*;
 import tree.Modifiers;
-import tree.Type.Type;
+import tree.Type.*;
 import tree.Type.TypeParameter;
 
 import java.util.ArrayList;
@@ -39,21 +40,19 @@ import java.util.ArrayList;
 public class NormalClassDeclaration extends ClassDeclaration
 {
     // Structure
-    public ArrayList<TypeParameter> typeParameters;
+    public TypeParameters typeParameters;
     public Type extendedType;
-    public ArrayList<Type> interfaces;
-    public ArrayList<Declaration> body;
+    public TypeList interfaces;
+    public Declarations body;
 
     // Creation
-    public NormalClassDeclaration(Modifiers mods,
-                                  String n,
-                                  ArrayList<TypeParameter> typePars,
+    public NormalClassDeclaration(Token n,
+                                  TypeParameters typePars,
                                   Type extType,
-                                  ArrayList<Type> ints,
-                                  ArrayList<Declaration> body)
+                                  TypeList ints,
+                                  Declarations body)
     {
-        super(mods,n);
-        this.modifiers = mods;
+        super(null,n.image);
         this.typeParameters = typePars;
         this.extendedType = extType;
         this.interfaces = ints;

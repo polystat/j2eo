@@ -33,7 +33,7 @@ public class MethodDeclaration extends Declaration
     public TypeParameters typeParameters;
 //  public Type type;
 //  public String name;
-    public ReceiverDeclaration receiver;
+//  public ReceiverDeclaration receiver; -- this is a special kind of ParameterDeclaration
     public ParameterDeclarations parameters;
     public Dims dims;
     public TypeList exceptions;
@@ -44,7 +44,6 @@ public class MethodDeclaration extends Declaration
                              TypeParameters typePars,
                              Type t,
                              String n,
-                             ReceiverDeclaration r,
                              ParameterDeclarations pars,
                              Dims dims,
                              TypeList excs,
@@ -53,7 +52,6 @@ public class MethodDeclaration extends Declaration
         super(mods,n,t);
         this.typeParameters = typePars;
         this.parameters = pars;
-        this.receiver = r;
         this.dims = dims;
         this.exceptions = excs;
         this.methodBody = body;

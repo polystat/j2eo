@@ -9,17 +9,15 @@ import java.util.ArrayList;
 //    | SYNCHRONIZED LPAREN Expression RPAREN Block  // SynchronizedStatement
 //    | ...
 //    ;
-public class SynchronizedStatement extends Statement
+public class Synchronized extends Statement
 {
     // Structure
 //  public ArrayList<String> labels;
     public Expression expression;
-    public ArrayList<Block> block;
+    public Block block;
 
     // Creation
-    public SynchronizedStatement(ArrayList<String> ls,
-                                 Expression expr,
-                                 ArrayList<Block> block)
+    public Synchronized(ArrayList<String> ls, Expression expr, Block block)
     {
         super(ls);
         this.expression = expr;

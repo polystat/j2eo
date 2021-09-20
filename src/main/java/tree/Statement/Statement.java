@@ -1,5 +1,6 @@
 package tree.Statement;
 
+import lexer.*;
 import tree.Entity;
 import java.util.ArrayList;
 
@@ -42,6 +43,16 @@ import java.util.ArrayList;
 //    | TRY Block         Finally
 //    | TRY ResourceSpecification Block CatchesOpt FinallyOpt // TryWithResourcesStatement
 //    ;
+//
+// StatementExpression
+//    : Assignment
+//    | PreIncrementExpression
+//    | PreDecrementExpression
+//    | PostIncrementExpression
+//    | PostDecrementExpression
+//    | MethodInvocation
+//    | ClassInstanceCreationExpression
+//    ;
 public class Statement extends Entity
 {
     // Structure
@@ -51,5 +62,13 @@ public class Statement extends Entity
     public Statement(ArrayList<String> ls)
     {
         this.labels = ls;
+    }
+
+    public Statement addStatement(Token label)
+    {
+        if ( labels == null )
+            labels = new ArrayList<>();
+        labels.add(label.image);
+        return this;
     }
 }

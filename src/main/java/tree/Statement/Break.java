@@ -1,7 +1,7 @@
 package tree.Statement;
 
+import lexer.*;
 import tree.Entity;
-
 import java.util.ArrayList;
 
 // SimpleStatement
@@ -17,10 +17,10 @@ public class Break extends Statement
     public String label;
 
     // Creation
-    public Break(ArrayList<String> ls, String label)
+    public Break(ArrayList<String> ls, Token label)
     {
         super(ls);
-        this.label = label;
+        this.label = label.image;
     }
 
     // Reporting

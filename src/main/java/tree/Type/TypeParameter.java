@@ -16,21 +16,21 @@ import java.util.ArrayList;
 public class TypeParameter extends Entity
 {
     // Structure
-    public String name;
     public Annotations annotations;
+    public String name;
+
+    public Annotations extAnnotations;
     public String extendingName;
     public TypeList extendingTypes;
 
     // Creation
-    public TypeParameter(String n,
-                         Annotations anns,
-                         String en,
-                         TypeList extTypes)
+    public TypeParameter(Annotations anns, TypeParameterTail tail)
     {
-        this.name = n;
         this.annotations = anns;
-        this.extendingName = en;
-        this.extendingTypes = extTypes;
+        this.name = tail.identifier;
+        this.extAnnotations = tail.extAnnotations;
+        this.extendingName = tail.extending;
+        this.extendingTypes = tail.types;
     }
 
     // Reporting
