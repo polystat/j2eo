@@ -6,7 +6,7 @@ package eotree;
  * '+' name '␣' ANY EOL
  * </code>
  */
-public abstract class EOMeta extends EONode {
+public class EOMeta extends EONode {
     public String name;
     public String value;
 

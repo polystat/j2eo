@@ -90,7 +90,7 @@ fun runBison() =
                 workingDir = File(".")
                 executable = "bin/bison_mac"
                 args = mutableListOf(
-                    "-r all",
+                    "-r", "all",
                     "--report-file=${reportFilePath}",
                     "--output=${javaParserFilePath}",
                     javaGrammarFilePath
@@ -101,7 +101,7 @@ fun runBison() =
                 workingDir = File(".")
                 executable = "bison"
                 args = mutableListOf(
-                    "-r all",
+                    "-r", "all",
                     "--report-file=${reportFilePath}",
                     "--output=${javaParserFilePath}",
                     javaGrammarFilePath
