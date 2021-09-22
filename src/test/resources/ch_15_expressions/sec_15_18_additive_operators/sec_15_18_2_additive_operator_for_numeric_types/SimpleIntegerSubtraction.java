@@ -1,6 +1,6 @@
-public class SimpleFloatAddition {
+public class SimpleIntegerSubtraction {
 	public static void main(String[] args) {
-		float a = 1f + 2f;
+        int a = 1 - 2;
 		System.out.println(a);
 	}
 }
