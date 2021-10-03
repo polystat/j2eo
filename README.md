@@ -49,3 +49,20 @@ java -jar j2eo.jar <source package directory> -o <output directory>
 - First, the Java source code files are parsed recursively.
 - Then, for each file, translator converts Java AST to EO AST.
 - Then, EO AST is printed out as a source code to output directory in the same directory structure.
+
+## NOT covered Java features list
+
+- Type Erasure
+- Subtyping
+- Conversions
+- Casting
+- Modules
+- Exceptions
+- Asserts
+- Throws
+- ``synchronized`` blocks
+- ``try``/``catch`` blocks
+- ``yeild`` feature
+- Threads and Locks
+
+In general, we cover **91 feature of 112** described in the Java language specification.
