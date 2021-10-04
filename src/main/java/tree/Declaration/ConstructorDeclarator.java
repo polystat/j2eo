@@ -1,7 +1,7 @@
 package tree.Declaration;
 
 import tree.Entity;
-import tree.Type.TypeList;
+import tree.Type.*;
 
 // Intermediate class: won't appear in the AST.
 //
@@ -11,11 +11,11 @@ import tree.Type.TypeList;
 public class ConstructorDeclarator extends Entity
 {
     // Structure
-    public TypeList typeParameters;
+    public TypeParameters typeParameters;
     public ParameterDeclarations formalParameters;
 
     // Creation
-    public ConstructorDeclarator(TypeList tpars, ParameterDeclarations pars)
+    public ConstructorDeclarator(TypeParameters tpars, ParameterDeclarations pars)
     {
         this.typeParameters = tpars;
         this.formalParameters = pars;

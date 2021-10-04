@@ -11,9 +11,15 @@ public class SwitchLabel extends Entity
     public ArrayList<Expression> cases;
 
     // Creation
-    public SwitchLabel(ArrayList<Expression> cs)
+    public SwitchLabel(Expression cs)
     {
-        this.cases = cs;
+        this.cases = new ArrayList<>();
+        this.cases.add(cs);
+    }
+    public SwitchLabel add(Expression cs)
+    {
+        this.cases.add(cs);
+        return this;
     }
 
     // Reporting

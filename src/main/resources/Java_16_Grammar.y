@@ -173,6 +173,8 @@
                      AnnotationInterfaceDeclaration Pattern InterfaceMemberDeclaration
                      ClassBodyDeclaration PureBodyDeclaration FieldDeclaration MethodDeclaration
                      ConstantDeclaration InterfaceMethodDeclaration BlockDeclaration
+                     LocalVariableDeclaration
+
 %nterm <ConstructorDeclaration> ConstructorDeclaration
 %nterm <Declarations> InterfaceMemberDeclarationSeq InterfaceBody ClassBodyDeclarationSeq ClassBody ClassBodyOpt
 
@@ -189,12 +191,13 @@
                     SwitchExpression PostfixExpression Primary UnaryExpression UnaryExpressionNotPlusMinus
                     InstanceofExpression CastExpression LambdaExpression
                     LeftHandSide FieldAccess ArrayAccess StatementExpression
+                    MethodInvocation MethodReference ArrayCreationExpression ClassInstanceCreationExpression
 
 %nterm<tree.Expression.Binary> ConditionalOrTail ConditionalOrExpression ConditionalAndExpression
                InclusiveOrExpression ExclusiveOrExpression AndExpression EqualityExpression RelationalExpression
                ShiftExpression AdditiveExpression MultiplicativeExpression
 
-%nterm <Expressions> StatementExpressionList StatementExpressionListOpt
+%nterm <StatementExpressions> StatementExpressionList StatementExpressionListOpt
 
 %nterm <UnaryPrefix> PreIncrementExpression PreDecrementExpression
 %nterm <UnaryPostfix> PostIncrementExpression PostDecrementExpression
@@ -218,6 +221,17 @@
 %nterm <ConstructorBody> ConstructorBody
 %nterm <ConstructorDeclarator> ConstructorDeclarator
 %nterm <ExplicitConstructorInvocation> ExplicitConstructorInvocation
+
+%nterm <VariableDeclarator> VariableDeclarator
+%nterm <VariableDeclarators> VariableDeclaratorList
+
+%nterm <Initializer> ArrayInitializer VariableInitializerListOpt VariableInitializerList VariableInitializer
+
+%nterm <SwitchBlock> SwitchBlock
+%nterm <SwitchRule> SwitchRule
+%nterm <SwitchRules> SwitchRuleSeq
+%nterm <SwitchLabel> SwitchLabel CaseExpressionList
+%nterm <SwitchLabels> SwitchLabelSeq
 
 %%
 
@@ -511,8 +525,7 @@ PureBodyDeclaration
 
 ConstructorDeclaration
     : /*ModifierSeqOpt*/ ConstructorDeclarator ThrowsOpt ConstructorBody
-                            { $$ = new ConstructorDeclaration(null,
-                                                              $1.typeParameters,$1.receiver,$1.parameters,
+                            { $$ = new ConstructorDeclaration(null,$1.typeParameters,$1.formalParameters,
                                                               $2,$3.invocation,$3.block); }
     ;
 
@@ -524,16 +537,16 @@ ConstructorDeclarator
 ConstructorBody
     : LBRACE                                                 RBRACE { $$ = new ConstructorBody(null,null); }
     | LBRACE ExplicitConstructorInvocation                   RBRACE { $$ = new ConstructorBody($2,null); }
-    | LBRACE                               BlockStatementSeq RBRACE { $$ = new ConstructorBody(null,$2); }
-    | LBRACE ExplicitConstructorInvocation BlockStatementSeq RBRACE { $$ = new ConstructorBody($2,$3); }
+    | LBRACE                               BlockStatementSeq RBRACE { $$ = new ConstructorBody(null,new Block(null,$2)); }
+    | LBRACE ExplicitConstructorInvocation BlockStatementSeq RBRACE { $$ = new ConstructorBody($2,new Block(null,$3)); }
     ;
 
 ExplicitConstructorInvocation
-    :                  TypeArgumentsOpt THIS  Arguments SEMICOLON { $$ = ExplicitConstructorInvocation(null,$1,false,$3); }
-    |                  TypeArgumentsOpt SUPER Arguments SEMICOLON { $$ = ExplicitConstructorInvocation(null,$1,true,$3); }
+    :                  TypeArgumentsOpt THIS  Arguments SEMICOLON { $$ = new ExplicitConstructorInvocation(null,$1,false,$3); }
+    |                  TypeArgumentsOpt SUPER Arguments SEMICOLON { $$ = new ExplicitConstructorInvocation(null,$1,true,$3); }
     | CompoundName DOT TypeArgumentsOpt SUPER Arguments SEMICOLON { Expression expr = new SimpleReference($1);
-                                                                    $$ = ExplicitConstructorInvocation(expr,$3,true,$5); }
-    | Primary      DOT TypeArgumentsOpt SUPER Arguments SEMICOLON { $$ = ExplicitConstructorInvocation(n$1,$3,true,$5); }
+                                                                    $$ = new ExplicitConstructorInvocation(expr,$3,true,$5); }
+    | Primary      DOT TypeArgumentsOpt SUPER Arguments SEMICOLON { $$ = new ExplicitConstructorInvocation($1,$3,true,$5); }
     ;
 
 //// EnumDeclaration ////////////////////////////////////
@@ -603,45 +616,45 @@ RecordBodyDeclaration
 //// FieldDeclaration ///////////////////////////////////
 
 FieldDeclaration
-    : /*ModifierSeqOpt*/ UnannotatedType VariableDeclaratorList SEMICOLON
+    : /*ModifierSeqOpt*/ UnannotatedType VariableDeclaratorList SEMICOLON { $$ = new TypeAndDeclarators($1,$2); }
     ;
 
 VariableDeclaratorList
-    :                              VariableDeclarator
-    | VariableDeclaratorList COMMA VariableDeclarator
+    :                              VariableDeclarator { $$ = new VariableDeclarators($1); }
+    | VariableDeclaratorList COMMA VariableDeclarator { $$ = $1.add($3); }
     ;
 
 VariableDeclarator
-    : IDENTIFIER
-    | IDENTIFIER      EQUAL Expression
-    | IDENTIFIER Dims
-    | IDENTIFIER Dims EQUAL ArrayInitializer
+    : IDENTIFIER                              { $$ = new VariableDeclarator($1,null,null); }
+    | IDENTIFIER      EQUAL Expression        { $$ = new VariableDeclarator($1,null,$3); }
+    | IDENTIFIER Dims                         { $$ = new VariableDeclarator($1,$2,null); }
+    | IDENTIFIER Dims EQUAL ArrayInitializer  { $$ = new VariableDeclarator($1,$2,$4); }
     ;
 
 ArrayInitializer
-    : LBRACE VariableInitializerListOpt       RBRACE
-    | LBRACE VariableInitializerListOpt COMMA RBRACE
+    : LBRACE VariableInitializerListOpt       RBRACE { $$ = $2; }
+    | LBRACE VariableInitializerListOpt COMMA RBRACE { $$ = $2; }
     ;
 
 VariableInitializerListOpt
-    : %empty
-    | VariableInitializerList
+    : %empty                    { $$ = null; }
+    | VariableInitializerList   { $$ = $1; }
     ;
 
 VariableInitializerList
-    :                               VariableInitializer
-    | VariableInitializerList COMMA VariableInitializer
+    :                               VariableInitializer { $$ = new InitializerArray($1); }
+    | VariableInitializerList COMMA VariableInitializer { $$ = $1.add($3); }
     ;
 
 VariableInitializer
-    : Expression
-    | ArrayInitializer
+    : Expression        { $$ = new InitializerSimple($1); }
+    | ArrayInitializer  { $$ = $1; }
     ;
 
 //// MethodDeclaration ////////////////////////////////
 
 MethodDeclaration
-    : MethodHeader MethodBody
+    : MethodHeader MethodBody { $$ = null; }  // not implemented yet
 	;
 
 //MethodHeader
@@ -771,11 +784,11 @@ InterfaceMemberDeclaration
     ;
 
 ConstantDeclaration
-    : Type VariableDeclaratorList SEMICOLON
+    : Type VariableDeclaratorList SEMICOLON { $$ = new TypeAndDeclarators($1,$2); }
     ;
 
 InterfaceMethodDeclaration
-    : MethodHeader MethodBody
+    : MethodHeader MethodBody { $$ = null; } // not implemented yet
     ;
 
 AnnotationInterfaceDeclaration
@@ -821,7 +834,7 @@ BlockStatementSeq
     ;
 
 BlockStatement
-    : ModifierSeqOpt BlockDeclaration { $$ = new Statement($2.addModifiers($1)); }
+    : ModifierSeqOpt BlockDeclaration { $$ = new BlockStatement($2.addModifiers($1)); }
     | Statement                       { $$ = $1; }
     ;
 
@@ -832,8 +845,8 @@ BlockDeclaration
     ;
 
 LocalVariableDeclaration
-    : UnannotatedType VariableDeclaratorList
-    | VAR             VariableDeclaratorList
+    : UnannotatedType VariableDeclaratorList { $$ = new TypeAndDeclarators($1,$2); }
+    | VAR             VariableDeclaratorList { $$ = new TypeAndDeclarators(null,$2); }
     ;
 
 Statement
@@ -852,8 +865,8 @@ SimpleStatement
     | ASSERT Expression                  SEMICOLON { $$ = new Assert(null,$2,null); } // AssertStatement
     | ASSERT Expression COLON Expression SEMICOLON { $$ = new Assert(null,$2,$4); }   // AssertStatement
 
-    | SWITCH LPAREN Expression RPAREN SwitchBlock  // SwitchStatement
-    | DO Statement WHILE LPAREN Expression RPAREN SEMICOLON // DoStatement
+    | SWITCH LPAREN Expression RPAREN SwitchBlock  { $$ = null; } // not implemented yet  // SwitchStatement
+    | DO Statement WHILE LPAREN Expression RPAREN SEMICOLON { $$ = new Do(null,$2,$5); } // DoStatement
 
     | BREAK            SEMICOLON  { $$ = new Break(null,null); }           // BreakStatement
     | BREAK IDENTIFIER SEMICOLON  { $$ = new Break(null,$2); }             // BreakStatement
@@ -901,20 +914,20 @@ ElsePartOpt
     ;
 
 SwitchBlock
-    : LBRACE SwitchRuleSeq                                  RBRACE
-    | LBRACE SwitchBlockStatementGroupSeqOpt                RBRACE
-    | LBRACE SwitchBlockStatementGroupSeqOpt SwitchLabelSeq RBRACE
+    : LBRACE SwitchRuleSeq                                  RBRACE { $$ = null; } // not implemented yet
+    | LBRACE SwitchBlockStatementGroupSeqOpt                RBRACE { $$ = null; } // not implemented yet
+    | LBRACE SwitchBlockStatementGroupSeqOpt SwitchLabelSeq RBRACE { $$ = null; } // not implemented yet
     ;
 
 SwitchRuleSeq
-    :               SwitchRule
-    | SwitchRuleSeq SwitchRule
+    :               SwitchRule { $$ = new SwitchRules($1); }
+    | SwitchRuleSeq SwitchRule { $$ = $1.add($2); }
     ;
 
 SwitchRule
-    : SwitchLabel ARROW Expression SEMICOLON
-    | SwitchLabel ARROW Block
-    | SwitchLabel ARROW THROW Expression SEMICOLON // ThrowStatement
+    : SwitchLabel ARROW Expression SEMICOLON        { $$ = new SwitchRule($1,$3); }
+    | SwitchLabel ARROW Block                       { $$ = new SwitchRule($1,$3); }
+    | SwitchLabel ARROW THROW Expression SEMICOLON  { $$ = new SwitchRule($1,new Throw(null,$4)); } // ThrowStatement
     ;
 
 SwitchBlockStatementGroupSeqOpt
@@ -929,18 +942,18 @@ SwitchBlockStatementGroup
     ;
 
 SwitchLabelSeq
-    :                SwitchLabel COLON
-    | SwitchLabelSeq SwitchLabel COLON
+    :                SwitchLabel COLON { $$ = new SwitchLables($2); }
+    | SwitchLabelSeq SwitchLabel COLON { $$ = $1.add($2); }
     ;
 
 SwitchLabel
-    : CASE CaseExpressionList
-	| DEFAULT
+    : CASE CaseExpressionList  { $$ = $2; }
+	| DEFAULT                  { $$ = null; }
     ;
 
 CaseExpressionList
-    :                          AssignmentExpression
-    | CaseExpressionList COMMA AssignmentExpression
+    :                          AssignmentExpression { $$ = new SwitchLabel($1); }
+    | CaseExpressionList COMMA AssignmentExpression { $$ = $1.add($3); }
     ;
 
 //CaseConstant
@@ -976,7 +989,7 @@ ExpressionOpt
 
 StatementExpressionList
     :                               StatementExpression { $$ = new StatementExpressions($1); }
-    | StatementExpressionList COMMA StatementExpression { $$ = $1.add($2); }
+    | StatementExpressionList COMMA StatementExpression { $$ = $1.add($3); }
     ;
 
 StatementExpressionListOpt
@@ -985,7 +998,7 @@ StatementExpressionListOpt
     ;
 
 EnhancedForStatement
-    : FOR LPAREN LocalVariableDeclaration COLON Expression RPAREN Statement
+    : FOR LPAREN LocalVariableDeclaration COLON Expression RPAREN Statement { $$ = null; } // not implemented yet
     ;
 
 CatchesOpt
@@ -1051,12 +1064,12 @@ Primary
     | THIS                              { $$ = new This(null); }
     | Type DOT THIS                     { $$ = new This($1); }
     | LPAREN Expression RPAREN          { $$ = new Parenthesized($2); }
-    | ClassInstanceCreationExpression
+    | ClassInstanceCreationExpression   { $$ = null; } // not implemented yet
     | FieldAccess                       { $$ = $1; }
     | ArrayAccess                       { $$ = $1; }
-    | MethodInvocation
-    | MethodReference
-    | ArrayCreationExpression
+    | MethodInvocation                  { $$ = $1; }  // not implemented yet
+    | MethodReference                   { $$ = $1; }  // not implemented yet
+    | ArrayCreationExpression           { $$ = $1; }  // not implemented yet
     ;
 
 //ClassLiteral:
@@ -1066,9 +1079,9 @@ Primary
 //	void			. class
 
 ClassInstanceCreationExpression
-    :                  UnqualifiedClassInstanceCreationExpression
-    | CompoundName DOT UnqualifiedClassInstanceCreationExpression
-    | Primary      DOT UnqualifiedClassInstanceCreationExpression
+    :                  UnqualifiedClassInstanceCreationExpression { $$ = null; } // not implemented yet
+    | CompoundName DOT UnqualifiedClassInstanceCreationExpression { $$ = null; } // not implemented yet
+    | Primary      DOT UnqualifiedClassInstanceCreationExpression { $$ = null; } // not implemented yet
     ;
 
 UnqualifiedClassInstanceCreationExpression
@@ -1127,11 +1140,11 @@ ArrayAccess
     ;
 
 MethodInvocation
-    :                                             IDENTIFIER Arguments
-    | CompoundName           DOT TypeArgumentsOpt IDENTIFIER Arguments
-    | Primary                DOT TypeArgumentsOpt IDENTIFIER Arguments
-    |                  SUPER DOT TypeArgumentsOpt IDENTIFIER Arguments
-    | CompoundName DOT SUPER DOT TypeArgumentsOpt IDENTIFIER Arguments
+    :                                             IDENTIFIER Arguments { $$ = null; } // not implemented yet
+    | CompoundName           DOT TypeArgumentsOpt IDENTIFIER Arguments { $$ = null; } // not implemented yet
+    | Primary                DOT TypeArgumentsOpt IDENTIFIER Arguments { $$ = null; } // not implemented yet
+    |                  SUPER DOT TypeArgumentsOpt IDENTIFIER Arguments { $$ = null; } // not implemented yet
+    | CompoundName DOT SUPER DOT TypeArgumentsOpt IDENTIFIER Arguments { $$ = null; } // not implemented yet
     ;
 
 Arguments
@@ -1150,17 +1163,17 @@ ArgumentList
     ;
 
 MethodReference
-    : CompoundName      DBL_COLON TypeArgumentsOpt IDENTIFIER
-    | Primary           DBL_COLON TypeArgumentsOpt IDENTIFIER
-    | Type              DBL_COLON TypeArgumentsOpt IDENTIFIER
-    |             SUPER DBL_COLON TypeArgumentsOpt IDENTIFIER
-    | Type    DOT SUPER DBL_COLON TypeArgumentsOpt IDENTIFIER
-    | Type              DBL_COLON TypeArgumentsOpt NEW
+    : CompoundName      DBL_COLON TypeArgumentsOpt IDENTIFIER { $$ = null; } // not implemented yet
+    | Primary           DBL_COLON TypeArgumentsOpt IDENTIFIER { $$ = null; } // not implemented yet
+    | Type              DBL_COLON TypeArgumentsOpt IDENTIFIER { $$ = null; } // not implemented yet
+    |             SUPER DBL_COLON TypeArgumentsOpt IDENTIFIER { $$ = null; } // not implemented yet
+    | Type    DOT SUPER DBL_COLON TypeArgumentsOpt IDENTIFIER { $$ = null; } // not implemented yet
+    | Type              DBL_COLON TypeArgumentsOpt NEW        { $$ = null; } // not implemented yet
     ;
 
 ArrayCreationExpression
-    : NEW Type DimExprs DimsOpt
-    | NEW Type Dims ArrayInitializer
+    : NEW Type DimExprs DimsOpt        { $$ = null; } // not implemented yet
+    | NEW Type Dims ArrayInitializer   { $$ = null; } // not implemented yet
     ;
 
 DimExprs
@@ -1391,7 +1404,7 @@ TypeList
     ;
 
 SwitchExpression
-    : SWITCH LPAREN Expression RPAREN SwitchBlock
+    : SWITCH LPAREN Expression RPAREN SwitchBlock { $$ = new SwitchExpression($3,$5); }
     ;
 
 
@@ -1420,8 +1433,8 @@ Annotation
     ;
 
 AnnoParameterList
-    :                         IDENTIFIER EQUAL ElementValue
-    | AnnoParameterList COMMA IDENTIFIER EQUAL ElementValue
+    :                         IDENTIFIER EQUAL ElementValue { $$ = null; } // not implemented yet
+    | AnnoParameterList COMMA IDENTIFIER EQUAL ElementValue { $$ = null; } // not implemented yet
     ;
 
 ElementValue

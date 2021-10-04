@@ -1,5 +1,9 @@
 package tree.Statement;
 
+import tree.Declaration.Declaration;
+import tree.Declaration.TypeAndDeclarators;
+import tree.Declaration.VariableDeclaration;
+import tree.Declaration.VariableDeclarator;
 import tree.Entity;
 import java.util.ArrayList;
 
@@ -12,12 +16,27 @@ public class BlockStatements extends Entity
     public BlockStatements(BlockStatement elem)
     {
         this.blockStatements = new ArrayList<>();
-        this.blockStatements.add(elem);
+        deconstruct(elem);
     }
     public BlockStatements add(BlockStatement elem)
     {
-        this.blockStatements.add(elem);
+        deconstruct(elem);
         return this;
+    }
+    private void deconstruct(BlockStatement stmt)
+    {
+        if ( stmt.declaration != null && stmt.declaration instanceof TypeAndDeclarators)
+        {
+            TypeAndDeclarators tds = (TypeAndDeclarators)stmt.declaration;
+            for (VariableDeclarator declarator: tds.declarators.declarators)
+            {
+                VariableDeclaration variable =
+                        new VariableDeclaration(tds.name,tds.modifiers,tds.type,declarator.dims,declarator.initializer);
+                this.blockStatements.add(new BlockStatement(variable));
+            }
+        }
+        else
+            this.blockStatements.add(stmt);
     }
 
     // Reporting

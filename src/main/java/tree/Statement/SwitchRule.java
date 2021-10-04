@@ -1,8 +1,7 @@
 package tree.Statement;
 
 import tree.Entity;
-import tree.Statement.Block;
-import tree.Statement.Throw;
+import tree.Statement.*;
 import tree.Expression.*;
 
 // SwitchBlock
@@ -35,7 +34,7 @@ public class SwitchRule extends Entity
     // Structure
     SwitchLabel label;
 
-    // One of the following values:
+    // ONE of the following values:
     public Expression expression;
     public Block block;
     public Throw throwStatement;

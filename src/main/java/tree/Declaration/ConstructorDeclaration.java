@@ -31,6 +31,7 @@ public class ConstructorDeclaration extends MethodDeclaration
 //  public ParameterDeclarations parameters;
 //  public Dims dims;                           // always null
 //  public TypeList exceptions;
+    public ExplicitConstructorInvocation invocation;
 //  public Block methodBody;
 
     // Creation
@@ -38,9 +39,11 @@ public class ConstructorDeclaration extends MethodDeclaration
                                   TypeParameters typePars,
                                   ParameterDeclarations pars,
                                   TypeList excs,
+                                  ExplicitConstructorInvocation inv,
                                   Block body)
     {
         super(mods,typePars,null,null,pars,null,excs,body);
+        this.invocation = inv;
     }
 
     // Reporting

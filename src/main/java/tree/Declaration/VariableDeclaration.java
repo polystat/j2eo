@@ -1,12 +1,22 @@
 package tree.Declaration;
 
-import tree.Dim;
+import lexer.*;
+import tree.Dims;
 import tree.Initializer;
 import tree.Modifiers;
 import tree.Type.Type;
 
 import java.util.ArrayList;
 
+// ConstantDeclaration
+//    : Type VariableDeclaratorList SEMICOLON
+//    ;
+//
+// LocalVariableDeclaration
+//    : UnannotatedType VariableDeclaratorList
+//    | VAR             VariableDeclaratorList
+//    ;
+//
 // FieldDeclaration
 //    : /*ModifierSeqOpt*/ UnannotatedType VariableDeclaratorList SEMICOLON
 //    ;
@@ -22,21 +32,21 @@ import java.util.ArrayList;
 //    | IDENTIFIER Dims
 //    | IDENTIFIER Dims EQUAL ArrayInitializer
 //    ;
-public class FieldDeclaration extends Declaration
+public class VariableDeclaration extends Declaration
 {
     // Structure
     public Modifiers modifiers;
-    public ArrayList<Dim> dims;
+    public Dims dims;
 
     // Either a single expression, or a list of initializers
     public Initializer initializer;
 
     // Creation
-    public FieldDeclaration(String n,
-                            Modifiers mods,
-                            Type t,
-                            ArrayList<Dim> dims,
-                            Initializer init)
+    public VariableDeclaration(String n,
+                               Modifiers mods,
+                               Type t,
+                               Dims dims,
+                               Initializer init)
     {
         super(mods,n,t);
         this.dims = dims;

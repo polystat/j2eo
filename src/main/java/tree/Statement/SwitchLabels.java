@@ -3,17 +3,21 @@ package tree.Statement;
 import tree.Entity;
 import java.util.ArrayList;
 
-public class SwitchBlock extends Entity
+public class SwitchLabels extends Entity
 {
     // Structure
     public ArrayList<SwitchLabel> labels;
-    public Block block;
 
     // Creation
-    public SwitchBlock(ArrayList<SwitchLabel> ls, Block block)
+    public SwitchLabels(SwitchLabel label)
     {
-        this.labels = ls;
-        this.block = block;
+        this.labels = new ArrayList<>();
+        this.labels.add(label);
+    }
+    public SwitchLabels add(SwitchLabel label)
+    {
+        this.labels.add(label);
+        return this;
     }
 
     // Reporting
