@@ -1,16 +1,22 @@
 package eotree;
 
-public class EODot extends EOExpr {
-    public EOExpr src;
-    public String name;
+import java.util.Optional;
 
-    public EODot(EOExpr src, String name) {
+public class EODot extends EOExpr {
+    public Optional<EOExpr> src;
+    public String           name;
+
+    public EODot(Optional<EOExpr> src, String name) {
         this.src = src;
         this.name = name;
     }
 
     @Override
     public String generateEO(int indent) {
-        return src.generateEO(indent) + "." + name;
+        return
+                src
+                        .map(eoExpr -> eoExpr.generateEO(indent) + ".")
+                        .orElse(indent(indent))
+                + name;
     }
 }
