@@ -1,6 +1,8 @@
 package lexer;
 
-public class Token
+import tree.*;
+
+public class Token extends Entity
 {
     public Span span;
     public String image;

@@ -1,5 +1,6 @@
 package tree;
 
+import tree.Expression.*;
 import java.util.ArrayList;
 
 // ArrayInitializer
@@ -7,37 +8,25 @@ import java.util.ArrayList;
 //    | LBRACE VariableInitializerListOpt COMMA RBRACE
 //    ;
 //
-//VariableInitializerListOpt
+// VariableInitializerListOpt
 //    :  // empty
 //    | VariableInitializerList
 //    ;
 //
-//VariableInitializerList
+// VariableInitializerList
 //    :                               VariableInitializer
 //    | VariableInitializerList COMMA VariableInitializer
 //    ;
 //
-//VariableInitializer
+// VariableInitializer
 //    : Expression
 //    | ArrayInitializer
 //    ;
 public class Initializer extends Entity
 {
-    // Structure
-    public Expression             singleInitializer;
-    public ArrayList<Initializer> arrayInitializer;
+    // NO structure
 
-    // Creation
-    public Initializer(Expression single)
-    {
-        this.singleInitializer = single;
-        this.arrayInitializer = null;
-    }
-    public Initializer(ArrayList<Initializer> array)
-    {
-        this.singleInitializer = null;
-        this.arrayInitializer = array;
-    }
+    // NO creation
 
     // Reporting
     public void report(int sh)
