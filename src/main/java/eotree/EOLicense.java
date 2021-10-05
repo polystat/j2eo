@@ -1,5 +1,6 @@
 package eotree;
 
+import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -14,6 +15,10 @@ public class EOLicense extends EONode {
 
     public EOLicense(List<EOComment> comments) {
         this.comments = comments;
+    }
+
+    public EOLicense(EOComment... comments) {
+        this(Arrays.stream(comments).collect(Collectors.toList()));
     }
 
     @Override

@@ -22,7 +22,7 @@ public class EOObject extends EOExpr {
 
     @Override
     public String generateEO(int indent) {
-        return "[" +
+        return indent(indent) + "[" +
                freeAttrs.stream()
                        .map(attr -> attr.generateEO(indent))
                        .collect(Collectors.joining(" ")) +
@@ -31,7 +31,7 @@ public class EOObject extends EOExpr {
                        .orElse("")) +
                "]" +
                (name
-                       .map(n -> " > " + name)
+                       .map(n -> " > " + name.get())
                        .orElse("")
                ) + "\n" +
                bndAttrs.stream()

@@ -18,7 +18,7 @@ public class EOBytesData extends EOData {
     }
 
     public EOBytesData(EOByte... bytes) {
-        this.bytes = Arrays.stream(bytes).collect(Collectors.toList());
+        this(Arrays.stream(bytes).collect(Collectors.toList()));
     }
 
     public List<EOByte> bytes;
