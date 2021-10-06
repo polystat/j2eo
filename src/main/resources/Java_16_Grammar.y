@@ -190,13 +190,13 @@
 %nterm <tree.Expression.Expression> Expression ExpressionOpt Assignment AssignmentExpression ConditionalExpression
                     SwitchExpression PostfixExpression Primary UnaryExpression UnaryExpressionNotPlusMinus
                     InstanceofExpression CastExpression LambdaExpression
-                    LeftHandSide FieldAccess ArrayAccess StatementExpression
-                    MethodInvocation MethodReference ArrayCreationExpression ClassInstanceCreationExpression
+                    LeftHandSide FieldAccess ArrayAccess MethodInvocation MethodReference
+                    ArrayCreationExpression ClassInstanceCreationExpression
 
 %nterm<tree.Expression.Binary> ConditionalOrTail ConditionalOrExpression ConditionalAndExpression
                InclusiveOrExpression ExclusiveOrExpression AndExpression EqualityExpression RelationalExpression
                ShiftExpression AdditiveExpression MultiplicativeExpression
-
+%nterm <StatementExpression> StatementExpression
 %nterm <StatementExpressions> StatementExpressionList StatementExpressionListOpt
 
 %nterm <UnaryPrefix> PreIncrementExpression PreDecrementExpression
@@ -225,7 +225,8 @@
 %nterm <VariableDeclarator> VariableDeclarator
 %nterm <VariableDeclarators> VariableDeclaratorList
 
-%nterm <Initializer> ArrayInitializer VariableInitializerListOpt VariableInitializerList VariableInitializer
+%nterm <InitializerArray> ArrayInitializer VariableInitializerListOpt VariableInitializerList
+%nterm <InitializerSimple> VariableInitializer
 
 %nterm <SwitchBlock> SwitchBlock
 %nterm <SwitchRule> SwitchRule
@@ -626,7 +627,7 @@ VariableDeclaratorList
 
 VariableDeclarator
     : IDENTIFIER                              { $$ = new VariableDeclarator($1,null,null); }
-    | IDENTIFIER      EQUAL Expression        { $$ = new VariableDeclarator($1,null,$3); }
+    | IDENTIFIER      EQUAL Expression        { $$ = new VariableDeclarator($1,null,new InitializerSimple($3)); }
     | IDENTIFIER Dims                         { $$ = new VariableDeclarator($1,$2,null); }
     | IDENTIFIER Dims EQUAL ArrayInitializer  { $$ = new VariableDeclarator($1,$2,$4); }
     ;
@@ -860,7 +861,7 @@ Statement
 SimpleStatement
     : Block                             { $$ = $1; }
 	| SEMICOLON                         { $$ = null; }                         // EmptyStatement
-    | StatementExpression SEMICOLON     { $$ = new StatementExpression($1); }  // ExpressionStatement
+    | StatementExpression SEMICOLON     { $$ = $1; }  // ExpressionStatement
 
     | ASSERT Expression                  SEMICOLON { $$ = new Assert(null,$2,null); } // AssertStatement
     | ASSERT Expression COLON Expression SEMICOLON { $$ = new Assert(null,$2,$4); }   // AssertStatement
@@ -942,7 +943,7 @@ SwitchBlockStatementGroup
     ;
 
 SwitchLabelSeq
-    :                SwitchLabel COLON { $$ = new SwitchLables($2); }
+    :                SwitchLabel COLON { $$ = new SwitchLabels($1); }
     | SwitchLabelSeq SwitchLabel COLON { $$ = $1.add($2); }
     ;
 
@@ -988,7 +989,7 @@ ExpressionOpt
 //    : StatementExpressionList
 
 StatementExpressionList
-    :                               StatementExpression { $$ = new StatementExpressions($1); }
+    :                               StatementExpression { $$ = $1; }
     | StatementExpressionList COMMA StatementExpression { $$ = $1.add($3); }
     ;
 
