@@ -40,9 +40,4 @@ public class TypeParameterTail extends Entity
 
     }
 
-    // Generation
-    public void generateEO()
-    {
-
-    }
 }

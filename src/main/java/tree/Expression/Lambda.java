@@ -2,7 +2,6 @@ package tree.Expression;
 
 import tree.Statement.Block;
 import tree.Declaration.*;
-import java.util.ArrayList;
 
 // LambdaExpression
 //    : IDENTIFIER       ARROW LambdaBody
@@ -56,12 +55,6 @@ public class Lambda extends Expression
 
     // Reporting
     public void report(int sh)
-    {
-
-    }
-
-    // Generation
-    public void generateEO()
     {
 
     }

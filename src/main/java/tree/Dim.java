@@ -22,9 +22,4 @@ public class Dim extends Entity
         System.out.print("[]");
     }
 
-    // Generation
-    public void generateEO()
-    {
-
-    }
 }

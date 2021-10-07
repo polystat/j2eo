@@ -1,6 +1,5 @@
 package tree.Expression.Primary;
 
-import tree.*;
 import tree.Expression.Expression;
 
 // Primary
@@ -24,9 +23,4 @@ public class Parenthesized extends Primary
         expression.report(sh);
     }
 
-    // Generation
-    public void generateEO()
-    {
-
-    }
 }

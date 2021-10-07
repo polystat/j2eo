@@ -53,9 +53,4 @@ public class IfThenElse extends Statement
         }
     }
 
-    // Generation
-    public void generateEO()
-    {
-
-    }
 }

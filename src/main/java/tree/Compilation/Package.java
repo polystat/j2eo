@@ -33,10 +33,4 @@ public class Package extends CompilationUnit
         components.report(sh);
     }
 
-    // Generation
-    public void generateEO()
-    {
-
-    }
-
 }

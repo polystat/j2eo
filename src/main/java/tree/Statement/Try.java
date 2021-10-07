@@ -43,9 +43,4 @@ public class Try extends Statement
 
     }
 
-    // Generation
-    public void generateEO()
-    {
-
-    }
 }

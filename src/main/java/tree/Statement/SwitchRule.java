@@ -1,7 +1,6 @@
 package tree.Statement;
 
 import tree.Entity;
-import tree.Statement.*;
 import tree.Expression.*;
 
 // SwitchBlock
@@ -68,10 +67,5 @@ public class SwitchRule extends Entity
 
     }
 
-    // Generation
-    public void generateEO()
-    {
-
-    }
 }
 

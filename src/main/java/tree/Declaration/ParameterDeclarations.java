@@ -25,9 +25,4 @@ public class ParameterDeclarations extends Entity
     {
     }
 
-    // Generation
-    public void generateEO()
-    {
-
-    }
 }

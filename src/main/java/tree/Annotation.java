@@ -36,10 +36,4 @@ public class Annotation extends Entity
         annoParameterList.report(sh+Entity.shift);
     }
 
-    // Generation
-    public void generateEO()
-    {
-
-    }
-
 }

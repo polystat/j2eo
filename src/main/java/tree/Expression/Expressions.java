@@ -31,9 +31,4 @@ public class Expressions extends Entity
         }
     }
 
-    // Generation
-    public void generateEO()
-    {
-
-    }
 }

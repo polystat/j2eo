@@ -28,9 +28,4 @@ public class VariableDeclarators extends Entity
         // Empty
     }
 
-    // Generation
-    public void generateEO()
-    {
-        // Empty
-    }
 }

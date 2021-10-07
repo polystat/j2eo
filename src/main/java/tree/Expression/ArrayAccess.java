@@ -28,9 +28,4 @@ public class ArrayAccess extends Expression
         size.report(sh+Entity.shift);
     }
 
-    // Generation
-    public void generateEO()
-    {
-
-    }
 }

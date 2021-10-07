@@ -29,8 +29,4 @@ public class Cast extends Expression
         expression.report(sh+Entity.shift);
     }
 
-    public void generateEO()
-    {
-
-    }
 }

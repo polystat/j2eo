@@ -1,11 +1,7 @@
 package tree.Declaration;
 
 import lexer.*;
-import tree.Modifiers;
 import tree.Type.*;
-import tree.Type.TypeParameter;
-
-import java.util.ArrayList;
 
 // NormalClassDeclaration
 //    : /*ModifierSeqOpt*/ CLASS IDENTIFIER TypeParametersOpt ClassExtendsOpt ClassImplementsOpt ClassBody
@@ -61,12 +57,6 @@ public class NormalClassDeclaration extends ClassDeclaration
 
     // Reporting
     public void report(int sh)
-    {
-
-    }
-
-    // Generation
-    public void generateEO()
     {
 
     }

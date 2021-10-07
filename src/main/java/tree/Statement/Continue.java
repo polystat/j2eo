@@ -2,7 +2,6 @@ package tree.Statement;
 
 import lexer.*;
 import tree.Entity;
-import tree.Statement.Statement;
 
 import java.util.ArrayList;
 
@@ -32,12 +31,6 @@ public class Continue extends Statement
         System.out.print("CONTINUE ");
         if ( label != null ) System.out.print(label);
         System.out.println();
-    }
-
-    // Generation
-    public void generateEO()
-    {
-
     }
 
 }

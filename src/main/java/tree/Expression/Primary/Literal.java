@@ -39,9 +39,4 @@ public class Literal extends Primary
         System.out.println(value);
     }
 
-    // Generation
-    public void generateEO()
-    {
-
-    }
 }

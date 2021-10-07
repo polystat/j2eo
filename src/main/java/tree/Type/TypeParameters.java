@@ -26,9 +26,4 @@ public class TypeParameters extends Entity
 
     }
 
-    // Generation
-    public void generateEO()
-    {
-
-    }
 }

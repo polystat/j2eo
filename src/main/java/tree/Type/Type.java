@@ -32,9 +32,4 @@ public class Type extends Entity
         annotations.report(sh);
     }
 
-    // Generation
-    public void generateEO()
-    {
-
-    }
 }

@@ -41,10 +41,4 @@ public class TopLevelComponent  extends Entity
             this.interfaceDecl.report(sh);
     }
 
-    // Generation
-    public void generateEO()
-    {
-
-    }
-
 }

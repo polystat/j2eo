@@ -63,9 +63,4 @@ public class MethodDeclaration extends Declaration
 
     }
 
-    // Generation
-    public void generateEO()
-    {
-
-    }
 }

@@ -39,9 +39,4 @@ public class TypeArgument extends Entity
 
     }
 
-    // Generation
-    public void generateEO()
-    {
-
-    }
 }

@@ -1,7 +1,6 @@
 package tree.Type;
 
 import tree.*;
-import java.util.ArrayList;
 
 // TypeParameter
 //    : AnnotationSeq TypeParameterTail
@@ -39,9 +38,4 @@ public class TypeParameter extends Entity
 
     }
 
-    // Generation
-    public void generateEO()
-    {
-
-    }
 }

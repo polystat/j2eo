@@ -2,7 +2,6 @@ package tree.Declaration;
 
 import tree.*;
 import tree.Statement.Block;
-import tree.Type.Type;
 import tree.Type.TypeList;
 import tree.Type.TypeParameters;
 
@@ -50,12 +49,6 @@ public class ConstructorDeclaration extends MethodDeclaration
     public void report(int sh)
     {
         title("CONSTRUCTOR",sh);
-    }
-
-    // Generation
-    public void generateEO()
-    {
-
     }
 
 }

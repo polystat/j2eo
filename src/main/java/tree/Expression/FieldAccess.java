@@ -38,9 +38,4 @@ public class FieldAccess extends Expression
         }
     }
 
-    // Generation
-    public void generateEO()
-    {
-
-    }
 }

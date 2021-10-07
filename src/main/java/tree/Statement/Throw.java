@@ -31,9 +31,4 @@ public class Throw extends Statement
             expression.report(sh+Entity.shift);
     }
 
-    // Generation
-    public void generateEO()
-    {
-
-    }
 }

@@ -1,6 +1,5 @@
 package tree.Statement;
 
-import tree.Statement.Block;
 import tree.Expression.*;
 import java.util.ArrayList;
 
@@ -29,9 +28,4 @@ public class Synchronized extends Statement
     {
     }
 
-    // Generation
-    public void generateEO()
-    {
-
-    }
 }

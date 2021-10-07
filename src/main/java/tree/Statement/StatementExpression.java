@@ -37,9 +37,4 @@ public class StatementExpression extends Statement
         expression.report(shift);
     }
 
-    // Generation
-    public void generateEO()
-    {
-
-    }
 }

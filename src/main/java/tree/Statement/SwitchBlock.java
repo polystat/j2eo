@@ -22,9 +22,4 @@ public class SwitchBlock extends Entity
 
     }
 
-    // Generation
-    public void generateEO()
-    {
-
-    }
 }

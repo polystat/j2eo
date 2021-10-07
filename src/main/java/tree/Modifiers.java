@@ -1,7 +1,5 @@
 package tree;
 
-import java.util.ArrayList;
-
 // ModifierSeq
 //    :               StandardModifierSeq
 //    | AnnotationSeq StandardModifierSeq
@@ -31,9 +29,4 @@ public class Modifiers extends Entity
         System.out.println();
     }
 
-    // Generation
-    public void generateEO()
-    {
-
-    }
 }

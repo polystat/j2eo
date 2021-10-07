@@ -1,6 +1,5 @@
 package tree.Declaration;
 
-import tree.Declaration.Declaration;
 import tree.Expression.*;
 import tree.Modifiers;
 
@@ -55,12 +54,6 @@ public class EnumDeclaration extends ClassDeclaration
 
     // Reporting
     public void report(int sh)
-    {
-
-    }
-
-    // Generation
-    public void generateEO()
     {
 
     }

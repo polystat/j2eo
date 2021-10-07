@@ -35,9 +35,4 @@ public class Block extends Statement
 
     }
 
-    // Generation
-    public void generateEO()
-    {
-
-    }
 }

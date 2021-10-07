@@ -24,10 +24,4 @@ public class UnaryPrefix extends Expression
         operand.report(sh+Entity.shift);
     }
 
-    // Generation
-    public void generateEO()
-    {
-
-    }
-
 }

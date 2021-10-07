@@ -32,9 +32,4 @@ public class Break extends Statement
         System.out.println();
     }
 
-    // Generation
-    public void generateEO()
-    {
-
-    }
 }

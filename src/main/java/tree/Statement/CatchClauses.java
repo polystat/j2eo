@@ -36,9 +36,4 @@ public class CatchClauses extends Entity
 
     }
 
-    // Generation
-    public void generateEO()
-    {
-
-    }
 }

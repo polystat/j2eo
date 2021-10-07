@@ -28,9 +28,4 @@ public class ConstructorBody extends Entity
 
     }
 
-    // Generation
-    public void generateEO()
-    {
-
-    }
 }

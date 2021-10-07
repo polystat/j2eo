@@ -2,7 +2,6 @@ package tree.Declaration;
 
 import tree.*;
 import tree.Type.Type;
-import java.util.ArrayList;
 
 // FormalParameter
 //    : ModifierSeq UnannotatedType FormalParameterTail
@@ -41,9 +40,4 @@ public class ReceiverDeclaration extends ParameterDeclaration
         if ( annotations != null ) annotations.report(sh+Entity.shift);
     }
 
-    // Generation
-    public void generateEO()
-    {
-
-    }
 }

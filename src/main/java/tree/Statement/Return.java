@@ -35,9 +35,4 @@ public class Return extends Statement
         }
     }
 
-    // Generation
-    public void generateEO()
-    {
-
-    }
 }

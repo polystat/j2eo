@@ -4,7 +4,6 @@ import lexer.Token;
 import tree.*;
 import tree.Modifiers;
 import tree.Type.*;
-import tree.Declaration.*;
 
 // FormalParameter
 //    : ModifierSeq UnannotatedType FormalParameterTail
@@ -72,12 +71,6 @@ public class ParameterDeclaration extends Declaration
 
     // Reporting
     public void report(int sh)
-    {
-
-    }
-
-    // Generation
-    public void generateEO()
     {
 
     }

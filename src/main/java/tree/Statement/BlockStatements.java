@@ -1,6 +1,5 @@
 package tree.Statement;
 
-import tree.Declaration.Declaration;
 import tree.Declaration.TypeAndDeclarators;
 import tree.Declaration.VariableDeclaration;
 import tree.Declaration.VariableDeclarator;
@@ -45,9 +44,4 @@ public class BlockStatements extends Entity
 
     }
 
-    // Generation
-    public void generateEO()
-    {
-
-    }
 }

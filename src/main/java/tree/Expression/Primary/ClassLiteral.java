@@ -30,9 +30,4 @@ public class ClassLiteral extends Literal
         System.out.println("CLASS LITERAL");
     }
 
-    // Generation
-    public void generateEO()
-    {
-
-    }
 }

@@ -44,9 +44,4 @@ public class Declarations extends Entity
         }
     }
 
-    // Generation
-    public void generateEO()
-    {
-
-    }
 }

@@ -36,9 +36,4 @@ public class ParameterTail extends Entity
         // empty
     }
 
-    // Generation
-    public void generateEO()
-    {
-        // Empty
-    }
 }
