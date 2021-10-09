@@ -1,6 +1,6 @@
 package org.eolang.j2eo;
 
-public class SimpleLeftShift {
+public class SimpleRightShiftAbsolute {
 
 	public static void main(String[] args) {
 		int a = -64;

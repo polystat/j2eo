@@ -1,6 +1,6 @@
 package org.eolang.j2eo;
 
-public class SimpleLessOrEqualComparison {
+public class SimpleGreaterOrEqualComparison {
 
 	public static void main(String[] args) {
 		int a = 5;

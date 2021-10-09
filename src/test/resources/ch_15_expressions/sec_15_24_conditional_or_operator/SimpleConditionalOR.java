@@ -1,6 +1,6 @@
 package org.eolang.j2eo;
 
-public class SimpleConditionalAND {
+public class SimpleConditionalOR {
 
 	public static void main(String[] args) {
 		boolean a = false;
