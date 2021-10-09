@@ -1,11 +1,11 @@
 package org.eolang.j2eo;
 
-public class SimpleGenericMethod {
+public class SimpleFinalField {
 
-	static <T> void method(T param) {}
+	static final int var = 2;
 
 	public static void main(String[] args) {
-		method("param");
+		int a = var + 1;
 		System.out.println("passed");
 	}
 }

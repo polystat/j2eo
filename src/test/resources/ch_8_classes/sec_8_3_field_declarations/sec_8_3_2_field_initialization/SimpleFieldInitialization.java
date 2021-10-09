@@ -1,16 +1,15 @@
 package org.eolang.j2eo;
 
-public class SimpleFinalMethod {
+public class SimpleFieldInitialization {
 
 	public static void main(String[] args) {
 		InnerClass obj = new InnerClass();
-		obj.method();
+		obj.var = obj.var2;
+		System.out.println(obj.var);
 		System.out.println("passed");
 	}
 
 	class InnerClass {
-
-		final void method () {}
-
+		int var = 2, var2 = 3;
 	}
 }

@@ -1,9 +1,9 @@
 package org.eolang.j2eo;
 
-public class SampleTest {
+public class SimpleMultiplication {
 
 	public static void Main (String[] args) {
-
+		System.out.println(7 * 8);
 	}
 
 }

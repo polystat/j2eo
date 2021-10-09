@@ -1,11 +1,11 @@
 package org.eolang.j2eo;
 
-public class SimpleGenericMethod {
-
-	static <T> void method(T param) {}
+public class SimpleLeftShift {
 
 	public static void main(String[] args) {
-		method("param");
+		int a = 128;
+		a = a << 1;
+		System.out.println(a);
 		System.out.println("passed");
 	}
 }

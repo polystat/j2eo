@@ -2,6 +2,11 @@ package org.eolang.j2eo;
 
 public class SimpleParameterMethod {
 
-	void method (String param) {}
+	static void method (String param) {}
+
+	public static void main(String[] args) {
+		method("param 1");
+		System.out.println("passed");
+	}
 
 }

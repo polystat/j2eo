@@ -1,11 +1,11 @@
 package org.eolang.j2eo;
 
-public class SimpleGenericMethod {
-
-	static <T> void method(T param) {}
+public class SimpleXOR {
 
 	public static void main(String[] args) {
-		method("param");
+		boolean a = false;
+		boolean b = true;
+		System.out.println(a ^ b);
 		System.out.println("passed");
 	}
 }

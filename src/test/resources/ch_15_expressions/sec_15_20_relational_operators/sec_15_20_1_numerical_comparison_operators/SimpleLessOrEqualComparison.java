@@ -1,11 +1,11 @@
 package org.eolang.j2eo;
 
-public class SimpleGenericMethod {
-
-	static <T> void method(T param) {}
+public class SimpleLessOrEqualComparison {
 
 	public static void main(String[] args) {
-		method("param");
+		int a = 5;
+		int b = 6;
+		System.out.println(a <= b);
 		System.out.println("passed");
 	}
 }
