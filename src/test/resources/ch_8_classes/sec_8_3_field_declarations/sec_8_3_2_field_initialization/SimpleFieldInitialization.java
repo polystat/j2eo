@@ -1,15 +1,14 @@
-package org.eolang.j2eo;
-
 public class SimpleFieldInitialization {
 
 	public static void main(String[] args) {
-		InnerClass obj = new InnerClass();
+		OuterClass obj = new OuterClass();
 		obj.var = obj.var2;
 		System.out.println(obj.var);
 		System.out.println("passed");
 	}
 
-	class InnerClass {
-		int var = 2, var2 = 3;
-	}
+}
+
+class OuterClass {
+	int var = 2, var2 = 3;
 }

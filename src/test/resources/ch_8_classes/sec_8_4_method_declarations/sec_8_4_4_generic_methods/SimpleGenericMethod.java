@@ -1,5 +1,3 @@
-package org.eolang.j2eo;
-
 public class SimpleGenericMethod {
 
 	static <T> void method(T param) {}

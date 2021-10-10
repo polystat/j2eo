@@ -1,5 +1,3 @@
-package org.eolang.j2eo;
-
 public class SimpleMethodBody {
 
 	static void method() {

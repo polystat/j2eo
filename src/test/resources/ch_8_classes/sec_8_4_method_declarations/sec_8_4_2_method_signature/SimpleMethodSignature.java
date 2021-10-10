@@ -1,5 +1,3 @@
-package org.eolang.j2eo;
-
 public class SimpleMethodSignature {
 
 	private static synchronized int method (float param1, long param2) {

@@ -1,10 +1,8 @@
-package org.eolang.j2eo;
-
 public class SimpleMethodThrows {
 
 	static void method() throws Exception {}
 
-	public static void main(String[] args) {
+	public static void main(String[] args) throws Exception {
 		method();
 		System.out.println("passed");
 	}

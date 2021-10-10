@@ -1,5 +1,3 @@
-package org.eolang.j2eo;
-
 public class SimpleConditionalAND {
 
 	public static void main(String[] args) {

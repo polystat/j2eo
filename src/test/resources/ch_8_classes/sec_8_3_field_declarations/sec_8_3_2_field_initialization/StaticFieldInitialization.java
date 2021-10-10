@@ -1,5 +1,3 @@
-package org.eolang.j2eo;
-
 public class StaticFieldInitialization {
 
 	public static void main(String[] args) {

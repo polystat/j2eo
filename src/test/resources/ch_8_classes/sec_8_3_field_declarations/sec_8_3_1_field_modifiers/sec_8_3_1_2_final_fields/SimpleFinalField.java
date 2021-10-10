@@ -1,5 +1,3 @@
-package org.eolang.j2eo;
-
 public class SimpleFinalField {
 
 	static final int var = 2;

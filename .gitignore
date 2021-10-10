@@ -2,4 +2,4 @@ out
 .gradle
 .idea
 build
-num_of_tests.bat
+compile_and_run_tests.bat

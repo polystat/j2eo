@@ -1,5 +1,3 @@
-package org.eolang.j2eo;
-
 public class SimpleOR {
 
 	public static void main(String[] args) {

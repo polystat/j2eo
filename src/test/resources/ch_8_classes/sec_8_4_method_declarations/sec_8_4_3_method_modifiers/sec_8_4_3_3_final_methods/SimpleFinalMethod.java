@@ -1,16 +1,12 @@
-package org.eolang.j2eo;
-
 public class SimpleFinalMethod {
 
 	public static void main(String[] args) {
-		InnerClass obj = new InnerClass();
+		OuterClass obj = new OuterClass();
 		obj.method();
 		System.out.println("passed");
 	}
+}
 
-	class InnerClass {
-
-		final void method () {}
-
-	}
+class OuterClass {
+	final void method () {}
 }

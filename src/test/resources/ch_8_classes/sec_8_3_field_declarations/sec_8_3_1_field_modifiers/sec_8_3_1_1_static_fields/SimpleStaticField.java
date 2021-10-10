@@ -1,5 +1,3 @@
-package org.eolang.j2eo;
-
 public class SimpleStaticField {
 
 	static int var = 2;

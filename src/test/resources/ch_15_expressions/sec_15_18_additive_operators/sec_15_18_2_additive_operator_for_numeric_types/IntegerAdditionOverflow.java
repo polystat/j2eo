@@ -3,5 +3,6 @@ public class IntegerAdditionOverflow {
         int a = Integer.MAX_VALUE;
         a += 10;
         System.out.println(a);
+        System.out.println("passed");
     }
 }

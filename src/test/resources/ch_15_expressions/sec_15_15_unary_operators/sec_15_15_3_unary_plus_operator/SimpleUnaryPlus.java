@@ -1,5 +1,3 @@
-package org.eolang.j2eo;
-
 public class SimpleUnaryPlus {
 
 	public static void main(String[] args) {
