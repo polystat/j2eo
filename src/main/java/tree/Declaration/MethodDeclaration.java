@@ -70,7 +70,20 @@ public class MethodDeclaration extends Declaration
     // Reporting
     public void report(int sh)
     {
+ //       public ParameterDeclarations parameters;
+ //       public Dims dims;
+ //       public TypeList exceptions;
+ //       public Block methodBody;
 
+        this.title("METHOD "+name,sh);
+        if ( modifiers != null ) modifiers.report(sh+Entity.shift);
+        if ( typeParameters != null ) typeParameters.report(sh+Entity.shift);
+        if ( type != null ) type.report(sh+Entity.shift);
+        else { Entity.doShift(sh+Entity.shift); System.out.println("TYPE VOID"); }
+        // Dimensions! ---
+        if ( parameters != null ) parameters.report(sh+Entity.shift);
+        if ( exceptions != null ) exceptions.report(sh+Entity.shift);
+        if ( methodBody != null ) methodBody.report(sh+Entity.shift);
     }
 
 }

@@ -1,6 +1,7 @@
 package tree.Declaration;
 
 import lexer.*;
+import tree.Entity;
 import tree.Type.*;
 
 // NormalClassDeclaration
@@ -58,7 +59,18 @@ public class NormalClassDeclaration extends ClassDeclaration
     // Reporting
     public void report(int sh)
     {
-
+        this.title("CLASS DECLARATION "+this.name,sh);
+        if ( this.typeParameters != null )
+            this.typeParameters.report(sh+Entity.shift);
+        if ( this.extendedType != null )
+        {
+            this.title("SUPER",sh+Entity.shift);
+            this.extendedType.report(sh+Entity.shift);
+        }
+        if ( this.interfaces != null )
+            this.interfaces.report(sh+Entity.shift);
+        if ( body != null )
+            body.report(sh+Entity.shift);
     }
 
 }
