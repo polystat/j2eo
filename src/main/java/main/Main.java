@@ -15,6 +15,7 @@ public class Main
         try {
             boolean result = parser.parse();
             System.out.println(result?"SUCCESS":"FAIL");
+            parser.ast.report(0);
         }
         catch(java.io.IOException exc)
         {

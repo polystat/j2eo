@@ -143,6 +143,10 @@
 %code imports { import tree.Statement.*; }
 %code imports { import tree.Type.*; }
 
+%code {
+    public CompilationUnit ast;
+}
+
 // Nonterminal types
 // =================
 
@@ -155,7 +159,7 @@
 %nterm <StandardModifiers> StandardModifierSeq
 %nterm <Modifiers> ModifierSeq ModifierSeqOpt
 
-%nterm <tree.Compilation.CompilationUnit> CompilationUnit Package
+%nterm <tree.Compilation.CompilationUnit> CompilationUnit Package SimpleCompilationUnit
 %nterm <tree.Compilation.Module> Module
 
 %nterm <tree.Declaration.ImportDeclaration> ImportDeclaration
@@ -303,9 +307,9 @@ StandardModifier
 
 CompilationUnit
     : %empty                                        { $$ = null; }
-    | Package                                       { $$ = $1; }
-    | Module                                        { $$ = $1; }
-    | ImportDeclarationSeqOpt TopLevelComponentSeq  { $$ = new SimpleCompilationUnit($1,$2); }
+    | Package                                       { $$ = $1; ast = $1; }
+    | Module                                        { $$ = $1; ast = $1; }
+    | ImportDeclarationSeqOpt TopLevelComponentSeq  { ast = new SimpleCompilationUnit($1,$2); }
     ;
 
 Package
