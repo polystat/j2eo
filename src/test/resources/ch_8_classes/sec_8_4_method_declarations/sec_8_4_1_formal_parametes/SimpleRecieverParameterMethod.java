@@ -1,7 +1,13 @@
-package org.eolang.j2eo;
-
 public class SimpleRecieverParameterMethod {
 
-	void method (SimpleRecieverParameterMethod this) {}
+	public static void main(String[] args) {
+		OuterClass obj = new OuterClass();
+		obj.method();
+		System.out.println("passed");
+	}
+}
 
+class OuterClass
+{
+	void method (OuterClass this) {}
 }

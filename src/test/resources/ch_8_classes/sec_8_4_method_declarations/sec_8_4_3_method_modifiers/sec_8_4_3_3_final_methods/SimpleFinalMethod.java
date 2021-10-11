@@ -1,7 +1,12 @@
-package org.eolang.j2eo;
-
 public class SimpleFinalMethod {
 
-	final void method () {}
+	public static void main(String[] args) {
+		OuterClass obj = new OuterClass();
+		obj.method();
+		System.out.println("passed");
+	}
+}
 
+class OuterClass {
+	final void method () {}
 }

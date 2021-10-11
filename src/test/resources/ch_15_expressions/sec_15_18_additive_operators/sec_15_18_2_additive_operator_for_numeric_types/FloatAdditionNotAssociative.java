@@ -4,5 +4,6 @@ public class FloatAdditionNotAssociative {
 		float b = (1f + 2f) + 3f;
 		System.out.println(a);
 		System.out.println(b);
+		System.out.println("passed");
 	}
 }
