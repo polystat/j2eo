@@ -4,5 +4,6 @@ public class SubtractionIsAdditionFloat {
         float b = 2f;
         System.out.println(a - b);
         System.out.println(a + (-b));
+        System.out.println("passed");
     }    
 }
