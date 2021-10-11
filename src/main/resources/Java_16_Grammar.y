@@ -1,20 +1,20 @@
 
 //// Tokens ////////////////////////
 
-%token <Token> LPAREN     //  (
-%token <Token> RPAREN     //  )
-%token <Token> LBRACE     //  {
-%token <Token> RBRACE     //  }
-%token <Token> LBRACKET   //  [
-%token <Token> RBRACKET   //  ]
-%token <Token> COMMA      //  ,
-%token <Token> DOT        //  .
-%token <Token> SEMICOLON  //  ;
-%token <Token> COLON
-%token <Token> DBL_COLON
-%token <Token> STAR
-%token <Token> SLASH
-%token <Token> PERCENT
+%token <Token> LPAREN       //  (
+%token <Token> RPAREN       //  )
+%token <Token> LBRACE       //  {
+%token <Token> RBRACE       //  }
+%token <Token> LBRACKET     //  [
+%token <Token> RBRACKET     //  ]
+%token <Token> COMMA        //  ,
+%token <Token> DOT          //  .
+%token <Token> SEMICOLON    //  ;
+%token <Token> COLON        //
+%token <Token> DBL_COLON    //
+%token <Token> STAR         //  *
+%token <Token> SLASH        //  /
+%token <Token> PERCENT      //  %
 %token <Token> AMPERSAND    //  &
 %token <Token> AT           //  @
 %token <Token> LESS         //  <
@@ -51,6 +51,7 @@
 %token <Token> DBL_VERTICAL        //  ||
 %token <Token> DBL_AMPERSAND       //  &&
 %token <Token> DBL_EQUAL           //  ==
+%token <Token> TRIPL_EQUAL         //  ===
 %token <Token> NON_EQUAL           //  !=
 %token <Token> DBL_LESS            //  <<
 %token <Token> DBL_GREATER         //  >>
@@ -91,6 +92,7 @@
 %token <Token> INTERFACE
 %token <Token> LONG
 %token <Token> MODULE
+%token <Token> NATIVE
 %token <Token> NEW
 %token <Token> NULL
 %token <Token> OPEN
@@ -118,6 +120,10 @@
 %token <Token> VOLATILE
 %token <Token> WHILE
 %token <Token> YIELD
+
+%token <Token> SHORT_COMMENT
+%token <Token> LONG_COMMENT
+%token <Token> EOS
 
 %start CompilationUnit
 
@@ -168,15 +174,18 @@
 %nterm <TypeParameterTail> TypeParameterTail
 %nterm <TypeParameters> TypeParameterList TypeParameters TypeParametersOpt
 
-%nterm <tree.Declaration.Declaration> EnumDeclaration ClassDeclaration NormalClassDeclaration
-                     InterfaceDeclaration NormalInterfaceDeclaration RecordDeclaration
-                     AnnotationInterfaceDeclaration Pattern InterfaceMemberDeclaration
+%nterm <ClassDeclaration> ClassDeclaration NormalClassDeclaration
+%nterm <InterfaceDeclaration> InterfaceDeclaration NormalInterfaceDeclaration AnnotationInterfaceDeclaration
+
+%nterm <tree.Declaration.Declaration> EnumDeclaration RecordDeclaration Pattern InterfaceMemberDeclaration
                      ClassBodyDeclaration PureBodyDeclaration FieldDeclaration MethodDeclaration
                      ConstantDeclaration InterfaceMethodDeclaration BlockDeclaration
                      LocalVariableDeclaration
 
 %nterm <ConstructorDeclaration> ConstructorDeclaration
 %nterm <Declarations> InterfaceMemberDeclarationSeq InterfaceBody ClassBodyDeclarationSeq ClassBody ClassBodyOpt
+%nterm <MethodDeclarator> MethodDeclarator
+%nterm <MethodHeader> MethodHeader
 
 %nterm <tree.Type.Type> Type ClassExtendsOpt
 %nterm <tree.Type.UnannotatedType> UnannotatedType
@@ -193,9 +202,12 @@
                     LeftHandSide FieldAccess ArrayAccess MethodInvocation MethodReference
                     ArrayCreationExpression ClassInstanceCreationExpression
 
-%nterm<tree.Expression.Binary> ConditionalOrTail ConditionalOrExpression ConditionalAndExpression
+/*%nterm<tree.Expression.Binary> ConditionalOrTail*/ ConditionalOrExpression ConditionalAndExpression
                InclusiveOrExpression ExclusiveOrExpression AndExpression EqualityExpression RelationalExpression
                ShiftExpression AdditiveExpression MultiplicativeExpression
+
+%nterm<tree.Expression.Binary> ConditionalOrTail
+
 %nterm <StatementExpression> StatementExpression
 %nterm <StatementExpressions> StatementExpressionList StatementExpressionListOpt
 
@@ -210,7 +222,7 @@
 %nterm <tree.Statement.Statement> Statement SimpleStatement LabeledStatement
                                   IfThenElseStatement WhileStatement ForStatement ElsePartOpt
                                   BasicForStatement EnhancedForStatement
-%nterm <tree.Statement.Block> Block
+%nterm <tree.Statement.Block> Block MethodBody
 %nterm <tree.Statement.BlockStatement> BlockStatement
 %nterm <tree.Statement.BlockStatements> BlockStatementSeq
 
@@ -335,8 +347,8 @@ TopLevelComponentSeq
     ;
 
 TopLevelComponent
-    : ClassDeclaration     { $$ = $1; }
-    | InterfaceDeclaration { $$ = $1; }
+    : ClassDeclaration     { $$ = new TopLevelComponent($1); }
+    | InterfaceDeclaration { $$ = new TopLevelComponent($1); }
     ;
 
 /////// Java modules are not supported (yet)
@@ -655,7 +667,7 @@ VariableInitializer
 //// MethodDeclaration ////////////////////////////////
 
 MethodDeclaration
-    : MethodHeader MethodBody { $$ = null; }  // not implemented yet
+    : MethodHeader MethodBody { $$ = new MethodDeclaration($1,$2); }
 	;
 
 //MethodHeader
@@ -665,12 +677,12 @@ MethodDeclaration
 //    ;
 
 MethodHeader
-    : TypeParameters               Type            MethodDeclarator ThrowsOpt
-    | TypeParameters AnnotationSeq VOID            MethodDeclarator ThrowsOpt
-    | TypeParameters               UnannotatedType MethodDeclarator ThrowsOpt
-    | TypeParameters               VOID            MethodDeclarator ThrowsOpt
-    |                              UnannotatedType MethodDeclarator ThrowsOpt
-    |                              VOID            MethodDeclarator ThrowsOpt
+    : TypeParameters               Type            MethodDeclarator ThrowsOpt { $$ = new MethodHeader($1,$2,$3,$4); }
+    | TypeParameters AnnotationSeq VOID            MethodDeclarator ThrowsOpt { $$ = new MethodHeader($1,null,$4,$5); }
+    | TypeParameters               UnannotatedType MethodDeclarator ThrowsOpt { $$ = new MethodHeader($1,$2,$3,$4); }
+    | TypeParameters               VOID            MethodDeclarator ThrowsOpt { $$ = new MethodHeader($1,null,$3,$4); }
+    |                              UnannotatedType MethodDeclarator ThrowsOpt { $$ = new MethodHeader(null,$1,$2,$3); }
+    |                              VOID            MethodDeclarator ThrowsOpt { $$ = new MethodHeader(null,null,$2,$3); }
     ;
 
 //Result
@@ -679,8 +691,8 @@ MethodHeader
 //    ;
 
 MethodDeclarator
-    : IDENTIFIER LPAREN                                          RPAREN DimsOpt
-    | IDENTIFIER LPAREN FormalParameterList /*FormalParameters*/ RPAREN DimsOpt
+    : IDENTIFIER LPAREN                                          RPAREN DimsOpt { $$ = new MethodDeclarator($1,null,$4); }
+    | IDENTIFIER LPAREN FormalParameterList /*FormalParameters*/ RPAREN DimsOpt { $$ = new MethodDeclarator($1,$3,$5); }
     ;
 
 //FormalParameters
@@ -724,8 +736,8 @@ ThrowsOpt
     ;
 
 MethodBody
-    : Block
-    | SEMICOLON
+    : Block        { $$ = $1; }
+    | SEMICOLON    { $$ = null; }
     ;
 
 ////             //////////////////////////////////
@@ -826,7 +838,7 @@ DefaultValueOpt
 
 Block
     : LBRACE                   RBRACE { $$ = null; }
-    | LBRACE BlockStatementSeq RBRACE { $$ = $2; }
+    | LBRACE BlockStatementSeq RBRACE { $$ = new Block(null,$2); }
     ;
 
 BlockStatementSeq
@@ -1059,7 +1071,7 @@ Pattern
 //    ArrayCreationExpression
 
 Primary
-    : Literal                           { $$ = $1; }
+    : Literal                           { $$ = new Literal($1); }
     | Type DimsOpt DOT CLASS            { $$ = new ClassLiteral($1,$2); }   // ClassLiteral
     | VOID DimsOpt DOT CLASS            { $$ = new ClassLiteral(null,$2); } // ClassLiteral
     | THIS                              { $$ = new This(null); }

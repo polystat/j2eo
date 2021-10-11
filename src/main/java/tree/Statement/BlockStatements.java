@@ -24,7 +24,7 @@ public class BlockStatements extends Entity
     }
     private void deconstruct(BlockStatement stmt)
     {
-        if ( stmt.declaration != null && stmt.declaration instanceof TypeAndDeclarators)
+        if ( stmt != null && stmt.declaration != null && stmt.declaration instanceof TypeAndDeclarators)
         {
             TypeAndDeclarators tds = (TypeAndDeclarators)stmt.declaration;
             for (VariableDeclarator declarator: tds.declarators.declarators)

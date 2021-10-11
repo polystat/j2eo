@@ -40,6 +40,16 @@ public class MethodDeclaration extends Declaration
     public Block methodBody;
 
     // Creation
+    public MethodDeclaration(MethodHeader header,Block body)
+    {
+        super(null,header.declarator.name,header.type);
+        this.typeParameters = header.typeParameters;
+        this.parameters = header.declarator.parameters;
+        this.dims = header.declarator.dims;
+        this.exceptions = header.throwsClause;
+        this.methodBody = body;
+    }
+
     public MethodDeclaration(Modifiers mods,
                              TypeParameters typePars,
                              Type t,
