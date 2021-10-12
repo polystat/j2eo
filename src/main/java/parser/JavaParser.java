@@ -1,8 +1,8 @@
-/* A Bison parser, made by GNU Bison 3.7.4.  */
+/* A Bison parser, made by GNU Bison 3.7.6.  */
 
 /* Skeleton implementation for Bison LALR(1) parsers in Java
 
-   Copyright (C) 2007-2015, 2018-2020 Free Software Foundation, Inc.
+   Copyright (C) 2007-2015, 2018-2021 Free Software Foundation, Inc.
 
    This program is free software: you can redistribute it and/or modify
    it under the terms of the GNU General Public License as published by
@@ -15,7 +15,7 @@
    GNU General Public License for more details.
 
    You should have received a copy of the GNU General Public License
-   along with this program.  If not, see <http://www.gnu.org/licenses/>.  */
+   along with this program.  If not, see <https://www.gnu.org/licenses/>.  */
 
 /* As a special exception, you may create a larger work that contains
    part or all of the Bison parser skeleton and distribute that work
@@ -67,7 +67,7 @@ import java.text.MessageFormat;
 public class JavaParser
 {
   /** Version number for the Bison executable that generated this parser.  */
-  public static final String bisonVersion = "3.7.4";
+  public static final String bisonVersion = "3.7.6";
 
   /** Name of the skeleton that generated this parser.  */
   public static final String bisonSkeleton = "lalr1.java";
@@ -4702,7 +4702,7 @@ public class JavaParser
   {
     return new short[]
     {
-      -1,    92,   145,   474,    17,    18,    19,    20,    21,    22,
+       0,    92,   145,   474,    17,    18,    19,    20,    21,    22,
       23,    24,    25,   226,    38,    53,   233,   234,   235,   528,
      342,    94,    95,    96,    54,    55,   688,   239,   352,   353,
      354,   357,   241,   359,   542,   509,   510,   602,   603,   690,

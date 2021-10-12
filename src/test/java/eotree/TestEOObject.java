@@ -28,12 +28,11 @@ public class TestEOObject {
                                 new EODot(Optional.empty(), "memory"),
                                 new EOBndName("bnd2")
                         )
-                ),
-                Optional.of("objectName")
+                )
         );
         assertEquals(
                 """
-                        [free1 free2 vararg...] > objectName
+                        [free1 free2 vararg...]
                           memory > bnd1
                           memory > bnd2""",
                 object.generateEO(0)
@@ -59,12 +58,11 @@ public class TestEOObject {
                                 new EODot(Optional.empty(), "memory"),
                                 new EOBndName("bnd2")
                         )
-                ),
-                Optional.of("objectName")
+                )
         );
         //noinspection TextBlockMigration
         assertEquals(
-                "  [free1 free2 vararg...] > objectName\n" +
+                "  [free1 free2 vararg...]\n" +
                 "    memory > bnd1\n" +
                 "    memory > bnd2",
                 object.generateEO(1)

@@ -72,45 +72,49 @@ fun createOutDirs() {
  * Runs Bison using OS-specific shell command.
  */
 fun runBison() =
-    when {
-        Os.isFamily(Os.FAMILY_WINDOWS) ->
-            exec {
-                workingDir = File(".")
-                executable = "bin/win_bison.exe"
-                args = mutableListOf(
-                    "--report=states,lookaheads",
-                    // "-r", "all",
-                    // "--debug", "--help", "--stacktrace",
-                    "--report-file=${reportFilePath}",
-                    "--output=${javaParserFilePath}",
-                    javaGrammarFilePath
-                )
-            }
-        Os.isFamily(Os.FAMILY_MAC) ->
-            exec {
-                workingDir = File(".")
-                executable = "bin/bison_mac"
-                args = mutableListOf(
-                    "--report=states,lookaheads",
-                    "--report-file=${reportFilePath}",
-                    "--output=${javaParserFilePath}",
-                    javaGrammarFilePath
-                )
-            }
-        Os.isFamily(Os.FAMILY_UNIX) ->
-            exec {
-                workingDir = File(".")
-                executable = "bison"
-                args = mutableListOf(
-                    "--report=states,lookaheads",
-                    "--report-file=${reportFilePath}",
-                    "--output=${javaParserFilePath}",
-                    javaGrammarFilePath
-                )
-            }
-        else ->
-            throw kotlin.UnsupportedOperationException("Your OS is not yet supported. File a GitHub or issue or " +
-                    "provide a Pull Request with support for Bison execution for your OS.")
+    try {
+        when {
+            Os.isFamily(Os.FAMILY_WINDOWS) ->
+                exec {
+                    workingDir = File(".")
+                    executable = "bin/win_bison.exe"
+                    args = mutableListOf(
+                        "--report=states,lookaheads",
+                        // "-r", "all",
+                        // "--debug", "--help", "--stacktrace",
+                        "--report-file=${reportFilePath}",
+                        "--output=${javaParserFilePath}",
+                        javaGrammarFilePath
+                    )
+                }
+            Os.isFamily(Os.FAMILY_MAC) ->
+                exec {
+                    workingDir = File(".")
+                    executable = "bin/bison_mac"
+                    args = mutableListOf(
+                        "--report=states,lookaheads",
+                        "--report-file=${reportFilePath}",
+                        "--output=${javaParserFilePath}",
+                        javaGrammarFilePath
+                    )
+                }
+            Os.isFamily(Os.FAMILY_UNIX) ->
+                exec {
+                    workingDir = File(".")
+                    executable = "bison"
+                    args = mutableListOf(
+                        "--report=states,lookaheads",
+                        "--report-file=${reportFilePath}",
+                        "--output=${javaParserFilePath}",
+                        javaGrammarFilePath
+                    )
+                }
+            else ->
+                throw kotlin.UnsupportedOperationException("Your OS is not yet supported. File a GitHub or issue or " +
+                        "provide a Pull Request with support for Bison execution for your OS.")
+        }
+    } catch (e: Exception) {
+        e.printStackTrace()
     }
 
 
