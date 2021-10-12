@@ -29,7 +29,7 @@ public class StatementExpression extends Statement
     public void report(int sh)
     {
         int shift = sh;
-        if ( super.labels.size() != 0 )
+        if ( super.labels != null && super.labels.size() != 0 )
         {
             super.report(sh);
             shift += Entity.shift;

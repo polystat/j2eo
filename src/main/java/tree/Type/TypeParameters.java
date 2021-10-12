@@ -23,7 +23,12 @@ public class TypeParameters extends Entity
     // Reporting
     public void report(int sh)
     {
-
+        if ( typeParameters.size() == 0 ) return;
+        this.title("TYPE PARAMETERS",sh);
+        for ( TypeParameter tp: typeParameters)
+        {
+            tp.report(sh+Entity.shift);
+        }
     }
 
 }

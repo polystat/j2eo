@@ -41,7 +41,10 @@ public class BlockStatements extends Entity
     // Reporting
     public void report(int sh)
     {
-
+        for (BlockStatement stmt: blockStatements )
+        {
+            if ( stmt != null ) stmt.report(sh);
+        }
     }
 
 }

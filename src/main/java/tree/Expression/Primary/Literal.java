@@ -29,7 +29,7 @@ public class Literal extends Primary
     public Literal(Token token)
     {
         this.code = token.code;
-        this.value = token.value;
+        this.value = token.image; //.value;
     }
 
     // Reporting
