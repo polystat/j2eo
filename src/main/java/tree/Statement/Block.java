@@ -1,5 +1,7 @@
 package tree.Statement;
 
+import tree.Entity;
+
 import java.util.ArrayList;
 
 // Block
@@ -32,7 +34,15 @@ public class Block extends Statement
     // Reporting
     public void report(int sh)
     {
-
+        if ( labels != null && labels.size() > 0 )
+        {
+            String labs = "LABELS: ";
+            for (int i=0; i<labels.size(); i++ )
+                labs += labels.get(i) + " ";
+            Entity.doShift(sh);
+            System.out.println(labs);
+        }
+        if ( block != null ) block.report(sh);
     }
 
 }

@@ -36,7 +36,7 @@ public class ArgumentList extends Entity
         for (Expression arg: arguments)
         {
             arg.report(sh);
-            System.out.println();
+         // System.out.println();
         }
     }
 

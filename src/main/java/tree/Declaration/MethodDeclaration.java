@@ -83,7 +83,11 @@ public class MethodDeclaration extends Declaration
         // Dimensions! ---
         if ( parameters != null ) parameters.report(sh+Entity.shift);
         if ( exceptions != null ) exceptions.report(sh+Entity.shift);
-        if ( methodBody != null ) methodBody.report(sh+Entity.shift);
+        if ( methodBody != null )
+        {
+            title("METHOD BODY",sh+Entity.shift);
+            methodBody.report(sh+Entity.shift);
+        }
     }
 
 }

@@ -852,7 +852,7 @@ BlockStatementSeq
 
 BlockStatement
     : ModifierSeqOpt BlockDeclaration { $$ = new BlockStatement($2.addModifiers($1)); }
-    | Statement                       { $$ = $1; }
+    | Statement                       { $$ = new BlockStatement($1); }
     ;
 
 BlockDeclaration
@@ -917,7 +917,7 @@ StatementExpression
     | PreDecrementExpression       { $$ = $1; }
     | PostIncrementExpression      { $$ = $1; }
     | PostDecrementExpression      { $$ = $1; }
-    | MethodInvocation             { $$ = $1; }
+    | MethodInvocation             { $$ = new StatementExpression(null,$1); }
     | ClassInstanceCreationExpression  { $$ = $1; }
     ;
 
@@ -1084,7 +1084,7 @@ Primary
     | ClassInstanceCreationExpression   { $$ = null; } // not implemented yet
     | FieldAccess                       { $$ = $1; }
     | ArrayAccess                       { $$ = $1; }
-    | MethodInvocation                  { $$ = $1; }  // not implemented yet
+    | MethodInvocation                  { $$ = $1; }
     | MethodReference                   { $$ = $1; }  // not implemented yet
     | ArrayCreationExpression           { $$ = $1; }  // not implemented yet
     ;
@@ -1157,11 +1157,13 @@ ArrayAccess
     ;
 
 MethodInvocation
-    :                                             IDENTIFIER Arguments { $$ = null; } // not implemented yet
-    | CompoundName           DOT TypeArgumentsOpt IDENTIFIER Arguments { $$ = null; } // not implemented yet
-    | Primary                DOT TypeArgumentsOpt IDENTIFIER Arguments { $$ = null; } // not implemented yet
-    |                  SUPER DOT TypeArgumentsOpt IDENTIFIER Arguments { $$ = null; } // not implemented yet
-    | CompoundName DOT SUPER DOT TypeArgumentsOpt IDENTIFIER Arguments { $$ = null; } // not implemented yet
+    :                                             IDENTIFIER Arguments { $$ = new MethodInvocation(null,false,null,$1,$2); }
+    | CompoundName           DOT TypeArgumentsOpt IDENTIFIER Arguments { var ref = new SimpleReference($1);
+                                                                         $$ = new MethodInvocation(ref,false,$3,$4,$5); }
+    | Primary                DOT TypeArgumentsOpt IDENTIFIER Arguments { $$ = new MethodInvocation($1,false,$3,$4,$5); }
+    |                  SUPER DOT TypeArgumentsOpt IDENTIFIER Arguments { $$ = new MethodInvocation(null,true,$3,$4,$5); }
+    | CompoundName DOT SUPER DOT TypeArgumentsOpt IDENTIFIER Arguments { var ref = new SimpleReference($1);
+                                                                         $$ = new MethodInvocation(ref,true,$5,$6,$7); }
     ;
 
 Arguments
