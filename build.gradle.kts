@@ -1,5 +1,6 @@
 import org.apache.tools.ant.taskdefs.condition.Os
 import java.security.MessageDigest
+import org.gradle.jvm.tasks.Jar
 
 
 plugins {
@@ -27,8 +28,28 @@ repositories {
 }
 
 dependencies {
-    testImplementation("org.junit.jupiter:junit-jupiter-api:5.8.0")
-    testRuntimeOnly("org.junit.jupiter:junit-jupiter-engine:5.8.0")
+    implementation("commons-cli:commons-cli:1.4")
+
+    testImplementation("org.junit.jupiter:junit-jupiter-api:5.8.1")
+    testRuntimeOnly("org.junit.jupiter:junit-jupiter-engine:5.8.1")
+}
+
+
+val fatJar = task("fatJar", type = Jar::class) {
+//    baseName = "${project.name}-fat"
+    // manifest Main-Class attribute is optional.
+    // (Used only to provide default main class for executable jar)
+    manifest {
+        attributes["Main-Class"] = "main.Main" // fully qualified class name of default main class
+    }
+//    from(configurations.runtime.map({ if (it.isDirectory) it else zipTree(it) }))
+    with(tasks["jar"] as CopySpec)
+}
+
+tasks {
+    "build" {
+        dependsOn(fatJar)
+    }
 }
 
 tasks.withType(JavaCompile::class).configureEach {
