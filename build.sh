@@ -1,4 +1,4 @@
 #/bin/sh
 
 ./gradlew fatJar
-cp build/libs/* .
+cp build/libs/* j2eo.jar
