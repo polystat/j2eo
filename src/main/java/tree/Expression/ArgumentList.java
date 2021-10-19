@@ -1,7 +1,7 @@
 package tree.Expression;
 
 import tree.Entity;
-import tree.Expression.*;
+
 import java.util.ArrayList;
 
 // Arguments
@@ -36,13 +36,8 @@ public class ArgumentList extends Entity
         for (Expression arg: arguments)
         {
             arg.report(sh);
-            System.out.println();
+         // System.out.println();
         }
     }
 
-    // Generation
-    public void generateEO()
-    {
-
-    }
 }

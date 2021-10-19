@@ -35,9 +35,4 @@ public class ExplicitConstructorInvocation extends Entity
 
     }
 
-    // Generation
-    public void generateEO()
-    {
-
-    }
 }

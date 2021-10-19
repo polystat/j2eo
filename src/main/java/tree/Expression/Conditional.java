@@ -36,9 +36,4 @@ public class Conditional extends Expression
         elsePart.report(sh+Entity.shift);
     }
 
-    // Generation
-    public void generateEO()
-    {
-
-    }
 }

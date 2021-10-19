@@ -39,9 +39,4 @@ public class CatchParameter extends ParameterDeclaration
 
     }
 
-    // Generation
-    public void generateEO()
-    {
-
-    }
 }

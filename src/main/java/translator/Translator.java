@@ -1,15 +1,27 @@
 package translator;
 
 import eotree.*;
+import tree.Compilation.CompilationUnit;
 import tree.Compilation.Package;
+import tree.Compilation.SimpleCompilationUnit;
 import tree.Compilation.TopLevelComponent;
+import tree.Declaration.*;
 
 import java.util.ArrayList;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
 public class Translator {
-    public EOProgram translate(Package pkg) {
+    public static EOProgram translate(CompilationUnit unit) {
+        if (unit instanceof SimpleCompilationUnit)
+            return mapSimpleCompilationUnit((SimpleCompilationUnit) unit);
+        else
+            throw new IllegalArgumentException("CompilationUnit of type " +
+                                               unit.getClass().getSimpleName() +
+                                               " is not supported");
+    }
+
+    public static EOProgram mapPackage(Package pkg) {
         return new EOProgram(
                 new EOLicense(), // TODO: add license?
                 new EOMetas(
@@ -20,18 +32,30 @@ public class Translator {
                 ),
                 pkg.components.components
                         .stream()
-                        .map(this::mapTopLevelComponent)
+                        .map(Translator::mapTopLevelComponent)
                         .collect(Collectors.toList())
         );
     }
 
-    private EOBnd mapTopLevelComponent(TopLevelComponent component) {
+    public static EOProgram mapSimpleCompilationUnit(SimpleCompilationUnit unit) {
+        return new EOProgram(
+                new EOLicense(),
+                new EOMetas(
+                        Optional.empty(),
+                        new ArrayList<>()
+                ),
+                unit.components.components
+                        .stream()
+                        .map(Translator::mapTopLevelComponent)
+                        .collect(Collectors.toList())
+        );
+    }
+
+    public static EOBnd mapTopLevelComponent(TopLevelComponent component) {
         if (component.classDecl != null) {
-            // TODO: implement
-            throw new IllegalStateException("Not implemented");
+            return Classes.mapClass(component.classDecl);
         } else if (component.interfaceDecl != null) {
-            // TODO: implement
-            throw new IllegalStateException("Not implemented");
+            return Classes.mapInterface(component.interfaceDecl);
         } else {
             throw new IllegalArgumentException("Supplied TopLevelComponent does not have neither class nor interface");
         }

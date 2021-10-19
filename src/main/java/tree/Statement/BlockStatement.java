@@ -2,7 +2,6 @@ package tree.Statement;
 
 import tree.Declaration.Declaration;
 import tree.Expression.*;
-import tree.Entity;
 
 // BlockStatement
 //    : ModifierSeqOpt BlockDeclaration
@@ -44,12 +43,6 @@ public class BlockStatement extends Statement
         if ( declaration != null ) { declaration.report(sh); return; }
         if ( statement != null ) { statement.report(sh); return; }
         if ( expression != null ) { expression.report(sh); return; }
-    }
-
-    // Generation
-    public void generateEO()
-    {
-
     }
 
 }

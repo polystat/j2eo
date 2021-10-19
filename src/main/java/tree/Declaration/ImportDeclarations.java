@@ -34,9 +34,4 @@ public class ImportDeclarations extends Entity
         }
     }
 
-    // Generation
-    public void generateEO()
-    {
-
-    }
 }

@@ -24,9 +24,4 @@ public class SwitchExpression extends Expression
 
     }
 
-    // Generation
-    public void generateEO()
-    {
-
-    }
 }

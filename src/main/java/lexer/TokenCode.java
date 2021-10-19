@@ -1,125 +1,127 @@
 package lexer;
 
+import parser.JavaParser.Lexer;
+
 public enum TokenCode
 {
-    EOS,
-    ERROR,
-    ShortComment,
-    LongComment,
+    EOS           (Lexer.YYEOF),
+    ERROR         (Lexer.YYerror),
+    ShortComment  (Lexer.SHORT_COMMENT),
+    LongComment   (Lexer.LONG_COMMENT),
 
-    Identifier,
-    IntegerLiteral,
-    FloatingLiteral,
+    Identifier     (Lexer.IDENTIFIER),
+    IntegerLiteral (Lexer.INTEGER_LITERAL),
+    FloatingLiteral(Lexer.FLOATING_POINT_LITERAL),
+    StringLiteral  (Lexer.STRING_LITERAL),
 
-    LeftParenth,       //  (
-    RightParenth,      //  )
-    LeftBracket,       //  [
-    RightBracket,      //  ]
-    LeftBrace,         //  {
-    RightBrace,        //  }
+    LeftParenth    (Lexer.LPAREN),            //  (
+    RightParenth   (Lexer.RPAREN),            //  )
+    LeftBracket    (Lexer.LBRACKET),          //  [
+    RightBracket   (Lexer.RBRACKET),          //  ]
+    LeftBrace      (Lexer.LBRACE),            //  {
+    RightBrace     (Lexer.RBRACE),            //  }
 
-    At,                //  @
-    Dot,               //  .
-    Ellipsis,          //  ...
-    Colon,             //  :
-    DoubleColon,       //  ::
-    Semicolon,         //  ;
-    Comma,             //  ,
-    Question,          //  ?
-    Tilde,             //  ~
+    At             (Lexer.AT),                //  @
+    Dot            (Lexer.DOT),               //  .
+    Ellipsis       (Lexer.ELLIPSIS),          //  ...
+    Colon          (Lexer.COLON),             //  :
+    DoubleColon    (Lexer.DBL_COLON),         //  ::
+    Semicolon      (Lexer.SEMICOLON),         //  ;
+    Comma          (Lexer.COMMA),             //  ,
+    Question       (Lexer.QUESTION),          //  ?
+    Tilde          (Lexer.TILDE),             //  ~
 
-    Plus,              //  +
-    PlusPlus,          //  ++
-    PlusAssign,        //  +=
-    Minus,             //  -
-    MinusMinus,        //  --
-    MinusAssign,       //  -=
-    Arrow,             //  ->
-    Slash,             //  /
-    SlashAssign,       //  /=
-    Star,              //  *
-    StarAssign,        //  *=
-    Percent,           //  %
-    PercentAssign,     //  %=
-    Caret,             //  ^
-    CaretAssign,       //  ^=
- // BackSlash,         //  \
-    Ampersand,         //  &
-    AmpersandAssign,   //  &=
-    DoubleAmpersand,   //  &&
-    Vertical,          //  |
-    VerticalAssign,    //  |=
-    DoubleVertical,    //  ||
+    Plus           (Lexer.PLUS),              //  +
+    PlusPlus       (Lexer.DBL_PLUS),          //  ++
+    PlusAssign     (Lexer.PLUS_EQUAL),        //  +=
+    Minus          (Lexer.MINUS),             //  -
+    MinusMinus     (Lexer.DBL_MINUS),         //  --
+    MinusAssign    (Lexer.MINUS_EQUAL),       //  -=
+    Arrow          (Lexer.ARROW),             //  ->
+    Slash          (Lexer.SLASH),             //  /
+    SlashAssign    (Lexer.SLASH_EQUAL),       //  /=
+    Star           (Lexer.STAR),              //  *
+    StarAssign     (Lexer.STAR_EQUAL),        //  *=
+    Percent        (Lexer.PERCENT),           //  %
+    PercentAssign  (Lexer.PERCENT_EQUAL),     //  %=
+    Caret          (Lexer.CARET),             //  ^
+    CaretAssign    (Lexer.CARET_EQUAL),       //  ^=
+ // BackSlash      (Lexer.BACKSLASH),         //  \
+    Ampersand      (Lexer.AMPERSAND),         //  &
+    AmpersandAssign(Lexer.AMP_EQUAL),         //  &=
+    DoubleAmpersand(Lexer.DBL_AMPERSAND),     //  &&
+    Vertical       (Lexer.VERTICAL),          //  |
+    VerticalAssign (Lexer.VERTICAL_EQUAL),    //  |=
+    DoubleVertical (Lexer.DBL_VERTICAL),      //  ||
 
-    Assign,            //  =
-    Less,              //  <
-    LessEqual,         //  <=
-    Greater,           //  >
-    GreaterEqual,      //  >=
-    Equal,             //  ==
-    EqualDeep,         //  ===
-    Negation,          //  !
-    NonEqual,          //  !=
+    Assign         (Lexer.EQUAL),             //  =
+    Less           (Lexer.LESS),              //  <
+    LessEqual      (Lexer.LESS_EQUAL),        //  <=
+    Greater        (Lexer.GREATER),           //  >
+    GreaterEqual   (Lexer.GREATER_EQUAL),     //  >=
+    Equal          (Lexer.DBL_EQUAL),         //  ==
+    EqualDeep      (Lexer.TRIPL_EQUAL),       //  ===
+    Negation       (Lexer.EXCLAMATION),       //  !
+    NonEqual       (Lexer.NON_EQUAL),         //  !=
 
-    LeftShift,         //  <<
-    LeftShiftAssign,   //  <<=
-    RightShift,        //  >>
-    RightShiftAssign,  //  >>=
-    ArithmRightShift,  //  >>>
-    ArithmRightShiftAssign, // >>>=
+    LeftShift      (Lexer.DBL_LESS),          //  <<
+    LeftShiftAssign(Lexer.LESS_LESS_EQUAL),   //  <<=
+    RightShift     (Lexer.DBL_GREATER),       //  >>
+    RightShiftAssign(Lexer.GR_GR_EQUAL),      //  >>=
+    ArithmRightShift(Lexer.TRIPL_GREATER),    //  >>>
+    ArithmRightShiftAssign(Lexer.GR_GR_GR_EQUAL), // >>>=
 
-    Abstract,
-    Assert,
-    Base,
-    Boolean,
-    Break,
-    Byte,
-    Case,
-    Catch,
-    Char,
-    Class,
-    Const,       // not actually used
-    Continue,
-    Default,
-    Do,
-    Double,
-    Else,
-    Enum,
-    Extends,
-    Final,
-    Finally,
-    Float,
-    For,
-    Goto,       // not actually used
-    If,
-    Implements,
-    Import,
-    Instanceof,
-    Int,
-    Interface,
-    Long,
-    Native,
-    Package,
-    Private,
-    Protected,
-    Public,
-    New,
-    Return,
-    Short,
-    Static,
-    Strictfp,
-    Super,
-    Synchronized,
-    Switch,
-    This,
-    Throw,
-    Throws,
-    Transient,
-    Try,
-    Void,
-    Volatile,
-    While,
-    Underscore,        // _ for future use
+    Abstract       (Lexer.ABSTRACT),
+    Assert         (Lexer.ASSERT),
+    Boolean        (Lexer.BOOLEAN),
+    Break          (Lexer.BREAK),
+    Byte           (Lexer.BYTE),
+    Case           (Lexer.CASE),
+    Catch          (Lexer.CATCH),
+    Char           (Lexer.CHAR),
+    Class          (Lexer.CLASS),
+//  Const          (Lexer.CONST),       // not actually used
+    Continue       (Lexer.CONTINUE),
+    Default        (Lexer.DEFAULT),
+    Do             (Lexer.DO),
+    Double         (Lexer.DOUBLE),
+    Else           (Lexer.ELSE),
+    Enum           (Lexer.ENUM),
+    Extends        (Lexer.EXTENDS),
+    Final          (Lexer.FINAL),
+    Finally        (Lexer.FINALLY),
+    Float          (Lexer.FLOAT),
+    For            (Lexer.FOR),
+//  Goto           (Lexer.GOTO),       // not actually used
+    If             (Lexer.IF),
+    Implements     (Lexer.IMPLEMENTS),
+    Import         (Lexer.IMPORT),
+    Instanceof     (Lexer.INSTANCEOF),
+    Int            (Lexer.INT),
+    Interface      (Lexer.INTERFACE),
+    Long           (Lexer.LONG),
+    Native         (Lexer.NATIVE),
+    New            (Lexer.NEW),
+    Package        (Lexer.PACKAGE),
+    Private        (Lexer.PRIVATE),
+    Protected      (Lexer.PROTECTED),
+    Public         (Lexer.PUBLIC),
+    Return         (Lexer.RETURN),
+    Short          (Lexer.SHORT),
+    Static         (Lexer.STATIC),
+    Strictfp       (Lexer.STRICTFP),
+    Super          (Lexer.SUPER),
+    Synchronized   (Lexer.SYNCHRONIZED),
+    Switch         (Lexer.SWITCH),
+    This           (Lexer.THIS),
+    Throw          (Lexer.THROW),
+    Throws         (Lexer.THROWS),
+    Transient      (Lexer.TRANSIENT),
+    Try            (Lexer.TRY),
+    Void           (Lexer.VOID),
+    Volatile       (Lexer.VOLATILE),
+    While          (Lexer.WHILE),
+//  Underscore     (Lexer.UNDERSCORE),        // _ for future use
 
     // Restricted keywords
     //
@@ -135,7 +137,7 @@ public enum TokenCode
     // requires in the ModuleDirective production, the character sequence transitive
     // is tokenized as a keyword unless it is followed by a separator, in which case it is
     // tokenized as an identifier.
-
+/*
     open,
     module,
     requires,
@@ -146,7 +148,7 @@ public enum TokenCode
     uses,
     provides,
     with,
-
+*/
     // A variety of character sequences are sometimes assumed, incorrectly, to be keywords:
     //
     //  • true and false are not keywords, but rather boolean literals (§3.10.3).
@@ -158,11 +160,15 @@ public enum TokenCode
     // statement (§14.21); all invocations of a method named yield must be qualified so as
     // to be distinguished from a yield statement. record has special meaning in a record declaration (§8.10).
 
-    True,
-    False,
-    Null,
+    True      (Lexer.FALSE),
+    False     (Lexer.FALSE),
+    Null      (Lexer.NULL),
 
-    Var,
-    Yield,
-    Record,
+    Var       (Lexer.VAR),
+    Yield     (Lexer.YIELD),
+    Record    (Lexer.RECORD);
+
+    TokenCode(int value) { this.value = value; }
+    private final int value;
+    public int value() { return value; }
 }

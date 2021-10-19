@@ -1,7 +1,9 @@
-package org.eolang.j2eo;
-
 public class SimpleStrictFPMethod {
 
-	strictfp void method() {}
+	static strictfp void method() {}
 
+	public static void main(String[] args) {
+		method();
+		System.out.println("passed");
+	}
 }

@@ -28,9 +28,4 @@ public class This extends Primary
             type.report(sh+Entity.shift);
     }
 
-    // Generation
-    public void generateEO()
-    {
-
-    }
 }

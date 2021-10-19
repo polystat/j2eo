@@ -1,6 +1,5 @@
 package tree.Statement;
 
-import tree.Declaration.Declaration;
 import tree.Declaration.TypeAndDeclarators;
 import tree.Declaration.VariableDeclaration;
 import tree.Declaration.VariableDeclarator;
@@ -25,7 +24,7 @@ public class BlockStatements extends Entity
     }
     private void deconstruct(BlockStatement stmt)
     {
-        if ( stmt.declaration != null && stmt.declaration instanceof TypeAndDeclarators)
+        if ( stmt != null && stmt.declaration != null && stmt.declaration instanceof TypeAndDeclarators)
         {
             TypeAndDeclarators tds = (TypeAndDeclarators)stmt.declaration;
             for (VariableDeclarator declarator: tds.declarators.declarators)
@@ -42,12 +41,10 @@ public class BlockStatements extends Entity
     // Reporting
     public void report(int sh)
     {
-
+        for (BlockStatement stmt: blockStatements )
+        {
+            if ( stmt != null ) stmt.report(sh);
+        }
     }
 
-    // Generation
-    public void generateEO()
-    {
-
-    }
 }

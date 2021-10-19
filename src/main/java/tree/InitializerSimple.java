@@ -19,9 +19,4 @@ public class InitializerSimple extends Initializer
 
     }
 
-    // Generation
-    public void generateEO()
-    {
-
-    }
 }

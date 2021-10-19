@@ -36,10 +36,16 @@ bugs in our code. It is also much easier to work with abstraction layer than wit
 
 ## Usage
 
-> ⚠️ NOTE: for now, the entire pipeline is not available. Project is Work In Progress.
+To build, run:
 
 ```shell
-java -jar j2eo.jar <source package directory> -o <output directory>
+./build.sh
+```
+
+To execute, run:
+
+```shell
+java -jar j2eo.jar <source .java file> -o <output .eo file>
 ```
 
 ---
@@ -49,6 +55,10 @@ java -jar j2eo.jar <source package directory> -o <output directory>
 - First, the Java source code files are parsed recursively.
 - Then, for each file, translator converts Java AST to EO AST.
 - Then, EO AST is printed out as a source code to output directory in the same directory structure.
+
+## What's inside
+
+
 
 ## NOT covered Java features list
 
@@ -64,5 +74,9 @@ java -jar j2eo.jar <source package directory> -o <output directory>
 - ``try``/``catch`` blocks
 - ``yeild`` feature
 - Threads and Locks
+- Generics (all kinds of them)
+- Native methods
+- break and continue statements
+- RTTI (instanceof operator) ??????
 
 In general, we cover **91 feature of 112** described in the Java language specification.

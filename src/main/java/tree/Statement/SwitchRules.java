@@ -26,9 +26,4 @@ public class SwitchRules extends Entity
 
     }
 
-    // Generation
-    public void generateEO()
-    {
-
-    }
 }

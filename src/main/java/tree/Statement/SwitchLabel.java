@@ -28,9 +28,4 @@ public class SwitchLabel extends Entity
 
     }
 
-    // Generation
-    public void generateEO()
-    {
-
-    }
 }

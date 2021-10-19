@@ -26,9 +26,4 @@ public class Dims extends Entity
             System.out.print("[]");
     }
 
-    // Generation
-    public void generateEO()
-    {
-
-    }
 }

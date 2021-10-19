@@ -28,9 +28,4 @@ public class Annotations extends Entity
         }
     }
 
-    // Generation
-    public void generateEO()
-    {
-
-    }
 }

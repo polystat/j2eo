@@ -60,8 +60,4 @@ public class Entity
 
     }
 
-    public void generateEO()
-    {
-
-    }
 }

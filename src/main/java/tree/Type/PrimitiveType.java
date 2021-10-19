@@ -33,9 +33,4 @@ public class PrimitiveType extends UnannotatedType
         System.out.print(typeCode.toString());
     }
 
-    // Generation
-    public void generateEO()
-    {
-
-    }
 }

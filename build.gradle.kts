@@ -1,5 +1,6 @@
 import org.apache.tools.ant.taskdefs.condition.Os
 import java.security.MessageDigest
+import org.gradle.jvm.tasks.Jar
 
 
 plugins {
@@ -27,8 +28,29 @@ repositories {
 }
 
 dependencies {
-    testImplementation("org.junit.jupiter:junit-jupiter-api:5.8.0")
-    testRuntimeOnly("org.junit.jupiter:junit-jupiter-engine:5.8.0")
+    implementation("commons-cli:commons-cli:1.4")
+
+    testImplementation("org.junit.jupiter:junit-jupiter-api:5.8.1")
+    testRuntimeOnly("org.junit.jupiter:junit-jupiter-engine:5.8.1")
+}
+
+
+val fatJar = task("fatJar", type = Jar::class) {
+//    baseName = "${project.name}-fat"
+    // manifest Main-Class attribute is optional.
+    // (Used only to provide default main class for executable jar)
+    manifest {
+        attributes["Main-Class"] = "main.Main" // fully qualified class name of default main class
+    }
+    // Include dependencies
+    from(configurations.runtimeClasspath.get().map { if (it.isDirectory) it else zipTree(it) })
+    with(tasks["jar"] as CopySpec)
+}
+
+tasks {
+    "build" {
+        dependsOn(fatJar)
+    }
 }
 
 tasks.withType(JavaCompile::class).configureEach {
@@ -72,45 +94,49 @@ fun createOutDirs() {
  * Runs Bison using OS-specific shell command.
  */
 fun runBison() =
-    when {
-        Os.isFamily(Os.FAMILY_WINDOWS) ->
-            exec {
-                workingDir = File(".")
-                executable = "bin/win_bison.exe"
-                args = mutableListOf(
-                    "--report=states,lookaheads",
-                 // "-r", "all",
-                 // "--debug", "--help", "--stacktrace",
-                    "--report-file=${reportFilePath}",
-                    "--output=${javaParserFilePath}",
-                    javaGrammarFilePath
-                )
-            }
-        Os.isFamily(Os.FAMILY_MAC) ->
-            exec {
-                workingDir = File(".")
-                executable = "bin/bison_mac"
-                args = mutableListOf(
-                    "-r", "all",
-                    "--report-file=${reportFilePath}",
-                    "--output=${javaParserFilePath}",
-                    javaGrammarFilePath
-                )
-            }
-        Os.isFamily(Os.FAMILY_UNIX) ->
-            exec {
-                workingDir = File(".")
-                executable = "bison"
-                args = mutableListOf(
-                    "-r", "all",
-                    "--report-file=${reportFilePath}",
-                    "--output=${javaParserFilePath}",
-                    javaGrammarFilePath
-                )
-            }
-        else ->
-            throw kotlin.UnsupportedOperationException("Your OS is not yet supported. File a GitHub or issue or " +
-                    "provide a Pull Request with support for Bison execution for your OS.")
+    try {
+        when {
+            Os.isFamily(Os.FAMILY_WINDOWS) ->
+                exec {
+                    workingDir = File(".")
+                    executable = "bin/win_bison.exe"
+                    args = mutableListOf(
+                        "--report=states,lookaheads",
+                        // "-r", "all",
+                        // "--debug", "--help", "--stacktrace",
+                        "--report-file=${reportFilePath}",
+                        "--output=${javaParserFilePath}",
+                        javaGrammarFilePath
+                    )
+                }
+            Os.isFamily(Os.FAMILY_MAC) ->
+                exec {
+                    workingDir = File(".")
+                    executable = "bin/bison_mac"
+                    args = mutableListOf(
+                        "--report=states,lookaheads",
+                        "--report-file=${reportFilePath}",
+                        "--output=${javaParserFilePath}",
+                        javaGrammarFilePath
+                    )
+                }
+            Os.isFamily(Os.FAMILY_UNIX) ->
+                exec {
+                    workingDir = File(".")
+                    executable = "bison"
+                    args = mutableListOf(
+                        "--report=states,lookaheads",
+                        "--report-file=${reportFilePath}",
+                        "--output=${javaParserFilePath}",
+                        javaGrammarFilePath
+                    )
+                }
+            else ->
+                throw kotlin.UnsupportedOperationException("Your OS is not yet supported. File a GitHub or issue or " +
+                        "provide a Pull Request with support for Bison execution for your OS.")
+        }
+    } catch (e: Exception) {
+        e.printStackTrace()
     }
 
 

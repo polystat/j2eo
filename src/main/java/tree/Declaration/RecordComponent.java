@@ -43,9 +43,4 @@ public class RecordComponent extends Declaration
 
     }
 
-    // Generation
-    public void generateEO()
-    {
-
-    }
 }

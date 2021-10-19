@@ -33,9 +33,4 @@ public class UnannotatedType extends Type
         dimension.report(0);
     }
 
-    // Generating
-    public void generateEO()
-    {
-
-    }
 }

@@ -3,7 +3,7 @@ package eotree;
 /**
  * EBNF representation:
  * <code>
- * '+' name '␣' ANY EOL
+ * '+' name ' ' ANY EOL
  * </code>
  */
 public class EOMeta extends EONode {

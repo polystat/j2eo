@@ -34,10 +34,4 @@ public class NormalInterfaceDeclaration extends InterfaceDeclaration
         if ( interfaceBody != null ) interfaceBody.report(sh+Entity.shift);
     }
 
-    // Generation
-    public void generateEO()
-    {
-
-    }
-
 }

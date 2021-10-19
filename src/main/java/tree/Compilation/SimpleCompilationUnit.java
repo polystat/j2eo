@@ -18,7 +18,7 @@ public class SimpleCompilationUnit extends CompilationUnit
     public SimpleCompilationUnit(ImportDeclarations ids, TopLevelComponents tlcs)
     {
         this.imports = ids;
-        this.components =tlcs;
+        this.components = tlcs;
     }
 
     // Reporting
@@ -28,9 +28,4 @@ public class SimpleCompilationUnit extends CompilationUnit
         if ( components != null ) components.report(sh);
     }
 
-    // Generation
-    public void generateEO()
-    {
-
-    }
 }

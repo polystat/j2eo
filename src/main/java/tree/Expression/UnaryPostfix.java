@@ -24,10 +24,4 @@ public class UnaryPostfix extends Expression
         operand.report(sh+Entity.shift);
     }
 
-    // Generation
-    public void generateEO()
-    {
-
-    }
-
 }

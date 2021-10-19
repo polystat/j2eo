@@ -40,10 +40,4 @@ public class InstanceOf extends Expression
         else                declaration.report(sh+Entity.shift);
     }
 
-    // Generation
-    public void generateEO()
-    {
-
-    }
-
 }

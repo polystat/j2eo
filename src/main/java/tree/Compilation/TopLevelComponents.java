@@ -33,9 +33,4 @@ public class TopLevelComponents extends Entity
         }
     }
 
-    // Generation
-    public void generateEO()
-    {
-
-    }
 }

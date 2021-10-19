@@ -39,9 +39,4 @@ public class CompoundName extends Entity
         }
     }
 
-    // Generation
-    public void generateEO()
-    {
-
-    }
 }

@@ -66,9 +66,4 @@ public class RecordDeclaration extends ClassDeclaration
 
     }
 
-    // Generation
-    public void generateEO()
-    {
-
-    }
 }

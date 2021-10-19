@@ -36,9 +36,4 @@ public class TypeList extends Entity
 
     }
 
-    // Generation
-    public void generateEO()
-    {
-
-    }
 }

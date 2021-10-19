@@ -1,6 +1,5 @@
 package tree.Declaration;
 
-import tree.Declaration.Declaration;
 import tree.Statement.Block;
 
 // ClassBodyDeclaration
@@ -29,9 +28,4 @@ public class ClassInitializer extends Declaration
 
     }
 
-    // Generation
-    public void generateEO()
-    {
-
-    }
 }

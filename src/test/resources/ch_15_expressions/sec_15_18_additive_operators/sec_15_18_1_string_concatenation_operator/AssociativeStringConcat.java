@@ -4,5 +4,6 @@ public class AssociativeStringConcat {
         String str2 = 1 + 2 + "str";
         System.out.println(str1);
         System.out.println(str2);
+		System.out.println("passed");
     }    
 }

@@ -31,9 +31,4 @@ public class While extends Statement
         statement.report(sh+Entity.shift);
     }
 
-    // Generation
-    public void generateEO()
-    {
-
-    }
 }

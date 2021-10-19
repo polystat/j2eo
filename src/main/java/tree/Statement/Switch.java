@@ -84,9 +84,4 @@ public class Switch extends Statement
 
     }
 
-    // Generation
-    public void generateEO()
-    {
-
-    }
 }

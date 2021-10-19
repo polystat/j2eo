@@ -28,9 +28,4 @@ public class Binary extends Expression
         right.report(sh+Entity.shift);
     }
 
-    // Generation
-    public void generateEO()
-    {
-
-    }
 }

@@ -1,11 +1,8 @@
 package tree.Declaration;
 
 import lexer.*;
-import tree.Modifiers;
+import tree.Entity;
 import tree.Type.*;
-import tree.Type.TypeParameter;
-
-import java.util.ArrayList;
 
 // NormalClassDeclaration
 //    : /*ModifierSeqOpt*/ CLASS IDENTIFIER TypeParametersOpt ClassExtendsOpt ClassImplementsOpt ClassBody
@@ -62,13 +59,18 @@ public class NormalClassDeclaration extends ClassDeclaration
     // Reporting
     public void report(int sh)
     {
-
-    }
-
-    // Generation
-    public void generateEO()
-    {
-
+        this.title("CLASS DECLARATION "+this.name,sh);
+        if ( this.typeParameters != null )
+            this.typeParameters.report(sh+Entity.shift);
+        if ( this.extendedType != null )
+        {
+            this.title("SUPER",sh+Entity.shift);
+            this.extendedType.report(sh+Entity.shift);
+        }
+        if ( this.interfaces != null )
+            this.interfaces.report(sh+Entity.shift);
+        if ( body != null )
+            body.report(sh+Entity.shift);
     }
 
 }

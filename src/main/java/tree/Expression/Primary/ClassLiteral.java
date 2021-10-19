@@ -11,7 +11,7 @@ import tree.Type.Type;
 public class ClassLiteral extends Literal
 {
     // Structure
-    public Type type;  // VOID, is type==null
+    public Type type;  // VOID, if type==null
     public Dims dims;
 
     // Creation
@@ -30,9 +30,4 @@ public class ClassLiteral extends Literal
         System.out.println("CLASS LITERAL");
     }
 
-    // Generation
-    public void generateEO()
-    {
-
-    }
 }

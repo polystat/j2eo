@@ -1,20 +1,20 @@
 
 //// Tokens ////////////////////////
 
-%token <Token> LPAREN     //  (
-%token <Token> RPAREN     //  )
-%token <Token> LBRACE     //  {
-%token <Token> RBRACE     //  }
-%token <Token> LBRACKET   //  [
-%token <Token> RBRACKET   //  ]
-%token <Token> COMMA      //  ,
-%token <Token> DOT        //  .
-%token <Token> SEMICOLON  //  ;
-%token <Token> COLON
-%token <Token> DBL_COLON
-%token <Token> STAR
-%token <Token> SLASH
-%token <Token> PERCENT
+%token <Token> LPAREN       //  (
+%token <Token> RPAREN       //  )
+%token <Token> LBRACE       //  {
+%token <Token> RBRACE       //  }
+%token <Token> LBRACKET     //  [
+%token <Token> RBRACKET     //  ]
+%token <Token> COMMA        //  ,
+%token <Token> DOT          //  .
+%token <Token> SEMICOLON    //  ;
+%token <Token> COLON        //
+%token <Token> DBL_COLON    //
+%token <Token> STAR         //  *
+%token <Token> SLASH        //  /
+%token <Token> PERCENT      //  %
 %token <Token> AMPERSAND    //  &
 %token <Token> AT           //  @
 %token <Token> LESS         //  <
@@ -51,6 +51,7 @@
 %token <Token> DBL_VERTICAL        //  ||
 %token <Token> DBL_AMPERSAND       //  &&
 %token <Token> DBL_EQUAL           //  ==
+%token <Token> TRIPL_EQUAL         //  ===
 %token <Token> NON_EQUAL           //  !=
 %token <Token> DBL_LESS            //  <<
 %token <Token> DBL_GREATER         //  >>
@@ -91,6 +92,7 @@
 %token <Token> INTERFACE
 %token <Token> LONG
 %token <Token> MODULE
+%token <Token> NATIVE
 %token <Token> NEW
 %token <Token> NULL
 %token <Token> OPEN
@@ -119,6 +121,10 @@
 %token <Token> WHILE
 %token <Token> YIELD
 
+%token <Token> SHORT_COMMENT
+%token <Token> LONG_COMMENT
+%token <Token> EOS
+
 %start CompilationUnit
 
 
@@ -137,6 +143,10 @@
 %code imports { import tree.Statement.*; }
 %code imports { import tree.Type.*; }
 
+%code {
+    public CompilationUnit ast;
+}
+
 // Nonterminal types
 // =================
 
@@ -149,7 +159,7 @@
 %nterm <StandardModifiers> StandardModifierSeq
 %nterm <Modifiers> ModifierSeq ModifierSeqOpt
 
-%nterm <tree.Compilation.CompilationUnit> CompilationUnit Package
+%nterm <tree.Compilation.CompilationUnit> CompilationUnit Package SimpleCompilationUnit
 %nterm <tree.Compilation.Module> Module
 
 %nterm <tree.Declaration.ImportDeclaration> ImportDeclaration
@@ -168,15 +178,18 @@
 %nterm <TypeParameterTail> TypeParameterTail
 %nterm <TypeParameters> TypeParameterList TypeParameters TypeParametersOpt
 
-%nterm <tree.Declaration.Declaration> EnumDeclaration ClassDeclaration NormalClassDeclaration
-                     InterfaceDeclaration NormalInterfaceDeclaration RecordDeclaration
-                     AnnotationInterfaceDeclaration Pattern InterfaceMemberDeclaration
+%nterm <ClassDeclaration> ClassDeclaration NormalClassDeclaration
+%nterm <InterfaceDeclaration> InterfaceDeclaration NormalInterfaceDeclaration AnnotationInterfaceDeclaration
+
+%nterm <tree.Declaration.Declaration> EnumDeclaration RecordDeclaration Pattern InterfaceMemberDeclaration
                      ClassBodyDeclaration PureBodyDeclaration FieldDeclaration MethodDeclaration
                      ConstantDeclaration InterfaceMethodDeclaration BlockDeclaration
                      LocalVariableDeclaration
 
 %nterm <ConstructorDeclaration> ConstructorDeclaration
 %nterm <Declarations> InterfaceMemberDeclarationSeq InterfaceBody ClassBodyDeclarationSeq ClassBody ClassBodyOpt
+%nterm <MethodDeclarator> MethodDeclarator
+%nterm <MethodHeader> MethodHeader
 
 %nterm <tree.Type.Type> Type ClassExtendsOpt
 %nterm <tree.Type.UnannotatedType> UnannotatedType
@@ -190,13 +203,16 @@
 %nterm <tree.Expression.Expression> Expression ExpressionOpt Assignment AssignmentExpression ConditionalExpression
                     SwitchExpression PostfixExpression Primary UnaryExpression UnaryExpressionNotPlusMinus
                     InstanceofExpression CastExpression LambdaExpression
-                    LeftHandSide FieldAccess ArrayAccess StatementExpression
-                    MethodInvocation MethodReference ArrayCreationExpression ClassInstanceCreationExpression
+                    LeftHandSide FieldAccess ArrayAccess MethodInvocation MethodReference
+                    ArrayCreationExpression ClassInstanceCreationExpression
 
-%nterm<tree.Expression.Binary> ConditionalOrTail ConditionalOrExpression ConditionalAndExpression
+/*%nterm<tree.Expression.Binary> ConditionalOrTail*/ ConditionalOrExpression ConditionalAndExpression
                InclusiveOrExpression ExclusiveOrExpression AndExpression EqualityExpression RelationalExpression
                ShiftExpression AdditiveExpression MultiplicativeExpression
 
+%nterm<tree.Expression.Binary> ConditionalOrTail
+
+%nterm <StatementExpression> StatementExpression
 %nterm <StatementExpressions> StatementExpressionList StatementExpressionListOpt
 
 %nterm <UnaryPrefix> PreIncrementExpression PreDecrementExpression
@@ -210,7 +226,7 @@
 %nterm <tree.Statement.Statement> Statement SimpleStatement LabeledStatement
                                   IfThenElseStatement WhileStatement ForStatement ElsePartOpt
                                   BasicForStatement EnhancedForStatement
-%nterm <tree.Statement.Block> Block
+%nterm <tree.Statement.Block> Block MethodBody
 %nterm <tree.Statement.BlockStatement> BlockStatement
 %nterm <tree.Statement.BlockStatements> BlockStatementSeq
 
@@ -225,7 +241,8 @@
 %nterm <VariableDeclarator> VariableDeclarator
 %nterm <VariableDeclarators> VariableDeclaratorList
 
-%nterm <Initializer> ArrayInitializer VariableInitializerListOpt VariableInitializerList VariableInitializer
+%nterm <InitializerArray> ArrayInitializer VariableInitializerListOpt VariableInitializerList
+%nterm <InitializerSimple> VariableInitializer
 
 %nterm <SwitchBlock> SwitchBlock
 %nterm <SwitchRule> SwitchRule
@@ -290,9 +307,9 @@ StandardModifier
 
 CompilationUnit
     : %empty                                        { $$ = null; }
-    | Package                                       { $$ = $1; }
-    | Module                                        { $$ = $1; }
-    | ImportDeclarationSeqOpt TopLevelComponentSeq  { $$ = new SimpleCompilationUnit($1,$2); }
+    | Package                                       { $$ = $1; ast = $1; }
+    | Module                                        { $$ = $1; ast = $1; }
+    | ImportDeclarationSeqOpt TopLevelComponentSeq  { ast = new SimpleCompilationUnit($1,$2); }
     ;
 
 Package
@@ -334,8 +351,8 @@ TopLevelComponentSeq
     ;
 
 TopLevelComponent
-    : ClassDeclaration     { $$ = $1; }
-    | InterfaceDeclaration { $$ = $1; }
+    : ClassDeclaration     { $$ = new TopLevelComponent($1); }
+    | InterfaceDeclaration { $$ = new TopLevelComponent($1); }
     ;
 
 /////// Java modules are not supported (yet)
@@ -626,7 +643,7 @@ VariableDeclaratorList
 
 VariableDeclarator
     : IDENTIFIER                              { $$ = new VariableDeclarator($1,null,null); }
-    | IDENTIFIER      EQUAL Expression        { $$ = new VariableDeclarator($1,null,$3); }
+    | IDENTIFIER      EQUAL Expression        { $$ = new VariableDeclarator($1,null,new InitializerSimple($3)); }
     | IDENTIFIER Dims                         { $$ = new VariableDeclarator($1,$2,null); }
     | IDENTIFIER Dims EQUAL ArrayInitializer  { $$ = new VariableDeclarator($1,$2,$4); }
     ;
@@ -654,7 +671,7 @@ VariableInitializer
 //// MethodDeclaration ////////////////////////////////
 
 MethodDeclaration
-    : MethodHeader MethodBody { $$ = null; }  // not implemented yet
+    : MethodHeader MethodBody { $$ = new MethodDeclaration($1,$2); }
 	;
 
 //MethodHeader
@@ -664,12 +681,12 @@ MethodDeclaration
 //    ;
 
 MethodHeader
-    : TypeParameters               Type            MethodDeclarator ThrowsOpt
-    | TypeParameters AnnotationSeq VOID            MethodDeclarator ThrowsOpt
-    | TypeParameters               UnannotatedType MethodDeclarator ThrowsOpt
-    | TypeParameters               VOID            MethodDeclarator ThrowsOpt
-    |                              UnannotatedType MethodDeclarator ThrowsOpt
-    |                              VOID            MethodDeclarator ThrowsOpt
+    : TypeParameters               Type            MethodDeclarator ThrowsOpt { $$ = new MethodHeader($1,$2,$3,$4); }
+    | TypeParameters AnnotationSeq VOID            MethodDeclarator ThrowsOpt { $$ = new MethodHeader($1,null,$4,$5); }
+    | TypeParameters               UnannotatedType MethodDeclarator ThrowsOpt { $$ = new MethodHeader($1,$2,$3,$4); }
+    | TypeParameters               VOID            MethodDeclarator ThrowsOpt { $$ = new MethodHeader($1,null,$3,$4); }
+    |                              UnannotatedType MethodDeclarator ThrowsOpt { $$ = new MethodHeader(null,$1,$2,$3); }
+    |                              VOID            MethodDeclarator ThrowsOpt { $$ = new MethodHeader(null,null,$2,$3); }
     ;
 
 //Result
@@ -678,8 +695,8 @@ MethodHeader
 //    ;
 
 MethodDeclarator
-    : IDENTIFIER LPAREN                                          RPAREN DimsOpt
-    | IDENTIFIER LPAREN FormalParameterList /*FormalParameters*/ RPAREN DimsOpt
+    : IDENTIFIER LPAREN                                          RPAREN DimsOpt { $$ = new MethodDeclarator($1,null,$4); }
+    | IDENTIFIER LPAREN FormalParameterList /*FormalParameters*/ RPAREN DimsOpt { $$ = new MethodDeclarator($1,$3,$5); }
     ;
 
 //FormalParameters
@@ -723,8 +740,8 @@ ThrowsOpt
     ;
 
 MethodBody
-    : Block
-    | SEMICOLON
+    : Block        { $$ = $1; }
+    | SEMICOLON    { $$ = null; }
     ;
 
 ////             //////////////////////////////////
@@ -825,7 +842,7 @@ DefaultValueOpt
 
 Block
     : LBRACE                   RBRACE { $$ = null; }
-    | LBRACE BlockStatementSeq RBRACE { $$ = $2; }
+    | LBRACE BlockStatementSeq RBRACE { $$ = new Block(null,$2); }
     ;
 
 BlockStatementSeq
@@ -835,7 +852,7 @@ BlockStatementSeq
 
 BlockStatement
     : ModifierSeqOpt BlockDeclaration { $$ = new BlockStatement($2.addModifiers($1)); }
-    | Statement                       { $$ = $1; }
+    | Statement                       { $$ = new BlockStatement($1); }
     ;
 
 BlockDeclaration
@@ -860,7 +877,7 @@ Statement
 SimpleStatement
     : Block                             { $$ = $1; }
 	| SEMICOLON                         { $$ = null; }                         // EmptyStatement
-    | StatementExpression SEMICOLON     { $$ = new StatementExpression($1); }  // ExpressionStatement
+    | StatementExpression SEMICOLON     { $$ = $1; }  // ExpressionStatement
 
     | ASSERT Expression                  SEMICOLON { $$ = new Assert(null,$2,null); } // AssertStatement
     | ASSERT Expression COLON Expression SEMICOLON { $$ = new Assert(null,$2,$4); }   // AssertStatement
@@ -900,7 +917,7 @@ StatementExpression
     | PreDecrementExpression       { $$ = $1; }
     | PostIncrementExpression      { $$ = $1; }
     | PostDecrementExpression      { $$ = $1; }
-    | MethodInvocation             { $$ = $1; }
+    | MethodInvocation             { $$ = new StatementExpression(null,$1); }
     | ClassInstanceCreationExpression  { $$ = $1; }
     ;
 
@@ -942,7 +959,7 @@ SwitchBlockStatementGroup
     ;
 
 SwitchLabelSeq
-    :                SwitchLabel COLON { $$ = new SwitchLables($2); }
+    :                SwitchLabel COLON { $$ = new SwitchLabels($1); }
     | SwitchLabelSeq SwitchLabel COLON { $$ = $1.add($2); }
     ;
 
@@ -988,7 +1005,7 @@ ExpressionOpt
 //    : StatementExpressionList
 
 StatementExpressionList
-    :                               StatementExpression { $$ = new StatementExpressions($1); }
+    :                               StatementExpression { $$ = $1; }
     | StatementExpressionList COMMA StatementExpression { $$ = $1.add($3); }
     ;
 
@@ -1058,7 +1075,7 @@ Pattern
 //    ArrayCreationExpression
 
 Primary
-    : Literal                           { $$ = $1; }
+    : Literal                           { $$ = new Literal($1); }
     | Type DimsOpt DOT CLASS            { $$ = new ClassLiteral($1,$2); }   // ClassLiteral
     | VOID DimsOpt DOT CLASS            { $$ = new ClassLiteral(null,$2); } // ClassLiteral
     | THIS                              { $$ = new This(null); }
@@ -1067,7 +1084,7 @@ Primary
     | ClassInstanceCreationExpression   { $$ = null; } // not implemented yet
     | FieldAccess                       { $$ = $1; }
     | ArrayAccess                       { $$ = $1; }
-    | MethodInvocation                  { $$ = $1; }  // not implemented yet
+    | MethodInvocation                  { $$ = $1; }
     | MethodReference                   { $$ = $1; }  // not implemented yet
     | ArrayCreationExpression           { $$ = $1; }  // not implemented yet
     ;
@@ -1140,11 +1157,13 @@ ArrayAccess
     ;
 
 MethodInvocation
-    :                                             IDENTIFIER Arguments { $$ = null; } // not implemented yet
-    | CompoundName           DOT TypeArgumentsOpt IDENTIFIER Arguments { $$ = null; } // not implemented yet
-    | Primary                DOT TypeArgumentsOpt IDENTIFIER Arguments { $$ = null; } // not implemented yet
-    |                  SUPER DOT TypeArgumentsOpt IDENTIFIER Arguments { $$ = null; } // not implemented yet
-    | CompoundName DOT SUPER DOT TypeArgumentsOpt IDENTIFIER Arguments { $$ = null; } // not implemented yet
+    :                                             IDENTIFIER Arguments { $$ = new MethodInvocation(null,false,null,$1,$2); }
+    | CompoundName           DOT TypeArgumentsOpt IDENTIFIER Arguments { var ref = new SimpleReference($1);
+                                                                         $$ = new MethodInvocation(ref,false,$3,$4,$5); }
+    | Primary                DOT TypeArgumentsOpt IDENTIFIER Arguments { $$ = new MethodInvocation($1,false,$3,$4,$5); }
+    |                  SUPER DOT TypeArgumentsOpt IDENTIFIER Arguments { $$ = new MethodInvocation(null,true,$3,$4,$5); }
+    | CompoundName DOT SUPER DOT TypeArgumentsOpt IDENTIFIER Arguments { var ref = new SimpleReference($1);
+                                                                         $$ = new MethodInvocation(ref,true,$5,$6,$7); }
     ;
 
 Arguments

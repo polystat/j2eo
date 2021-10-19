@@ -19,9 +19,4 @@ public class SimpleReference extends Expression
         compoundName.report(sh);
     }
 
-    // Generation
-    public void generateEO()
-    {
-
-    }
 }

@@ -8,16 +8,13 @@ public class EOObject extends EOExpr {
     public List<EOBndName>     freeAttrs;
     public Optional<EOBndName> varargAttr;
     public List<EOBndExpr>     bndAttrs;
-    public Optional<String>    name;
 
     public EOObject(List<EOBndName> freeAttrs,
                     Optional<EOBndName> varargAttr,
-                    List<EOBndExpr> bndAttrs,
-                    Optional<String> name) {
+                    List<EOBndExpr> bndAttrs) {
         this.freeAttrs = freeAttrs;
         this.varargAttr = varargAttr;
         this.bndAttrs = bndAttrs;
-        this.name = name;
     }
 
     @Override
@@ -29,11 +26,7 @@ public class EOObject extends EOExpr {
                (varargAttr
                        .map(attr -> " " + attr.generateEO(indent) + "...")
                        .orElse("")) +
-               "]" +
-               (name
-                       .map(n -> " > " + name.get())
-                       .orElse("")
-               ) + "\n" +
+               "]\n" +
                bndAttrs.stream()
                        .map(attr -> attr.generateEO(indent + 1))
                        .collect(Collectors.joining("\n"));

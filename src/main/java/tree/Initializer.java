@@ -1,8 +1,5 @@
 package tree;
 
-import tree.Expression.*;
-import java.util.ArrayList;
-
 // ArrayInitializer
 //    : LBRACE VariableInitializerListOpt       RBRACE
 //    | LBRACE VariableInitializerListOpt COMMA RBRACE
@@ -30,12 +27,6 @@ public class Initializer extends Entity
 
     // Reporting
     public void report(int sh)
-    {
-
-    }
-
-    // Generation
-    public void generateEO()
     {
 
     }

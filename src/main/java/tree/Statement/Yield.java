@@ -30,9 +30,4 @@ public class Yield extends Statement
         expression.report(sh+Entity.shift);
     }
 
-    // Generation
-    public void generateEO()
-    {
-
-    }
 }

@@ -29,9 +29,4 @@ public class Do extends Statement
 
     }
 
-    // Generation
-    public void generateEO()
-    {
-
-    }
 }

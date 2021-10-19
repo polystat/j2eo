@@ -27,9 +27,4 @@ public class ConstructorDeclarator extends Entity
         // Empty
     }
 
-    // Generation
-    public void generateEO()
-    {
-        // Empty
-    }
 }

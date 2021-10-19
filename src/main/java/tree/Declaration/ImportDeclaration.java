@@ -3,8 +3,6 @@ package tree.Declaration;
 import tree.CompoundName;
 import tree.Entity;
 
-import java.util.ArrayList;
-
 // ImportDeclaration
 //    : IMPORT StaticOpt CompoundName          SEMICOLON
 //    | IMPORT StaticOpt CompoundName DOT STAR SEMICOLON
@@ -40,9 +38,4 @@ public class ImportDeclaration extends Entity
         System.out.println();
     }
 
-    // Generation
-    public void generateEO()
-    {
-
-    }
 }

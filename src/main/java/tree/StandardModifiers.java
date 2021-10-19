@@ -54,10 +54,5 @@ public class StandardModifiers extends Entity
         System.out.println();
     }
 
-    // Generation
-    public void generateEO()
-    {
-
-    }
 }
 

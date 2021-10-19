@@ -25,9 +25,4 @@ public class InitializerArray extends Initializer
 
     }
 
-    // Generation
-    public void generateEO()
-    {
-
-    }
 }

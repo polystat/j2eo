@@ -26,9 +26,4 @@ public class SwitchLabels extends Entity
 
     }
 
-    // Generation
-    public void generateEO()
-    {
-
-    }
 }

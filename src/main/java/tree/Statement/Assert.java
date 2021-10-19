@@ -39,9 +39,4 @@ public class Assert extends Statement
         }
     }
 
-    // Generation
-    public void generateEO()
-    {
-
-    }
 }

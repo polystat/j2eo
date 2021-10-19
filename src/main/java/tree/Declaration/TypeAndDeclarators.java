@@ -19,6 +19,4 @@ public class TypeAndDeclarators extends Declaration
 
     // Reporting
     public void report(int sh) { }
-    // Generation
-    public void generateEO() { }
 }

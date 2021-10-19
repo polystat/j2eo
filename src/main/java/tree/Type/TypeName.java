@@ -33,9 +33,4 @@ public class TypeName extends UnannotatedType
         typeArguments.report(0);
     }
 
-    // Generation
-    public void generateEO()
-    {
-
-    }
 }

@@ -1,12 +1,9 @@
 package tree.Declaration;
 
-import lexer.*;
 import tree.Dims;
 import tree.Initializer;
 import tree.Modifiers;
 import tree.Type.Type;
-
-import java.util.ArrayList;
 
 // ConstantDeclaration
 //    : Type VariableDeclaratorList SEMICOLON
@@ -59,9 +56,4 @@ public class VariableDeclaration extends Declaration
 
     }
 
-    // Generation
-    public void generateEO()
-    {
-
-    }
 }

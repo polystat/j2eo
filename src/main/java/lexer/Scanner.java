@@ -1,10 +1,12 @@
 package lexer;
 
+import parser.JavaParser;
+
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 
-public class Scanner
+public class Scanner implements JavaParser.Lexer
 {
     private static String sourcePath;
     private static char[] sourceText;
@@ -47,6 +49,32 @@ public class Scanner
         currentChar = '\0';
     }
 
+    // PUBLIC SCANNER INTERFACE /////////////////////////////
+
+    private Token lastToken;
+
+    public int yylex()
+    {
+        lastToken = getToken();
+
+        System.out.println(lastToken.code);
+
+        return lastToken.code.value();
+    }
+
+    public Token getLVal()
+    {
+        return lastToken;
+    }
+
+    @Override
+    public void yyerror(String msg) {
+        System.out.println(msg);
+    }
+
+    /////////////////////////////////////////////////////////////
+
+
     // Detecting the current token //////////////////////////////
 
     private static Token currentToken;
@@ -79,6 +107,23 @@ public class Scanner
         }
         switch ( ch )
         {
+            case '"':  // String literal
+                forgetChar();
+                String str = "";
+                while ( true )
+                {
+                    ch = getChar();
+                    if ( ch == '"' )
+                    {
+                        forgetChar();
+                        break;
+                    }
+                    str += ""+ch;
+                    forgetChar();
+                }
+                code = TokenCode.StringLiteral;
+                image = str;
+                break;
             case ':' :  //  :  ::
                 forgetChar(); ch = getChar();
                 if ( ch == ':' ) { forgetChar(); code = TokenCode.DoubleColon; image = "::"; }
@@ -106,7 +151,7 @@ public class Scanner
             case ']': forgetChar(); code = TokenCode.RightBracket; image = "]"; break;
             case '{': forgetChar(); code = TokenCode.LeftBrace ;   image = "{"; break;
             case '}': forgetChar(); code = TokenCode.RightBrace;   image = "}"; break;
-            case '@': forgetChar(); code = TokenCode.Ampersand;    image = "@"; break;
+            case '@': forgetChar(); code = TokenCode.At;           image = "@"; break;
             case '~': forgetChar(); code = TokenCode.Tilde;        image = "~"; break;
 
             case '*':  //  *  *=
@@ -303,12 +348,11 @@ public class Scanner
             case "boolean"  : return TokenCode.Boolean;
             case "break"    : return TokenCode.Break;
             case "byte"     : return TokenCode.Byte;
-            case "base"     : return TokenCode.Base;
             case "catch"    : return TokenCode.Catch;
             case "case"     : return TokenCode.Case;
             case "char"     : return TokenCode.Char;
             case "class"    : return TokenCode.Class;
-            case "const"    : return TokenCode.Const;   // not actually used
+ //         case "const"    : return TokenCode.Const;   // not actually used
             case "continue" : return TokenCode.Continue;
             case "default"  : return TokenCode.Default;
             case "do"       : return TokenCode.Do;
@@ -320,7 +364,7 @@ public class Scanner
             case "finally"  : return TokenCode.Finally;
             case "float"    : return TokenCode.Float;
             case "for"      : return TokenCode.For;
-            case "goto"     : return TokenCode.Goto; // not actually used
+ //         case "goto"     : return TokenCode.Goto; // not actually used
             case "if"       : return TokenCode.If;
             case "implements": return TokenCode.Implements;
             case "import"   : return TokenCode.Import;
@@ -354,6 +398,8 @@ public class Scanner
             case "false"    : return TokenCode.False;
             case "null"     : return TokenCode.Null;
             case "var"      : return TokenCode.Var;
+            case "yield"    : return TokenCode.Yield;
+            case "record"   : return TokenCode.Record;
 
            /*
                     open,

@@ -64,7 +64,7 @@ public class Statement extends Entity
         this.labels = ls;
     }
 
-    public Statement addStatement(Token label)
+    public Statement addLabel(Token label)
     {
         if ( labels == null )
             labels = new ArrayList<>();
