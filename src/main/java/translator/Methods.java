@@ -1,8 +1,6 @@
 package translator;
 
-import eotree.EOBndExpr;
-import eotree.EOBndName;
-import eotree.EOObject;
+import eotree.*;
 import tree.Declaration.Declaration;
 import tree.Declaration.MethodDeclaration;
 
@@ -32,10 +30,20 @@ public class Methods {
                                         .findFirst() :
                                 Optional.empty(),
                         // Bound attributes
-//                        dec.methodBody.block.blockStatements.stream()
-//                                .map(Statements::mapBlockStatement)
-//                                .collect(Collectors.toList())
-                        new ArrayList<>()
+                        new ArrayList<>() {
+                            {
+                                add(new EOBndExpr(
+                                            new EOCopy(
+                                                    new EODot(Optional.empty(), "seq"),
+                                                    dec.methodBody.block.blockStatements.stream()
+                                                            .map(Statements::mapBlockStatement)
+                                                            .collect(Collectors.toList())
+                                            ),
+                                            new EOBndName("@")
+                                        )
+                                );
+                            }
+                        }
                 ),
                 new EOBndName(dec.name)
         );

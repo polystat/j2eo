@@ -10,7 +10,6 @@ import org.junit.jupiter.api.parallel.ExecutionMode;
 import parser.JavaParser;
 import translator.Translator;
 import tree.Compilation.CompilationUnit;
-import tree.Compilation.Package;
 
 import java.io.BufferedReader;
 import java.io.File;
@@ -21,7 +20,6 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.Collection;
-import java.util.Iterator;
 import java.util.stream.Collectors;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -39,13 +37,77 @@ public class TestJ2EO {
     }
 
     @TestFactory
-    Collection<DynamicTest> testChapter15() {
-        return testChapter(testFolderRoot + "/ch_15_expressions");
+    Collection<DynamicTest> testChapter4() {
+        return testChapter(testFolderRoot + "/ch_4_types_values_variables");
+    }
+
+    @TestFactory
+    Collection<DynamicTest> testChapter5() {
+        return testChapter(testFolderRoot + "/ch_5_conversions_and_contexts");
+    }
+
+    @TestFactory
+    Collection<DynamicTest> testChapter6() {
+        return testChapter(testFolderRoot + "/ch_6_names");
+    }
+
+    @TestFactory
+    Collection<DynamicTest> testChapter7() {
+        return testChapter(testFolderRoot + "/ch_7_packages_and_modules");
     }
 
     @TestFactory
     Collection<DynamicTest> testChapter8() {
         return testChapter(testFolderRoot + "/ch_8_classes");
+    }
+
+    @TestFactory
+    Collection<DynamicTest> testChapter9() {
+        return testChapter(testFolderRoot + "/ch_9_interfaces");
+    }
+
+    @TestFactory
+    Collection<DynamicTest> testChapter10() {
+        return testChapter(testFolderRoot + "/ch_10_arrays");
+    }
+
+    @TestFactory
+    Collection<DynamicTest> testChapter11() {
+        return testChapter(testFolderRoot + "/ch_11_exceptions");
+    }
+
+    @TestFactory
+    Collection<DynamicTest> testChapter14() {
+        return testChapter(testFolderRoot + "/ch_14_blocks_statements_and_patterns");
+    }
+
+    @TestFactory
+    Collection<DynamicTest> testChapter15() {
+        return testChapter(testFolderRoot + "/ch_15_expressions");
+    }
+
+    @TestFactory
+    Collection<DynamicTest> testChapter16() {
+        return testChapter(testFolderRoot + "/ch_16_definite_assignment");
+    }
+
+    @TestFactory
+    Collection<DynamicTest> testChapter17() {
+        return testChapter(testFolderRoot + "/ch_17_threads_and_locks");
+    }
+
+    @TestFactory
+    Collection<DynamicTest> testChapter18() {
+        return testChapter(testFolderRoot + "/ch_18_type_inference");
+    }
+
+    @TestFactory
+    Collection<DynamicTest> zerothTest() {
+       return new ArrayList<>() {
+           {
+                add(testFile(Paths.get(testFolderRoot + "/../TEST0.java")));
+           }
+       };
     }
 
     private ArrayList<DynamicTest> testChapter(String chapterPath) {
@@ -75,8 +137,8 @@ public class TestJ2EO {
                     CompilationUnit unit = parseAndBuildAST(path);
 
                     // EO tree to string
-                    //String eoCode = translateToEO(unit);
-                    String eoCode = "[args...] > app";
+                    String eoCode = translateToEO(unit);
+                    System.out.println("eoCode = " + eoCode);
 
                     // Compile and execute translated to EO Java file
                     String eoExecOutput = compileAndExecuteEO(eoCode);
@@ -113,8 +175,9 @@ public class TestJ2EO {
                     .filter(Files::isRegularFile)
                     .filter(TestJ2EO::isClassFile)
                     .collect(Collectors.toList())) {
-                p.toFile().delete();
-                p.toFile().deleteOnExit();
+                if (!p.toFile().delete()) {
+                    System.err.println("Unable to delete file/dir: \"" + p.toString() + "\"");
+                }
             }
 
         } catch (IOException | InterruptedException e) {
@@ -124,11 +187,13 @@ public class TestJ2EO {
     }
 
     private static CompilationUnit parseAndBuildAST(Path path) {
-        Scanner.read(path.toString());
         Scanner scanner = new Scanner();
+        scanner.read(path.toString());
         JavaParser parser = new JavaParser(scanner);
         try {
-            boolean success = parser.parse();
+            if (!parser.parse()) {
+                System.err.println("Unable to parse a .java file: \"" + path.toString() + "\"");
+            }
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -136,8 +201,7 @@ public class TestJ2EO {
     }
 
     private static String translateToEO(CompilationUnit unit) {
-        Translator translator = new Translator();
-        EOProgram eoProgram = translator.translate((Package) unit); // TODO: 'CompilationUnit' preferred
+        EOProgram eoProgram = Translator.translate(unit);
         return eoProgram.generateEO(0);
     }
 
