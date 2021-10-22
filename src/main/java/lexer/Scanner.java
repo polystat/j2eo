@@ -9,9 +9,9 @@ import java.nio.file.Paths;
 public class Scanner implements JavaParser.Lexer
 {
     private static String sourcePath;
-    private static char[] sourceText;
+    private char[] sourceText;
 
-    public static boolean read(String path)
+    public boolean read(String path)
     {
         sourcePath = path;
         try {
@@ -28,12 +28,12 @@ public class Scanner implements JavaParser.Lexer
 
     // Machinery for reading bytes from the source ///////////////////////
 
-    private static int currentLine = 0;
-    private static int currentPos = 0;
-    private static int globalPos = -1;
-    private static char currentChar = '\0';
+    private int currentLine = 0;
+    private int currentPos = 0;
+    private int globalPos = -1;
+    private char currentChar = '\0';
 
-    private static char getChar()
+    private char getChar()
     {
         if ( currentChar == '\0' )
         {
@@ -44,7 +44,7 @@ public class Scanner implements JavaParser.Lexer
         return currentChar;
     }
 
-    private static void forgetChar()
+    private void forgetChar()
     {
         currentChar = '\0';
     }
@@ -77,18 +77,18 @@ public class Scanner implements JavaParser.Lexer
 
     // Detecting the current token //////////////////////////////
 
-    private static Token currentToken;
-    public static Token get()
+    private Token currentToken;
+    public Token get()
     {
         if ( currentToken == null ) currentToken = getToken();
         return currentToken;
     }
-    public static void forget()
+    public void forget()
     {
         currentToken = null;
     }
 
-    private static Token getToken()
+    private Token getToken()
     {
         char ch;
         TokenCode code;
@@ -330,17 +330,17 @@ public class Scanner implements JavaParser.Lexer
         return token;
     }
 
-    private static String scanShortComment()
+    private String scanShortComment()
     {
         return "";
     }
 
-    private static String scanLongComment()
+    private String scanLongComment()
     {
         return "";
     }
 
-    private static TokenCode detectKeyword(String identifier)
+    private TokenCode detectKeyword(String identifier)
     {
         switch ( identifier ) {
             case "abstract" : return TokenCode.Abstract;

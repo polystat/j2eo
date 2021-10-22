@@ -1,11 +1,12 @@
 package translator;
 
-import eotree.EOBndExpr;
+import eotree.EOAnonExpr;
 import tree.Statement.BlockStatement;
 import tree.Statement.Statement;
+import tree.Statement.StatementExpression;
 
 public class Statements {
-    public static EOBndExpr mapBlockStatement(BlockStatement stmt) {
+    public static EOAnonExpr mapBlockStatement(BlockStatement stmt) {
         // Block statement is one of three variants
         if (stmt.statement != null) {
             return Statements.mapStatement(stmt.statement);
@@ -17,7 +18,17 @@ public class Statements {
             throw new IllegalArgumentException("BlockStatement does not have any known type");
     }
 
-    public static EOBndExpr mapStatement(Statement statement) {
+    public static EOAnonExpr mapStatement(Statement statement) {
+        if (statement instanceof StatementExpression) {
+            return mapStatementExpression((StatementExpression) statement);
+        }
+        return null;
+    }
+
+    public static EOAnonExpr mapStatementExpression(StatementExpression stmtExpr) {
+        if (stmtExpr.expression != null) {
+            return Expressions.mapExpression(stmtExpr.expression);
+        }
         return null;
     }
 }
