@@ -1,15 +1,13 @@
 package translator;
 
 import eotree.*;
-import tree.Declaration.Declaration;
 import tree.Declaration.MethodDeclaration;
 
 import java.util.ArrayList;
 import java.util.Optional;
 import java.util.stream.Collectors;
-import java.util.stream.Stream;
 
-import static util.ListUtils.first;
+import static util.ListUtils.listOf;
 
 public class Methods {
     public static EOBndExpr mapMethodDeclaration(MethodDeclaration dec) {
@@ -30,20 +28,17 @@ public class Methods {
                                         .findFirst() :
                                 Optional.empty(),
                         // Bound attributes
-                        new ArrayList<>() {
-                            {
-                                add(new EOBndExpr(
-                                            new EOCopy(
-                                                    new EODot(Optional.empty(), "seq"),
-                                                    dec.methodBody.block.blockStatements.stream()
-                                                            .map(Statements::mapBlockStatement)
-                                                            .collect(Collectors.toList())
-                                            ),
-                                            new EOBndName("@")
-                                        )
-                                );
-                            }
-                        }
+                        listOf(
+                                new EOBndExpr(
+                                        new EOCopy(
+                                                new EODot(Optional.empty(), "seq"),
+                                                dec.methodBody.block.blockStatements.stream()
+                                                        .map(Statements::mapBlockStatement)
+                                                        .collect(Collectors.toList())
+                                        ),
+                                        new EOBndName("@")
+                                )
+                        )
                 ),
                 new EOBndName(dec.name)
         );
