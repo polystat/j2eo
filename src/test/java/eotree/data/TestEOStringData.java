@@ -17,6 +17,6 @@ public class TestEOStringData {
     public void TestGenerateEONonZeroIndent() {
         var f = new EOStringData("hello world");
 
-        assertEquals(f.generateEO(1), "\"hello world\"");
+        assertEquals(f.generateEO(1), "  \"hello world\"");
     }
 }
