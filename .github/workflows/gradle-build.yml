@@ -12,7 +12,6 @@ jobs:
     strategy:
       matrix:
         os: [
-            ubuntu-latest,
             macos-latest,
             windows-latest
         ]
@@ -23,6 +22,27 @@ jobs:
       - uses: actions/setup-java@v1
         with:
           java-version: 16
+
+      - uses: gradle/gradle-build-action@v1
+        with:
+          arguments: build
+
+      - uses: gradle/gradle-build-action@v1
+        with:
+          arguments: test
+
+  gradle_ubuntu:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+
+      - uses: actions/setup-java@v1
+        with:
+          java-version: 16
+
+      - run: |
+          sudo apt-get update -y
+          sudo apt-get install -y bison
 
       - uses: gradle/gradle-build-action@v1
         with:
