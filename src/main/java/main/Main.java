@@ -47,8 +47,8 @@ public class Main {
 
 
         // Read, parse, map and print file
-        Scanner.read(inputFilepath);
         Scanner    scanner = new Scanner();
+        scanner.read(inputFilepath);
         JavaParser parser  = new JavaParser(scanner);
         try {
             boolean result = parser.parse();
