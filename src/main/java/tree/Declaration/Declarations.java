@@ -27,7 +27,7 @@ public class Declarations extends Entity
             for (VariableDeclarator declarator: tds.declarators.declarators)
             {
                 VariableDeclaration variable =
-                        new VariableDeclaration(tds.name,d.modifiers,d.type,declarator.dims,declarator.initializer);
+                        new VariableDeclaration(declarator.name,d.modifiers,d.type,declarator.dims,declarator.initializer);
                 this.declarations.add(variable);
             }
         }

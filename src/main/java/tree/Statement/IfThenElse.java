@@ -38,6 +38,7 @@ public class IfThenElse extends Statement
     // Reporting
     public void report(int sh)
     {
+        super.report(sh);
         Entity.doShift(sh);
         System.out.println("IF");
         condition.report(sh+Entity.shift);

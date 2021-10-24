@@ -28,13 +28,8 @@ public class StatementExpression extends Statement
     // Reporting
     public void report(int sh)
     {
-        int shift = sh;
-        if ( super.labels != null && super.labels.size() != 0 )
-        {
-            super.report(sh);
-            shift += Entity.shift;
-        }
-        expression.report(shift);
+        super.report(sh);  // printing labels, if any
+        expression.report(sh);
     }
 
 }

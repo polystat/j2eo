@@ -33,6 +33,10 @@ public class TypeList extends Entity
     // Reporting
     public void report(int sh)
     {
+        for (Type t: types)
+        {
+            t.report(sh);
+        }
 
     }
 

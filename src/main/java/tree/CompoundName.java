@@ -30,11 +30,11 @@ public class CompoundName extends Entity
     // Reporting
     public void report(int sh)
     {
-        Entity.doShift(sh);
-        for (int i=1; i<=names.size(); i++)
+     // Entity.doShift(sh);
+        for (int i=0; i<names.size(); i++)
         {
             System.out.print(names.get(i));
-            if ( i < names.size() )
+            if ( i < names.size()-1 )
                 System.out.print(".");
         }
     }

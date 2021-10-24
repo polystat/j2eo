@@ -19,8 +19,7 @@ public class UnaryPostfix extends Expression
     // Reporting
     public void report(int sh)
     {
-        Entity.doShift(sh);
-        System.out.println("UNARY POSTFIX "+operator.toString());
+        title("UNARY POSTFIX "+operator.toString(),sh);
         operand.report(sh+Entity.shift);
     }
 

@@ -30,7 +30,7 @@ public class BlockStatements extends Entity
             for (VariableDeclarator declarator: tds.declarators.declarators)
             {
                 VariableDeclaration variable =
-                        new VariableDeclaration(tds.name,tds.modifiers,tds.type,declarator.dims,declarator.initializer);
+                        new VariableDeclaration(declarator.name,tds.modifiers,tds.type,declarator.dims,declarator.initializer);
                 this.blockStatements.add(new BlockStatement(variable));
             }
         }

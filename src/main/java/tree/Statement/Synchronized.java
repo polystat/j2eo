@@ -26,6 +26,7 @@ public class Synchronized extends Statement
     // Reporting
     public void report(int sh)
     {
+        super.report(sh);
     }
 
 }

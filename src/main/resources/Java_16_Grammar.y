@@ -133,6 +133,7 @@
 %define api.parser.public
 %define api.package {parser}
 %define api.value.type {Entity}
+%define parse.error verbose
 
 %code imports { import lexer.*; }
 %code imports { import tree.*; }
@@ -159,7 +160,7 @@
 %nterm <StandardModifiers> StandardModifierSeq
 %nterm <Modifiers> ModifierSeq ModifierSeqOpt
 
-%nterm <tree.Compilation.CompilationUnit> CompilationUnit Package SimpleCompilationUnit
+%nterm <tree.Compilation.CompilationUnit> CompilationUnit Package /* SimpleCompilationUnit */
 %nterm <tree.Compilation.Module> Module
 
 %nterm <tree.Declaration.ImportDeclaration> ImportDeclaration
@@ -180,6 +181,9 @@
 
 %nterm <ClassDeclaration> ClassDeclaration NormalClassDeclaration
 %nterm <InterfaceDeclaration> InterfaceDeclaration NormalInterfaceDeclaration AnnotationInterfaceDeclaration
+%nterm <Enumerator> EnumConstant
+%nterm <Enumerators> EnumConstantList EnumConstantListOpt
+%nterm <EnumBody> EnumBody
 
 %nterm <tree.Declaration.Declaration> EnumDeclaration RecordDeclaration Pattern InterfaceMemberDeclaration
                      ClassBodyDeclaration PureBodyDeclaration FieldDeclaration MethodDeclaration
@@ -187,7 +191,8 @@
                      LocalVariableDeclaration
 
 %nterm <ConstructorDeclaration> ConstructorDeclaration
-%nterm <Declarations> InterfaceMemberDeclarationSeq InterfaceBody ClassBodyDeclarationSeq ClassBody ClassBodyOpt
+%nterm <Declarations> InterfaceMemberDeclarationSeq InterfaceBody ClassBodyDeclarationSeq
+                      ClassBody ClassBodyOpt EnumBodyDeclarationsOpt
 %nterm <MethodDeclarator> MethodDeclarator
 %nterm <MethodHeader> MethodHeader
 
@@ -569,29 +574,34 @@ ExplicitConstructorInvocation
 //// EnumDeclaration ////////////////////////////////////
 
 EnumDeclaration
-    : /*ModifierSeqOpt*/ ENUM IDENTIFIER ClassImplementsOpt EnumBody { $$ = null; }
+    : /*ModifierSeqOpt*/ ENUM IDENTIFIER ClassImplementsOpt EnumBody { $$ = new EnumDeclaration($2,$3,$4); }
     ;
 
 EnumBody
-    : LBRACE EnumConstantListOpt       EnumBodyDeclarationsOpt RBRACE
-    | LBRACE EnumConstantListOpt COMMA EnumBodyDeclarationsOpt RBRACE
+    : LBRACE EnumConstantListOpt       EnumBodyDeclarationsOpt RBRACE { $$ = new EnumBody($2,$3); }
+    | LBRACE EnumConstantListOpt COMMA EnumBodyDeclarationsOpt RBRACE { $$ = new EnumBody($2,$4); }
     ;
 
 EnumConstantListOpt
-    : %empty
-    |                           EnumConstant
-    | EnumConstantListOpt COMMA EnumConstant
+    : %empty             { $$ = null; }
+    | EnumConstantList   { $$ = $1; }
+    ;
+
+EnumConstantList
+    :                        EnumConstant { $$ = new Enumerators($1); }
+    | EnumConstantList COMMA EnumConstant { $$ = $1.add($3); }
     ;
 
 EnumConstant
-    : AnnotationSeqOpt IDENTIFIER Arguments
-    | AnnotationSeqOpt IDENTIFIER Arguments ClassBody
+    : AnnotationSeqOpt IDENTIFIER                      { $$ = new Enumerator($1,$2,null,null); }
+    | AnnotationSeqOpt IDENTIFIER Arguments            { $$ = new Enumerator($1,$2,$3,null); }
+    | AnnotationSeqOpt IDENTIFIER Arguments ClassBody  { $$ = new Enumerator($1,$2,$3,$4); }
     ;
 
 EnumBodyDeclarationsOpt
-    : %empty
-    | SEMICOLON
-    | SEMICOLON ClassBodyDeclarationSeq
+    : %empty                            { $$ = null; }
+    | SEMICOLON                         { $$ = null; }
+    | SEMICOLON ClassBodyDeclarationSeq { $$ = $2; }
     ;
 
 //// RecordDeclaration //////////////////////////////////
@@ -633,7 +643,8 @@ RecordBodyDeclaration
 //// FieldDeclaration ///////////////////////////////////
 
 FieldDeclaration
-    : /*ModifierSeqOpt*/ UnannotatedType VariableDeclaratorList SEMICOLON { $$ = new TypeAndDeclarators($1,$2); }
+    : /*ModifierSeqOpt*/ UnannotatedType VariableDeclaratorList SEMICOLON
+                                                  { $$ = new TypeAndDeclarators($1,$2); }
     ;
 
 VariableDeclaratorList
@@ -849,7 +860,7 @@ BlockStatementSeq
 	:                   BlockStatement { $$ = new BlockStatements($1); }
     | BlockStatementSeq BlockStatement { $$ = $1.add($2); }
     ;
-
+/*
 BlockStatement
     : ModifierSeqOpt BlockDeclaration { $$ = new BlockStatement($2.addModifiers($1)); }
     | Statement                       { $$ = new BlockStatement($1); }
@@ -859,6 +870,15 @@ BlockDeclaration
     : ClassDeclaration                   { $$ = $1; } // LocalClassOrInterfaceDeclaration
     | NormalInterfaceDeclaration         { $$ = $1; } // LocalClassOrInterfaceDeclaration
     | LocalVariableDeclaration SEMICOLON { $$ = $1; } // LocalVariableDeclarationStatement
+    ;
+*/
+
+BlockStatement
+    : ModifierSeqOpt ClassDeclaration           { $$ = new BlockStatement($2.addModifiers($1)); }
+    | ModifierSeqOpt NormalInterfaceDeclaration { $$ = new BlockStatement($2.addModifiers($1)); }
+    | ModifierSeqOpt LocalVariableDeclaration SEMICOLON
+                                                { $$ = new BlockStatement($2.addModifiers($1)); }
+    |                Statement                  { $$ = new BlockStatement($1); }
     ;
 
 LocalVariableDeclaration
@@ -876,8 +896,8 @@ Statement
 
 SimpleStatement
     : Block                             { $$ = $1; }
-	| SEMICOLON                         { $$ = null; }                         // EmptyStatement
-    | StatementExpression SEMICOLON     { $$ = $1; }  // ExpressionStatement
+	| SEMICOLON                         { $$ = null; }   // EmptyStatement
+    | StatementExpression SEMICOLON     { $$ = $1; }     // ExpressionStatement
 
     | ASSERT Expression                  SEMICOLON { $$ = new Assert(null,$2,null); } // AssertStatement
     | ASSERT Expression COLON Expression SEMICOLON { $$ = new Assert(null,$2,$4); }   // AssertStatement
@@ -912,11 +932,11 @@ LabeledStatement
     ;
 
 StatementExpression
-    : Assignment                   { $$ = $1; }
-    | PreIncrementExpression       { $$ = $1; }
-    | PreDecrementExpression       { $$ = $1; }
-    | PostIncrementExpression      { $$ = $1; }
-    | PostDecrementExpression      { $$ = $1; }
+    : Assignment                   { $$ = new StatementExpression(null,$1); }
+    | PreIncrementExpression       { $$ = new StatementExpression(null,$1); }
+    | PreDecrementExpression       { $$ = new StatementExpression(null,$1); }
+    | PostIncrementExpression      { $$ = new StatementExpression(null,$1); }
+    | PostDecrementExpression      { $$ = new StatementExpression(null,$1); }
     | MethodInvocation             { $$ = new StatementExpression(null,$1); }
     | ClassInstanceCreationExpression  { $$ = $1; }
     ;
@@ -1157,8 +1177,9 @@ ArrayAccess
     ;
 
 MethodInvocation
-    :                                             IDENTIFIER Arguments { $$ = new MethodInvocation(null,false,null,$1,$2); }
-    | CompoundName           DOT TypeArgumentsOpt IDENTIFIER Arguments { var ref = new SimpleReference($1);
+    : CompoundName                                           Arguments { var ref = new SimpleReference($1);
+                                                                         $$ = new MethodInvocation(ref,false,null,null,$2); }
+    | CompoundName           DOT TypeArguments    IDENTIFIER Arguments { var ref = new SimpleReference($1);
                                                                          $$ = new MethodInvocation(ref,false,$3,$4,$5); }
     | Primary                DOT TypeArgumentsOpt IDENTIFIER Arguments { $$ = new MethodInvocation($1,false,$3,$4,$5); }
     |                  SUPER DOT TypeArgumentsOpt IDENTIFIER Arguments { $$ = new MethodInvocation(null,true,$3,$4,$5); }
@@ -1182,8 +1203,8 @@ ArgumentList
     ;
 
 MethodReference
-    : CompoundName      DBL_COLON TypeArgumentsOpt IDENTIFIER { $$ = null; } // not implemented yet
-    | Primary           DBL_COLON TypeArgumentsOpt IDENTIFIER { $$ = null; } // not implemented yet
+//  : CompoundName      DBL_COLON TypeArgumentsOpt IDENTIFIER { $$ = null; } -- covered by 'Type' case
+    : Primary           DBL_COLON TypeArgumentsOpt IDENTIFIER { $$ = null; } // not implemented yet
     | Type              DBL_COLON TypeArgumentsOpt IDENTIFIER { $$ = null; } // not implemented yet
     |             SUPER DBL_COLON TypeArgumentsOpt IDENTIFIER { $$ = null; } // not implemented yet
     | Type    DOT SUPER DBL_COLON TypeArgumentsOpt IDENTIFIER { $$ = null; } // not implemented yet

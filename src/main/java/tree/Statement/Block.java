@@ -21,7 +21,7 @@ import java.util.ArrayList;
 public class Block extends Statement
 {
     // Structure
-//  public ArrayList<String> labels;
+//  public ArrayList<String> labels; -- from the base class
     public BlockStatements block;
 
     // Creation
@@ -34,14 +34,7 @@ public class Block extends Statement
     // Reporting
     public void report(int sh)
     {
-        if ( labels != null && labels.size() > 0 )
-        {
-            String labs = "LABELS: ";
-            for (int i=0; i<labels.size(); i++ )
-                labs += labels.get(i) + " ";
-            Entity.doShift(sh);
-            System.out.println(labs);
-        }
+        super.report(sh);
         if ( block != null ) block.report(sh);
     }
 

@@ -8,6 +8,10 @@ public class Dims extends Entity
     public ArrayList<Dim> dimensions;
 
     // Creation
+    public Dims()
+    {
+        dimensions = new ArrayList<>();
+    }
     public Dims(Dim dim)
     {
         this.dimensions = new ArrayList<>();
@@ -22,8 +26,11 @@ public class Dims extends Entity
     // Reporting
     public void report(int sh)
     {
+        title("Dimensions: ",sh);
+        Entity.doShift(sh+Entity.shift);
         for (int i=1; i<=dimensions.size(); i++)
             System.out.print("[]");
+        System.out.println();
     }
 
 }

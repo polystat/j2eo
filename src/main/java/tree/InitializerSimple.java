@@ -16,7 +16,7 @@ public class InitializerSimple extends Initializer
     // Reporting
     public void report(int sh)
     {
-
+        expression.report(sh);
     }
 
 }

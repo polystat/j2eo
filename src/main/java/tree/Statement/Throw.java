@@ -25,6 +25,7 @@ public class Throw extends Statement
     // Reporting
     public void report(int sh)
     {
+        super.report(sh);
         Entity.doShift(sh);
         System.out.println("THROW");
         if ( expression != null )

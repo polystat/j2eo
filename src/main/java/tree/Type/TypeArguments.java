@@ -36,12 +36,10 @@ public class TypeArguments extends Entity
     // Reporting
     public void report(int sh)
     {
-        Entity.doShift(sh);
-        System.out.println("TYPE ARGUMENTS");
+        title("TYPE ARGUMENTS",sh);
         for ( TypeArgument arg: arguments)
         {
             arg.report(sh+Entity.shift);
-            System.out.println();
         }
     }
 

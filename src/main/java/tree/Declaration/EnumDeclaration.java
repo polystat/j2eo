@@ -1,9 +1,10 @@
 package tree.Declaration;
 
+import lexer.Token;
+import tree.Entity;
 import tree.Expression.*;
 import tree.Modifiers;
-
-import java.util.ArrayList;
+import tree.Type.TypeList;
 
 // EnumDeclaration
 //    : /*ModifierSeqOpt*/ ENUM IDENTIFIER ClassImplementsOpt EnumBody
@@ -33,29 +34,43 @@ import java.util.ArrayList;
 public class EnumDeclaration extends ClassDeclaration
 {
     // Structure
-//  public Modifiers modifiers;
-    public ArrayList<String> enumerators;
-    public ArrayList<Expression> initializers;
-    public ArrayList<Declaration> body;
+//  public Modifiers modifiers;  -- in the base class
+//  public String name;          -- in the base class
+    public TypeList implemented;
+    public Enumerators enumerators;
+    public Declarations body;
 
     // Creation
-    public EnumDeclaration(String n,
-                           Modifiers mods,
-                           ArrayList<String> enums,
-                           ArrayList<Expression> inits,
-                           ArrayList<Declaration> body)
+    public EnumDeclaration(Token n, TypeList impls, EnumBody body)
     {
-        super(mods,n);
-        this.modifiers = mods;
-        this.enumerators = enums;
-        this.initializers = inits;
-        this.body = body;
+        super(null,n.image);
+        this.implemented = impls;
+        this.enumerators = body.enumerators;
+        this.body = body.declarations;
     }
 
     // Reporting
     public void report(int sh)
     {
-
+        title("ENUM DECLARATION "+name,sh);
+        if ( implemented != null )
+        {
+            Entity.doShift(sh+Entity.shift);
+            System.out.println("BASES:");
+            implemented.report(sh+2*Entity.shift);
+        }
+        if ( enumerators != null )
+        {
+            Entity.doShift(sh+Entity.shift);
+            System.out.println("ENUMERATORS:");
+            enumerators.report(sh+2*Entity.shift);
+        }
+        if ( body != null )
+        {
+            Entity.doShift(sh+Entity.shift);
+            System.out.println("ENUM BODY:");
+            body.report(sh+2*Entity.shift);
+        }
     }
 
 }

@@ -2,6 +2,7 @@ package tree.Type;
 
 import tree.Annotations;
 import tree.Dim;
+import tree.Dims;
 
 // UnannotatedType
 //    : PrimitiveType
@@ -12,25 +13,25 @@ import tree.Dim;
 public class UnannotatedType extends Type
 {
     // Structure
-    public Dim dimension;
+    public Dims dimensions;
 
     // Creation
     public UnannotatedType(Annotations anns)
     {
         super(anns);
+        dimensions = new Dims();
         // Empty
     }
     public UnannotatedType addDimension(Dim dim)
     {
-        this.dimension = dim;
+        this.dimensions.add(dim);
         return this;
     }
 
     // Reporting
     public void report(int sh)
     {
-        super.report(sh);
-        dimension.report(0);
+        // empty
     }
 
 }

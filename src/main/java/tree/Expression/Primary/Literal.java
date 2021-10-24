@@ -35,8 +35,7 @@ public class Literal extends Primary
     // Reporting
     public void report(int sh)
     {
-        Entity.doShift(sh);
-        System.out.println(value);
+        title("LITERAL "+value,sh);
     }
 
 }

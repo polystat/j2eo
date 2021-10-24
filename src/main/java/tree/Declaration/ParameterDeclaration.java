@@ -1,5 +1,6 @@
 package tree.Declaration;
 
+import com.sun.source.tree.EmptyStatementTree;
 import lexer.Token;
 import tree.*;
 import tree.Modifiers;
@@ -72,6 +73,9 @@ public class ParameterDeclaration extends Declaration
     // Reporting
     public void report(int sh)
     {
+        title("PARAMETER "+name,sh);
+        if ( super.modifiers != null ) super.modifiers.report(sh+Entity.shift);
+        if ( super.type != null ) super.type.report(sh+ Entity.shift);
 
     }
 

@@ -23,6 +23,10 @@ public class ParameterDeclarations extends Entity
     // Reporting
     public void report(int sh)
     {
+        for (ParameterDeclaration p: parameters)
+        {
+            p.report(sh);
+        }
     }
 
 }
