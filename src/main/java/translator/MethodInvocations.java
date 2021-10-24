@@ -21,10 +21,9 @@ public class MethodInvocations {
         return new EOCopy(
                 new EODot(Optional.empty(), methodInvocation.name),
                 methodInvocation.arguments.arguments.stream()
-                        .map(expression -> new EOAnonExpr(new EODot(Optional.empty(), "not implemented")))
+                        .map(Expressions::mapExpression)
                         .collect(Collectors.toList())
         );
-        // expression -> Expressions.mapExpresion(expression)
         // Optional.empty() in EODot will be removed
     }
 }

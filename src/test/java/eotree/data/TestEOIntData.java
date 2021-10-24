@@ -17,6 +17,6 @@ public class TestEOIntData {
     public void TestGenerateEONonZeroIndent() {
         var f = new EOIntData(42);
 
-        assertEquals(f.generateEO(1), "42");
+        assertEquals(f.generateEO(1), "  42");
     }
 }

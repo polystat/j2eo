@@ -22,7 +22,7 @@ public class TestEOCopy {
                         )
                 )
         );
-        assertEquals("name arg1 arg2", f.generateEO(0));
+        assertEquals("name\n  arg1\n  arg2", f.generateEO(0));
     }
 
     @Test
