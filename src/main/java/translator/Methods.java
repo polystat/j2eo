@@ -4,6 +4,7 @@ import eotree.*;
 import tree.Declaration.MethodDeclaration;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
@@ -14,7 +15,7 @@ public class Methods {
         return new EOBndExpr(
                 new EOObject(
                         // Non-vararg parameters
-                        dec.parameters != null ?
+                        dec.parameters != null && !dec.name.equals("main") ? // Exclude 'String[] args' fon now
                                 dec.parameters.parameters.stream()
                                         .filter(param -> !param.signEllipsis)
                                         .map(param -> new EOBndName(param.name))
@@ -32,9 +33,11 @@ public class Methods {
                                 new EOBndExpr(
                                         new EOCopy(
                                                 new EODot(Optional.empty(), "seq"),
+                                                dec.methodBody != null ?
                                                 dec.methodBody.block.blockStatements.stream()
                                                         .map(Statements::mapBlockStatement)
-                                                        .collect(Collectors.toList())
+                                                        .collect(Collectors.toList()) :
+                                                        Collections.emptyList()
                                         ),
                                         new EOBndName("@")
                                 )

@@ -133,6 +133,7 @@
 %define api.parser.public
 %define api.package {parser}
 %define api.value.type {Entity}
+%define parse.error detailed
 
 %code imports { import lexer.*; }
 %code imports { import tree.*; }
@@ -320,7 +321,7 @@ Package
 /////// Java modules are not supported (yet)
 ///////
 Module
-    : ModifierSeqOpt MODULE CompoundName LBRACE ModuleDirectiveSeqOpt RBRACE { $$ = null; }  // not implemented
+    : /*ModifierSeqOpt*/ MODULE CompoundName LBRACE ModuleDirectiveSeqOpt RBRACE { $$ = null; }  // not implemented
     ;
 
 ImportDeclarationSeqOpt
@@ -453,8 +454,8 @@ ClassDeclaration
     ;
 
 NormalClassDeclaration
-    : /*ModifierSeqOpt*/ CLASS IDENTIFIER TypeParametersOpt ClassExtendsOpt ClassImplementsOpt ClassBody
-                              { $$ = new NormalClassDeclaration($2,$3,$4,$5,$6); }
+    : ModifierSeqOpt CLASS IDENTIFIER TypeParametersOpt ClassExtendsOpt ClassImplementsOpt ClassBody
+                              { $$ = new NormalClassDeclaration($3,$4,$5,$6,$7); }
     ;
 
 TypeParametersOpt
@@ -1158,8 +1159,11 @@ ArrayAccess
 
 MethodInvocation
     :                                             IDENTIFIER Arguments { $$ = new MethodInvocation(null,false,null,$1,$2); }
-    | CompoundName           DOT TypeArgumentsOpt IDENTIFIER Arguments { var ref = new SimpleReference($1);
-                                                                         $$ = new MethodInvocation(ref,false,$3,$4,$5); }
+    | IDENTIFIER           DOT TypeArgumentsOpt CompoundName Arguments { var ref = new SimpleReference(new CompoundName($1.image));
+                                                                         for (String s : $4.names) ref.compoundName.add(s);
+                                                                         ref.compoundName.names.remove(ref.compoundName.names.size() - 1);
+                                                                         $$ = new MethodInvocation(ref,false,$3,
+                                                                         new Token(TokenCode.Identifier, $4.names.get($4.names.size() - 1)),$5); }
     | Primary                DOT TypeArgumentsOpt IDENTIFIER Arguments { $$ = new MethodInvocation($1,false,$3,$4,$5); }
     |                  SUPER DOT TypeArgumentsOpt IDENTIFIER Arguments { $$ = new MethodInvocation(null,true,$3,$4,$5); }
     | CompoundName DOT SUPER DOT TypeArgumentsOpt IDENTIFIER Arguments { var ref = new SimpleReference($1);
