@@ -36,10 +36,16 @@ bugs in our code. It is also much easier to work with abstraction layer than wit
 
 ## Usage
 
-> ⚠️ NOTE: for now, the entire pipeline is not available. Project is Work In Progress.
+To build, run:
 
 ```shell
-java -jar j2eo.jar <source package directory> -o <output directory>
+./build.sh
+```
+
+To execute, run:
+
+```shell
+java -jar j2eo.jar <source .java file> -o <output .eo file>
 ```
 
 ---

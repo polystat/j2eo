@@ -42,7 +42,8 @@ val fatJar = task("fatJar", type = Jar::class) {
     manifest {
         attributes["Main-Class"] = "main.Main" // fully qualified class name of default main class
     }
-//    from(configurations.runtime.map({ if (it.isDirectory) it else zipTree(it) }))
+    // Include dependencies
+    from(configurations.runtimeClasspath.get().map { if (it.isDirectory) it else zipTree(it) })
     with(tasks["jar"] as CopySpec)
 }
 
