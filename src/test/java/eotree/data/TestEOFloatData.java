@@ -17,6 +17,6 @@ public class TestEOFloatData {
     public void TestGenerateEONonZeroIndent() {
         var f = new EOFloatData(3.14f);
 
-        assertEquals(f.generateEO(1), "3.14");
+        assertEquals(f.generateEO(1), "  3.14");
     }
 }

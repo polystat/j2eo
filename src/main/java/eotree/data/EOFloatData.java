@@ -15,6 +15,6 @@ public class EOFloatData extends EOData {
 
     @Override
     public String generateEO(int indent) {
-        return f.toString();
+        return indent(indent) + f.toString();
     }
 }
