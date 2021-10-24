@@ -41,8 +41,8 @@ jobs:
           java-version: 16
 
       - run: |
-        sudo apt-get install flex
-        sudo apt-get install flex
+          sudo apt-get install flex
+          sudo apt-get install flex
 
       - uses: gradle/gradle-build-action@v1
         with:
