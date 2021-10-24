@@ -8,11 +8,6 @@ on:
   pull_request:
 
 jobs:
-  bison:
-    runs-on: ubuntu-latest
-    steps:
-      - run: sudo apt-get install flex
-      - run: sudo apt-get install bison
   gradle:
     strategy:
       matrix:
