@@ -16,6 +16,11 @@ jobs:
             macos-latest,
             windows-latest
         ]
+        os_name: [
+            'ubuntu',
+            'macos',
+            'windows'
+        ]
     runs-on: ${{ matrix.os }}
     steps:
       - uses: actions/checkout@v2
@@ -24,7 +29,7 @@ jobs:
         with:
           java-version: 16
       
-      - if: ${{ matrix.os }} == ubuntu-latest
+      - if: ${{ matrix.os_name }} == 'ubuntu'
         run: |
           sudo apt-get install flex
           sudo apt-get install bison
