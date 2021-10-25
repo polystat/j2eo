@@ -24,7 +24,7 @@ public class EOObject extends EOExpr {
                        .map(attr -> attr.generateEO(indent))
                        .collect(Collectors.joining(" ")) +
                (varargAttr
-                       .map(attr -> " " + attr.generateEO(indent) + "...")
+                       .map(attr -> (freeAttrs.size() > 0 ? " " : "") + attr.generateEO(indent) + "...")
                        .orElse("")) +
                "]\n" +
                bndAttrs.stream()
