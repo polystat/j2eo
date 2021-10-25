@@ -138,7 +138,8 @@ public class TestJ2EO {
 
     private static DynamicTest testFile(Path path) {
         return DynamicTest.dynamicTest(
-                path.getFileName().toString(), () -> {
+                path.getParent().getFileName().toString() + "/" +
+                        path.getFileName().toString(), () -> {
                     // Compile and execute Java file
                     String javaExecOutput = compileAndExecuteJava(path);
 
