@@ -15,7 +15,7 @@ public class EOCopy extends EOExpr {
     @Override
     public String generateEO(int indent) {
         return trg.generateEO(indent) + args.stream()
-                .map(arg -> " " + arg.generateEO(indent + 1))
+                .map(arg -> "\n" + arg.generateEO(indent + 1))
                 .collect(Collectors.joining());
     }
 }

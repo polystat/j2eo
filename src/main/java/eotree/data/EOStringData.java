@@ -15,6 +15,6 @@ public class EOStringData extends EOData {
 
     @Override
     public String generateEO(int indent) {
-        return "\"" + str + "\"";
+        return indent(indent) + "\"" + str + "\"";
     }
 }

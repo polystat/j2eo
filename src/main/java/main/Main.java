@@ -47,14 +47,14 @@ public class Main {
 
 
         // Read, parse, map and print file
-        Scanner.read(inputFilepath);
         Scanner    scanner = new Scanner();
+        scanner.read(inputFilepath);
         JavaParser parser  = new JavaParser(scanner);
         try {
             boolean result = parser.parse();
             System.out.println(result ? "SUCCESS" : "FAIL");
             if (parser.ast != null) {
-                parser.ast.report(0);
+                //parser.ast.report(0);
                 var eoProgram  = Translator.translate(parser.ast);
                 var targetText = eoProgram.generateEO(0);
 

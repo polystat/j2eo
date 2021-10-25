@@ -28,6 +28,6 @@ public class EOProgram extends EONode {
                "\n" +
                bnds.stream()
                        .map(bnd -> bnd.generateEO(indent))
-                       .collect(Collectors.joining("\n"));
+                       .collect(Collectors.joining("\n")) + "\n";
     }
 }
