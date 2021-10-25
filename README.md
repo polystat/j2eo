@@ -34,6 +34,17 @@ bugs in our code. It is also much easier to work with abstraction layer than wit
 
 ---
 
+## Requirements
+
+In order to compile project from source code, you need to have
+
+- Bison 3.7+
+- Java 15+
+
+installed. Bison is currently bundled with the project for Windows and macOS. On Linux, you may use package manager to easily install Bison (but check the Bison version; some distos, like Ubuntu, like to ship outdated versions of software).
+
+---
+
 ## Usage
 
 To build, run:
