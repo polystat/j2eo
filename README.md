@@ -10,30 +10,6 @@ This is a translator of Java to [EOLANG](https://www.eolang.org).
 
 ---
 
-## Motivation
-
-This project is a part of Polystat project, the goal of which is to statically analyze different languages using EOLANG,
-the implementation of phi-calculus. In order to do that, the first step is to convert source language into EO. This
-particular repository contains translator from Java to EO.
-
----
-
-## Decisions
-
-**Q**: Why do we implement yet another Java parser?
-
-**A**: Publicly available parsers only support older versions of Java, while we aim to support the latest version (
-currently 16). Thus, we had to create our own parser.
-
----
-
-**Q**: Why do we implement EO AST?
-
-**A**: Working with AST instead of raw strings allows utilization of Java compiler's type checking to minimize amount of
-bugs in our code. It is also much easier to work with abstraction layer than with strings.
-
----
-
 ## Requirements
 
 In order to compile project from source code, you need to have
@@ -58,6 +34,30 @@ To execute, run:
 ```shell
 java -jar j2eo.jar <source .java file> -o <output .eo file>
 ```
+
+---
+
+## Motivation
+
+This project is a part of Polystat project, the goal of which is to statically analyze different languages using EOLANG,
+the implementation of phi-calculus. In order to do that, the first step is to convert source language into EO. This
+particular repository contains translator from Java to EO.
+
+---
+
+## Decisions
+
+**Q**: Why do we implement yet another Java parser?
+
+**A**: Publicly available parsers only support older versions of Java, while we aim to support the latest version (
+currently 16). Thus, we had to create our own parser.
+
+---
+
+**Q**: Why do we implement EO AST?
+
+**A**: Working with AST instead of raw strings allows utilization of Java compiler's type checking to minimize amount of
+bugs in our code. It is also much easier to work with abstraction layer than with strings.
 
 ---
 
