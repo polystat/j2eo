@@ -75,6 +75,7 @@ tasks.getByName("build") {
 
 tasks.getByName<Test>("test") {
     useJUnitPlatform()
+    systemProperty("candidates", System.getProperty("candidates"))
 }
 
 /**

@@ -31,7 +31,13 @@ public class TestJ2EO {
 
     @BeforeAll
     static void setup() {
+        boolean testCandidates = System.getProperty("candidates") != null &&
+                System.getProperty("candidates").equals("true");
+        System.out.println("Testing candidates:  " + testCandidates);
         String testFolderPath = "src" + sep + "test" + sep + "resources";
+        if (testCandidates) {
+            testFolderPath += sep + "test_candidates";
+        }
         File file = new File(testFolderPath);
         testFolderRoot = file.getAbsolutePath();
     }
@@ -102,15 +108,6 @@ public class TestJ2EO {
     }
 
     @TestFactory
-    Collection<DynamicTest> zerothTest() {
-       return new ArrayList<>() {
-           {
-                add(testFile(Paths.get(testFolderRoot + sep + ".." + sep + "TEST0.java")));
-           }
-       };
-    }
-
-    @TestFactory
     Collection<DynamicTest> simpleTest() {
         return new ArrayList<>() {
             {
@@ -127,6 +124,7 @@ public class TestJ2EO {
                     .filter(Files::isRegularFile)
                     .filter(TestJ2EO::isReadyTest)
                     .filter(TestJ2EO::isNotClassFile)
+                    .filter(TestJ2EO::isJavaFile)
                     .collect(Collectors.toList())) {
                 chapterTests.add(testFile(p));
             }
@@ -142,6 +140,8 @@ public class TestJ2EO {
                         path.getFileName().toString(), () -> {
                     // Compile and execute Java file
                     String javaExecOutput = compileAndExecuteJava(path);
+                    System.out.println("javaExecOutput = \n" + javaExecOutput);
+                    System.out.flush();
 
                     // Run parser
                     CompilationUnit unit = parseAndBuildAST(path);
@@ -149,10 +149,12 @@ public class TestJ2EO {
                     // EO tree to string
                     String eoCode = translateToEO(unit);
                     System.out.println("eoCode = \n" + eoCode);
+                    System.out.flush();
 
                     // Compile and execute translated to EO Java file
                     String eoExecOutput = compileAndExecuteEO(eoCode, path);
-                    System.out.println("eoExecOutput = \n" + eoExecOutput);
+                    //System.out.println("eoExecOutput = \n" + eoExecOutput);
+                    //System.out.flush();
 
                     // Assert equal execution outputs
                     assertEquals(javaExecOutput, eoExecOutput);
@@ -164,12 +166,35 @@ public class TestJ2EO {
         StringBuilder output = new StringBuilder();
         try {
             // Compile .java file
-            Process compileProcess = Runtime.getRuntime().exec("javac " + path.toString());
+            String fileName = path.getFileName().toString().split("\\.")[0];
+            Path subFolder = Paths.get(path.getParent().toString(), fileName + "_java");
+            if (Files.exists(subFolder)) {
+                deleteDirTree(subFolder);
+            }
+            Files.createDirectories(subFolder);
+            Files.copy(path, Paths.get(subFolder.toString(), path.getFileName().toString()));
+            ProcessBuilder compilePb = new ProcessBuilder(
+                    "javac",
+                    "-d",
+                    subFolder.toString(),
+                    path.toString()
+            );
+            compilePb.directory(new File(subFolder.toString()));
+            compilePb.redirectErrorStream(true);
+            Process compileProcess = compilePb.start();
             compileProcess.waitFor();
+            compileProcess.destroy();
 
             // Execute .class file
-            String folder = path.toString().substring(0, path.toString().lastIndexOf(File.separatorChar) + 1);
-            Process execProcess = Runtime.getRuntime().exec("java -cp " + folder + " " + path.toString());
+            ProcessBuilder execPb = new ProcessBuilder(
+                    "java",
+                    "-cp",
+                    subFolder.toString() + sep,
+                    fileName
+            );
+            execPb.directory(new File(subFolder.toString()));
+            execPb.redirectErrorStream(true);
+            Process execProcess = execPb.start();
 
             // Receive output
             BufferedReader stdInput = new BufferedReader(new
@@ -179,17 +204,10 @@ public class TestJ2EO {
                 output.append(s).append(System.lineSeparator());
             }
             execProcess.waitFor();
+            execProcess.destroy();
 
             // Remove .class files
-            for (Path p : Files
-                    .walk(Paths.get(folder))
-                    .filter(Files::isRegularFile)
-                    .filter(TestJ2EO::isClassFile)
-                    .collect(Collectors.toList())) {
-                if (!p.toFile().delete()) {
-                    System.err.println("Unable to delete file/dir: \"" + p.toString() + "\"");
-                }
-            }
+            deleteDirTree(subFolder);
 
         } catch (IOException | InterruptedException e) {
             e.printStackTrace();
@@ -232,12 +250,15 @@ public class TestJ2EO {
      */
     private static String compileAndExecuteEO(String eoCode, Path testFilePath) {
         StringBuilder eoExecOut = new StringBuilder();
+        String eoFileName = testFilePath.getFileName().toString().split("\\.")[0];
+        Path testFolderPath = Paths.get(testFilePath.getParent().toString(), eoFileName + "_eo");
         try {
             // Setup temporary folders and files
-            String eoFileName = testFilePath.getFileName().toString();
-            eoFileName = eoFileName.substring(0, eoFileName.lastIndexOf('.'));
+            if (Files.exists(testFolderPath)) {
+                deleteDirTree(testFolderPath);
+            }
             Path eoExecDir = Files.createDirectories(
-                    Paths.get(Paths.get(testFilePath.getParent().toString(), eoFileName).toString(), "eo"));
+                        Paths.get(testFolderPath.toString(), "eo"));
             Path eoFilePath = Files.createFile(Paths.get(eoExecDir.toString() + sep + "class_" + eoFileName + ".eo"));
             Files.copy(
                     Paths.get(testFolderRoot, "eo_execution_pom", "pom.xml"),
@@ -262,8 +283,10 @@ public class TestJ2EO {
                 String m;
                 while ((m = mvnStdInput.readLine()) != null) {
                     System.out.println(m);
+                    System.out.flush();
                 }
                 compileProcess.waitFor();
+                compileProcess.destroy();
 
                 // Execute Java ".class"es
                 ProcessBuilder execPb = new ProcessBuilder(
@@ -286,31 +309,47 @@ public class TestJ2EO {
                 String s;
                 while ((s = stdInput.readLine()) != null) {
                     eoExecOut.append(s).append(System.lineSeparator());
+                    System.out.println(s);
+                    System.out.flush();
                 }
                 execProcess.waitFor();
+                execProcess.destroy();
 
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }
 
             // Clean everything out
-            Files.walkFileTree(eoExecDir.getParent(), new SimpleFileVisitor<>() {
-                @Override
-                public FileVisitResult postVisitDirectory(Path dir, IOException exc) throws IOException {
-                    Files.delete(dir);
-                    return FileVisitResult.CONTINUE;
-                }
-                @Override
-                public FileVisitResult visitFile(Path file, BasicFileAttributes attrs) throws IOException {
-                    Files.delete(file);
-                    return FileVisitResult.CONTINUE;
-                }
-            });
+            deleteDirTree(eoExecDir.getParent());
 
-        } catch (IOException e) {
+        } catch (Exception e) {
             e.printStackTrace();
         }
+
+        // Double check for delete, so that no obsolete files are created after test fail
+        if (Files.exists(testFolderPath)) {
+            try {
+                deleteDirTree(testFolderPath);
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
         return eoExecOut.isEmpty() ? "not passed" : eoExecOut.toString();
+    }
+
+    private static void deleteDirTree(Path path) throws IOException {
+        Files.walkFileTree(path, new SimpleFileVisitor<>() {
+            @Override
+            public FileVisitResult postVisitDirectory(Path dir, IOException exc) throws IOException {
+                Files.delete(dir);
+                return FileVisitResult.CONTINUE;
+            }
+            @Override
+            public FileVisitResult visitFile(Path file, BasicFileAttributes attrs) throws IOException {
+                Files.delete(file);
+                return FileVisitResult.CONTINUE;
+            }
+        });
     }
 
     private static boolean isReadyTest(Path path) {
@@ -319,6 +358,10 @@ public class TestJ2EO {
 
     private static boolean isClassFile(Path path) {
         return path.toString().endsWith(".class");
+    }
+
+    private static boolean isJavaFile(Path path) {
+        return path.toString().endsWith(".java");
     }
 
     private static boolean isNotClassFile(Path path) {
