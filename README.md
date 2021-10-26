@@ -35,6 +35,13 @@ To execute, run:
 java -jar j2eo.jar <source .java file> -o <output .eo file>
 ```
 
+For example,
+```shell
+java -jar j2eo.jar src/test/TEST0.java -o output.eo
+# Output may be displayed with 
+cat output.eo
+```
+
 ---
 
 ## Motivation
