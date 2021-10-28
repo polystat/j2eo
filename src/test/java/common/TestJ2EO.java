@@ -2,23 +2,22 @@ package common;
 
 import eotree.EOProgram;
 import lexer.Scanner;
-import org.junit.jupiter.api.BeforeAll;
-import org.junit.jupiter.api.DynamicTest;
-import org.junit.jupiter.api.TestFactory;
+import org.junit.jupiter.api.*;
 import org.junit.jupiter.api.parallel.Execution;
 import org.junit.jupiter.api.parallel.ExecutionMode;
 import parser.JavaParser;
 import translator.Translator;
 import tree.Compilation.CompilationUnit;
 
-import java.io.BufferedReader;
-import java.io.File;
-import java.io.IOException;
-import java.io.InputStreamReader;
+import java.io.*;
 import java.nio.file.*;
 import java.nio.file.attribute.BasicFileAttributes;
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.LinkedList;
+import java.util.logging.Level;
+import java.util.logging.LogManager;
+import java.util.logging.Logger;
 import java.util.stream.Collectors;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -28,12 +27,16 @@ public class TestJ2EO {
 
     private static String testFolderRoot;
     private static final char sep = File.separatorChar;
+    private static final Logger logger = Logger.getLogger("org.eolang.j2eo.test");
 
     @BeforeAll
     static void setup() {
         boolean testCandidates = System.getProperty("candidates") != null &&
                 System.getProperty("candidates").equals("true");
-        System.out.println("Testing candidates:  " + testCandidates);
+
+        if (testCandidates)
+            logger.log(Level.INFO, "Executing candidate tests!");
+
         String testFolderPath = "src" + sep + "test" + sep + "resources";
         if (testCandidates) {
             testFolderPath += sep + "test_candidates";
@@ -138,23 +141,26 @@ public class TestJ2EO {
         return DynamicTest.dynamicTest(
                 path.getParent().getFileName().toString() + "/" +
                         path.getFileName().toString(), () -> {
+
+                    logger.info("-- Current test file: " + path.toString());
+
                     // Compile and execute Java file
                     String javaExecOutput = compileAndExecuteJava(path);
-                    System.out.println("javaExecOutput = \n" + javaExecOutput);
-                    System.out.flush();
 
                     // Run parser
                     CompilationUnit unit = parseAndBuildAST(path);
+                    if (unit == null) {
+                        logger.severe("Java parsing failed!!!");
+                    }
 
                     // EO tree to string
                     String eoCode = translateToEO(unit);
-                    System.out.println("eoCode = \n" + eoCode);
-                    System.out.flush();
+                    if (eoCode != null) {
+                        logger.info("-- Translation output --" + System.lineSeparator() + eoCode);
+                    }
 
                     // Compile and execute translated to EO Java file
                     String eoExecOutput = compileAndExecuteEO(eoCode, path);
-                    //System.out.println("eoExecOutput = \n" + eoExecOutput);
-                    //System.out.flush();
 
                     // Assert equal execution outputs
                     assertEquals(javaExecOutput, eoExecOutput);
@@ -182,8 +188,17 @@ public class TestJ2EO {
             compilePb.directory(new File(subFolder.toString()));
             compilePb.redirectErrorStream(true);
             Process compileProcess = compilePb.start();
+            BufferedReader stdCompInput = new BufferedReader(new
+                    InputStreamReader(compileProcess.getInputStream()));
+            String sc;
+            StringBuilder javacSb = new StringBuilder();
+            while ((sc = stdCompInput.readLine()) != null) {
+                javacSb.append(sc).append(System.lineSeparator()); // Java compilation output (if any)
+            }
             compileProcess.waitFor();
             compileProcess.destroy();
+
+            logger.info("-- Java compilation output --" + System.lineSeparator() + javacSb.toString());
 
             // Execute .class file
             ProcessBuilder execPb = new ProcessBuilder(
@@ -206,11 +221,14 @@ public class TestJ2EO {
             execProcess.waitFor();
             execProcess.destroy();
 
+            logger.info("-- Java execution output --" + System.lineSeparator() + output.toString());
+
             // Remove .class files
             deleteDirTree(subFolder);
 
         } catch (IOException | InterruptedException e) {
             e.printStackTrace();
+            logger.throwing(TestJ2EO.class.getName(), "compileAndExecuteJava", e);
         }
         return output.toString();
     }
@@ -221,17 +239,32 @@ public class TestJ2EO {
         JavaParser parser = new JavaParser(scanner);
         try {
             if (!parser.parse()) {
-                System.err.println("Unable to parse a .java file: \"" + path.toString() + "\"");
+                logger.severe("Unable to parse a .java file: \"" + path.toString() + "\"");
             }
         } catch (IOException e) {
             e.printStackTrace();
+            logger.throwing(TestJ2EO.class.getName(), "parseAndBuildAST", e);
         }
         return parser.ast;
     }
 
     private static String translateToEO(CompilationUnit unit) {
-        EOProgram eoProgram = Translator.translate(unit);
-        return eoProgram.generateEO(0);
+        if (unit == null) {
+            logger.severe("Given AST tree root is null!!! Aborting the translation...");
+            return "abort since parsing failed";
+        }
+        EOProgram eoProgram = null;
+        try {
+            eoProgram = Translator.translate(unit);
+        } catch (Exception e) {
+            logger.throwing(TestJ2EO.class.getName(), "translateToEO", e);
+        }
+        if (eoProgram == null) {
+            logger.severe("Translation failed!!!");
+            return null;
+        } else {
+            return eoProgram.generateEO(0);
+        }
     }
 
     /***
@@ -281,12 +314,14 @@ public class TestJ2EO {
                 BufferedReader mvnStdInput = new BufferedReader(new
                         InputStreamReader(compileProcess.getInputStream()));
                 String m;
+                StringBuilder mvnSb = new StringBuilder();
                 while ((m = mvnStdInput.readLine()) != null) {
-                    System.out.println(m);
-                    System.out.flush();
+                    mvnSb.append(m).append(System.lineSeparator());
                 }
                 compileProcess.waitFor();
                 compileProcess.destroy();
+
+                logger.info(" -- EO compilation output --" + System.lineSeparator() + mvnSb.toString());
 
                 // Execute Java ".class"es
                 ProcessBuilder execPb = new ProcessBuilder(
@@ -309,14 +344,15 @@ public class TestJ2EO {
                 String s;
                 while ((s = stdInput.readLine()) != null) {
                     eoExecOut.append(s).append(System.lineSeparator());
-                    System.out.println(s);
-                    System.out.flush();
                 }
                 execProcess.waitFor();
                 execProcess.destroy();
 
+                logger.info("-- EO execution output --" + System.lineSeparator() + eoExecOut.toString());
+
             } catch (InterruptedException e) {
                 e.printStackTrace();
+                logger.throwing(TestJ2EO.class.getName(), "compileAndExecuteEO", e);
             }
 
             // Clean everything out
@@ -324,6 +360,7 @@ public class TestJ2EO {
 
         } catch (Exception e) {
             e.printStackTrace();
+            logger.throwing(TestJ2EO.class.getName(), "compileAndExecuteEO", e);
         }
 
         // Double check for delete, so that no obsolete files are created after test fail

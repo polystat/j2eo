@@ -21,7 +21,7 @@ public class Scanner implements JavaParser.Lexer
         }
         catch(Exception exc)
         {
-            System.out.println(exc.getMessage());
+            System.err.println(exc.getMessage());
             return false;
         }
     }
@@ -57,7 +57,7 @@ public class Scanner implements JavaParser.Lexer
     {
         lastToken = getToken();
 
-        System.out.println(lastToken.code);
+        //System.out.println(lastToken.code);
 
         return lastToken.code.value();
     }
@@ -69,7 +69,7 @@ public class Scanner implements JavaParser.Lexer
 
     @Override
     public void yyerror(String msg) {
-        System.out.println(msg);
+        System.err.println(msg);
     }
 
     /////////////////////////////////////////////////////////////
