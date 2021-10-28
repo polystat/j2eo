@@ -29,7 +29,7 @@ jobs:
 
       - uses: gradle/gradle-build-action@v1
         with:
-          arguments: test -Dcandidates=false
+          arguments: test --info
 
   gradle_ubuntu:
     runs-on: ubuntu-latest
@@ -55,4 +55,4 @@ jobs:
 
       - uses: gradle/gradle-build-action@v1
         with:
-          arguments: test -Dcandidates=false
+          arguments: test --info
