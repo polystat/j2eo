@@ -14,9 +14,9 @@ This is a translator of **Java** programming language to [EOLANG](https://www.eo
 ## Usage
   
 1. Make sure you have installed:
-    - Java 16 or higher (make sure command `java -version` shows 16+ version of Java in terminal if you have multiple Java version installed)
-    - Maven 3.3 or higher
-    - Bison 3.7 or higher (make sure the path to Bison executable is added to the `PATH` environmental variable)
+    - **Java 16+** (make sure command `java -version` shows 16+ version of Java in terminal if you have multiple Java version installed)
+    - **Maven 3.3+** (be aware of [possible conflicts](https://bugs.debian.org/cgi-bin/bugreport.cgi?bug=980467) of the latest versions of Maven and Java on some OSs)
+    - **Bison 3.7+** [3.7.5 recommended] (make sure the path to Bison executable is added to the `PATH` environmental variable)
 2. Clone the repo into your folder:
 
     HTTPS:
@@ -45,7 +45,7 @@ This is a translator of **Java** programming language to [EOLANG](https://www.eo
 
     For example,
     ```shell
-    java -jar j2eo.jar src/test/TEST0.java -o output.eo
+    java -jar j2eo.jar src/test/resources/SimpleTest.java -o output.eo
 
     # Output may be displayed with 
     cat output.eo
