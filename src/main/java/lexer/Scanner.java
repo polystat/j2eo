@@ -11,7 +11,11 @@ public class Scanner implements JavaParser.Lexer
     private static String sourcePath;
     private char[] sourceText;
 
-    public boolean read(String path)
+    public void read(String src) {
+        sourceText = src.toCharArray();
+    }
+
+    public boolean readFile(String path)
     {
         sourcePath = path;
         try {

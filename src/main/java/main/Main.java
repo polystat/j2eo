@@ -1,16 +1,18 @@
 package main;
 
-import lexer.*;
+import lexer.Scanner;
 import org.apache.commons.cli.*;
-import parser.*;
+import parser.JavaParser;
 import translator.Translator;
 
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.io.PrintWriter;
+import java.nio.charset.StandardCharsets;
 
 public class Main {
-    public static void main(String[] args) throws FileNotFoundException {
+    public static void main(String[] args) throws IOException {
         // Setup command line argument parser
         Options options = new Options();
 
@@ -26,7 +28,7 @@ public class Main {
         try {
             cmd = cmdLineParser.parse(options, args);
         } catch (ParseException e) {
-            System.out.println(e.getMessage());
+            e.printStackTrace();
             printUsage(formatter, options);
             System.exit(1);
         }
@@ -42,14 +44,21 @@ public class Main {
         // Check if source file exists
         String inputFilepath = cmd.getArgList().get(0);
         var    f             = new File(inputFilepath);
-        if (!f.exists())
+        if (!inputFilepath.equals("-") && !f.exists())
             throw new FileNotFoundException("No file found at \"" + inputFilepath + "\"");
 
 
         // Read, parse, map and print file
-        Scanner    scanner = new Scanner();
-        scanner.read(inputFilepath);
-        JavaParser parser  = new JavaParser(scanner);
+        Scanner scanner = new Scanner();
+        if (inputFilepath.equals("-")) {
+            // Handle stdin case
+            var src = new String(System.in.readAllBytes(), StandardCharsets.UTF_8);
+            scanner.read(src);
+        } else {
+            // Handle file case
+            scanner.readFile(inputFilepath);
+        }
+        JavaParser parser = new JavaParser(scanner);
         try {
             boolean result = parser.parse();
             System.out.println(result ? "SUCCESS" : "FAIL");
@@ -77,6 +86,6 @@ public class Main {
     }
 
     private static void printUsage(HelpFormatter formatter, Options options) {
-        formatter.printHelp("java -jar J2EO.jar [OPTIONS...] <input file>", options);
+        formatter.printHelp("java -jar J2EO.jar [OPTIONS...] <input file or - for stdin>", options);
     }
 }

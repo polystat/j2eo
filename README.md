@@ -12,6 +12,23 @@ This is a translator of **Java** programming language to [EOLANG](https://www.eo
 ---
 
 ## Usage
+
+### With Docker
+
+To use J2EO wrapped into Docker image:
+
+1. Build image
+```shell
+docker build -t polystat/j2eo:latest -f docker/Dockerfile .  
+```
+2. Use image
+```shell
+cat <.java filepath> | docker run --rm -i polystat/j2eo java -jar j2eo.jar -
+```
+
+---
+
+### Without docker
   
 1. Make sure you have installed:
     - **Java 16+** (make sure command `java -version` shows 16+ version of Java in terminal if you have multiple Java version installed)

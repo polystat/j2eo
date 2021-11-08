@@ -1,0 +1,10 @@
+.github
+.gradle
+.idea
+bin
+build
+docker
+docs
+out
+share
+j2eo.jar
