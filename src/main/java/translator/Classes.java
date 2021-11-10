@@ -3,8 +3,7 @@ package translator;
 import eotree.*;
 import tree.Declaration.*;
 
-import java.util.ArrayList;
-import java.util.Optional;
+import java.util.*;
 import java.util.stream.Collectors;
 
 import static util.ListUtils.concat;
@@ -42,12 +41,14 @@ public class Classes {
 
 
                                 ),
-
+                                clsDec.body != null ?
                                 clsDec.body.declarations.stream()
                                         .map(Declarations::mapDeclaration)
-                                        .collect(Collectors.toList()))
+                                        .collect(Collectors.toList()) :
+                                        new ArrayList<>()
+                                )
                 ),
-                new EOBndName(clsDec.name)
+                new EOBndName("class_" + clsDec.name)
         );
     }
 

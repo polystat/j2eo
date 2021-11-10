@@ -10,6 +10,40 @@ This is a translator of Java to [EOLANG](https://www.eolang.org).
 
 ---
 
+## Requirements
+
+In order to compile project from source code, you need to have
+
+- Bison 3.7+
+- Java 15+
+
+installed. Bison is currently bundled with the project for Windows and macOS. On Linux, you may use package manager to easily install Bison (but check the Bison version; some distos, like Ubuntu, like to ship outdated versions of software).
+
+---
+
+## Usage
+
+To build, run:
+
+```shell
+./build.sh
+```
+
+To execute, run:
+
+```shell
+java -jar j2eo.jar <source .java file> -o <output .eo file>
+```
+
+For example,
+```shell
+java -jar j2eo.jar src/test/TEST0.java -o output.eo
+# Output may be displayed with 
+cat output.eo
+```
+
+---
+
 ## Motivation
 
 This project is a part of Polystat project, the goal of which is to statically analyze different languages using EOLANG,
@@ -31,22 +65,6 @@ currently 16). Thus, we had to create our own parser.
 
 **A**: Working with AST instead of raw strings allows utilization of Java compiler's type checking to minimize amount of
 bugs in our code. It is also much easier to work with abstraction layer than with strings.
-
----
-
-## Usage
-
-To build, run:
-
-```shell
-./build.sh
-```
-
-To execute, run:
-
-```shell
-java -jar j2eo.jar <source .java file> -o <output .eo file>
-```
 
 ---
 

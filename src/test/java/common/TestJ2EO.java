@@ -138,7 +138,8 @@ public class TestJ2EO {
 
     private static DynamicTest testFile(Path path) {
         return DynamicTest.dynamicTest(
-                path.getFileName().toString(), () -> {
+                path.getParent().getFileName().toString() + "/" +
+                        path.getFileName().toString(), () -> {
                     // Compile and execute Java file
                     String javaExecOutput = compileAndExecuteJava(path);
 
@@ -148,15 +149,6 @@ public class TestJ2EO {
                     // EO tree to string
                     String eoCode = translateToEO(unit);
                     System.out.println("eoCode = \n" + eoCode);
-
-                    // FIXME
-                    {
-                        eoCode = "+alias org.eolang.io.stdout" + System.lineSeparator();
-                        eoCode += System.lineSeparator();
-                        eoCode += "[args...] > main" + System.lineSeparator();
-                        eoCode += "  stdout > @" + System.lineSeparator();
-                        eoCode += "    \"passed\\n\"" + System.lineSeparator();
-                    }
 
                     // Compile and execute translated to EO Java file
                     String eoExecOutput = compileAndExecuteEO(eoCode, path);
@@ -246,7 +238,7 @@ public class TestJ2EO {
             eoFileName = eoFileName.substring(0, eoFileName.lastIndexOf('.'));
             Path eoExecDir = Files.createDirectories(
                     Paths.get(Paths.get(testFilePath.getParent().toString(), eoFileName).toString(), "eo"));
-            Path eoFilePath = Files.createFile(Paths.get(eoExecDir.toString() + sep + "main.eo"));
+            Path eoFilePath = Files.createFile(Paths.get(eoExecDir.toString() + sep + "class_" + eoFileName + ".eo"));
             Files.copy(
                     Paths.get(testFolderRoot, "eo_execution_pom", "pom.xml"),
                     Paths.get(eoExecDir.getParent().toString() + sep + "pom.xml"));
@@ -281,7 +273,7 @@ public class TestJ2EO {
                                 "\"target/classes;target/eo-runtime.jar\"" :
                                 "target/classes:target/eo-runtime.jar"),
                         "org.eolang.Main",
-                        "main",
+                        "global",
                         (isWindows ? "%*" : "\"$@\"")
                 );
                 execPb.directory(new File(eoExecDir.getParent().toString()));
