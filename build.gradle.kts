@@ -5,6 +5,7 @@ import org.gradle.jvm.tasks.Jar
 
 plugins {
     java
+    jacoco
 }
 
 group = "org.eolang"
@@ -76,6 +77,11 @@ tasks.getByName("build") {
 tasks.getByName<Test>("test") {
     useJUnitPlatform()
     systemProperty("candidates", System.getProperty("candidates"))
+    finalizedBy(tasks.getByName("jacocoTestReport"))
+}
+
+tasks.getByName("jacocoTestReport") {
+    dependsOn(tasks.getByName<Test>("test")) // tests are required to run before generating the report
 }
 
 /**
