@@ -11,7 +11,11 @@ public class Scanner implements JavaParser.Lexer
     private static String sourcePath;
     private char[] sourceText;
 
-    public boolean read(String path)
+    public void read(String src) {
+        sourceText = src.toCharArray();
+    }
+
+    public boolean readFile(String path)
     {
         sourcePath = path;
         try {
@@ -22,7 +26,7 @@ public class Scanner implements JavaParser.Lexer
         }
         catch(Exception exc)
         {
-            System.out.println(exc.getMessage());
+            System.err.println(exc.getMessage());
             return false;
         }
     }
@@ -73,7 +77,7 @@ public class Scanner implements JavaParser.Lexer
 
     @Override
     public void yyerror(String msg) {
-        System.out.println(msg);
+        System.err.println(msg);
     }
 
     /////////////////////////////////////////////////////////////
