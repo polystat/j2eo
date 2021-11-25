@@ -28,7 +28,8 @@ public class PrimitiveType extends UnannotatedType
         super(null);
         this.typeCode = token.code;
 
-        System.out.println("Primitive type accepted");
+//      Entity.unAnnotatedTypeTaken = true;
+        if ( Entity.debug ) System.out.println("Primitive type accepted");
     }
 
     // Reporting

@@ -1,8 +1,8 @@
-/* A Bison parser, made by GNU Bison 3.7.6.  */
+/* A Bison parser, made by GNU Bison 3.7.4.  */
 
 /* Skeleton implementation for Bison LALR(1) parsers in Java
 
-   Copyright (C) 2007-2015, 2018-2021 Free Software Foundation, Inc.
+   Copyright (C) 2007-2015, 2018-2020 Free Software Foundation, Inc.
 
    This program is free software: you can redistribute it and/or modify
    it under the terms of the GNU General Public License as published by
@@ -15,7 +15,7 @@
    GNU General Public License for more details.
 
    You should have received a copy of the GNU General Public License
-   along with this program.  If not, see <https://www.gnu.org/licenses/>.  */
+   along with this program.  If not, see <http://www.gnu.org/licenses/>.  */
 
 /* As a special exception, you may create a larger work that contains
    part or all of the Bison parser skeleton and distribute that work
@@ -40,21 +40,21 @@ package parser;
 
 import java.text.MessageFormat;
 /* "%code imports" blocks.  */
-/* "src/main/resources/Java_16_Grammar.y":138  */
- import lexer.*; 
-/* "src/main/resources/Java_16_Grammar.y":139  */
- import tree.*; 
 /* "src/main/resources/Java_16_Grammar.y":140  */
- import tree.Compilation.*; 
+ import lexer.*; 
 /* "src/main/resources/Java_16_Grammar.y":141  */
- import tree.Declaration.*; 
+ import tree.*; 
 /* "src/main/resources/Java_16_Grammar.y":142  */
- import tree.Expression.*; 
+ import tree.Compilation.*; 
 /* "src/main/resources/Java_16_Grammar.y":143  */
- import tree.Expression.Primary.*; 
+ import tree.Declaration.*; 
 /* "src/main/resources/Java_16_Grammar.y":144  */
- import tree.Statement.*; 
+ import tree.Expression.*; 
 /* "src/main/resources/Java_16_Grammar.y":145  */
+ import tree.Expression.Primary.*; 
+/* "src/main/resources/Java_16_Grammar.y":146  */
+ import tree.Statement.*; 
+/* "src/main/resources/Java_16_Grammar.y":147  */
  import tree.Type.*; 
 
 /* "src/main/java/parser/JavaParser.java":61  */
@@ -67,7 +67,7 @@ import java.text.MessageFormat;
 public class JavaParser
 {
   /** Version number for the Bison executable that generated this parser.  */
-  public static final String bisonVersion = "3.7.6";
+  public static final String bisonVersion = "3.7.4";
 
   /** Name of the skeleton that generated this parser.  */
   public static final String bisonSkeleton = "lalr1.java";
@@ -1321,693 +1321,693 @@ public class JavaParser
       {
           case 2: /* Literal: INTEGER_LITERAL  */
   if (yyn == 2)
-    /* "src/main/resources/Java_16_Grammar.y":263  */
+    /* "src/main/resources/Java_16_Grammar.y":265  */
                               { yyval = ((Token)(yystack.valueAt (0))); };
   break;
 
 
   case 3: /* Literal: FLOATING_POINT_LITERAL  */
   if (yyn == 3)
-    /* "src/main/resources/Java_16_Grammar.y":264  */
+    /* "src/main/resources/Java_16_Grammar.y":266  */
                               { yyval = ((Token)(yystack.valueAt (0))); };
   break;
 
 
   case 4: /* Literal: TRUE  */
   if (yyn == 4)
-    /* "src/main/resources/Java_16_Grammar.y":265  */
+    /* "src/main/resources/Java_16_Grammar.y":267  */
                               { yyval = ((Token)(yystack.valueAt (0))); };
   break;
 
 
   case 5: /* Literal: FALSE  */
   if (yyn == 5)
-    /* "src/main/resources/Java_16_Grammar.y":266  */
+    /* "src/main/resources/Java_16_Grammar.y":268  */
                               { yyval = ((Token)(yystack.valueAt (0))); };
   break;
 
 
   case 6: /* Literal: CHARACTER_LITERAL  */
   if (yyn == 6)
-    /* "src/main/resources/Java_16_Grammar.y":267  */
+    /* "src/main/resources/Java_16_Grammar.y":269  */
                               { yyval = ((Token)(yystack.valueAt (0))); };
   break;
 
 
   case 7: /* Literal: STRING_LITERAL  */
   if (yyn == 7)
-    /* "src/main/resources/Java_16_Grammar.y":268  */
+    /* "src/main/resources/Java_16_Grammar.y":270  */
                               { yyval = ((Token)(yystack.valueAt (0))); };
   break;
 
 
   case 8: /* Literal: NULL  */
   if (yyn == 8)
-    /* "src/main/resources/Java_16_Grammar.y":270  */
+    /* "src/main/resources/Java_16_Grammar.y":272  */
                               { yyval = ((Token)(yystack.valueAt (0))); };
   break;
 
 
   case 9: /* CompoundName: IDENTIFIER  */
   if (yyn == 9)
-    /* "src/main/resources/Java_16_Grammar.y":276  */
+    /* "src/main/resources/Java_16_Grammar.y":278  */
                                   { yyval = new CompoundName(((Token)(yystack.valueAt (0))).image); };
   break;
 
 
   case 10: /* CompoundName: CompoundName DOT IDENTIFIER  */
   if (yyn == 10)
-    /* "src/main/resources/Java_16_Grammar.y":277  */
+    /* "src/main/resources/Java_16_Grammar.y":279  */
                                   { yyval = ((CompoundName)(yystack.valueAt (2))).add(((Token)(yystack.valueAt (0))).image); };
   break;
 
 
   case 11: /* ModifierSeqOpt: %empty  */
   if (yyn == 11)
-    /* "src/main/resources/Java_16_Grammar.y":281  */
+    /* "src/main/resources/Java_16_Grammar.y":283  */
                    { yyval = null; };
   break;
 
 
   case 12: /* ModifierSeqOpt: ModifierSeq  */
   if (yyn == 12)
-    /* "src/main/resources/Java_16_Grammar.y":282  */
+    /* "src/main/resources/Java_16_Grammar.y":284  */
                    { yyval = ((Modifiers)(yystack.valueAt (0))); };
   break;
 
 
   case 13: /* ModifierSeq: StandardModifierSeq  */
   if (yyn == 13)
-    /* "src/main/resources/Java_16_Grammar.y":286  */
+    /* "src/main/resources/Java_16_Grammar.y":288  */
                                         { yyval = new Modifiers(null,((StandardModifiers)(yystack.valueAt (0)))); };
   break;
 
 
   case 14: /* ModifierSeq: AnnotationSeq StandardModifierSeq  */
   if (yyn == 14)
-    /* "src/main/resources/Java_16_Grammar.y":287  */
+    /* "src/main/resources/Java_16_Grammar.y":289  */
                                         { yyval = new Modifiers(((Annotations)(yystack.valueAt (1))),((StandardModifiers)(yystack.valueAt (0)))); };
   break;
 
 
   case 15: /* StandardModifierSeq: StandardModifier  */
   if (yyn == 15)
-    /* "src/main/resources/Java_16_Grammar.y":291  */
+    /* "src/main/resources/Java_16_Grammar.y":293  */
                                            { yyval = new StandardModifiers(((Token)(yystack.valueAt (0)))); };
   break;
 
 
   case 16: /* StandardModifierSeq: StandardModifierSeq StandardModifier  */
   if (yyn == 16)
-    /* "src/main/resources/Java_16_Grammar.y":292  */
+    /* "src/main/resources/Java_16_Grammar.y":294  */
                                            { yyval = ((StandardModifiers)(yystack.valueAt (1))).add(((Token)(yystack.valueAt (0)))); };
   break;
 
 
   case 17: /* StandardModifier: DEFAULT  */
   if (yyn == 17)
-    /* "src/main/resources/Java_16_Grammar.y":297  */
+    /* "src/main/resources/Java_16_Grammar.y":299  */
                         { yyval = ((Token)(yystack.valueAt (0))); };
   break;
 
 
   case 18: /* StandardModifier: FINAL  */
   if (yyn == 18)
-    /* "src/main/resources/Java_16_Grammar.y":298  */
+    /* "src/main/resources/Java_16_Grammar.y":300  */
                     { yyval = ((Token)(yystack.valueAt (0))); };
   break;
 
 
   case 19: /* StandardModifier: PUBLIC  */
   if (yyn == 19)
-    /* "src/main/resources/Java_16_Grammar.y":299  */
+    /* "src/main/resources/Java_16_Grammar.y":301  */
                     { yyval = ((Token)(yystack.valueAt (0))); };
   break;
 
 
   case 20: /* StandardModifier: PROTECTED  */
   if (yyn == 20)
-    /* "src/main/resources/Java_16_Grammar.y":300  */
+    /* "src/main/resources/Java_16_Grammar.y":302  */
                     { yyval = ((Token)(yystack.valueAt (0))); };
   break;
 
 
   case 21: /* StandardModifier: PRIVATE  */
   if (yyn == 21)
-    /* "src/main/resources/Java_16_Grammar.y":301  */
+    /* "src/main/resources/Java_16_Grammar.y":303  */
                     { yyval = ((Token)(yystack.valueAt (0))); };
   break;
 
 
   case 22: /* StandardModifier: ABSTRACT  */
   if (yyn == 22)
-    /* "src/main/resources/Java_16_Grammar.y":302  */
+    /* "src/main/resources/Java_16_Grammar.y":304  */
                     { yyval = ((Token)(yystack.valueAt (0))); };
   break;
 
 
   case 23: /* StandardModifier: STATIC  */
   if (yyn == 23)
-    /* "src/main/resources/Java_16_Grammar.y":303  */
+    /* "src/main/resources/Java_16_Grammar.y":305  */
                     { yyval = ((Token)(yystack.valueAt (0))); };
   break;
 
 
   case 24: /* StandardModifier: STRICTFP  */
   if (yyn == 24)
-    /* "src/main/resources/Java_16_Grammar.y":304  */
+    /* "src/main/resources/Java_16_Grammar.y":306  */
                     { yyval = ((Token)(yystack.valueAt (0))); };
   break;
 
 
   case 25: /* StandardModifier: SYNCHRONIZED  */
   if (yyn == 25)
-    /* "src/main/resources/Java_16_Grammar.y":305  */
+    /* "src/main/resources/Java_16_Grammar.y":307  */
                     { yyval = ((Token)(yystack.valueAt (0))); };
   break;
 
 
   case 26: /* StandardModifier: TRANSIENT  */
   if (yyn == 26)
-    /* "src/main/resources/Java_16_Grammar.y":306  */
+    /* "src/main/resources/Java_16_Grammar.y":308  */
                     { yyval = ((Token)(yystack.valueAt (0))); };
   break;
 
 
   case 27: /* StandardModifier: VOLATILE  */
   if (yyn == 27)
-    /* "src/main/resources/Java_16_Grammar.y":307  */
+    /* "src/main/resources/Java_16_Grammar.y":309  */
                     { yyval = ((Token)(yystack.valueAt (0))); };
   break;
 
 
   case 28: /* StandardModifier: OPEN  */
   if (yyn == 28)
-    /* "src/main/resources/Java_16_Grammar.y":308  */
+    /* "src/main/resources/Java_16_Grammar.y":310  */
                     { yyval = ((Token)(yystack.valueAt (0))); };
   break;
 
 
   case 29: /* CompilationUnit: %empty  */
   if (yyn == 29)
-    /* "src/main/resources/Java_16_Grammar.y":314  */
+    /* "src/main/resources/Java_16_Grammar.y":316  */
                                                     { yyval = null; };
   break;
 
 
   case 30: /* CompilationUnit: Package  */
   if (yyn == 30)
-    /* "src/main/resources/Java_16_Grammar.y":315  */
+    /* "src/main/resources/Java_16_Grammar.y":317  */
                                                     { yyval = ((tree.Compilation.CompilationUnit)(yystack.valueAt (0))); ast = ((tree.Compilation.CompilationUnit)(yystack.valueAt (0))); };
   break;
 
 
   case 31: /* CompilationUnit: Module  */
   if (yyn == 31)
-    /* "src/main/resources/Java_16_Grammar.y":316  */
+    /* "src/main/resources/Java_16_Grammar.y":318  */
                                                     { yyval = ((tree.Compilation.Module)(yystack.valueAt (0))); ast = ((tree.Compilation.Module)(yystack.valueAt (0))); };
   break;
 
 
   case 32: /* CompilationUnit: ImportDeclarationSeqOpt TopLevelComponentSeq  */
   if (yyn == 32)
-    /* "src/main/resources/Java_16_Grammar.y":317  */
+    /* "src/main/resources/Java_16_Grammar.y":319  */
                                                     { ast = new SimpleCompilationUnit(((tree.Declaration.ImportDeclarations)(yystack.valueAt (1))),((tree.Compilation.TopLevelComponents)(yystack.valueAt (0)))); };
   break;
 
 
   case 33: /* Package: PACKAGE CompoundName SEMICOLON ImportDeclarationSeqOpt TopLevelComponentSeqOpt  */
   if (yyn == 33)
-    /* "src/main/resources/Java_16_Grammar.y":322  */
+    /* "src/main/resources/Java_16_Grammar.y":324  */
                                                     { yyval = new tree.Compilation.Package(((CompoundName)(yystack.valueAt (3))),((tree.Declaration.ImportDeclarations)(yystack.valueAt (1))),((tree.Compilation.TopLevelComponents)(yystack.valueAt (0)))); };
   break;
 
 
   case 34: /* Module: ModifierSeqOpt MODULE CompoundName LBRACE ModuleDirectiveSeqOpt RBRACE  */
   if (yyn == 34)
-    /* "src/main/resources/Java_16_Grammar.y":328  */
+    /* "src/main/resources/Java_16_Grammar.y":330  */
                                                                              { yyval = null; };
   break;
 
 
   case 35: /* ImportDeclarationSeqOpt: %empty  */
   if (yyn == 35)
-    /* "src/main/resources/Java_16_Grammar.y":332  */
+    /* "src/main/resources/Java_16_Grammar.y":334  */
                                                  { yyval = null; };
   break;
 
 
   case 36: /* ImportDeclarationSeqOpt: ImportDeclarationSeq  */
   if (yyn == 36)
-    /* "src/main/resources/Java_16_Grammar.y":333  */
+    /* "src/main/resources/Java_16_Grammar.y":335  */
                                                  { yyval = ((tree.Declaration.ImportDeclarations)(yystack.valueAt (0))); };
   break;
 
 
   case 37: /* ImportDeclarationSeq: ImportDeclaration  */
   if (yyn == 37)
-    /* "src/main/resources/Java_16_Grammar.y":337  */
+    /* "src/main/resources/Java_16_Grammar.y":339  */
                                                  { yyval = new ImportDeclarations(((tree.Declaration.ImportDeclaration)(yystack.valueAt (0)))); };
   break;
 
 
   case 38: /* ImportDeclarationSeq: ImportDeclarationSeqOpt ImportDeclaration  */
   if (yyn == 38)
-    /* "src/main/resources/Java_16_Grammar.y":338  */
+    /* "src/main/resources/Java_16_Grammar.y":340  */
                                                  { yyval = ((tree.Declaration.ImportDeclarations)(yystack.valueAt (1))).add(((tree.Declaration.ImportDeclaration)(yystack.valueAt (0)))); };
   break;
 
 
   case 39: /* ImportDeclaration: IMPORT CompoundName SEMICOLON  */
   if (yyn == 39)
-    /* "src/main/resources/Java_16_Grammar.y":342  */
+    /* "src/main/resources/Java_16_Grammar.y":344  */
                                                      { yyval = new ImportDeclaration(false,((CompoundName)(yystack.valueAt (1))),false); };
   break;
 
 
   case 40: /* ImportDeclaration: IMPORT STATIC CompoundName SEMICOLON  */
   if (yyn == 40)
-    /* "src/main/resources/Java_16_Grammar.y":343  */
+    /* "src/main/resources/Java_16_Grammar.y":345  */
                                                      { yyval = new ImportDeclaration(true,((CompoundName)(yystack.valueAt (1))),false); };
   break;
 
 
   case 41: /* ImportDeclaration: IMPORT CompoundName DOT STAR SEMICOLON  */
   if (yyn == 41)
-    /* "src/main/resources/Java_16_Grammar.y":344  */
+    /* "src/main/resources/Java_16_Grammar.y":346  */
                                                      { yyval = new ImportDeclaration(false,((CompoundName)(yystack.valueAt (3))),true); };
   break;
 
 
   case 42: /* ImportDeclaration: IMPORT STATIC CompoundName DOT STAR SEMICOLON  */
   if (yyn == 42)
-    /* "src/main/resources/Java_16_Grammar.y":345  */
+    /* "src/main/resources/Java_16_Grammar.y":347  */
                                                      { yyval = new ImportDeclaration(true,((CompoundName)(yystack.valueAt (3))),true); };
   break;
 
 
   case 43: /* TopLevelComponentSeqOpt: %empty  */
   if (yyn == 43)
-    /* "src/main/resources/Java_16_Grammar.y":349  */
+    /* "src/main/resources/Java_16_Grammar.y":351  */
                             { yyval = null; };
   break;
 
 
   case 44: /* TopLevelComponentSeqOpt: TopLevelComponentSeq  */
   if (yyn == 44)
-    /* "src/main/resources/Java_16_Grammar.y":350  */
+    /* "src/main/resources/Java_16_Grammar.y":352  */
                             { yyval = ((tree.Compilation.TopLevelComponents)(yystack.valueAt (0))); };
   break;
 
 
   case 45: /* TopLevelComponentSeq: ModifierSeqOpt TopLevelComponent  */
   if (yyn == 45)
-    /* "src/main/resources/Java_16_Grammar.y":354  */
+    /* "src/main/resources/Java_16_Grammar.y":356  */
                                                             { ((tree.Compilation.TopLevelComponent)(yystack.valueAt (0))).addModifiers(((Modifiers)(yystack.valueAt (1)))); yyval = new TopLevelComponents(((tree.Compilation.TopLevelComponent)(yystack.valueAt (0)))); };
   break;
 
 
   case 46: /* TopLevelComponentSeq: TopLevelComponentSeq ModifierSeqOpt TopLevelComponent  */
   if (yyn == 46)
-    /* "src/main/resources/Java_16_Grammar.y":355  */
+    /* "src/main/resources/Java_16_Grammar.y":357  */
                                                             { ((tree.Compilation.TopLevelComponent)(yystack.valueAt (0))).addModifiers(((Modifiers)(yystack.valueAt (1)))); yyval = ((tree.Compilation.TopLevelComponents)(yystack.valueAt (2))).add(((tree.Compilation.TopLevelComponent)(yystack.valueAt (0)))); };
   break;
 
 
   case 47: /* TopLevelComponent: ClassDeclaration  */
   if (yyn == 47)
-    /* "src/main/resources/Java_16_Grammar.y":359  */
+    /* "src/main/resources/Java_16_Grammar.y":361  */
                            { yyval = new TopLevelComponent(((ClassDeclaration)(yystack.valueAt (0)))); };
   break;
 
 
   case 48: /* TopLevelComponent: InterfaceDeclaration  */
   if (yyn == 48)
-    /* "src/main/resources/Java_16_Grammar.y":360  */
+    /* "src/main/resources/Java_16_Grammar.y":362  */
                            { yyval = new TopLevelComponent(((InterfaceDeclaration)(yystack.valueAt (0)))); };
   break;
 
 
   case 67: /* Type: UnannotatedType  */
   if (yyn == 67)
-    /* "src/main/resources/Java_16_Grammar.y":407  */
+    /* "src/main/resources/Java_16_Grammar.y":409  */
                                     { yyval = ((tree.Type.UnannotatedType)(yystack.valueAt (0))); };
   break;
 
 
   case 68: /* Type: AnnotationSeq UnannotatedType  */
   if (yyn == 68)
-    /* "src/main/resources/Java_16_Grammar.y":408  */
+    /* "src/main/resources/Java_16_Grammar.y":410  */
                                     { yyval = ((tree.Type.UnannotatedType)(yystack.valueAt (0))).addAnnotations(((Annotations)(yystack.valueAt (1)))); };
   break;
 
 
   case 69: /* UnannotatedType: PrimitiveType  */
   if (yyn == 69)
-    /* "src/main/resources/Java_16_Grammar.y":412  */
+    /* "src/main/resources/Java_16_Grammar.y":414  */
                                  { yyval = new PrimitiveType(((Token)(yystack.valueAt (0)))); };
   break;
 
 
   case 70: /* UnannotatedType: CompoundName  */
   if (yyn == 70)
-    /* "src/main/resources/Java_16_Grammar.y":414  */
+    /* "src/main/resources/Java_16_Grammar.y":416  */
                                  { yyval = new TypeName(((CompoundName)(yystack.valueAt (0))),null); };
   break;
 
 
   case 71: /* UnannotatedType: CompoundName TypeArguments  */
   if (yyn == 71)
-    /* "src/main/resources/Java_16_Grammar.y":415  */
+    /* "src/main/resources/Java_16_Grammar.y":417  */
                                  { yyval = new TypeName(((CompoundName)(yystack.valueAt (1))),((tree.Type.TypeArguments)(yystack.valueAt (0)))); };
   break;
 
 
   case 72: /* UnannotatedType: UnannotatedType Dim  */
   if (yyn == 72)
-    /* "src/main/resources/Java_16_Grammar.y":417  */
+    /* "src/main/resources/Java_16_Grammar.y":419  */
                                      { yyval = ((tree.Type.UnannotatedType)(yystack.valueAt (1))).addDimension(((Dim)(yystack.valueAt (0)))); };
   break;
 
 
   case 73: /* PrimitiveType: BYTE  */
   if (yyn == 73)
-    /* "src/main/resources/Java_16_Grammar.y":426  */
+    /* "src/main/resources/Java_16_Grammar.y":428  */
                  { yyval = ((Token)(yystack.valueAt (0))); };
   break;
 
 
   case 74: /* PrimitiveType: SHORT  */
   if (yyn == 74)
-    /* "src/main/resources/Java_16_Grammar.y":427  */
+    /* "src/main/resources/Java_16_Grammar.y":429  */
                  { yyval = ((Token)(yystack.valueAt (0))); };
   break;
 
 
   case 75: /* PrimitiveType: INT  */
   if (yyn == 75)
-    /* "src/main/resources/Java_16_Grammar.y":428  */
+    /* "src/main/resources/Java_16_Grammar.y":430  */
                  { yyval = ((Token)(yystack.valueAt (0))); };
   break;
 
 
   case 76: /* PrimitiveType: LONG  */
   if (yyn == 76)
-    /* "src/main/resources/Java_16_Grammar.y":429  */
+    /* "src/main/resources/Java_16_Grammar.y":431  */
                  { yyval = ((Token)(yystack.valueAt (0))); };
   break;
 
 
   case 77: /* PrimitiveType: CHAR  */
   if (yyn == 77)
-    /* "src/main/resources/Java_16_Grammar.y":430  */
+    /* "src/main/resources/Java_16_Grammar.y":432  */
                  { yyval = ((Token)(yystack.valueAt (0))); };
   break;
 
 
   case 78: /* PrimitiveType: FLOAT  */
   if (yyn == 78)
-    /* "src/main/resources/Java_16_Grammar.y":432  */
+    /* "src/main/resources/Java_16_Grammar.y":434  */
                  { yyval = ((Token)(yystack.valueAt (0))); };
   break;
 
 
   case 79: /* PrimitiveType: DOUBLE  */
   if (yyn == 79)
-    /* "src/main/resources/Java_16_Grammar.y":433  */
+    /* "src/main/resources/Java_16_Grammar.y":435  */
                  { yyval = ((Token)(yystack.valueAt (0))); };
   break;
 
 
   case 80: /* PrimitiveType: BOOLEAN  */
   if (yyn == 80)
-    /* "src/main/resources/Java_16_Grammar.y":434  */
+    /* "src/main/resources/Java_16_Grammar.y":436  */
                  { yyval = ((Token)(yystack.valueAt (0))); };
   break;
 
 
   case 81: /* ClassDeclaration: NormalClassDeclaration  */
   if (yyn == 81)
-    /* "src/main/resources/Java_16_Grammar.y":455  */
+    /* "src/main/resources/Java_16_Grammar.y":457  */
                                { yyval = ((ClassDeclaration)(yystack.valueAt (0))); };
   break;
 
 
   case 82: /* ClassDeclaration: EnumDeclaration  */
   if (yyn == 82)
-    /* "src/main/resources/Java_16_Grammar.y":456  */
+    /* "src/main/resources/Java_16_Grammar.y":458  */
                                { yyval = ((tree.Declaration.Declaration)(yystack.valueAt (0))); };
   break;
 
 
   case 83: /* ClassDeclaration: RecordDeclaration  */
   if (yyn == 83)
-    /* "src/main/resources/Java_16_Grammar.y":457  */
+    /* "src/main/resources/Java_16_Grammar.y":459  */
                                { yyval = ((tree.Declaration.Declaration)(yystack.valueAt (0))); };
   break;
 
 
   case 84: /* NormalClassDeclaration: CLASS IDENTIFIER TypeParametersOpt ClassExtendsOpt ClassImplementsOpt ClassBody  */
   if (yyn == 84)
-    /* "src/main/resources/Java_16_Grammar.y":462  */
+    /* "src/main/resources/Java_16_Grammar.y":464  */
                               { yyval = new NormalClassDeclaration(((Token)(yystack.valueAt (4))),((TypeParameters)(yystack.valueAt (3))),((tree.Type.Type)(yystack.valueAt (2))),((tree.Type.TypeList)(yystack.valueAt (1))),((Declarations)(yystack.valueAt (0)))); };
   break;
 
 
   case 85: /* TypeParametersOpt: %empty  */
   if (yyn == 85)
-    /* "src/main/resources/Java_16_Grammar.y":466  */
+    /* "src/main/resources/Java_16_Grammar.y":468  */
                        { yyval = null; };
   break;
 
 
   case 86: /* TypeParametersOpt: TypeParameters  */
   if (yyn == 86)
-    /* "src/main/resources/Java_16_Grammar.y":467  */
+    /* "src/main/resources/Java_16_Grammar.y":469  */
                        { yyval = ((TypeParameters)(yystack.valueAt (0))); };
   break;
 
 
   case 87: /* TypeParameters: LESS TypeParameterList GREATER  */
   if (yyn == 87)
-    /* "src/main/resources/Java_16_Grammar.y":471  */
+    /* "src/main/resources/Java_16_Grammar.y":473  */
                                       { yyval = ((TypeParameters)(yystack.valueAt (1))); };
   break;
 
 
   case 88: /* TypeParameterList: TypeParameter  */
   if (yyn == 88)
-    /* "src/main/resources/Java_16_Grammar.y":475  */
+    /* "src/main/resources/Java_16_Grammar.y":477  */
                                             { yyval = new TypeParameters(((TypeParameter)(yystack.valueAt (0)))); };
   break;
 
 
   case 89: /* TypeParameterList: TypeParameterList COMMA TypeParameter  */
   if (yyn == 89)
-    /* "src/main/resources/Java_16_Grammar.y":476  */
+    /* "src/main/resources/Java_16_Grammar.y":478  */
                                             { yyval = ((TypeParameters)(yystack.valueAt (2))).add(((TypeParameter)(yystack.valueAt (0)))); };
   break;
 
 
   case 90: /* TypeParameter: AnnotationSeq TypeParameterTail  */
   if (yyn == 90)
-    /* "src/main/resources/Java_16_Grammar.y":486  */
+    /* "src/main/resources/Java_16_Grammar.y":488  */
                                       { yyval = new TypeParameter(((Annotations)(yystack.valueAt (1))),((TypeParameterTail)(yystack.valueAt (0)))); };
   break;
 
 
   case 91: /* TypeParameter: TypeParameterTail  */
   if (yyn == 91)
-    /* "src/main/resources/Java_16_Grammar.y":487  */
+    /* "src/main/resources/Java_16_Grammar.y":489  */
                                       { yyval = new TypeParameter(null,((TypeParameterTail)(yystack.valueAt (0)))); };
   break;
 
 
   case 92: /* TypeParameterTail: IDENTIFIER  */
   if (yyn == 92)
-    /* "src/main/resources/Java_16_Grammar.y":491  */
+    /* "src/main/resources/Java_16_Grammar.y":493  */
                                                       { yyval = new TypeParameterTail(((Token)(yystack.valueAt (0))),null); };
   break;
 
 
   case 93: /* TypeParameterTail: IDENTIFIER EXTENDS AnnotationSeqOpt IDENTIFIER  */
   if (yyn == 93)
-    /* "src/main/resources/Java_16_Grammar.y":492  */
+    /* "src/main/resources/Java_16_Grammar.y":494  */
                                                       { yyval = new TypeParameterTail(((Token)(yystack.valueAt (3))),((Annotations)(yystack.valueAt (1))),((Token)(yystack.valueAt (0)))); };
   break;
 
 
   case 94: /* TypeParameterTail: IDENTIFIER EXTENDS ClassTypeList2  */
   if (yyn == 94)
-    /* "src/main/resources/Java_16_Grammar.y":493  */
+    /* "src/main/resources/Java_16_Grammar.y":495  */
                                                       { yyval = new TypeParameterTail(((Token)(yystack.valueAt (2))),((tree.Type.TypeList)(yystack.valueAt (0)))); };
   break;
 
 
   case 95: /* ClassExtendsOpt: %empty  */
   if (yyn == 95)
-    /* "src/main/resources/Java_16_Grammar.y":497  */
+    /* "src/main/resources/Java_16_Grammar.y":499  */
                     { yyval = null; };
   break;
 
 
   case 96: /* ClassExtendsOpt: EXTENDS Type  */
   if (yyn == 96)
-    /* "src/main/resources/Java_16_Grammar.y":498  */
+    /* "src/main/resources/Java_16_Grammar.y":500  */
                     { yyval = ((tree.Type.Type)(yystack.valueAt (0))); };
   break;
 
 
   case 97: /* ClassImplementsOpt: %empty  */
   if (yyn == 97)
-    /* "src/main/resources/Java_16_Grammar.y":502  */
+    /* "src/main/resources/Java_16_Grammar.y":504  */
                                  { yyval = null; };
   break;
 
 
   case 98: /* ClassImplementsOpt: IMPLEMENTS ClassTypeList1  */
   if (yyn == 98)
-    /* "src/main/resources/Java_16_Grammar.y":503  */
+    /* "src/main/resources/Java_16_Grammar.y":505  */
                                  { yyval = ((tree.Type.TypeList)(yystack.valueAt (0))); };
   break;
 
 
   case 99: /* ClassTypeList1: Type  */
   if (yyn == 99)
-    /* "src/main/resources/Java_16_Grammar.y":507  */
+    /* "src/main/resources/Java_16_Grammar.y":509  */
                                 { yyval = new TypeList(((tree.Type.Type)(yystack.valueAt (0)))); };
   break;
 
 
   case 100: /* ClassTypeList1: ClassTypeList1 COMMA Type  */
   if (yyn == 100)
-    /* "src/main/resources/Java_16_Grammar.y":508  */
+    /* "src/main/resources/Java_16_Grammar.y":510  */
                                 { yyval = ((tree.Type.TypeList)(yystack.valueAt (2))).add(((tree.Type.Type)(yystack.valueAt (0)))); };
   break;
 
 
   case 101: /* ClassTypeList2: Type  */
   if (yyn == 101)
-    /* "src/main/resources/Java_16_Grammar.y":512  */
+    /* "src/main/resources/Java_16_Grammar.y":514  */
                                     { yyval = new TypeList(((tree.Type.Type)(yystack.valueAt (0)))); };
   break;
 
 
   case 102: /* ClassTypeList2: ClassTypeList2 AMPERSAND Type  */
   if (yyn == 102)
-    /* "src/main/resources/Java_16_Grammar.y":513  */
+    /* "src/main/resources/Java_16_Grammar.y":515  */
                                     { yyval = ((tree.Type.TypeList)(yystack.valueAt (2))).add(((tree.Type.Type)(yystack.valueAt (0)))); };
   break;
 
 
   case 103: /* ClassBodyOpt: %empty  */
   if (yyn == 103)
-    /* "src/main/resources/Java_16_Grammar.y":517  */
+    /* "src/main/resources/Java_16_Grammar.y":519  */
                     { yyval = null; };
   break;
 
 
   case 104: /* ClassBodyOpt: ClassBody  */
   if (yyn == 104)
-    /* "src/main/resources/Java_16_Grammar.y":518  */
+    /* "src/main/resources/Java_16_Grammar.y":520  */
                     { yyval = ((Declarations)(yystack.valueAt (0))); };
   break;
 
 
   case 105: /* ClassBody: LBRACE RBRACE  */
   if (yyn == 105)
-    /* "src/main/resources/Java_16_Grammar.y":522  */
+    /* "src/main/resources/Java_16_Grammar.y":524  */
                                              { yyval = null; };
   break;
 
 
   case 106: /* ClassBody: LBRACE ClassBodyDeclarationSeq RBRACE  */
   if (yyn == 106)
-    /* "src/main/resources/Java_16_Grammar.y":523  */
+    /* "src/main/resources/Java_16_Grammar.y":525  */
                                                  { yyval = ((Declarations)(yystack.valueAt (1))); };
   break;
 
 
   case 107: /* ClassBodyDeclarationSeq: ClassBodyDeclaration  */
   if (yyn == 107)
-    /* "src/main/resources/Java_16_Grammar.y":527  */
+    /* "src/main/resources/Java_16_Grammar.y":529  */
                                                    { yyval = new Declarations(((tree.Declaration.Declaration)(yystack.valueAt (0)))); };
   break;
 
 
   case 108: /* ClassBodyDeclarationSeq: ClassBodyDeclarationSeq ClassBodyDeclaration  */
   if (yyn == 108)
-    /* "src/main/resources/Java_16_Grammar.y":528  */
+    /* "src/main/resources/Java_16_Grammar.y":530  */
                                                    { yyval = ((Declarations)(yystack.valueAt (1))).add(((tree.Declaration.Declaration)(yystack.valueAt (0)))); };
   break;
 
 
   case 109: /* ClassBodyDeclaration: ModifierSeqOpt PureBodyDeclaration  */
   if (yyn == 109)
-    /* "src/main/resources/Java_16_Grammar.y":532  */
+    /* "src/main/resources/Java_16_Grammar.y":534  */
                                          { yyval = ((tree.Declaration.Declaration)(yystack.valueAt (0))).addModifiers(((Modifiers)(yystack.valueAt (1)))); };
   break;
 
 
   case 110: /* ClassBodyDeclaration: Block  */
   if (yyn == 110)
-    /* "src/main/resources/Java_16_Grammar.y":533  */
+    /* "src/main/resources/Java_16_Grammar.y":535  */
                       { yyval = new ClassInitializer(((tree.Statement.Block)(yystack.valueAt (0))),false); };
   break;
 
 
   case 111: /* ClassBodyDeclaration: STATIC Block  */
   if (yyn == 111)
-    /* "src/main/resources/Java_16_Grammar.y":534  */
+    /* "src/main/resources/Java_16_Grammar.y":536  */
                       { yyval = new ClassInitializer(((tree.Statement.Block)(yystack.valueAt (0))),true); };
   break;
 
 
   case 112: /* ClassBodyDeclaration: SEMICOLON  */
   if (yyn == 112)
-    /* "src/main/resources/Java_16_Grammar.y":535  */
+    /* "src/main/resources/Java_16_Grammar.y":537  */
                       { yyval = null; };
   break;
 
 
   case 113: /* PureBodyDeclaration: FieldDeclaration  */
   if (yyn == 113)
-    /* "src/main/resources/Java_16_Grammar.y":539  */
+    /* "src/main/resources/Java_16_Grammar.y":541  */
                                { yyval = ((tree.Declaration.Declaration)(yystack.valueAt (0))); };
   break;
 
 
   case 114: /* PureBodyDeclaration: MethodDeclaration  */
   if (yyn == 114)
-    /* "src/main/resources/Java_16_Grammar.y":540  */
+    /* "src/main/resources/Java_16_Grammar.y":542  */
                                { yyval = ((tree.Declaration.Declaration)(yystack.valueAt (0))); };
   break;
 
 
   case 115: /* PureBodyDeclaration: ClassDeclaration  */
   if (yyn == 115)
-    /* "src/main/resources/Java_16_Grammar.y":541  */
+    /* "src/main/resources/Java_16_Grammar.y":543  */
                                { yyval = ((ClassDeclaration)(yystack.valueAt (0))); };
   break;
 
 
   case 116: /* PureBodyDeclaration: InterfaceDeclaration  */
   if (yyn == 116)
-    /* "src/main/resources/Java_16_Grammar.y":542  */
+    /* "src/main/resources/Java_16_Grammar.y":544  */
                                { yyval = ((InterfaceDeclaration)(yystack.valueAt (0))); };
   break;
 
 
   case 117: /* PureBodyDeclaration: ConstructorDeclaration  */
   if (yyn == 117)
-    /* "src/main/resources/Java_16_Grammar.y":543  */
+    /* "src/main/resources/Java_16_Grammar.y":545  */
                                { yyval = ((ConstructorDeclaration)(yystack.valueAt (0))); };
   break;
 
 
   case 118: /* ConstructorDeclaration: ConstructorDeclarator ThrowsOpt ConstructorBody  */
   if (yyn == 118)
-    /* "src/main/resources/Java_16_Grammar.y":550  */
+    /* "src/main/resources/Java_16_Grammar.y":552  */
                             { yyval = new ConstructorDeclaration(null,((ConstructorDeclarator)(yystack.valueAt (2))).typeParameters,((ConstructorDeclarator)(yystack.valueAt (2))).formalParameters,
                                                               ((tree.Type.TypeList)(yystack.valueAt (1))),((ConstructorBody)(yystack.valueAt (0))).invocation,((ConstructorBody)(yystack.valueAt (0))).block); };
   break;
@@ -2015,56 +2015,56 @@ public class JavaParser
 
   case 119: /* ConstructorDeclarator: TypeParametersOpt IDENTIFIER LPAREN FormalParameterList RPAREN  */
   if (yyn == 119)
-    /* "src/main/resources/Java_16_Grammar.y":556  */
+    /* "src/main/resources/Java_16_Grammar.y":558  */
                                       { yyval = new ConstructorDeclarator(((TypeParameters)(yystack.valueAt (4))),((ParameterDeclarations)(yystack.valueAt (1)))); };
   break;
 
 
   case 120: /* ConstructorBody: LBRACE RBRACE  */
   if (yyn == 120)
-    /* "src/main/resources/Java_16_Grammar.y":560  */
+    /* "src/main/resources/Java_16_Grammar.y":562  */
                                                                     { yyval = new ConstructorBody(null,null); };
   break;
 
 
   case 121: /* ConstructorBody: LBRACE ExplicitConstructorInvocation RBRACE  */
   if (yyn == 121)
-    /* "src/main/resources/Java_16_Grammar.y":561  */
+    /* "src/main/resources/Java_16_Grammar.y":563  */
                                                                     { yyval = new ConstructorBody(((ExplicitConstructorInvocation)(yystack.valueAt (1))),null); };
   break;
 
 
   case 122: /* ConstructorBody: LBRACE BlockStatementSeq RBRACE  */
   if (yyn == 122)
-    /* "src/main/resources/Java_16_Grammar.y":562  */
+    /* "src/main/resources/Java_16_Grammar.y":564  */
                                                                     { yyval = new ConstructorBody(null,new Block(null,((tree.Statement.BlockStatements)(yystack.valueAt (1))))); };
   break;
 
 
   case 123: /* ConstructorBody: LBRACE ExplicitConstructorInvocation BlockStatementSeq RBRACE  */
   if (yyn == 123)
-    /* "src/main/resources/Java_16_Grammar.y":563  */
+    /* "src/main/resources/Java_16_Grammar.y":565  */
                                                                     { yyval = new ConstructorBody(((ExplicitConstructorInvocation)(yystack.valueAt (2))),new Block(null,((tree.Statement.BlockStatements)(yystack.valueAt (1))))); };
   break;
 
 
   case 124: /* ExplicitConstructorInvocation: TypeArgumentsOpt THIS Arguments SEMICOLON  */
   if (yyn == 124)
-    /* "src/main/resources/Java_16_Grammar.y":567  */
+    /* "src/main/resources/Java_16_Grammar.y":569  */
                                                                   { yyval = new ExplicitConstructorInvocation(null,((tree.Type.TypeArguments)(yystack.valueAt (3))),false,((tree.Expression.ArgumentList)(yystack.valueAt (1)))); };
   break;
 
 
   case 125: /* ExplicitConstructorInvocation: TypeArgumentsOpt SUPER Arguments SEMICOLON  */
   if (yyn == 125)
-    /* "src/main/resources/Java_16_Grammar.y":568  */
+    /* "src/main/resources/Java_16_Grammar.y":570  */
                                                                   { yyval = new ExplicitConstructorInvocation(null,((tree.Type.TypeArguments)(yystack.valueAt (3))),true,((tree.Expression.ArgumentList)(yystack.valueAt (1)))); };
   break;
 
 
   case 126: /* ExplicitConstructorInvocation: CompoundName DOT TypeArgumentsOpt SUPER Arguments SEMICOLON  */
   if (yyn == 126)
-    /* "src/main/resources/Java_16_Grammar.y":569  */
+    /* "src/main/resources/Java_16_Grammar.y":571  */
                                                                   { Expression expr = new SimpleReference(((CompoundName)(yystack.valueAt (5))));
                                                                     yyval = new ExplicitConstructorInvocation(expr,((tree.Type.TypeArguments)(yystack.valueAt (3))),true,((tree.Expression.ArgumentList)(yystack.valueAt (1)))); };
   break;
@@ -2072,1274 +2072,1274 @@ public class JavaParser
 
   case 127: /* ExplicitConstructorInvocation: Primary DOT TypeArgumentsOpt SUPER Arguments SEMICOLON  */
   if (yyn == 127)
-    /* "src/main/resources/Java_16_Grammar.y":571  */
+    /* "src/main/resources/Java_16_Grammar.y":573  */
                                                                   { yyval = new ExplicitConstructorInvocation(((tree.Expression.Expression)(yystack.valueAt (5))),((tree.Type.TypeArguments)(yystack.valueAt (3))),true,((tree.Expression.ArgumentList)(yystack.valueAt (1)))); };
   break;
 
 
   case 128: /* EnumDeclaration: ENUM IDENTIFIER ClassImplementsOpt EnumBody  */
   if (yyn == 128)
-    /* "src/main/resources/Java_16_Grammar.y":577  */
+    /* "src/main/resources/Java_16_Grammar.y":579  */
                                                                      { yyval = new EnumDeclaration(((Token)(yystack.valueAt (2))),((tree.Type.TypeList)(yystack.valueAt (1))),((EnumBody)(yystack.valueAt (0)))); };
   break;
 
 
   case 129: /* EnumBody: LBRACE EnumConstantListOpt EnumBodyDeclarationsOpt RBRACE  */
   if (yyn == 129)
-    /* "src/main/resources/Java_16_Grammar.y":581  */
+    /* "src/main/resources/Java_16_Grammar.y":583  */
                                                                       { yyval = new EnumBody(((Enumerators)(yystack.valueAt (2))),((Declarations)(yystack.valueAt (1)))); };
   break;
 
 
   case 130: /* EnumBody: LBRACE EnumConstantListOpt COMMA EnumBodyDeclarationsOpt RBRACE  */
   if (yyn == 130)
-    /* "src/main/resources/Java_16_Grammar.y":582  */
+    /* "src/main/resources/Java_16_Grammar.y":584  */
                                                                       { yyval = new EnumBody(((Enumerators)(yystack.valueAt (3))),((Declarations)(yystack.valueAt (1)))); };
   break;
 
 
   case 131: /* EnumConstantListOpt: %empty  */
   if (yyn == 131)
-    /* "src/main/resources/Java_16_Grammar.y":586  */
+    /* "src/main/resources/Java_16_Grammar.y":588  */
                          { yyval = null; };
   break;
 
 
   case 132: /* EnumConstantListOpt: EnumConstantList  */
   if (yyn == 132)
-    /* "src/main/resources/Java_16_Grammar.y":587  */
+    /* "src/main/resources/Java_16_Grammar.y":589  */
                          { yyval = ((Enumerators)(yystack.valueAt (0))); };
   break;
 
 
   case 133: /* EnumConstantList: EnumConstant  */
   if (yyn == 133)
-    /* "src/main/resources/Java_16_Grammar.y":591  */
+    /* "src/main/resources/Java_16_Grammar.y":593  */
                                           { yyval = new Enumerators(((Enumerator)(yystack.valueAt (0)))); };
   break;
 
 
   case 134: /* EnumConstantList: EnumConstantList COMMA EnumConstant  */
   if (yyn == 134)
-    /* "src/main/resources/Java_16_Grammar.y":592  */
+    /* "src/main/resources/Java_16_Grammar.y":594  */
                                           { yyval = ((Enumerators)(yystack.valueAt (2))).add(((Enumerator)(yystack.valueAt (0)))); };
   break;
 
 
   case 135: /* EnumConstant: AnnotationSeqOpt IDENTIFIER  */
   if (yyn == 135)
-    /* "src/main/resources/Java_16_Grammar.y":596  */
+    /* "src/main/resources/Java_16_Grammar.y":598  */
                                                        { yyval = new Enumerator(((Annotations)(yystack.valueAt (1))),((Token)(yystack.valueAt (0))),null,null); };
   break;
 
 
   case 136: /* EnumConstant: AnnotationSeqOpt IDENTIFIER Arguments  */
   if (yyn == 136)
-    /* "src/main/resources/Java_16_Grammar.y":597  */
+    /* "src/main/resources/Java_16_Grammar.y":599  */
                                                        { yyval = new Enumerator(((Annotations)(yystack.valueAt (2))),((Token)(yystack.valueAt (1))),((tree.Expression.ArgumentList)(yystack.valueAt (0))),null); };
   break;
 
 
   case 137: /* EnumConstant: AnnotationSeqOpt IDENTIFIER Arguments ClassBody  */
   if (yyn == 137)
-    /* "src/main/resources/Java_16_Grammar.y":598  */
+    /* "src/main/resources/Java_16_Grammar.y":600  */
                                                        { yyval = new Enumerator(((Annotations)(yystack.valueAt (3))),((Token)(yystack.valueAt (2))),((tree.Expression.ArgumentList)(yystack.valueAt (1))),((Declarations)(yystack.valueAt (0)))); };
   break;
 
 
   case 138: /* EnumBodyDeclarationsOpt: %empty  */
   if (yyn == 138)
-    /* "src/main/resources/Java_16_Grammar.y":602  */
+    /* "src/main/resources/Java_16_Grammar.y":604  */
                                         { yyval = null; };
   break;
 
 
   case 139: /* EnumBodyDeclarationsOpt: SEMICOLON  */
   if (yyn == 139)
-    /* "src/main/resources/Java_16_Grammar.y":603  */
+    /* "src/main/resources/Java_16_Grammar.y":605  */
                                         { yyval = null; };
   break;
 
 
   case 140: /* EnumBodyDeclarationsOpt: SEMICOLON ClassBodyDeclarationSeq  */
   if (yyn == 140)
-    /* "src/main/resources/Java_16_Grammar.y":604  */
+    /* "src/main/resources/Java_16_Grammar.y":606  */
                                         { yyval = ((Declarations)(yystack.valueAt (0))); };
   break;
 
 
   case 141: /* RecordDeclaration: RECORD IDENTIFIER TypeParametersOpt RecordHeader ClassImplementsOpt RecordBody  */
   if (yyn == 141)
-    /* "src/main/resources/Java_16_Grammar.y":610  */
+    /* "src/main/resources/Java_16_Grammar.y":612  */
                                                                                                         { yyval = null; };
   break;
 
 
   case 154: /* FieldDeclaration: UnannotatedType VariableDeclaratorList SEMICOLON  */
   if (yyn == 154)
-    /* "src/main/resources/Java_16_Grammar.y":647  */
+    /* "src/main/resources/Java_16_Grammar.y":649  */
                                                   { yyval = new TypeAndDeclarators(((tree.Type.UnannotatedType)(yystack.valueAt (2))),((VariableDeclarators)(yystack.valueAt (1)))); };
   break;
 
 
   case 155: /* VariableDeclaratorList: VariableDeclarator  */
   if (yyn == 155)
-    /* "src/main/resources/Java_16_Grammar.y":651  */
+    /* "src/main/resources/Java_16_Grammar.y":653  */
                                                       { yyval = new VariableDeclarators(((VariableDeclarator)(yystack.valueAt (0)))); };
   break;
 
 
   case 156: /* VariableDeclaratorList: VariableDeclaratorList COMMA VariableDeclarator  */
   if (yyn == 156)
-    /* "src/main/resources/Java_16_Grammar.y":652  */
+    /* "src/main/resources/Java_16_Grammar.y":654  */
                                                       { yyval = ((VariableDeclarators)(yystack.valueAt (2))).add(((VariableDeclarator)(yystack.valueAt (0)))); };
   break;
 
 
   case 157: /* VariableDeclarator: IDENTIFIER  */
   if (yyn == 157)
-    /* "src/main/resources/Java_16_Grammar.y":656  */
+    /* "src/main/resources/Java_16_Grammar.y":658  */
                                               { yyval = new VariableDeclarator(((Token)(yystack.valueAt (0))),null,null); };
   break;
 
 
   case 158: /* VariableDeclarator: IDENTIFIER EQUAL Expression  */
   if (yyn == 158)
-    /* "src/main/resources/Java_16_Grammar.y":657  */
+    /* "src/main/resources/Java_16_Grammar.y":659  */
                                               { yyval = new VariableDeclarator(((Token)(yystack.valueAt (2))),null,new InitializerSimple(((tree.Expression.Expression)(yystack.valueAt (0))))); };
   break;
 
 
   case 159: /* VariableDeclarator: IDENTIFIER Dims  */
   if (yyn == 159)
-    /* "src/main/resources/Java_16_Grammar.y":658  */
+    /* "src/main/resources/Java_16_Grammar.y":660  */
                                               { yyval = new VariableDeclarator(((Token)(yystack.valueAt (1))),((Dims)(yystack.valueAt (0))),null); };
   break;
 
 
   case 160: /* VariableDeclarator: IDENTIFIER Dims EQUAL ArrayInitializer  */
   if (yyn == 160)
-    /* "src/main/resources/Java_16_Grammar.y":659  */
+    /* "src/main/resources/Java_16_Grammar.y":661  */
                                               { yyval = new VariableDeclarator(((Token)(yystack.valueAt (3))),((Dims)(yystack.valueAt (2))),((InitializerArray)(yystack.valueAt (0)))); };
   break;
 
 
   case 161: /* ArrayInitializer: LBRACE VariableInitializerListOpt RBRACE  */
   if (yyn == 161)
-    /* "src/main/resources/Java_16_Grammar.y":663  */
+    /* "src/main/resources/Java_16_Grammar.y":665  */
                                                      { yyval = ((InitializerArray)(yystack.valueAt (1))); };
   break;
 
 
   case 162: /* ArrayInitializer: LBRACE VariableInitializerListOpt COMMA RBRACE  */
   if (yyn == 162)
-    /* "src/main/resources/Java_16_Grammar.y":664  */
+    /* "src/main/resources/Java_16_Grammar.y":666  */
                                                      { yyval = ((InitializerArray)(yystack.valueAt (2))); };
   break;
 
 
   case 163: /* VariableInitializerListOpt: %empty  */
   if (yyn == 163)
-    /* "src/main/resources/Java_16_Grammar.y":668  */
+    /* "src/main/resources/Java_16_Grammar.y":670  */
                                 { yyval = null; };
   break;
 
 
   case 164: /* VariableInitializerListOpt: VariableInitializerList  */
   if (yyn == 164)
-    /* "src/main/resources/Java_16_Grammar.y":669  */
+    /* "src/main/resources/Java_16_Grammar.y":671  */
                                 { yyval = ((InitializerArray)(yystack.valueAt (0))); };
   break;
 
 
   case 165: /* VariableInitializerList: VariableInitializer  */
   if (yyn == 165)
-    /* "src/main/resources/Java_16_Grammar.y":673  */
+    /* "src/main/resources/Java_16_Grammar.y":675  */
                                                         { yyval = new InitializerArray(((InitializerSimple)(yystack.valueAt (0)))); };
   break;
 
 
   case 166: /* VariableInitializerList: VariableInitializerList COMMA VariableInitializer  */
   if (yyn == 166)
-    /* "src/main/resources/Java_16_Grammar.y":674  */
+    /* "src/main/resources/Java_16_Grammar.y":676  */
                                                         { yyval = ((InitializerArray)(yystack.valueAt (2))).add(((InitializerSimple)(yystack.valueAt (0)))); };
   break;
 
 
   case 167: /* VariableInitializer: Expression  */
   if (yyn == 167)
-    /* "src/main/resources/Java_16_Grammar.y":678  */
+    /* "src/main/resources/Java_16_Grammar.y":680  */
                         { yyval = new InitializerSimple(((tree.Expression.Expression)(yystack.valueAt (0)))); };
   break;
 
 
   case 168: /* VariableInitializer: ArrayInitializer  */
   if (yyn == 168)
-    /* "src/main/resources/Java_16_Grammar.y":679  */
+    /* "src/main/resources/Java_16_Grammar.y":681  */
                         { yyval = ((InitializerArray)(yystack.valueAt (0))); };
   break;
 
 
   case 169: /* MethodDeclaration: MethodHeader MethodBody  */
   if (yyn == 169)
-    /* "src/main/resources/Java_16_Grammar.y":685  */
+    /* "src/main/resources/Java_16_Grammar.y":687  */
                               { yyval = new MethodDeclaration(((MethodHeader)(yystack.valueAt (1))),((tree.Statement.Block)(yystack.valueAt (0)))); };
   break;
 
 
   case 170: /* MethodHeader: TypeParameters Type MethodDeclarator ThrowsOpt  */
   if (yyn == 170)
-    /* "src/main/resources/Java_16_Grammar.y":695  */
+    /* "src/main/resources/Java_16_Grammar.y":697  */
                                                                               { yyval = new MethodHeader(((TypeParameters)(yystack.valueAt (3))),((tree.Type.Type)(yystack.valueAt (2))),((MethodDeclarator)(yystack.valueAt (1))),((tree.Type.TypeList)(yystack.valueAt (0)))); };
   break;
 
 
   case 171: /* MethodHeader: TypeParameters AnnotationSeq VOID MethodDeclarator ThrowsOpt  */
   if (yyn == 171)
-    /* "src/main/resources/Java_16_Grammar.y":696  */
+    /* "src/main/resources/Java_16_Grammar.y":698  */
                                                                               { yyval = new MethodHeader(((TypeParameters)(yystack.valueAt (4))),null,((MethodDeclarator)(yystack.valueAt (1))),((tree.Type.TypeList)(yystack.valueAt (0)))); };
   break;
 
 
   case 172: /* MethodHeader: TypeParameters UnannotatedType MethodDeclarator ThrowsOpt  */
   if (yyn == 172)
-    /* "src/main/resources/Java_16_Grammar.y":697  */
+    /* "src/main/resources/Java_16_Grammar.y":699  */
                                                                               { yyval = new MethodHeader(((TypeParameters)(yystack.valueAt (3))),((tree.Type.UnannotatedType)(yystack.valueAt (2))),((MethodDeclarator)(yystack.valueAt (1))),((tree.Type.TypeList)(yystack.valueAt (0)))); };
   break;
 
 
   case 173: /* MethodHeader: TypeParameters VOID MethodDeclarator ThrowsOpt  */
   if (yyn == 173)
-    /* "src/main/resources/Java_16_Grammar.y":698  */
+    /* "src/main/resources/Java_16_Grammar.y":700  */
                                                                               { yyval = new MethodHeader(((TypeParameters)(yystack.valueAt (3))),null,((MethodDeclarator)(yystack.valueAt (1))),((tree.Type.TypeList)(yystack.valueAt (0)))); };
   break;
 
 
   case 174: /* MethodHeader: UnannotatedType MethodDeclarator ThrowsOpt  */
   if (yyn == 174)
-    /* "src/main/resources/Java_16_Grammar.y":699  */
+    /* "src/main/resources/Java_16_Grammar.y":701  */
                                                                               { yyval = new MethodHeader(null,((tree.Type.UnannotatedType)(yystack.valueAt (2))),((MethodDeclarator)(yystack.valueAt (1))),((tree.Type.TypeList)(yystack.valueAt (0)))); };
   break;
 
 
   case 175: /* MethodHeader: VOID MethodDeclarator ThrowsOpt  */
   if (yyn == 175)
-    /* "src/main/resources/Java_16_Grammar.y":700  */
+    /* "src/main/resources/Java_16_Grammar.y":702  */
                                                                               { yyval = new MethodHeader(null,null,((MethodDeclarator)(yystack.valueAt (1))),((tree.Type.TypeList)(yystack.valueAt (0)))); };
   break;
 
 
   case 176: /* MethodDeclarator: IDENTIFIER LPAREN RPAREN DimsOpt  */
   if (yyn == 176)
-    /* "src/main/resources/Java_16_Grammar.y":709  */
+    /* "src/main/resources/Java_16_Grammar.y":711  */
                                                                                 { yyval = new MethodDeclarator(((Token)(yystack.valueAt (3))),null,((Dims)(yystack.valueAt (0)))); };
   break;
 
 
   case 177: /* MethodDeclarator: IDENTIFIER LPAREN FormalParameterList RPAREN DimsOpt  */
   if (yyn == 177)
-    /* "src/main/resources/Java_16_Grammar.y":710  */
+    /* "src/main/resources/Java_16_Grammar.y":712  */
                                                                                 { yyval = new MethodDeclarator(((Token)(yystack.valueAt (4))),((ParameterDeclarations)(yystack.valueAt (2))),((Dims)(yystack.valueAt (0)))); };
   break;
 
 
   case 178: /* FormalParameterList: FormalParameter  */
   if (yyn == 178)
-    /* "src/main/resources/Java_16_Grammar.y":724  */
+    /* "src/main/resources/Java_16_Grammar.y":726  */
                                                 { yyval = new ParameterDeclarations(((ParameterDeclaration)(yystack.valueAt (0)))); };
   break;
 
 
   case 179: /* FormalParameterList: FormalParameterList COMMA FormalParameter  */
   if (yyn == 179)
-    /* "src/main/resources/Java_16_Grammar.y":725  */
+    /* "src/main/resources/Java_16_Grammar.y":727  */
                                                 { yyval = ((ParameterDeclarations)(yystack.valueAt (2))).add(((ParameterDeclaration)(yystack.valueAt (0))));};
   break;
 
 
   case 180: /* FormalParameter: ModifierSeq UnannotatedType FormalParameterTail  */
   if (yyn == 180)
-    /* "src/main/resources/Java_16_Grammar.y":729  */
+    /* "src/main/resources/Java_16_Grammar.y":731  */
                                                       { yyval = ParameterDeclaration.create(((Modifiers)(yystack.valueAt (2))),((tree.Type.UnannotatedType)(yystack.valueAt (1))),((ParameterTail)(yystack.valueAt (0)))); };
   break;
 
 
   case 181: /* FormalParameter: UnannotatedType FormalParameterTail  */
   if (yyn == 181)
-    /* "src/main/resources/Java_16_Grammar.y":730  */
+    /* "src/main/resources/Java_16_Grammar.y":732  */
                                                       { yyval = ParameterDeclaration.create(null,((tree.Type.UnannotatedType)(yystack.valueAt (1))),((ParameterTail)(yystack.valueAt (0)))); };
   break;
 
 
   case 182: /* FormalParameterTail: IDENTIFIER DimsOpt  */
   if (yyn == 182)
-    /* "src/main/resources/Java_16_Grammar.y":734  */
+    /* "src/main/resources/Java_16_Grammar.y":736  */
                                                    { yyval = new ParameterTail(null,((Token)(yystack.valueAt (1))),((Dims)(yystack.valueAt (0))),false,false); };
   break;
 
 
   case 183: /* FormalParameterTail: AnnotationSeqOpt ELLIPSIS IDENTIFIER  */
   if (yyn == 183)
-    /* "src/main/resources/Java_16_Grammar.y":735  */
+    /* "src/main/resources/Java_16_Grammar.y":737  */
                                                    { yyval = new ParameterTail(((Annotations)(yystack.valueAt (2))),((Token)(yystack.valueAt (0))),null,true,false); };
   break;
 
 
   case 184: /* FormalParameterTail: THIS  */
   if (yyn == 184)
-    /* "src/main/resources/Java_16_Grammar.y":736  */
+    /* "src/main/resources/Java_16_Grammar.y":738  */
                                                    { yyval = new ParameterTail(null,null,null,false,true); };
   break;
 
 
   case 185: /* FormalParameterTail: IDENTIFIER DOT THIS  */
   if (yyn == 185)
-    /* "src/main/resources/Java_16_Grammar.y":737  */
+    /* "src/main/resources/Java_16_Grammar.y":739  */
                                                    { yyval = new ParameterTail(null,((Token)(yystack.valueAt (2))),null,false,true); };
   break;
 
 
   case 186: /* ThrowsOpt: %empty  */
   if (yyn == 186)
-    /* "src/main/resources/Java_16_Grammar.y":749  */
+    /* "src/main/resources/Java_16_Grammar.y":751  */
                              { yyval = null; };
   break;
 
 
   case 187: /* ThrowsOpt: THROWS ClassTypeList1  */
   if (yyn == 187)
-    /* "src/main/resources/Java_16_Grammar.y":750  */
+    /* "src/main/resources/Java_16_Grammar.y":752  */
                              { yyval = ((tree.Type.TypeList)(yystack.valueAt (0))); };
   break;
 
 
   case 188: /* MethodBody: Block  */
   if (yyn == 188)
-    /* "src/main/resources/Java_16_Grammar.y":754  */
+    /* "src/main/resources/Java_16_Grammar.y":756  */
                    { yyval = ((tree.Statement.Block)(yystack.valueAt (0))); };
   break;
 
 
   case 189: /* MethodBody: SEMICOLON  */
   if (yyn == 189)
-    /* "src/main/resources/Java_16_Grammar.y":755  */
+    /* "src/main/resources/Java_16_Grammar.y":757  */
                    { yyval = null; };
   break;
 
 
   case 190: /* DimsOpt: %empty  */
   if (yyn == 190)
-    /* "src/main/resources/Java_16_Grammar.y":761  */
+    /* "src/main/resources/Java_16_Grammar.y":763  */
                  { yyval = null; };
   break;
 
 
   case 191: /* DimsOpt: Dims  */
   if (yyn == 191)
-    /* "src/main/resources/Java_16_Grammar.y":762  */
+    /* "src/main/resources/Java_16_Grammar.y":764  */
                  { yyval = ((Dims)(yystack.valueAt (0))); };
   break;
 
 
   case 192: /* Dims: Dim  */
   if (yyn == 192)
-    /* "src/main/resources/Java_16_Grammar.y":766  */
+    /* "src/main/resources/Java_16_Grammar.y":768  */
                 { yyval = new Dims(((Dim)(yystack.valueAt (0)))); };
   break;
 
 
   case 193: /* Dims: Dims Dim  */
   if (yyn == 193)
-    /* "src/main/resources/Java_16_Grammar.y":767  */
+    /* "src/main/resources/Java_16_Grammar.y":769  */
                 { yyval = ((Dims)(yystack.valueAt (1))).add(((Dim)(yystack.valueAt (0)))); };
   break;
 
 
   case 194: /* Dim: AnnotationSeq LBRACKET RBRACKET  */
   if (yyn == 194)
-    /* "src/main/resources/Java_16_Grammar.y":771  */
+    /* "src/main/resources/Java_16_Grammar.y":773  */
                                       { yyval = new Dim(((Annotations)(yystack.valueAt (2)))); };
   break;
 
 
   case 195: /* Dim: LBRACKET RBRACKET  */
   if (yyn == 195)
-    /* "src/main/resources/Java_16_Grammar.y":772  */
+    /* "src/main/resources/Java_16_Grammar.y":774  */
                                       { yyval = new Dim(null); };
   break;
 
 
   case 196: /* InterfaceDeclaration: NormalInterfaceDeclaration  */
   if (yyn == 196)
-    /* "src/main/resources/Java_16_Grammar.y":778  */
+    /* "src/main/resources/Java_16_Grammar.y":780  */
                                       { yyval = ((InterfaceDeclaration)(yystack.valueAt (0))); };
   break;
 
 
   case 197: /* InterfaceDeclaration: AnnotationInterfaceDeclaration  */
   if (yyn == 197)
-    /* "src/main/resources/Java_16_Grammar.y":779  */
+    /* "src/main/resources/Java_16_Grammar.y":781  */
                                       { yyval = null; };
   break;
 
 
   case 198: /* NormalInterfaceDeclaration: INTERFACE IDENTIFIER TypeParametersOpt InterfaceExtendsOpt InterfaceBody  */
   if (yyn == 198)
-    /* "src/main/resources/Java_16_Grammar.y":784  */
+    /* "src/main/resources/Java_16_Grammar.y":786  */
                                          { yyval = new NormalInterfaceDeclaration(((Token)(yystack.valueAt (3))),((TypeParameters)(yystack.valueAt (2))),((tree.Type.TypeList)(yystack.valueAt (1))),((Declarations)(yystack.valueAt (0)))); };
   break;
 
 
   case 199: /* InterfaceExtendsOpt: %empty  */
   if (yyn == 199)
-    /* "src/main/resources/Java_16_Grammar.y":788  */
+    /* "src/main/resources/Java_16_Grammar.y":790  */
                         { yyval = null; };
   break;
 
 
   case 200: /* InterfaceExtendsOpt: InterfaceExtends  */
   if (yyn == 200)
-    /* "src/main/resources/Java_16_Grammar.y":789  */
+    /* "src/main/resources/Java_16_Grammar.y":791  */
                         { yyval = ((tree.Type.TypeList)(yystack.valueAt (0))); };
   break;
 
 
   case 201: /* InterfaceExtends: EXTENDS Type  */
   if (yyn == 201)
-    /* "src/main/resources/Java_16_Grammar.y":793  */
+    /* "src/main/resources/Java_16_Grammar.y":795  */
                                    { yyval = new TypeList(((tree.Type.Type)(yystack.valueAt (0)))); };
   break;
 
 
   case 202: /* InterfaceExtends: InterfaceExtends COMMA Type  */
   if (yyn == 202)
-    /* "src/main/resources/Java_16_Grammar.y":794  */
+    /* "src/main/resources/Java_16_Grammar.y":796  */
                                    { yyval = ((tree.Type.TypeList)(yystack.valueAt (2))).add(((tree.Type.Type)(yystack.valueAt (0)))); };
   break;
 
 
   case 203: /* InterfaceBody: LBRACE RBRACE  */
   if (yyn == 203)
-    /* "src/main/resources/Java_16_Grammar.y":798  */
+    /* "src/main/resources/Java_16_Grammar.y":800  */
                                                   { yyval = null; };
   break;
 
 
   case 204: /* InterfaceBody: LBRACE InterfaceMemberDeclarationSeq RBRACE  */
   if (yyn == 204)
-    /* "src/main/resources/Java_16_Grammar.y":799  */
+    /* "src/main/resources/Java_16_Grammar.y":801  */
                                                   { yyval = ((Declarations)(yystack.valueAt (1))); };
   break;
 
 
   case 205: /* InterfaceMemberDeclarationSeq: ModifierSeqOpt InterfaceMemberDeclaration  */
   if (yyn == 205)
-    /* "src/main/resources/Java_16_Grammar.y":803  */
+    /* "src/main/resources/Java_16_Grammar.y":805  */
                                                                               { yyval = new Declarations(((tree.Declaration.Declaration)(yystack.valueAt (0))).addModifiers(((Modifiers)(yystack.valueAt (1))))); };
   break;
 
 
   case 206: /* InterfaceMemberDeclarationSeq: InterfaceMemberDeclarationSeq ModifierSeqOpt InterfaceMemberDeclaration  */
   if (yyn == 206)
-    /* "src/main/resources/Java_16_Grammar.y":804  */
+    /* "src/main/resources/Java_16_Grammar.y":806  */
                                                                               { yyval = ((Declarations)(yystack.valueAt (2))).add(((tree.Declaration.Declaration)(yystack.valueAt (0))).addModifiers(((Modifiers)(yystack.valueAt (1))))); };
   break;
 
 
   case 207: /* InterfaceMemberDeclaration: ConstantDeclaration  */
   if (yyn == 207)
-    /* "src/main/resources/Java_16_Grammar.y":808  */
+    /* "src/main/resources/Java_16_Grammar.y":810  */
                                   { yyval = ((tree.Declaration.Declaration)(yystack.valueAt (0))); };
   break;
 
 
   case 208: /* InterfaceMemberDeclaration: InterfaceMethodDeclaration  */
   if (yyn == 208)
-    /* "src/main/resources/Java_16_Grammar.y":809  */
+    /* "src/main/resources/Java_16_Grammar.y":811  */
                                   { yyval = ((tree.Declaration.Declaration)(yystack.valueAt (0))); };
   break;
 
 
   case 209: /* InterfaceMemberDeclaration: ClassDeclaration  */
   if (yyn == 209)
-    /* "src/main/resources/Java_16_Grammar.y":810  */
+    /* "src/main/resources/Java_16_Grammar.y":812  */
                                   { yyval = ((ClassDeclaration)(yystack.valueAt (0))); };
   break;
 
 
   case 210: /* InterfaceMemberDeclaration: InterfaceDeclaration  */
   if (yyn == 210)
-    /* "src/main/resources/Java_16_Grammar.y":811  */
+    /* "src/main/resources/Java_16_Grammar.y":813  */
                                   { yyval = ((InterfaceDeclaration)(yystack.valueAt (0))); };
   break;
 
 
   case 211: /* ConstantDeclaration: Type VariableDeclaratorList SEMICOLON  */
   if (yyn == 211)
-    /* "src/main/resources/Java_16_Grammar.y":815  */
+    /* "src/main/resources/Java_16_Grammar.y":817  */
                                             { yyval = new TypeAndDeclarators(((tree.Type.Type)(yystack.valueAt (2))),((VariableDeclarators)(yystack.valueAt (1)))); };
   break;
 
 
   case 212: /* InterfaceMethodDeclaration: MethodHeader MethodBody  */
   if (yyn == 212)
-    /* "src/main/resources/Java_16_Grammar.y":819  */
+    /* "src/main/resources/Java_16_Grammar.y":821  */
                               { yyval = null; };
   break;
 
 
   case 213: /* AnnotationInterfaceDeclaration: AT INTERFACE IDENTIFIER AnnotationInterfaceBody  */
   if (yyn == 213)
-    /* "src/main/resources/Java_16_Grammar.y":823  */
+    /* "src/main/resources/Java_16_Grammar.y":825  */
                                                       { yyval = null; };
   break;
 
 
   case 225: /* Block: LBRACE RBRACE  */
   if (yyn == 225)
-    /* "src/main/resources/Java_16_Grammar.y":855  */
-                                      { yyval = null; };
+    /* "src/main/resources/Java_16_Grammar.y":858  */
+                                        { yyval = null; };
   break;
 
 
   case 226: /* Block: LBRACE BlockStatementSeq RBRACE  */
   if (yyn == 226)
-    /* "src/main/resources/Java_16_Grammar.y":856  */
-                                      { yyval = new Block(null,((tree.Statement.BlockStatements)(yystack.valueAt (1)))); };
+    /* "src/main/resources/Java_16_Grammar.y":859  */
+                                        { yyval = new Block(null,((tree.Statement.BlockStatements)(yystack.valueAt (1)))); };
   break;
 
 
   case 227: /* BlockStatementSeq: BlockStatement  */
   if (yyn == 227)
-    /* "src/main/resources/Java_16_Grammar.y":860  */
+    /* "src/main/resources/Java_16_Grammar.y":863  */
                                            { yyval = new BlockStatements(((tree.Statement.BlockStatement)(yystack.valueAt (0)))); };
   break;
 
 
   case 228: /* BlockStatementSeq: BlockStatementSeq BlockStatement  */
   if (yyn == 228)
-    /* "src/main/resources/Java_16_Grammar.y":861  */
+    /* "src/main/resources/Java_16_Grammar.y":864  */
                                        { yyval = ((tree.Statement.BlockStatements)(yystack.valueAt (1))).add(((tree.Statement.BlockStatement)(yystack.valueAt (0)))); };
   break;
 
 
   case 229: /* BlockStatement: ModifierSeqOpt ClassDeclaration  */
   if (yyn == 229)
-    /* "src/main/resources/Java_16_Grammar.y":877  */
+    /* "src/main/resources/Java_16_Grammar.y":880  */
                                                 { yyval = new BlockStatement(((ClassDeclaration)(yystack.valueAt (0))).addModifiers(((Modifiers)(yystack.valueAt (1))))); };
   break;
 
 
   case 230: /* BlockStatement: ModifierSeqOpt NormalInterfaceDeclaration  */
   if (yyn == 230)
-    /* "src/main/resources/Java_16_Grammar.y":878  */
+    /* "src/main/resources/Java_16_Grammar.y":881  */
                                                 { yyval = new BlockStatement(((InterfaceDeclaration)(yystack.valueAt (0))).addModifiers(((Modifiers)(yystack.valueAt (1))))); };
   break;
 
 
   case 231: /* BlockStatement: ModifierSeqOpt LocalVariableDeclaration SEMICOLON  */
   if (yyn == 231)
-    /* "src/main/resources/Java_16_Grammar.y":880  */
+    /* "src/main/resources/Java_16_Grammar.y":883  */
                                                 { yyval = new BlockStatement(((tree.Declaration.Declaration)(yystack.valueAt (1))).addModifiers(((Modifiers)(yystack.valueAt (2))))); };
   break;
 
 
   case 232: /* BlockStatement: Statement  */
   if (yyn == 232)
-    /* "src/main/resources/Java_16_Grammar.y":881  */
+    /* "src/main/resources/Java_16_Grammar.y":884  */
                                                 { yyval = new BlockStatement(((tree.Statement.Statement)(yystack.valueAt (0)))); };
   break;
 
 
   case 233: /* LocalVariableDeclaration: UnannotatedType VariableDeclaratorList  */
   if (yyn == 233)
-    /* "src/main/resources/Java_16_Grammar.y":885  */
+    /* "src/main/resources/Java_16_Grammar.y":888  */
                                              { yyval = new TypeAndDeclarators(((tree.Type.UnannotatedType)(yystack.valueAt (1))),((VariableDeclarators)(yystack.valueAt (0)))); };
   break;
 
 
   case 234: /* LocalVariableDeclaration: VAR VariableDeclaratorList  */
   if (yyn == 234)
-    /* "src/main/resources/Java_16_Grammar.y":886  */
+    /* "src/main/resources/Java_16_Grammar.y":889  */
                                              { yyval = new TypeAndDeclarators(null,((VariableDeclarators)(yystack.valueAt (0)))); };
   break;
 
 
   case 240: /* SimpleStatement: Block  */
   if (yyn == 240)
-    /* "src/main/resources/Java_16_Grammar.y":898  */
+    /* "src/main/resources/Java_16_Grammar.y":901  */
                                         { yyval = ((tree.Statement.Block)(yystack.valueAt (0))); };
   break;
 
 
   case 241: /* SimpleStatement: SEMICOLON  */
   if (yyn == 241)
-    /* "src/main/resources/Java_16_Grammar.y":899  */
+    /* "src/main/resources/Java_16_Grammar.y":902  */
                                             { yyval = null; };
   break;
 
 
   case 242: /* SimpleStatement: StatementExpression SEMICOLON  */
   if (yyn == 242)
-    /* "src/main/resources/Java_16_Grammar.y":900  */
+    /* "src/main/resources/Java_16_Grammar.y":903  */
                                         { yyval = ((StatementExpression)(yystack.valueAt (1))); };
   break;
 
 
   case 243: /* SimpleStatement: ASSERT Expression SEMICOLON  */
   if (yyn == 243)
-    /* "src/main/resources/Java_16_Grammar.y":902  */
+    /* "src/main/resources/Java_16_Grammar.y":905  */
                                                    { yyval = new Assert(null,((tree.Expression.Expression)(yystack.valueAt (1))),null); };
   break;
 
 
   case 244: /* SimpleStatement: ASSERT Expression COLON Expression SEMICOLON  */
   if (yyn == 244)
-    /* "src/main/resources/Java_16_Grammar.y":903  */
+    /* "src/main/resources/Java_16_Grammar.y":906  */
                                                    { yyval = new Assert(null,((tree.Expression.Expression)(yystack.valueAt (3))),((tree.Expression.Expression)(yystack.valueAt (1)))); };
   break;
 
 
   case 245: /* SimpleStatement: SWITCH LPAREN Expression RPAREN SwitchBlock  */
   if (yyn == 245)
-    /* "src/main/resources/Java_16_Grammar.y":905  */
+    /* "src/main/resources/Java_16_Grammar.y":908  */
                                                    { yyval = null; };
   break;
 
 
   case 246: /* SimpleStatement: DO Statement WHILE LPAREN Expression RPAREN SEMICOLON  */
   if (yyn == 246)
-    /* "src/main/resources/Java_16_Grammar.y":906  */
+    /* "src/main/resources/Java_16_Grammar.y":909  */
                                                             { yyval = new Do(null,((tree.Statement.Statement)(yystack.valueAt (5))),((tree.Expression.Expression)(yystack.valueAt (2)))); };
   break;
 
 
   case 247: /* SimpleStatement: BREAK SEMICOLON  */
   if (yyn == 247)
-    /* "src/main/resources/Java_16_Grammar.y":908  */
+    /* "src/main/resources/Java_16_Grammar.y":911  */
                                   { yyval = new Break(null,null); };
   break;
 
 
   case 248: /* SimpleStatement: BREAK IDENTIFIER SEMICOLON  */
   if (yyn == 248)
-    /* "src/main/resources/Java_16_Grammar.y":909  */
+    /* "src/main/resources/Java_16_Grammar.y":912  */
                                   { yyval = new Break(null,((Token)(yystack.valueAt (1)))); };
   break;
 
 
   case 249: /* SimpleStatement: CONTINUE SEMICOLON  */
   if (yyn == 249)
-    /* "src/main/resources/Java_16_Grammar.y":911  */
+    /* "src/main/resources/Java_16_Grammar.y":914  */
                                       { yyval = new Continue(null,null); };
   break;
 
 
   case 250: /* SimpleStatement: CONTINUE IDENTIFIER SEMICOLON  */
   if (yyn == 250)
-    /* "src/main/resources/Java_16_Grammar.y":912  */
+    /* "src/main/resources/Java_16_Grammar.y":915  */
                                       { yyval = new Continue(null,((Token)(yystack.valueAt (1)))); };
   break;
 
 
   case 251: /* SimpleStatement: RETURN SEMICOLON  */
   if (yyn == 251)
-    /* "src/main/resources/Java_16_Grammar.y":914  */
+    /* "src/main/resources/Java_16_Grammar.y":917  */
                                       { yyval = new Return(null,null); };
   break;
 
 
   case 252: /* SimpleStatement: RETURN Expression SEMICOLON  */
   if (yyn == 252)
-    /* "src/main/resources/Java_16_Grammar.y":915  */
+    /* "src/main/resources/Java_16_Grammar.y":918  */
                                       { yyval = new Return(null,((tree.Expression.Expression)(yystack.valueAt (1)))); };
   break;
 
 
   case 253: /* SimpleStatement: SYNCHRONIZED LPAREN Expression RPAREN Block  */
   if (yyn == 253)
-    /* "src/main/resources/Java_16_Grammar.y":917  */
+    /* "src/main/resources/Java_16_Grammar.y":920  */
                                                    { yyval = new Synchronized(null,((tree.Expression.Expression)(yystack.valueAt (2))),((tree.Statement.Block)(yystack.valueAt (0)))); };
   break;
 
 
   case 254: /* SimpleStatement: THROW Expression SEMICOLON  */
   if (yyn == 254)
-    /* "src/main/resources/Java_16_Grammar.y":919  */
+    /* "src/main/resources/Java_16_Grammar.y":922  */
                                   { yyval = new Throw(null,((tree.Expression.Expression)(yystack.valueAt (1)))); };
   break;
 
 
   case 255: /* SimpleStatement: YIELD Expression SEMICOLON  */
   if (yyn == 255)
-    /* "src/main/resources/Java_16_Grammar.y":920  */
+    /* "src/main/resources/Java_16_Grammar.y":923  */
                                   { yyval = new Yield(null,((tree.Expression.Expression)(yystack.valueAt (1)))); };
   break;
 
 
   case 256: /* SimpleStatement: TRY Block Catches  */
   if (yyn == 256)
-    /* "src/main/resources/Java_16_Grammar.y":923  */
+    /* "src/main/resources/Java_16_Grammar.y":926  */
                                    { yyval = null; };
   break;
 
 
   case 257: /* SimpleStatement: TRY Block Catches Finally  */
   if (yyn == 257)
-    /* "src/main/resources/Java_16_Grammar.y":924  */
+    /* "src/main/resources/Java_16_Grammar.y":927  */
                                    { yyval = null; };
   break;
 
 
   case 258: /* SimpleStatement: TRY Block Finally  */
   if (yyn == 258)
-    /* "src/main/resources/Java_16_Grammar.y":925  */
+    /* "src/main/resources/Java_16_Grammar.y":928  */
                                    { yyval = null; };
   break;
 
 
   case 259: /* SimpleStatement: TRY ResourceSpecification Block CatchesOpt FinallyOpt  */
   if (yyn == 259)
-    /* "src/main/resources/Java_16_Grammar.y":927  */
+    /* "src/main/resources/Java_16_Grammar.y":930  */
                                    { yyval = null; };
   break;
 
 
   case 260: /* LabeledStatement: IDENTIFIER COLON Statement  */
   if (yyn == 260)
-    /* "src/main/resources/Java_16_Grammar.y":931  */
+    /* "src/main/resources/Java_16_Grammar.y":934  */
                                  { yyval = ((tree.Statement.Statement)(yystack.valueAt (0))).addLabel(((Token)(yystack.valueAt (2)))); };
   break;
 
 
   case 261: /* StatementExpression: Assignment  */
   if (yyn == 261)
-    /* "src/main/resources/Java_16_Grammar.y":935  */
+    /* "src/main/resources/Java_16_Grammar.y":938  */
                                    { yyval = new StatementExpression(null,((tree.Expression.Expression)(yystack.valueAt (0)))); };
   break;
 
 
   case 262: /* StatementExpression: PreIncrementExpression  */
   if (yyn == 262)
-    /* "src/main/resources/Java_16_Grammar.y":936  */
+    /* "src/main/resources/Java_16_Grammar.y":939  */
                                    { yyval = new StatementExpression(null,((UnaryPrefix)(yystack.valueAt (0)))); };
   break;
 
 
   case 263: /* StatementExpression: PreDecrementExpression  */
   if (yyn == 263)
-    /* "src/main/resources/Java_16_Grammar.y":937  */
+    /* "src/main/resources/Java_16_Grammar.y":940  */
                                    { yyval = new StatementExpression(null,((UnaryPrefix)(yystack.valueAt (0)))); };
   break;
 
 
   case 264: /* StatementExpression: PostIncrementExpression  */
   if (yyn == 264)
-    /* "src/main/resources/Java_16_Grammar.y":938  */
+    /* "src/main/resources/Java_16_Grammar.y":941  */
                                    { yyval = new StatementExpression(null,((UnaryPostfix)(yystack.valueAt (0)))); };
   break;
 
 
   case 265: /* StatementExpression: PostDecrementExpression  */
   if (yyn == 265)
-    /* "src/main/resources/Java_16_Grammar.y":939  */
+    /* "src/main/resources/Java_16_Grammar.y":942  */
                                    { yyval = new StatementExpression(null,((UnaryPostfix)(yystack.valueAt (0)))); };
   break;
 
 
   case 266: /* StatementExpression: MethodInvocation  */
   if (yyn == 266)
-    /* "src/main/resources/Java_16_Grammar.y":940  */
+    /* "src/main/resources/Java_16_Grammar.y":943  */
                                    { yyval = new StatementExpression(null,((tree.Expression.Expression)(yystack.valueAt (0)))); };
   break;
 
 
   case 267: /* StatementExpression: ClassInstanceCreationExpression  */
   if (yyn == 267)
-    /* "src/main/resources/Java_16_Grammar.y":941  */
+    /* "src/main/resources/Java_16_Grammar.y":944  */
                                        { yyval = ((tree.Expression.Expression)(yystack.valueAt (0))); };
   break;
 
 
   case 268: /* IfThenElseStatement: IF LPAREN Expression RPAREN Statement ElsePartOpt  */
   if (yyn == 268)
-    /* "src/main/resources/Java_16_Grammar.y":945  */
+    /* "src/main/resources/Java_16_Grammar.y":948  */
                                                         { yyval = null; };
   break;
 
 
   case 269: /* ElsePartOpt: %empty  */
   if (yyn == 269)
-    /* "src/main/resources/Java_16_Grammar.y":949  */
+    /* "src/main/resources/Java_16_Grammar.y":952  */
                       { yyval = null; };
   break;
 
 
   case 270: /* ElsePartOpt: ELSE Statement  */
   if (yyn == 270)
-    /* "src/main/resources/Java_16_Grammar.y":950  */
+    /* "src/main/resources/Java_16_Grammar.y":953  */
                       { yyval = ((tree.Statement.Statement)(yystack.valueAt (0))); };
   break;
 
 
   case 271: /* SwitchBlock: LBRACE SwitchRuleSeq RBRACE  */
   if (yyn == 271)
-    /* "src/main/resources/Java_16_Grammar.y":954  */
+    /* "src/main/resources/Java_16_Grammar.y":957  */
                                                                    { yyval = null; };
   break;
 
 
   case 272: /* SwitchBlock: LBRACE SwitchBlockStatementGroupSeqOpt RBRACE  */
   if (yyn == 272)
-    /* "src/main/resources/Java_16_Grammar.y":955  */
+    /* "src/main/resources/Java_16_Grammar.y":958  */
                                                                    { yyval = null; };
   break;
 
 
   case 273: /* SwitchBlock: LBRACE SwitchBlockStatementGroupSeqOpt SwitchLabelSeq RBRACE  */
   if (yyn == 273)
-    /* "src/main/resources/Java_16_Grammar.y":956  */
+    /* "src/main/resources/Java_16_Grammar.y":959  */
                                                                    { yyval = null; };
   break;
 
 
   case 274: /* SwitchRuleSeq: SwitchRule  */
   if (yyn == 274)
-    /* "src/main/resources/Java_16_Grammar.y":960  */
+    /* "src/main/resources/Java_16_Grammar.y":963  */
                                { yyval = new SwitchRules(((SwitchRule)(yystack.valueAt (0)))); };
   break;
 
 
   case 275: /* SwitchRuleSeq: SwitchRuleSeq SwitchRule  */
   if (yyn == 275)
-    /* "src/main/resources/Java_16_Grammar.y":961  */
+    /* "src/main/resources/Java_16_Grammar.y":964  */
                                { yyval = ((SwitchRules)(yystack.valueAt (1))).add(((SwitchRule)(yystack.valueAt (0)))); };
   break;
 
 
   case 276: /* SwitchRule: SwitchLabel ARROW Expression SEMICOLON  */
   if (yyn == 276)
-    /* "src/main/resources/Java_16_Grammar.y":965  */
+    /* "src/main/resources/Java_16_Grammar.y":968  */
                                                     { yyval = new SwitchRule(((SwitchLabel)(yystack.valueAt (3))),((tree.Expression.Expression)(yystack.valueAt (1)))); };
   break;
 
 
   case 277: /* SwitchRule: SwitchLabel ARROW Block  */
   if (yyn == 277)
-    /* "src/main/resources/Java_16_Grammar.y":966  */
+    /* "src/main/resources/Java_16_Grammar.y":969  */
                                                     { yyval = new SwitchRule(((SwitchLabel)(yystack.valueAt (2))),((tree.Statement.Block)(yystack.valueAt (0)))); };
   break;
 
 
   case 278: /* SwitchRule: SwitchLabel ARROW THROW Expression SEMICOLON  */
   if (yyn == 278)
-    /* "src/main/resources/Java_16_Grammar.y":967  */
+    /* "src/main/resources/Java_16_Grammar.y":970  */
                                                     { yyval = new SwitchRule(((SwitchLabel)(yystack.valueAt (4))),new Throw(null,((tree.Expression.Expression)(yystack.valueAt (1))))); };
   break;
 
 
   case 284: /* SwitchLabelSeq: SwitchLabel COLON  */
   if (yyn == 284)
-    /* "src/main/resources/Java_16_Grammar.y":982  */
+    /* "src/main/resources/Java_16_Grammar.y":985  */
                                        { yyval = new SwitchLabels(((SwitchLabel)(yystack.valueAt (1)))); };
   break;
 
 
   case 285: /* SwitchLabelSeq: SwitchLabelSeq SwitchLabel COLON  */
   if (yyn == 285)
-    /* "src/main/resources/Java_16_Grammar.y":983  */
+    /* "src/main/resources/Java_16_Grammar.y":986  */
                                        { yyval = ((SwitchLabels)(yystack.valueAt (2))).add(((SwitchLabel)(yystack.valueAt (1)))); };
   break;
 
 
   case 286: /* SwitchLabel: CASE CaseExpressionList  */
   if (yyn == 286)
-    /* "src/main/resources/Java_16_Grammar.y":987  */
+    /* "src/main/resources/Java_16_Grammar.y":990  */
                                { yyval = ((SwitchLabel)(yystack.valueAt (0))); };
   break;
 
 
   case 287: /* SwitchLabel: DEFAULT  */
   if (yyn == 287)
-    /* "src/main/resources/Java_16_Grammar.y":988  */
+    /* "src/main/resources/Java_16_Grammar.y":991  */
                                    { yyval = null; };
   break;
 
 
   case 288: /* CaseExpressionList: AssignmentExpression  */
   if (yyn == 288)
-    /* "src/main/resources/Java_16_Grammar.y":992  */
+    /* "src/main/resources/Java_16_Grammar.y":995  */
                                                     { yyval = new SwitchLabel(((tree.Expression.Expression)(yystack.valueAt (0)))); };
   break;
 
 
   case 289: /* CaseExpressionList: CaseExpressionList COMMA AssignmentExpression  */
   if (yyn == 289)
-    /* "src/main/resources/Java_16_Grammar.y":993  */
+    /* "src/main/resources/Java_16_Grammar.y":996  */
                                                     { yyval = ((SwitchLabel)(yystack.valueAt (2))).add(((tree.Expression.Expression)(yystack.valueAt (0)))); };
   break;
 
 
   case 290: /* WhileStatement: WHILE LPAREN Expression RPAREN Statement  */
   if (yyn == 290)
-    /* "src/main/resources/Java_16_Grammar.y":1000  */
+    /* "src/main/resources/Java_16_Grammar.y":1003  */
                                                 { yyval = new While(null,((tree.Expression.Expression)(yystack.valueAt (2))),((tree.Statement.Statement)(yystack.valueAt (0)))); };
   break;
 
 
   case 291: /* ForStatement: BasicForStatement  */
   if (yyn == 291)
-    /* "src/main/resources/Java_16_Grammar.y":1004  */
+    /* "src/main/resources/Java_16_Grammar.y":1007  */
                            { yyval = ((tree.Statement.Statement)(yystack.valueAt (0))); };
   break;
 
 
   case 292: /* ForStatement: EnhancedForStatement  */
   if (yyn == 292)
-    /* "src/main/resources/Java_16_Grammar.y":1005  */
+    /* "src/main/resources/Java_16_Grammar.y":1008  */
                            { yyval = ((tree.Statement.Statement)(yystack.valueAt (0))); };
   break;
 
 
   case 293: /* BasicForStatement: FOR LPAREN ForInitOpt SEMICOLON ExpressionOpt SEMICOLON StatementExpressionListOpt RPAREN Statement  */
   if (yyn == 293)
-    /* "src/main/resources/Java_16_Grammar.y":1010  */
+    /* "src/main/resources/Java_16_Grammar.y":1013  */
                           { yyval = null; };
   break;
 
 
   case 297: /* ExpressionOpt: %empty  */
   if (yyn == 297)
-    /* "src/main/resources/Java_16_Grammar.y":1020  */
+    /* "src/main/resources/Java_16_Grammar.y":1023  */
                   { yyval = null; };
   break;
 
 
   case 298: /* ExpressionOpt: Expression  */
   if (yyn == 298)
-    /* "src/main/resources/Java_16_Grammar.y":1021  */
+    /* "src/main/resources/Java_16_Grammar.y":1024  */
                   { yyval = ((tree.Expression.Expression)(yystack.valueAt (0))); };
   break;
 
 
   case 299: /* StatementExpressionList: StatementExpression  */
   if (yyn == 299)
-    /* "src/main/resources/Java_16_Grammar.y":1028  */
+    /* "src/main/resources/Java_16_Grammar.y":1031  */
                                                         { yyval = ((StatementExpression)(yystack.valueAt (0))); };
   break;
 
 
   case 300: /* StatementExpressionList: StatementExpressionList COMMA StatementExpression  */
   if (yyn == 300)
-    /* "src/main/resources/Java_16_Grammar.y":1029  */
+    /* "src/main/resources/Java_16_Grammar.y":1032  */
                                                         { yyval = ((StatementExpressions)(yystack.valueAt (2))).add(((StatementExpression)(yystack.valueAt (0)))); };
   break;
 
 
   case 301: /* StatementExpressionListOpt: %empty  */
   if (yyn == 301)
-    /* "src/main/resources/Java_16_Grammar.y":1033  */
+    /* "src/main/resources/Java_16_Grammar.y":1036  */
                                { yyval = null; };
   break;
 
 
   case 302: /* StatementExpressionListOpt: StatementExpressionList  */
   if (yyn == 302)
-    /* "src/main/resources/Java_16_Grammar.y":1034  */
+    /* "src/main/resources/Java_16_Grammar.y":1037  */
                                { yyval = ((StatementExpressions)(yystack.valueAt (0))); };
   break;
 
 
   case 303: /* EnhancedForStatement: FOR LPAREN LocalVariableDeclaration COLON Expression RPAREN Statement  */
   if (yyn == 303)
-    /* "src/main/resources/Java_16_Grammar.y":1038  */
+    /* "src/main/resources/Java_16_Grammar.y":1041  */
                                                                             { yyval = null; };
   break;
 
 
   case 304: /* CatchesOpt: %empty  */
   if (yyn == 304)
-    /* "src/main/resources/Java_16_Grammar.y":1042  */
+    /* "src/main/resources/Java_16_Grammar.y":1045  */
                { yyval = null; };
   break;
 
 
   case 305: /* CatchesOpt: Catches  */
   if (yyn == 305)
-    /* "src/main/resources/Java_16_Grammar.y":1043  */
+    /* "src/main/resources/Java_16_Grammar.y":1046  */
                { yyval = ((CatchClauses)(yystack.valueAt (0))); };
   break;
 
 
   case 306: /* Catches: CatchClause  */
   if (yyn == 306)
-    /* "src/main/resources/Java_16_Grammar.y":1047  */
+    /* "src/main/resources/Java_16_Grammar.y":1050  */
                             { yyval = new CatchClauses(((CatchClause)(yystack.valueAt (0)))); };
   break;
 
 
   case 307: /* Catches: Catches CatchClause  */
   if (yyn == 307)
-    /* "src/main/resources/Java_16_Grammar.y":1048  */
+    /* "src/main/resources/Java_16_Grammar.y":1051  */
                             { yyval = ((CatchClauses)(yystack.valueAt (1))).add(((CatchClause)(yystack.valueAt (0)))); };
   break;
 
 
   case 308: /* CatchClause: CATCH LPAREN CatchFormalParameter RPAREN Block  */
   if (yyn == 308)
-    /* "src/main/resources/Java_16_Grammar.y":1052  */
+    /* "src/main/resources/Java_16_Grammar.y":1055  */
                                                      { yyval = new CatchClause(((CatchParameter)(yystack.valueAt (2))),((tree.Statement.Block)(yystack.valueAt (0)))); };
   break;
 
 
   case 309: /* CatchFormalParameter: ModifierSeqOpt CatchType IDENTIFIER DimsOpt  */
   if (yyn == 309)
-    /* "src/main/resources/Java_16_Grammar.y":1056  */
+    /* "src/main/resources/Java_16_Grammar.y":1059  */
                                                   { yyval = new CatchParameter(((Modifiers)(yystack.valueAt (3))),((tree.Type.TypeList)(yystack.valueAt (2))),((Token)(yystack.valueAt (1))),((Dims)(yystack.valueAt (0)))); };
   break;
 
 
   case 310: /* CatchType: Type  */
   if (yyn == 310)
-    /* "src/main/resources/Java_16_Grammar.y":1060  */
+    /* "src/main/resources/Java_16_Grammar.y":1063  */
                               { yyval = new TypeList(((tree.Type.Type)(yystack.valueAt (0)))); };
   break;
 
 
   case 311: /* CatchType: CatchType VERTICAL Type  */
   if (yyn == 311)
-    /* "src/main/resources/Java_16_Grammar.y":1061  */
+    /* "src/main/resources/Java_16_Grammar.y":1064  */
                               { yyval = ((tree.Type.TypeList)(yystack.valueAt (2))).add(((tree.Type.Type)(yystack.valueAt (0)))); };
   break;
 
 
   case 322: /* Primary: Literal  */
   if (yyn == 322)
-    /* "src/main/resources/Java_16_Grammar.y":1098  */
+    /* "src/main/resources/Java_16_Grammar.y":1101  */
                                         { yyval = new Literal(((Token)(yystack.valueAt (0)))); };
   break;
 
 
   case 323: /* Primary: Type DimsOpt DOT CLASS  */
   if (yyn == 323)
-    /* "src/main/resources/Java_16_Grammar.y":1099  */
+    /* "src/main/resources/Java_16_Grammar.y":1102  */
                                         { yyval = new ClassLiteral(((tree.Type.Type)(yystack.valueAt (3))),((Dims)(yystack.valueAt (2)))); };
   break;
 
 
   case 324: /* Primary: VOID DimsOpt DOT CLASS  */
   if (yyn == 324)
-    /* "src/main/resources/Java_16_Grammar.y":1100  */
+    /* "src/main/resources/Java_16_Grammar.y":1103  */
                                         { yyval = new ClassLiteral(null,((Dims)(yystack.valueAt (2)))); };
   break;
 
 
   case 325: /* Primary: THIS  */
   if (yyn == 325)
-    /* "src/main/resources/Java_16_Grammar.y":1101  */
+    /* "src/main/resources/Java_16_Grammar.y":1104  */
                                         { yyval = new This(null); };
   break;
 
 
   case 326: /* Primary: Type DOT THIS  */
   if (yyn == 326)
-    /* "src/main/resources/Java_16_Grammar.y":1102  */
+    /* "src/main/resources/Java_16_Grammar.y":1105  */
                                         { yyval = new This(((tree.Type.Type)(yystack.valueAt (2)))); };
   break;
 
 
   case 327: /* Primary: LPAREN Expression RPAREN  */
   if (yyn == 327)
-    /* "src/main/resources/Java_16_Grammar.y":1103  */
+    /* "src/main/resources/Java_16_Grammar.y":1106  */
                                         { yyval = new Parenthesized(((tree.Expression.Expression)(yystack.valueAt (1)))); };
   break;
 
 
   case 328: /* Primary: ClassInstanceCreationExpression  */
   if (yyn == 328)
-    /* "src/main/resources/Java_16_Grammar.y":1104  */
+    /* "src/main/resources/Java_16_Grammar.y":1107  */
                                         { yyval = null; };
   break;
 
 
   case 329: /* Primary: FieldAccess  */
   if (yyn == 329)
-    /* "src/main/resources/Java_16_Grammar.y":1105  */
+    /* "src/main/resources/Java_16_Grammar.y":1108  */
                                         { yyval = ((tree.Expression.Expression)(yystack.valueAt (0))); };
   break;
 
 
   case 330: /* Primary: ArrayAccess  */
   if (yyn == 330)
-    /* "src/main/resources/Java_16_Grammar.y":1106  */
+    /* "src/main/resources/Java_16_Grammar.y":1109  */
                                         { yyval = ((tree.Expression.Expression)(yystack.valueAt (0))); };
   break;
 
 
   case 331: /* Primary: MethodInvocation  */
   if (yyn == 331)
-    /* "src/main/resources/Java_16_Grammar.y":1107  */
+    /* "src/main/resources/Java_16_Grammar.y":1110  */
                                         { yyval = ((tree.Expression.Expression)(yystack.valueAt (0))); };
   break;
 
 
   case 332: /* Primary: MethodReference  */
   if (yyn == 332)
-    /* "src/main/resources/Java_16_Grammar.y":1108  */
+    /* "src/main/resources/Java_16_Grammar.y":1111  */
                                         { yyval = ((tree.Expression.Expression)(yystack.valueAt (0))); };
   break;
 
 
   case 333: /* Primary: ArrayCreationExpression  */
   if (yyn == 333)
-    /* "src/main/resources/Java_16_Grammar.y":1109  */
+    /* "src/main/resources/Java_16_Grammar.y":1112  */
                                         { yyval = ((tree.Expression.Expression)(yystack.valueAt (0))); };
   break;
 
 
   case 334: /* ClassInstanceCreationExpression: UnqualifiedClassInstanceCreationExpression  */
   if (yyn == 334)
-    /* "src/main/resources/Java_16_Grammar.y":1119  */
+    /* "src/main/resources/Java_16_Grammar.y":1122  */
                                                                   { yyval = null; };
   break;
 
 
   case 335: /* ClassInstanceCreationExpression: CompoundName DOT UnqualifiedClassInstanceCreationExpression  */
   if (yyn == 335)
-    /* "src/main/resources/Java_16_Grammar.y":1120  */
+    /* "src/main/resources/Java_16_Grammar.y":1123  */
                                                                   { yyval = null; };
   break;
 
 
   case 336: /* ClassInstanceCreationExpression: Primary DOT UnqualifiedClassInstanceCreationExpression  */
   if (yyn == 336)
-    /* "src/main/resources/Java_16_Grammar.y":1121  */
+    /* "src/main/resources/Java_16_Grammar.y":1124  */
                                                                   { yyval = null; };
   break;
 
 
   case 342: /* TypeArgumentsOpt: %empty  */
   if (yyn == 342)
-    /* "src/main/resources/Java_16_Grammar.y":1139  */
+    /* "src/main/resources/Java_16_Grammar.y":1142  */
                       { yyval = null; };
   break;
 
 
   case 343: /* TypeArgumentsOpt: TypeArguments  */
   if (yyn == 343)
-    /* "src/main/resources/Java_16_Grammar.y":1140  */
+    /* "src/main/resources/Java_16_Grammar.y":1143  */
                       { yyval = ((tree.Type.TypeArguments)(yystack.valueAt (0))); };
   break;
 
 
   case 344: /* TypeArguments: LESS TypeArgumentList GREATER  */
   if (yyn == 344)
-    /* "src/main/resources/Java_16_Grammar.y":1144  */
+    /* "src/main/resources/Java_16_Grammar.y":1147  */
                                      { yyval = ((tree.Type.TypeArguments)(yystack.valueAt (1))); };
   break;
 
 
   case 345: /* TypeArgumentList: TypeArgument  */
   if (yyn == 345)
-    /* "src/main/resources/Java_16_Grammar.y":1148  */
+    /* "src/main/resources/Java_16_Grammar.y":1151  */
                                            { yyval = new TypeArguments(((tree.Type.TypeArgument)(yystack.valueAt (0)))); };
   break;
 
 
   case 346: /* TypeArgumentList: TypeArgumentList COMMA TypeArgument  */
   if (yyn == 346)
-    /* "src/main/resources/Java_16_Grammar.y":1149  */
+    /* "src/main/resources/Java_16_Grammar.y":1152  */
                                            { yyval = ((tree.Type.TypeArguments)(yystack.valueAt (2))).add(((tree.Type.TypeArgument)(yystack.valueAt (0)))); };
   break;
 
 
   case 347: /* TypeArgument: Type  */
   if (yyn == 347)
-    /* "src/main/resources/Java_16_Grammar.y":1153  */
+    /* "src/main/resources/Java_16_Grammar.y":1156  */
                                                { yyval = new TypeArgument(((tree.Type.Type)(yystack.valueAt (0))),0,null); };
   break;
 
 
   case 348: /* TypeArgument: QUESTION  */
   if (yyn == 348)
-    /* "src/main/resources/Java_16_Grammar.y":1154  */
+    /* "src/main/resources/Java_16_Grammar.y":1157  */
                                                { yyval = new TypeArgument(null,1,null); };
   break;
 
 
   case 349: /* TypeArgument: QUESTION EXTENDS Type  */
   if (yyn == 349)
-    /* "src/main/resources/Java_16_Grammar.y":1155  */
+    /* "src/main/resources/Java_16_Grammar.y":1158  */
                                                { yyval = new TypeArgument(((tree.Type.Type)(yystack.valueAt (0))),1,null); };
   break;
 
 
   case 350: /* TypeArgument: QUESTION SUPER Type  */
   if (yyn == 350)
-    /* "src/main/resources/Java_16_Grammar.y":1156  */
+    /* "src/main/resources/Java_16_Grammar.y":1159  */
                                                { yyval = new TypeArgument(((tree.Type.Type)(yystack.valueAt (0))),2,null); };
   break;
 
 
   case 351: /* TypeArgument: AnnotationSeq QUESTION  */
   if (yyn == 351)
-    /* "src/main/resources/Java_16_Grammar.y":1157  */
+    /* "src/main/resources/Java_16_Grammar.y":1160  */
                                                { yyval = new TypeArgument(null,1,((Annotations)(yystack.valueAt (1)))); };
   break;
 
 
   case 352: /* TypeArgument: AnnotationSeq QUESTION EXTENDS Type  */
   if (yyn == 352)
-    /* "src/main/resources/Java_16_Grammar.y":1158  */
+    /* "src/main/resources/Java_16_Grammar.y":1161  */
                                                { yyval = new TypeArgument(((tree.Type.Type)(yystack.valueAt (0))),2,((Annotations)(yystack.valueAt (3)))); };
   break;
 
 
   case 353: /* TypeArgument: AnnotationSeq QUESTION SUPER Type  */
   if (yyn == 353)
-    /* "src/main/resources/Java_16_Grammar.y":1159  */
+    /* "src/main/resources/Java_16_Grammar.y":1162  */
                                                { yyval = new TypeArgument(((tree.Type.Type)(yystack.valueAt (0))),3,((Annotations)(yystack.valueAt (3)))); };
   break;
 
 
   case 354: /* FieldAccess: Primary DOT IDENTIFIER  */
   if (yyn == 354)
-    /* "src/main/resources/Java_16_Grammar.y":1169  */
+    /* "src/main/resources/Java_16_Grammar.y":1172  */
                                              { yyval = new FieldAccess(((tree.Expression.Expression)(yystack.valueAt (2))),  false,((Token)(yystack.valueAt (0)))); };
   break;
 
 
   case 355: /* FieldAccess: SUPER DOT IDENTIFIER  */
   if (yyn == 355)
-    /* "src/main/resources/Java_16_Grammar.y":1170  */
+    /* "src/main/resources/Java_16_Grammar.y":1173  */
                                              { yyval = new FieldAccess(null,true, ((Token)(yystack.valueAt (0)))); };
   break;
 
 
   case 356: /* FieldAccess: CompoundName DOT SUPER DOT IDENTIFIER  */
   if (yyn == 356)
-    /* "src/main/resources/Java_16_Grammar.y":1171  */
+    /* "src/main/resources/Java_16_Grammar.y":1174  */
                                              { yyval = new FieldAccess(new SimpleReference(((CompoundName)(yystack.valueAt (4)))),true,((Token)(yystack.valueAt (0)))); };
   break;
 
 
   case 357: /* ArrayAccess: CompoundName LBRACKET Expression RBRACKET  */
   if (yyn == 357)
-    /* "src/main/resources/Java_16_Grammar.y":1175  */
+    /* "src/main/resources/Java_16_Grammar.y":1178  */
                                                  { yyval = new ArrayAccess(new SimpleReference(((CompoundName)(yystack.valueAt (3)))),((tree.Expression.Expression)(yystack.valueAt (1)))); };
   break;
 
 
   case 358: /* ArrayAccess: Primary LBRACKET Expression RBRACKET  */
   if (yyn == 358)
-    /* "src/main/resources/Java_16_Grammar.y":1176  */
+    /* "src/main/resources/Java_16_Grammar.y":1179  */
                                                  { yyval = new ArrayAccess(((tree.Expression.Expression)(yystack.valueAt (3))),((tree.Expression.Expression)(yystack.valueAt (1)))); };
   break;
 
 
   case 359: /* MethodInvocation: CompoundName Arguments  */
   if (yyn == 359)
-    /* "src/main/resources/Java_16_Grammar.y":1180  */
+    /* "src/main/resources/Java_16_Grammar.y":1183  */
                                                                        { var ref = new SimpleReference(((CompoundName)(yystack.valueAt (1))));
                                                                          yyval = new MethodInvocation(ref,false,null,null,((tree.Expression.ArgumentList)(yystack.valueAt (0)))); };
   break;
@@ -3347,7 +3347,7 @@ public class JavaParser
 
   case 360: /* MethodInvocation: CompoundName DOT TypeArguments IDENTIFIER Arguments  */
   if (yyn == 360)
-    /* "src/main/resources/Java_16_Grammar.y":1182  */
+    /* "src/main/resources/Java_16_Grammar.y":1185  */
                                                                        { var ref = new SimpleReference(((CompoundName)(yystack.valueAt (4))));
                                                                          yyval = new MethodInvocation(ref,false,((tree.Type.TypeArguments)(yystack.valueAt (2))),((Token)(yystack.valueAt (1))),((tree.Expression.ArgumentList)(yystack.valueAt (0)))); };
   break;
@@ -3355,21 +3355,21 @@ public class JavaParser
 
   case 361: /* MethodInvocation: Primary DOT TypeArgumentsOpt IDENTIFIER Arguments  */
   if (yyn == 361)
-    /* "src/main/resources/Java_16_Grammar.y":1184  */
+    /* "src/main/resources/Java_16_Grammar.y":1187  */
                                                                        { yyval = new MethodInvocation(((tree.Expression.Expression)(yystack.valueAt (4))),false,((tree.Type.TypeArguments)(yystack.valueAt (2))),((Token)(yystack.valueAt (1))),((tree.Expression.ArgumentList)(yystack.valueAt (0)))); };
   break;
 
 
   case 362: /* MethodInvocation: SUPER DOT TypeArgumentsOpt IDENTIFIER Arguments  */
   if (yyn == 362)
-    /* "src/main/resources/Java_16_Grammar.y":1185  */
+    /* "src/main/resources/Java_16_Grammar.y":1188  */
                                                                        { yyval = new MethodInvocation(null,true,((tree.Type.TypeArguments)(yystack.valueAt (2))),((Token)(yystack.valueAt (1))),((tree.Expression.ArgumentList)(yystack.valueAt (0)))); };
   break;
 
 
   case 363: /* MethodInvocation: CompoundName DOT SUPER DOT TypeArgumentsOpt IDENTIFIER Arguments  */
   if (yyn == 363)
-    /* "src/main/resources/Java_16_Grammar.y":1186  */
+    /* "src/main/resources/Java_16_Grammar.y":1189  */
                                                                        { var ref = new SimpleReference(((CompoundName)(yystack.valueAt (6))));
                                                                          yyval = new MethodInvocation(ref,true,((tree.Type.TypeArguments)(yystack.valueAt (2))),((Token)(yystack.valueAt (1))),((tree.Expression.ArgumentList)(yystack.valueAt (0)))); };
   break;
@@ -3377,322 +3377,322 @@ public class JavaParser
 
   case 364: /* Arguments: LPAREN RPAREN  */
   if (yyn == 364)
-    /* "src/main/resources/Java_16_Grammar.y":1191  */
+    /* "src/main/resources/Java_16_Grammar.y":1194  */
                                  { yyval = null; };
   break;
 
 
   case 365: /* Arguments: LPAREN ArgumentList RPAREN  */
   if (yyn == 365)
-    /* "src/main/resources/Java_16_Grammar.y":1192  */
+    /* "src/main/resources/Java_16_Grammar.y":1195  */
                                  { yyval = ((tree.Expression.ArgumentList)(yystack.valueAt (1))); };
   break;
 
 
   case 366: /* ArgumentList: Expression  */
   if (yyn == 366)
-    /* "src/main/resources/Java_16_Grammar.y":1201  */
+    /* "src/main/resources/Java_16_Grammar.y":1204  */
                                     { yyval = new ArgumentList(((tree.Expression.Expression)(yystack.valueAt (0)))); };
   break;
 
 
   case 367: /* ArgumentList: ArgumentList COMMA Expression  */
   if (yyn == 367)
-    /* "src/main/resources/Java_16_Grammar.y":1202  */
+    /* "src/main/resources/Java_16_Grammar.y":1205  */
                                     { yyval = ((tree.Expression.ArgumentList)(yystack.valueAt (2))).add(((tree.Expression.Expression)(yystack.valueAt (0)))); };
   break;
 
 
   case 368: /* MethodReference: Primary DBL_COLON TypeArgumentsOpt IDENTIFIER  */
   if (yyn == 368)
-    /* "src/main/resources/Java_16_Grammar.y":1207  */
-                                                              { yyval = null; };
+    /* "src/main/resources/Java_16_Grammar.y":1210  */
+                                                           { yyval = null; };
   break;
 
 
   case 369: /* MethodReference: Type DBL_COLON TypeArgumentsOpt IDENTIFIER  */
   if (yyn == 369)
-    /* "src/main/resources/Java_16_Grammar.y":1208  */
-                                                              { yyval = null; };
+    /* "src/main/resources/Java_16_Grammar.y":1211  */
+                                                           { yyval = null; };
   break;
 
 
   case 370: /* MethodReference: SUPER DBL_COLON TypeArgumentsOpt IDENTIFIER  */
   if (yyn == 370)
-    /* "src/main/resources/Java_16_Grammar.y":1209  */
-                                                              { yyval = null; };
+    /* "src/main/resources/Java_16_Grammar.y":1212  */
+                                                           { yyval = null; };
   break;
 
 
   case 371: /* MethodReference: Type DOT SUPER DBL_COLON TypeArgumentsOpt IDENTIFIER  */
   if (yyn == 371)
-    /* "src/main/resources/Java_16_Grammar.y":1210  */
-                                                              { yyval = null; };
+    /* "src/main/resources/Java_16_Grammar.y":1213  */
+                                                           { yyval = null; };
   break;
 
 
   case 372: /* MethodReference: Type DBL_COLON TypeArgumentsOpt NEW  */
   if (yyn == 372)
-    /* "src/main/resources/Java_16_Grammar.y":1211  */
-                                                              { yyval = null; };
+    /* "src/main/resources/Java_16_Grammar.y":1214  */
+                                                           { yyval = null; };
   break;
 
 
   case 373: /* ArrayCreationExpression: NEW Type DimExprs DimsOpt  */
   if (yyn == 373)
-    /* "src/main/resources/Java_16_Grammar.y":1215  */
+    /* "src/main/resources/Java_16_Grammar.y":1218  */
                                        { yyval = null; };
   break;
 
 
   case 374: /* ArrayCreationExpression: NEW Type Dims ArrayInitializer  */
   if (yyn == 374)
-    /* "src/main/resources/Java_16_Grammar.y":1216  */
+    /* "src/main/resources/Java_16_Grammar.y":1219  */
                                        { yyval = null; };
   break;
 
 
   case 379: /* Expression: LambdaExpression  */
   if (yyn == 379)
-    /* "src/main/resources/Java_16_Grammar.y":1232  */
+    /* "src/main/resources/Java_16_Grammar.y":1235  */
                             { yyval = ((tree.Expression.Expression)(yystack.valueAt (0))); };
   break;
 
 
   case 380: /* Expression: AssignmentExpression  */
   if (yyn == 380)
-    /* "src/main/resources/Java_16_Grammar.y":1233  */
+    /* "src/main/resources/Java_16_Grammar.y":1236  */
                             { yyval = ((tree.Expression.Expression)(yystack.valueAt (0))); };
   break;
 
 
   case 381: /* LambdaExpression: IDENTIFIER ARROW Expression  */
   if (yyn == 381)
-    /* "src/main/resources/Java_16_Grammar.y":1238  */
+    /* "src/main/resources/Java_16_Grammar.y":1241  */
                         { yyval = new Lambda(new ParameterDeclarations(new ParameterDeclaration(((Token)(yystack.valueAt (2))))),((tree.Expression.Expression)(yystack.valueAt (0)))); };
   break;
 
 
   case 382: /* LambdaExpression: IDENTIFIER ARROW Block  */
   if (yyn == 382)
-    /* "src/main/resources/Java_16_Grammar.y":1240  */
+    /* "src/main/resources/Java_16_Grammar.y":1243  */
                         { yyval = new Lambda(new ParameterDeclarations(new ParameterDeclaration(((Token)(yystack.valueAt (2))))),((tree.Statement.Block)(yystack.valueAt (0)))); };
   break;
 
 
   case 383: /* LambdaExpression: LambdaParameters ARROW Expression  */
   if (yyn == 383)
-    /* "src/main/resources/Java_16_Grammar.y":1241  */
+    /* "src/main/resources/Java_16_Grammar.y":1244  */
                                          { yyval = new Lambda(((ParameterDeclarations)(yystack.valueAt (2))),((tree.Expression.Expression)(yystack.valueAt (0)))); };
   break;
 
 
   case 384: /* LambdaExpression: LambdaParameters ARROW Block  */
   if (yyn == 384)
-    /* "src/main/resources/Java_16_Grammar.y":1242  */
+    /* "src/main/resources/Java_16_Grammar.y":1245  */
                                          { yyval = new Lambda(((ParameterDeclarations)(yystack.valueAt (2))),((tree.Statement.Block)(yystack.valueAt (0)))); };
   break;
 
 
   case 385: /* LambdaParameters: LPAREN RPAREN  */
   if (yyn == 385)
-    /* "src/main/resources/Java_16_Grammar.y":1251  */
+    /* "src/main/resources/Java_16_Grammar.y":1254  */
                                            { yyval = null; };
   break;
 
 
   case 386: /* LambdaParameters: LPAREN LambdaParameterList1 RPAREN  */
   if (yyn == 386)
-    /* "src/main/resources/Java_16_Grammar.y":1252  */
+    /* "src/main/resources/Java_16_Grammar.y":1255  */
                                            { yyval = ((ParameterDeclarations)(yystack.valueAt (1))); };
   break;
 
 
   case 387: /* LambdaParameters: LPAREN LambdaParameterList2 RPAREN  */
   if (yyn == 387)
-    /* "src/main/resources/Java_16_Grammar.y":1253  */
+    /* "src/main/resources/Java_16_Grammar.y":1256  */
                                            { yyval = ((ParameterDeclarations)(yystack.valueAt (1))); };
   break;
 
 
   case 388: /* LambdaParameterList1: IDENTIFIER  */
   if (yyn == 388)
-    /* "src/main/resources/Java_16_Grammar.y":1258  */
+    /* "src/main/resources/Java_16_Grammar.y":1261  */
                                              { yyval = new ParameterDeclarations(new ParameterDeclaration(((Token)(yystack.valueAt (0))))); };
   break;
 
 
   case 389: /* LambdaParameterList1: LambdaParameterList1 COMMA IDENTIFIER  */
   if (yyn == 389)
-    /* "src/main/resources/Java_16_Grammar.y":1259  */
+    /* "src/main/resources/Java_16_Grammar.y":1262  */
                                              { yyval = ((ParameterDeclarations)(yystack.valueAt (2))).add(new ParameterDeclaration(((Token)(yystack.valueAt (0))))); };
   break;
 
 
   case 390: /* LambdaParameterList2: LambdaParameter  */
   if (yyn == 390)
-    /* "src/main/resources/Java_16_Grammar.y":1263  */
+    /* "src/main/resources/Java_16_Grammar.y":1266  */
                                                  { yyval = new ParameterDeclarations(((ParameterDeclaration)(yystack.valueAt (0)))); };
   break;
 
 
   case 391: /* LambdaParameterList2: LambdaParameterList2 COMMA LambdaParameter  */
   if (yyn == 391)
-    /* "src/main/resources/Java_16_Grammar.y":1264  */
+    /* "src/main/resources/Java_16_Grammar.y":1267  */
                                                  { yyval = ((ParameterDeclarations)(yystack.valueAt (2))).add(((ParameterDeclaration)(yystack.valueAt (0)))); };
   break;
 
 
   case 392: /* LambdaParameter: ModifierSeqOpt UnannotatedType IDENTIFIER DimsOpt  */
   if (yyn == 392)
-    /* "src/main/resources/Java_16_Grammar.y":1275  */
+    /* "src/main/resources/Java_16_Grammar.y":1278  */
                                                          { yyval = new ParameterDeclaration(((Modifiers)(yystack.valueAt (3))),((tree.Type.UnannotatedType)(yystack.valueAt (2))),((Token)(yystack.valueAt (1))).image,null,false,((Dims)(yystack.valueAt (0)))); };
   break;
 
 
   case 393: /* LambdaParameter: ModifierSeqOpt VAR IDENTIFIER DimsOpt  */
   if (yyn == 393)
-    /* "src/main/resources/Java_16_Grammar.y":1276  */
+    /* "src/main/resources/Java_16_Grammar.y":1279  */
                                                          { yyval = new ParameterDeclaration(((Modifiers)(yystack.valueAt (3))),null,((Token)(yystack.valueAt (1))).image,null,false,((Dims)(yystack.valueAt (0)))); };
   break;
 
 
   case 394: /* LambdaParameter: ModifierSeqOpt UnannotatedType AnnotationSeqOpt ELLIPSIS IDENTIFIER  */
   if (yyn == 394)
-    /* "src/main/resources/Java_16_Grammar.y":1278  */
+    /* "src/main/resources/Java_16_Grammar.y":1281  */
                                                          { yyval = new ParameterDeclaration(((Modifiers)(yystack.valueAt (4))),((tree.Type.UnannotatedType)(yystack.valueAt (3))),((Token)(yystack.valueAt (0))).image,((Annotations)(yystack.valueAt (2))),true,null); };
   break;
 
 
   case 395: /* AssignmentExpression: ConditionalExpression  */
   if (yyn == 395)
-    /* "src/main/resources/Java_16_Grammar.y":1288  */
+    /* "src/main/resources/Java_16_Grammar.y":1290  */
                              { yyval = ((tree.Expression.Expression)(yystack.valueAt (0))); };
   break;
 
 
   case 396: /* AssignmentExpression: Assignment  */
   if (yyn == 396)
-    /* "src/main/resources/Java_16_Grammar.y":1289  */
+    /* "src/main/resources/Java_16_Grammar.y":1291  */
                              { yyval = ((tree.Expression.Expression)(yystack.valueAt (0))); };
   break;
 
 
   case 397: /* Assignment: LeftHandSide AssignmentOperator Expression  */
   if (yyn == 397)
-    /* "src/main/resources/Java_16_Grammar.y":1293  */
+    /* "src/main/resources/Java_16_Grammar.y":1295  */
                                                  { yyval = new Binary(((tree.Expression.Expression)(yystack.valueAt (2))),((tree.Expression.Expression)(yystack.valueAt (0))),((Token)(yystack.valueAt (1)))); };
   break;
 
 
   case 398: /* LeftHandSide: CompoundName  */
   if (yyn == 398)
-    /* "src/main/resources/Java_16_Grammar.y":1297  */
+    /* "src/main/resources/Java_16_Grammar.y":1299  */
                    { yyval = new SimpleReference(((CompoundName)(yystack.valueAt (0)))); };
   break;
 
 
   case 399: /* LeftHandSide: FieldAccess  */
   if (yyn == 399)
-    /* "src/main/resources/Java_16_Grammar.y":1298  */
+    /* "src/main/resources/Java_16_Grammar.y":1300  */
                    { yyval = ((tree.Expression.Expression)(yystack.valueAt (0))); };
   break;
 
 
   case 400: /* LeftHandSide: ArrayAccess  */
   if (yyn == 400)
-    /* "src/main/resources/Java_16_Grammar.y":1299  */
+    /* "src/main/resources/Java_16_Grammar.y":1301  */
                    { yyval = ((tree.Expression.Expression)(yystack.valueAt (0))); };
   break;
 
 
   case 401: /* AssignmentOperator: EQUAL  */
   if (yyn == 401)
-    /* "src/main/resources/Java_16_Grammar.y":1303  */
+    /* "src/main/resources/Java_16_Grammar.y":1305  */
                         { yyval = ((Token)(yystack.valueAt (0))); };
   break;
 
 
   case 402: /* AssignmentOperator: STAR_EQUAL  */
   if (yyn == 402)
-    /* "src/main/resources/Java_16_Grammar.y":1304  */
+    /* "src/main/resources/Java_16_Grammar.y":1306  */
                         { yyval = ((Token)(yystack.valueAt (0))); };
   break;
 
 
   case 403: /* AssignmentOperator: SLASH_EQUAL  */
   if (yyn == 403)
-    /* "src/main/resources/Java_16_Grammar.y":1305  */
+    /* "src/main/resources/Java_16_Grammar.y":1307  */
                         { yyval = ((Token)(yystack.valueAt (0))); };
   break;
 
 
   case 404: /* AssignmentOperator: PERCENT_EQUAL  */
   if (yyn == 404)
-    /* "src/main/resources/Java_16_Grammar.y":1306  */
+    /* "src/main/resources/Java_16_Grammar.y":1308  */
                         { yyval = ((Token)(yystack.valueAt (0))); };
   break;
 
 
   case 405: /* AssignmentOperator: PLUS_EQUAL  */
   if (yyn == 405)
-    /* "src/main/resources/Java_16_Grammar.y":1307  */
+    /* "src/main/resources/Java_16_Grammar.y":1309  */
                         { yyval = ((Token)(yystack.valueAt (0))); };
   break;
 
 
   case 406: /* AssignmentOperator: MINUS_EQUAL  */
   if (yyn == 406)
-    /* "src/main/resources/Java_16_Grammar.y":1308  */
+    /* "src/main/resources/Java_16_Grammar.y":1310  */
                         { yyval = ((Token)(yystack.valueAt (0))); };
   break;
 
 
   case 407: /* AssignmentOperator: LESS_LESS_EQUAL  */
   if (yyn == 407)
-    /* "src/main/resources/Java_16_Grammar.y":1309  */
+    /* "src/main/resources/Java_16_Grammar.y":1311  */
                         { yyval = ((Token)(yystack.valueAt (0))); };
   break;
 
 
   case 408: /* AssignmentOperator: GR_GR_EQUAL  */
   if (yyn == 408)
-    /* "src/main/resources/Java_16_Grammar.y":1310  */
+    /* "src/main/resources/Java_16_Grammar.y":1312  */
                         { yyval = ((Token)(yystack.valueAt (0))); };
   break;
 
 
   case 409: /* AssignmentOperator: GR_GR_GR_EQUAL  */
   if (yyn == 409)
-    /* "src/main/resources/Java_16_Grammar.y":1311  */
+    /* "src/main/resources/Java_16_Grammar.y":1313  */
                         { yyval = ((Token)(yystack.valueAt (0))); };
   break;
 
 
   case 410: /* AssignmentOperator: AMP_EQUAL  */
   if (yyn == 410)
-    /* "src/main/resources/Java_16_Grammar.y":1312  */
+    /* "src/main/resources/Java_16_Grammar.y":1314  */
                         { yyval = ((Token)(yystack.valueAt (0))); };
   break;
 
 
   case 411: /* AssignmentOperator: CARET_EQUAL  */
   if (yyn == 411)
-    /* "src/main/resources/Java_16_Grammar.y":1313  */
+    /* "src/main/resources/Java_16_Grammar.y":1315  */
                         { yyval = ((Token)(yystack.valueAt (0))); };
   break;
 
 
   case 412: /* AssignmentOperator: VERTICAL_EQUAL  */
   if (yyn == 412)
-    /* "src/main/resources/Java_16_Grammar.y":1314  */
+    /* "src/main/resources/Java_16_Grammar.y":1316  */
                         { yyval = ((Token)(yystack.valueAt (0))); };
   break;
 
 
   case 413: /* ConditionalExpression: ConditionalOrExpression ConditionalOrTail  */
   if (yyn == 413)
-    /* "src/main/resources/Java_16_Grammar.y":1318  */
+    /* "src/main/resources/Java_16_Grammar.y":1320  */
                                                 { if ( ((tree.Expression.Binary)(yystack.valueAt (0))) == null ) yyval = ((tree.Expression.Expression)(yystack.valueAt (1)));
                                                   else              yyval = new Conditional(((tree.Expression.Expression)(yystack.valueAt (1))),((tree.Expression.Binary)(yystack.valueAt (0))).left,((tree.Expression.Binary)(yystack.valueAt (0))).right); };
   break;
@@ -3700,504 +3700,504 @@ public class JavaParser
 
   case 414: /* ConditionalOrTail: %empty  */
   if (yyn == 414)
-    /* "src/main/resources/Java_16_Grammar.y":1323  */
+    /* "src/main/resources/Java_16_Grammar.y":1325  */
                                                        { yyval = null; };
   break;
 
 
   case 415: /* ConditionalOrTail: QUESTION Expression COLON ConditionalExpression  */
   if (yyn == 415)
-    /* "src/main/resources/Java_16_Grammar.y":1324  */
+    /* "src/main/resources/Java_16_Grammar.y":1326  */
                                                        { yyval = new Binary(((tree.Expression.Expression)(yystack.valueAt (2))),((tree.Expression.Expression)(yystack.valueAt (0))),null); };
   break;
 
 
   case 416: /* ConditionalOrTail: QUESTION Expression COLON LambdaExpression  */
   if (yyn == 416)
-    /* "src/main/resources/Java_16_Grammar.y":1325  */
+    /* "src/main/resources/Java_16_Grammar.y":1327  */
                                                        { yyval = new Binary(((tree.Expression.Expression)(yystack.valueAt (2))),((tree.Expression.Expression)(yystack.valueAt (0))),null); };
   break;
 
 
   case 417: /* ConditionalOrExpression: ConditionalAndExpression  */
   if (yyn == 417)
-    /* "src/main/resources/Java_16_Grammar.y":1329  */
+    /* "src/main/resources/Java_16_Grammar.y":1331  */
                                                                     { yyval = ((tree.Expression.Expression)(yystack.valueAt (0))); };
   break;
 
 
   case 418: /* ConditionalOrExpression: ConditionalOrExpression DBL_VERTICAL ConditionalAndExpression  */
   if (yyn == 418)
-    /* "src/main/resources/Java_16_Grammar.y":1330  */
+    /* "src/main/resources/Java_16_Grammar.y":1332  */
                                                                     { yyval = new Binary(((tree.Expression.Expression)(yystack.valueAt (2))),((tree.Expression.Expression)(yystack.valueAt (0))),((Token)(yystack.valueAt (1)))); };
   break;
 
 
   case 419: /* ConditionalAndExpression: InclusiveOrExpression  */
   if (yyn == 419)
-    /* "src/main/resources/Java_16_Grammar.y":1334  */
+    /* "src/main/resources/Java_16_Grammar.y":1336  */
                                                                    { yyval = ((tree.Expression.Expression)(yystack.valueAt (0))); };
   break;
 
 
   case 420: /* ConditionalAndExpression: ConditionalAndExpression DBL_AMPERSAND InclusiveOrExpression  */
   if (yyn == 420)
-    /* "src/main/resources/Java_16_Grammar.y":1335  */
+    /* "src/main/resources/Java_16_Grammar.y":1337  */
                                                                    { yyval = new Binary(((tree.Expression.Expression)(yystack.valueAt (2))),((tree.Expression.Expression)(yystack.valueAt (0))),((Token)(yystack.valueAt (1)))); };
   break;
 
 
   case 421: /* InclusiveOrExpression: ExclusiveOrExpression  */
   if (yyn == 421)
-    /* "src/main/resources/Java_16_Grammar.y":1339  */
+    /* "src/main/resources/Java_16_Grammar.y":1341  */
                                                            { yyval = ((tree.Expression.Expression)(yystack.valueAt (0))); };
   break;
 
 
   case 422: /* InclusiveOrExpression: InclusiveOrExpression VERTICAL ExclusiveOrExpression  */
   if (yyn == 422)
-    /* "src/main/resources/Java_16_Grammar.y":1340  */
+    /* "src/main/resources/Java_16_Grammar.y":1342  */
                                                            { yyval = new Binary(((tree.Expression.Expression)(yystack.valueAt (2))),((tree.Expression.Expression)(yystack.valueAt (0))),((Token)(yystack.valueAt (1)))); };
   break;
 
 
   case 423: /* ExclusiveOrExpression: AndExpression  */
   if (yyn == 423)
-    /* "src/main/resources/Java_16_Grammar.y":1344  */
+    /* "src/main/resources/Java_16_Grammar.y":1346  */
                                                 { yyval = ((tree.Expression.Expression)(yystack.valueAt (0))); };
   break;
 
 
   case 424: /* ExclusiveOrExpression: ExclusiveOrExpression CARET AndExpression  */
   if (yyn == 424)
-    /* "src/main/resources/Java_16_Grammar.y":1345  */
+    /* "src/main/resources/Java_16_Grammar.y":1347  */
                                                 { yyval = new Binary(((tree.Expression.Expression)(yystack.valueAt (2))),((tree.Expression.Expression)(yystack.valueAt (0))),((Token)(yystack.valueAt (1)))); };
   break;
 
 
   case 425: /* AndExpression: EqualityExpression  */
   if (yyn == 425)
-    /* "src/main/resources/Java_16_Grammar.y":1349  */
+    /* "src/main/resources/Java_16_Grammar.y":1351  */
                                                  { yyval = ((tree.Expression.Expression)(yystack.valueAt (0))); };
   break;
 
 
   case 426: /* AndExpression: AndExpression AMPERSAND EqualityExpression  */
   if (yyn == 426)
-    /* "src/main/resources/Java_16_Grammar.y":1350  */
+    /* "src/main/resources/Java_16_Grammar.y":1352  */
                                                  { yyval = new Binary(((tree.Expression.Expression)(yystack.valueAt (2))),((tree.Expression.Expression)(yystack.valueAt (0))),((Token)(yystack.valueAt (1)))); };
   break;
 
 
   case 427: /* EqualityExpression: RelationalExpression  */
   if (yyn == 427)
-    /* "src/main/resources/Java_16_Grammar.y":1354  */
+    /* "src/main/resources/Java_16_Grammar.y":1356  */
                                                         { yyval = ((tree.Expression.Expression)(yystack.valueAt (0))); };
   break;
 
 
   case 428: /* EqualityExpression: EqualityExpression DBL_EQUAL RelationalExpression  */
   if (yyn == 428)
-    /* "src/main/resources/Java_16_Grammar.y":1355  */
+    /* "src/main/resources/Java_16_Grammar.y":1357  */
                                                         { yyval = new Binary(((tree.Expression.Expression)(yystack.valueAt (2))),((tree.Expression.Expression)(yystack.valueAt (0))),((Token)(yystack.valueAt (1)))); };
   break;
 
 
   case 429: /* EqualityExpression: EqualityExpression NON_EQUAL RelationalExpression  */
   if (yyn == 429)
-    /* "src/main/resources/Java_16_Grammar.y":1356  */
+    /* "src/main/resources/Java_16_Grammar.y":1358  */
                                                         { yyval = new Binary(((tree.Expression.Expression)(yystack.valueAt (2))),((tree.Expression.Expression)(yystack.valueAt (0))),((Token)(yystack.valueAt (1)))); };
   break;
 
 
   case 430: /* RelationalExpression: ShiftExpression  */
   if (yyn == 430)
-    /* "src/main/resources/Java_16_Grammar.y":1360  */
+    /* "src/main/resources/Java_16_Grammar.y":1362  */
                                                          { yyval = ((tree.Expression.Expression)(yystack.valueAt (0))); };
   break;
 
 
   case 431: /* RelationalExpression: RelationalExpression LESS ShiftExpression  */
   if (yyn == 431)
-    /* "src/main/resources/Java_16_Grammar.y":1361  */
+    /* "src/main/resources/Java_16_Grammar.y":1363  */
                                                          { yyval = new Binary(((tree.Expression.Expression)(yystack.valueAt (2))),((tree.Expression.Expression)(yystack.valueAt (0))),((Token)(yystack.valueAt (1)))); };
   break;
 
 
   case 432: /* RelationalExpression: RelationalExpression GREATER ShiftExpression  */
   if (yyn == 432)
-    /* "src/main/resources/Java_16_Grammar.y":1362  */
+    /* "src/main/resources/Java_16_Grammar.y":1364  */
                                                          { yyval = new Binary(((tree.Expression.Expression)(yystack.valueAt (2))),((tree.Expression.Expression)(yystack.valueAt (0))),((Token)(yystack.valueAt (1)))); };
   break;
 
 
   case 433: /* RelationalExpression: RelationalExpression LESS_EQUAL ShiftExpression  */
   if (yyn == 433)
-    /* "src/main/resources/Java_16_Grammar.y":1363  */
+    /* "src/main/resources/Java_16_Grammar.y":1365  */
                                                          { yyval = new Binary(((tree.Expression.Expression)(yystack.valueAt (2))),((tree.Expression.Expression)(yystack.valueAt (0))),((Token)(yystack.valueAt (1)))); };
   break;
 
 
   case 434: /* RelationalExpression: RelationalExpression GREATER_EQUAL ShiftExpression  */
   if (yyn == 434)
-    /* "src/main/resources/Java_16_Grammar.y":1364  */
+    /* "src/main/resources/Java_16_Grammar.y":1366  */
                                                          { yyval = new Binary(((tree.Expression.Expression)(yystack.valueAt (2))),((tree.Expression.Expression)(yystack.valueAt (0))),((Token)(yystack.valueAt (1)))); };
   break;
 
 
   case 435: /* RelationalExpression: InstanceofExpression  */
   if (yyn == 435)
-    /* "src/main/resources/Java_16_Grammar.y":1365  */
+    /* "src/main/resources/Java_16_Grammar.y":1367  */
                                                          { yyval = ((tree.Expression.Expression)(yystack.valueAt (0))); };
   break;
 
 
   case 436: /* InstanceofExpression: RelationalExpression INSTANCEOF Type  */
   if (yyn == 436)
-    /* "src/main/resources/Java_16_Grammar.y":1369  */
+    /* "src/main/resources/Java_16_Grammar.y":1371  */
                                                { yyval = new InstanceOf(((tree.Expression.Expression)(yystack.valueAt (2))),((tree.Type.Type)(yystack.valueAt (0)))); };
   break;
 
 
   case 437: /* InstanceofExpression: RelationalExpression INSTANCEOF Pattern  */
   if (yyn == 437)
-    /* "src/main/resources/Java_16_Grammar.y":1370  */
+    /* "src/main/resources/Java_16_Grammar.y":1372  */
                                                { yyval = new InstanceOf(((tree.Expression.Expression)(yystack.valueAt (2))),((tree.Declaration.Declaration)(yystack.valueAt (0)))); };
   break;
 
 
   case 438: /* ShiftExpression: AdditiveExpression  */
   if (yyn == 438)
-    /* "src/main/resources/Java_16_Grammar.y":1374  */
+    /* "src/main/resources/Java_16_Grammar.y":1376  */
                                                        { yyval = ((tree.Expression.Expression)(yystack.valueAt (0))); };
   break;
 
 
   case 439: /* ShiftExpression: ShiftExpression DBL_LESS AdditiveExpression  */
   if (yyn == 439)
-    /* "src/main/resources/Java_16_Grammar.y":1375  */
+    /* "src/main/resources/Java_16_Grammar.y":1377  */
                                                        { yyval = new Binary(((tree.Expression.Expression)(yystack.valueAt (2))),((tree.Expression.Expression)(yystack.valueAt (0))),((Token)(yystack.valueAt (1)))); };
   break;
 
 
   case 440: /* ShiftExpression: ShiftExpression DBL_GREATER AdditiveExpression  */
   if (yyn == 440)
-    /* "src/main/resources/Java_16_Grammar.y":1376  */
+    /* "src/main/resources/Java_16_Grammar.y":1378  */
                                                        { yyval = new Binary(((tree.Expression.Expression)(yystack.valueAt (2))),((tree.Expression.Expression)(yystack.valueAt (0))),((Token)(yystack.valueAt (1)))); };
   break;
 
 
   case 441: /* ShiftExpression: ShiftExpression TRIPL_GREATER AdditiveExpression  */
   if (yyn == 441)
-    /* "src/main/resources/Java_16_Grammar.y":1377  */
+    /* "src/main/resources/Java_16_Grammar.y":1379  */
                                                        { yyval = new Binary(((tree.Expression.Expression)(yystack.valueAt (2))),((tree.Expression.Expression)(yystack.valueAt (0))),((Token)(yystack.valueAt (1)))); };
   break;
 
 
   case 442: /* AdditiveExpression: MultiplicativeExpression  */
   if (yyn == 442)
-    /* "src/main/resources/Java_16_Grammar.y":1381  */
+    /* "src/main/resources/Java_16_Grammar.y":1383  */
                                                         { yyval = ((tree.Expression.Expression)(yystack.valueAt (0))); };
   break;
 
 
   case 443: /* AdditiveExpression: AdditiveExpression PLUS MultiplicativeExpression  */
   if (yyn == 443)
-    /* "src/main/resources/Java_16_Grammar.y":1382  */
+    /* "src/main/resources/Java_16_Grammar.y":1384  */
                                                         { yyval = new Binary(((tree.Expression.Expression)(yystack.valueAt (2))),((tree.Expression.Expression)(yystack.valueAt (0))),((Token)(yystack.valueAt (1)))); };
   break;
 
 
   case 444: /* AdditiveExpression: AdditiveExpression MINUS MultiplicativeExpression  */
   if (yyn == 444)
-    /* "src/main/resources/Java_16_Grammar.y":1383  */
+    /* "src/main/resources/Java_16_Grammar.y":1385  */
                                                         { yyval = new Binary(((tree.Expression.Expression)(yystack.valueAt (2))),((tree.Expression.Expression)(yystack.valueAt (0))),((Token)(yystack.valueAt (1)))); };
   break;
 
 
   case 445: /* MultiplicativeExpression: UnaryExpression  */
   if (yyn == 445)
-    /* "src/main/resources/Java_16_Grammar.y":1387  */
+    /* "src/main/resources/Java_16_Grammar.y":1389  */
                                                        { yyval = ((tree.Expression.Expression)(yystack.valueAt (0))); };
   break;
 
 
   case 446: /* MultiplicativeExpression: MultiplicativeExpression STAR UnaryExpression  */
   if (yyn == 446)
-    /* "src/main/resources/Java_16_Grammar.y":1388  */
+    /* "src/main/resources/Java_16_Grammar.y":1390  */
                                                        { yyval = new Binary(((tree.Expression.Expression)(yystack.valueAt (2))),((tree.Expression.Expression)(yystack.valueAt (0))),((Token)(yystack.valueAt (1)))); };
   break;
 
 
   case 447: /* MultiplicativeExpression: MultiplicativeExpression SLASH UnaryExpression  */
   if (yyn == 447)
-    /* "src/main/resources/Java_16_Grammar.y":1389  */
+    /* "src/main/resources/Java_16_Grammar.y":1391  */
                                                        { yyval = new Binary(((tree.Expression.Expression)(yystack.valueAt (2))),((tree.Expression.Expression)(yystack.valueAt (0))),((Token)(yystack.valueAt (1)))); };
   break;
 
 
   case 448: /* MultiplicativeExpression: MultiplicativeExpression PERCENT UnaryExpression  */
   if (yyn == 448)
-    /* "src/main/resources/Java_16_Grammar.y":1390  */
+    /* "src/main/resources/Java_16_Grammar.y":1392  */
                                                        { yyval = new Binary(((tree.Expression.Expression)(yystack.valueAt (2))),((tree.Expression.Expression)(yystack.valueAt (0))),((Token)(yystack.valueAt (1)))); };
   break;
 
 
   case 449: /* UnaryExpression: PreIncrementExpression  */
   if (yyn == 449)
-    /* "src/main/resources/Java_16_Grammar.y":1394  */
+    /* "src/main/resources/Java_16_Grammar.y":1396  */
                                   { yyval = ((UnaryPrefix)(yystack.valueAt (0))); };
   break;
 
 
   case 450: /* UnaryExpression: PreDecrementExpression  */
   if (yyn == 450)
-    /* "src/main/resources/Java_16_Grammar.y":1395  */
+    /* "src/main/resources/Java_16_Grammar.y":1397  */
                                   { yyval = ((UnaryPrefix)(yystack.valueAt (0))); };
   break;
 
 
   case 451: /* UnaryExpression: PLUS UnaryExpression  */
   if (yyn == 451)
-    /* "src/main/resources/Java_16_Grammar.y":1396  */
+    /* "src/main/resources/Java_16_Grammar.y":1398  */
                                   { yyval = new UnaryPrefix(((Token)(yystack.valueAt (1))),((tree.Expression.Expression)(yystack.valueAt (0)))); };
   break;
 
 
   case 452: /* UnaryExpression: MINUS UnaryExpression  */
   if (yyn == 452)
-    /* "src/main/resources/Java_16_Grammar.y":1397  */
+    /* "src/main/resources/Java_16_Grammar.y":1399  */
                                   { yyval = new UnaryPrefix(((Token)(yystack.valueAt (1))),((tree.Expression.Expression)(yystack.valueAt (0)))); };
   break;
 
 
   case 453: /* UnaryExpression: UnaryExpressionNotPlusMinus  */
   if (yyn == 453)
-    /* "src/main/resources/Java_16_Grammar.y":1398  */
+    /* "src/main/resources/Java_16_Grammar.y":1400  */
                                   { yyval = ((tree.Expression.Expression)(yystack.valueAt (0))); };
   break;
 
 
   case 454: /* PreIncrementExpression: DBL_PLUS UnaryExpression  */
   if (yyn == 454)
-    /* "src/main/resources/Java_16_Grammar.y":1402  */
+    /* "src/main/resources/Java_16_Grammar.y":1404  */
                                { yyval = new UnaryPrefix(((Token)(yystack.valueAt (1))),((tree.Expression.Expression)(yystack.valueAt (0)))); };
   break;
 
 
   case 455: /* PreDecrementExpression: DBL_MINUS UnaryExpression  */
   if (yyn == 455)
-    /* "src/main/resources/Java_16_Grammar.y":1406  */
+    /* "src/main/resources/Java_16_Grammar.y":1408  */
                                  { yyval = new UnaryPrefix(((Token)(yystack.valueAt (1))),((tree.Expression.Expression)(yystack.valueAt (0)))); };
   break;
 
 
   case 457: /* UnaryExpressionNotPlusMinus: TILDE UnaryExpression  */
   if (yyn == 457)
-    /* "src/main/resources/Java_16_Grammar.y":1411  */
+    /* "src/main/resources/Java_16_Grammar.y":1413  */
                                   { yyval = new UnaryPrefix(((Token)(yystack.valueAt (1))),((tree.Expression.Expression)(yystack.valueAt (0)))); };
   break;
 
 
   case 458: /* UnaryExpressionNotPlusMinus: EXCLAMATION UnaryExpression  */
   if (yyn == 458)
-    /* "src/main/resources/Java_16_Grammar.y":1412  */
+    /* "src/main/resources/Java_16_Grammar.y":1414  */
                                   { yyval = new UnaryPrefix(((Token)(yystack.valueAt (1))),((tree.Expression.Expression)(yystack.valueAt (0)))); };
   break;
 
 
   case 459: /* UnaryExpressionNotPlusMinus: CastExpression  */
   if (yyn == 459)
-    /* "src/main/resources/Java_16_Grammar.y":1413  */
+    /* "src/main/resources/Java_16_Grammar.y":1415  */
                                   { yyval = ((tree.Expression.Expression)(yystack.valueAt (0))); };
   break;
 
 
   case 460: /* UnaryExpressionNotPlusMinus: SwitchExpression  */
   if (yyn == 460)
-    /* "src/main/resources/Java_16_Grammar.y":1414  */
+    /* "src/main/resources/Java_16_Grammar.y":1416  */
                                   { yyval = ((tree.Expression.Expression)(yystack.valueAt (0))); };
   break;
 
 
   case 461: /* PostfixExpression: Primary  */
   if (yyn == 461)
-    /* "src/main/resources/Java_16_Grammar.y":1418  */
+    /* "src/main/resources/Java_16_Grammar.y":1420  */
                                { yyval = ((tree.Expression.Expression)(yystack.valueAt (0))); };
   break;
 
 
   case 462: /* PostfixExpression: CompoundName  */
   if (yyn == 462)
-    /* "src/main/resources/Java_16_Grammar.y":1419  */
+    /* "src/main/resources/Java_16_Grammar.y":1421  */
                                { yyval = new SimpleReference(((CompoundName)(yystack.valueAt (0)))); };
   break;
 
 
   case 463: /* PostfixExpression: PostIncrementExpression  */
   if (yyn == 463)
-    /* "src/main/resources/Java_16_Grammar.y":1420  */
+    /* "src/main/resources/Java_16_Grammar.y":1422  */
                                { yyval = ((UnaryPostfix)(yystack.valueAt (0))); };
   break;
 
 
   case 464: /* PostfixExpression: PostDecrementExpression  */
   if (yyn == 464)
-    /* "src/main/resources/Java_16_Grammar.y":1421  */
+    /* "src/main/resources/Java_16_Grammar.y":1423  */
                                { yyval = ((UnaryPostfix)(yystack.valueAt (0))); };
   break;
 
 
   case 465: /* PostIncrementExpression: PostfixExpression DBL_PLUS  */
   if (yyn == 465)
-    /* "src/main/resources/Java_16_Grammar.y":1425  */
+    /* "src/main/resources/Java_16_Grammar.y":1427  */
                                  { yyval = new UnaryPostfix(((Token)(yystack.valueAt (0))),((tree.Expression.Expression)(yystack.valueAt (1)))); };
   break;
 
 
   case 466: /* PostDecrementExpression: PostfixExpression DBL_MINUS  */
   if (yyn == 466)
-    /* "src/main/resources/Java_16_Grammar.y":1429  */
+    /* "src/main/resources/Java_16_Grammar.y":1431  */
                                   { yyval = new UnaryPostfix(((Token)(yystack.valueAt (0))),((tree.Expression.Expression)(yystack.valueAt (1)))); };
   break;
 
 
   case 467: /* CastExpression: TargetType UnaryExpression  */
   if (yyn == 467)
-    /* "src/main/resources/Java_16_Grammar.y":1433  */
+    /* "src/main/resources/Java_16_Grammar.y":1435  */
                                    { yyval = new Cast(((tree.Type.TypeList)(yystack.valueAt (1))),((tree.Expression.Expression)(yystack.valueAt (0)))); };
   break;
 
 
   case 468: /* CastExpression: TargetType LambdaExpression  */
   if (yyn == 468)
-    /* "src/main/resources/Java_16_Grammar.y":1434  */
+    /* "src/main/resources/Java_16_Grammar.y":1436  */
                                    { yyval = new Cast(((tree.Type.TypeList)(yystack.valueAt (1))),((tree.Expression.Expression)(yystack.valueAt (0)))); };
   break;
 
 
   case 469: /* TargetType: LPAREN TypeList RPAREN  */
   if (yyn == 469)
-    /* "src/main/resources/Java_16_Grammar.y":1438  */
+    /* "src/main/resources/Java_16_Grammar.y":1440  */
                              { yyval = ((tree.Type.TypeList)(yystack.valueAt (1))); };
   break;
 
 
   case 470: /* TypeList: Type  */
   if (yyn == 470)
-    /* "src/main/resources/Java_16_Grammar.y":1442  */
+    /* "src/main/resources/Java_16_Grammar.y":1444  */
                               { yyval = new TypeList(((tree.Type.Type)(yystack.valueAt (0)))); };
   break;
 
 
   case 471: /* TypeList: TypeList AMPERSAND Type  */
   if (yyn == 471)
-    /* "src/main/resources/Java_16_Grammar.y":1443  */
+    /* "src/main/resources/Java_16_Grammar.y":1445  */
                               { yyval = ((tree.Type.TypeList)(yystack.valueAt (2))).add(((tree.Type.Type)(yystack.valueAt (0)))); };
   break;
 
 
   case 472: /* SwitchExpression: SWITCH LPAREN Expression RPAREN SwitchBlock  */
   if (yyn == 472)
-    /* "src/main/resources/Java_16_Grammar.y":1447  */
+    /* "src/main/resources/Java_16_Grammar.y":1449  */
                                                   { yyval = new SwitchExpression(((tree.Expression.Expression)(yystack.valueAt (2))),((SwitchBlock)(yystack.valueAt (0)))); };
   break;
 
 
   case 473: /* AnnotationSeqOpt: %empty  */
   if (yyn == 473)
-    /* "src/main/resources/Java_16_Grammar.y":1459  */
+    /* "src/main/resources/Java_16_Grammar.y":1461  */
                        { yyval = null; };
   break;
 
 
   case 474: /* AnnotationSeqOpt: AnnotationSeq  */
   if (yyn == 474)
-    /* "src/main/resources/Java_16_Grammar.y":1460  */
+    /* "src/main/resources/Java_16_Grammar.y":1462  */
                        { yyval = ((Annotations)(yystack.valueAt (0))); };
   break;
 
 
   case 475: /* AnnotationSeq: Annotation  */
   if (yyn == 475)
-    /* "src/main/resources/Java_16_Grammar.y":1464  */
+    /* "src/main/resources/Java_16_Grammar.y":1466  */
                                 { yyval = new Annotations(((Annotation)(yystack.valueAt (0)))); };
   break;
 
 
   case 476: /* AnnotationSeq: AnnotationSeq Annotation  */
   if (yyn == 476)
-    /* "src/main/resources/Java_16_Grammar.y":1465  */
+    /* "src/main/resources/Java_16_Grammar.y":1467  */
                                 { yyval = ((Annotations)(yystack.valueAt (1))).add(((Annotation)(yystack.valueAt (0)))); };
   break;
 
 
   case 477: /* Annotation: AT CompoundName  */
   if (yyn == 477)
-    /* "src/main/resources/Java_16_Grammar.y":1469  */
+    /* "src/main/resources/Java_16_Grammar.y":1471  */
                                                        { yyval = new Annotation(((CompoundName)(yystack.valueAt (0))),(AnnoParameterList)null); };
   break;
 
 
   case 478: /* Annotation: AT CompoundName LPAREN RPAREN  */
   if (yyn == 478)
-    /* "src/main/resources/Java_16_Grammar.y":1470  */
+    /* "src/main/resources/Java_16_Grammar.y":1472  */
                                                        { yyval = new Annotation(((CompoundName)(yystack.valueAt (2))),(AnnoParameterList)null); };
   break;
 
 
   case 479: /* Annotation: AT CompoundName LPAREN AnnoParameterList RPAREN  */
   if (yyn == 479)
-    /* "src/main/resources/Java_16_Grammar.y":1471  */
+    /* "src/main/resources/Java_16_Grammar.y":1473  */
                                                        { yyval = new Annotation(((CompoundName)(yystack.valueAt (3))),/*$4*/ (AnnoParameterList)null); };
   break;
 
 
   case 480: /* Annotation: AT CompoundName LPAREN ElementValue RPAREN  */
   if (yyn == 480)
-    /* "src/main/resources/Java_16_Grammar.y":1472  */
+    /* "src/main/resources/Java_16_Grammar.y":1474  */
                                                        { yyval = new Annotation(((CompoundName)(yystack.valueAt (3))),(AnnoElementValue)null); };
   break;
 
 
   case 481: /* AnnoParameterList: IDENTIFIER EQUAL ElementValue  */
   if (yyn == 481)
-    /* "src/main/resources/Java_16_Grammar.y":1476  */
+    /* "src/main/resources/Java_16_Grammar.y":1478  */
                                                             { yyval = null; };
   break;
 
 
   case 482: /* AnnoParameterList: AnnoParameterList COMMA IDENTIFIER EQUAL ElementValue  */
   if (yyn == 482)
-    /* "src/main/resources/Java_16_Grammar.y":1477  */
+    /* "src/main/resources/Java_16_Grammar.y":1479  */
                                                             { yyval = null; };
   break;
 
 
   case 483: /* ElementValue: ConditionalExpression  */
   if (yyn == 483)
-    /* "src/main/resources/Java_16_Grammar.y":1481  */
+    /* "src/main/resources/Java_16_Grammar.y":1483  */
                                                  { yyval = null; };
   break;
 
 
   case 484: /* ElementValue: LBRACE ElementValueListOpt RBRACE  */
   if (yyn == 484)
-    /* "src/main/resources/Java_16_Grammar.y":1482  */
+    /* "src/main/resources/Java_16_Grammar.y":1484  */
                                                  { yyval = null; };
   break;
 
 
   case 485: /* ElementValue: LBRACE COMMA RBRACE  */
   if (yyn == 485)
-    /* "src/main/resources/Java_16_Grammar.y":1483  */
+    /* "src/main/resources/Java_16_Grammar.y":1485  */
                                                  { yyval = null; };
   break;
 
 
   case 486: /* ElementValue: Annotation  */
   if (yyn == 486)
-    /* "src/main/resources/Java_16_Grammar.y":1484  */
+    /* "src/main/resources/Java_16_Grammar.y":1486  */
                                                  { yyval = null; };
   break;
 
@@ -4851,7 +4851,7 @@ public class JavaParser
   {
     return new short[]
     {
-       0,    92,   145,   471,    17,    18,    19,    20,    21,    22,
+      -1,    92,   145,   471,    17,    18,    19,    20,    21,    22,
       23,    24,    25,   224,    38,    53,   231,   232,   233,   525,
      339,    94,    95,    96,    54,    55,   685,   237,   349,   350,
      351,   354,   239,   356,   539,   505,   506,   599,   600,   687,
@@ -6084,13 +6084,13 @@ private static final short[] yycheck_ = yycheck_init();
   private static final int YYNTOKENS_ = 127;
 
 /* Unqualified %code blocks.  */
-/* "src/main/resources/Java_16_Grammar.y":147  */
+/* "src/main/resources/Java_16_Grammar.y":149  */
 
     public CompilationUnit ast;
 
 /* "src/main/java/parser/JavaParser.java":6092  */
 
 }
-/* "src/main/resources/Java_16_Grammar.y":1493  */
+/* "src/main/resources/Java_16_Grammar.y":1495  */
 
 

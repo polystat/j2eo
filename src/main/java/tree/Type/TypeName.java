@@ -26,7 +26,8 @@ public class TypeName extends UnannotatedType
         this.compoundName = cn;
         this.typeArguments = targs;
 
-        System.out.println("Type name accepted");
+//      Entity.unAnnotatedTypeTaken = true;
+        if ( Entity.debug ) System.out.println("Type name accepted");
     }
 
     // Reporting

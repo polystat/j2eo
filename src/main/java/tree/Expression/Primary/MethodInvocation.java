@@ -9,8 +9,8 @@ import tree.Expression.SimpleReference;
 import tree.Type.*;
 
 // MethodInvocation
-//    :                                             IDENTIFIER Arguments
-//    | CompoundName           DOT TypeArgumentsOpt IDENTIFIER Arguments
+//    : CompoundName                                           Arguments
+//    | CompoundName           DOT TypeArguments    IDENTIFIER Arguments
 //    | Primary                DOT TypeArgumentsOpt IDENTIFIER Arguments
 //    |                  SUPER DOT TypeArgumentsOpt IDENTIFIER Arguments
 //    | CompoundName DOT SUPER DOT TypeArgumentsOpt IDENTIFIER Arguments
@@ -23,6 +23,12 @@ public class MethodInvocation extends Primary
     public TypeArguments typeArguments;
     public String name; // callee; can be null
     public ArgumentList arguments;
+
+    // =================================
+    // NOTE!
+    // If qualifier != null, and name == null, then 'qualifier' actually
+    // contains the method name -- perhaps, the compound name.
+    // ==================================
 
     // Creation
     public MethodInvocation(Expression q, boolean ss, TypeArguments targs, Token name, ArgumentList args)

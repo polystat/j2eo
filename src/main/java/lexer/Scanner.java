@@ -1,6 +1,7 @@
 package lexer;
 
 import parser.JavaParser;
+import tree.Entity;
 
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
@@ -62,11 +63,13 @@ public class Scanner implements JavaParser.Lexer
     {
         lastToken = get();
 
-        System.out.print(lastToken.code);
-        if ( lastToken.code == TokenCode.Identifier )
-            System.out.print(" "+lastToken.image);
-        System.out.println();
-
+        if ( Entity.debug )
+        {
+            System.out.print(lastToken.code);
+            if ( lastToken.code == TokenCode.Identifier )
+                System.out.print(" "+lastToken.image);
+            System.out.println();
+        }
         return lastToken.code.value();
     }
 
@@ -114,6 +117,12 @@ public class Scanner implements JavaParser.Lexer
         TokenCode code;
         String image;
         Token token;
+
+ //     if ( Entity.inBlock && Entity.unAnnotatedTypeTaken )
+ //     {
+ //         Entity.unAnnotatedTypeTaken = false;
+ //         return new Token(TokenCode.Phantom,"");
+ //     }
 
         while ( true )
         {

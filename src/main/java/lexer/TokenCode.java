@@ -9,6 +9,8 @@ public enum TokenCode
     ShortComment  (Lexer.SHORT_COMMENT),
     LongComment   (Lexer.LONG_COMMENT),
 
+//  Phantom        (Lexer.PHANTOM),
+
     Identifier     (Lexer.IDENTIFIER),
     IntegerLiteral (Lexer.INTEGER_LITERAL),
     FloatingLiteral(Lexer.FLOATING_POINT_LITERAL),

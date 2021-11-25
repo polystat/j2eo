@@ -1,6 +1,8 @@
 
 //// Tokens ////////////////////////
 
+//%token <Token> PHANTOM      //  ===========
+
 %token <Token> LPAREN       //  (
 %token <Token> RPAREN       //  )
 %token <Token> LBRACE       //  {
@@ -849,11 +851,12 @@ DefaultValueOpt
     | DEFAULT ElementValue
     ;
 
+
 //// Blocks & Statements /////////////////////////////////////
 
 Block
-    : LBRACE                   RBRACE { $$ = null; }
-    | LBRACE BlockStatementSeq RBRACE { $$ = new Block(null,$2); }
+    : LBRACE                     RBRACE { $$ = null; }
+    | LBRACE BlockStatementSeq   RBRACE { $$ = new Block(null,$2); }
     ;
 
 BlockStatementSeq
@@ -1203,12 +1206,12 @@ ArgumentList
     ;
 
 MethodReference
-//  : CompoundName      DBL_COLON TypeArgumentsOpt IDENTIFIER { $$ = null; } -- covered by 'Type' case
-    : Primary           DBL_COLON TypeArgumentsOpt IDENTIFIER { $$ = null; } // not implemented yet
-    | Type              DBL_COLON TypeArgumentsOpt IDENTIFIER { $$ = null; } // not implemented yet
-    |             SUPER DBL_COLON TypeArgumentsOpt IDENTIFIER { $$ = null; } // not implemented yet
-    | Type    DOT SUPER DBL_COLON TypeArgumentsOpt IDENTIFIER { $$ = null; } // not implemented yet
-    | Type              DBL_COLON TypeArgumentsOpt NEW        { $$ = null; } // not implemented yet
+//  : CompoundName   DBL_COLON TypeArgumentsOpt IDENTIFIER { $$ = null; } -- covered by 'Type' case
+    : Primary        DBL_COLON TypeArgumentsOpt IDENTIFIER { $$ = null; } // not implemented yet
+    | Type           DBL_COLON TypeArgumentsOpt IDENTIFIER { $$ = null; } // not implemented yet
+    |          SUPER DBL_COLON TypeArgumentsOpt IDENTIFIER { $$ = null; } // not implemented yet
+    | Type DOT SUPER DBL_COLON TypeArgumentsOpt IDENTIFIER { $$ = null; } // not implemented yet
+    | Type           DBL_COLON TypeArgumentsOpt NEW        { $$ = null; } // not implemented yet
     ;
 
 ArrayCreationExpression
@@ -1274,9 +1277,8 @@ LambdaParameter
 //  :                                IDENTIFIER
     : ModifierSeqOpt UnannotatedType IDENTIFIER DimsOpt  { $$ = new ParameterDeclaration($1,$2,$3.image,null,false,$4); }
     | ModifierSeqOpt VAR             IDENTIFIER DimsOpt  { $$ = new ParameterDeclaration($1,null,$3.image,null,false,$4); }
-    | ModifierSeqOpt UnannotatedType AnnotationSeqOpt ELLIPSIS IDENTIFIER
+    | ModifierSeqOpt UnannotatedType AnnotationSeqOpt ELLIPSIS IDENTIFIER   // VariableArityParameter
                                                          { $$ = new ParameterDeclaration($1,$2,$5.image,$3,true,null); }
-                                                         // VariableArityParameter
     ;
 
 //LambdaParameterType
