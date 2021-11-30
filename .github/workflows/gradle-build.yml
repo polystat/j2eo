@@ -31,6 +31,12 @@ jobs:
         with:
           arguments: test --info
 
+      - name: Generate JaCoCo Badge
+        uses: cicirello/jacoco-badge-generator@v2
+        with:
+          generate-branches-badge: true
+          jacoco-csv-file: build/reports/jacoco/test/jacocoTestReport.csv
+
   gradle_ubuntu:
     runs-on: ubuntu-latest
     steps:
@@ -56,3 +62,9 @@ jobs:
       - uses: gradle/gradle-build-action@v1
         with:
           arguments: test --info
+
+      - name: Generate JaCoCo Badge
+        uses: cicirello/jacoco-badge-generator@v2
+        with:
+          generate-branches-badge: true
+          jacoco-csv-file: build/reports/jacoco/test/jacocoTestReport.csv

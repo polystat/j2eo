@@ -143,6 +143,7 @@ tasks.withType<JacocoReport> {
             }
         }))
     }
+    reports.csv.required.set(true)
 }
 
 /**
