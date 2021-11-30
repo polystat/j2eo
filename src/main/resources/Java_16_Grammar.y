@@ -143,6 +143,7 @@
 %code imports { import tree.Expression.Primary.*; }
 %code imports { import tree.Statement.*; }
 %code imports { import tree.Type.*; }
+%code imports { @SuppressWarnings("PMD") }
 
 %code {
     public CompilationUnit ast;

@@ -235,7 +235,7 @@ public class TestJ2EO {
 
     private static CompilationUnit parseAndBuildAST(Path path) {
         Scanner scanner = new Scanner();
-        scanner.read(path.toString());
+        scanner.readFile(path.toString());
         JavaParser parser = new JavaParser(scanner);
         try {
             if (!parser.parse()) {
