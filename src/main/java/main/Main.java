@@ -4,6 +4,7 @@ import lexer.*;
 import org.apache.commons.cli.*;
 import parser.*;
 import translator.Translator;
+import tree.Entity;
 
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -46,8 +47,8 @@ public class Main {
         }
 
         boolean outputToFile = cmd.hasOption("o");
-        boolean stopAfterSyntax = cmd.hasOption("s");
-        boolean reportOutput = cmd.hasOption("d");
+        Entity.syntaxOnly = cmd.hasOption("s");
+        Entity.debug = cmd.hasOption("d");
 
         // Check if source file exists
         String inputFilepath = cmd.getArgList().get(0);
@@ -55,17 +56,16 @@ public class Main {
         if (!f.exists())
             throw new FileNotFoundException("No file found at \"" + inputFilepath + "\"");
 
-
         // Read, parse, map and print file
-        Scanner    scanner = new Scanner();
-        scanner.read(inputFilepath);
+        Scanner scanner = new Scanner();
+        scanner.readFile(inputFilepath);
         JavaParser parser  = new JavaParser(scanner);
         try {
             boolean result = parser.parse();
             System.out.println("Parsing completed: "+(result ? "SUCCESS" : "FAIL"));
             if (parser.ast != null) {
-                if ( reportOutput ) parser.ast.report(0);
-                if ( stopAfterSyntax ) return;
+                if ( Entity.debug ) parser.ast.report(0);
+                if ( Entity.syntaxOnly ) return;
                 var eoProgram  = Translator.translate(parser.ast);
                 var targetText = eoProgram.generateEO(0);
 

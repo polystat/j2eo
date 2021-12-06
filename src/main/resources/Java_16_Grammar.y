@@ -135,7 +135,7 @@
 %define api.parser.public
 %define api.package {parser}
 %define api.value.type {Entity}
-%define parse.error verbose
+%define parse.error detailed
 
 %code imports { import lexer.*; }
 %code imports { import tree.*; }
@@ -928,6 +928,7 @@ SimpleStatement
     | TRY Block         Finally    { $$ = null; } // not implemented yet
     | TRY ResourceSpecification Block CatchesOpt FinallyOpt // TryWithResourcesStatement
                                    { $$ = null; } // not implemented yet
+    | error SEMICOLON              { $$ = null; }
     ;
 
 LabeledStatement
@@ -945,7 +946,7 @@ StatementExpression
     ;
 
 IfThenElseStatement
-    : IF LPAREN Expression RPAREN Statement ElsePartOpt { $$ = null; } // not implemented yet
+    : IF LPAREN Expression RPAREN Statement ElsePartOpt { $$ = new IfThenElse(null,$3,$5,$6); }
     ;
 
 ElsePartOpt
