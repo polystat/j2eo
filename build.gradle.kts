@@ -5,6 +5,9 @@ import org.gradle.jvm.tasks.Jar
 
 plugins {
     java
+    jacoco
+    pmd
+    checkstyle
 }
 
 group = "org.eolang"
@@ -48,6 +51,21 @@ val fatJar = task("fatJar", type = Jar::class) {
 }
 
 tasks {
+    "pmdMain" {
+        dependsOn(classes)
+    }
+    "checkstyleMain" {
+        dependsOn(classes)
+    }
+    "pmdTest" {
+        dependsOn(testClasses)
+    }
+    "checkstyleTest" {
+        dependsOn(testClasses)
+    }
+    "jacocoTestReport" {
+        dependsOn(test)
+    }
     "build" {
         dependsOn(fatJar)
     }
@@ -76,6 +94,56 @@ tasks.getByName("build") {
 tasks.getByName<Test>("test") {
     useJUnitPlatform()
     systemProperty("candidates", System.getProperty("candidates"))
+    finalizedBy(tasks.getByName("jacocoTestReport"))
+}
+
+pmd {
+    isIgnoreFailures = true
+    isConsoleOutput = false
+    toolVersion = "6.40.0"
+    rulesMinimumPriority.set(5)
+}
+
+
+checkstyle {
+    toolVersion = "9.1"
+    isShowViolations = false
+    isIgnoreFailures = true
+}
+
+tasks.withType<Checkstyle>().configureEach {
+    reports {
+        xml.required.set(false)
+        html.required.set(true)
+        html.stylesheet = resources.text.fromFile("config/xsl/checkstyle-simple.xsl")
+    }
+}
+tasks.withType<JacocoCoverageVerification> {
+    /*violationRules {
+        rule {
+            limit {
+                minimum = BigDecimal(0.62)
+            }
+        }
+    }*/
+
+    afterEvaluate {
+        classDirectories.setFrom(files(classDirectories.files.map {
+            fileTree(it).apply {
+                exclude("parser/**")
+            }
+        }))
+    }
+}
+tasks.withType<JacocoReport> {
+    afterEvaluate {
+        classDirectories.setFrom(files(classDirectories.files.map {
+            fileTree(it).apply {
+                exclude("parser/**")
+            }
+        }))
+    }
+    reports.csv.required.set(true)
 }
 
 /**
