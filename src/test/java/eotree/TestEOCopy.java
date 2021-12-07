@@ -12,13 +12,13 @@ public class TestEOCopy {
     @Test
     public void TestGenerateEOZeroIndent() {
         var f = new EOCopy(
-                new EODot(Optional.empty(), "name"),
+                new EODot("name"),
                 listOf(
                         new EOAnonExpr(
-                                new EODot(Optional.empty(), "arg1")
+                                new EODot("arg1")
                         ),
                         new EOAnonExpr(
-                                new EODot(Optional.empty(), "arg2")
+                                new EODot("arg2")
                         )
                 )
         );
