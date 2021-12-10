@@ -2,25 +2,28 @@ package common;
 
 import eotree.EOProgram;
 import lexer.Scanner;
-import org.junit.jupiter.api.*;
+import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.DynamicTest;
+import org.junit.jupiter.api.TestFactory;
 import org.junit.jupiter.api.parallel.Execution;
 import org.junit.jupiter.api.parallel.ExecutionMode;
 import parser.JavaParser;
-import translator.Translator;
 import tree.Compilation.CompilationUnit;
 
-import java.io.*;
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.IOException;
+import java.io.InputStreamReader;
 import java.nio.file.*;
 import java.nio.file.attribute.BasicFileAttributes;
 import java.util.ArrayList;
 import java.util.Collection;
-import java.util.LinkedList;
 import java.util.logging.Level;
-import java.util.logging.LogManager;
 import java.util.logging.Logger;
 import java.util.stream.Collectors;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static translator.TranslatorKt.translate;
 
 @Execution(ExecutionMode.CONCURRENT)
 public class TestJ2EO {
@@ -255,7 +258,7 @@ public class TestJ2EO {
         }
         EOProgram eoProgram = null;
         try {
-            eoProgram = Translator.translate(unit);
+            eoProgram = translate(unit);
         } catch (Exception e) {
             logger.throwing(TestJ2EO.class.getName(), "translateToEO", e);
         }

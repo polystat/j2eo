@@ -1,6 +1,7 @@
 package tree;
 
 import java.util.ArrayList;
+import java.util.List;
 
 // %nterm <CompoundName> CompoundName
 //
@@ -20,11 +21,23 @@ public class CompoundName extends Entity
         names.add(first);
     }
 
+    public CompoundName(List<String> name) {
+        names = new ArrayList<>(name);
+    }
+
     // Adding
     public CompoundName add(String next)
     {
         names.add(next);
         return this;
+    }
+
+    public String concatenatedJava() {
+        return String.join(".", names);
+    }
+
+    public String concatenatedEO() {
+        return String.join("__", names);
     }
 
     // Reporting

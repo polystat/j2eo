@@ -1,4 +1,4 @@
-class Example
+class Example extends Object
 {
     int m1;
     P.T m2;

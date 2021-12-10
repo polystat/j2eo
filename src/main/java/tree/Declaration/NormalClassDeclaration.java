@@ -4,6 +4,9 @@ import lexer.*;
 import tree.Entity;
 import tree.Type.*;
 
+import java.util.List;
+import java.util.stream.Collectors;
+
 // NormalClassDeclaration
 //    : /*ModifierSeqOpt*/ CLASS IDENTIFIER TypeParametersOpt ClassExtendsOpt ClassImplementsOpt ClassBody
 //    ;
@@ -34,43 +37,71 @@ import tree.Type.*;
 //    | STATIC Block           // StaticInitializer
 //    | SEMICOLON
 // 	;
-public class NormalClassDeclaration extends ClassDeclaration
-{
+public class NormalClassDeclaration extends ClassDeclaration {
     // Structure
     public TypeParameters typeParameters;
-    public Type extendedType;
-    public TypeList interfaces;
-    public Declarations body;
+    public Type           extendedType;
+    public TypeList       interfaces;
+    public Declarations   body;
 
     // Creation
     public NormalClassDeclaration(Token n,
                                   TypeParameters typePars,
                                   Type extType,
                                   TypeList ints,
-                                  Declarations body)
-    {
-        super(null,n.image);
+                                  Declarations body) {
+        super(null, n.image);
         this.typeParameters = typePars;
         this.extendedType = extType;
         this.interfaces = ints;
         this.body = body;
     }
 
+    public List<VariableDeclaration> getStaticVariables() {
+        return body.declarations.stream()
+                .filter(dec -> dec instanceof VariableDeclaration)
+                .filter(dec -> dec.modifiers.modifiers.modifiers.contains(TokenCode.Static))
+                .map(dec -> (VariableDeclaration) dec)
+                .collect(Collectors.toList());
+    }
+
+    public List<VariableDeclaration> getNonStaticVariables() {
+        return body.declarations.stream()
+                .filter(dec -> dec instanceof VariableDeclaration)
+                .filter(dec -> !dec.modifiers.modifiers.modifiers.contains(TokenCode.Static))
+                .map(dec -> (VariableDeclaration) dec)
+                .collect(Collectors.toList());
+    }
+
+    public List<MethodDeclaration> getStaticMethods() {
+        return body.declarations.stream()
+                .filter(dec -> dec instanceof MethodDeclaration)
+                .filter(dec -> dec.modifiers.modifiers.modifiers.contains(TokenCode.Static))
+                .map(dec -> (MethodDeclaration) dec)
+                .collect(Collectors.toList());
+    }
+
+    public List<MethodDeclaration> getNonStaticMethods() {
+        return body.declarations.stream()
+                .filter(dec -> dec instanceof MethodDeclaration)
+                .filter(dec -> !dec.modifiers.modifiers.modifiers.contains(TokenCode.Static))
+                .map(dec -> (MethodDeclaration) dec)
+                .collect(Collectors.toList());
+    }
+
     // Reporting
-    public void report(int sh)
-    {
-        this.title("CLASS DECLARATION "+this.name,sh);
-        if ( this.typeParameters != null )
-            this.typeParameters.report(sh+Entity.shift);
-        if ( this.extendedType != null )
-        {
-            this.title("SUPER",sh+Entity.shift);
-            this.extendedType.report(sh+Entity.shift);
+    public void report(int sh) {
+        this.title("CLASS DECLARATION " + this.name, sh);
+        if (this.typeParameters != null)
+            this.typeParameters.report(sh + Entity.shift);
+        if (this.extendedType != null) {
+            this.title("SUPER", sh + Entity.shift);
+            this.extendedType.report(sh + Entity.shift);
         }
-        if ( this.interfaces != null )
-            this.interfaces.report(sh+Entity.shift);
-        if ( body != null )
-            body.report(sh+Entity.shift);
+        if (this.interfaces != null)
+            this.interfaces.report(sh + Entity.shift);
+        if (body != null)
+            body.report(sh + Entity.shift);
     }
 
 }

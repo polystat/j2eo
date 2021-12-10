@@ -1,0 +1,6 @@
+# 2021-12-07T19:19:55.458820
+# j2eo team
++alias org.eolang.io.stdout
+
+[] > class_Example
+Object > @

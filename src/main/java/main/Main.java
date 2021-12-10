@@ -3,12 +3,13 @@ package main;
 import lexer.*;
 import org.apache.commons.cli.*;
 import parser.*;
-import translator.Translator;
 import tree.Entity;
 
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.PrintWriter;
+
+import static translator.TranslatorKt.translate;
 
 public class Main {
     public static void main(String[] args) throws FileNotFoundException {
@@ -66,7 +67,7 @@ public class Main {
             if (parser.ast != null) {
                 if ( Entity.debug ) parser.ast.report(0);
                 if ( Entity.syntaxOnly ) return;
-                var eoProgram  = Translator.translate(parser.ast);
+                var eoProgram  = translate(parser.ast);
                 var targetText = eoProgram.generateEO(0);
 
                 // Print generated code to stdout or to file, if any specified

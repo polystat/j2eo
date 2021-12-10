@@ -11,8 +11,8 @@ public class TestEOBndExpr {
     @Test
     public void TestGenerateEOZeroIndent() {
         var f = new EOBndExpr(
-                new EODot(Optional.empty(), "memory"),
-                new EOBndName("bnd1")
+                new EODot("memory"),
+                "bnd1"
         );
         assertEquals("memory > bnd1", f.generateEO(0));
     }
@@ -20,8 +20,8 @@ public class TestEOBndExpr {
     @Test
     public void TestGenerateEONonZeroIndent() {
         var f = new EOBndExpr(
-                new EODot(Optional.empty(), "memory"),
-                new EOBndName("bnd1")
+                new EODot("memory"),
+                "bnd1"
         );
         assertEquals("  memory > bnd1", f.generateEO(1));
     }
