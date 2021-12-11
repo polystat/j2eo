@@ -29,5 +29,5 @@ class EODot : EOExpr {
     override fun generateEO(indent: Int): String =
         src
             .map { src -> src.generateEO(indent) + "." + name }
-            .getOrElse { name }
+            .getOrElse { indent(indent) + name }
 }
