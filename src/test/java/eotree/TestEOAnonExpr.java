@@ -10,7 +10,7 @@ public class TestEOAnonExpr {
     @Test
     public void TestGenerateEOZeroIndent() {
         var f = new EOAnonExpr(
-                new EODot(Optional.empty(), "memory")
+                new EODot("memory")
         );
         assertEquals("memory", f.generateEO(0));
     }
@@ -18,7 +18,7 @@ public class TestEOAnonExpr {
     @Test
     public void TestGenerateEONonZeroIndent() {
         var f = new EOAnonExpr(
-                new EODot(Optional.empty(), "memory")
+                new EODot("memory")
         );
         assertEquals("  memory", f.generateEO(1));
     }

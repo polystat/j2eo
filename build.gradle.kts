@@ -1,6 +1,7 @@
 import org.apache.tools.ant.taskdefs.condition.Os
 import java.security.MessageDigest
 import org.gradle.jvm.tasks.Jar
+import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 
 
 plugins {
@@ -8,10 +9,20 @@ plugins {
     jacoco
     pmd
     checkstyle
+    kotlin("jvm") version "1.6.0"
 }
 
 group = "org.eolang"
 version = "0.1"
+
+val compileKotlin: KotlinCompile by tasks
+compileKotlin.kotlinOptions {
+    jvmTarget = "15"
+}
+val compileTestKotlin: KotlinCompile by tasks
+compileTestKotlin.kotlinOptions {
+    jvmTarget = "15"
+}
 
 // The Java grammar source file for Bison
 val javaGrammarFilePath = "src/main/resources/Java_16_Grammar.y"
@@ -31,10 +42,14 @@ repositories {
 }
 
 dependencies {
+    // Library for command-line arguments support
     implementation("commons-cli:commons-cli:1.4")
+    // Functional stuff
+    implementation("io.arrow-kt:arrow-core:1.0.1")
 
     testImplementation("org.junit.jupiter:junit-jupiter-api:5.8.1")
     testRuntimeOnly("org.junit.jupiter:junit-jupiter-engine:5.8.1")
+    implementation(kotlin("stdlib-jdk8"))
 }
 
 
@@ -201,7 +216,7 @@ fun runBison() =
                     )
                 }
             else ->
-                throw kotlin.UnsupportedOperationException("Your OS is not yet supported. File a GitHub or issue or " +
+                throw UnsupportedOperationException("Your OS is not yet supported. File a GitHub or issue or " +
                         "provide a Pull Request with support for Bison execution for your OS.")
         }
     } catch (e: Exception) {

@@ -1,5 +1,6 @@
 package eotree;
 
+import arrow.core.Some;
 import org.junit.jupiter.api.Test;
 
 import java.util.Optional;
@@ -12,7 +13,7 @@ public class TestEOMetas {
     @Test
     public void TestGenerateEOZeroIndent() {
         var f = new EOMetas(
-                Optional.of("org.eolang.package"),
+                new Some<>("org.eolang.package"),
                 listOf(
                         new EOMeta("key1", "value1"),
                         new EOMeta("key2", "value2")
@@ -28,7 +29,7 @@ public class TestEOMetas {
     @Test
     public void TestGenerateEONonZeroIndent() {
         var f = new EOMetas(
-                Optional.of("org.eolang.package"),
+                new Some<>("org.eolang.package"),
                 listOf(
                         new EOMeta("key1", "value1"),
                         new EOMeta("key2", "value2")
