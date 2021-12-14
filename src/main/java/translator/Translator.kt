@@ -11,10 +11,13 @@ import util.ListUtils
 import java.time.LocalDateTime
 
 fun translate(unit: CompilationUnit): EOProgram {
-    return if (unit is SimpleCompilationUnit) mapSimpleCompilationUnit(unit) else throw IllegalArgumentException(
-        "CompilationUnit of type " +
-                unit.javaClass.simpleName +
-                " is not supported")
+    return if (unit is SimpleCompilationUnit)
+        mapSimpleCompilationUnit(unit)
+    else
+        throw IllegalArgumentException(
+            "CompilationUnit of type " +
+                    unit.javaClass.simpleName +
+                    " is not supported")
 }
 
 fun mapPackage(pkg: Package): EOProgram {
@@ -155,7 +158,8 @@ fun mapSimpleCompilationUnit(unit: SimpleCompilationUnit): EOProgram {
         EOMetas(
             None,
             ListUtils.listOf(
-                EOMeta("alias", "org.eolang.io.stdout")
+                EOMeta("alias", "org.eolang.io.stdout"),
+                EOMeta("alias", "org.eolang.gray.cage"),
             )
         ),
 //        stdBnds + bnds + entrypointBnds

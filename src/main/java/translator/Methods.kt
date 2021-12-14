@@ -22,7 +22,7 @@ import java.util.stream.Collectors
 fun mapMethodDeclaration(dec: MethodDeclaration): EOBndExpr {
     val obj = EOObject(
         // Non-vararg parameters
-        if (dec.parameters != null && dec.name != "main") // Exclude 'String[] args' fon now
+        if (dec.parameters != null) // Exclude 'String[] args' fon now
             dec.parameters.parameters.stream()
                 .filter { param: ParameterDeclaration -> !param.signEllipsis }
                 .map { param: ParameterDeclaration -> param.name }
@@ -60,7 +60,7 @@ fun mapMethodDeclaration(dec: MethodDeclaration): EOBndExpr {
     if (dec.parameters != null)
         assert(dec.parameters.parameters.size ==
                 obj.freeAttrs.size + if (obj.varargAttr.nonEmpty()) 1 else 0) {
-            "Parameters count of Java method and EO method do not match"
+            "Parameters count of Java method and EO method do not match: ${dec.parameters.parameters.size} vs ${obj.freeAttrs.size + if (obj.varargAttr.nonEmpty()) 1 else 0}"
         }
 
     return EOBndExpr(
