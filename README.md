@@ -108,21 +108,21 @@ bugs in our code. It is also much easier to work with abstraction layer than wit
 
 ## NOT covered Java features list
 
-- Type Erasure
-- Subtyping
-- Conversions
-- Casting
-- Modules
-- Exceptions
-- Asserts
-- Throws
+- Type Erasure  - Zouev
+- Subtyping     - discuss with Yegor
+- Conversions   - remove
+- Casting       - remove
+- Modules      
+- Exceptions     - remove
+- Asserts        - remove
+- Throws         - remove
 - ``synchronized`` blocks
-- ``try``/``catch`` blocks
+- ``try``/``catch`` blocks  - remove
 - ``yeild`` feature
-- Threads and Locks
-- Generics (all kinds of them)
-- Native methods
-- break and continue statements
-- RTTI (instanceof operator) ??????
+- Threads and Locks 
+- Generics (all kinds of them) - remove
+- Native methods 
+- break and continue statements - remove
+- RTTI (instanceof operator) ??????  - remove
 
 In general, we cover **91 feature of 112** described in the Java language specification.
