@@ -11,14 +11,15 @@ class EOObject(
     var bndAttrs: List<EOBndExpr>,
 ) : EOExpr() {
     override fun generateEO(indent: Int): String {
-        return indent(indent) + "[" +
+        return indent(indent) +
+                "[" +
                 freeAttrs.joinToString(" ") +
                 varargAttr
                     .map { attr -> (if (freeAttrs.isNotEmpty()) " " else "") + attr + "..." }
                     .getOrElse { "" } +
-                "]\n" +
+                "]" +
                 bndAttrs
-                    .map { attr: EOBndExpr -> attr.generateEO(indent + 1) }
-                    .joinToString("\n")
+                    .map { attr: EOBndExpr -> "\n" + attr.generateEO(indent + 1) }
+                    .joinToString("")
     }
 }

@@ -35,7 +35,7 @@ public class TestJ2EO {
     @BeforeAll
     static void setup() {
         boolean testCandidates = System.getProperty("candidates") != null &&
-                System.getProperty("candidates").equals("true");
+                                 System.getProperty("candidates").equals("true");
 
         if (testCandidates)
             logger.log(Level.INFO, "Executing candidate tests!");
@@ -143,7 +143,7 @@ public class TestJ2EO {
     private static DynamicTest testFile(Path path) {
         return DynamicTest.dynamicTest(
                 path.getParent().getFileName().toString() + "/" +
-                        path.getFileName().toString(), () -> {
+                path.getFileName().toString(), () -> {
 
                     logger.info("-- Current test file: " + path.toString());
 
@@ -294,7 +294,7 @@ public class TestJ2EO {
                 deleteDirTree(testFolderPath);
             }
             Path eoExecDir = Files.createDirectories(
-                        Paths.get(testFolderPath.toString(), "eo"));
+                    Paths.get(testFolderPath.toString(), "eo"));
             Path eoFilePath = Files.createFile(Paths.get(eoExecDir.toString() + sep + "class_" + eoFileName + ".eo"));
             Files.copy(
                     Paths.get(testFolderRoot, "eo_execution_pom", "pom.xml"),
@@ -333,7 +333,7 @@ public class TestJ2EO {
                         (isWindows ?
                                 "\"target/classes;target/eo-runtime.jar\"" :
                                 "target/classes:target/eo-runtime.jar"),
-                        "org.eolang.Main",
+                        "org.eolang.EOMain",
                         "global",
                         (isWindows ? "%*" : "\"$@\"")
                 );
@@ -384,6 +384,7 @@ public class TestJ2EO {
                 Files.delete(dir);
                 return FileVisitResult.CONTINUE;
             }
+
             @Override
             public FileVisitResult visitFile(Path file, BasicFileAttributes attrs) throws IOException {
                 Files.delete(file);

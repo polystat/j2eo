@@ -5,3 +5,7 @@ class EOAnonExpr(expr: EOExpr) : EOBnd(expr) {
         return expr.generateEO(indent)
     }
 }
+
+fun EOExpr.anonExpr(): EOAnonExpr = EOAnonExpr(this)
+
+fun List<EOExpr>.anonExprs(): List<EOAnonExpr> = map { e -> e.anonExpr() }

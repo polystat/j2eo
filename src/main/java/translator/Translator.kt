@@ -50,7 +50,7 @@ fun mapSimpleCompilationUnit(unit: SimpleCompilationUnit): EOProgram {
             EOBndExpr(
                 EOCopy(
                     EODot("stdout"),
-                    ListUtils.listOf<EOBnd>(
+                    listOf(
                         EOAnonExpr(
                             EODot("text")
                         )
@@ -90,6 +90,38 @@ fun mapSimpleCompilationUnit(unit: SimpleCompilationUnit): EOProgram {
         .map { bnd: EOBnd -> bnd as EOBndExpr }
 
     // FIXME: assuming there is only one top-level component and it is a class
+    val mainClassName = bnds[0].bndName
+    val entrypointBnds = listOf(
+        EOBndExpr(
+            EOObject(
+                listOf(),
+                Some("args"),
+                listOf(
+                    EOBndExpr("cage".eoDot(), "instance"),
+
+                    EOBndExpr(
+                        EOCopy(
+                            "seq",
+                            listOf(
+                                EOCopy(
+                                    "instance.write".eoDot(),
+                                    listOf("${mainClassName}.new".eoDot()).anonExprs()
+                                ),
+                                EOCopy(
+                                    "instance.main".eoDot(),
+                                    listOf()
+                                )
+                            ).anonExprs()
+                        ),
+                        "@"
+                    )
+                )
+            ),
+            "main"
+        )
+    )
+
+    // FIXME: assuming there is only one top-level component and it is a class
     // Always calling the 'main' method
 //    val mainClassName = bndLst[0].bndName
 //    bndLst.add(EOBndExpr(
@@ -126,7 +158,8 @@ fun mapSimpleCompilationUnit(unit: SimpleCompilationUnit): EOProgram {
                 EOMeta("alias", "org.eolang.io.stdout")
             )
         ),
-        bnds
+//        stdBnds + bnds + entrypointBnds
+        bnds + entrypointBnds
     )
 }
 

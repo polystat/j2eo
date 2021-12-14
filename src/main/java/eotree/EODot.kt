@@ -3,13 +3,20 @@ package eotree
 import arrow.core.*
 import tree.CompoundName
 
+fun String.eoDot(): EODot = EODot(this)
+
 class EODot : EOExpr {
     var src: Option<EOExpr>
     var name: String
 
-    constructor(name: String) {
-        src = None
-        this.name = name
+    constructor(name: String) : this(name.split("."))
+
+    constructor(names: List<String>) {
+        this.name = names.last()
+        this.src = if (names.size > 1)
+            EODot(names.dropLast(1)).some()
+        else
+            None
     }
 
     constructor(src: Option<EOExpr>, name: String) {
