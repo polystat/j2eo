@@ -1,8 +1,5 @@
 package common
 
-import arrow.core.None
-import arrow.core.Option
-import arrow.core.some
 import eotree.EOProgram
 import lexer.Scanner
 import org.junit.jupiter.api.Assertions
@@ -19,9 +16,10 @@ import java.io.BufferedReader
 import java.io.File
 import java.io.IOException
 import java.io.InputStreamReader
-import java.nio.file.*
+import java.nio.file.Files
+import java.nio.file.Path
+import java.nio.file.Paths
 import java.util.*
-import java.util.stream.Collectors
 
 @Execution(ExecutionMode.CONCURRENT)
 //@Execution(ExecutionMode.SAME_THREAD)
@@ -98,15 +96,12 @@ class TestJ2EO {
         )
 
     private fun testChapter(chapterPath: String): List<DynamicTest> {
-        return Files
-            .walk(Paths.get(chapterPath))
-            .collect(Collectors.toList())
-            .asSequence()
-            .filter { path -> Files.isRegularFile(path) }
-            .filter { path -> isReadyTest(path) }
-            .filter { path -> isNotClassFile(path) }
-            .filter { path -> isJavaFile(path) }
-            .map { p -> testFile(p) }
+        return File(chapterPath).walk()
+            .filter { file -> file.isFile }
+            .filter { file -> isReadyTest(file.toPath()) }
+            .filter { file -> isNotClassFile(file.toPath()) }
+            .filter { file -> isJavaFile(file.toPath()) }
+            .map { file -> testFile(file.toPath()) }
             .toList()
     }
 
@@ -156,58 +151,65 @@ class TestJ2EO {
         }
 
         private fun compileAndExecuteJava(path: Path): String {
-            val output = StringBuilder()
-            // Compile .java file
             val fileName = path.fileName.toString().split("\\.").toTypedArray()[0]
             val subFolder: File = Path.of(path.parent.toString(), "${fileName}_java").toFile()
             if (subFolder.exists()) {
-                deleteDirTree(subFolder)
+                subFolder.deleteRecursively()
             }
-            Files.createDirectories(subFolder.toPath())
-            Files.copy(path, Paths.get(subFolder.toString(), path.fileName.toString()))
-            val compilePb = ProcessBuilder(
-                "javac",
-                "-d",
-                subFolder.toString(),
-                path.toString()
-            )
-            compilePb.directory(File(subFolder.toString()))
-            compilePb.redirectErrorStream(true)
-            val compileProcess = compilePb.start()
-            val stdCompInput = BufferedReader(InputStreamReader(compileProcess.inputStream))
-            var sc: String?
-            val javacSb = StringBuilder()
-            while (stdCompInput.readLine().also { sc = it } != null) {
-                javacSb.append(sc).append(System.lineSeparator()) // Java compilation output (if any)
+
+            try {
+                val output = StringBuilder()
+                // Compile .java file
+                Files.createDirectories(subFolder.toPath())
+                Files.copy(path, Paths.get(subFolder.toString(), path.fileName.toString()))
+                val compilePb = ProcessBuilder(
+                    "javac",
+                    "-d",
+                    subFolder.toString(),
+                    path.toString()
+                )
+                compilePb.directory(File(subFolder.toString()))
+                compilePb.redirectErrorStream(true)
+                val compileProcess = compilePb.start()
+                val stdCompInput = BufferedReader(InputStreamReader(compileProcess.inputStream))
+                var sc: String?
+                val javacSb = StringBuilder()
+                while (stdCompInput.readLine().also { sc = it } != null) {
+                    javacSb.append(sc).append(System.lineSeparator()) // Java compilation output (if any)
+                }
+                compileProcess.waitFor()
+                compileProcess.destroy()
+                logger.info("-- Java compilation output --" + System.lineSeparator() + javacSb.toString())
+
+                // Execute .class file
+                val execPb = ProcessBuilder(
+                    "java",
+                    "-cp",
+                    subFolder.toString() + sep,
+                    fileName
+                )
+                execPb.directory(File(subFolder.toString()))
+                execPb.redirectErrorStream(true)
+                val execProcess = execPb.start()
+
+                // Receive output
+                val stdInput = BufferedReader(InputStreamReader(execProcess.inputStream))
+                var s: String?
+                while (stdInput.readLine().also { s = it } != null) {
+                    output.append(s).append(System.lineSeparator())
+                }
+                execProcess.waitFor()
+                execProcess.destroy()
+                logger.info("-- Java execution output --" + System.lineSeparator() + output.toString())
+
+                // Remove .class files
+                subFolder.deleteRecursively()
+                return output.toString()
+            } catch (e: Exception) {
+                // Cleanup output and rethrow exception
+                subFolder.deleteRecursively()
+                throw e
             }
-            compileProcess.waitFor()
-            compileProcess.destroy()
-            logger.info("-- Java compilation output --" + System.lineSeparator() + javacSb.toString())
-
-            // Execute .class file
-            val execPb = ProcessBuilder(
-                "java",
-                "-cp",
-                subFolder.toString() + sep,
-                fileName
-            )
-            execPb.directory(File(subFolder.toString()))
-            execPb.redirectErrorStream(true)
-            val execProcess = execPb.start()
-
-            // Receive output
-            val stdInput = BufferedReader(InputStreamReader(execProcess.inputStream))
-            var s: String?
-            while (stdInput.readLine().also { s = it } != null) {
-                output.append(s).append(System.lineSeparator())
-            }
-            execProcess.waitFor()
-            execProcess.destroy()
-            logger.info("-- Java execution output --" + System.lineSeparator() + output.toString())
-
-            // Remove .class files
-            deleteDirTree(subFolder)
-            return output.toString()
         }
 
         private fun parseAndBuildAST(path: Path): CompilationUnit {
@@ -245,81 +247,88 @@ class TestJ2EO {
             val testFolder: File = Path.of(testFilePath.parent.toString(), "${eoFileName}_eo").toFile()
             // Setup temporary folders and files
             if (testFolder.exists()) {
-                deleteDirTree(testFolder)
+                testFolder.deleteRecursively()
             }
-            val eoExecDir = Files.createDirectories(
-                Paths.get(testFolder.toString(), "eo"))
-            val eoFilePath = Files.createFile(Paths.get(eoExecDir.toString() + sep + "class_" + eoFileName + ".eo"))
-            Files.copy(
-                Paths.get(testFolderRoot, "eo_execution_pom", "pom.xml"),
-                Paths.get(eoExecDir.parent.toString() + sep + "pom.xml"))
+            val eoExecDir = Files.createDirectories(Paths.get(testFolder.toString(), "eo"))
 
-            // Write generated code to the file
-            Files.writeString(eoFilePath, eoCode)
+            try {
+                val eoFilePath = Files.createFile(Paths.get(eoExecDir.toString() + sep + "class_" + eoFileName + ".eo"))
+                Files.copy(
+                    Paths.get(testFolderRoot, "eo_execution_pom", "pom.xml"),
+                    Paths.get(eoExecDir.parent.toString() + sep + "pom.xml"))
 
-            // Execute generated EO code
-            val isWindows = System.getProperty("os.name").lowercase(Locale.getDefault())
-                .contains("windows") // Matters a lot
+                // Write generated code to the file
+                Files.writeString(eoFilePath, eoCode)
 
-            // Compile EO file
-            val compilePb = ProcessBuilder("mvn" + if (isWindows) ".cmd" else "", "clean", "compile")
-            compilePb.directory(File(eoExecDir.parent.toString()))
-            compilePb.redirectErrorStream(true)
-            val compileProcess = compilePb.start()
+                // Execute generated EO code
+                val isWindows = System.getProperty("os.name").lowercase(Locale.getDefault())
+                    .contains("windows") // Matters a lot
 
-            // Receive compilation output (may be useful)
-            val mvnStdInput = BufferedReader(InputStreamReader(compileProcess.inputStream))
-            var m: String?
-            val mvnSb = StringBuilder()
-            while (mvnStdInput.readLine().also { m = it } != null) {
-                mvnSb.append(m).append(System.lineSeparator())
-            }
-            compileProcess.waitFor()
-            compileProcess.destroy()
-            logger.info(" -- EO compilation output --" + System.lineSeparator() + mvnSb.toString())
+                // Compile EO file
+                val compilePb = ProcessBuilder("mvn" + if (isWindows) ".cmd" else "", "clean", "compile")
+                compilePb.directory(File(eoExecDir.parent.toString()))
+                compilePb.redirectErrorStream(true)
+                val compileProcess = compilePb.start()
 
-            // Execute Java ".class"es
-            val execPb = ProcessBuilder(
-                "java", "-cp",
-                if (isWindows)
-                    "\"target/classes;target/eo-runtime.jar\""
-                else
-                    "target/classes:target/eo-runtime.jar",
-                "org.eolang.Main",
-                "main",
-                if (isWindows)
-                    "%*"
-                else
-                    "\"$@\"1"
-            )
-            execPb.directory(File(eoExecDir.parent.toString()))
-            execPb.redirectErrorStream(true)
-            val execProcess = execPb.start()
-
-            // Receive EO execution output
-            val stdInput = BufferedReader(InputStreamReader(execProcess.inputStream))
-            val eoExecOut: String = stdInput.readText()
-            execProcess.waitFor()
-            execProcess.destroy()
-            logger.info("-- EO execution output --\n$eoExecOut")
-
-            // Clean everything out
-            deleteDirTree(eoExecDir.toAbsolutePath().parent.toFile())
-
-            // Double check for delete, so that no obsolete files are created after test fail
-            if (testFolder.exists()) {
-                try {
-                    deleteDirTree(testFolder)
-                } catch (e: IOException) {
-                    e.printStackTrace()
+                // Receive compilation output (may be useful)
+                val mvnStdInput = BufferedReader(InputStreamReader(compileProcess.inputStream))
+                var m: String?
+                val mvnSb = StringBuilder()
+                while (mvnStdInput.readLine().also { m = it } != null) {
+                    mvnSb.append(m).append(System.lineSeparator())
                 }
+                compileProcess.waitFor()
+                compileProcess.destroy()
+                logger.info(" -- EO compilation output --" + System.lineSeparator() + mvnSb.toString())
+
+                // Execute Java ".class"es
+                val execPb = ProcessBuilder(
+                    "java", "-cp",
+                    if (isWindows)
+                        "\"target/classes;target/eo-runtime.jar\""
+                    else
+                        "target/classes:target/eo-runtime.jar",
+                    "org.eolang.Main",
+                    "main",
+                    if (isWindows)
+                        "%*"
+                    else
+                        "\"$@\"1"
+                )
+                execPb.directory(File(eoExecDir.parent.toString()))
+                execPb.redirectErrorStream(true)
+                val execProcess = execPb.start()
+
+                // Receive EO execution output
+                val stdInput = BufferedReader(InputStreamReader(execProcess.inputStream))
+                val eoExecOut: String = stdInput.readText()
+                execProcess.waitFor()
+                execProcess.destroy()
+                logger.info("-- EO execution output --\n$eoExecOut")
+
+                // Clean everything out
+                eoExecDir.toAbsolutePath().parent.toFile().deleteRecursively()
+
+                // Double check for delete, so that no obsolete files are created after test fail
+                if (testFolder.exists()) {
+                    try {
+                        testFolder.deleteRecursively()
+                    } catch (e: IOException) {
+                        e.printStackTrace()
+                    }
+                }
+
+                return eoExecOut
+            } catch (e: Exception) {
+                // Clean everything out
+                eoExecDir.toAbsolutePath().parent.toFile().deleteRecursively()
+
+                // Double check for delete, so that no obsolete files are created after test fail
+                if (testFolder.exists())
+                    testFolder.deleteRecursively()
+                throw e
             }
-
-            return eoExecOut
         }
-
-        private fun deleteDirTree(dir: File) =
-            dir.walk().forEach { file -> file.delete() }
 
         private fun isReadyTest(path: Path): Boolean {
             return !path.endsWith("SampleTest.java")
