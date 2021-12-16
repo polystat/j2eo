@@ -3,8 +3,6 @@ package eotree
 import arrow.core.*
 import tree.CompoundName
 
-fun String.eoDot(): EODot = EODot(this)
-
 class EODot : EOExpr {
     var src: Option<EOExpr>
     var name: String
@@ -38,3 +36,8 @@ class EODot : EOExpr {
             .map { src -> src.generateEO(indent) + "." + name }
             .getOrElse { indent(indent) + name }
 }
+
+
+fun String.eoDot(): EODot = EODot(this)
+
+fun CompoundName.eoDot(): EODot = EODot(this)

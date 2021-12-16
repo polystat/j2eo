@@ -2,15 +2,14 @@ package translator
 
 import arrow.core.None
 import arrow.core.flattenOption
+import eotree.*
 import tree.Declaration.ClassDeclaration
-import eotree.EOBnd
 import tree.Declaration.NormalClassDeclaration
 import java.lang.IllegalArgumentException
-import eotree.EOBndExpr
-import eotree.EOObject
-import tree.Type.TypeName
-import eotree.EODot
 import tree.Declaration.InterfaceDeclaration
+import tree.Type.TypeName
+import util.eoClassCompoundName
+import util.eoClassName
 import java.util.ArrayList
 
 fun mapClass(clsDec: ClassDeclaration): EOBndExpr {
@@ -28,19 +27,19 @@ fun mapClass(clsDec: ClassDeclaration): EOBndExpr {
             //                                        .map(varDec -> Declarations.mapClassDeclaration(varDec))
             //                                                .collect(Collectors.toList())),
 
-            listOf<EOBndExpr>(
+            listOf(
                 /* Super class extension */
-//                if (clsDec.extendedType is TypeName)
-//                    EOBndExpr(
-//                        EODot((clsDec.extendedType as TypeName).compoundName),
-//                        "@"
-//                    )
-//                else
-//                // Derive classes without "extends" specification from Object class.
-//                    EOBndExpr(
-//                        EODot(None, "class__Object"),
-//                        "@"
-//                    )
+                if (clsDec.extendedType is TypeName)
+                    EOBndExpr(
+                        (clsDec.extendedType as TypeName).compoundName.eoClassCompoundName().eoDot(),
+                        "@"
+                    )
+                else
+                // Derive classes without "extends" specification from Object class.
+                    EOBndExpr(
+                        "class__Object".eoDot(),
+                        "@"
+                    )
             ) + (
                     if (clsDec.body != null)
                         clsDec.body.declarations
@@ -50,7 +49,7 @@ fun mapClass(clsDec: ClassDeclaration): EOBndExpr {
                         listOf()
                     )
         ),
-        "class_" + clsDec.name
+        clsDec.name.eoClassName()
     )
 }
 
