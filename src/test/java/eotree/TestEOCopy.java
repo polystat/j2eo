@@ -30,14 +30,10 @@ public class TestEOCopy {
         var f = new EOCopy(
                 new EODot("name"),
                 listOf(
-                        new EOAnonExpr(
-                                new EODot("arg1")
-                        ),
-                        new EOAnonExpr(
-                                new EODot("arg2")
-                        )
+                        new EOAnonExpr(new EODot("arg1")),
+                        new EOAnonExpr(new EODot("arg2"))
                 )
         );
-        assertEquals("  name\n  arg1\n  arg2", f.generateEO(1));
+        assertEquals("  name\n    arg1\n    arg2", f.generateEO(1));
     }
 }

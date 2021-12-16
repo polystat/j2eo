@@ -7,9 +7,14 @@ class EODot : EOExpr {
     var src: Option<EOExpr>
     var name: String
 
-    constructor(name: String) {
-        src = None
-        this.name = name
+    constructor(name: String) : this(name.split("."))
+
+    constructor(names: List<String>) {
+        this.name = names.last()
+        this.src = if (names.size > 1)
+            EODot(names.dropLast(1)).some()
+        else
+            None
     }
 
     constructor(src: Option<EOExpr>, name: String) {
@@ -29,5 +34,10 @@ class EODot : EOExpr {
     override fun generateEO(indent: Int): String =
         src
             .map { src -> src.generateEO(indent) + "." + name }
-            .getOrElse { name }
+            .getOrElse { indent(indent) + name }
 }
+
+
+fun String.eoDot(): EODot = EODot(this)
+
+fun CompoundName.eoDot(): EODot = EODot(this)
