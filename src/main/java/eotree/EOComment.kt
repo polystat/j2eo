@@ -7,7 +7,9 @@ package eotree
 ` *
  */
 class EOComment(var comment: String) : EONode() {
-    override fun generateEO(indent: Int): String {
-        return "# $comment"
-    }
+    override fun generateEO(indent: Int): String =
+        "# $comment"
+
+    override fun toString(): String =
+        "# $comment"
 }

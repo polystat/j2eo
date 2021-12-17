@@ -10,7 +10,7 @@ import tree.Expression.Primary.Literal
 fun mapLiteral(literal: Literal): EOData =
     when (literal.code) {
         TokenCode.StringLiteral -> EOStringData(literal.value as String)
-        TokenCode.FloatingLiteral -> EOFloatData((literal.value as Number).toFloat())
-        TokenCode.IntegerLiteral -> EOIntData((literal.value as Number).toInt())
+        TokenCode.FloatingLiteral -> EOFloatData((literal.value as String).toFloat())
+        TokenCode.IntegerLiteral -> EOIntData((literal.value as String).toInt())
         else -> throw IllegalArgumentException("Mapping of type ${literal.javaClass.simpleName} is not supported.")
     }

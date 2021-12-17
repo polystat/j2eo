@@ -7,7 +7,9 @@ import eotree.*
 import tree.Declaration.Declaration
 import tree.Declaration.MethodDeclaration
 import tree.Declaration.ParameterDeclaration
+import tree.Declaration.VariableDeclaration
 import tree.Statement.BlockStatement
+import tree.Statement.BlockStatements
 import util.ListUtils
 import java.util.*
 import java.util.stream.Collectors
@@ -42,7 +44,26 @@ fun mapMethodDeclaration(dec: MethodDeclaration): EOBndExpr {
 
         // Bound attributes
         // TODO: implement
-        listOf()
+        dec.methodBody.block.findAllLocalVariables().map { mapVariableDeclaration(it) } +
+                listOf(
+                    EOBndExpr(
+                        EOCopy(
+                            "seq",
+                            dec.methodBody.block.blockStatements
+                                .mapNotNull {
+                                    if (it.statement != null)
+                                        mapStatement(it.statement)
+                                    else if (it.expression != null)
+                                        mapExpression(it.expression)
+                                    else
+                                        null
+                                }
+                        ),
+                        "@"
+                    )
+                )
+
+
 //            listOf(
 //                EOBndExpr(
 //                    EOCopy(
@@ -68,3 +89,8 @@ fun mapMethodDeclaration(dec: MethodDeclaration): EOBndExpr {
         dec.name
     )
 }
+
+fun BlockStatements.findAllLocalVariables(): List<VariableDeclaration> =
+    blockStatements
+        .filter { it.declaration is VariableDeclaration }
+        .map { it.declaration as VariableDeclaration }

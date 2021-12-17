@@ -18,4 +18,6 @@ class EOMetas(var packageName: Option<String>, var metas: List<EOMeta>) : EONode
                 metas
                     .map { m: EOMeta -> m.generateEO(indent) }
                     .joinToString("\n")
+
+    override fun toString(): String = "+ [metas]"
 }

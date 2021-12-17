@@ -18,4 +18,6 @@ class EOLicense(var comments: List<EOComment>) : EONode() {
         comments
             .map { comment: EOComment -> comment.generateEO(indent) }
             .joinToString("\n")
+
+    override fun toString(): String = "+ [license]"
 }

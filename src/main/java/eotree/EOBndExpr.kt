@@ -14,4 +14,6 @@ class EOBndExpr(expr: EOExpr, var bndName: String) : EOBnd(expr) {
             .prependTo(lines.tail())
             .joinToString("\n")
     }
+
+    override fun toString(): String = "[expr] > $bndName"
 }
