@@ -14,4 +14,6 @@ class EOProgram(var license: EOLicense, var metas: EOMetas, var bnds: List<EOBnd
 ${metas.generateEO(indent)}
 
 ${bnds.joinToString("\n\n") { bnd: EOBnd -> bnd.generateEO(indent) }}"""
+
+    override fun toString(): String = "[Program]"
 }

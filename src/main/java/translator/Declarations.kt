@@ -37,6 +37,8 @@ fun mapVariableDeclaration(dec: VariableDeclaration): EOBndExpr =
             EOBndExpr(EODot("cage"), dec.name)
         is PrimitiveType ->
             EOBndExpr(EODot("memory"), dec.name)
+        null ->
+            throw IllegalArgumentException("\"var\" declarations are not supported yet")
         else ->
             throw IllegalArgumentException("Type of type " + dec.type.javaClass.name + " is not supported")
     }

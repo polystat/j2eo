@@ -53,11 +53,7 @@ fun mapSimpleCompilationUnit(unit: SimpleCompilationUnit): EOProgram {
             EOBndExpr(
                 EOCopy(
                     EODot("stdout"),
-                    listOf(
-                        EOAnonExpr(
-                            EODot("text")
-                        )
-                    )
+                    EODot("text")
                 ),
                 "@"
             )
@@ -100,7 +96,10 @@ fun mapSimpleCompilationUnit(unit: SimpleCompilationUnit): EOProgram {
                 listOf(),
                 Some("args"),
                 listOf(
-                    EOBndExpr("cage".eoDot(), "instance"),
+                    EOBndExpr(
+                        "cage".eoDot(),
+                        "instance"
+                    ),
 
                     EOBndExpr(
                         EOCopy(
@@ -108,13 +107,13 @@ fun mapSimpleCompilationUnit(unit: SimpleCompilationUnit): EOProgram {
                             listOf(
                                 EOCopy(
                                     "instance.write".eoDot(),
-                                    listOf("${mainClassName}.new".eoDot()).anonExprs()
+                                    "${mainClassName}.new".eoDot()
                                 ),
                                 EOCopy(
                                     "instance.main".eoDot(),
                                     listOf()
                                 )
-                            ).anonExprs()
+                            )
                         ),
                         "@"
                     )

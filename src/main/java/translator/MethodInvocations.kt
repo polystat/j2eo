@@ -24,10 +24,8 @@ fun mapMethodInvocation(methodInvocation: MethodInvocation): EOCopy {
     require(!methodInvocation.superSign) { "Super sign isn't supported yet" }
     require(methodInvocation.typeArguments == null) { "Type arguments aren't supported yet" }
     return EOCopy(
-        EODot(src, methodInvocation.name),
-        methodInvocation.arguments.arguments.stream()
-            .map { obj -> mapExpression(obj) }
-            .collect(Collectors.toList())
+        EODot(src, methodInvocation.name.let { it ?: "PARSER_ERROR" }),
+        methodInvocation.arguments?.arguments?.map { obj -> mapExpression(obj) } ?: listOf()
     )
 }
 

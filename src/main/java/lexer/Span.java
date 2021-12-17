@@ -36,4 +36,9 @@ public class Span
         end.report();
         System.out.print(")");
     }
+
+    @Override
+    public String toString() {
+        return "Line " + begin.line + ", Char " + begin.pos;
+    }
 }

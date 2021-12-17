@@ -26,7 +26,7 @@ class EODot : EOExpr {
         // Recursively build a dot expression
         this.src =
             if (name.names.size >= 2)
-                Some(EODot(CompoundName(name.names.subList(0, name.names.size - 1))))
+                Some(EODot(CompoundName(name.names.dropLast(1))))
             else None
         this.name = name.names.last()
     }
@@ -35,6 +35,8 @@ class EODot : EOExpr {
         src
             .map { src -> src.generateEO(indent) + "." + name }
             .getOrElse { indent(indent) + name }
+
+    override fun toString(): String = "${src.getOrElse { "" }}.$name"
 }
 
 

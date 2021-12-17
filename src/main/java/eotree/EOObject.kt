@@ -12,21 +12,25 @@ class EOObject(
     var comment: String = "",
 ) : EOExpr() {
     override fun generateEO(indent: Int): String {
-        return comment.let {
-            if (it.isNotEmpty())
-                indent(indent) + it
-            else
-                it
-        } +
-                indent(indent) +
-                "[" +
-                freeAttrs.joinToString(" ") +
-                varargAttr
-                    .map { attr -> (if (freeAttrs.isNotEmpty()) " " else "") + attr + "..." }
-                    .getOrElse { "" } +
-                "]" +
-                bndAttrs
-                    .map { attr: EOBndExpr -> "\n" + attr.generateEO(indent + 1) }
-                    .joinToString("")
+        return listOfNotNull(
+            comment.let {
+                if (it.isNotEmpty())
+                    indent(indent) + it + "\n"
+                else
+                    null
+            },
+            indent(indent),
+            "[",
+            freeAttrs.joinToString(" "),
+            varargAttr
+                .map { attr -> (if (freeAttrs.isNotEmpty()) " " else "") + attr + "..." }
+                .getOrElse { null },
+            "]",
+            bndAttrs
+                .map { attr: EOBndExpr -> "\n" + attr.generateEO(indent + 1) }
+                .joinToString("")
+        ).joinToString("")
     }
+
+    override fun toString(): String = "[Object]"
 }

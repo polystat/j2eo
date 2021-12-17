@@ -4,6 +4,8 @@ class Example extends Object
     P.T m2;
     public T m3;
     void message() {
+        int local = 1;
+
         print("Hello");
         print(++a);
         print(a+1);
