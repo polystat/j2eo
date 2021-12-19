@@ -1,0 +1,24 @@
++package stdlib
++alias stdlib.class__Object
++alias stdlib.class__PrintStream
+
+[] > class__System
+  class__PrintStream.constructor > out
+
+  [] > new
+    [] > this
+      class__Object.new > super
+      super > @
+
+      [self] > init
+        0 > @
+
+    seq > @
+      this
+
+  [] > constructor
+    new > self
+    seq > @
+      self.init
+        self
+      self
