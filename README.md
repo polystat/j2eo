@@ -34,7 +34,7 @@ cat <.java filepath> | docker run --rm -i polystat/j2eo java -jar j2eo.jar -
   
 1. Make sure you have installed:
     - **Java 16+** (make sure command `java -version` shows 16+ version of Java in terminal if you have multiple Java version installed)
-    - **Maven 3.3+** (be aware of [possible conflicts](https://bugs.debian.org/cgi-bin/bugreport.cgi?bug=980467) of the latest versions of Maven and Java on some OSs)
+    - **Maven 3.8+** (be aware of [possible conflicts](https://bugs.debian.org/cgi-bin/bugreport.cgi?bug=980467) of the latest versions of Maven and Java on some OSs)
     - **Bison 3.7+** [3.7.5 recommended] (make sure the path to Bison executable is added to the `PATH` environmental variable)
 2. Clone the repo into your folder:
 

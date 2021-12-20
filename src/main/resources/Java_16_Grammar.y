@@ -316,7 +316,7 @@ StandardModifier
 CompilationUnit
     : %empty                                        { $$ = null; }
     | Package                                       { $$ = $1; ast = $1; }
-    | Module                                        { $$ = $1; ast = $1; }
+//    | Module                                        { $$ = $1; ast = $1; }
     | ImportDeclarationSeqOpt TopLevelComponentSeq  { ast = new SimpleCompilationUnit($1,$2); }
     ;
 
@@ -461,8 +461,8 @@ ClassDeclaration
     ;
 
 NormalClassDeclaration
-    : /*ModifierSeqOpt*/ CLASS IDENTIFIER TypeParametersOpt ClassExtendsOpt ClassImplementsOpt ClassBody
-                              { $$ = new NormalClassDeclaration($2,$3,$4,$5,$6); }
+    : ModifierSeqOpt CLASS IDENTIFIER TypeParametersOpt ClassExtendsOpt ClassImplementsOpt ClassBody
+                              { $$ = new NormalClassDeclaration($3,$4,$5,$6,$7); }
     ;
 
 TypeParametersOpt
