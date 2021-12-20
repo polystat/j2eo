@@ -51,8 +51,10 @@ fun mapUnaryPrefix(expr: UnaryPrefix): EOExpr {
         else -> throw IllegalArgumentException("Unary prefix ${expr.operator} is not supported")
     }
 
+    // TODO: create separate state object to pass pre and post operations of the statement
+    // TODO: return EODot here
     return EOCopy(
-        "${expr.operand}.$function".eoDot(),
+        "${mapSimpleReference(expr.operand as SimpleReference)}.$function".eoDot(),
         EOIntData(1)
     )
 }
@@ -65,8 +67,10 @@ fun mapUnaryPostfix(expr: UnaryPostfix): EOExpr {
         else -> throw IllegalArgumentException("Unary prefix ${expr.operator} is not supported")
     }
 
+    // TODO: create separate state object to pass pre and post operations of the statement
+    // TODO: return EODot here
     return EOCopy(
-        "${expr.operand}.$function".eoDot(),
+        "${mapSimpleReference(expr.operand as SimpleReference)}.$function".eoDot(),
         EOIntData(1)
     )
 }

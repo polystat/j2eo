@@ -23,6 +23,7 @@ class EODot : EOExpr {
     }
 
     constructor(name: CompoundName) {
+        println("Mapping ${name.concatenatedJava()}")
         // Recursively build a dot expression
         this.src =
             if (name.names.size >= 2)
@@ -36,7 +37,10 @@ class EODot : EOExpr {
             .map { src -> src.generateEO(indent) + "." + name }
             .getOrElse { indent(indent) + name }
 
-    override fun toString(): String = "${src.getOrElse { "" }}.$name"
+    override fun toString(): String =
+        src
+            .map { src -> "$src.$name" }
+            .getOrElse { name }
 }
 
 
