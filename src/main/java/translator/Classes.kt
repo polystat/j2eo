@@ -10,6 +10,7 @@ import tree.Declaration.InterfaceDeclaration
 import tree.Type.TypeName
 import util.eoClassCompoundName
 import util.eoClassName
+import util.generateNew
 import java.util.ArrayList
 
 fun mapClass(clsDec: ClassDeclaration): EOBndExpr {
@@ -40,14 +41,15 @@ fun mapClass(clsDec: ClassDeclaration): EOBndExpr {
                         "class__Object".eoDot(),
                         "@"
                     )
-            ) + (
+            ) +
+                    (generateNew(clsDec)) +
                     if (clsDec.body != null)
                         clsDec.body.declarations
                             .map { mapClassDeclaration(it) }
                             .flattenOption()
                     else
                         listOf()
-                    )
+
         ),
         clsDec.name.eoClassName()
     )
