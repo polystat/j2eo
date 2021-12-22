@@ -2,7 +2,7 @@ out
 .gradle
 .idea
 build
-JavaParser.java
+src/main/java/parser/JavaParser.java
 compile_and_run_tests.bat
 j2eo.jar
 output.eo
