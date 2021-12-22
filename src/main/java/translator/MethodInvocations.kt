@@ -21,8 +21,18 @@ fun mapMethodInvocation(methodInvocation: MethodInvocation): EOCopy {
         else ->
             throw IllegalArgumentException("Only SimpleReference is supported")
     }
+    val callee: EODot = when (methodInvocation.qualifier) {
+        is SimpleReference ->
+            if ((methodInvocation.qualifier as SimpleReference).compoundName.names.size > 1)
+                (methodInvocation.qualifier as SimpleReference).compoundName.names.dropLast(1).eoDot()
+            else
+                "this".eoDot()
+        else ->
+            throw IllegalArgumentException("Only SimpleReference is supported")
+    }
     return EOCopy(
         src,
-        methodInvocation.arguments?.arguments?.map { obj -> mapExpression(obj) } ?: listOf()
+        listOf(callee) +
+        (methodInvocation.arguments?.arguments?.map { obj -> mapExpression(obj) } ?: listOf())
     )
 }

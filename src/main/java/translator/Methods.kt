@@ -25,12 +25,13 @@ fun mapMethodDeclaration(dec: MethodDeclaration): EOBndExpr {
     val obj = EOObject(
         // Non-vararg parameters
         if (dec.parameters != null) // Exclude 'String[] args' fon now
+            listOf("this") +
             dec.parameters.parameters.stream()
                 .filter { param: ParameterDeclaration -> !param.signEllipsis }
                 .map { param: ParameterDeclaration -> param.name }
                 .collect(Collectors.toList())
         else
-            ArrayList(),
+            listOf("this"),
 
         // Optional vararg parameter
         if (dec.parameters != null)

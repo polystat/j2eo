@@ -112,7 +112,7 @@ fun mapSimpleCompilationUnit(unit: SimpleCompilationUnit): EOProgram {
                                 ),
                                 EOCopy(
                                     "instance.main".eoDot(),
-                                    listOf(EOStringData("arg"))
+                                    listOf("instance".eoDot(), EOStringData("arg"))
                                 )
                             )
                         ),
@@ -158,8 +158,9 @@ fun mapSimpleCompilationUnit(unit: SimpleCompilationUnit): EOProgram {
         EOMetas(
             None,
             ListUtils.listOf(
-                EOMeta("alias", "org.eolang.io.stdout"),
                 EOMeta("alias", "org.eolang.gray.cage"),
+                EOMeta("alias", "stdlib.class__Object"),
+                EOMeta("alias", "stdlib.class__System"),
             )
         ),
 //        stdBnds + bnds + entrypointBnds

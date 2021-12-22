@@ -41,15 +41,7 @@ fun mapClass(clsDec: ClassDeclaration): EOBndExpr {
                         "class__Object".eoDot(),
                         "@"
                     )
-            ) +
-                    (generateNew(clsDec)) +
-                    if (clsDec.body != null)
-                        clsDec.body.declarations
-                            .map { mapClassDeclaration(it) }
-                            .flattenOption()
-                    else
-                        listOf()
-
+            ) + (generateNew(clsDec))
         ),
         clsDec.name.eoClassName()
     )
