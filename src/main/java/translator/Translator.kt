@@ -81,7 +81,7 @@ fun mapSimpleCompilationUnit(unit: SimpleCompilationUnit): EOProgram {
                     )
                 )
             ),
-            "class_System"
+            "class__System"
         )
     )
     val bnds = unit.components.components
