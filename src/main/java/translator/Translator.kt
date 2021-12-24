@@ -3,6 +3,7 @@ package translator
 import arrow.core.None
 import arrow.core.Some
 import eotree.*
+import eotree.data.EOStringData
 import tree.Compilation.CompilationUnit
 import tree.Compilation.Package
 import tree.Compilation.SimpleCompilationUnit
@@ -111,7 +112,7 @@ fun mapSimpleCompilationUnit(unit: SimpleCompilationUnit): EOProgram {
                                 ),
                                 EOCopy(
                                     "instance.main".eoDot(),
-                                    listOf()
+                                    listOf(EOStringData("arg"))
                                 )
                             )
                         ),
