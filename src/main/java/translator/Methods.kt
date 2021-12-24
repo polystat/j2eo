@@ -80,7 +80,7 @@ fun mapMethodDeclaration(dec: MethodDeclaration): EOBndExpr {
 
     // Contract to check parameter count
     if (dec.parameters != null)
-        assert(dec.parameters.parameters.size ==
+        assert(dec.parameters.parameters.size + 1 ==
                 obj.freeAttrs.size + if (obj.varargAttr.nonEmpty()) 1 else 0) {
             "Parameters count of Java method and EO method do not match: ${dec.parameters.parameters.size} vs ${obj.freeAttrs.size + if (obj.varargAttr.nonEmpty()) 1 else 0}"
         }
