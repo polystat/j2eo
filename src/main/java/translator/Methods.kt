@@ -63,19 +63,6 @@ fun mapMethodDeclaration(dec: MethodDeclaration): EOBndExpr {
                         "@"
                     )
                 )
-
-
-//            listOf(
-//                EOBndExpr(
-//                    EOCopy(
-//                        EODot("seq"),
-//                        if (dec.methodBody != null) dec.methodBody.block.blockStatements.stream()
-//                            .map { obj: BlockStatement? -> mapBlockStatement(obj!!) }
-//                            .collect(Collectors.toList()) else emptyList()
-//                    ),
-//                    "@"
-//                )
-//            )
     )
 
     // Contract to check parameter count

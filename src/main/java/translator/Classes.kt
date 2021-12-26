@@ -43,7 +43,7 @@ fun mapClass(clsDec: ClassDeclaration): EOBndExpr {
                     )
             ) + (generateNew(clsDec))
         ),
-        clsDec.name.eoClassName()
+        clsDec.name
     )
 }
 

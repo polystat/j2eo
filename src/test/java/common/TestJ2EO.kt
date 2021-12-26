@@ -156,7 +156,7 @@ class TestJ2EO {
         }
 
         private fun compileAndExecuteJava(path: Path): String {
-            val fileName = path.fileName.toString().split("\\.").toTypedArray()[0]
+            val fileName = path.fileName.toString().split(".").toTypedArray()[0]
             val subFolder: File = Path.of(path.parent.toString(), "${fileName}_java").toFile()
             if (subFolder.exists()) {
                 subFolder.deleteRecursively()

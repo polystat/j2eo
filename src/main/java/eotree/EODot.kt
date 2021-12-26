@@ -10,10 +10,7 @@ class EODot : EOExpr {
     constructor(name: String) : this(name.split("."))
 
     constructor(names: List<String>) {
-        if (names.last() != "System")
-            this.name = names.last()
-        else
-            this.name = "class__System"
+        this.name = names.last()
         this.src = if (names.size > 1)
             EODot(names.dropLast(1)).some()
         else
@@ -32,10 +29,7 @@ class EODot : EOExpr {
             if (name.names.size >= 2)
                 Some(EODot(CompoundName(name.names.dropLast(1))))
             else None
-        if (name.names.last() != "System")
-            this.name = name.names.last()
-        else
-            this.name = "class__System"
+        this.name = name.names.last()
     }
 
     override fun generateEO(indent: Int): String =
