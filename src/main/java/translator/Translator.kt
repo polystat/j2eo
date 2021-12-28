@@ -60,7 +60,7 @@ fun mapSimpleCompilationUnit(unit: SimpleCompilationUnit): EOProgram {
         EOMetas(
             None,
             ListUtils.listOf(
-                EOMeta("alias", "org.eolang.gray.cage"),
+                //EOMeta("alias", "org.eolang.gray.cage"),
                 EOMeta("alias", "stdlib.class__Object"),
                 EOMeta("alias", "stdlib.class__System"),
             )

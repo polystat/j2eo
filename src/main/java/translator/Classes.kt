@@ -11,6 +11,7 @@ import tree.Type.TypeName
 import util.eoClassCompoundName
 import util.eoClassName
 import util.generateNew
+import util.generateStatic
 import java.util.ArrayList
 
 fun mapClass(clsDec: ClassDeclaration): EOBndExpr {
@@ -30,18 +31,22 @@ fun mapClass(clsDec: ClassDeclaration): EOBndExpr {
 
             listOf(
                 /* Super class extension */
-                if (clsDec.extendedType is TypeName)
+                (if (clsDec.extendedType is TypeName)
                     EOBndExpr(
                         (clsDec.extendedType as TypeName).compoundName.eoClassCompoundName().eoDot(),
-                        "@"
+                        "super"
                     )
                 else
                 // Derive classes without "extends" specification from Object class.
                     EOBndExpr(
                         "class__Object".eoDot(),
-                        "@"
-                    )
-            ) + (generateNew(clsDec))
+                        "super"
+                    )),
+                EOBndExpr(
+                    "super".eoDot(),
+                    "@"
+                )
+            ) + (generateNew(clsDec)) + generateStatic(clsDec)
         ),
         clsDec.name
     )

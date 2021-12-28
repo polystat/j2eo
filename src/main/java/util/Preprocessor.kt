@@ -1,5 +1,6 @@
 package util
 
+import lexer.TokenCode
 import translator.mapExpression
 import translator.mapStatement
 import tree.Compilation.SimpleCompilationUnit
@@ -11,18 +12,32 @@ import tree.Expression.Expression
 import tree.Expression.Primary.MethodInvocation
 import tree.Expression.SimpleReference
 import tree.Statement.BlockStatement
+import tree.Statement.Statement
 import tree.Statement.StatementExpression
 import java.util.ArrayList
 
-
-fun preprocessCompoundNames(compoundName: CompoundName, classNames: HashMap<String, String>) {
-    if (compoundName.names.size > 0 &&
-        compoundName.names.first() != "this" &&
+fun preprocessCompoundName(compoundName: CompoundName, classNames: HashMap<String, String>) {
+    if (compoundName.names.size == 1 &&
         classNames[compoundName.names.first()] == null) {
-        compoundName.names.add(0, "this")
+        compoundName.names.add(0, "^")
     }
     compoundName.names
         .replaceAll { if (classNames[it] != null) classNames[it] else it }
+}
+
+fun preprocessMethodDeclaration(methodDeclaration: MethodDeclaration, classNames: HashMap<String, String>) {
+    try {
+        methodDeclaration.methodBody.block.blockStatements
+            .mapNotNull { it.statement }
+            .mapNotNull { if (it is StatementExpression) it else null}
+            .mapNotNull { if (it.expression is MethodInvocation) it.expression as MethodInvocation else null}
+            .map {
+                if (it.qualifier != null && it.qualifier is SimpleReference)
+                    preprocessCompoundName((it.qualifier as SimpleReference).compoundName, classNames)
+                else
+                    null
+            }
+    } catch (e: NullPointerException) {/*Do nothing*/}
 }
 
 fun preprocessClsDec(clsDec: NormalClassDeclaration, classNames: HashMap<String, String>){
@@ -37,25 +52,7 @@ fun preprocessClsDec(clsDec: NormalClassDeclaration, classNames: HashMap<String,
             .map { innerClsDec: NormalClassDeclaration ->  preprocessClsDec(innerClsDec, classNames) }
         clsDec.body.declarations
             .filterIsInstance<MethodDeclaration>()
-            .mapNotNull { methodDeclaration: MethodDeclaration -> try {
-                    methodDeclaration.methodBody.block.blockStatements
-                    } catch (e: NullPointerException) {null}
-                }
-            .map {
-                blockStatements: ArrayList<BlockStatement> ->  blockStatements
-                .mapNotNull {
-                    if (it.statement != null && it.statement is StatementExpression)
-                        (it.statement as StatementExpression).expression
-                    else
-                        null
-                }
-                .mapNotNull {
-                    if (it is MethodInvocation) { if (it.qualifier != null) it.qualifier else null } else null
-                }
-                .map {
-                    preprocessCompoundNames((it as SimpleReference).compoundName, classNames)
-                }
-            }
+            .map { methodDeclaration: MethodDeclaration -> preprocessMethodDeclaration(methodDeclaration, classNames) }
     } catch (e: NullPointerException) { /*Ignore it*/ }
 }
 

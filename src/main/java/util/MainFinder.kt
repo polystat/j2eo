@@ -8,15 +8,13 @@ import tree.Declaration.NormalClassDeclaration
 
 fun containsMain(component: TopLevelComponent): Boolean {
     return if (component.classDecl != null) {
-        try {
-            (component.classDecl as NormalClassDeclaration).body.declarations
-                .filterIsInstance<MethodDeclaration>()
-                .find { declaration: Declaration? ->  (declaration as MethodDeclaration).parameters.parameters.size == 1 &&
-                        declaration.parameters.parameters[0].name == "args" &&
-                        declaration.name == "main"} != null
-        } catch (e:NullPointerException) {
-            return false
-        }
+        (component.classDecl as NormalClassDeclaration).body.declarations
+            .filterIsInstance<MethodDeclaration>()
+            .find { declaration: Declaration? ->  try {
+                (declaration as MethodDeclaration).parameters.parameters.size == 1 &&
+                    declaration.parameters.parameters[0].name == "args" &&
+                    declaration.name == "main"
+            } catch (e: NullPointerException) {false} } != null
     } else {
         false;
     }
