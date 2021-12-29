@@ -8,7 +8,7 @@ import tree.Compilation.CompilationUnit
 import tree.Compilation.Package
 import tree.Compilation.SimpleCompilationUnit
 import tree.Compilation.TopLevelComponent
-import util.ListUtils
+import util.*
 import java.time.LocalDateTime
 
 fun translate(unit: CompilationUnit): EOProgram {
@@ -34,121 +34,23 @@ fun mapPackage(pkg: Package): EOProgram {
 }
 
 fun mapSimpleCompilationUnit(unit: SimpleCompilationUnit): EOProgram {
-    val stdBnds = ArrayList<EOBndExpr>() // Standard top-level bounds
-    stdBnds.add(
-        EOBndExpr(
-            EOObject(
-                ArrayList(),
-                None,
-                emptyList()
-            ),
-            "class_Object"
-        )
-    )
-    val printlnObj = EOObject(
-        ListUtils.listOf(
-            "text"
-        ),
-        None,
-        ListUtils.listOf(
-            EOBndExpr(
-                EOCopy(
-                    EODot("stdout"),
-                    EODot("text")
-                ),
-                "@"
-            )
-        )
-    )
-    val outObj = EOObject(
-        ListUtils.listOf(),
-        None,
-        ListUtils.listOf(
-            EOBndExpr(
-                printlnObj,
-                "println"
-            )
-        )
-    )
-    stdBnds.add(
-        EOBndExpr(
-            EOObject(
-                ListUtils.listOf(),
-                None,
-                ListUtils.listOf(
-                    EOBndExpr(
-                        outObj,
-                        "out"
-                    )
-                )
-            ),
-            "class__System"
-        )
-    )
+    preprocessUnit(unit)
+
     val bnds = unit.components.components
         .map { obj: TopLevelComponent? -> mapTopLevelComponent(obj!!) }
         .map { bnd: EOBnd -> bnd as EOBndExpr }
 
     // FIXME: assuming there is only one top-level component and it is a class
-    val mainClassName = bnds[0].bndName
-    val entrypointBnds = listOf(
-        EOBndExpr(
-            EOObject(
-                listOf(),
-                Some("args"),
-                listOf(
-                    EOBndExpr(
-                        "cage".eoDot(),
-                        "instance"
-                    ),
-
-                    EOBndExpr(
-                        EOCopy(
-                            "seq",
-                            listOf(
-                                EOCopy(
-                                    "instance.write".eoDot(),
-                                    "${mainClassName}.new".eoDot()
-                                ),
-                                EOCopy(
-                                    "instance.main".eoDot(),
-                                    listOf(EOStringData("arg"))
-                                )
-                            )
-                        ),
-                        "@"
-                    )
-                )
-            ),
-            "main"
-        )
-    )
+    var entrypointBnds = listOf<EOBndExpr>()
+    try {
+        val mainClassName = findMainClass(unit)
+        entrypointBnds = generateEntryPoint(mainClassName)
+    } catch (e:NullPointerException){
+        logger.info { "No entry point here!" }
+    }
 
     // FIXME: assuming there is only one top-level component and it is a class
     // Always calling the 'main' method
-//    val mainClassName = bndLst[0].bndName
-//    bndLst.add(EOBndExpr(
-//        EODot(mainClassName),
-//        "mainObj"
-//    ))
-//    bndLst.add(
-//        EOBndExpr(
-//            EODot(Optional.of(EODot("mainObj")), "main"
-//            ),
-//            "@"
-//        )
-//    )
-//    val globalBnd = ListUtils.listOf<EOBnd>(
-//        EOBndExpr(
-//            EOObject(
-//                ListUtils.listOf(),
-//                Optional.of("args"),
-//                bndLst
-//            ),
-//            "global"
-//        )
-//    )
-//    globalBnd.addAll(stdBnds)
 
     return EOProgram(
         EOLicense(
@@ -158,11 +60,11 @@ fun mapSimpleCompilationUnit(unit: SimpleCompilationUnit): EOProgram {
         EOMetas(
             None,
             ListUtils.listOf(
-                EOMeta("alias", "org.eolang.io.stdout"),
-                EOMeta("alias", "org.eolang.gray.cage"),
+                //EOMeta("alias", "org.eolang.gray.cage"),
+                EOMeta("alias", "stdlib.class__Object"),
+                EOMeta("alias", "stdlib.class__System"),
             )
         ),
-//        stdBnds + bnds + entrypointBnds
         bnds + entrypointBnds
     )
 }

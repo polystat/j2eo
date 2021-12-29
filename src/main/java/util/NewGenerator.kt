@@ -1,26 +1,30 @@
 package util
 
 import arrow.core.None
+import arrow.core.flattenOption
 import eotree.*
+import lexer.TokenCode
+import translator.mapClassDeclaration
 import tree.Declaration.ClassDeclaration
+import tree.Declaration.Declaration
 import tree.Declaration.NormalClassDeclaration
+import tree.Declaration.ParameterDeclaration
 import tree.Type.Type
 import tree.Type.TypeName
 import kotlin.collections.ArrayList
 
-fun generateThis(extendedType: Type?): EOBndExpr {
+fun generateThis(clsDec: NormalClassDeclaration): EOBndExpr {
     return EOBndExpr(
         EOObject(
             ArrayList(),
             None,
             listOf(
-                if (extendedType is TypeName)
+                if (clsDec.extendedType is TypeName)
                     EOBndExpr(
-                        ((extendedType as TypeName).compoundName.names.last().eoClassName() + ".new").eoDot(),
+                        ((clsDec.extendedType as TypeName).compoundName.names.last().eoClassName() + ".new").eoDot(),
                         "super"
                     )
                 else
-                // Derive classes without "extends" specification from Object class.
                     EOBndExpr(
                         "class__Object.new".eoDot(),
                         "super"
@@ -29,7 +33,15 @@ fun generateThis(extendedType: Type?): EOBndExpr {
                     "super".eoDot(),
                     "@"
                 )
-            )
+            ) +
+            if (clsDec.body != null)
+                clsDec.body.declarations
+                    .filter { dec: Declaration -> dec.modifiers == null ||
+                        dec.modifiers.modifiers.modifiers.find { code: TokenCode -> code == TokenCode.Static } == null }
+                    .map { mapClassDeclaration(it) }
+                    .flattenOption()
+            else
+                listOf()
         ),
         "this"
     )
@@ -41,7 +53,7 @@ fun generateNew(clsDec: NormalClassDeclaration): EOBndExpr {
             ArrayList(),
             None,
             listOf(
-                generateThis(clsDec.extendedType)
+                generateThis(clsDec)
             ) + (
                 EOBndExpr(
                     EOCopy(

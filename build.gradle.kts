@@ -66,6 +66,7 @@ val fatJar = task("fatJar", type = Jar::class) {
     // Include dependencies
     from(configurations.runtimeClasspath.get().map { if (it.isDirectory) it else zipTree(it) })
     with(tasks["jar"] as CopySpec)
+    duplicatesStrategy = org.gradle.api.file.DuplicatesStrategy.INCLUDE
 }
 
 tasks {
