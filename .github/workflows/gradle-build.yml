@@ -27,9 +27,9 @@ jobs:
         with:
           arguments: build --info
 
-      - uses: gradle/gradle-build-action@v1
-        with:
-          arguments: test --info
+          #      - uses: gradle/gradle-build-action@v1
+          #        with:
+          #          arguments: test --info
 
   gradle_ubuntu:
     runs-on: ubuntu-latest
@@ -53,9 +53,9 @@ jobs:
         with:
           arguments: build --info
 
-      - uses: gradle/gradle-build-action@v1
-        with:
-          arguments: test --info
+          #      - uses: gradle/gradle-build-action@v1
+          #        with:
+          #          arguments: test --info
 
       - name: Generate JaCoCo Badge
         uses: cicirello/jacoco-badge-generator@v2
@@ -76,7 +76,7 @@ jobs:
       - name: Commit and push the badge (if it changed)
         uses: EndBug/add-and-commit@v7
         with:
-          default_author: github_actions
+          default_author: user_info
           message: 'commit badge'
           add: '*.svg'
 
