@@ -138,7 +138,8 @@ class TestJ2EO {
                 logger.info("-- Current test file: $path")
 
                 // Compile and execute Java file
-                val javaExecOutput = compileAndExecuteJava(path)
+                // FIXME: EO should generate '\r\n' symbols for Windows
+                val javaExecOutput = compileAndExecuteJava(path).replace("\r\n", "\n")
 
                 // Run parser
                 val unit = parseAndBuildAST(path)
