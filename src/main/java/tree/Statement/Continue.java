@@ -27,6 +27,7 @@ public class Continue extends Statement
     // Reporting
     public void report(int sh)
     {
+        super.report(sh);
         Entity.doShift(sh);
         System.out.print("CONTINUE ");
         if ( label != null ) System.out.print(label);

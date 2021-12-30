@@ -81,6 +81,7 @@ public class Switch extends Statement
     // Reporting
     public void report(int sh)
     {
+        super.report(sh);
 
     }
 

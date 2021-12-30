@@ -6,6 +6,8 @@
 <br>
 
 [![Gradle Build](https://github.com/polystat/j2eo/actions/workflows/gradle-build.yml/badge.svg)](https://github.com/polystat/j2eo/actions/workflows/gradle-build.yml)
+![Coverage](.github/badges/jacoco.svg)
+![Branches](.github/badges/branches.svg)
 
 This is a translator of **Java** programming language to [EOLANG](https://www.eolang.org) programming language.
 
@@ -32,7 +34,7 @@ cat <.java filepath> | docker run --rm -i polystat/j2eo java -jar j2eo.jar -
   
 1. Make sure you have installed:
     - **Java 16+** (make sure command `java -version` shows 16+ version of Java in terminal if you have multiple Java version installed)
-    - **Maven 3.3+** (be aware of [possible conflicts](https://bugs.debian.org/cgi-bin/bugreport.cgi?bug=980467) of the latest versions of Maven and Java on some OSs)
+    - **Maven 3.8+** (be aware of [possible conflicts](https://bugs.debian.org/cgi-bin/bugreport.cgi?bug=980467) of the latest versions of Maven and Java on some OSs)
     - **Bison 3.7+** [3.7.5 recommended] (make sure the path to Bison executable is added to the `PATH` environmental variable)
 2. Clone the repo into your folder:
 
@@ -106,21 +108,21 @@ bugs in our code. It is also much easier to work with abstraction layer than wit
 
 ## NOT covered Java features list
 
-- Type Erasure
-- Subtyping
-- Conversions
-- Casting
-- Modules
-- Exceptions
-- Asserts
-- Throws
+- Type Erasure  - Zouev
+- Subtyping     - discuss with Yegor
+- Conversions   - remove
+- Casting       - remove
+- Modules      
+- Exceptions     - remove
+- Asserts        - remove
+- Throws         - remove
 - ``synchronized`` blocks
-- ``try``/``catch`` blocks
+- ``try``/``catch`` blocks  - remove
 - ``yeild`` feature
-- Threads and Locks
-- Generics (all kinds of them)
-- Native methods
-- break and continue statements
-- RTTI (instanceof operator) ??????
+- Threads and Locks 
+- Generics (all kinds of them) - remove
+- Native methods 
+- break and continue statements - remove
+- RTTI (instanceof operator) ??????  - remove
 
 In general, we cover **91 feature of 112** described in the Java language specification.

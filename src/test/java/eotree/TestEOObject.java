@@ -1,5 +1,6 @@
 package eotree;
 
+import arrow.core.Some;
 import org.junit.jupiter.api.Test;
 
 import java.util.Optional;
@@ -13,22 +14,21 @@ public class TestEOObject {
     public void TestGenerateEOZeroIndent() {
         var object = new EOObject(
                 listOf(
-                        new EOBndName("free1"),
-                        new EOBndName("free2")
+                        "free1",
+                        "free2"
                 ),
-                Optional.of(
-                        new EOBndName("vararg")
-                ),
+                new Some<>("vararg"),
                 listOf(
                         new EOBndExpr(
-                                new EODot(Optional.empty(), "memory"),
-                                new EOBndName("bnd1")
+                                new EODot("memory"),
+                                "bnd1"
                         ),
                         new EOBndExpr(
-                                new EODot(Optional.empty(), "memory"),
-                                new EOBndName("bnd2")
+                                new EODot("memory"),
+                                "bnd2"
                         )
-                )
+                ),
+                ""
         );
         assertEquals(
                 """
@@ -42,23 +42,19 @@ public class TestEOObject {
     @Test
     public void TestGenerateEONonZeroIndent() {
         var object = new EOObject(
-                listOf(
-                        new EOBndName("free1"),
-                        new EOBndName("free2")
-                ),
-                Optional.of(
-                        new EOBndName("vararg")
-                ),
+                listOf("free1", "free2"),
+                new Some<>("vararg"),
                 listOf(
                         new EOBndExpr(
-                                new EODot(Optional.empty(), "memory"),
-                                new EOBndName("bnd1")
+                                new EODot("memory"),
+                                "bnd1"
                         ),
                         new EOBndExpr(
-                                new EODot(Optional.empty(), "memory"),
-                                new EOBndName("bnd2")
+                                new EODot("memory"),
+                                "bnd2"
                         )
-                )
+                ),
+                ""
         );
         //noinspection TextBlockMigration
         assertEquals(

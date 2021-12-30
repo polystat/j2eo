@@ -26,7 +26,7 @@ public class Modifiers extends Entity
             System.out.println();
         }
         modifiers.report(sh);
-        System.out.println();
+//      System.out.println();
     }
 
 }

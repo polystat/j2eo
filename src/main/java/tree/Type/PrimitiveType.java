@@ -1,7 +1,9 @@
 package tree.Type;
 
+import lexer.Scanner;
 import lexer.Token;
 import lexer.TokenCode;
+import tree.Entity;
 
 // PrimitiveType
 //             // NumericType -- IntegralType
@@ -25,12 +27,18 @@ public class PrimitiveType extends UnannotatedType
     {
         super(null);
         this.typeCode = token.code;
+
+//      Entity.unAnnotatedTypeTaken = true;
+        if ( Entity.debug ) System.out.println("Primitive type accepted");
     }
 
     // Reporting
     public void report(int sh)
     {
-        System.out.print(typeCode.toString());
+        title("TYPE "+typeCode.toString(),sh);
+        if ( super.annotations != null )
+            super.annotations.report(sh+ Entity.shift);
+        if ( super.dimensions != null && super.dimensions.dimensions.size() > 0 )
+            super.dimensions.report(sh+ Entity.shift);
     }
-
 }

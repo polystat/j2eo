@@ -1,6 +1,7 @@
 package tree;
 
 import java.util.ArrayList;
+import java.util.List;
 
 // %nterm <CompoundName> CompoundName
 //
@@ -20,6 +21,10 @@ public class CompoundName extends Entity
         names.add(first);
     }
 
+    public CompoundName(List<String> name) {
+        names = new ArrayList<>(name);
+    }
+
     // Adding
     public CompoundName add(String next)
     {
@@ -27,14 +32,22 @@ public class CompoundName extends Entity
         return this;
     }
 
+    public String concatenatedJava() {
+        return String.join(".", names);
+    }
+
+    public String concatenatedEO() {
+        return String.join("__", names);
+    }
+
     // Reporting
     public void report(int sh)
     {
-        Entity.doShift(sh);
-        for (int i=1; i<=names.size(); i++)
+     // Entity.doShift(sh);
+        for (int i=0; i<names.size(); i++)
         {
             System.out.print(names.get(i));
-            if ( i < names.size() )
+            if ( i < names.size()-1 )
                 System.out.print(".");
         }
     }

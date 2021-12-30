@@ -1,6 +1,7 @@
 package lexer;
 
 import parser.JavaParser;
+import tree.Entity;
 
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
@@ -20,6 +21,7 @@ public class Scanner implements JavaParser.Lexer
         sourcePath = path;
         try {
             String text = new String(Files.readAllBytes(Paths.get(path)), StandardCharsets.UTF_8);
+            text = text.replace("\r\n","\n").replace("\r","n");
             sourceText = text.toCharArray();  //.getChars(StandardCharsets.UTF_8);
             return true;
         }
@@ -59,10 +61,15 @@ public class Scanner implements JavaParser.Lexer
 
     public int yylex()
     {
-        lastToken = getToken();
+        lastToken = get();
 
-        //System.out.println(lastToken.code);
-
+        if ( Entity.debug )
+        {
+            System.out.print(lastToken.code);
+            if ( lastToken.code == TokenCode.Identifier )
+                System.out.print(" "+lastToken.image);
+            System.out.println();
+        }
         return lastToken.code.value();
     }
 
@@ -84,8 +91,20 @@ public class Scanner implements JavaParser.Lexer
     private Token currentToken;
     public Token get()
     {
-        if ( currentToken == null ) currentToken = getToken();
-        return currentToken;
+//      if ( currentToken == null ) currentToken = getToken();
+
+        while ( true )
+        {
+            currentToken = getToken();
+            switch ( currentToken.code )
+            {
+                case ShortComment:
+                case LongComment:
+                    continue;
+                default:
+                    return currentToken;
+            }
+        }
     }
     public void forget()
     {
@@ -98,6 +117,12 @@ public class Scanner implements JavaParser.Lexer
         TokenCode code;
         String image;
         Token token;
+
+ //     if ( Entity.inBlock && Entity.unAnnotatedTypeTaken )
+ //     {
+ //         Entity.unAnnotatedTypeTaken = false;
+ //         return new Token(TokenCode.Phantom,"");
+ //     }
 
         while ( true )
         {
@@ -283,7 +308,7 @@ public class Scanner implements JavaParser.Lexer
                     {
                         forgetChar(); ch = getChar();
                         if ( Character.isJavaIdentifierPart(ch) )
-                            identifier = identifier.concat(""+ch);
+                            identifier += ch;
                         else  {
                             // forgetChar();
                             break;
@@ -301,7 +326,7 @@ public class Scanner implements JavaParser.Lexer
                         if ( Character.isDigit(ch) )
                             literal = literal.concat(""+ch);
                         else {
-                            forgetChar();
+                        //  forgetChar();
                             break;
                         }
                     }
@@ -336,12 +361,40 @@ public class Scanner implements JavaParser.Lexer
 
     private String scanShortComment()
     {
-        return "";
+        String comment = "";
+        while ( true )
+        {
+            char ch = getChar();
+            forgetChar();
+            if ( ch == '\n' ) break;
+            comment += ch;
+        }
+        return comment;
     }
 
     private String scanLongComment()
     {
-        return "";
+        String comment = "";
+        while (true )
+        {
+            char ch = getChar();
+            forgetChar();
+            if ( ch == '*' )
+            {
+                forgetChar();
+                ch = getChar();
+                if ( ch == '/' )
+                {
+                    forgetChar();
+                    break;
+                }
+                else
+                    comment += "*" + ch;
+            }
+            else
+                comment += ch;
+        }
+        return comment;
     }
 
     private TokenCode detectKeyword(String identifier)

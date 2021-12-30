@@ -71,4 +71,16 @@ public class Statement extends Entity
         labels.add(label.image);
         return this;
     }
+
+    // Reporting
+    public void report(int sh)
+    {
+        if ( labels == null || labels.size() == 0 ) return;
+
+        String labs = "LABELS: ";
+        for (String lab: labels)
+            labs += lab + " ";
+        Entity.doShift(sh);
+        System.out.println(labs);
+    }
 }

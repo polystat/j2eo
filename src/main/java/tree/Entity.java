@@ -32,7 +32,15 @@ public class Entity
         this.span = token.span;
     }
 
+//  // Tricks for resolving conflicts
+//
+//  public static boolean inBlock = false;
+//  public static boolean unAnnotatedTypeTaken = false;
+
     // Machinery for reporting
+
+    public static boolean debug = false;
+    public static boolean syntaxOnly = false;
 
     public static final int shift = 4;
 

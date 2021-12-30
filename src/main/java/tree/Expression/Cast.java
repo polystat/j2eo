@@ -4,8 +4,8 @@ import tree.*;
 import tree.Type.TypeList;
 
 // CastExpression
-//    : TargetType UnaryExpression   { $$ = new Cast($1,$2); }
-//    | TargetType LambdaExpression  { $$ = new Cast($1,$2); }
+//    : TargetType UnaryExpression
+//    | TargetType LambdaExpression
 //    ;
 public class Cast extends Expression
 {
@@ -25,7 +25,8 @@ public class Cast extends Expression
     {
         Entity.doShift(sh);
         System.out.println("CAST");
-        types.report(sh+Entity.shift);
+        types.title("Target types:",sh+Entity.shift);
+        types.report(sh+2*Entity.shift);
         expression.report(sh+Entity.shift);
     }
 

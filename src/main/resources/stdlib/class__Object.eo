@@ -1,0 +1,17 @@
++package stdlib
+
+[] > class__Object
+  [] > new
+    [] > this
+      [self] > init
+        0 > @
+
+    seq > @
+      this
+
+  [] > constructor
+    new > self
+    seq > @
+      self.init
+        self
+      self

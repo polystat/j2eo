@@ -26,6 +26,7 @@ public class Break extends Statement
     // Reporting
     public void report(int sh)
     {
+        super.report(sh);
         Entity.doShift(sh);
         System.out.print("BREAK ");
         if ( label != null ) System.out.print(label);

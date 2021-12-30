@@ -1,8 +1,9 @@
 package tree.Declaration;
 
+import tree.Entity;
 import tree.Type.*;
 
-// Intermediate class - wont't appear in the AST
+// Intermediate class - won't appear in the AST
 
 public class TypeAndDeclarators extends Declaration
 {
@@ -15,6 +16,7 @@ public class TypeAndDeclarators extends Declaration
     {
         super(null,null,t);
         this.declarators = vds;
+        if ( Entity.debug ) System.out.println("Type with declarator(s) taken");
     }
 
     // Reporting

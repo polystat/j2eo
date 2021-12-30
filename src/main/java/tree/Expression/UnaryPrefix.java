@@ -19,8 +19,7 @@ public class UnaryPrefix extends Expression
     // Reporting
     public void report(int sh)
     {
-        Entity.doShift(sh);
-        System.out.println("UNARY PREFIX "+operator.toString());
+        title("UNARY PREFIX "+operator.toString(),sh);
         operand.report(sh+Entity.shift);
     }
 

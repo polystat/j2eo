@@ -36,7 +36,8 @@ public class TypeArgument extends Entity
     // Reporting
     public void report(int sh)
     {
-
+        if ( type != null ) type.report(sh);
+        // TODO: the rest
     }
 
 }

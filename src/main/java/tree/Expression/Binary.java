@@ -22,8 +22,7 @@ public class Binary extends Expression
     // Reporting
     public void report(int sh)
     {
-        Entity.doShift(sh);
-        System.out.println("BINARY "+operator.toString());
+        title("BINARY "+operator.toString(),sh);
         left.report(sh+Entity.shift);
         right.report(sh+Entity.shift);
     }

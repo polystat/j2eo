@@ -26,6 +26,7 @@ public class Return extends Statement
     // Reporting
     public void report(int sh)
     {
+        super.report(sh);
         Entity.doShift(sh);
         System.out.print("RETURN");
         if ( expression != null )

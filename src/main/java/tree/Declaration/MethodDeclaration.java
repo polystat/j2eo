@@ -70,11 +70,6 @@ public class MethodDeclaration extends Declaration
     // Reporting
     public void report(int sh)
     {
- //       public ParameterDeclarations parameters;
- //       public Dims dims;
- //       public TypeList exceptions;
- //       public Block methodBody;
-
         this.title("METHOD "+name,sh);
         if ( modifiers != null ) modifiers.report(sh+Entity.shift);
         if ( typeParameters != null ) typeParameters.report(sh+Entity.shift);
@@ -86,7 +81,7 @@ public class MethodDeclaration extends Declaration
         if ( methodBody != null )
         {
             title("METHOD BODY",sh+Entity.shift);
-            methodBody.report(sh+Entity.shift);
+            methodBody.report(sh+2*Entity.shift);
         }
     }
 

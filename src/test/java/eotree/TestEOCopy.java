@@ -12,22 +12,24 @@ public class TestEOCopy {
     @Test
     public void TestGenerateEOZeroIndent() {
         var f = new EOCopy(
-                new EODot(Optional.empty(), "name"),
+                new EODot("name"),
                 listOf(
-                        new EOAnonExpr(
-                                new EODot(Optional.empty(), "arg1")
-                        ),
-                        new EOAnonExpr(
-                                new EODot(Optional.empty(), "arg2")
+                        new EODot("arg1"),
+                        new EODot("arg2")
                         )
-                )
         );
         assertEquals("name\n  arg1\n  arg2", f.generateEO(0));
     }
 
     @Test
     public void TestGenerateEONonZeroIndent() {
-        var f = new EOBndName("name");
-        assertEquals(f.generateEO(1), "name");
+        var f = new EOCopy(
+                new EODot("name"),
+                listOf(
+                        new EODot("arg1"),
+                        new EODot("arg2")
+                )
+        );
+        assertEquals("  name\n    arg1\n    arg2", f.generateEO(1));
     }
 }

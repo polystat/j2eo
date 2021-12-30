@@ -16,7 +16,10 @@ public class SimpleReference extends Expression
     // Reporting
     public void report(int sh)
     {
+        Entity.doShift(sh);
+        System.out.print(this.unique+":REFERENCE TO ");
         compoundName.report(sh);
+        System.out.println();
     }
 
 }

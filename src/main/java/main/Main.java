@@ -1,24 +1,32 @@
 package main;
 
-import lexer.Scanner;
+import lexer.*;
 import org.apache.commons.cli.*;
-import parser.JavaParser;
-import translator.Translator;
+import parser.*;
+import tree.Entity;
 
 import java.io.File;
 import java.io.FileNotFoundException;
-import java.io.IOException;
 import java.io.PrintWriter;
-import java.nio.charset.StandardCharsets;
+
+import static translator.TranslatorKt.translate;
 
 public class Main {
-    public static void main(String[] args) throws IOException {
+    public static void main(String[] args) throws FileNotFoundException {
         // Setup command line argument parser
         Options options = new Options();
 
         Option output = new Option("o", "output", true, "Target EOLANG filepath");
         output.setRequired(false);
         options.addOption(output);
+
+        Option debug = new Option("d","debug",false,"Debug mode");
+        debug.setRequired(false);
+        options.addOption(debug);
+
+        Option syntaxOnly = new Option("s","syntax",false,"Syntax only");
+        syntaxOnly.setRequired(false);
+        options.addOption(syntaxOnly);
 
         CommandLineParser cmdLineParser = new DefaultParser();
         HelpFormatter     formatter     = new HelpFormatter();
@@ -28,7 +36,7 @@ public class Main {
         try {
             cmd = cmdLineParser.parse(options, args);
         } catch (ParseException e) {
-            e.printStackTrace();
+            System.out.println(e.getMessage());
             printUsage(formatter, options);
             System.exit(1);
         }
@@ -40,31 +48,26 @@ public class Main {
         }
 
         boolean outputToFile = cmd.hasOption("o");
+        Entity.syntaxOnly = cmd.hasOption("s");
+        Entity.debug = cmd.hasOption("d");
 
         // Check if source file exists
         String inputFilepath = cmd.getArgList().get(0);
         var    f             = new File(inputFilepath);
-        if (!inputFilepath.equals("-") && !f.exists())
+        if (!f.exists())
             throw new FileNotFoundException("No file found at \"" + inputFilepath + "\"");
-
 
         // Read, parse, map and print file
         Scanner scanner = new Scanner();
-        if (inputFilepath.equals("-")) {
-            // Handle stdin case
-            var src = new String(System.in.readAllBytes(), StandardCharsets.UTF_8);
-            scanner.read(src);
-        } else {
-            // Handle file case
-            scanner.readFile(inputFilepath);
-        }
-        JavaParser parser = new JavaParser(scanner);
+        scanner.readFile(inputFilepath);
+        JavaParser parser  = new JavaParser(scanner);
         try {
             boolean result = parser.parse();
-            System.out.println(result ? "SUCCESS" : "FAIL");
+            System.out.println("Parsing completed: "+(result ? "SUCCESS" : "FAIL"));
             if (parser.ast != null) {
-                //parser.ast.report(0);
-                var eoProgram  = Translator.translate(parser.ast);
+                if ( Entity.debug ) parser.ast.report(0);
+                if ( Entity.syntaxOnly ) return;
+                var eoProgram  = translate(parser.ast);
                 var targetText = eoProgram.generateEO(0);
 
                 // Print generated code to stdout or to file, if any specified
@@ -86,6 +89,6 @@ public class Main {
     }
 
     private static void printUsage(HelpFormatter formatter, Options options) {
-        formatter.printHelp("java -jar J2EO.jar [OPTIONS...] <input file or - for stdin>", options);
+        formatter.printHelp("java -jar J2EO.jar [OPTIONS...] <input file>", options);
     }
 }
