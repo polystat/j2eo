@@ -1,16 +1,18 @@
 package eotree.data;
 
-import org.junit.jupiter.api.Test;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import java.util.Arrays;
 import java.util.stream.Collectors;
+import org.junit.jupiter.api.Test;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-
+/**
+ * EO bytes data tests.
+ */
 public class TestEOBytesData {
 
     @Test
-    public void TestGenerateEOZeroIndent() {
+    public void testGenerateEOZeroIndent() {
         var bytes = new EOBytesData(
                 new EOByte((byte) 1),
                 new EOByte((byte) 255)
@@ -20,7 +22,7 @@ public class TestEOBytesData {
     }
 
     @Test
-    public void TestGenerateEONonZeroIndent() {
+    public void testGenerateEONonZeroIndent() {
         var bytes = new EOBytesData(
                 Arrays.stream(new EOByte[] {
                         new EOByte((byte) 1),

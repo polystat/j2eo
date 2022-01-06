@@ -1,20 +1,23 @@
 package eotree.data;
 
-import org.junit.jupiter.api.Test;
-
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
+import org.junit.jupiter.api.Test;
+
+/**
+ * EO float data tests.
+ */
 public class TestEOFloatData {
 
     @Test
-    public void TestGenerateEOZeroIndent() {
+    public void testGenerateEOZeroIndent() {
         var f = new EOFloatData(3.14f);
 
         assertEquals(f.generateEO(0), "3.14");
     }
 
     @Test
-    public void TestGenerateEONonZeroIndent() {
+    public void testGenerateEONonZeroIndent() {
         var f = new EOFloatData(3.14f);
 
         assertEquals(f.generateEO(1), "  3.14");
