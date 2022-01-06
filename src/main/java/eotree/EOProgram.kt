@@ -1,7 +1,5 @@
 package eotree
 
-import java.util.stream.Collectors
-
 /**
  * EBNF representation:
  * `

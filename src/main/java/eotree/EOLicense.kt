@@ -1,6 +1,6 @@
 package eotree
 
-import java.util.*
+import java.util.Arrays
 import java.util.stream.Collectors
 
 /**
@@ -10,9 +10,10 @@ import java.util.stream.Collectors
 ` *
  */
 class EOLicense(var comments: List<EOComment>) : EONode() {
-    constructor(vararg comments: EOComment) : this(Arrays.stream<EOComment>(comments)
-        .collect(Collectors.toList<EOComment>())) {
-    }
+    constructor(vararg comments: EOComment) : this (
+        Arrays.stream<EOComment>(comments)
+            .collect(Collectors.toList<EOComment>())
+    )
 
     override fun generateEO(indent: Int): String =
         comments

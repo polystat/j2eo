@@ -2,14 +2,14 @@ package util
 
 import arrow.core.None
 import arrow.core.flattenOption
-import eotree.*
+import eotree.EOBndExpr
+import eotree.EOCopy
+import eotree.EOObject
+import eotree.eoDot
 import lexer.TokenCode
 import translator.mapClassDeclaration
-import tree.Declaration.ClassDeclaration
 import tree.Declaration.Declaration
 import tree.Declaration.NormalClassDeclaration
-import tree.Declaration.ParameterDeclaration
-import tree.Type.Type
 import tree.Type.TypeName
 import kotlin.collections.ArrayList
 
@@ -34,14 +34,16 @@ fun generateThis(clsDec: NormalClassDeclaration): EOBndExpr {
                     "@"
                 )
             ) +
-            if (clsDec.body != null)
-                clsDec.body.declarations
-                    .filter { dec: Declaration -> dec.modifiers == null ||
-                        dec.modifiers.modifiers.modifiers.find { code: TokenCode -> code == TokenCode.Static } == null }
-                    .map { mapClassDeclaration(it) }
-                    .flattenOption()
-            else
-                listOf()
+                if (clsDec.body != null)
+                    clsDec.body.declarations
+                        .filter { dec: Declaration ->
+                            dec.modifiers == null ||
+                                dec.modifiers.modifiers.modifiers.find { code: TokenCode -> code == TokenCode.Static } == null
+                        }
+                        .map { mapClassDeclaration(it) }
+                        .flattenOption()
+                else
+                    listOf()
         ),
         "this"
     )
@@ -67,7 +69,7 @@ fun generateNew(clsDec: NormalClassDeclaration): EOBndExpr {
                     ),
                     "@"
                 )
-            )
+                )
         ),
         "new"
     )
