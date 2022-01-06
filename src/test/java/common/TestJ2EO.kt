@@ -19,11 +19,10 @@ import java.io.InputStreamReader
 import java.nio.file.Files
 import java.nio.file.Path
 import java.nio.file.Paths
-import java.util.*
-import kotlin.io.path.exists
+import java.util.Locale
 
 @Execution(ExecutionMode.CONCURRENT)
-//@Execution(ExecutionMode.SAME_THREAD)
+// @Execution(ExecutionMode.SAME_THREAD)
 class TestJ2EO {
     @TestFactory
     fun testChapter4(): Collection<DynamicTest> {
@@ -116,7 +115,7 @@ class TestJ2EO {
         fun setup() {
             val testCandidates =
                 System.getProperty("candidates") != null &&
-                        System.getProperty("candidates") == "true"
+                    System.getProperty("candidates") == "true"
             if (testCandidates)
                 logger.info("Executing candidate tests!")
             var testFolderPath = listOf("src", "test", "resources").joinToString(sep)
@@ -133,7 +132,7 @@ class TestJ2EO {
         private fun testFile(path: Path): DynamicTest {
             return DynamicTest.dynamicTest(
                 path.parent.fileName.toString() + "/" +
-                        path.fileName.toString()
+                    path.fileName.toString()
             ) {
                 logger.info("-- Current test file: $path")
 
