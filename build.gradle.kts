@@ -1,9 +1,8 @@
-import org.apache.tools.ant.taskdefs.condition.Os
 import java.security.MessageDigest
+import org.apache.tools.ant.taskdefs.condition.Os
 import org.gradle.jvm.tasks.Jar
 import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 import org.jlleitschuh.gradle.ktlint.reporter.ReporterType
-
 
 plugins {
     java
@@ -38,7 +37,6 @@ val javaParserFilePath = "src/main/java/parser/JavaParser.java"
 // MD5 of the latest generated grammar file is stored here
 val latestGrammarMD5FilePath = "out/latestGrammarMD5"
 
-
 repositories {
     mavenCentral()
 }
@@ -56,7 +54,6 @@ dependencies {
     testRuntimeOnly("org.junit.jupiter:junit-jupiter-engine:5.8.1")
     implementation(kotlin("stdlib-jdk8"))
 }
-
 
 val fatJar = task("fatJar", type = Jar::class) {
 //    baseName = "${project.name}-fat"
@@ -96,10 +93,11 @@ tasks {
 }
 
 tasks.withType(JavaCompile::class).configureEach {
-    options.forkOptions.jvmArgs!!.addAll(arrayOf(
-        "--add-opens",
-        "jdk.compiler/com.sun.tools.javac.code=ALL-UNNAMED"
-    ))
+    options.forkOptions.jvmArgs!!.addAll(
+        arrayOf(
+            "--add-opens", "jdk.compiler/com.sun.tools.javac.code=ALL-UNNAMED"
+        )
+    )
 }
 
 tasks.getByName("build") {
@@ -130,7 +128,7 @@ pmd {
 
 ktlint {
     verbose.set(true)
-    outputToConsole.set(true)
+    // outputToConsole.set(true)
     coloredOutput.set(true)
     ignoreFailures.set(true)
     reporters {
@@ -166,20 +164,28 @@ tasks.withType<JacocoCoverageVerification> {
     }*/
 
     afterEvaluate {
-        classDirectories.setFrom(files(classDirectories.files.map {
-            fileTree(it).apply {
-                exclude("parser/**")
-            }
-        }))
+        classDirectories.setFrom(
+            files(
+                classDirectories.files.map {
+                    fileTree(it).apply {
+                        exclude("parser/**")
+                    }
+                }
+            )
+        )
     }
 }
 tasks.withType<JacocoReport> {
     afterEvaluate {
-        classDirectories.setFrom(files(classDirectories.files.map {
-            fileTree(it).apply {
-                exclude("parser/**")
-            }
-        }))
+        classDirectories.setFrom(
+            files(
+                classDirectories.files.map {
+                    fileTree(it).apply {
+                        exclude("parser/**")
+                    }
+                }
+            )
+        )
     }
     reports.csv.required.set(true)
 }
@@ -211,8 +217,8 @@ fun runBison() =
                         "--report=states,lookaheads",
                         // "-r", "all",
                         // "--debug", "--help", "--stacktrace",
-                        "--report-file=${reportFilePath}",
-                        "--output=${javaParserFilePath}",
+                        "--report-file=$reportFilePath",
+                        "--output=$javaParserFilePath",
                         javaGrammarFilePath
                     )
                 }
@@ -222,8 +228,8 @@ fun runBison() =
                     executable = "bin/bison_mac"
                     args = mutableListOf(
                         "--report=states,lookaheads",
-                        "--report-file=${reportFilePath}",
-                        "--output=${javaParserFilePath}",
+                        "--report-file=$reportFilePath",
+                        "--output=$javaParserFilePath",
                         javaGrammarFilePath
                     )
                 }
@@ -233,19 +239,20 @@ fun runBison() =
                     executable = "bison"
                     args = mutableListOf(
                         "--report=states,lookaheads",
-                        "--report-file=${reportFilePath}",
-                        "--output=${javaParserFilePath}",
+                        "--report-file=$reportFilePath",
+                        "--output=$javaParserFilePath",
                         javaGrammarFilePath
                     )
                 }
             else ->
-                throw UnsupportedOperationException("Your OS is not yet supported. File a GitHub or issue or " +
-                        "provide a Pull Request with support for Bison execution for your OS.")
+                throw UnsupportedOperationException(
+                    "Your OS is not yet supported. File a GitHub or issue or " +
+                        "provide a Pull Request with support for Bison execution for your OS."
+                )
         }
     } catch (e: Exception) {
         e.printStackTrace()
     }
-
 
 /**
  * Returns MD5 string for a given file.
