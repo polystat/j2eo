@@ -2,6 +2,7 @@ import org.apache.tools.ant.taskdefs.condition.Os
 import java.security.MessageDigest
 import org.gradle.jvm.tasks.Jar
 import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
+import org.jlleitschuh.gradle.ktlint.reporter.ReporterType
 
 
 plugins {
@@ -9,6 +10,7 @@ plugins {
     jacoco
     pmd
     checkstyle
+    id("org.jlleitschuh.gradle.ktlint") version "10.2.1"
     kotlin("jvm") version "1.6.0"
 }
 
@@ -76,6 +78,9 @@ tasks {
     "checkstyleMain" {
         dependsOn(classes)
     }
+    /*"runKtlintCheckOverKotlinScripts" {
+        dependsOn(classes)
+    }*/
     "pmdTest" {
         dependsOn(testClasses)
     }
@@ -123,6 +128,20 @@ pmd {
     rulesMinimumPriority.set(5)
 }
 
+ktlint {
+    verbose.set(true)
+    outputToConsole.set(true)
+    coloredOutput.set(true)
+    ignoreFailures.set(true)
+    reporters {
+        reporter(ReporterType.CHECKSTYLE)
+        reporter(ReporterType.JSON)
+        reporter(ReporterType.HTML)
+    }
+    filter {
+        exclude("**/style-violations.kt")
+    }
+}
 
 checkstyle {
     toolVersion = "9.1"
