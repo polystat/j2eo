@@ -8,24 +8,25 @@ import tree.Declaration.ImportDeclarations;
 //    | Module
 //    | ImportDeclarationSeqOpt TopLevelComponentSeq <=====
 //    ;
-public class SimpleCompilationUnit extends CompilationUnit
-{
+public class SimpleCompilationUnit extends CompilationUnit {
     // Structure
     public ImportDeclarations imports;
     public TopLevelComponents components;
 
     // Creation
-    public SimpleCompilationUnit(ImportDeclarations ids, TopLevelComponents tlcs)
-    {
+    public SimpleCompilationUnit(ImportDeclarations ids, TopLevelComponents tlcs) {
         this.imports = ids;
         this.components = tlcs;
     }
 
     // Reporting
-    public void report(int sh)
-    {
-        if ( imports != null ) imports.report(sh);
-        if ( components != null ) components.report(sh);
+    public void report(int sh) {
+        if (imports != null) {
+            imports.report(sh);
+        }
+        if (components != null) {
+            components.report(sh);
+        }
     }
 
 }

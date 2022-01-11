@@ -17,6 +17,5 @@ package tree;
 //    |                           ElementValue
 //    | ElementValueListOpt COMMA ElementValue
 //    ;
-public class AnnoParameterList extends Entity
-{
+public class AnnoParameterList extends Entity {
 }

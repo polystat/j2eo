@@ -1,6 +1,6 @@
 package tree.Declaration;
 
-import tree.*;
+import tree.Modifiers;
 import tree.Statement.Block;
 import tree.Type.TypeList;
 import tree.Type.TypeParameters;
@@ -19,19 +19,18 @@ import tree.Type.TypeParameters;
 //    | LBRACE                               BlockStatementSeq RBRACE
 //    | LBRACE ExplicitConstructorInvocation BlockStatementSeq RBRACE
 //    ;
-public class ConstructorDeclaration extends MethodDeclaration
-{
+public class ConstructorDeclaration extends MethodDeclaration {
     // Structure: all from the base class
-//  public Modifiers modifiers;
-//  public TypeParameters typeParameters;
-//  public Type type;                           // always null
-//  public String name;                         // always null
-//  public ReceiverDeclaration receiver;
-//  public ParameterDeclarations parameters;
-//  public Dims dims;                           // always null
-//  public TypeList exceptions;
+    // public Modifiers modifiers;
+    // public TypeParameters typeParameters;
+    // public Type type;                           // always null
+    // public String name;                         // always null
+    // public ReceiverDeclaration receiver;
+    // public ParameterDeclarations parameters;
+    // public Dims dims;                           // always null
+    // public TypeList exceptions;
     public ExplicitConstructorInvocation invocation;
-//  public Block methodBody;
+    //  public Block methodBody;
 
     // Creation
     public ConstructorDeclaration(Modifiers mods,
@@ -39,16 +38,14 @@ public class ConstructorDeclaration extends MethodDeclaration
                                   ParameterDeclarations pars,
                                   TypeList excs,
                                   ExplicitConstructorInvocation inv,
-                                  Block body)
-    {
-        super(mods,typePars,null,null,pars,null,excs,body);
+                                  Block body) {
+        super(mods, typePars, null, null, pars, null, excs, body);
         this.invocation = inv;
     }
 
     // Reporting
-    public void report(int sh)
-    {
-        title("CONSTRUCTOR",sh);
+    public void report(int sh) {
+        title("CONSTRUCTOR", sh);
     }
 
 }

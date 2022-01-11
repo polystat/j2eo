@@ -9,8 +9,7 @@ import tree.Expression.ArgumentList;
 //    : AnnotationSeqOpt IDENTIFIER Arguments
 //    | AnnotationSeqOpt IDENTIFIER Arguments ClassBody
 //    ;
-public class Enumerator extends Entity
-{
+public class Enumerator extends Entity {
     // Structure
     public Annotations annotations;
     public String name;
@@ -18,8 +17,7 @@ public class Enumerator extends Entity
     public Declarations enumBody;
 
     // Creation
-    public Enumerator(Annotations anns, Token name, ArgumentList args, Declarations body)
-    {
+    public Enumerator(Annotations anns, Token name, ArgumentList args, Declarations body) {
         this.annotations = anns;
         this.name = name.image;
         this.arguments = args;
@@ -27,16 +25,15 @@ public class Enumerator extends Entity
     }
 
     // Reporting
-    public void report(int sh)
-    {
-        title("ENUM CONSTANT "+name,sh);
-        if ( arguments != null )
-        {
-            Entity.doShift(sh+Entity.shift);
+    public void report(int sh) {
+        title("ENUM CONSTANT " + name, sh);
+        if (arguments != null) {
+            Entity.doShift(sh + Entity.shift);
             System.out.println("ARGUMENTS:");
-            arguments.report(sh+2*Entity.shift);
+            arguments.report(sh + 2 * Entity.shift);
         }
-        if ( enumBody != null )
-            enumBody.report(sh+Entity.shift);
+        if (enumBody != null) {
+            enumBody.report(sh + Entity.shift);
+        }
     }
 }

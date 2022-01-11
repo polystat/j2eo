@@ -1,10 +1,9 @@
 package tree.Declaration;
 
+import java.util.ArrayList;
 import tree.Annotation;
 import tree.Modifiers;
 import tree.Type.Type;
-
-import java.util.ArrayList;
 
 // RecordComponentListOpt
 //    :  // empty
@@ -16,12 +15,11 @@ import java.util.ArrayList;
 //    : AnnotationSeqOpt UnannotatedType                           IDENTIFIER
 //    | AnnotationSeqOpt UnannotatedType AnnotationSeqOpt ELLIPSIS IDENTIFIER // VariableArityRecordComponent
 //    ;
-public class RecordComponent extends Declaration
-{
+public class RecordComponent extends Declaration {
     // Structure
-//  public Modifiers modifiers;
-//  public String name;
-//  public Type type;
+    // public Modifiers modifiers;
+    // public String name;
+    // public Type type;
     public ArrayList<Annotation> ellAnnotations;
     public boolean signEllipsis;
 
@@ -29,17 +27,15 @@ public class RecordComponent extends Declaration
     public RecordComponent(Modifiers mods,
                            String n,
                            Type t,
-                           ArrayList<Annotation> eAnns,
-                           boolean ell)
-    {
-        super(mods,n,t);
-        this.ellAnnotations = eAnns;
+                           ArrayList<Annotation> ellAnns,
+                           boolean ell) {
+        super(mods, n, t);
+        this.ellAnnotations = ellAnns;
         this.signEllipsis = ell;
     }
 
     // Reporting
-    public void report(int sh)
-    {
+    public void report(int sh) {
 
     }
 

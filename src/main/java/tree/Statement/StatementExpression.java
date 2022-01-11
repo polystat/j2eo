@@ -1,8 +1,7 @@
 package tree.Statement;
 
-import tree.Entity;
-import tree.Expression.*;
 import java.util.ArrayList;
+import tree.Expression.Expression;
 
 // StatementExpression
 //    : Assignment
@@ -13,21 +12,18 @@ import java.util.ArrayList;
 //    | MethodInvocation
 //    | ClassInstanceCreationExpression
 //    ;
-public class StatementExpression extends Statement
-{
+public class StatementExpression extends Statement {
     // Structure
     public Expression expression;
 
     // Creation
-    public StatementExpression(ArrayList<String> ls, Expression expr)
-    {
+    public StatementExpression(ArrayList<String> ls, Expression expr) {
         super(ls);
         this.expression = expr;
     }
 
     // Reporting
-    public void report(int sh)
-    {
+    public void report(int sh) {
         super.report(sh);  // printing labels, if any
         expression.report(sh);
     }

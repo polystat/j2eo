@@ -1,7 +1,9 @@
 package tree.Declaration;
 
-import lexer.*;
-import tree.*;
+import lexer.Token;
+import tree.Annotations;
+import tree.Dims;
+import tree.Entity;
 
 // Intermediate class; won't appear in the AST
 //
@@ -11,8 +13,7 @@ import tree.*;
 //    |                  THIS  // receiver
 //    | IDENTIFIER DOT   THIS  // receiver
 //    ;
-public class ParameterTail extends Entity
-{
+public class ParameterTail extends Entity {
     // Structure
     public Annotations annotations;
     public String identifier;
@@ -21,8 +22,7 @@ public class ParameterTail extends Entity
     public boolean thisSign;
 
     // Creation
-    public ParameterTail(Annotations anns,Token id,Dims dims,boolean ellSign,boolean thisSign)
-    {
+    public ParameterTail(Annotations anns, Token id, Dims dims, boolean ellSign, boolean thisSign) {
         this.annotations = anns;
         this.identifier = id.image;
         this.dims = dims;
@@ -31,8 +31,7 @@ public class ParameterTail extends Entity
     }
 
     // Reporting
-    public void report(int sh)
-    {
+    public void report(int sh) {
         // empty
     }
 

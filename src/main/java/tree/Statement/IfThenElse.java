@@ -1,8 +1,8 @@
 package tree.Statement;
 
-import tree.Entity;
-import tree.Expression.*;
 import java.util.ArrayList;
+import tree.Entity;
+import tree.Expression.Expression;
 
 // Statement
 //    : ...
@@ -18,17 +18,15 @@ import java.util.ArrayList;
 //    :  // empty
 //    | ELSE Statement
 //    ;
-public class IfThenElse extends Statement
-{
+public class IfThenElse extends Statement {
     // Structure
-//  public ArrayList<String> labels;
+    // public ArrayList<String> labels;
     public Expression condition;
     public Statement thenPart;
     public Statement elsePart;
 
     // Creation
-    public IfThenElse(ArrayList<String> ls, Expression c, Statement t, Statement e)
-    {
+    public IfThenElse(ArrayList<String> ls, Expression c, Statement t, Statement e) {
         super(ls);
         this.condition = c;
         this.thenPart = t;
@@ -36,21 +34,19 @@ public class IfThenElse extends Statement
     }
 
     // Reporting
-    public void report(int sh)
-    {
+    public void report(int sh) {
         super.report(sh);
         Entity.doShift(sh);
         System.out.println("IF");
-        condition.report(sh+Entity.shift);
-    //  System.out.println();
+        condition.report(sh + Entity.shift);
+        // System.out.println();
         Entity.doShift(sh);
         System.out.println("THEN");
-        thenPart.report(sh+Entity.shift);
-        if ( elsePart != null )
-        {
+        thenPart.report(sh + Entity.shift);
+        if (elsePart != null) {
             Entity.doShift(sh);
             System.out.println("ELSE");
-            elsePart.report(sh+Entity.shift);
+            elsePart.report(sh + Entity.shift);
         }
     }
 

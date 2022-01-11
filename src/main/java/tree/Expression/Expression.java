@@ -1,7 +1,6 @@
 package tree.Expression;
 
-import tree.*;
+import tree.Entity;
 
-public class Expression extends Entity
-{
+public class Expression extends Entity {
 }

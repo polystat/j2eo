@@ -12,8 +12,7 @@ import tree.Entity;
 //    | AnnotationSeq QUESTION EXTENDS Type      { $$ = new TypeArgument($4,2,$1); }
 //    | AnnotationSeq QUESTION SUPER   Type      { $$ = new TypeArgument($4,3,$1); }
 //    ;
-public class TypeArgument extends Entity
-{
+public class TypeArgument extends Entity {
     // Structure
     public Type type;
     public boolean signExtends;
@@ -21,22 +20,23 @@ public class TypeArgument extends Entity
     public Annotations annotations;
 
     // Creation
-    public TypeArgument(Type t, int sign, Annotations anns)
-    {
+    public TypeArgument(Type t, int sign, Annotations anns) {
         this.type = t;
-        signExtends = false; signSuper = false;
-        switch ( sign )
-        {
-            case 1: signExtends = true; break;
-            case 2: signSuper = true; break;
+        signExtends = false;
+        signSuper = false;
+        switch (sign) {
+            case 1 -> signExtends = true;
+            case 2 -> signSuper = true;
+            default -> { }
         }
         this.annotations = anns;
     }
 
     // Reporting
-    public void report(int sh)
-    {
-        if ( type != null ) type.report(sh);
+    public void report(int sh) {
+        if (type != null) {
+            type.report(sh);
+        }
         // TODO: the rest
     }
 

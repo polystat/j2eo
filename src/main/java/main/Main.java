@@ -1,15 +1,14 @@
 package main;
 
-import lexer.*;
-import org.apache.commons.cli.*;
-import parser.*;
-import tree.Entity;
+import static translator.TranslatorKt.translate;
 
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.PrintWriter;
-
-import static translator.TranslatorKt.translate;
+import lexer.Scanner;
+import org.apache.commons.cli.*;
+import parser.JavaParser;
+import tree.Entity;
 
 public class Main {
     public static void main(String[] args) throws FileNotFoundException {
@@ -20,17 +19,17 @@ public class Main {
         output.setRequired(false);
         options.addOption(output);
 
-        Option debug = new Option("d","debug",false,"Debug mode");
+        Option debug = new Option("d", "debug", false, "Debug mode");
         debug.setRequired(false);
         options.addOption(debug);
 
-        Option syntaxOnly = new Option("s","syntax",false,"Syntax only");
+        Option syntaxOnly = new Option("s", "syntax", false, "Syntax only");
         syntaxOnly.setRequired(false);
         options.addOption(syntaxOnly);
 
         CommandLineParser cmdLineParser = new DefaultParser();
-        HelpFormatter     formatter     = new HelpFormatter();
-        CommandLine       cmd           = null;
+        HelpFormatter formatter = new HelpFormatter();
+        CommandLine cmd;
 
         // Parse command line arguments and exit if parsing failed.
         try {
@@ -39,6 +38,7 @@ public class Main {
             System.out.println(e.getMessage());
             printUsage(formatter, options);
             System.exit(1);
+            return;
         }
 
         // Check argv for all required data
@@ -53,21 +53,26 @@ public class Main {
 
         // Check if source file exists
         String inputFilepath = cmd.getArgList().get(0);
-        var    f             = new File(inputFilepath);
-        if (!f.exists())
+        var f = new File(inputFilepath);
+        if (!f.exists()) {
             throw new FileNotFoundException("No file found at \"" + inputFilepath + "\"");
+        }
 
         // Read, parse, map and print file
         Scanner scanner = new Scanner();
         scanner.readFile(inputFilepath);
-        JavaParser parser  = new JavaParser(scanner);
+        JavaParser parser = new JavaParser(scanner);
         try {
             boolean result = parser.parse();
-            System.out.println("Parsing completed: "+(result ? "SUCCESS" : "FAIL"));
+            System.out.println("Parsing completed: " + (result ? "SUCCESS" : "FAIL"));
             if (parser.ast != null) {
-                if ( Entity.debug ) parser.ast.report(0);
-                if ( Entity.syntaxOnly ) return;
-                var eoProgram  = translate(parser.ast);
+                if (Entity.debug) {
+                    parser.ast.report(0);
+                }
+                if (Entity.syntaxOnly) {
+                    return;
+                }
+                var eoProgram = translate(parser.ast);
                 var targetText = eoProgram.generateEO(0);
 
                 // Print generated code to stdout or to file, if any specified
@@ -80,8 +85,9 @@ public class Main {
                     System.out.println("\n\n=== Produced EO code ===");
                     System.out.println(targetText);
                 }
-            } else
+            } else {
                 throw new IllegalStateException("Parser AST is null");
+            }
 
         } catch (java.io.IOException exc) {
             System.out.println("ABORT");

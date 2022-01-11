@@ -6,34 +6,31 @@ package tree;
 //    | AT CompoundName LPAREN AnnoParameterList RPAREN
 //    | AT CompoundName LPAREN ElementValue      RPAREN
 //    ;
-public class Annotation extends Entity
-{
+public class Annotation extends Entity {
     // Structure
     public CompoundName compoundName;
     public AnnoParameterList annoParameterList;
 
     // Creation
-    public Annotation(CompoundName cn, AnnoParameterList apl)
-    {
+    public Annotation(CompoundName cn, AnnoParameterList apl) {
         this.compoundName = cn;
         this.annoParameterList = apl;
     }
-    public Annotation(CompoundName cn, AnnoElementValue aev)
-    {
+
+    public Annotation(CompoundName cn, AnnoElementValue aev) {
         this.compoundName = cn;
         this.annoParameterList = new AnnoParameterList();
-     // this.annoParameterList.add
+        // this.annoParameterList.add
 
     }
 
     // Reporting
-    public void report(int sh)
-    {
+    public void report(int sh) {
         Entity.doShift(sh);
         System.out.print("ANNOTATION ");
         compoundName.report(0);
         System.out.println();
-        annoParameterList.report(sh+Entity.shift);
+        annoParameterList.report(sh + Entity.shift);
     }
 
 }

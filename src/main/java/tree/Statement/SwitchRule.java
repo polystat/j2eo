@@ -1,7 +1,7 @@
 package tree.Statement;
 
 import tree.Entity;
-import tree.Expression.*;
+import tree.Expression.Expression;
 
 // SwitchBlock
 //    : LBRACE SwitchRuleSeq RBRACE
@@ -28,42 +28,32 @@ import tree.Expression.*;
 //    :                          AssignmentExpression
 //    | CaseExpressionList COMMA AssignmentExpression
 //    ;
-public class SwitchRule extends Entity
-{
-    // Structure
-    SwitchLabel label;
-
+public class SwitchRule extends Entity {
     // ONE of the following values:
     public Expression expression;
     public Block block;
     public Throw throwStatement;
+    // Structure
+    SwitchLabel label;
 
     // Creation: three cases
-    public SwitchRule(SwitchLabel l,Expression expr)
-    {
+    public SwitchRule(SwitchLabel l, Expression expr) {
         this.label = l;
         this.expression = expr;
-        this.block = null;
-        this.throwStatement = null;
     }
-    public SwitchRule(SwitchLabel l,Block block)
-    {
+
+    public SwitchRule(SwitchLabel l, Block block) {
         this.label = l;
-        this.expression = null;
         this.block = block;
-        this.throwStatement = null;
     }
-    public SwitchRule(SwitchLabel l,Throw tStmt)
-    {
+
+    public SwitchRule(SwitchLabel l, Throw thrwStmt) {
         this.label = l;
-        this.expression = null;
-        this.block = null;
-        this.throwStatement = tStmt;
+        this.throwStatement = thrwStmt;
     }
 
     // Reporting
-    public void report(int sh)
-    {
+    public void report(int sh) {
 
     }
 

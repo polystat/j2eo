@@ -1,14 +1,17 @@
 package tree.Declaration;
 
-import lexer.*;
-import tree.Entity;
-import tree.Type.*;
-
 import java.util.List;
 import java.util.stream.Collectors;
+import lexer.Token;
+import lexer.TokenCode;
+import tree.Entity;
+import tree.Type.Type;
+import tree.Type.TypeList;
+import tree.Type.TypeParameters;
 
 // NormalClassDeclaration
-//    : /*ModifierSeqOpt*/ CLASS IDENTIFIER TypeParametersOpt ClassExtendsOpt ClassImplementsOpt ClassBody
+//    : /*ModifierSeqOpt*/ CLASS IDENTIFIER
+//          TypeParametersOpt ClassExtendsOpt ClassImplementsOpt ClassBody
 //    ;
 //
 // ClassExtendsOpt
@@ -23,7 +26,7 @@ import java.util.stream.Collectors;
 //
 // ClassBody
 //    : LBRACE                         RBRACE
-//	  | LBRACE ClassBodyDeclarationSeq RBRACE
+//    | LBRACE ClassBodyDeclarationSeq RBRACE
 //    ;
 //
 //ClassBodyDeclarationSeq
@@ -36,13 +39,13 @@ import java.util.stream.Collectors;
 //    |        Block           // InstanceInitializer
 //    | STATIC Block           // StaticInitializer
 //    | SEMICOLON
-// 	;
+//    ;
 public class NormalClassDeclaration extends ClassDeclaration {
     // Structure
     public TypeParameters typeParameters;
-    public Type           extendedType;
-    public TypeList       interfaces;
-    public Declarations   body;
+    public Type extendedType;
+    public TypeList interfaces;
+    public Declarations body;
 
     // Creation
     public NormalClassDeclaration(Token n,
@@ -92,16 +95,19 @@ public class NormalClassDeclaration extends ClassDeclaration {
     // Reporting
     public void report(int sh) {
         this.title("CLASS DECLARATION " + this.name, sh);
-        if (this.typeParameters != null)
+        if (this.typeParameters != null) {
             this.typeParameters.report(sh + Entity.shift);
+        }
         if (this.extendedType != null) {
             this.title("SUPER", sh + Entity.shift);
             this.extendedType.report(sh + Entity.shift);
         }
-        if (this.interfaces != null)
+        if (this.interfaces != null) {
             this.interfaces.report(sh + Entity.shift);
-        if (body != null)
+        }
+        if (body != null) {
             body.report(sh + Entity.shift);
+        }
     }
 
 }

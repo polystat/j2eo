@@ -1,7 +1,7 @@
 package tree.Expression.Primary;
 
-import lexer.*;
-import tree.Entity;
+import lexer.Token;
+import lexer.TokenCode;
 
 // Primary
 //    : Literal
@@ -19,23 +19,20 @@ import tree.Entity;
 ////  | TextBlock   // ???
 //    | NULL   // NullLiteral
 //    ;
-public class Literal extends Primary
-{
+public class Literal extends Primary {
     // Structure
     public TokenCode code;
     public Object value;
 
     // Creation
-    public Literal(Token token)
-    {
+    public Literal(Token token) {
         this.code = token.code;
         this.value = token.image; //.value;
     }
 
     // Reporting
-    public void report(int sh)
-    {
-        title("LITERAL "+value,sh);
+    public void report(int sh) {
+        title("LITERAL " + value, sh);
     }
 
 }

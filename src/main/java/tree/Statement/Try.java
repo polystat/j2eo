@@ -1,7 +1,7 @@
 package tree.Statement;
 
-import tree.ResourceSpecification;
 import java.util.ArrayList;
+import tree.ResourceSpecification;
 
 // SimpleStatement
 //    : ...
@@ -14,10 +14,9 @@ import java.util.ArrayList;
 // Finally
 //    : FINALLY Block
 //    ;
-public class Try extends Statement
-{
+public class Try extends Statement {
     // Structure
-//  public ArrayList<String> labels;
+    // public ArrayList<String> labels;
     public ResourceSpecification resSpec;
     public Block block;
     public ArrayList<CatchClause> catches;
@@ -28,8 +27,7 @@ public class Try extends Statement
                ResourceSpecification res,
                Block b,
                ArrayList<CatchClause> cs,
-               Block finb)
-    {
+               Block finb) {
         super(ls);
         this.resSpec = res;
         this.block = b;
@@ -38,8 +36,7 @@ public class Try extends Statement
     }
 
     // Reporting
-    public void report(int sh)
-    {
+    public void report(int sh) {
         super.report(sh);
 
     }

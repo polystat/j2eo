@@ -8,29 +8,26 @@ import tree.Dims;
 //    : PrimitiveType
 //    | CompoundName
 //    | CompoundName TypeArguments
-//    | UnannotatedType Dim    	  // ArrayType
+//    | UnannotatedType Dim        // ArrayType
 //    ;
-public class UnannotatedType extends Type
-{
+public class UnannotatedType extends Type {
     // Structure
     public Dims dimensions;
 
     // Creation
-    public UnannotatedType(Annotations anns)
-    {
+    public UnannotatedType(Annotations anns) {
         super(anns);
         dimensions = new Dims();
         // Empty
     }
-    public UnannotatedType addDimension(Dim dim)
-    {
+
+    public UnannotatedType addDimension(Dim dim) {
         this.dimensions.add(dim);
         return this;
     }
 
     // Reporting
-    public void report(int sh)
-    {
+    public void report(int sh) {
         // empty
     }
 

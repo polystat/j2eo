@@ -1,9 +1,8 @@
 package tree.Declaration;
 
+import java.util.ArrayList;
 import tree.Modifiers;
 import tree.Type.TypeParameter;
-
-import java.util.ArrayList;
 
 // RecordDeclaration
 //    : /*ModifierSeqOpt*/ RECORD IDENTIFIER TypeParametersOpt RecordHeader ClassImplementsOpt RecordBody
@@ -38,22 +37,20 @@ import java.util.ArrayList;
 //    : ClassBodyDeclaration
 //    | ModifierSeqOpt IDENTIFIER ConstructorBody // CompactConstructorDeclaration
 //    ;
-public class RecordDeclaration extends ClassDeclaration
-{
+public class RecordDeclaration extends ClassDeclaration {
     // Structure
     public ArrayList<TypeParameter> typeParameters;
     public ArrayList<RecordComponent> recordComponents;
     public ArrayList<Declaration> body;
-//  public CompactConstructor  !!!!!!!!!!!!!!!!!!!!!!!!
+    // public CompactConstructor  !!!!!!!!!!!!!!!!!!!!!!!!
 
     // Creation
     public RecordDeclaration(String n,
                              Modifiers mods,
                              ArrayList<TypeParameter> typePars,
                              ArrayList<RecordComponent> recordComps,
-                             ArrayList<Declaration> body)
-    {
-        super(mods,n);
+                             ArrayList<Declaration> body) {
+        super(mods, n);
         this.modifiers = mods;
         this.typeParameters = typePars;
         this.recordComponents = recordComps;
@@ -61,8 +58,7 @@ public class RecordDeclaration extends ClassDeclaration
     }
 
     // Reporting
-    public void report(int sh)
-    {
+    public void report(int sh) {
 
     }
 

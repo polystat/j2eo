@@ -1,7 +1,6 @@
 package tree.Declaration;
 
 import tree.Entity;
-import tree.Statement.Throw;
 import tree.Type.Type;
 import tree.Type.TypeList;
 import tree.Type.TypeParameters;
@@ -16,16 +15,18 @@ import tree.Type.TypeParameters;
 //    |                              UnannotatedType MethodDeclarator ThrowsOpt
 //    |                              VOID            MethodDeclarator ThrowsOpt
 //    ;
-public class MethodHeader extends Entity
-{
+public class MethodHeader extends Entity {
     // Structure
     public TypeParameters typeParameters;
     public Type type;  // together with annotations?
     public MethodDeclarator declarator;
     public TypeList throwsClause;
 
-    public MethodHeader(TypeParameters tpars, Type type, MethodDeclarator methodDecl, TypeList thr)
-    {
+    public MethodHeader(
+            TypeParameters tpars,
+            Type type,
+            MethodDeclarator methodDecl,
+            TypeList thr) {
         this.typeParameters = tpars;
         this.type = type;
         this.declarator = methodDecl;
@@ -33,8 +34,7 @@ public class MethodHeader extends Entity
     }
 
     // Reporting
-    public void report(int sh)
-    {
+    public void report(int sh) {
 
     }
 }

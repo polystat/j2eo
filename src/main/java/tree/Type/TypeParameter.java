@@ -1,6 +1,7 @@
 package tree.Type;
 
-import tree.*;
+import tree.Annotations;
+import tree.Entity;
 
 // TypeParameter
 //    : AnnotationSeq TypeParameterTail
@@ -12,8 +13,7 @@ import tree.*;
 //    | IDENTIFIER EXTENDS AnnotationSeqOpt IDENTIFIER
 //    | IDENTIFIER EXTENDS ClassTypeList2
 //    ;
-public class TypeParameter extends Entity
-{
+public class TypeParameter extends Entity {
     // Structure
     public Annotations annotations;
     public String name;
@@ -23,8 +23,7 @@ public class TypeParameter extends Entity
     public TypeList extendingTypes;
 
     // Creation
-    public TypeParameter(Annotations anns, TypeParameterTail tail)
-    {
+    public TypeParameter(Annotations anns, TypeParameterTail tail) {
         this.annotations = anns;
         this.name = tail.identifier;
         this.extAnnotations = tail.extAnnotations;
@@ -33,8 +32,7 @@ public class TypeParameter extends Entity
     }
 
     // Reporting
-    public void report(int sh)
-    {
+    public void report(int sh) {
 
     }
 

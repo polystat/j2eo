@@ -1,6 +1,5 @@
 package tree.Compilation;
 
-public class Module extends CompilationUnit
-{
+public class Module extends CompilationUnit {
 }
 

@@ -75,9 +75,6 @@ tasks {
     "checkstyleMain" {
         dependsOn(classes)
     }
-    /*"runKtlintCheckOverKotlinScripts" {
-        dependsOn(classes)
-    }*/
     "pmdTest" {
         dependsOn(testClasses)
     }
@@ -124,13 +121,14 @@ pmd {
     isConsoleOutput = false
     toolVersion = "6.40.0"
     rulesMinimumPriority.set(5)
+    ruleSets = listOf("category/java/codestyle.xml")
 }
 
 ktlint {
     verbose.set(true)
     // outputToConsole.set(true)
     coloredOutput.set(true)
-    ignoreFailures.set(true)
+    ignoreFailures.set(false)
     reporters {
         reporter(ReporterType.CHECKSTYLE)
         reporter(ReporterType.JSON)
@@ -144,7 +142,7 @@ ktlint {
 checkstyle {
     toolVersion = "9.1"
     isShowViolations = false
-    isIgnoreFailures = true
+    isIgnoreFailures = false
 }
 
 tasks.withType<Checkstyle>().configureEach {

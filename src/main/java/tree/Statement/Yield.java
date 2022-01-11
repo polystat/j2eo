@@ -1,34 +1,31 @@
 package tree.Statement;
 
-import tree.Entity;
-import tree.Expression.*;
 import java.util.ArrayList;
+import tree.Entity;
+import tree.Expression.Expression;
 
 // SimpleStatement
 //    : ...
 //    | YIELD Expression SEMICOLON      // YieldStatement
 //    | ...
 //    ;
-public class Yield extends Statement
-{
+public class Yield extends Statement {
     // Structure
-//  public ArrayList<String> labels;
+    // public ArrayList<String> labels;
     public Expression expression;
 
     // Creation
-    public Yield(ArrayList<String> ls, Expression expr)
-    {
+    public Yield(ArrayList<String> ls, Expression expr) {
         super(ls);
         this.expression = expr;
     }
 
     // Reporting
-    public void report(int sh)
-    {
+    public void report(int sh) {
         super.report(sh);
         Entity.doShift(sh);
         System.out.println("YIELD");
-        expression.report(sh+Entity.shift);
+        expression.report(sh + Entity.shift);
     }
 
 }
