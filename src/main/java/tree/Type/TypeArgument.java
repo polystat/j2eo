@@ -31,6 +31,9 @@ public class TypeArgument extends Entity
             case 2: signSuper = true; break;
         }
         this.annotations = anns;
+
+        if ( this.type != null )        this.type.parent = this;
+        if ( this.annotations != null ) this.annotations.parent = this;
     }
 
     // Reporting

@@ -13,10 +13,13 @@ public class StatementExpressions extends Entity
     {
         this.expressions = new ArrayList<>();
         this.expressions.add(expr);
+
+        if ( expr != null ) expr.parent = this;
     }
     public StatementExpressions add(StatementExpression expr)
     {
         this.expressions.add(expr);
+        if ( expr != null ) expr.parent = this;
         return this;
     }
 }

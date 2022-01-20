@@ -23,6 +23,9 @@ public class MethodDeclarator extends Entity
         this.name = token.image;
         this.parameters = pars;
         this.dims = dims;
+
+        if ( this.parameters != null ) this.parameters.parent = this;
+        if ( this.dims != null )       this.dims.parent = this;
     }
 
     // Reporting

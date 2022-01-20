@@ -21,6 +21,9 @@ public class Do extends Statement
         super(ls);
         this.statement = stmt;
         this.condition = cond;
+
+        if ( this.statement != null ) this.statement.parent = this;
+        if ( this.condition != null ) this.condition.parent = this;
     }
 
     // Reporting

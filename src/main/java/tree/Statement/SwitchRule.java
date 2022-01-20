@@ -45,6 +45,9 @@ public class SwitchRule extends Entity
         this.expression = expr;
         this.block = null;
         this.throwStatement = null;
+
+        if ( this.label != null )      this.label.parent = this;
+        if ( this.expression != null ) this.expression.parent = this;
     }
     public SwitchRule(SwitchLabel l,Block block)
     {
@@ -52,6 +55,9 @@ public class SwitchRule extends Entity
         this.expression = null;
         this.block = block;
         this.throwStatement = null;
+
+        if ( this.label != null ) this.label.parent = this;
+        if ( this.block != null ) this.block.parent = this;
     }
     public SwitchRule(SwitchLabel l,Throw tStmt)
     {
@@ -59,6 +65,9 @@ public class SwitchRule extends Entity
         this.expression = null;
         this.block = null;
         this.throwStatement = tStmt;
+
+        if ( this.label != null )          this.label.parent = this;
+        if ( this.throwStatement != null ) this.throwStatement.parent = this;
     }
 
     // Reporting

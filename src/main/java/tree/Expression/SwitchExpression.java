@@ -16,6 +16,9 @@ public class SwitchExpression extends Expression
     {
         this.expression = expr;
         this.switchBlock = block;
+
+        if ( this.expression != null )  this.expression.parent = this;
+        if ( this.switchBlock != null ) this.switchBlock.parent = this;
     }
 
     // Reporting

@@ -14,10 +14,12 @@ public class Expressions extends Entity
     {
         this.expressions = new ArrayList<>();
         this.expressions.add(expr);
+        if ( expr != null ) expr.parent = this;
     }
     public Expressions add(Expression expr)
     {
         this.expressions.add(expr);
+        if ( expr != null ) expr.parent = this;
         return this;
     }
 

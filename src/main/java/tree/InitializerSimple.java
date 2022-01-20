@@ -11,6 +11,7 @@ public class InitializerSimple extends Initializer
     public InitializerSimple(Expression expr)
     {
         this.expression = expr;
+        if ( expr != null ) expr.parent = this;
     }
 
     // Reporting

@@ -14,6 +14,8 @@ public class UnaryPostfix extends Expression
     {
         this.operator = token.code;
         this.operand = op;
+
+        if ( this.operand != null ) this.operand.parent = this;
     }
 
     // Reporting

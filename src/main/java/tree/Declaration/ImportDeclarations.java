@@ -18,10 +18,13 @@ public class ImportDeclarations extends Entity
     {
         this.imports = new ArrayList<>();
         this.imports.add(id);
+
+        if ( id != null ) id.parent = this;
     }
     public ImportDeclarations add(ImportDeclaration id)
     {
         imports.add(id);
+        if ( id != null ) id.parent = this;
         return this;
     }
 

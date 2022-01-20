@@ -29,10 +29,14 @@ public class Declarations extends Entity
                 VariableDeclaration variable =
                         new VariableDeclaration(declarator.name,d.modifiers,d.type,declarator.dims,declarator.initializer);
                 this.declarations.add(variable);
+                if ( variable != null ) variable.parent = this;
             }
         }
         else
+        {
             this.declarations.add(d);
+            if ( d != null ) d.parent = this;
+        }
     }
 
     // Reporting

@@ -22,12 +22,18 @@ public class InstanceOf extends Expression
         this.expression = expr;
         this.type = type;
         this.declaration = null;
+
+        if ( this.expression != null ) this.expression.parent = this;
+        if ( this.type != null )       this.type.parent = this;
     }
     public InstanceOf(Expression expr, Declaration decl)
     {
         this.expression = expr;
         this.type = null;
         this.declaration = decl;
+
+        if ( this.expression != null )  this.expression.parent = this;
+        if ( this.declaration != null ) this.declaration.parent = this;
     }
 
     // Reporting

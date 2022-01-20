@@ -20,6 +20,7 @@ public class Yield extends Statement
     {
         super(ls);
         this.expression = expr;
+        if ( this.expression != null ) this.expression.parent = this;
     }
 
     // Reporting
@@ -28,7 +29,8 @@ public class Yield extends Statement
         super.report(sh);
         Entity.doShift(sh);
         System.out.println("YIELD");
-        expression.report(sh+Entity.shift);
+        if ( expression != null )
+            expression.report(sh+Entity.shift);
     }
 
 }

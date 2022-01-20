@@ -1,7 +1,8 @@
 package tree.Declaration;
 
 import tree.Modifiers;
-import tree.Type.TypeParameter;
+import tree.Declaration.Declarations;
+import tree.Type.TypeParameters;
 
 import java.util.ArrayList;
 
@@ -41,23 +42,28 @@ import java.util.ArrayList;
 public class RecordDeclaration extends ClassDeclaration
 {
     // Structure
-    public ArrayList<TypeParameter> typeParameters;
-    public ArrayList<RecordComponent> recordComponents;
-    public ArrayList<Declaration> body;
+    public TypeParameters typeParameters;
+    public RecordComponents recordComponents;
+    public Declarations body;
 //  public CompactConstructor  !!!!!!!!!!!!!!!!!!!!!!!!
 
     // Creation
     public RecordDeclaration(String n,
                              Modifiers mods,
-                             ArrayList<TypeParameter> typePars,
-                             ArrayList<RecordComponent> recordComps,
-                             ArrayList<Declaration> body)
+                             TypeParameters typePars,
+                             RecordComponents recordComps,
+                             Declarations body)
     {
         super(mods,n);
         this.modifiers = mods;
         this.typeParameters = typePars;
         this.recordComponents = recordComps;
         this.body = body;
+
+        if ( this.modifiers != null )        this.modifiers.parent = this;
+        if ( this.typeParameters != null )   this.typeParameters.parent = null;
+        if ( this.recordComponents != null ) this.recordComponents.parent = this;
+        if ( this.body != null )             this.body.parent = this;
     }
 
     // Reporting

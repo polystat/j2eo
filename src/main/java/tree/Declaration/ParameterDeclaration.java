@@ -42,6 +42,9 @@ public class ParameterDeclaration extends Declaration
         this.ellAnnotations = ellAnns;
         this.signEllipsis = signEll;
         this.dims = dims;
+
+        this.ellAnnotations.parent = this;
+        this.dims.parent = this;
     }
     public ParameterDeclaration(Token token)
     {
@@ -63,10 +66,13 @@ public class ParameterDeclaration extends Declaration
     private static ReceiverDeclaration createReceiver(Modifiers mods,Type t,String n)
     {
         ReceiverDeclaration receiver = new ReceiverDeclaration(null,t,n);
+
         receiver.modifiers = mods;
         receiver.dims = null;
         receiver.ellAnnotations = null;
         receiver.signEllipsis = false;
+
+        if ( receiver.modifiers != null ) receiver.modifiers.parent = receiver;
         return receiver;
     }
 

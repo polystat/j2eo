@@ -5,6 +5,7 @@ import lexer.Token;
 
 // The root class of the whole hierarchy of classes
 // representing various Java constructs.
+
 public class Entity
 {
     // Entity's unique number
@@ -67,5 +68,8 @@ public class Entity
     {
 
     }
+
+    // Managing references to parent nodes
+    public Entity parent;
 
 }

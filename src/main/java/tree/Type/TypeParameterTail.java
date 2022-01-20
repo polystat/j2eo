@@ -25,6 +25,8 @@ public class TypeParameterTail extends Entity
         this.extAnnotations = extAnns;
         this.extending = ext.image;
         this.types = null;
+
+        if ( this.extAnnotations != null ) this.extAnnotations.parent = this;
     }
     public TypeParameterTail(Token id, TypeList types)
     {
@@ -32,6 +34,8 @@ public class TypeParameterTail extends Entity
         this.extAnnotations = null;
         this.extending = null;
         this.types = types;
+
+        if ( this.types != null ) this.types.parent = this;
     }
 
     // Reporting

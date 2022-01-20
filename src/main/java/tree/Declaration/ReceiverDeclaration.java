@@ -29,6 +29,8 @@ public class ReceiverDeclaration extends ParameterDeclaration
     {
         super(null,t,n,null,false,null);
         this.annotations = anns;
+
+        if ( this.annotations != null ) this.annotations.parent = this;
     }
 
     // Reporting

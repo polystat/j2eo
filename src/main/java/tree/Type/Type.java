@@ -18,10 +18,12 @@ public class Type extends Entity
     public Type(Annotations annSeq)
     {
         this.annotations = annSeq;
+        if ( this.annotations != null ) this.annotations.parent = this;
     }
     public Type addAnnotations(Annotations anns)
     {
         this.annotations = anns;
+        if ( this.annotations != null ) this.annotations.parent = this;
         return this;
     }
 
