@@ -27,7 +27,8 @@ public class TestEOObject {
                                 new EODot("memory"),
                                 "bnd2"
                         )
-                )
+                ),
+                ""
         );
         assertEquals(
                 """
@@ -52,7 +53,8 @@ public class TestEOObject {
                                 new EODot("memory"),
                                 "bnd2"
                         )
-                )
+                ),
+                ""
         );
         //noinspection TextBlockMigration
         assertEquals(

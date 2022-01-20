@@ -3,44 +3,41 @@ package translator
 import arrow.core.None
 import arrow.core.Option
 import arrow.core.some
-import eotree.EOCopy
-import eotree.EODot
-import eotree.EOExpr
-import eotree.EOObject
+import eotree.*
 import tree.Expression.Expression
 import tree.Expression.Primary.MethodInvocation
 import tree.Expression.SimpleReference
+import util.isSystemOutCall
 import java.util.*
 import java.util.stream.Collectors
+import kotlin.collections.ArrayList
+
 
 // TODO: create state object to store binding of expression
 fun mapMethodInvocation(methodInvocation: MethodInvocation): EOCopy {
-    var src: Option<EOExpr> = None
-    if (methodInvocation.qualifier != null) {
-        val expr = methodInvocation.qualifier
-        if (expr is SimpleReference) {
-            expr.compoundName.names.reverse()
-            src = buildEODotObjTree(expr.compoundName.names)
-        }
-    }
     require(!methodInvocation.superSign) { "Super sign isn't supported yet" }
     require(methodInvocation.typeArguments == null) { "Type arguments aren't supported yet" }
+
+    val isStaticCall = !isSystemOutCall(methodInvocation)
+
+    val src: EODot = when (methodInvocation.qualifier) {
+        is SimpleReference ->
+            (methodInvocation.qualifier as SimpleReference).compoundName.eoDot()
+        else ->
+            throw IllegalArgumentException("Only SimpleReference is supported")
+    }
+    val callee: EODot = when (methodInvocation.qualifier) {
+        is SimpleReference ->
+            if ((methodInvocation.qualifier as SimpleReference).compoundName.names.size > 1)
+                (methodInvocation.qualifier as SimpleReference).compoundName.names.dropLast(1).eoDot()
+            else
+                "this".eoDot()
+        else ->
+            throw IllegalArgumentException("Only SimpleReference is supported")
+    }
     return EOCopy(
-        EODot(src, methodInvocation.name.let { it ?: "PARSER_ERROR" }),
-        methodInvocation.arguments?.arguments?.map { obj -> mapExpression(obj) } ?: listOf()
+        src,
+        (if (!isStaticCall) listOf(callee) else ArrayList<EOExpr>()) +
+        (methodInvocation.arguments?.arguments?.map { obj -> mapExpression(obj) } ?: listOf())
     )
 }
-
-private fun buildEODotObjTree(names: ArrayList<String>): Option<EOExpr> =
-    if (names.size > 0) {
-        var name = names.removeAt(0)
-        if (name == "System") {
-            name = "class_$name"
-        }
-        EODot(
-            buildEODotObjTree(names),
-            name
-        ).some()
-    } else {
-        None
-    }

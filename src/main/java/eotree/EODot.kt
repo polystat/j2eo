@@ -47,3 +47,5 @@ class EODot : EOExpr {
 fun String.eoDot(): EODot = EODot(this)
 
 fun CompoundName.eoDot(): EODot = EODot(this)
+
+fun List<String>.eoDot(): EODot = EODot(this)

@@ -20,6 +20,7 @@ import java.nio.file.Files
 import java.nio.file.Path
 import java.nio.file.Paths
 import java.util.*
+import kotlin.io.path.exists
 
 @Execution(ExecutionMode.CONCURRENT)
 //@Execution(ExecutionMode.SAME_THREAD)
@@ -107,6 +108,7 @@ class TestJ2EO {
 
     companion object {
         private var testFolderRoot: String? = null
+        private var mainFolderRoot: String? = null
         private val sep = File.separatorChar.toString()
 
         @BeforeAll
@@ -121,8 +123,11 @@ class TestJ2EO {
             if (testCandidates) {
                 testFolderPath += sep + "test_candidates"
             }
-            val file = File(testFolderPath)
-            testFolderRoot = file.absolutePath
+            val mainFolderPath = listOf("src", "main", "resources").joinToString(sep)
+            val fileMain = File(mainFolderPath)
+            mainFolderRoot = fileMain.absolutePath
+            val fileTest = File(testFolderPath)
+            testFolderRoot = fileTest.absolutePath
         }
 
         private fun testFile(path: Path): DynamicTest {
@@ -133,7 +138,8 @@ class TestJ2EO {
                 logger.info("-- Current test file: $path")
 
                 // Compile and execute Java file
-                val javaExecOutput = compileAndExecuteJava(path)
+                // FIXME: EO should generate '\r\n' symbols for Windows
+                val javaExecOutput = compileAndExecuteJava(path).replace("\r\n", "\n")
 
                 // Run parser
                 val unit = parseAndBuildAST(path)
@@ -151,7 +157,7 @@ class TestJ2EO {
         }
 
         private fun compileAndExecuteJava(path: Path): String {
-            val fileName = path.fileName.toString().split("\\.").toTypedArray()[0]
+            val fileName = path.fileName.toString().split(".").toTypedArray()[0]
             val subFolder: File = Path.of(path.parent.toString(), "${fileName}_java").toFile()
             if (subFolder.exists()) {
                 subFolder.deleteRecursively()
@@ -243,7 +249,7 @@ class TestJ2EO {
          * @return EO execution output
          */
         private fun compileAndExecuteEO(eoCode: String?, testFilePath: Path): String {
-            val eoFileName = testFilePath.fileName.toString().split("\\.").toTypedArray()[0]
+            val eoFileName = testFilePath.fileName.toString().split(".").toTypedArray()[0]
             val testFolder: File = Path.of(testFilePath.parent.toString(), "${eoFileName}_eo").toFile()
             // Setup temporary folders and files
             if (testFolder.exists()) {
@@ -255,7 +261,11 @@ class TestJ2EO {
                 val eoFilePath = Files.createFile(Paths.get(eoExecDir.toString() + sep + "class_" + eoFileName + ".eo"))
                 Files.copy(
                     Paths.get(testFolderRoot, "eo_execution_pom", "pom.xml"),
-                    Paths.get(eoExecDir.parent.toString() + sep + "pom.xml"))
+                    Paths.get(eoExecDir.parent.toString() + sep + "pom.xml")
+                )
+                Paths.get(mainFolderRoot, "stdlib").toFile().copyRecursively(
+                    Paths.get(eoExecDir.toString(), "stdlib").toFile()
+                )
 
                 // Write generated code to the file
                 Files.writeString(eoFilePath, eoCode)
@@ -265,10 +275,12 @@ class TestJ2EO {
                     .contains("windows") // Matters a lot
 
                 // Compile EO file
-                val compilePb = ProcessBuilder("mvn" + if (isWindows) ".cmd" else "", "clean", "compile")
-                compilePb.directory(File(eoExecDir.parent.toString()))
-                compilePb.redirectErrorStream(true)
-                val compileProcess = compilePb.start()
+                val mvnCommands = if (isWindows) listOf("mvn.cmd", "clean", "compile")
+                else listOf("mvn", "clean", "compile")
+                val compileProcess = ProcessBuilder(mvnCommands)
+                    .directory(File(eoExecDir.parent.toString()))
+                    .redirectErrorStream(true)
+                    .start()
 
                 // Receive compilation output (may be useful)
                 val mvnStdInput = BufferedReader(InputStreamReader(compileProcess.inputStream))
