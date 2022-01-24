@@ -1,8 +1,8 @@
-import java.security.MessageDigest
 import org.apache.tools.ant.taskdefs.condition.Os
 import org.gradle.jvm.tasks.Jar
 import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 import org.jlleitschuh.gradle.ktlint.reporter.ReporterType
+import java.security.MessageDigest
 
 plugins {
     java
