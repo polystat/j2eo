@@ -31,9 +31,13 @@ public class BlockStatements extends Entity {
                         declarator.dims,
                         declarator.initializer);
                 this.blockStatements.add(new BlockStatement(variable));
+                if ( variable != null ) variable.parent = this;
             }
-        } else {
+        }
+        else
+        {
             this.blockStatements.add(stmt);
+            if ( stmt != null ) stmt.parent = this;
         }
     }
 

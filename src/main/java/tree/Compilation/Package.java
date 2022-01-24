@@ -18,6 +18,10 @@ public class Package extends CompilationUnit {
         this.compoundName = cn;
         this.imports = ims;
         this.components = cs;
+
+        if ( this.compoundName != null ) this.compoundName.parent = this;
+        if ( this.imports != null )      this.imports.parent = this;
+        if ( this.components != null )   this.components.parent = this;
     }
 
     // Reporting

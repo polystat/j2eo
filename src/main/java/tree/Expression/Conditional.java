@@ -22,6 +22,10 @@ public class Conditional extends Expression {
         this.condition = c;
         this.thenPart = t;
         this.elsePart = e;
+
+        if ( this.condition != null ) this.condition.parent = this;
+        if ( this.thenPart != null )  this.thenPart.parent = this;
+        if ( this.elsePart != null )  this.elsePart.parent = this;
     }
 
     // Reporting

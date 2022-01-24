@@ -18,6 +18,9 @@ public class ConstructorBody extends Entity {
     public ConstructorBody(ExplicitConstructorInvocation inv, Block block) {
         this.invocation = inv;
         this.block = block;
+
+        if ( this.invocation != null ) this.invocation.parent = this;
+        if ( this.block != null )      this.block.parent = this;
     }
 
     // Reporting

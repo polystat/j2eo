@@ -25,6 +25,8 @@ public class Block extends Statement {
     public Block(ArrayList<String> ls, BlockStatements block) {
         super(ls);
         this.block = block;
+
+        if ( this.block != null ) this.block.parent = this;
     }
 
     // Reporting

@@ -42,11 +42,18 @@ public class Lambda extends Expression {
     public Lambda(ParameterDeclarations pars, Expression expr) {
         this.parameters = pars;
         this.expression = expr;
+        this.block = null;
+
+        if ( this.parameters != null ) this.parameters.parent = this;
+        if ( this.expression != null ) this.expression.parent = this;
     }
 
     public Lambda(ParameterDeclarations pars, Block block) {
         this.parameters = pars;
         this.block = block;
+
+        if ( this.parameters != null ) this.parameters.parent = this;
+        if ( this.block != null )      this.block.parent = this;
     }
 
     // Reporting

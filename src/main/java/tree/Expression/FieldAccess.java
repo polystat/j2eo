@@ -19,6 +19,8 @@ public class FieldAccess extends Expression {
         this.expression = expr;
         this.superSign = ss;
         this.identifier = id.image;
+
+        if ( this.expression != null ) this.expression.parent = this;
     }
 
     // Reporting
@@ -26,12 +28,13 @@ public class FieldAccess extends Expression {
         Entity.doShift(sh);
         if (expression != null) {
             expression.report(0);
-            if (superSign) {
-                System.out.print(".");
-            }
-        } else if (superSign) {
-            System.out.print("SUPER." + identifier);
+            if ( superSign ) System.out.print(".");
         }
+        else if ( superSign )
+        {
+            System.out.print("SUPER.");
+        }
+        System.out.print(identifier);
     }
 
 }

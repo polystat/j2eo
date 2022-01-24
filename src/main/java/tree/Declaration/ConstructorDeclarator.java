@@ -17,6 +17,9 @@ public class ConstructorDeclarator extends Entity {
     public ConstructorDeclarator(TypeParameters tpars, ParameterDeclarations pars) {
         this.typeParameters = tpars;
         this.formalParameters = pars;
+
+        if ( this.typeParameters != null )   this.typeParameters.parent = this;
+        if ( this.formalParameters != null ) this.formalParameters.parent = this;
     }
 
     // Reporting

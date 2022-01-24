@@ -13,10 +13,13 @@ public class VariableDeclarators extends Entity {
     public VariableDeclarators(VariableDeclarator decl) {
         this.declarators = new ArrayList<>();
         this.declarators.add(decl);
+
+        if ( decl != null ) decl.parent = this;
     }
 
     public VariableDeclarators add(VariableDeclarator decl) {
         this.declarators.add(decl);
+        if ( decl != null ) decl.parent = this;
         return this;
     }
 

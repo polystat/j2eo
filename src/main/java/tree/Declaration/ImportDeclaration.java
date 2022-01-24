@@ -23,6 +23,8 @@ public class ImportDeclaration extends Entity {
         this.signStatic = stat;
         this.compoundName = cn;
         this.signStar = star;
+
+        if ( this.compoundName != null ) this.compoundName.parent = this;
     }
 
     // Reporting

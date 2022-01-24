@@ -13,6 +13,8 @@ public class UnaryPrefix extends Expression {
     public UnaryPrefix(Token token, Expression op) {
         this.operator = token.code;
         this.operand = op;
+
+        if ( this.operand != null ) this.operand.parent = this;
     }
 
     // Reporting

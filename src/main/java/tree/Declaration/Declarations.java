@@ -28,9 +28,15 @@ public class Declarations extends Entity {
                         declarator.dims,
                         declarator.initializer);
                 this.declarations.add(variable);
+                if ( variable != null ) variable.parent = this;
             }
-        } else {
+        }
+        else
+        {
             this.declarations.add(d);
+            if (d != null) {
+              d.parent = this;
+            }
         }
     }
 

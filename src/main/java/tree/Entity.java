@@ -5,12 +5,8 @@ import lexer.Token;
 
 // The root class of the whole hierarchy of classes
 // representing various Java constructs.
-public class Entity {
-    public static final int shift = 4;
-    public static boolean debug = false;
-    public static boolean syntaxOnly = false;
-    // All entities created by the program are assigned unique numbers.
-    private static long count = 0;
+public class Entity
+{
     // Entity's unique number
     public long unique;
     // Text coordinates of the entity
@@ -59,5 +55,8 @@ public class Entity {
     public void report(int sh) {
 
     }
+
+    // Managing references to parent nodes
+    public Entity parent;
 
 }

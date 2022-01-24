@@ -20,6 +20,8 @@ public class StatementExpression extends Statement {
     public StatementExpression(ArrayList<String> ls, Expression expr) {
         super(ls);
         this.expression = expr;
+
+        if ( this.expression != null ) this.expression.parent = this;
     }
 
     // Reporting

@@ -11,10 +11,12 @@ public class ParameterDeclarations extends Entity {
     public ParameterDeclarations(ParameterDeclaration par) {
         this.parameters = new ArrayList<>();
         this.parameters.add(par);
+        if ( par != null ) par.parent = this;
     }
 
     public ParameterDeclarations add(ParameterDeclaration par) {
         this.parameters.add(par);
+        if ( par != null ) par.parent = this;
         return this;
     }
 
