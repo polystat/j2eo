@@ -48,23 +48,23 @@ fun mapMethodDeclaration(dec: MethodDeclaration): EOBndExpr {
         // TODO: implement
         try {
             dec.methodBody.block.findAllLocalVariables().map { mapVariableDeclaration(it) } +
-                    listOf(
-                        EOBndExpr(
-                            EOCopy(
-                                "seq",
-                                dec.methodBody.block.blockStatements
-                                    .mapNotNull {
-                                        if (it.statement != null)
-                                            mapStatement(it.statement)
-                                        else if (it.expression != null)
-                                            mapExpression(it.expression)
-                                        else
-                                            null
-                                    }
-                            ),
-                            "@"
-                        )
+                listOf(
+                    EOBndExpr(
+                        EOCopy(
+                            "seq",
+                            dec.methodBody.block.blockStatements
+                                .mapNotNull {
+                                    if (it.statement != null)
+                                        mapStatement(it.statement)
+                                    else if (it.expression != null)
+                                        mapExpression(it.expression)
+                                    else
+                                        null
+                                }
+                        ),
+                        "@"
                     )
+                )
         } catch (e: NullPointerException) {
             listOf(
                 EOBndExpr(

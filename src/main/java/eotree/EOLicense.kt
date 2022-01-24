@@ -10,7 +10,7 @@ import java.util.stream.Collectors
 ` *
  */
 class EOLicense(var comments: List<EOComment>) : EONode() {
-    constructor(vararg comments: EOComment) : this (
+    constructor(vararg comments: EOComment) : this(
         Arrays.stream<EOComment>(comments)
             .collect(Collectors.toList<EOComment>())
     )

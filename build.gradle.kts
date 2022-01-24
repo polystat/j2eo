@@ -126,7 +126,7 @@ pmd {
 
 ktlint {
     verbose.set(true)
-    // outputToConsole.set(true)
+    outputToConsole.set(true)
     coloredOutput.set(true)
     ignoreFailures.set(false)
     reporters {
