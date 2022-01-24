@@ -43,8 +43,10 @@ public class ParameterDeclaration extends Declaration
         this.signEllipsis = signEll;
         this.dims = dims;
 
-        this.ellAnnotations.parent = this;
-        this.dims.parent = this;
+        if (this.ellAnnotations != null)
+            this.ellAnnotations.parent = this;
+        if (this.dims != null)
+            this.dims.parent = this;
     }
     public ParameterDeclaration(Token token)
     {

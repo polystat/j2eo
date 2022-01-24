@@ -13,7 +13,7 @@ plugins {
 }
 
 group = "org.eolang"
-version = "0.1"
+version = "0.2"
 
 val compileKotlin: KotlinCompile by tasks
 compileKotlin.kotlinOptions {
