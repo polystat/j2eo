@@ -9,12 +9,14 @@ plugins {
     jacoco
     pmd
     checkstyle
+    `maven-publish`
+    signing
     id("org.jlleitschuh.gradle.ktlint") version "10.2.1"
     kotlin("jvm") version "1.6.0"
 }
 
 group = "org.eolang"
-version = "0.1"
+version = "2.0"
 
 val compileKotlin: KotlinCompile by tasks
 compileKotlin.kotlinOptions {
@@ -53,6 +55,17 @@ dependencies {
     testImplementation("org.junit.jupiter:junit-jupiter-api:5.8.2")
     testRuntimeOnly("org.junit.jupiter:junit-jupiter-engine:5.8.2")
     implementation(kotlin("stdlib-jdk8"))
+}
+
+java {
+    withJavadocJar()
+    withSourcesJar()
+}
+
+tasks.javadoc {
+    if (JavaVersion.current().isJava9Compatible) {
+        (options as StandardJavadocDocletOptions).addBooleanOption("html5", true)
+    }
 }
 
 val fatJar = task("fatJar", type = Jar::class) {
@@ -107,6 +120,10 @@ tasks.withType(JavaCompile::class).configureEach {
     )
 }
 
+tasks.javadoc {
+    exclude("parser/**")
+}
+
 tasks.getByName("build") {
     createOutDirs()
 
@@ -122,8 +139,7 @@ tasks.getByName("build") {
 
 tasks.getByName<Test>("test") {
     useJUnitPlatform()
-    systemProperty("candidates", System.getProperty("candidates"))
-    // finalizedBy(tasks.getByName("jacocoTestReport"))
+    project.properties["candidates"]?.let { systemProperty("candidates", it) }
 }
 
 pmd {
@@ -196,6 +212,63 @@ tasks.withType<JacocoReport> {
         )
     }
     reports.csv.required.set(true)
+}
+
+publishing {
+    publications {
+        create<MavenPublication>("mavenJava") {
+            groupId = "org.polystat"
+            artifactId = "j2eo"
+            version = project.properties["mvn_version"] as String?
+            from(components["java"])
+            pom {
+                name.set("j2eo")
+                description.set("Java to EO transpiler.")
+                url.set("https://github.com/polystat/j2eo")
+                // properties.set(mapOf(
+                //     "myProp" to "value",
+                //     "prop.with.dots" to "anotherValue"
+                // ))
+                // licenses {
+                //     license {
+                //         name.set("The Apache License, Version 2.0")
+                //         url.set("http://www.apache.org/licenses/LICENSE-2.0.txt")
+                //     }
+                // }
+                developers {
+                    developer {
+                        id.set("zouev")
+                        name.set("Eugene Zouev")
+                        email.set("e.zuev@innopolis.ru")
+                    }
+                    developer {
+                        id.set("IamMaxim58")
+                        name.set("Maxim Stepanov")
+                        email.set("m.stepanov@innopolis.ru")
+                    }
+                    developer {
+                        id.set("Ilia_Mil")
+                        name.set("Ilya Milyoshin")
+                        email.set("i.milyoshin@innopolis.ru")
+                    }
+                    developer {
+                        id.set("egorklementev")
+                        name.set("Egor Klementev")
+                        email.set("e.klementev@innopolis.ru")
+                    }
+                }
+                // scm {
+                //     connection.set("scm:git:git://example.com/my-library.git")
+                //     developerConnection.set("scm:git:ssh://example.com/my-library.git")
+                //     url.set("http://example.com/my-library/")
+                // }
+            }
+        }
+    }
+}
+
+signing {
+    sign(publishing.publications["mavenJava"])
 }
 
 /**
