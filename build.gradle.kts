@@ -43,20 +43,20 @@ repositories {
 
 dependencies {
     // Library for command-line arguments support
-    implementation("commons-cli:commons-cli:1.4")
+    implementation("commons-cli:commons-cli:1.5.0")
     // Functional stuff
     implementation("io.arrow-kt:arrow-core:1.0.1")
     // Kotlin logger
-    implementation("org.slf4j:slf4j-simple:1.7.29")
-    implementation("io.github.microutils:kotlin-logging-jvm:2.1.0")
+    implementation("org.slf4j:slf4j-simple:1.7.33")
+    implementation("io.github.microutils:kotlin-logging-jvm:2.1.21")
 
-    testImplementation("org.junit.jupiter:junit-jupiter-api:5.8.1")
-    testRuntimeOnly("org.junit.jupiter:junit-jupiter-engine:5.8.1")
+    testImplementation("org.junit.jupiter:junit-jupiter-api:5.8.2")
+    testRuntimeOnly("org.junit.jupiter:junit-jupiter-engine:5.8.2")
     implementation(kotlin("stdlib-jdk8"))
 }
 
 val fatJar = task("fatJar", type = Jar::class) {
-//    baseName = "${project.name}-fat"
+    // baseName = "${project.name}-fat"
     // manifest Main-Class attribute is optional.
     // (Used only to provide default main class for executable jar)
     manifest {
@@ -65,26 +65,36 @@ val fatJar = task("fatJar", type = Jar::class) {
     // Include dependencies
     from(configurations.runtimeClasspath.get().map { if (it.isDirectory) it else zipTree(it) })
     with(tasks["jar"] as CopySpec)
-    duplicatesStrategy = org.gradle.api.file.DuplicatesStrategy.INCLUDE
+    duplicatesStrategy = DuplicatesStrategy.INCLUDE
 }
 
 tasks {
-    "pmdMain" {
+    classes {
+        dependsOn(ktlintFormat)
+    }
+    ktlintFormat {
+        finalizedBy(ktlintCheck)
+    }
+    pmdMain {
         dependsOn(classes)
     }
-    "checkstyleMain" {
+    checkstyleMain {
         dependsOn(classes)
     }
-    "pmdTest" {
+    pmdTest {
         dependsOn(testClasses)
     }
-    "checkstyleTest" {
+    checkstyleTest {
         dependsOn(testClasses)
     }
-    "jacocoTestReport" {
+    jacocoTestReport {
         dependsOn(test)
     }
-    "build" {
+    test {
+        dependsOn(pmdTest, checkstyleTest)
+        finalizedBy(jacocoTestReport)
+    }
+    build {
         dependsOn(fatJar)
     }
 }
@@ -113,7 +123,7 @@ tasks.getByName("build") {
 tasks.getByName<Test>("test") {
     useJUnitPlatform()
     systemProperty("candidates", System.getProperty("candidates"))
-    finalizedBy(tasks.getByName("jacocoTestReport"))
+    // finalizedBy(tasks.getByName("jacocoTestReport"))
 }
 
 pmd {
