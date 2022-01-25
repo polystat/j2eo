@@ -1,7 +1,6 @@
 package tree.Declaration;
 
-import java.util.ArrayList;
-import tree.Annotation;
+import tree.Annotations;
 import tree.Modifiers;
 import tree.Type.Type;
 
@@ -17,21 +16,24 @@ import tree.Type.Type;
 //    ;
 public class RecordComponent extends Declaration {
     // Structure
-    // public Modifiers modifiers;
-    // public String name;
-    // public Type type;
-    public ArrayList<Annotation> ellAnnotations;
+//  public Modifiers modifiers;
+//  public String name;
+//  public Type type;
+    public Annotations ellAnnotations;
     public boolean signEllipsis;
 
     // Creation
     public RecordComponent(Modifiers mods,
                            String n,
                            Type t,
-                           ArrayList<Annotation> ellAnns,
-                           boolean ell) {
-        super(mods, n, t);
-        this.ellAnnotations = ellAnns;
+                           Annotations eAnns,
+                           boolean ell)
+    {
+        super(mods,n,t);
+        this.ellAnnotations = eAnns;
         this.signEllipsis = ell;
+
+        if ( this.ellAnnotations != null ) this.ellAnnotations.parent = this;
     }
 
     // Reporting

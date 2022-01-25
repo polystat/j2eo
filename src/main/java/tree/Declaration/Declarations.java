@@ -17,20 +17,23 @@ public class Declarations extends Entity {
         deconstruct(d);
         return this;
     }
-
-    private void deconstruct(Declaration d) {
-        if (d instanceof TypeAndDeclarators tds) {
-            for (VariableDeclarator declarator : tds.declarators.declarators) {
-                VariableDeclaration variable = new VariableDeclaration(
-                        declarator.name,
-                        d.modifiers,
-                        d.type,
-                        declarator.dims,
-                        declarator.initializer);
+    private void deconstruct(Declaration d)
+    {
+        if ( d instanceof TypeAndDeclarators )
+        {
+            TypeAndDeclarators tds = (TypeAndDeclarators)d;
+            for (VariableDeclarator declarator: tds.declarators.declarators)
+            {
+                VariableDeclaration variable =
+                        new VariableDeclaration(declarator.name,d.modifiers,d.type,declarator.dims,declarator.initializer);
                 this.declarations.add(variable);
+                if ( variable != null ) variable.parent = this;
             }
-        } else {
+        }
+        else
+        {
             this.declarations.add(d);
+            if ( d != null ) d.parent = this;
         }
     }
 

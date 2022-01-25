@@ -22,6 +22,10 @@ public class Enumerator extends Entity {
         this.name = name.image;
         this.arguments = args;
         this.enumBody = body;
+
+        if ( this.annotations != null ) this.annotations.parent = this;
+        if ( this.arguments != null )   this.arguments.parent = this;
+        if ( this.enumBody != null )    this.enumBody.parent = this;
     }
 
     // Reporting

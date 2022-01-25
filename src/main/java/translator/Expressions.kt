@@ -96,6 +96,7 @@ fun mapBinary(expr: Binary): EOExpr {
         TokenCode.LessEqual -> "leq"
         TokenCode.Assign -> "write"
         TokenCode.Star -> "mul"
+        TokenCode.Slash -> "div"
         else -> throw IllegalArgumentException("Binary operation ${expr.operator} is not supported")
     }
 

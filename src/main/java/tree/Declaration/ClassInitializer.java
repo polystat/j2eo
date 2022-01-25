@@ -18,6 +18,8 @@ public class ClassInitializer extends Declaration {
         super(null, null, null);
         this.block = b;
         this.signStatic = ss;
+
+        if ( this.block != null ) this.block.parent = this;
     }
 
     // Reporting

@@ -11,10 +11,12 @@ public class TypeParameters extends Entity {
     public TypeParameters(TypeParameter tpar) {
         this.typeParameters = new ArrayList<>();
         this.typeParameters.add(tpar);
+        if ( tpar != null ) tpar.parent = this;
     }
 
     public TypeParameters add(TypeParameter tpar) {
         this.typeParameters.add(tpar);
+        if ( tpar != null ) tpar.parent = this;
         return this;
     }
 

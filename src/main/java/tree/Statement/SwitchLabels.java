@@ -11,10 +11,12 @@ public class SwitchLabels extends Entity {
     public SwitchLabels(SwitchLabel label) {
         this.labels = new ArrayList<>();
         this.labels.add(label);
+        if ( label != null ) label.parent = this;
     }
 
     public SwitchLabels add(SwitchLabel label) {
         this.labels.add(label);
+        if ( label != null ) label.parent = this;
         return this;
     }
 

@@ -15,6 +15,9 @@ public class ArrayAccess extends Expression {
     public ArrayAccess(Expression expr, Expression size) {
         this.expression = expr;
         this.size = size;
+
+        if ( this.expression != null ) this.expression.parent = this;
+        if ( this.size != null )       this.size.parent = this;
     }
 
     // Reporting

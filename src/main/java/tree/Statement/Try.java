@@ -19,20 +19,26 @@ public class Try extends Statement {
     // public ArrayList<String> labels;
     public ResourceSpecification resSpec;
     public Block block;
-    public ArrayList<CatchClause> catches;
+    public CatchClauses catches;
     public Block finallyBlock;
 
     // Creation
     public Try(ArrayList<String> ls,
                ResourceSpecification res,
                Block b,
-               ArrayList<CatchClause> cs,
-               Block finb) {
+               CatchClauses cs,
+               Block finb)
+    {
         super(ls);
         this.resSpec = res;
         this.block = b;
         this.catches = cs;
         this.finallyBlock = finb;
+
+        if ( this.resSpec != null )      this.resSpec.parent = this;
+        if ( this.block != null )        this.block.parent = this;
+        if ( this.catches != null )      this.catches.parent = this;
+        if ( this.finallyBlock != null ) this.finallyBlock.parent = this;
     }
 
     // Reporting

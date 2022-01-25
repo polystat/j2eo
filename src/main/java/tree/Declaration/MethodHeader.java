@@ -31,6 +31,11 @@ public class MethodHeader extends Entity {
         this.type = type;
         this.declarator = methodDecl;
         this.throwsClause = thr;
+
+        if ( this.typeParameters != null ) this.typeParameters.parent = this;
+        if ( this.type != null )           this.type.parent = this;
+        if ( this.declarator != null )     this.declarator.parent = this;
+        if ( this.throwsClause != null )   this.throwsClause.parent = this;
     }
 
     // Reporting

@@ -20,10 +20,12 @@ public class TypeList extends Entity {
     public TypeList(Type t) {
         this.types = new ArrayList<>();
         this.types.add(t);
+        if ( t != null ) t.parent = this;
     }
 
     public TypeList add(Type t) {
         this.types.add(t);
+        if ( t != null ) t.parent = this;
         return this;
     }
 

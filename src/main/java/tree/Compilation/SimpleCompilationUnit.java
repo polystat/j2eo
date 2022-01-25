@@ -17,6 +17,9 @@ public class SimpleCompilationUnit extends CompilationUnit {
     public SimpleCompilationUnit(ImportDeclarations ids, TopLevelComponents tlcs) {
         this.imports = ids;
         this.components = tlcs;
+
+        if ( this.imports != null )    this.imports.parent = this;
+        if ( this.components != null ) this.components.parent = this;
     }
 
     // Reporting

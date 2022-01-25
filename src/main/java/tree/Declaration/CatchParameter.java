@@ -30,6 +30,8 @@ public class CatchParameter extends ParameterDeclaration {
     public CatchParameter(Modifiers mods, TypeList types, Token id, Dims dims) {
         super(mods, null, id.image, null, false, dims);
         this.catchTypes = types;
+
+        if ( this.catchTypes != null ) this.catchTypes.parent = this;
     }
 
     // Reporting

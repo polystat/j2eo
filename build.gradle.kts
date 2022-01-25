@@ -1,4 +1,5 @@
 import org.apache.tools.ant.taskdefs.condition.Os
+import java.security.MessageDigest
 import org.gradle.jvm.tasks.Jar
 import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 import org.jlleitschuh.gradle.ktlint.reporter.ReporterType
@@ -16,7 +17,7 @@ plugins {
 }
 
 group = "org.eolang"
-version = "2.0"
+version = "0.2"
 
 val compileKotlin: KotlinCompile by tasks
 compileKotlin.kotlinOptions {

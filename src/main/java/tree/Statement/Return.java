@@ -19,6 +19,8 @@ public class Return extends Statement {
     public Return(ArrayList<String> ls, Expression expr) {
         super(ls);
         this.expression = expr;
+
+        if ( this.expression != null ) this.expression.parent = this;
     }
 
     // Reporting

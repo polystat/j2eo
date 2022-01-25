@@ -10,10 +10,12 @@ public class Annotations extends Entity {
     public Annotations(Annotation ann) {
         this.annotations = new ArrayList<Annotation>();
         this.annotations.add(ann);
+        if ( ann != null ) ann.parent = this;
     }
 
     public Annotations add(Annotation ann) {
         this.annotations.add(ann);
+        if ( ann != null ) ann.parent = this;
         return this;
     }
 

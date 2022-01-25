@@ -12,6 +12,8 @@ public class SwitchBlock extends Entity {
     public SwitchBlock(ArrayList<SwitchLabel> ls, Block block) {
         this.labels = ls;
         this.block = block;
+
+        if ( this.block != null ) this.block.parent = this;
     }
 
     // Reporting

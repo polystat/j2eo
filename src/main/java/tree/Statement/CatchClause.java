@@ -15,6 +15,9 @@ public class CatchClause extends Entity {
     public CatchClause(CatchParameter catchPar, Block b) {
         this.catchParameter = catchPar;
         this.block = b;
+
+        if ( this.catchParameter != null ) this.catchParameter.parent = this;
+        if ( this.block != null ) this.block.parent = this;
     }
 
     // Reporting

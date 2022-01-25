@@ -24,10 +24,12 @@ public class TypeArguments extends Entity {
     public TypeArguments(TypeArgument arg) {
         this.arguments = new ArrayList<>();
         this.arguments.add(arg);
+        if ( arg != null ) arg.parent = this;
     }
 
     public TypeArguments add(TypeArgument arg) {
         this.arguments.add(arg);
+        if ( arg != null ) arg.parent = this;
         return this;
     }
 

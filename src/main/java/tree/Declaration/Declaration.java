@@ -47,10 +47,14 @@ public class Declaration extends Entity {
         this.modifiers = mods;
         this.name = n;
         this.type = t;
+
+        if ( this.modifiers != null ) this.modifiers.parent = this;
+        if ( this.type != null )      this.type.parent = this;
     }
 
     public Declaration addModifiers(Modifiers mods) {
         this.modifiers = mods;
+        if ( this.modifiers != null ) this.modifiers.parent = this;
         return this;
     }
 

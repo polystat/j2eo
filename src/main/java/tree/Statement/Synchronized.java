@@ -19,6 +19,9 @@ public class Synchronized extends Statement {
         super(ls);
         this.expression = expr;
         this.block = block;
+
+        if ( this.expression != null ) this.expression.parent = this;
+        if ( this.block != null )      this.block.parent = this;
     }
 
     // Reporting

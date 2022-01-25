@@ -38,6 +38,10 @@ public class MethodInvocation extends Primary {
             this.name = name.image;
         }
         this.arguments = args;
+
+        if ( this.qualifier != null )     this.qualifier.parent = this;
+        if ( this.typeArguments != null ) this.typeArguments.parent = this;
+        if ( this.arguments != null )     this.arguments.parent = this;
     }
 
     // Reporting

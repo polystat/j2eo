@@ -10,6 +10,7 @@ public class SimpleReference extends Expression {
     // Creation
     public SimpleReference(CompoundName cn) {
         this.compoundName = cn;
+        if ( cn != null ) cn.parent = this;
     }
 
     // Reporting

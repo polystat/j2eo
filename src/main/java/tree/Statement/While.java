@@ -18,6 +18,9 @@ public class While extends Statement {
         super(ls);
         this.condition = c;
         this.statement = s;
+
+        if ( this.condition != null ) this.condition.parent = this;
+        if ( this.statement != null ) this.statement.parent = this;
     }
 
     // Reporting

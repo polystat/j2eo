@@ -15,6 +15,7 @@ public class This extends Primary {
     // Creation
     public This(Type t) {
         this.type = t;
+        if ( this.type != null ) this.type.parent = this;
     }
 
     // Reporting

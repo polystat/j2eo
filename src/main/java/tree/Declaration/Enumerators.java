@@ -20,10 +20,13 @@ public class Enumerators extends Entity {
     public Enumerators(Enumerator en) {
         this.enumerators = new ArrayList<>();
         this.enumerators.add(en);
+
+        if ( en != null ) en.parent = this;
     }
 
     public Enumerators add(Enumerator en) {
         this.enumerators.add(en);
+        if ( en != null ) en.parent = this;
         return this;
     }
 

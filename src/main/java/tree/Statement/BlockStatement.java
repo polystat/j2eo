@@ -17,16 +17,28 @@ public class BlockStatement extends Statement {
     public BlockStatement(Declaration d) {
         super(null);
         this.declaration = d;
+        this.statement = null;
+        this.expression = null;
+
+        if ( this.declaration != null ) this.declaration.parent = this;
     }
 
     public BlockStatement(Statement stmt) {
         super(null);
+        this.declaration = null;
         this.statement = stmt;
+        this.expression = null;
+
+        if ( this.statement != null ) this.statement.parent = this;
     }
 
     public BlockStatement(Expression expr) {
         super(null);
+        this.declaration = null;
+        this.statement = null;
         this.expression = expr;
+
+        if ( this.expression != null ) this.expression.parent = this;
     }
 
     // Reporting
