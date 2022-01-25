@@ -23,10 +23,12 @@ public class CatchClauses extends Entity
     {
         this.catchClauses = new ArrayList<>();
         this.catchClauses.add(clause);
+        if ( clause != null ) clause.parent = this;
     }
     public CatchClauses add(CatchClause clause)
     {
         this.catchClauses.add(clause);
+        if ( clause != null ) clause.parent = this;
         return this;
     }
 

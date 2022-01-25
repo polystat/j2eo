@@ -13,10 +13,12 @@ public class SwitchRules extends Entity
     {
         this.rules = new ArrayList<>();
         this.rules.add(rule);
+        if ( rule != null ) rule.parent = this;
     }
     public SwitchRules add(SwitchRule rule)
     {
         this.rules.add(rule);
+        if ( rule != null ) rule.parent = this;
         return this;
     }
 

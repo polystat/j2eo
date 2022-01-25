@@ -16,6 +16,7 @@ public class TypeAndDeclarators extends Declaration
     {
         super(null,null,t);
         this.declarators = vds;
+        if ( vds != null ) vds.parent = this;
         if ( Entity.debug ) System.out.println("Type with declarator(s) taken");
     }
 

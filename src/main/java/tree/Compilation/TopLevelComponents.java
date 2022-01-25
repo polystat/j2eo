@@ -17,10 +17,13 @@ public class TopLevelComponents extends Entity
     {
         this.components = new ArrayList<>();
         this.components.add(tlc);
+
+        if ( tlc != null ) tlc.parent = this;
     }
     public TopLevelComponents add(TopLevelComponent tlc)
     {
         this.components.add(tlc);
+        if ( tlc != null ) tlc.parent = this;
         return this;
     }
 

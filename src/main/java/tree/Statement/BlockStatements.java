@@ -32,10 +32,14 @@ public class BlockStatements extends Entity
                 VariableDeclaration variable =
                         new VariableDeclaration(declarator.name,tds.modifiers,tds.type,declarator.dims,declarator.initializer);
                 this.blockStatements.add(new BlockStatement(variable));
+                if ( variable != null ) variable.parent = this;
             }
         }
         else
+        {
             this.blockStatements.add(stmt);
+            if ( stmt != null ) stmt.parent = this;
+        }
     }
 
     // Reporting

@@ -21,6 +21,8 @@ public class Return extends Statement
     {
         super(ls);
         this.expression = expr;
+
+        if ( this.expression != null ) this.expression.parent = this;
     }
 
     // Reporting

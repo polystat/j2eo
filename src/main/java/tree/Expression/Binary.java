@@ -17,6 +17,9 @@ public class Binary extends Expression
         this.left = l;
         this.right = r;
         this.operator = token.code;
+
+        if ( this.left != null )  this.left.parent = this;
+        if ( this.right != null ) this.right.parent = this;
     }
 
     // Reporting

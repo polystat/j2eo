@@ -1,10 +1,8 @@
 package tree.Declaration;
 
-import tree.Annotation;
+import tree.Annotations;
 import tree.Modifiers;
 import tree.Type.Type;
-
-import java.util.ArrayList;
 
 // RecordComponentListOpt
 //    :  // empty
@@ -22,19 +20,21 @@ public class RecordComponent extends Declaration
 //  public Modifiers modifiers;
 //  public String name;
 //  public Type type;
-    public ArrayList<Annotation> ellAnnotations;
+    public Annotations ellAnnotations;
     public boolean signEllipsis;
 
     // Creation
     public RecordComponent(Modifiers mods,
                            String n,
                            Type t,
-                           ArrayList<Annotation> eAnns,
+                           Annotations eAnns,
                            boolean ell)
     {
         super(mods,n,t);
         this.ellAnnotations = eAnns;
         this.signEllipsis = ell;
+
+        if ( this.ellAnnotations != null ) this.ellAnnotations.parent = this;
     }
 
     // Reporting

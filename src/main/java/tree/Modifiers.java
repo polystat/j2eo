@@ -15,6 +15,9 @@ public class Modifiers extends Entity
     {
         this.annotations = anns;
         this.modifiers = mods;
+
+        if ( this.annotations != null ) this.annotations.parent = this;
+        if ( this.modifiers != null )   this.modifiers.parent = this;
     }
 
     // Reporting

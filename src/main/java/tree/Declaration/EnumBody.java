@@ -19,6 +19,9 @@ public class EnumBody extends Entity
     {
         this.enumerators = ens;
         this.declarations = decls;
+
+        if ( this.enumerators != null )  this.enumerators.parent = this;
+        if ( this.declarations != null ) this.declarations.parent = this;
     }
 
     // Reporting

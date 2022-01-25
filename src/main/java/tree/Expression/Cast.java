@@ -18,6 +18,9 @@ public class Cast extends Expression
     {
         this.types = types;
         this.expression = expr;
+
+        if ( this.types != null )      this.types.parent = this;
+        if ( this.expression != null ) this.expression.parent = this;
     }
 
     // Reporting

@@ -25,6 +25,7 @@ public class UnannotatedType extends Type
     public UnannotatedType addDimension(Dim dim)
     {
         this.dimensions.add(dim);
+        if ( dim != null ) dim.parent = this;
         return this;
     }
 

@@ -16,10 +16,12 @@ public class Dims extends Entity
     {
         this.dimensions = new ArrayList<>();
         this.dimensions.add(dim);
+        if ( dim != null ) dim.parent = this;
     }
     public Dims add(Dim dim)
     {
         this.dimensions.add(dim);
+        if ( dim != null ) dim.parent = this;
         return this;
     }
 

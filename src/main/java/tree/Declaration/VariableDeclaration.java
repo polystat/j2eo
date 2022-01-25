@@ -50,6 +50,9 @@ public class VariableDeclaration extends Declaration
         super(mods,n,t);
         this.dims = dims;
         this.initializer = init;
+
+        if ( this.dims != null )        this.dims.parent = this;
+        if ( this.initializer != null ) this.initializer.parent = this;
     }
 
     // Reporting

@@ -17,6 +17,9 @@ public class Annotation extends Entity
     {
         this.compoundName = cn;
         this.annoParameterList = apl;
+
+        if ( this.compoundName != null )      this.compoundName.parent = this;
+        if ( this.annoParameterList != null ) this.annoParameterList.parent = this;
     }
     public Annotation(CompoundName cn, AnnoElementValue aev)
     {
@@ -24,6 +27,7 @@ public class Annotation extends Entity
         this.annoParameterList = new AnnoParameterList();
      // this.annoParameterList.add
 
+        if ( this.compoundName != null ) this.compoundName.parent = this;
     }
 
     // Reporting

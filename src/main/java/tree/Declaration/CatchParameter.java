@@ -31,6 +31,8 @@ public class CatchParameter extends ParameterDeclaration
     {
         super(mods,null,id.image,null,false,dims);
         this.catchTypes = types;
+
+        if ( this.catchTypes != null ) this.catchTypes.parent = this;
     }
 
     // Reporting

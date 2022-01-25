@@ -20,6 +20,9 @@ public class ClassLiteral extends Literal
         super(null);
         this.type = t;
         this.dims = d;
+
+        if ( this.type != null ) this.type.parent = this;
+        if ( this.dims != null ) this.dims.parent = this;
     }
 
     // Reporting

@@ -27,6 +27,10 @@ public class ExplicitConstructorInvocation extends Entity
         this.typeArguments = targs;
         this.thisORsuper = ts;
         this.arguments = args;
+
+        if ( this.expression != null )    this.expression.parent = this;
+        if ( this.typeArguments != null ) this.typeArguments.parent = this;
+        if ( this.arguments != null )     this.arguments.parent = this;
     }
 
     // Reporting

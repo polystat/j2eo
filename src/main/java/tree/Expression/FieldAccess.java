@@ -21,6 +21,8 @@ public class FieldAccess extends Expression
         this.expression = expr;
         this.superSign = ss;
         this.identifier = id.image;
+
+        if ( this.expression != null ) this.expression.parent = this;
     }
 
     // Reporting
@@ -34,8 +36,9 @@ public class FieldAccess extends Expression
         }
         else if ( superSign )
         {
-            System.out.print("SUPER."+identifier);
+            System.out.print("SUPER.");
         }
+        System.out.print(identifier);
     }
 
 }
