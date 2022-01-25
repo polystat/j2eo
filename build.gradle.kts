@@ -124,7 +124,7 @@ tasks.javadoc {
     exclude("parser/**")
 }
 
-tasks.getByName("build") {
+tasks.build {
     createOutDirs()
 
     // Only run Bison build if grammar file changed
@@ -137,7 +137,7 @@ tasks.getByName("build") {
     }
 }
 
-tasks.getByName<Test>("test") {
+tasks.test {
     useJUnitPlatform()
     project.properties["candidates"]?.let { systemProperty("candidates", it) }
 }
