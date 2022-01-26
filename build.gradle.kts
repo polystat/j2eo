@@ -11,12 +11,18 @@ plugins {
     checkstyle
     `maven-publish`
     signing
+    id("io.spring.dependency-management") version "1.0.11.RELEASE"
     id("org.jlleitschuh.gradle.ktlint") version "10.2.1"
     kotlin("jvm") version "1.6.0"
 }
 
-group = "org.eolang"
-version = "0.2"
+val mvnUsername: String? by project
+val mvnPassword: String? by project
+val mvnPublicationVersion: String? by project
+val testingCandidates: String? by project
+
+group = "org.polystat"
+version = mvnPublicationVersion ?: "0.2.0"
 
 val compileKotlin: KotlinCompile by tasks
 compileKotlin.kotlinOptions {
@@ -43,6 +49,12 @@ repositories {
     mavenCentral()
 }
 
+dependencyManagement {
+    imports {
+        mavenBom("com.jcabi:parent:0.57.0")
+    }
+}
+
 dependencies {
     // Library for command-line arguments support
     implementation("commons-cli:commons-cli:1.5.0")
@@ -55,6 +67,10 @@ dependencies {
     testImplementation("org.junit.jupiter:junit-jupiter-api:5.8.2")
     testRuntimeOnly("org.junit.jupiter:junit-jupiter-engine:5.8.2")
     implementation(kotlin("stdlib-jdk8"))
+
+    // implementation("com.jcabi:jcabi-log")
+    // implementation("com.jcabi:jcabi-xml:0.23.2")
+    // implementation("com.jcabi:jcabi-manifests")
 }
 
 java {
@@ -139,7 +155,7 @@ tasks.build {
 
 tasks.test {
     useJUnitPlatform()
-    project.properties["candidates"]?.let { systemProperty("candidates", it) }
+    systemProperty("candidates", testingCandidates ?: "false")
 }
 
 pmd {
@@ -219,7 +235,7 @@ publishing {
         create<MavenPublication>("mavenJava") {
             groupId = "org.polystat"
             artifactId = "j2eo"
-            version = project.properties["mvn_version"] as String?
+            version = project.version as String
             from(components["java"])
             pom {
                 name.set("j2eo")
@@ -229,12 +245,12 @@ publishing {
                 //     "myProp" to "value",
                 //     "prop.with.dots" to "anotherValue"
                 // ))
-                // licenses {
-                //     license {
-                //         name.set("The Apache License, Version 2.0")
-                //         url.set("http://www.apache.org/licenses/LICENSE-2.0.txt")
-                //     }
-                // }
+                licenses {
+                    license {
+                        name.set("MIT")
+                        url.set("https://github.com/polystat/polystat/blob/master/LICENSE.txt")
+                    }
+                }
                 developers {
                     developer {
                         id.set("zouev")
@@ -244,12 +260,12 @@ publishing {
                     developer {
                         id.set("IamMaxim58")
                         name.set("Maxim Stepanov")
-                        email.set("m.stepanov@innopolis.ru")
+                        email.set("m.stepanov@innopolis.university")
                     }
                     developer {
                         id.set("Ilia_Mil")
                         name.set("Ilya Milyoshin")
-                        email.set("i.milyoshin@innopolis.ru")
+                        email.set("i.mileshin@innopolis.university")
                     }
                     developer {
                         id.set("egorklementev")
@@ -257,11 +273,20 @@ publishing {
                         email.set("e.klementev@innopolis.ru")
                     }
                 }
-                // scm {
-                //     connection.set("scm:git:git://example.com/my-library.git")
-                //     developerConnection.set("scm:git:ssh://example.com/my-library.git")
-                //     url.set("http://example.com/my-library/")
-                // }
+                scm {
+                    connection.set("scm:git:git@github.com:polystat/polystat.git")
+                    developerConnection.set("scm:git:git@github.com:polystat/polystat.git")
+                    url.set("https://github.com/polystat/polystat")
+                }
+            }
+            repositories {
+                maven {
+                    credentials {
+                        username = mvnUsername
+                        password = mvnPassword
+                    }
+                    url = uri("https://s01.oss.sonatype.org/")
+                }
             }
         }
     }
