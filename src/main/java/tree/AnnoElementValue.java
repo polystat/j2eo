@@ -1,5 +1,4 @@
 package tree;
 
-public class AnnoElementValue extends Entity
-{
+public class AnnoElementValue extends Entity {
 }

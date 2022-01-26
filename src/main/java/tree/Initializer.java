@@ -19,15 +19,13 @@ package tree;
 //    : Expression
 //    | ArrayInitializer
 //    ;
-public class Initializer extends Entity
-{
+public class Initializer extends Entity {
     // NO structure
 
     // NO creation
 
     // Reporting
-    public void report(int sh)
-    {
+    public void report(int sh) {
 
     }
 

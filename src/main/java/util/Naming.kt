@@ -2,7 +2,6 @@ package util
 
 import tree.CompoundName
 
-
 fun String.eoClassName(): String = genClassName(this)
 
 fun genClassName(javaName: String): String =

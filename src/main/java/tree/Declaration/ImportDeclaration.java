@@ -12,31 +12,34 @@ import tree.Entity;
 //    : // empty
 //    | STATIC
 //    ;
-public class ImportDeclaration extends Entity
-{
+public class ImportDeclaration extends Entity {
     // Structure
     public boolean signStatic;
     public CompoundName compoundName;
     public boolean signStar;
 
     // Creation
-    public ImportDeclaration(boolean stat, CompoundName cn, boolean star)
-    {
+    public ImportDeclaration(boolean stat, CompoundName cn, boolean star) {
         this.signStatic = stat;
         this.compoundName = cn;
         this.signStar = star;
 
-        if ( this.compoundName != null ) this.compoundName.parent = this;
+        if (this.compoundName != null) {
+            this.compoundName.parent = this;
+        }
     }
 
     // Reporting
-    public void report(int sh)
-    {
+    public void report(int sh) {
         Entity.doShift(sh);
         System.out.print("IMPORT ");
-        if ( this.signStatic ) System.out.print("STATIC ");
+        if (this.signStatic) {
+            System.out.print("STATIC ");
+        }
         compoundName.report(0);
-        if ( this.signStar ) System.out.print(".*");
+        if (this.signStar) {
+            System.out.print(".*");
+        }
         System.out.println();
     }
 

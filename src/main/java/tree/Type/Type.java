@@ -9,28 +9,31 @@ import tree.Entity;
 //    :               UnannotatedType
 //    | AnnotationSeq UnannotatedType
 //    ;
-public class Type extends Entity
-{
+public class Type extends Entity {
     // Structure
     public Annotations annotations;
 
     // Creation
-    public Type(Annotations annSeq)
-    {
+    public Type(Annotations annSeq) {
         this.annotations = annSeq;
-        if ( this.annotations != null ) this.annotations.parent = this;
+        if (this.annotations != null) {
+            this.annotations.parent = this;
+        }
     }
-    public Type addAnnotations(Annotations anns)
-    {
+
+    public Type addAnnotations(Annotations anns) {
         this.annotations = anns;
-        if ( this.annotations != null ) this.annotations.parent = this;
+        if (this.annotations != null) {
+            this.annotations.parent = this;
+        }
         return this;
     }
 
     // Reporting
-    public void report(int sh)
-    {
-        if ( annotations == null ) return;
+    public void report(int sh) {
+        if (annotations == null) {
+            return;
+        }
         annotations.report(sh);
     }
 

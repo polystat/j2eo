@@ -1,7 +1,7 @@
 package tree.Type;
 
-import tree.Entity;
 import java.util.ArrayList;
+import tree.Entity;
 
 // TypeArgumentsOpt
 //    :  // empty
@@ -16,32 +16,32 @@ import java.util.ArrayList;
 //    :                        TypeArgument
 //    | TypeArgumentList COMMA TypeArgument
 //    ;
-public class TypeArguments extends Entity
-{
+public class TypeArguments extends Entity {
     // Structure
     public ArrayList<TypeArgument> arguments;
 
     // Creation
-    public TypeArguments(TypeArgument arg)
-    {
+    public TypeArguments(TypeArgument arg) {
         this.arguments = new ArrayList<>();
         this.arguments.add(arg);
-        if ( arg != null ) arg.parent = this;
+        if (arg != null) {
+            arg.parent = this;
+        }
     }
-    public TypeArguments add(TypeArgument arg)
-    {
+
+    public TypeArguments add(TypeArgument arg) {
         this.arguments.add(arg);
-        if ( arg != null ) arg.parent = this;
+        if (arg != null) {
+            arg.parent = this;
+        }
         return this;
     }
 
     // Reporting
-    public void report(int sh)
-    {
-        title("TYPE ARGUMENTS",sh);
-        for ( TypeArgument arg: arguments)
-        {
-            arg.report(sh+Entity.shift);
+    public void report(int sh) {
+        title("TYPE ARGUMENTS", sh);
+        for (TypeArgument arg : arguments) {
+            arg.report(sh + Entity.shift);
         }
     }
 

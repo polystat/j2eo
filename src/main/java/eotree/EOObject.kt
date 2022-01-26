@@ -2,8 +2,6 @@ package eotree
 
 import arrow.core.Option
 import arrow.core.getOrElse
-import java.util.*
-import java.util.stream.Collectors
 
 class EOObject(
     var freeAttrs: List<String>,

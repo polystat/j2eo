@@ -1,16 +1,17 @@
 package eotree;
 
-import org.junit.jupiter.api.Test;
-
-import java.util.Optional;
-
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static util.ListUtils.listOf;
 
+import org.junit.jupiter.api.Test;
+
+/**
+ * EO copying feature tests.
+ */
 public class TestEOCopy {
 
     @Test
-    public void TestGenerateEOZeroIndent() {
+    public void testGenerateEOZeroIndent() {
         var f = new EOCopy(
                 new EODot("name"),
                 listOf(
@@ -22,7 +23,7 @@ public class TestEOCopy {
     }
 
     @Test
-    public void TestGenerateEONonZeroIndent() {
+    public void testGenerateEONonZeroIndent() {
         var f = new EOCopy(
                 new EODot("name"),
                 listOf(

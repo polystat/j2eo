@@ -1,8 +1,8 @@
 package tree.Statement;
 
-import lexer.*;
-import tree.Entity;
 import java.util.ArrayList;
+import lexer.Token;
+import tree.Entity;
 
 // Statement
 //    : SimpleStatement
@@ -14,7 +14,7 @@ import java.util.ArrayList;
 //
 // SimpleStatement
 //    : Block
-//	  | SEMICOLON                                    // EmptyStatement
+//    | SEMICOLON                                    // EmptyStatement
 //    | StatementExpression SEMICOLON                // ExpressionStatement
 //
 //    | ASSERT Expression                  SEMICOLON // AssertStatement
@@ -53,33 +53,33 @@ import java.util.ArrayList;
 //    | MethodInvocation
 //    | ClassInstanceCreationExpression
 //    ;
-public class Statement extends Entity
-{
+public class Statement extends Entity {
     // Structure
     public ArrayList<String> labels;
 
     // Creation
-    public Statement(ArrayList<String> ls)
-    {
+    public Statement(ArrayList<String> ls) {
         this.labels = ls;
     }
 
-    public Statement addLabel(Token label)
-    {
-        if ( labels == null )
+    public Statement addLabel(Token label) {
+        if (labels == null) {
             labels = new ArrayList<>();
+        }
         labels.add(label.image);
         return this;
     }
 
     // Reporting
-    public void report(int sh)
-    {
-        if ( labels == null || labels.size() == 0 ) return;
+    public void report(int sh) {
+        if (labels == null || labels.size() == 0) {
+            return;
+        }
 
-        String labs = "LABELS: ";
-        for (String lab: labels)
-            labs += lab + " ";
+        StringBuilder labs = new StringBuilder("LABELS: ");
+        for (String lab : labels) {
+            labs.append(lab).append(" ");
+        }
         Entity.doShift(sh);
         System.out.println(labs);
     }

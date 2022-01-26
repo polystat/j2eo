@@ -11,11 +11,15 @@ fun containsMain(component: TopLevelComponent): Boolean {
         try {
             (component.classDecl as NormalClassDeclaration).body.declarations
                 .filterIsInstance<MethodDeclaration>()
-                .find { declaration: Declaration? ->  try {
-                    (declaration as MethodDeclaration).parameters.parameters.size == 1 &&
+                .find { declaration: Declaration? ->
+                    try {
+                        (declaration as MethodDeclaration).parameters.parameters.size == 1 &&
                             declaration.parameters.parameters[0].name == "args" &&
                             declaration.name == "main"
-                } catch (e: NullPointerException) {false} } != null
+                    } catch (e: NullPointerException) {
+                        false
+                    }
+                } != null
         } catch (e: NullPointerException) {
             false
         }
@@ -25,5 +29,5 @@ fun containsMain(component: TopLevelComponent): Boolean {
 }
 
 fun findMainClass(unit: SimpleCompilationUnit): String {
-    return unit.components.components.find { component: TopLevelComponent ->  containsMain(component) }!!.classDecl.name
+    return unit.components.components.find { component: TopLevelComponent -> containsMain(component) }!!.classDecl.name
 }

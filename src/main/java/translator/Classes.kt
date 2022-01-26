@@ -1,24 +1,25 @@
 package translator
 
 import arrow.core.None
-import arrow.core.flattenOption
-import eotree.*
+import eotree.EOBnd
+import eotree.EOBndExpr
+import eotree.EOObject
+import eotree.eoDot
 import tree.Declaration.ClassDeclaration
-import tree.Declaration.NormalClassDeclaration
-import java.lang.IllegalArgumentException
 import tree.Declaration.InterfaceDeclaration
+import tree.Declaration.NormalClassDeclaration
 import tree.Type.TypeName
 import util.eoClassCompoundName
-import util.eoClassName
 import util.generateNew
 import util.generateStatic
-import java.util.ArrayList
 
 fun mapClass(clsDec: ClassDeclaration): EOBndExpr {
     require(clsDec is NormalClassDeclaration) {
-        ("Only NormalClassDeclaration is supported, but " +
-                clsDec.javaClass.simpleName
-                + " was passed")
+        (
+            "Only NormalClassDeclaration is supported, but " +
+                clsDec.javaClass.simpleName +
+                " was passed"
+            )
     }
     return EOBndExpr(
         EOObject(
@@ -31,17 +32,19 @@ fun mapClass(clsDec: ClassDeclaration): EOBndExpr {
 
             listOf(
                 /* Super class extension */
-                (if (clsDec.extendedType is TypeName)
-                    EOBndExpr(
-                        (clsDec.extendedType as TypeName).compoundName.eoClassCompoundName().eoDot(),
-                        "super"
-                    )
-                else
-                // Derive classes without "extends" specification from Object class.
-                    EOBndExpr(
-                        "class__Object".eoDot(),
-                        "super"
-                    )),
+                (
+                    if (clsDec.extendedType is TypeName)
+                        EOBndExpr(
+                            (clsDec.extendedType as TypeName).compoundName.eoClassCompoundName().eoDot(),
+                            "super"
+                        )
+                    else
+                    // Derive classes without "extends" specification from Object class.
+                        EOBndExpr(
+                            "class__Object".eoDot(),
+                            "super"
+                        )
+                    ),
                 EOBndExpr(
                     "super".eoDot(),
                     "@"

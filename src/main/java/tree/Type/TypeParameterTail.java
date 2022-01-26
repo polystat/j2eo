@@ -1,15 +1,15 @@
 package tree.Type;
 
-import lexer.*;
-import tree.*;
+import lexer.Token;
+import tree.Annotations;
+import tree.Entity;
 
 // TypeParameterTail
 //    : IDENTIFIER
 //    | IDENTIFIER EXTENDS AnnotationSeqOpt IDENTIFIER
 //    | IDENTIFIER EXTENDS ClassTypeList2
 //    ;
-public class TypeParameterTail extends Entity
-{
+public class TypeParameterTail extends Entity {
     // Structure
     public String identifier;
 
@@ -19,28 +19,28 @@ public class TypeParameterTail extends Entity
     public TypeList types;
 
     // Creation
-    public TypeParameterTail(Token id, Annotations extAnns, Token ext)
-    {
+    public TypeParameterTail(Token id, Annotations extAnns, Token ext) {
         this.identifier = id.image;
         this.extAnnotations = extAnns;
         this.extending = ext.image;
         this.types = null;
 
-        if ( this.extAnnotations != null ) this.extAnnotations.parent = this;
+        if (this.extAnnotations != null) {
+            this.extAnnotations.parent = this;
+        }
     }
-    public TypeParameterTail(Token id, TypeList types)
-    {
+
+    public TypeParameterTail(Token id, TypeList types) {
         this.identifier = id.image;
-        this.extAnnotations = null;
-        this.extending = null;
         this.types = types;
 
-        if ( this.types != null ) this.types.parent = this;
+        if (this.types != null) {
+            this.types.parent = this;
+        }
     }
 
     // Reporting
-    public void report(int sh)
-    {
+    public void report(int sh) {
 
     }
 

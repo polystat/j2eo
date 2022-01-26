@@ -2,13 +2,22 @@ package translator
 
 import arrow.core.None
 import arrow.core.Some
-import eotree.*
-import eotree.data.EOStringData
+import eotree.EOBnd
+import eotree.EOBndExpr
+import eotree.EOComment
+import eotree.EOLicense
+import eotree.EOMeta
+import eotree.EOMetas
+import eotree.EOProgram
 import tree.Compilation.CompilationUnit
 import tree.Compilation.Package
 import tree.Compilation.SimpleCompilationUnit
 import tree.Compilation.TopLevelComponent
-import util.*
+import util.ListUtils
+import util.findMainClass
+import util.generateEntryPoint
+import util.logger
+import util.preprocessUnit
 import java.time.LocalDateTime
 
 fun translate(unit: CompilationUnit): EOProgram {
@@ -17,13 +26,14 @@ fun translate(unit: CompilationUnit): EOProgram {
     else
         throw IllegalArgumentException(
             "CompilationUnit of type " +
-                    unit.javaClass.simpleName +
-                    " is not supported")
+                unit.javaClass.simpleName +
+                " is not supported"
+        )
 }
 
 fun mapPackage(pkg: Package): EOProgram {
     return EOProgram(
-        EOLicense(),  // TODO: add license?
+        EOLicense(), // TODO: add license?
         EOMetas(
             Some(pkg.compoundName.names.joinToString(".")),
             ArrayList()
@@ -45,7 +55,7 @@ fun mapSimpleCompilationUnit(unit: SimpleCompilationUnit): EOProgram {
     try {
         val mainClassName = findMainClass(unit)
         entrypointBnds = generateEntryPoint(mainClassName)
-    } catch (e:NullPointerException){
+    } catch (e: NullPointerException) {
         logger.info { "No entry point here!" }
     }
 
@@ -60,7 +70,7 @@ fun mapSimpleCompilationUnit(unit: SimpleCompilationUnit): EOProgram {
         EOMetas(
             None,
             ListUtils.listOf(
-                //EOMeta("alias", "org.eolang.gray.cage"),
+                // EOMeta("alias", "org.eolang.gray.cage"),
                 EOMeta("alias", "stdlib.class__Object"),
                 EOMeta("alias", "stdlib.class__System"),
             )

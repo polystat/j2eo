@@ -1,7 +1,7 @@
 package eotree.data
 
 import eotree.EONode
-import java.util.*
+import java.util.Locale
 
 /**
  * EBNF representation:

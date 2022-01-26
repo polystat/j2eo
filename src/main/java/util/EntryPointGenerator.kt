@@ -4,7 +4,6 @@ import arrow.core.Some
 import eotree.EOBndExpr
 import eotree.EOCopy
 import eotree.EOObject
-import eotree.data.EOStringData
 import eotree.eoDot
 
 fun generateEntryPoint(mainClassName: String): List<EOBndExpr> {
@@ -16,7 +15,7 @@ fun generateEntryPoint(mainClassName: String): List<EOBndExpr> {
                 listOf(
                     EOBndExpr(
                         EOCopy(
-                            "${mainClassName}.main".eoDot(),
+                            "$mainClassName.main".eoDot(),
                             listOf("*".eoDot())
                         ),
                         "@"

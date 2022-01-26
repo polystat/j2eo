@@ -1,0 +1,14 @@
+assets:
+  gradle.properties: yegor256/home#assets/polystat/gradle.properties
+  pubring.gpg: yegor256/home#assets/pubring.gpg
+  secring.gpg: yegor256/home#assets/secring.gpg
+install: |
+  ./gradlew build --info
+merge:
+  script: |
+    ./gradlew build --info
+release:
+  script: |-
+    git commit -am "${tag}"
+    mv ../gradle.properties .
+    ./gradlew build publish --info -PmvnPublicationVersion=${tag}

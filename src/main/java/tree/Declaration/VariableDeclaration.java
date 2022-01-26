@@ -30,11 +30,10 @@ import tree.Type.Type;
 //    | IDENTIFIER Dims
 //    | IDENTIFIER Dims EQUAL ArrayInitializer
 //    ;
-public class VariableDeclaration extends Declaration
-{
+public class VariableDeclaration extends Declaration {
     // Structure
-//  public Modifiers modifiers;  -- from the base class
-//  public String name;          -- from the base class
+    // public Modifiers modifiers;  -- from the base class
+    // public String name;          -- from the base class
     public Dims dims;
 
     // Either a single expression, or a list of initializers
@@ -45,25 +44,37 @@ public class VariableDeclaration extends Declaration
                                Modifiers mods,
                                Type t,
                                Dims dims,
-                               Initializer init)
-    {
-        super(mods,n,t);
+                               Initializer init) {
+        super(mods, n, t);
         this.dims = dims;
         this.initializer = init;
 
-        if ( this.dims != null )        this.dims.parent = this;
-        if ( this.initializer != null ) this.initializer.parent = this;
+        if (this.dims != null) {
+            this.dims.parent = this;
+        }
+        if (this.initializer != null) {
+            this.initializer.parent = this;
+        }
     }
 
     // Reporting
-    public void report(int sh)
-    {
-        title("VARIABLE DECLARATION "+name,sh);
-        if ( modifiers != null ) modifiers.report(sh+ Entity.shift);
-        if ( type != null ) type.report(sh+ Entity.shift);
-        else { Entity.doShift(sh+Entity.shift); System.out.println("VAR"); }
-        if ( dims != null ) dims.report(sh+Entity.shift);
-        if ( initializer != null ) initializer.report(sh+Entity.shift);
+    public void report(int sh) {
+        title("VARIABLE DECLARATION " + name, sh);
+        if (modifiers != null) {
+            modifiers.report(sh + Entity.shift);
+        }
+        if (type != null) {
+            type.report(sh + Entity.shift);
+        } else {
+            Entity.doShift(sh + Entity.shift);
+            System.out.println("VAR");
+        }
+        if (dims != null) {
+            dims.report(sh + Entity.shift);
+        }
+        if (initializer != null) {
+            initializer.report(sh + Entity.shift);
+        }
     }
 
 }
