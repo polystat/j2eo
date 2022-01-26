@@ -27,12 +27,17 @@ public class TypeArgument extends Entity {
         switch (sign) {
             case 1 -> signExtends = true;
             case 2 -> signSuper = true;
-            default -> { }
+            default -> {
+            }
         }
         this.annotations = anns;
 
-        if ( this.type != null )        this.type.parent = this;
-        if ( this.annotations != null ) this.annotations.parent = this;
+        if (this.type != null) {
+            this.type.parent = this;
+        }
+        if (this.annotations != null) {
+            this.annotations.parent = this;
+        }
     }
 
     // Reporting

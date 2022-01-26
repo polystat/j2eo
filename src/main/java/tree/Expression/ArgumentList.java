@@ -20,12 +20,16 @@ public class ArgumentList extends Entity {
     public ArgumentList(Expression expr) {
         this.arguments = new ArrayList<>();
         this.arguments.add(expr);
-        if ( expr != null ) expr.parent = this;
+        if (expr != null) {
+            expr.parent = this;
+        }
     }
 
     public ArgumentList add(Expression expr) {
         this.arguments.add(expr);
-        if ( expr != null ) expr.parent = this;
+        if (expr != null) {
+            expr.parent = this;
+        }
         return this;
     }
 

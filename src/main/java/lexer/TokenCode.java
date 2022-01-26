@@ -173,11 +173,11 @@ public enum TokenCode {
     Yield(Lexer.YIELD),
     Record(Lexer.RECORD);
 
+    private final int value;
+
     TokenCode(int value) {
         this.value = value;
     }
-
-    private final int value;
 
     public int value() {
         return value;

@@ -23,9 +23,15 @@ public class Enumerator extends Entity {
         this.arguments = args;
         this.enumBody = body;
 
-        if ( this.annotations != null ) this.annotations.parent = this;
-        if ( this.arguments != null )   this.arguments.parent = this;
-        if ( this.enumBody != null )    this.enumBody.parent = this;
+        if (this.annotations != null) {
+            this.annotations.parent = this;
+        }
+        if (this.arguments != null) {
+            this.arguments.parent = this;
+        }
+        if (this.enumBody != null) {
+            this.enumBody.parent = this;
+        }
     }
 
     // Reporting

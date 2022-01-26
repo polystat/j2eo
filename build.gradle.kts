@@ -1,5 +1,4 @@
 import org.apache.tools.ant.taskdefs.condition.Os
-import java.security.MessageDigest
 import org.gradle.jvm.tasks.Jar
 import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 import org.jlleitschuh.gradle.ktlint.reporter.ReporterType

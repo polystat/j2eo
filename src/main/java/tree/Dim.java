@@ -11,7 +11,9 @@ public class Dim extends Entity {
     // Creation
     public Dim(Annotations anns) {
         this.annotations = anns;
-        if ( this.annotations != null ) this.annotations.parent = this;
+        if (this.annotations != null) {
+            this.annotations.parent = this;
+        }
     }
 
     // Reporting

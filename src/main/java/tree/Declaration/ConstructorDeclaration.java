@@ -42,7 +42,9 @@ public class ConstructorDeclaration extends MethodDeclaration {
         super(mods, typePars, null, null, pars, null, excs, body);
         this.invocation = inv;
 
-        if ( this.invocation != null ) this.invocation.parent = this;
+        if (this.invocation != null) {
+            this.invocation.parent = this;
+        }
     }
 
     // Reporting

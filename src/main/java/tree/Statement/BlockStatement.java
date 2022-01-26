@@ -20,7 +20,9 @@ public class BlockStatement extends Statement {
         this.statement = null;
         this.expression = null;
 
-        if ( this.declaration != null ) this.declaration.parent = this;
+        if (this.declaration != null) {
+            this.declaration.parent = this;
+        }
     }
 
     public BlockStatement(Statement stmt) {
@@ -29,7 +31,9 @@ public class BlockStatement extends Statement {
         this.statement = stmt;
         this.expression = null;
 
-        if ( this.statement != null ) this.statement.parent = this;
+        if (this.statement != null) {
+            this.statement.parent = this;
+        }
     }
 
     public BlockStatement(Expression expr) {
@@ -38,7 +42,9 @@ public class BlockStatement extends Statement {
         this.statement = null;
         this.expression = expr;
 
-        if ( this.expression != null ) this.expression.parent = this;
+        if (this.expression != null) {
+            this.expression.parent = this;
+        }
     }
 
     // Reporting

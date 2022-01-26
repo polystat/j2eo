@@ -22,8 +22,12 @@ public class Assert extends Statement {
         this.expression = expr;
         this.expression2 = expr2;
 
-        if ( this.expression != null )  this.expression.parent = this;
-        if ( this.expression2 != null ) this.expression2.parent = this;
+        if (this.expression != null) {
+            this.expression.parent = this;
+        }
+        if (this.expression2 != null) {
+            this.expression2.parent = this;
+        }
     }
 
     // Reporting

@@ -27,18 +27,25 @@ public class Try extends Statement {
                ResourceSpecification res,
                Block b,
                CatchClauses cs,
-               Block finb)
-    {
+               Block finb) {
         super(ls);
         this.resSpec = res;
         this.block = b;
         this.catches = cs;
         this.finallyBlock = finb;
 
-        if ( this.resSpec != null )      this.resSpec.parent = this;
-        if ( this.block != null )        this.block.parent = this;
-        if ( this.catches != null )      this.catches.parent = this;
-        if ( this.finallyBlock != null ) this.finallyBlock.parent = this;
+        if (this.resSpec != null) {
+            this.resSpec.parent = this;
+        }
+        if (this.block != null) {
+            this.block.parent = this;
+        }
+        if (this.catches != null) {
+            this.catches.parent = this;
+        }
+        if (this.finallyBlock != null) {
+            this.finallyBlock.parent = this;
+        }
     }
 
     // Reporting

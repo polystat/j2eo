@@ -29,8 +29,12 @@ public class ParameterTail extends Entity {
         this.ellipsisSign = ellSign;
         this.thisSign = thisSign;
 
-        if ( this.annotations != null ) this.annotations.parent = this;
-        if ( this.dims != null )        this.dims.parent = this;
+        if (this.annotations != null) {
+            this.annotations.parent = this;
+        }
+        if (this.dims != null) {
+            this.dims.parent = this;
+        }
     }
 
     // Reporting

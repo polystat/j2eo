@@ -26,9 +26,15 @@ public class NormalInterfaceDeclaration extends InterfaceDeclaration {
         this.extendingInterfaces = extTypes;
         this.interfaceBody = body;
 
-        if ( this.typeParameters != null )      this.typeParameters.parent = this;
-        if ( this.extendingInterfaces != null ) this.extendingInterfaces.parent = this;
-        if ( this.interfaceBody != null )       this.interfaceBody.parent = this;
+        if (this.typeParameters != null) {
+            this.typeParameters.parent = this;
+        }
+        if (this.extendingInterfaces != null) {
+            this.extendingInterfaces.parent = this;
+        }
+        if (this.interfaceBody != null) {
+            this.interfaceBody.parent = this;
+        }
     }
 
     // Reporting

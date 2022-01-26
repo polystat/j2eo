@@ -30,9 +30,15 @@ public class TypeParameter extends Entity {
         this.extendingName = tail.extending;
         this.extendingTypes = tail.types;
 
-        if ( this.annotations != null )    this.annotations.parent = this;
-        if ( this.extAnnotations != null ) this.extAnnotations.parent = this;
-        if ( this.extendingTypes != null ) this.extendingTypes.parent = this;
+        if (this.annotations != null) {
+            this.annotations.parent = this;
+        }
+        if (this.extAnnotations != null) {
+            this.extAnnotations.parent = this;
+        }
+        if (this.extendingTypes != null) {
+            this.extendingTypes.parent = this;
+        }
     }
 
     // Reporting

@@ -20,8 +20,12 @@ public class Synchronized extends Statement {
         this.expression = expr;
         this.block = block;
 
-        if ( this.expression != null ) this.expression.parent = this;
-        if ( this.block != null )      this.block.parent = this;
+        if (this.expression != null) {
+            this.expression.parent = this;
+        }
+        if (this.block != null) {
+            this.block.parent = this;
+        }
     }
 
     // Reporting

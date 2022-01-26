@@ -59,10 +59,18 @@ public class NormalClassDeclaration extends ClassDeclaration {
         this.interfaces = ints;
         this.body = body;
 
-        if ( this.typeParameters != null ) this.typeParameters.parent = this;
-        if ( this.extendedType != null )   this.extendedType.parent = this;
-        if ( this.interfaces != null )     this.interfaces.parent = this;
-        if ( this.body != null )           this.body.parent = this;
+        if (this.typeParameters != null) {
+            this.typeParameters.parent = this;
+        }
+        if (this.extendedType != null) {
+            this.extendedType.parent = this;
+        }
+        if (this.interfaces != null) {
+            this.interfaces.parent = this;
+        }
+        if (this.body != null) {
+            this.body.parent = this;
+        }
     }
 
     public List<VariableDeclaration> getStaticVariables() {

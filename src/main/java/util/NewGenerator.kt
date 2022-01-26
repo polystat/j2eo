@@ -11,7 +11,6 @@ import translator.mapClassDeclaration
 import tree.Declaration.Declaration
 import tree.Declaration.NormalClassDeclaration
 import tree.Type.TypeName
-import kotlin.collections.ArrayList
 
 fun generateThis(clsDec: NormalClassDeclaration): EOBndExpr {
     return EOBndExpr(

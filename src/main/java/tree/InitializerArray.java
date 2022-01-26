@@ -10,12 +10,16 @@ public class InitializerArray extends Initializer {
     public InitializerArray(Initializer init) {
         this.initializers = new ArrayList<>();
         this.initializers.add(init);
-        if ( init != null ) init.parent = this;
+        if (init != null) {
+            init.parent = this;
+        }
     }
 
     public InitializerArray add(Initializer init) {
         this.initializers.add(init);
-        if ( init != null ) init.parent = this;
+        if (init != null) {
+            init.parent = this;
+        }
         return this;
     }
 

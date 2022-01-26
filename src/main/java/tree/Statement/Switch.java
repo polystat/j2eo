@@ -61,24 +61,31 @@ public class Switch extends Statement {
     public SwitchBlocks blocks;
 
     // Creation
-    public Switch(ArrayList<String> ls,Expression expr,SwitchRules rs)
-    {
+    public Switch(ArrayList<String> ls, Expression expr, SwitchRules rs) {
         super(ls);
         this.expression = expr;
         this.rules = rs;
         this.blocks = null;
 
-        if ( this.expression != null ) this.expression.parent = this;
-        if ( this.rules != null )      this.rules.parent = this;
+        if (this.expression != null) {
+            this.expression.parent = this;
+        }
+        if (this.rules != null) {
+            this.rules.parent = this;
+        }
     }
-    public Switch(ArrayList<String> ls,Expression expr,SwitchBlocks bs,int useless)
-    {
+
+    public Switch(ArrayList<String> ls, Expression expr, SwitchBlocks bs, int useless) {
         super(ls);
         this.expression = expr;
         this.blocks = bs;
 
-        if ( this.expression != null ) this.expression.parent = this;
-        if ( this.blocks != null )     this.blocks.parent = this;
+        if (this.expression != null) {
+            this.expression.parent = this;
+        }
+        if (this.blocks != null) {
+            this.blocks.parent = this;
+        }
     }
 
     // Reporting

@@ -12,12 +12,16 @@ public class SwitchLabel extends Entity {
     public SwitchLabel(Expression cs) {
         this.cases = new ArrayList<>();
         this.cases.add(cs);
-        if ( cs != null ) cs.parent = this;
+        if (cs != null) {
+            cs.parent = this;
+        }
     }
 
     public SwitchLabel add(Expression cs) {
         this.cases.add(cs);
-        if ( cs != null ) cs.parent = this;
+        if (cs != null) {
+            cs.parent = this;
+        }
         return this;
     }
 

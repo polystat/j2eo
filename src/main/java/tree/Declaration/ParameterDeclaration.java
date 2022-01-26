@@ -42,45 +42,53 @@ public class ParameterDeclaration extends Declaration {
         this.signEllipsis = signEll;
         this.dims = dims;
 
-        if (this.ellAnnotations != null)
+        if (this.ellAnnotations != null) {
             this.ellAnnotations.parent = this;
-        if (this.dims != null)
+        }
+        if (this.dims != null) {
             this.dims.parent = this;
+        }
     }
 
     public ParameterDeclaration(Token token) {
         // For the single lambda parameter
         this(null, null, token.image, null, false, null);
     }
-    public static ParameterDeclaration create(Modifiers mods,Type type,ParameterTail tail)
-    {
-        if ( tail.thisSign ) // this is the receiver declaration
-            return createReceiver(mods,type,tail.identifier);
-        else // this is a usual parameter declaration
-            return createParameter(mods,type,tail.identifier,tail.annotations,tail.ellipsisSign,tail.dims);
+
+    public static ParameterDeclaration create(Modifiers mods, Type type, ParameterTail tail) {
+        if (tail.thisSign) { // this is the receiver declaration
+            return createReceiver(mods, type, tail.identifier);
+        } else { // this is a usual parameter declaration
+            return createParameter(mods, type, tail.identifier, tail.annotations, tail.ellipsisSign, tail.dims);
+        }
     }
 
     private static ParameterDeclaration createParameter(Modifiers mods, Type t, String n,
                                                         Annotations ellAnns, boolean signEll, Dims dims) {
         return new ParameterDeclaration(mods, t, n, ellAnns, signEll, dims);
     }
-    private static ReceiverDeclaration createReceiver(Modifiers mods,Type t,String n)
-    {
-        ReceiverDeclaration receiver = new ReceiverDeclaration(null,t,n);
+
+    private static ReceiverDeclaration createReceiver(Modifiers mods, Type t, String n) {
+        ReceiverDeclaration receiver = new ReceiverDeclaration(null, t, n);
 
         receiver.modifiers = mods;
         receiver.signEllipsis = false;
 
-        if ( receiver.modifiers != null ) receiver.modifiers.parent = receiver;
+        if (receiver.modifiers != null) {
+            receiver.modifiers.parent = receiver;
+        }
         return receiver;
     }
 
     // Reporting
-    public void report(int sh)
-    {
-        title("PARAMETER "+name,sh);
-        if ( super.modifiers != null ) super.modifiers.report(sh+Entity.shift);
-        if ( super.type != null ) super.type.report(sh+ Entity.shift);
+    public void report(int sh) {
+        title("PARAMETER " + name, sh);
+        if (super.modifiers != null) {
+            super.modifiers.report(sh + Entity.shift);
+        }
+        if (super.type != null) {
+            super.type.report(sh + Entity.shift);
+        }
 
     }
 

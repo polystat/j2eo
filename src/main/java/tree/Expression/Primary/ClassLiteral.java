@@ -20,8 +20,12 @@ public class ClassLiteral extends Literal {
         this.type = t;
         this.dims = d;
 
-        if ( this.type != null ) this.type.parent = this;
-        if ( this.dims != null ) this.dims.parent = this;
+        if (this.type != null) {
+            this.type.parent = this;
+        }
+        if (this.dims != null) {
+            this.dims.parent = this;
+        }
     }
 
     // Reporting

@@ -6,15 +6,25 @@ import lexer.Token;
 // The root class of the whole hierarchy of classes
 // representing various Java constructs.
 
-public class Entity
-{
+public class Entity {
+    public static final int shift = 4;
+    public static boolean debug = false;
+    public static boolean syntaxOnly = false;
+    // All entities created by the program are assigned unique numbers.
+    private static long count = 0;
     // Entity's unique number
     public long unique;
     // Text coordinates of the entity
     public Span span;
 
-    // All entities created by the program are assigned unique numbers.
-    private static long count = 0;
+    // // Tricks for resolving conflicts
+    //
+    // public static boolean inBlock = false;
+    // public static boolean unAnnotatedTypeTaken = false;
+
+    // Machinery for reporting
+    // Managing references to parent nodes
+    public Entity parent;
 
     // Constructors
     public Entity() {
@@ -32,43 +42,25 @@ public class Entity
         this.span = token.span;
     }
 
-//  // Tricks for resolving conflicts
-//
-//  public static boolean inBlock = false;
-//  public static boolean unAnnotatedTypeTaken = false;
+    public static void doShift(int sh) {
+        for (int i = 1; i <= sh; i++) {
+            System.out.print(" ");
+        }
+    }
 
-    // Machinery for reporting
-
-    public static boolean debug = false;
-    public static boolean syntaxOnly = false;
-
-    public static final int shift = 4;
-
-    public void outUnique()
-    {
+    public void outUnique() {
         System.out.print(unique);
         System.out.print(":");
     }
 
-    public static void doShift(int sh)
-    {
-        for (int i = 1; i<=sh; i++)
-            System.out.print(" ");
-    }
-
-    public void title(String n, int sh)
-    {
+    public void title(String n, int sh) {
         doShift(sh);
         outUnique();
         System.out.println(n);
     }
 
-    public void report(int sh)
-    {
+    public void report(int sh) {
 
     }
-
-    // Managing references to parent nodes
-    public Entity parent;
 
 }

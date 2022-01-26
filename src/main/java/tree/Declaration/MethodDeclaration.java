@@ -51,11 +51,21 @@ public class MethodDeclaration extends Declaration {
         this.exceptions = header.throwsClause;
         this.methodBody = body;
 
-        if ( this.typeParameters != null ) this.typeParameters.parent = this;
-        if ( this.parameters != null )     this.parameters.parent = this;
-        if ( this.dims != null )           this.dims.parent = this;
-        if ( this.exceptions != null )     this.exceptions.parent = this;
-        if ( this.methodBody != null )     this.methodBody.parent = this;
+        if (this.typeParameters != null) {
+            this.typeParameters.parent = this;
+        }
+        if (this.parameters != null) {
+            this.parameters.parent = this;
+        }
+        if (this.dims != null) {
+            this.dims.parent = this;
+        }
+        if (this.exceptions != null) {
+            this.exceptions.parent = this;
+        }
+        if (this.methodBody != null) {
+            this.methodBody.parent = this;
+        }
     }
 
     public MethodDeclaration(Modifiers mods,
@@ -73,11 +83,21 @@ public class MethodDeclaration extends Declaration {
         this.exceptions = excs;
         this.methodBody = body;
 
-        if ( this.typeParameters != null ) this.typeParameters.parent = this;
-        if ( this.parameters != null )     this.parameters.parent = this;
-        if ( this.dims != null )           this.dims.parent = this;
-        if ( this.exceptions != null )     this.exceptions.parent = this;
-        if ( this.methodBody != null )     this.methodBody.parent = this;
+        if (this.typeParameters != null) {
+            this.typeParameters.parent = this;
+        }
+        if (this.parameters != null) {
+            this.parameters.parent = this;
+        }
+        if (this.dims != null) {
+            this.dims.parent = this;
+        }
+        if (this.exceptions != null) {
+            this.exceptions.parent = this;
+        }
+        if (this.methodBody != null) {
+            this.methodBody.parent = this;
+        }
     }
 
     // Reporting

@@ -10,11 +10,23 @@ import tree.Entity;
  */
 public class Scanner implements JavaParser.Lexer {
 
+    private static final char charZero = '\0';
+    private static final Token noToken = new Token(TokenCode.DUMMY);
     private char[] sourceText;
+
+    // Machinery for reading bytes from the source ///////////////////////
+    // private int currentLine = 0;
+    // private int currentPos = 0;
+    private int globalPos = -1;
+    private char currentChar = charZero;
+    private Token lastToken;
+    private Token currentToken;
 
     public void read(String src) {
         sourceText = src.toCharArray();
     }
+
+    // PUBLIC SCANNER INTERFACE /////////////////////////////
 
     public boolean readFile(String path) {
         try {
@@ -27,14 +39,6 @@ public class Scanner implements JavaParser.Lexer {
             return false;
         }
     }
-
-    // Machinery for reading bytes from the source ///////////////////////
-
-    private static final char charZero = '\0';
-    // private int currentLine = 0;
-    // private int currentPos = 0;
-    private int globalPos = -1;
-    private char currentChar = charZero;
 
     private char getChar() {
         if (currentChar == charZero) {
@@ -51,10 +55,6 @@ public class Scanner implements JavaParser.Lexer {
         currentChar = charZero;
     }
 
-    // PUBLIC SCANNER INTERFACE /////////////////////////////
-
-    private Token lastToken;
-
     public int yylex() {
         lastToken = get();
 
@@ -68,6 +68,11 @@ public class Scanner implements JavaParser.Lexer {
         return lastToken.code.value();
     }
 
+    /////////////////////////////////////////////////////////////
+
+
+    // Detecting the current token //////////////////////////////
+
     public Token getLVal() {
         return lastToken;
     }
@@ -76,14 +81,6 @@ public class Scanner implements JavaParser.Lexer {
     public void yyerror(String msg) {
         System.err.println(msg);
     }
-
-    /////////////////////////////////////////////////////////////
-
-
-    // Detecting the current token //////////////////////////////
-
-    private static final Token noToken = new Token(TokenCode.DUMMY);
-    private Token currentToken;
 
     public Token get() {
         // if ( currentToken == null ) currentToken = getToken();

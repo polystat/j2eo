@@ -18,7 +18,9 @@ public class Yield extends Statement {
     public Yield(ArrayList<String> ls, Expression expr) {
         super(ls);
         this.expression = expr;
-        if ( this.expression != null ) this.expression.parent = this;
+        if (this.expression != null) {
+            this.expression.parent = this;
+        }
     }
 
     // Reporting
@@ -26,8 +28,9 @@ public class Yield extends Statement {
         super.report(sh);
         Entity.doShift(sh);
         System.out.println("YIELD");
-        if ( expression != null )
-            expression.report(sh+Entity.shift);
+        if (expression != null) {
+            expression.report(sh + Entity.shift);
+        }
     }
 
 }

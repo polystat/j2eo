@@ -13,7 +13,9 @@ public class Parenthesized extends Primary {
     // Creation
     public Parenthesized(Expression expr) {
         this.expression = expr;
-        if ( this.expression != null ) this.expression.parent = this;
+        if (this.expression != null) {
+            this.expression.parent = this;
+        }
     }
 
     // Reporting

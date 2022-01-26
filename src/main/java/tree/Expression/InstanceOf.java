@@ -21,8 +21,12 @@ public class InstanceOf extends Expression {
         this.type = type;
         this.declaration = null;
 
-        if ( this.expression != null ) this.expression.parent = this;
-        if ( this.type != null )       this.type.parent = this;
+        if (this.expression != null) {
+            this.expression.parent = this;
+        }
+        if (this.type != null) {
+            this.type.parent = this;
+        }
     }
 
     public InstanceOf(Expression expr, Declaration decl) {
@@ -30,17 +34,24 @@ public class InstanceOf extends Expression {
         this.type = null;
         this.declaration = decl;
 
-        if ( this.expression != null )  this.expression.parent = this;
-        if ( this.declaration != null ) this.declaration.parent = this;
+        if (this.expression != null) {
+            this.expression.parent = this;
+        }
+        if (this.declaration != null) {
+            this.declaration.parent = this;
+        }
     }
 
     // Reporting
     public void report(int sh) {
         Entity.doShift(sh);
         System.out.println("INSTANCEOF");
-        expression.report(sh+Entity.shift);
-        if ( type != null ) type.report(sh+Entity.shift);
-        else                declaration.report(sh+Entity.shift);
+        expression.report(sh + Entity.shift);
+        if (type != null) {
+            type.report(sh + Entity.shift);
+        } else {
+            declaration.report(sh + Entity.shift);
+        }
     }
 
 }

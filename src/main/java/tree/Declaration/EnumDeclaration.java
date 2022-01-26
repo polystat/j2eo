@@ -44,9 +44,15 @@ public class EnumDeclaration extends ClassDeclaration {
         this.enumerators = body.enumerators;
         this.body = body.declarations;
 
-        if ( this.implemented != null ) this.implemented.parent = this;
-        if ( this.enumerators != null ) this.enumerators.parent = this;
-        if ( this.body != null )        this.body.parent = this;
+        if (this.implemented != null) {
+            this.implemented.parent = this;
+        }
+        if (this.enumerators != null) {
+            this.enumerators.parent = this;
+        }
+        if (this.body != null) {
+            this.body.parent = this;
+        }
     }
 
     // Reporting

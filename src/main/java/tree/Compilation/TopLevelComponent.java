@@ -20,19 +20,25 @@ public class TopLevelComponent extends Entity {
         this.classDecl = cd;
         this.interfaceDecl = null;
 
-        if ( this.classDecl != null ) this.classDecl.parent = this;
+        if (this.classDecl != null) {
+            this.classDecl.parent = this;
+        }
     }
 
     public TopLevelComponent(InterfaceDeclaration id) {
         this.interfaceDecl = id;
 
-        if ( this.interfaceDecl != null ) this.interfaceDecl.parent = this;
+        if (this.interfaceDecl != null) {
+            this.interfaceDecl.parent = this;
+        }
     }
 
     public void addModifiers(Modifiers mods) {
         Declaration decl = classDecl != null ? classDecl : interfaceDecl;
         decl.modifiers = mods;
-        if ( decl != null ) decl.parent = this;
+        if (decl != null) {
+            decl.parent = this;
+        }
     }
 
     // Reporting

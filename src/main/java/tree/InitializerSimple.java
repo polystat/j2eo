@@ -9,7 +9,9 @@ public class InitializerSimple extends Initializer {
     // Creation
     public InitializerSimple(Expression expr) {
         this.expression = expr;
-        if ( expr != null ) expr.parent = this;
+        if (expr != null) {
+            expr.parent = this;
+        }
     }
 
     // Reporting

@@ -25,10 +25,16 @@ public class VariableDeclarator extends Entity {
         this.dims = dims;
         this.initializer = init;
 
-        if ( this.dims != null )        this.dims.parent = this;
-        if ( this.initializer != null ) this.initializer.parent = this;
+        if (this.dims != null) {
+            this.dims.parent = this;
+        }
+        if (this.initializer != null) {
+            this.initializer.parent = this;
+        }
 
-        if ( Entity.debug ) System.out.println("Variable declarator with "+id.image+" accepted");
+        if (Entity.debug) {
+            System.out.println("Variable declarator with " + id.image + " accepted");
+        }
     }
 
     // Reporting

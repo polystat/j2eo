@@ -23,11 +23,17 @@ public class TypeName extends UnannotatedType {
         this.compoundName = cn;
         this.typeArguments = targs;
 
-        if ( this.compoundName != null )  this.compoundName.parent = this;
-        if ( this.typeArguments != null ) this.typeArguments.parent = this;
+        if (this.compoundName != null) {
+            this.compoundName.parent = this;
+        }
+        if (this.typeArguments != null) {
+            this.typeArguments.parent = this;
+        }
 
-//      Entity.unAnnotatedTypeTaken = true;
-        if ( Entity.debug ) System.out.println("Type name accepted");
+        // Entity.unAnnotatedTypeTaken = true;
+        if (Entity.debug) {
+            System.out.println("Type name accepted");
+        }
     }
 
     // Reporting
