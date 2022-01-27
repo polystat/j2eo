@@ -3,9 +3,9 @@ assets:
   pubring.gpg: yegor256/home#assets/pubring.gpg
   secring.gpg: yegor256/home#assets/secring.gpg
 install: |
-  apt install openjdk-16-jdk
+  sudo apt install openjdk-16-jdk
   ls -a /usr/lib/jvm/
-  export JAVA_HOME=/usr/lib/jvm/openjdk-16-jdk
+  sudo export JAVA_HOME=/usr/lib/jvm/openjdk-16-jdk
   echo $JAVA_HOME
   java -version
   ./gradlew build --info
