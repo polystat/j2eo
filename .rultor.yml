@@ -3,10 +3,18 @@ assets:
   pubring.gpg: yegor256/home#assets/pubring.gpg
   secring.gpg: yegor256/home#assets/secring.gpg
 install: |
+  wget http://ftp.gnu.org/gnu/bison/bison-3.8.tar.gz
+  tar -zxvf bison-3.8.tar.gz
+  cd bison-3.8
+  ./configure
+  make
+  sudo make install
+  bison -V
+  cd ..
   sudo apt-key adv --keyserver keyserver.ubuntu.com --recv-keys EEA14886 E1DF1F24 3DD9F856
   sudo apt install -y openjdk-16-jdk
   ls -a /usr/lib/jvm/
-  sudo export JAVA_HOME=/usr/lib/jvm/openjdk-16-jdk
+  sudo export JAVA_HOME=/usr/lib/jvm/java-16-openjdk-amd64
   echo $JAVA_HOME
   java -version
   ./gradlew build --info
