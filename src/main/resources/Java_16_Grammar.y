@@ -1,3 +1,4 @@
+// Java 16
 
 //// Tokens ////////////////////////
 
@@ -164,7 +165,7 @@
 %nterm <Modifiers> ModifierSeq ModifierSeqOpt
 
 %nterm <tree.Compilation.CompilationUnit> CompilationUnit Package /* SimpleCompilationUnit */
-%nterm <tree.Compilation.Module> Module
+//%nterm <tree.Compilation.Module> Module
 
 %nterm <tree.Declaration.ImportDeclaration> ImportDeclaration
 %nterm <tree.Declaration.ImportDeclarations> ImportDeclarationSeq ImportDeclarationSeqOpt
@@ -190,7 +191,7 @@
 
 %nterm <tree.Declaration.Declaration> EnumDeclaration RecordDeclaration Pattern InterfaceMemberDeclaration
                      ClassBodyDeclaration PureBodyDeclaration FieldDeclaration MethodDeclaration
-                     ConstantDeclaration InterfaceMethodDeclaration BlockDeclaration
+                     ConstantDeclaration InterfaceMethodDeclaration /*BlockDeclaration*/
                      LocalVariableDeclaration
 
 %nterm <ConstructorDeclaration> ConstructorDeclaration
@@ -210,7 +211,7 @@
 
 %nterm <tree.Expression.Expression> Expression ExpressionOpt Assignment AssignmentExpression ConditionalExpression
                     SwitchExpression PostfixExpression Primary UnaryExpression UnaryExpressionNotPlusMinus
-                    InstanceofExpression CastExpression LambdaExpression
+                    InstanceofExpression /*CastExpression*/ LambdaExpression
                     LeftHandSide FieldAccess ArrayAccess MethodInvocation MethodReference
                     ArrayCreationExpression ClassInstanceCreationExpression
 
@@ -229,7 +230,8 @@
 %nterm <tree.Expression.ArgumentList> Arguments ArgumentList
 
 %nterm <ParameterDeclaration> LambdaParameter FormalParameter
-%nterm <ParameterDeclarations> LambdaParameters LambdaParameterList1 LambdaParameterList2 FormalParameterList
+%nterm <ParameterDeclarations> LambdaParameters LambdaParameterList /*LambdaParameterList1 LambdaParameterList2 */
+                               FormalParameterList
 %nterm <ParameterTail> FormalParameterTail
 %nterm <tree.Statement.Statement> Statement SimpleStatement LabeledStatement
                                   IfThenElseStatement WhileStatement ForStatement ElsePartOpt
@@ -316,7 +318,7 @@ StandardModifier
 CompilationUnit
     : %empty                                        { $$ = null; }
     | Package                                       { $$ = $1; ast = $1; }
-//    | Module                                        { $$ = $1; ast = $1; }
+//  | Module                                        { $$ = $1; ast = $1; }
     | ImportDeclarationSeqOpt TopLevelComponentSeq  { ast = new SimpleCompilationUnit($1,$2); }
     ;
 
@@ -327,9 +329,9 @@ Package
 
 /////// Java modules are not supported (yet)
 ///////
-Module
-    : ModifierSeqOpt MODULE CompoundName LBRACE ModuleDirectiveSeqOpt RBRACE { $$ = null; }  // not implemented
-    ;
+//Module
+//    : ModifierSeqOpt MODULE CompoundName LBRACE ModuleDirectiveSeqOpt RBRACE { $$ = null; }  // not implemented
+//    ;
 
 ImportDeclarationSeqOpt
     : %empty                                     { $$ = null; }
@@ -366,38 +368,38 @@ TopLevelComponent
 /////// Java modules are not supported (yet)
 ///////
 
-ModuleDirectiveSeqOpt
-    : %empty              //{ $$ = null; }
-    | ModuleDirectiveSeq  //{ $$ = $1; }
-    ;
+//ModuleDirectiveSeqOpt
+//    : %empty              //{ $$ = null; }
+//    | ModuleDirectiveSeq  //{ $$ = $1; }
+//    ;
 
-ModuleDirectiveSeq
-    :                    ModuleDirective
-    | ModuleDirectiveSeq ModuleDirective
-    ;
+//ModuleDirectiveSeq
+//    :                    ModuleDirective
+//    | ModuleDirectiveSeq ModuleDirective
+//    ;
 
-ModuleDirective
-    : "requires" RequiresModifierSeqOpt CompoundName SEMICOLON
-	| "exports"  CompoundName                        SEMICOLON
-	| "exports"  CompoundName "to" ModuleNameList    SEMICOLON
-	| "opens"    CompoundName                        SEMICOLON
-	| "opens"    CompoundName "to" ModuleNameList    SEMICOLON
-    | "uses"     CompoundName                        SEMICOLON
-	| "provides" CompoundName "with" ModuleNameList  SEMICOLON
-    ;
+//ModuleDirective
+//    : "requires" RequiresModifierSeqOpt CompoundName SEMICOLON
+//	| "exports"  CompoundName                        SEMICOLON
+//	| "exports"  CompoundName "to" ModuleNameList    SEMICOLON
+//	| "opens"    CompoundName                        SEMICOLON
+//	| "opens"    CompoundName "to" ModuleNameList    SEMICOLON
+//  | "uses"     CompoundName                        SEMICOLON
+//	| "provides" CompoundName "with" ModuleNameList  SEMICOLON
+//  ;
 
-ModuleNameList
-    :                      CompoundName
-    | ModuleNameList COMMA CompoundName
-    ;
+//ModuleNameList
+//    :                      CompoundName
+//    | ModuleNameList COMMA CompoundName
+//    ;
 
-RequiresModifierSeqOpt
-    : %empty
-    | TRANSITIVE
-    | TRANSITIVE STATIC
-	| STATIC
-	| STATIC TRANSITIVE
-    ;
+//RequiresModifierSeqOpt
+//    : %empty
+//    | TRANSITIVE
+//    | TRANSITIVE STATIC
+//    | STATIC
+//    | STATIC TRANSITIVE
+//    ;
 
 //// Types //////////////////////////
 
@@ -880,8 +882,10 @@ BlockDeclaration
 BlockStatement
     : ModifierSeqOpt ClassDeclaration           { $$ = new BlockStatement($2.addModifiers($1)); }
     | ModifierSeqOpt NormalInterfaceDeclaration { $$ = new BlockStatement($2.addModifiers($1)); }
-    | ModifierSeqOpt LocalVariableDeclaration SEMICOLON
+    | ModifierSeq LocalVariableDeclaration SEMICOLON
                                                 { $$ = new BlockStatement($2.addModifiers($1)); }
+    |             LocalVariableDeclaration SEMICOLON
+                                                { $$ = new BlockStatement($1); }
     |                Statement                  { $$ = new BlockStatement($1); }
     ;
 
@@ -891,11 +895,11 @@ LocalVariableDeclaration
     ;
 
 Statement
-    : SimpleStatement
-    | LabeledStatement
-    | IfThenElseStatement
-    | WhileStatement
-    | ForStatement
+    : SimpleStatement      { $$ = $1; }
+    | LabeledStatement     { $$ = $1; }
+    | IfThenElseStatement  { $$ = $1; }
+    | WhileStatement       { $$ = $1; }
+    | ForStatement         { $$ = $1; }
     ;
 
 SimpleStatement
@@ -956,9 +960,12 @@ ElsePartOpt
     ;
 
 SwitchBlock
-    : LBRACE SwitchRuleSeq                                  RBRACE { $$ = null; } // not implemented yet
-    | LBRACE SwitchBlockStatementGroupSeqOpt                RBRACE { $$ = null; } // not implemented yet
-    | LBRACE SwitchBlockStatementGroupSeqOpt SwitchLabelSeq RBRACE { $$ = null; } // not implemented yet
+    : LBRACE                                             RBRACE { $$ = null; }
+    | LBRACE SwitchRuleSeq                               RBRACE { $$ = null; } // not implemented yet
+    | LBRACE SwitchBlockStatementGroupSeq                RBRACE { $$ = null; } // not implemented yet
+
+//    This is the useless branch because the rule SwitchBlockStatementGroup covers it
+//  | LBRACE SwitchBlockStatementGroupSeq SwitchLabelSeq RBRACE { $$ = null; } // not implemented yet
     ;
 
 SwitchRuleSeq
@@ -972,15 +979,14 @@ SwitchRule
     | SwitchLabel ARROW THROW Expression SEMICOLON  { $$ = new SwitchRule($1,new Throw(null,$4)); } // ThrowStatement
     ;
 
-SwitchBlockStatementGroupSeqOpt
-    : %empty
-    |                                 SwitchBlockStatementGroup
-    | SwitchBlockStatementGroupSeqOpt SwitchBlockStatementGroup
+SwitchBlockStatementGroupSeq
+    :                              SwitchBlockStatementGroup
+    | SwitchBlockStatementGroupSeq SwitchBlockStatementGroup
     ;
 
 SwitchBlockStatementGroup
-    : SwitchLabelSeq
-    | SwitchLabelSeq BlockStatementSeq
+//  : SwitchLabelSeq
+    : SwitchLabelSeq BlockStatementSeq
     ;
 
 SwitchLabelSeq
@@ -1254,29 +1260,28 @@ LambdaExpression
 
 LambdaParameters
     : LPAREN                      RPAREN   { $$ = null; }
-    | LPAREN LambdaParameterList1 RPAREN   { $$ = $2; }
-    | LPAREN LambdaParameterList2 RPAREN   { $$ = $2; }
-//  | IDENTIFIER
+//  | LPAREN LambdaParameterList1 RPAREN   { $$ = $2; }
+//  | LPAREN LambdaParameterList2 RPAREN   { $$ = $2; }
+    | LPAREN LambdaParameterList  RPAREN   { $$ = $2; }
     ;
 
-LambdaParameterList1
-    :                            IDENTIFIER  { $$ = new ParameterDeclarations(new ParameterDeclaration($1)); }
-    | LambdaParameterList1 COMMA IDENTIFIER  { $$ = $1.add(new ParameterDeclaration($3)); }
+LambdaParameterList
+    :                           LambdaParameter { $$ = new ParameterDeclarations($1); }
+    | LambdaParameterList COMMA LambdaParameter { $$ = $1.add($3); }
     ;
 
-LambdaParameterList2
-    :                            LambdaParameter { $$ = new ParameterDeclarations($1); }
-    | LambdaParameterList2 COMMA LambdaParameter { $$ = $1.add($3); }
-    ;
+//LambdaParameterList1
+//    :                            IDENTIFIER  { $$ = new ParameterDeclarations(new ParameterDeclaration($1)); }
+//    | LambdaParameterList1 COMMA IDENTIFIER  { $$ = $1.add(new ParameterDeclaration($3)); }
+//    ;
 
-//LambdaParameter
-//    :                                    IDENTIFIER
-//    | ModifierSeqOpt LambdaParameterType IDENTIFIER DimsOpt
-//    | ModifierSeqOpt UnannotatedType AnnotationSeqOpt ELLIPSIS IDENTIFIER  // VariableArityParameter
+//LambdaParameterList2
+//    :                            LambdaParameter { $$ = new ParameterDeclarations($1); }
+//    | LambdaParameterList2 COMMA LambdaParameter { $$ = $1.add($3); }
 //    ;
 
 LambdaParameter
-//  :                                IDENTIFIER
+//  :                                IDENTIFIER          { $$ = new ParameterDeclaration($1); }
     : ModifierSeqOpt UnannotatedType IDENTIFIER DimsOpt  { $$ = new ParameterDeclaration($1,$2,$3.image,null,false,$4); }
     | ModifierSeqOpt VAR             IDENTIFIER DimsOpt  { $$ = new ParameterDeclaration($1,null,$3.image,null,false,$4); }
     | ModifierSeqOpt UnannotatedType AnnotationSeqOpt ELLIPSIS IDENTIFIER   // VariableArityParameter
@@ -1414,7 +1419,7 @@ UnaryExpressionNotPlusMinus
     : PostfixExpression
     | TILDE       UnaryExpression { $$ = new UnaryPrefix($1,$2); }
     | EXCLAMATION UnaryExpression { $$ = new UnaryPrefix($1,$2); }
-    | CastExpression              { $$ = $1; }
+//    | CastExpression              { $$ = $1; }
     | SwitchExpression            { $$ = $1; }
     ;
 
@@ -1433,10 +1438,10 @@ PostDecrementExpression
     : PostfixExpression DBL_MINUS { $$ = new UnaryPostfix($2,$1); }
     ;
 
-CastExpression
-    : TargetType UnaryExpression   { $$ = new Cast($1,$2); }
-    | TargetType LambdaExpression  { $$ = new Cast($1,$2); }
-    ;
+//CastExpression
+//    : TargetType UnaryExpression   { $$ = new Cast($1,$2); }
+//    | TargetType LambdaExpression  { $$ = new Cast($1,$2); }
+//    ;
 
 TargetType
     : LPAREN TypeList RPAREN { $$ = $2; }
