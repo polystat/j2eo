@@ -3,7 +3,7 @@ assets:
   pubring.gpg: yegor256/home#assets/pubring.gpg
   secring.gpg: yegor256/home#assets/secring.gpg
 install: |
-  sudo apt install openjdk-16-jdk
+  sudo apt install -y openjdk-16-jdk
   ls -a /usr/lib/jvm/
   sudo export JAVA_HOME=/usr/lib/jvm/openjdk-16-jdk
   echo $JAVA_HOME
