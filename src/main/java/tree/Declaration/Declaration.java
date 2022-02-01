@@ -15,7 +15,7 @@ import tree.Type.Type;
 //    |        Block         // InstanceInitializer
 //    | STATIC Block         // StaticInitializer
 //    | SEMICOLON
-// 	;
+//    ;
 //
 // PureBodyDeclaration
 //    : FieldDeclaration
@@ -35,8 +35,7 @@ import tree.Type.Type;
 //    : UnannotatedType VariableDeclaratorList
 //    | VAR             VariableDeclaratorList
 //    ;
-public class Declaration extends Entity
-{
+public class Declaration extends Entity {
     // Structure: properties common to (almost) all
     // kinds of declarations.
     public Modifiers modifiers;
@@ -44,25 +43,29 @@ public class Declaration extends Entity
     public Type type;
 
     // Creation
-    public Declaration(Modifiers mods, String n, Type t)
-    {
+    public Declaration(Modifiers mods, String n, Type t) {
         this.modifiers = mods;
         this.name = n;
         this.type = t;
 
-        if ( this.modifiers != null ) this.modifiers.parent = this;
-        if ( this.type != null )      this.type.parent = this;
+        if (this.modifiers != null) {
+            this.modifiers.parent = this;
+        }
+        if (this.type != null) {
+            this.type.parent = this;
+        }
     }
-    public Declaration addModifiers(Modifiers mods)
-    {
+
+    public Declaration addModifiers(Modifiers mods) {
         this.modifiers = mods;
-        if ( this.modifiers != null ) this.modifiers.parent = this;
+        if (this.modifiers != null) {
+            this.modifiers.parent = this;
+        }
         return this;
     }
 
     // Reporting
-    public void report(int sg)
-    {
+    public void report(int sg) {
 
     }
 

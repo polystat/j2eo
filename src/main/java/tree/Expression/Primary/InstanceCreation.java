@@ -24,6 +24,5 @@ package tree.Expression.Primary;
 //    :                           AnnotationSeqOpt /*AnnotationOpt*/ IDENTIFIER
 //    | AnnotatedCompoundName DOT AnnotationSeqOpt /*AnnotationOpt*/ IDENTIFIER
 //    ;
-public class InstanceCreation extends Primary
-{
+public class InstanceCreation extends Primary {
 }

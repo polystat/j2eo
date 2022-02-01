@@ -1,8 +1,9 @@
 package tree.Declaration;
 
 import tree.Entity;
-import tree.Expression.*;
-import tree.Type.*;
+import tree.Expression.ArgumentList;
+import tree.Expression.Expression;
+import tree.Type.TypeArguments;
 
 // Intermediate class: won't appear in the AST
 //
@@ -12,8 +13,7 @@ import tree.Type.*;
 //    | CompoundName DOT TypeArgumentsOpt SUPER Arguments SEMICOLON
 //    | Primary      DOT TypeArgumentsOpt SUPER Arguments SEMICOLON
 //    ;
-public class ExplicitConstructorInvocation extends Entity
-{
+public class ExplicitConstructorInvocation extends Entity {
     // Structure
     public Expression expression;
     public TypeArguments typeArguments;
@@ -21,21 +21,28 @@ public class ExplicitConstructorInvocation extends Entity
     public ArgumentList arguments;
 
     // Creation
-    public ExplicitConstructorInvocation(Expression expr, TypeArguments targs, boolean ts, ArgumentList args)
-    {
+    public ExplicitConstructorInvocation(
+            Expression expr,
+            TypeArguments targs,
+            boolean ts, ArgumentList args) {
         this.expression = expr;
         this.typeArguments = targs;
         this.thisORsuper = ts;
         this.arguments = args;
 
-        if ( this.expression != null )    this.expression.parent = this;
-        if ( this.typeArguments != null ) this.typeArguments.parent = this;
-        if ( this.arguments != null )     this.arguments.parent = this;
+        if (this.expression != null) {
+            this.expression.parent = this;
+        }
+        if (this.typeArguments != null) {
+            this.typeArguments.parent = this;
+        }
+        if (this.arguments != null) {
+            this.arguments.parent = this;
+        }
     }
 
     // Reporting
-    public void report(int sh)
-    {
+    public void report(int sh) {
 
     }
 

@@ -1,6 +1,10 @@
 package eotree
 
-import arrow.core.*
+import arrow.core.None
+import arrow.core.Option
+import arrow.core.Some
+import arrow.core.getOrElse
+import arrow.core.some
 import tree.CompoundName
 
 class EODot : EOExpr {
@@ -42,7 +46,6 @@ class EODot : EOExpr {
             .map { src -> "$src.$name" }
             .getOrElse { name }
 }
-
 
 fun String.eoDot(): EODot = EODot(this)
 

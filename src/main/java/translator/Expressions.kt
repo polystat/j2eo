@@ -1,14 +1,22 @@
 package translator
 
 import arrow.core.some
-import eotree.*
+import eotree.EOCopy
+import eotree.EODot
+import eotree.EOExpr
 import eotree.data.EOIntData
+import eotree.eoDot
 import lexer.TokenCode
-import tree.Expression.*
+import tree.Expression.Binary
+import tree.Expression.Expression
+import tree.Expression.FieldAccess
 import tree.Expression.Primary.Literal
 import tree.Expression.Primary.MethodInvocation
 import tree.Expression.Primary.Parenthesized
 import tree.Expression.Primary.This
+import tree.Expression.SimpleReference
+import tree.Expression.UnaryPostfix
+import tree.Expression.UnaryPrefix
 
 fun mapExpression(expr: Expression): EOExpr =
     when (expr) {
@@ -88,6 +96,7 @@ fun mapBinary(expr: Binary): EOExpr {
         TokenCode.LessEqual -> "leq"
         TokenCode.Assign -> "write"
         TokenCode.Star -> "mul"
+        TokenCode.Slash -> "div"
         else -> throw IllegalArgumentException("Binary operation ${expr.operator} is not supported")
     }
 

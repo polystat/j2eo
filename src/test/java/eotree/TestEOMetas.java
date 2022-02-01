@@ -1,17 +1,18 @@
 package eotree;
 
-import arrow.core.Some;
-import org.junit.jupiter.api.Test;
-
-import java.util.Optional;
-
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static util.ListUtils.listOf;
 
+import arrow.core.Some;
+import org.junit.jupiter.api.Test;
+
+/**
+ * EO metas tests.
+ */
 public class TestEOMetas {
 
     @Test
-    public void TestGenerateEOZeroIndent() {
+    public void testGenerateEOZeroIndent() {
         var f = new EOMetas(
                 new Some<>("org.eolang.package"),
                 listOf(
@@ -27,7 +28,7 @@ public class TestEOMetas {
     }
 
     @Test
-    public void TestGenerateEONonZeroIndent() {
+    public void testGenerateEONonZeroIndent() {
         var f = new EOMetas(
                 new Some<>("org.eolang.package"),
                 listOf(

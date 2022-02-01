@@ -1,18 +1,35 @@
 package lexer;
 
-public class Pos
-{
-    public long line;
-    public int pos;
+/**
+ * Represents a position of a token inside a source code.
+ */
+public class Pos {
 
-    public Pos(long l, int p)
-    {
+    private long line;
+    private int symbol;
+
+    public Pos(long l, int p) {
         line = l;
-        pos = p;
+        symbol = p;
     }
 
-    void report()
-    {
-        System.out.print(line+":"+pos);
+    void report() {
+        System.out.print(getLine() + ":" + getSymbol());
+    }
+
+    public long getLine() {
+        return line;
+    }
+
+    public void setLine(long line) {
+        this.line = line;
+    }
+
+    public int getSymbol() {
+        return symbol;
+    }
+
+    public void setSymbol(int symbol) {
+        this.symbol = symbol;
     }
 }

@@ -1,8 +1,8 @@
 package tree;
 
+import java.util.ArrayList;
 import lexer.Token;
 import lexer.TokenCode;
-import java.util.ArrayList;
 
 // StandardModifierSeq
 //    :                     StandardModifier
@@ -11,7 +11,7 @@ import java.util.ArrayList;
 //
 // StandardModifier
 //     //    : Annotation
-//	  : DEFAULT
+//    : DEFAULT
 //    | FINAL
 //    | PUBLIC
 //    | PROTECTED
@@ -24,30 +24,25 @@ import java.util.ArrayList;
 //    | VOLATILE
 //    | OPEN  // for modules only
 //    ;
-public class StandardModifiers extends Entity
-{
+public class StandardModifiers extends Entity {
     // Structure
     public ArrayList<TokenCode> modifiers;
 
     // Creation
-    public StandardModifiers(Token token)
-    {
+    public StandardModifiers(Token token) {
         this.modifiers = new ArrayList<>();
         this.modifiers.add(token.code);
     }
 
-    public StandardModifiers add(Token token)
-    {
+    public StandardModifiers add(Token token) {
         this.modifiers.add(token.code);
         return this;
     }
 
     // Reporting
-    public void report(int sh)
-    {
+    public void report(int sh) {
         Entity.doShift(sh);
-        for (TokenCode m: this.modifiers)
-        {
+        for (TokenCode m : this.modifiers) {
             System.out.print(m.toString());
             System.out.print(" ");
         }

@@ -1,15 +1,16 @@
 package eotree;
 
-import org.junit.jupiter.api.Test;
-
-import java.util.Optional;
-
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
+import org.junit.jupiter.api.Test;
+
+/**
+ * EO bound expression tests.
+ */
 public class TestEOBndExpr {
 
     @Test
-    public void TestGenerateEOZeroIndent() {
+    public void testGenerateEOZeroIndent() {
         var f = new EOBndExpr(
                 new EODot("memory"),
                 "bnd1"
@@ -18,7 +19,7 @@ public class TestEOBndExpr {
     }
 
     @Test
-    public void TestGenerateEONonZeroIndent() {
+    public void testGenerateEONonZeroIndent() {
         var f = new EOBndExpr(
                 new EODot("memory"),
                 "bnd1"

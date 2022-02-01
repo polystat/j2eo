@@ -5,7 +5,11 @@ import arrow.core.Option
 import arrow.core.some
 import eotree.EOBndExpr
 import eotree.EODot
-import tree.Declaration.*
+import tree.Declaration.ClassDeclaration
+import tree.Declaration.Declaration
+import tree.Declaration.MethodDeclaration
+import tree.Declaration.NormalClassDeclaration
+import tree.Declaration.VariableDeclaration
 import tree.Type.PrimitiveType
 import tree.Type.TypeName
 

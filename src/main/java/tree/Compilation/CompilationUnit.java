@@ -8,6 +8,5 @@ import tree.Entity;
 //    | Module
 //    | ImportDeclarationSeqOpt TopLevelComponentSeq
 //    ;
-public class CompilationUnit extends Entity
-{
+public class CompilationUnit extends Entity {
 }

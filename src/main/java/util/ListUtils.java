@@ -20,16 +20,18 @@ public class ListUtils {
     }
 
     public static <T> Optional<T> first(List<T> list) {
-        if (list.size() == 0)
+        if (list.size() == 0) {
             return Optional.empty();
-        else
+        } else {
             return Optional.ofNullable(list.get(0));
+        }
     }
 
     public static <T> Optional<T> last(List<T> list) {
-        if (list.size() == 0)
+        if (list.size() == 0) {
             return Optional.empty();
-        else
+        } else {
             return Optional.ofNullable(list.get(list.size() - 1));
+        }
     }
 }

@@ -10,8 +10,10 @@ import tree.Declaration.NormalClassDeclaration
 fun generateStatic(clsDec: NormalClassDeclaration): List<EOBndExpr> {
     try {
         return clsDec.body.declarations
-            .filter { dec: Declaration -> dec.modifiers != null &&
-                    dec.modifiers.modifiers.modifiers.find { code: TokenCode -> code == TokenCode.Static } != null }// TODO
+            .filter { dec: Declaration ->
+                dec.modifiers != null &&
+                    dec.modifiers.modifiers.modifiers.find { code: TokenCode -> code == TokenCode.Static } != null
+            } // TODO
             .map { mapClassDeclaration(it) }
             .flattenOption()
     } catch (e: NullPointerException) {

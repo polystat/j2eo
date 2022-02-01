@@ -1,25 +1,27 @@
 package tree.Statement;
 
-import tree.Entity;
 import java.util.ArrayList;
+import tree.Entity;
 
-public class StatementExpressions extends Entity
-{
+public class StatementExpressions extends Entity {
     // Structure
     public ArrayList<StatementExpression> expressions;
 
     // Creation
-    public StatementExpressions(StatementExpression expr)
-    {
+    public StatementExpressions(StatementExpression expr) {
         this.expressions = new ArrayList<>();
         this.expressions.add(expr);
 
-        if ( expr != null ) expr.parent = this;
+        if (expr != null) {
+            expr.parent = this;
+        }
     }
-    public StatementExpressions add(StatementExpression expr)
-    {
+
+    public StatementExpressions add(StatementExpression expr) {
         this.expressions.add(expr);
-        if ( expr != null ) expr.parent = this;
+        if (expr != null) {
+            expr.parent = this;
+        }
         return this;
     }
 }

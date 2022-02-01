@@ -6,21 +6,20 @@ import tree.Expression.Expression;
 //    : ...
 //    | LPAREN Expression RPAREN
 //    | ...
-public class Parenthesized extends Primary
-{
+public class Parenthesized extends Primary {
     // Structure
     public Expression expression;
 
     // Creation
-    public Parenthesized(Expression expr)
-    {
+    public Parenthesized(Expression expr) {
         this.expression = expr;
-        if ( this.expression != null ) this.expression.parent = this;
+        if (this.expression != null) {
+            this.expression.parent = this;
+        }
     }
 
     // Reporting
-    public void report(int sh)
-    {
+    public void report(int sh) {
         expression.report(sh);
     }
 

@@ -1,8 +1,7 @@
 package tree.Statement;
 
-import tree.Entity;
-
 import java.util.ArrayList;
+import tree.Entity;
 
 // CatchesOpt
 //    : %empty
@@ -13,28 +12,29 @@ import java.util.ArrayList;
 //    :         CatchClause
 //    | Catches CatchClause
 //    ;
-public class CatchClauses extends Entity
-{
+public class CatchClauses extends Entity {
     // Structure
     public ArrayList<CatchClause> catchClauses;
 
     // Creation
-    public CatchClauses(CatchClause clause)
-    {
+    public CatchClauses(CatchClause clause) {
         this.catchClauses = new ArrayList<>();
         this.catchClauses.add(clause);
-        if ( clause != null ) clause.parent = this;
+        if (clause != null) {
+            clause.parent = this;
+        }
     }
-    public CatchClauses add(CatchClause clause)
-    {
+
+    public CatchClauses add(CatchClause clause) {
         this.catchClauses.add(clause);
-        if ( clause != null ) clause.parent = this;
+        if (clause != null) {
+            clause.parent = this;
+        }
         return this;
     }
 
     // Reporting
-    public void report(int sh)
-    {
+    public void report(int sh) {
 
     }
 
