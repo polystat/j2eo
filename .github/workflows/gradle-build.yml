@@ -31,6 +31,13 @@ jobs:
           #        with:
           #          arguments: test --info
 
+      - name: Upload Gradle test report
+        uses: actions/upload-artifact@v2
+        if: ${{ always() }}
+        with:
+          name: gradle-test-report
+          path: build/reports/tests/test/
+
   gradle_ubuntu:
     runs-on: ubuntu-latest
     steps:
