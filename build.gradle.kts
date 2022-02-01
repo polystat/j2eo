@@ -1,7 +1,6 @@
 import org.apache.tools.ant.taskdefs.condition.Os
 import org.gradle.jvm.tasks.Jar
 import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
-import org.jlleitschuh.gradle.ktlint.reporter.ReporterType
 import java.security.MessageDigest
 
 plugins {
@@ -12,7 +11,8 @@ plugins {
     `maven-publish`
     signing
     id("io.spring.dependency-management") version "1.0.11.RELEASE"
-    id("org.jlleitschuh.gradle.ktlint") version "10.2.1"
+    // id("org.jlleitschuh.gradle.ktlint") version "10.2.1"
+	id("org.cqfn.diktat.diktat-gradle-plugin") version "1.0.2"
     kotlin("jvm") version "1.6.0"
 }
 
@@ -100,11 +100,15 @@ val fatJar = task("fatJar", type = Jar::class) {
 
 tasks {
     classes {
-        dependsOn(ktlintFormat)
+        dependsOn(diktatFix)
     }
-    ktlintFormat {
-        finalizedBy(ktlintCheck)
-    }
+    // ktlintFormat {
+    //     finalizedBy(ktlintCheck)
+    // }
+	diktatFix {
+		// dependsOn(ktlintFormat)
+		finalizedBy(diktatCheck)
+	}
     pmdMain {
         dependsOn(classes)
     }
@@ -167,19 +171,23 @@ pmd {
     ruleSets = listOf("category/java/codestyle.xml")
 }
 
-ktlint {
-    verbose.set(true)
-    outputToConsole.set(true)
-    coloredOutput.set(true)
-    ignoreFailures.set(false)
-    reporters {
-        reporter(ReporterType.CHECKSTYLE)
-        reporter(ReporterType.JSON)
-        reporter(ReporterType.HTML)
-    }
-    filter {
-        exclude("**/style-violations.kt")
-    }
+// ktlint {
+//     verbose.set(true)
+//     outputToConsole.set(true)
+//     coloredOutput.set(true)
+//     ignoreFailures.set(false)
+//     reporters {
+//         reporter(ReporterType.CHECKSTYLE)
+//         reporter(ReporterType.JSON)
+//         reporter(ReporterType.HTML)
+//     }
+//     filter {
+//         exclude("**/style-violations.kt")
+//     }
+// }
+
+diktat {
+    reporterType = "sarif"
 }
 
 checkstyle {
