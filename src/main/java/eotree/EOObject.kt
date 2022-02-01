@@ -13,7 +13,7 @@ class EOObject(
         return listOfNotNull(
             comment.let {
                 if (it.isNotEmpty())
-                    indent(indent) + it + "\n"
+                    "${indent(indent)}# $it\n"
                 else
                     null
             },
