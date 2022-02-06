@@ -3,12 +3,10 @@ assets:
   pubring.gpg: yegor256/home#assets/pubring.gpg
   secring.gpg: yegor256/home#assets/secring.gpg
 install: |
-  sudo docker build -t polystat/j2eo:latest -f $(pwd)/docker/Dockerfile $(pwd)
-  sudo docker run -v $(pwd)/src:/app/src -v $(pwd)/build:/app/build polystat/j2eo:latest bash build.sh
+  sudo docker run -v $(pwd)/src:/app/src -v $(pwd)/build:/app/build iammaxim/j2eo:latest bash build.sh
 merge:
   script: |
-    sudo docker build -t polystat/j2eo:latest -f $(pwd)/docker/Dockerfile $(pwd)
-    sudo docker run -v $(pwd)/src:/app/src -v $(pwd)/build:/app/build polystat/j2eo:latest bash build.sh
+    sudo docker run -v $(pwd)/src:/app/src -v $(pwd)/build:/app/build iammaxim/j2eo:latest bash build.sh
 release:
   script: |-
     git commit -am "${tag}"
