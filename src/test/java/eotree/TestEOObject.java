@@ -31,10 +31,11 @@ public class TestEOObject {
                                 "bnd2"
                         )
                 ),
-                ""
+                "comment"
         );
         assertEquals(
                 """
+                        # comment
                         [free1 free2 vararg...]
                           memory > bnd1
                           memory > bnd2""",
@@ -57,13 +58,14 @@ public class TestEOObject {
                                 "bnd2"
                         )
                 ),
-                ""
+                "comment"
         );
         //noinspection TextBlockMigration
         assertEquals(
-                "  [free1 free2 vararg...]\n"
-                        + "    memory > bnd1\n"
-                        + "    memory > bnd2",
+                "  # comment\n"
+                + "  [free1 free2 vararg...]\n"
+                + "    memory > bnd1\n"
+                + "    memory > bnd2",
                 object.generateEO(1)
         );
     }
