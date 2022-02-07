@@ -11,4 +11,4 @@ release:
     ls src
     ls src/main
     ls src/main/resources
-    sudo docker run -v $(pwd)/../gradle.properties:/app/gradle.properties -e tag=${tag} iammaxim/j2eo:latest bash build.sh
+    sudo docker run -v $(pwd)/../gradle.properties:/app/gradle.properties -v $(pwd)/.gnupg:/root/.gnupg -v $(pwd)/pubring.gpg:/root/pubring.gpg -v $(pwd)/secring.gpg:/root/secring.gpg -e tag=${tag} iammaxim/j2eo:latest bash build.sh
