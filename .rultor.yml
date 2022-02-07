@@ -9,6 +9,5 @@ merge:
     sudo docker run -v $(pwd)/src:/app/src -v $(pwd)/build:/app/build iammaxim/j2eo:latest bash build.sh
 release:
   script: |-
-    git commit -am "${tag}"
     mv ../gradle.properties .
     ./gradlew publish --info -PmvnPublicationVersion=${tag}
