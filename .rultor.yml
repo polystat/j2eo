@@ -7,4 +7,5 @@ merge:
     echo "Merge is not implemented"
 release:
   script: |-
+    sudo docker pull iammaxim/j2eo:latest
     sudo docker run -v $(pwd)/src:/app/src -v $(pwd)/../gradle.properties:/app/gradle.properties -e tag=${tag} iammaxim/j2eo:latest bash build.sh
