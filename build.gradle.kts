@@ -300,6 +300,10 @@ signing {
     sign(publishing.publications["mavenJava"])
 }
 
+tasks.getByName("signMavenJavaPublication") {
+    dependsOn(fatJar)
+}
+
 /**
  * Creates directories for all Bison output files.
  */
