@@ -2,17 +2,13 @@ assets:
   gradle.properties: yegor256/home#assets/polystat/gradle.properties
   pubring.gpg: yegor256/home#assets/pubring.gpg
   secring.gpg: yegor256/home#assets/secring.gpg
-install: |
-#  sudo apt-key adv --keyserver keyserver.ubuntu.com --recv-keys EEA14886 E1DF1F24 3DD9F856
-#  sudo apt install -y openjdk-16-jdk
-#  sudo export JAVA_HOME=/usr/lib/jvm/java-16-openjdk-amd64
-#  java -version
-#  sudo docker run -v $(pwd)/src:/app/src -v $(pwd)/build:/app/build -v $(pwd)/out:/app/out -v $(pwd)/.gradle:/app/.gradle iammaxim/j2eo:latest bash build.sh
-  cat ../gradle.properties
+install:
+  - "cat ../gradle.properties"
 merge:
-  script: |
-#    sudo docker run -v $(pwd)/src:/app/src -v $(pwd)/build:/app/build -v $(pwd)/out:/app/out -v $(pwd)/.gradle:/app/.gradle iammaxim/j2eo:latest bash build.sh
+  script:
+    - "cat ../gradle.properties"
 release:
-  script: |-
-    mv ../gradle.properties .
-    ./gradlew publish --info -PmvnPublicationVersion=${tag}
+  script:
+    - "cat ../gradle.properties"
+    - "mv ../gradle.properties ."
+    - "./gradlew publish --info -PmvnPublicationVersion=${tag}"
