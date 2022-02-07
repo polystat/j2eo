@@ -1,4 +1,10 @@
-#/bin/sh
+#!/bin/sh
 
-./gradlew fatJar test -Dcandidates=false
-cp build/libs/* j2eo.jar
+# Fail on non-zero exit codes
+set -e
+
+# Tag should be exported from outside
+
+echo "Building and publishing J2EO"
+./gradlew build fatJar publish -Dcandidates=false --info -PmvnPublicationVersion=${tag}
+echo "Publish completed"

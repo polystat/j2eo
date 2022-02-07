@@ -5,6 +5,7 @@ class Example extends Object
     public T m3;
     void message() {
         int local = 1;
+        var x = 777;
 
         print("Hello");
         print(++a);
