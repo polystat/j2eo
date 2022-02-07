@@ -1,6 +1,6 @@
-FROM archlinux:base-devel-20211024.0.37588
+FROM archlinux:base-devel-20220130.0.46058
 
-RUN pacman -Sy --noconfirm jdk-openjdk bison maven
+RUN pacman -Sy --noconfirm jdk-openjdk maven
 WORKDIR /app
 COPY . /app
-RUN bash build.sh
+CMD bash build.sh
