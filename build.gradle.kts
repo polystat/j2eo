@@ -188,6 +188,7 @@ pmd {
 
 diktat {
     reporterType = "sarif"
+    ignoreFailures = true
 }
 
 checkstyle {
