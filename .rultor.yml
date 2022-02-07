@@ -2,16 +2,6 @@ assets:
   gradle.properties: yegor256/home#assets/polystat/gradle.properties
   pubring.gpg: yegor256/home#assets/pubring.gpg
   secring.gpg: yegor256/home#assets/secring.gpg
-install: |
-  sudo apt-key adv --keyserver keyserver.ubuntu.com --recv-keys EEA14886 E1DF1F24 3DD9F856
-  sudo apt install -y openjdk-16-jdk
-  sudo export JAVA_HOME=/usr/lib/jvm/java-16-openjdk-amd64
-  java -version
-  sudo docker run -v $(pwd)/src:/app/src -v $(pwd)/../gradle.properties:/app/gradle.properties -e tag=${tag} iammaxim/j2eo:latest bash build.sh
-merge:
-  script: |
-    echo "Merge is not implemented"
 release:
   script: |-
-    mv ../gradle.properties .
     sudo docker run -v $(pwd)/src:/app/src -v $(pwd)/../gradle.properties:/app/gradle.properties -e tag=${tag} iammaxim/j2eo:latest bash build.sh
