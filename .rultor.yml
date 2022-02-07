@@ -8,7 +8,4 @@ merge:
 release:
   script: |-
     sudo docker pull iammaxim/j2eo:latest
-    ls src
-    ls src/main
-    ls src/main/resources
-    sudo docker run -v $(pwd)/../gradle.properties:/app/gradle.properties -v $(pwd)/.gnupg:/root/.gnupg -v $(pwd)/pubring.gpg:/root/pubring.gpg -v $(pwd)/secring.gpg:/root/secring.gpg -e tag=${tag} iammaxim/j2eo:latest bash build.sh
+    sudo docker run -v $(pwd)/../gradle.properties:/app/gradle.properties -v /home/r/.gnupg:/root/.gnupg -v /home/r/pubring.gpg:/root/pubring.gpg -v /home/r/secring.gpg:/root/secring.gpg -e tag=${tag} iammaxim/j2eo:latest bash build.sh
