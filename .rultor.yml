@@ -8,4 +8,4 @@ merge:
 release:
   script: |-
     sudo docker pull iammaxim/j2eo:latest
-    sudo docker run -v $(pwd)/src:/app/src -v $(pwd)/../gradle.properties:/app/gradle.properties -e tag=${tag} iammaxim/j2eo:latest bash build.sh
+    sudo docker run -v $(pwd)/src:/app/src -v $(pwd)/out:/app/out -v $(pwd)/../gradle.properties:/app/gradle.properties -e tag=${tag} iammaxim/j2eo:latest bash build.sh
