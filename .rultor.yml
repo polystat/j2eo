@@ -4,6 +4,7 @@ assets:
   secring.gpg: yegor256/home#assets/secring.gpg
 docker:
   image: "iammaxim/j2eo:latest"
+  as_root: true
 release:
   script: |-
     cp ../gradle.properties .
