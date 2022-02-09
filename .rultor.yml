@@ -14,13 +14,11 @@ release:
     ls -lha /home/r
     echo "Contents of current dir:"
     ls -lha
-    echo "Contents of GnuPG dir:"
-    ls -lha ~/.gnupg
     echo "Building Gradle project (excluding tests)..."
     ./gradlew build fatJar publish \
       -x test \
       --info \
       -Dcandidates=false \
       -PmvnPublicationVersion=${tag} \
-      -Dsigning.secretKeyRingFile=/home/r/.gpupg/secring.gpg
+      -Dsigning.secretKeyRingFile=/home/r/secring.gpg
     echo "Done."
