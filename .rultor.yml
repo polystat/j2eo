@@ -2,11 +2,13 @@ assets:
   gradle.properties: yegor256/home#assets/polystat/gradle.properties
   pubring.gpg: yegor256/home#assets/pubring.gpg
   secring.gpg: yegor256/home#assets/secring.gpg
-merge:
-  script: |
-    echo "Merge is not implemented"
+docker:
+  image: "iammaxim/j2eo:latest"
+  as_root: true
 release:
   script: |-
-    sudo chown -R root:root /home/r
-    sudo docker pull iammaxim/j2eo:latest
-    sudo docker run -v $(pwd)/../gradle.properties:/app/gradle.properties -v /home/r/.gnupg:/root/.gnupg -v /home/r/pubring.gpg:/root/pubring.gpg -v /home/r/secring.gpg:/root/secring.gpg -e tag=${tag} iammaxim/j2eo:latest bash build.sh
+    pwd
+    ls -lha
+    cp ../gradle.properties .
+    chmod +x build.sh
+    ./build.sh
