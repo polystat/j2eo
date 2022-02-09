@@ -38,6 +38,11 @@ jobs:
           name: gradle-test-report-${{ matrix.os }}
           path: build/reports/tests/test/
 
+      - name: Print J2EO test report
+        run: |
+          cd ./src/test/resources/
+          python ./test_report.py
+
   gradle_ubuntu:
     runs-on: ubuntu-latest
     steps:
@@ -99,3 +104,8 @@ jobs:
         with:
           name: jacoco-report
           path: target/site/jacoco/
+
+      - name: Print J2EO test report
+        run: |
+          cd ./src/test/resources/
+          python ./test_report.py
