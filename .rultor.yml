@@ -15,10 +15,5 @@ release:
     echo "Contents of current dir:"
     ls -lha
     echo "Building Gradle project (excluding tests)..."
-    ./gradlew build fatJar publish \
-      -x test \
-      --info \
-      -Dcandidates=false \
-      -PmvnPublicationVersion=${tag} \
-      -Dsigning.secretKeyRingFile=/home/r/secring.gpg
+    ./gradlew build fatJar publish -x test --info -Dcandidates=false -PmvnPublicationVersion=${tag} -Dsigning.secretKeyRingFile=/home/r/secring.gpg
     echo "Done."
