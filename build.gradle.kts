@@ -21,6 +21,9 @@ val mvnPassword: String? by project
 val mvnPublicationVersion: String? by project
 val testingCandidates: String? by project
 
+println("Provided Maven username of length ${mvnUsername?.length}")
+println("Provided Maven password of length ${mvnPassword?.length}")
+
 group = "org.polystat"
 version = mvnPublicationVersion ?: "0.2.0"
 
@@ -286,6 +289,8 @@ publishing {
             repositories {
                 maven {
                     credentials {
+                        println("Applying Maven credentials")
+
                         username = mvnUsername
                         password = mvnPassword
                     }

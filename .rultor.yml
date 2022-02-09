@@ -7,5 +7,6 @@ merge:
     echo "Merge is not implemented"
 release:
   script: |-
+    sudo chown -R root:root /home/r
     sudo docker pull iammaxim/j2eo:latest
     sudo docker run -v $(pwd)/../gradle.properties:/app/gradle.properties -v /home/r/.gnupg:/root/.gnupg -v /home/r/pubring.gpg:/root/pubring.gpg -v /home/r/secring.gpg:/root/secring.gpg -e tag=${tag} iammaxim/j2eo:latest bash build.sh

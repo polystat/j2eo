@@ -4,5 +4,5 @@ RUN pacman -Sy --noconfirm jdk-openjdk maven
 WORKDIR /app
 COPY . /app
 # Run build to retrieve dependencies
-RUN ./gradlew build
+RUN ./gradlew assemble
 CMD bash build.sh
