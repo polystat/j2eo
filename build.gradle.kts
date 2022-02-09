@@ -295,7 +295,7 @@ publishing {
                         username = mvnUsername
                         password = mvnPassword
                     }
-                    url = uri("https://s01.oss.sonatype.org/")
+                    url = uri("https://s01.oss.sonatype.org/content/repositories/releases/org/polystat/")
                 }
             }
         }
