@@ -3,8 +3,13 @@
 [] > class__Object
   [] > new
     [] > this
+      "OBJECT" > @
+
       [self] > init
         0 > @
+
+      [self] > toString
+        "OBJECT" > @
 
     seq > @
       this

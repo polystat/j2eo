@@ -1,0 +1,132 @@
++package stdlib
++alias stdlib.class__Object
+
+[] > class__Int
+  class__Object > super
+  super > @
+
+  [] > new
+    [] > this
+      class__Object.new > super
+      super > @
+
+      memory > v
+
+      [self t] > init
+        seq > @
+          self.v.write
+            t
+
+      [self] > toString
+        seq > @
+          self.v.as-string
+
+      [self] > inc_post
+        class__Int.constructor1 > old
+        seq > @
+          old.v.write
+            self.v
+          self.v.write
+            add.
+              self.v
+              1
+          old
+
+      [self] > dec_post
+        class__Int.constructor1 > old
+        seq > @
+          old.v.write
+            self.v
+          self.v.write
+            sub.
+              self.v
+              1
+          old
+
+      [self] > inc_pre
+        class__Int.constructor1 > old
+        seq > @
+          self.v.write
+            add.
+              self.v
+              1
+          old.v.write
+            self.v
+          old
+
+      [self] > dec_pre
+        class__Int.constructor1 > old
+        seq > @
+          self.v.write
+            sub.
+              self.v
+              1
+          old.v.write
+            self.v
+          old
+
+    seq > @
+      this
+
+  [left right] > assign
+    seq > @
+      left.v.write
+        right.v
+      constructor3
+        left
+
+  [left right] > add
+    seq > @
+      constructor2
+        add.
+          left.v
+          right.v
+
+  [left right] > sub
+    seq > @
+      constructor2
+        sub.
+          left.v
+          right.v
+
+  [left right] > mul
+    seq > @
+      constructor2
+        mul.
+          left.v
+          right.v
+
+  [left right] > div
+    seq > @
+      constructor2
+        div.
+          left.v
+          right.v
+
+  [left right] > mod
+    seq > @
+      constructor2
+        mod.
+          left.v
+          right.v
+
+  [] > constructor1
+    new > self
+    seq > @
+      self
+
+  [t] > constructor2
+    new > self
+    seq > @
+      self.init
+        self
+        t
+      self
+
+  [i_o] > constructor3
+    new > self
+    seq > @
+      self.init
+        self
+        i_o.v
+      self
