@@ -1,13 +1,12 @@
 package main;
 
-import static translator.TranslatorKt.translate;
-
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.PrintWriter;
 import lexer.Scanner;
 import org.apache.commons.cli.*;
 import parser.JavaParser;
+import translator.Translator;
 import tree.Entity;
 
 public class Main {
@@ -72,7 +71,8 @@ public class Main {
                 if (Entity.syntaxOnly) {
                     return;
                 }
-                var eoProgram = translate(parser.ast);
+                Translator translator = new Translator();
+                var eoProgram = translator.translate(parser.ast);
                 var targetText = eoProgram.generateEO(0);
 
                 // Print generated code to stdout or to file, if any specified

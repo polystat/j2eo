@@ -9,7 +9,7 @@ import org.junit.jupiter.api.TestFactory
 import org.junit.jupiter.api.parallel.Execution
 import org.junit.jupiter.api.parallel.ExecutionMode
 import parser.JavaParser
-import translator.translate
+import translator.Translator
 import tree.Compilation.CompilationUnit
 import util.logger
 import java.io.BufferedReader
@@ -235,7 +235,7 @@ class TestJ2EO {
         }
 
         private fun translateToEO(unit: CompilationUnit): String {
-            val eoProgram: EOProgram = translate(unit)
+            val eoProgram: EOProgram = Translator().translate(unit)
             return eoProgram.generateEO(0)
         }
 
