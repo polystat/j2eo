@@ -3,6 +3,9 @@
 +alias stdlib.class__PrintStream
 
 [] > class__System
+  class__Object > super
+  super > @
+
   class__PrintStream.constructor > out
 
   [] > new

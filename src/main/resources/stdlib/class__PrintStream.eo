@@ -3,6 +3,9 @@
 +alias stdout org.eolang.io.stdout
 
 [] > class__PrintStream
+  class__Object > super
+  super > @
+
   [] > new
     [] > this
       class__Object.new > super

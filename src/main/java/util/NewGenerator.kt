@@ -8,6 +8,7 @@ import eotree.EOObject
 import eotree.eoDot
 import lexer.TokenCode
 import translator.mapClassDeclaration
+import tree.CompoundName
 import tree.Declaration.Declaration
 import tree.Declaration.NormalClassDeclaration
 import tree.Type.TypeName
@@ -20,7 +21,7 @@ fun generateThis(clsDec: NormalClassDeclaration): EOBndExpr {
             listOf(
                 if (clsDec.extendedType is TypeName)
                     EOBndExpr(
-                        ((clsDec.extendedType as TypeName).compoundName.names.last().eoClassName() + ".new").eoDot(),
+                        CompoundName((clsDec.extendedType as TypeName).compoundName.names + "new").eoDot(),
                         "super"
                     )
                 else

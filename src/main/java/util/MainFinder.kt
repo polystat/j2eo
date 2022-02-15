@@ -1,5 +1,6 @@
 package util
 
+import lexer.TokenCode
 import tree.Compilation.SimpleCompilationUnit
 import tree.Compilation.TopLevelComponent
 import tree.Declaration.Declaration
@@ -15,7 +16,10 @@ fun containsMain(component: TopLevelComponent): Boolean {
                     try {
                         (declaration as MethodDeclaration).parameters.parameters.size == 1 &&
                             declaration.parameters.parameters[0].name == "args" &&
-                            declaration.name == "main"
+                            declaration.name == "main" &&
+                            declaration.modifiers.modifiers.modifiers.size == 2 &&
+                            declaration.modifiers.modifiers.modifiers.find { it == TokenCode.Static } != null &&
+                            declaration.modifiers.modifiers.modifiers.find { it == TokenCode.Public } != null
                     } catch (e: NullPointerException) {
                         false
                     }
