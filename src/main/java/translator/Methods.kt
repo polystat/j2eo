@@ -20,7 +20,7 @@ import java.util.stream.Collectors
 
 fun mapMethodDeclaration(dec: MethodDeclaration): EOBndExpr {
     val isStatic = dec.modifiers != null &&
-        dec.modifiers.modifiers.modifiers.find { code: TokenCode -> code == TokenCode.Static } != null
+        dec.modifiers.modifiers.modifiers.find { it == TokenCode.Static } != null
     val additionalParameters = if (!isStatic) listOf("this") else ArrayList()
 
     val obj = EOObject(
@@ -47,7 +47,7 @@ fun mapMethodDeclaration(dec: MethodDeclaration): EOBndExpr {
         // Bound attributes
         // TODO: implement
         try {
-            dec.methodBody.block.findAllLocalVariables().map { mapVariableDeclaration(it) } +
+            dec.methodBody.block.findAllLocalVariables().map { preMapVariableDeclaration(it) } +
                 listOf(
                     EOBndExpr(
                         EOCopy(
@@ -58,6 +58,8 @@ fun mapMethodDeclaration(dec: MethodDeclaration): EOBndExpr {
                                         mapStatement(it.statement)
                                     else if (it.expression != null)
                                         mapExpression(it.expression)
+//                                    else if (it.declaration != null)
+//
                                     else
                                         null
                                 }

@@ -9,6 +9,7 @@ import eotree.EOLicense
 import eotree.EOMeta
 import eotree.EOMetas
 import eotree.EOProgram
+import translator.preprocessor.preprocess
 import tree.Compilation.CompilationUnit
 import tree.Compilation.Package
 import tree.Compilation.SimpleCompilationUnit
@@ -17,7 +18,6 @@ import util.ListUtils
 import util.findMainClass
 import util.generateEntryPoint
 import util.logger
-import util.preprocessUnit
 import java.time.LocalDateTime
 
 fun translate(unit: CompilationUnit): EOProgram {
@@ -44,7 +44,8 @@ fun mapPackage(pkg: Package): EOProgram {
 }
 
 fun mapSimpleCompilationUnit(unit: SimpleCompilationUnit): EOProgram {
-    preprocessUnit(unit)
+    // preprocessUnit(unit)
+    preprocess(unit)
 
     val bnds = unit.components.components
         .map { obj: TopLevelComponent? -> mapTopLevelComponent(obj!!) }
@@ -73,6 +74,7 @@ fun mapSimpleCompilationUnit(unit: SimpleCompilationUnit): EOProgram {
                 // EOMeta("alias", "org.eolang.gray.cage"),
                 EOMeta("alias", "stdlib.class__Object"),
                 EOMeta("alias", "stdlib.class__System"),
+                EOMeta("alias", "stdlib.class__Int"),
             )
         ),
         bnds + entrypointBnds

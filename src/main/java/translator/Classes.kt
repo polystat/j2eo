@@ -9,7 +9,6 @@ import tree.Declaration.ClassDeclaration
 import tree.Declaration.InterfaceDeclaration
 import tree.Declaration.NormalClassDeclaration
 import tree.Type.TypeName
-import util.eoClassCompoundName
 import util.generateNew
 import util.generateStatic
 
@@ -35,7 +34,7 @@ fun mapClass(clsDec: ClassDeclaration): EOBndExpr {
                 (
                     if (clsDec.extendedType is TypeName)
                         EOBndExpr(
-                            (clsDec.extendedType as TypeName).compoundName.eoClassCompoundName().eoDot(),
+                            (clsDec.extendedType as TypeName).compoundName.eoDot(),
                             "super"
                         )
                     else
