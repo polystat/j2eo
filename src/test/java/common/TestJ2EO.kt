@@ -117,14 +117,11 @@ class TestJ2EO {
             val testCandidates =
                 System.getProperty("candidates") != null &&
                     System.getProperty("candidates") == "true"
+            val props = System.getProperties().toString()
             if (testCandidates)
-                logger.info("Executing candidate tests!")
+                logger.info("-- Executing candidate tests --")
             var testFolderPath = listOf("src", "test", "resources").joinToString(sep)
-            if (testCandidates) {
-                testFolderPath += sep + "test_candidates"
-            } else {
-                testFolderPath += sep + "test_ready"
-            }
+            testFolderPath += sep + if (testCandidates) "test_candidates" else "test_ready"
             val mainFolderPath = listOf("src", "main", "resources").joinToString(sep)
             val fileMain = File(mainFolderPath)
             mainFolderRoot = fileMain.absolutePath

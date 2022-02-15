@@ -19,7 +19,7 @@ plugins {
 val mvnUsername: String? by project
 val mvnPassword: String? by project
 val mvnPublicationVersion: String? by project
-val testingCandidates: String? by project
+val candidates: String? by project
 
 println("Provided Maven username of length ${mvnUsername?.length}")
 println("Provided Maven password of length ${mvnPassword?.length}")
@@ -166,7 +166,7 @@ tasks.build {
 
 tasks.test {
     useJUnitPlatform()
-    systemProperty("candidates", testingCandidates ?: "false")
+    systemProperty("candidates", candidates ?: "false")
 }
 
 pmd {
