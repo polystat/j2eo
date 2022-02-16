@@ -12,7 +12,7 @@ plugins {
     signing
     id("io.spring.dependency-management") version "1.0.11.RELEASE"
     // id("org.jlleitschuh.gradle.ktlint") version "10.2.1"
-	id("org.cqfn.diktat.diktat-gradle-plugin") version "1.0.2"
+    // id("org.cqfn.diktat.diktat-gradle-plugin") version "1.0.2"
     kotlin("jvm") version "1.6.0"
 }
 
@@ -105,16 +105,16 @@ val fatJar = task("fatJar", type = Jar::class) {
 }
 
 tasks {
-    classes {
-        dependsOn(diktatFix)
-    }
-    // ktlintFormat {
-    //     finalizedBy(ktlintCheck)
-    // }
-	diktatFix {
-		// dependsOn(ktlintFormat)
-		finalizedBy(diktatCheck)
-	}
+//    classes {
+//        dependsOn(diktatFix)
+//    }
+//     ktlintFormat {
+//         finalizedBy(ktlintCheck)
+//     }
+//  diktatFix {
+//      dependsOn(ktlintFormat)
+//      finalizedBy(diktatCheck)
+//  }
     pmdMain {
         dependsOn(classes)
     }
@@ -192,10 +192,10 @@ pmd {
 //     }
 // }
 
-diktat {
-    reporterType = "sarif"
-    ignoreFailures = true
-}
+//diktat {
+//    reporterType = "sarif"
+//    ignoreFailures = true
+//}
 
 checkstyle {
     toolVersion = "9.1"
@@ -303,7 +303,7 @@ publishing {
                         username = mvnUsername
                         password = mvnPassword
                     }
-                    url = uri("https://s01.oss.sonatype.org/content/repositories/releases/org/polystat/")
+                    url = uri("https://s01.oss.sonatype.org/content/repositories/releases/")
                 }
             }
         }
@@ -379,7 +379,7 @@ fun runBison() =
             else ->
                 throw UnsupportedOperationException(
                     "Your OS is not yet supported. File a GitHub or issue or " +
-                        "provide a Pull Request with support for Bison execution for your OS."
+                            "provide a Pull Request with support for Bison execution for your OS."
                 )
         }
     } catch (e: Exception) {

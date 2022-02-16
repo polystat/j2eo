@@ -2,25 +2,20 @@ package translator
 
 import arrow.core.None
 import arrow.core.Some
-import eotree.EOBnd
-import eotree.EOBndExpr
-import eotree.EOComment
-import eotree.EOLicense
-import eotree.EOMeta
-import eotree.EOMetas
-import eotree.EOProgram
-import translator.preprocessor.Preprocessor
+import eotree.*
+import translator.preprocessor.PreprocessorState
+import translator.preprocessor.preprocess
 import tree.Compilation.CompilationUnit
 import tree.Compilation.Package
 import tree.Compilation.SimpleCompilationUnit
 import tree.Compilation.TopLevelComponent
 import tree.Entity
-import util.ListUtils
 import util.findMainClass
 import util.generateEntryPoint
 import util.logger
 import java.time.LocalDateTime
-import java.util.Stack
+import java.util.*
+import kotlin.streams.toList
 
 class ParseExprGoals {
     companion object {
@@ -44,8 +39,8 @@ class Translator {
         else
             throw IllegalArgumentException(
                 "CompilationUnit of type " +
-                    unit.javaClass.simpleName +
-                    " is not supported"
+                        unit.javaClass.simpleName +
+                        " is not supported"
             )
     }
 
@@ -63,8 +58,8 @@ class Translator {
 
     private fun mapSimpleCompilationUnit(unit: SimpleCompilationUnit): EOProgram {
         // preprocessUnit(unit)
-        val preprocessor = Preprocessor()
-        preprocessor.preprocess(unit)
+        val preprocessorState = PreprocessorState()
+        preprocess(preprocessorState, unit)
 
         val bnds = unit.components.components
             .map { obj: TopLevelComponent? -> mapTopLevelComponent(obj!!) }
@@ -83,7 +78,7 @@ class Translator {
         // FIXME: assuming there is only one top-level component and it is a class
         // Always calling the 'main' method
 
-        val stdAliases = preprocessor.stdClassesForCurrentAlias.stream()
+        val stdAliases = preprocessorState.stdClassesForCurrentAlias.stream()
             .map { EOMeta("alias", "stdlib.$it") }.toList()
 
         return EOProgram(
