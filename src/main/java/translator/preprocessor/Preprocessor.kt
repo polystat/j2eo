@@ -21,7 +21,8 @@ import tree.Type.TypeName
  */
 data class PreprocessorState(
         val classNames: HashMap<String, String> = hashMapOf(
-                "System" to "class__System"
+            "Object" to "class__Object",
+            "System" to "class__System"
         ),
         val stdClassesNeededForAlias: HashSet<String> = hashSetOf(
                 "class__Object",
@@ -224,20 +225,13 @@ private fun preprocessCompoundName(state: PreprocessorState, compoundName: Compo
 
     compoundName.names
             .replaceAll {
-                state.classNames[it]?.let {
-                    state.classNames[it]
-                }
-                        ?: run {
-                            it
-                        }
+                state.classNames[it] ?: it
             }
     tryAddClassForAliases(state, compoundName.names.first())
 }
 
 private fun tryAddClassForAliases(state: PreprocessorState, className: String) {
-    print("Trying add class [$className]...")
     if (state.stdClassesNeededForAlias.contains(className)) {
         state.stdClassesForCurrentAlias.add(className)
-        print("Class [$className] added.")
     }
 }
