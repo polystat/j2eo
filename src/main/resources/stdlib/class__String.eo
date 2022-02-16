@@ -1,0 +1,52 @@
++package stdlib
++alias stdlib.class__Object
+
+[] > class__String
+  class__Object > super
+  super > @
+
+  [] > new
+    [] > this
+      class__Object.new > super
+      super > @
+
+      memory > s
+
+      [self t] > init
+        seq > @
+          self.s.write
+            t
+
+      [self] > toString
+        seq > @
+          self.s
+
+      [left right] > write
+        seq > @
+          left.s.write
+            right.s
+          left
+
+    seq > @
+      this
+
+  [] > constructor1
+    new > self
+    seq > @
+      self
+
+  [t] > constructor2
+    new > self
+    seq > @
+      self.init
+        self
+        t
+      self
+
+  [s_o] > constructor3
+    new > self
+    seq > @
+      self.init
+        self
+        s_o.s
+      self
