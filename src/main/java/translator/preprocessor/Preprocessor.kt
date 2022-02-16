@@ -24,6 +24,16 @@ class Preprocessor {
         it["System"] = "class__System"
     }
 
+    private val stdClassesNeededForAlias = hashSetOf(
+        "class__Object",
+        "class__System",
+        "class__Int"
+    )
+
+    val stdClassesForCurrentAlias = hashSetOf<String>(
+        "class__Object" // We need it always
+    )
+
     fun preprocess(unit: CompilationUnit) {
         if (unit is SimpleCompilationUnit) {
             preprocessSimpleCompilationUnit(unit)
@@ -40,6 +50,7 @@ class Preprocessor {
         fun findClassDeclaration(clsDec: NormalClassDeclaration) {
             if (classNames[clsDec.name] == null) {
                 classNames[clsDec.name] = "class__${clsDec.name}"
+                tryAddClassForAliases("class__${clsDec.name}")
             }
 
             if (clsDec.extendedType is TypeName) {
@@ -47,6 +58,7 @@ class Preprocessor {
                     .map {
                         if (classNames[it] == null) {
                             classNames[it] = "class__$it"
+                            tryAddClassForAliases("class__$it")
                         }
                     }
                 (clsDec.extendedType as TypeName).compoundName.names
@@ -173,6 +185,15 @@ class Preprocessor {
 
         compoundName.names
             .replaceAll { if (classNames[it] != null) classNames[it] else it }
+        tryAddClassForAliases(compoundName.names.first())
+    }
+
+    private fun tryAddClassForAliases(className: String) {
+        print("Trying add class [$className]...")
+        if (stdClassesNeededForAlias.contains(className)) {
+            stdClassesForCurrentAlias.add(className)
+            print("Class [$className] added.")
+        }
     }
 
 }

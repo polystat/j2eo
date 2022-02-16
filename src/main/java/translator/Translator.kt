@@ -14,7 +14,6 @@ import tree.Compilation.CompilationUnit
 import tree.Compilation.Package
 import tree.Compilation.SimpleCompilationUnit
 import tree.Compilation.TopLevelComponent
-import util.ListUtils
 import util.findMainClass
 import util.generateEntryPoint
 import util.logger
@@ -46,9 +45,10 @@ class Translator {
         )
     }
 
-    fun mapSimpleCompilationUnit(unit: SimpleCompilationUnit): EOProgram {
+    private fun mapSimpleCompilationUnit(unit: SimpleCompilationUnit): EOProgram {
         // preprocessUnit(unit)
-        Preprocessor().preprocess(unit)
+        val preprocessor = Preprocessor()
+        preprocessor.preprocess(unit)
 
         val bnds = unit.components.components
             .map { obj: TopLevelComponent? -> mapTopLevelComponent(obj!!) }
@@ -66,6 +66,10 @@ class Translator {
         // FIXME: assuming there is only one top-level component and it is a class
         // Always calling the 'main' method
 
+
+        val stdAliases = preprocessor.stdClassesForCurrentAlias.stream()
+            .map { EOMeta("alias", "stdlib.$it") }.toList()
+
         return EOProgram(
             EOLicense(
                 EOComment(LocalDateTime.now().toString()),
@@ -73,12 +77,7 @@ class Translator {
             ),
             EOMetas(
                 None,
-                ListUtils.listOf(
-                    // EOMeta("alias", "org.eolang.gray.cage"),
-                    EOMeta("alias", "stdlib.class__Object"),
-                    EOMeta("alias", "stdlib.class__System"),
-                    EOMeta("alias", "stdlib.class__Int"),
-                )
+                stdAliases
             ),
             bnds + entrypointBnds
         )

@@ -117,7 +117,6 @@ class TestJ2EO {
             val testCandidates =
                 System.getProperty("candidates") != null &&
                     System.getProperty("candidates") == "true"
-            val props = System.getProperties().toString()
             if (testCandidates)
                 logger.info("-- Executing candidate tests --")
             var testFolderPath = listOf("src", "test", "resources").joinToString(sep)
@@ -262,10 +261,10 @@ class TestJ2EO {
             try {
                 val eoFilePath = Files.createFile(Paths.get(eoExecDir.toString() + sep + "class_" + eoFileName + ".eo"))
                 Files.copy(
-                    Paths.get(pomFilePath),
+                    Paths.get(pomFilePath ?: "pomPath"),
                     Paths.get(eoExecDir.parent.toString() + sep + "pom.xml")
                 )
-                Paths.get(mainFolderRoot, "stdlib").toFile().copyRecursively(
+                Paths.get(mainFolderRoot ?: "mainPath", "stdlib").toFile().copyRecursively(
                     Paths.get(eoExecDir.toString(), "stdlib").toFile()
                 )
 
