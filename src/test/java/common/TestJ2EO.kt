@@ -9,7 +9,7 @@ import org.junit.jupiter.api.TestFactory
 import org.junit.jupiter.api.parallel.Execution
 import org.junit.jupiter.api.parallel.ExecutionMode
 import parser.JavaParser
-import translator.translate
+import translator.Translator
 import tree.Compilation.CompilationUnit
 import util.logger
 import java.io.BufferedReader
@@ -118,13 +118,9 @@ class TestJ2EO {
                 System.getProperty("candidates") != null &&
                     System.getProperty("candidates") == "true"
             if (testCandidates)
-                logger.info("Executing candidate tests!")
+                logger.info("-- Executing candidate tests --")
             var testFolderPath = listOf("src", "test", "resources").joinToString(sep)
-            if (testCandidates) {
-                testFolderPath += sep + "test_candidates"
-            } else {
-                testFolderPath += sep + "test_ready"
-            }
+            testFolderPath += sep + if (testCandidates) "test_candidates" else "test_ready"
             val mainFolderPath = listOf("src", "main", "resources").joinToString(sep)
             val fileMain = File(mainFolderPath)
             mainFolderRoot = fileMain.absolutePath
@@ -235,7 +231,7 @@ class TestJ2EO {
         }
 
         private fun translateToEO(unit: CompilationUnit): String {
-            val eoProgram: EOProgram = translate(unit)
+            val eoProgram: EOProgram = Translator().translate(unit)
             return eoProgram.generateEO(0)
         }
 
@@ -265,10 +261,10 @@ class TestJ2EO {
             try {
                 val eoFilePath = Files.createFile(Paths.get(eoExecDir.toString() + sep + "class_" + eoFileName + ".eo"))
                 Files.copy(
-                    Paths.get(pomFilePath),
+                    Paths.get(pomFilePath ?: "pomPath"),
                     Paths.get(eoExecDir.parent.toString() + sep + "pom.xml")
                 )
-                Paths.get(mainFolderRoot, "stdlib").toFile().copyRecursively(
+                Paths.get(mainFolderRoot ?: "mainPath", "stdlib").toFile().copyRecursively(
                     Paths.get(eoExecDir.toString(), "stdlib").toFile()
                 )
 
