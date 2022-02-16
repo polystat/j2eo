@@ -9,6 +9,9 @@ import lexer.TokenCode
 import tree.Declaration.MethodDeclaration
 import tree.Declaration.ParameterDeclaration
 import tree.Declaration.VariableDeclaration
+import tree.Entity
+import tree.Expression.Expression
+import tree.Initializer
 import tree.Statement.BlockStatements
 import java.util.stream.Collectors
 
@@ -56,17 +59,17 @@ fun mapMethodDeclaration(dec: MethodDeclaration): EOBndExpr {
                                 .mapNotNull {
                                     if (it.statement != null)
                                         mapStatement(it.statement)
-                                    else if (it.expression != null)
-                                        mapExpression(it.expression)
-//                                    else if (it.declaration != null)
-//
+//                                    else if (it.expression != null)
+//                                        mapExpression(it.expression)
+                                    else if (it.declaration is VariableDeclaration && (it.declaration as VariableDeclaration).initializer != null)
+                                        mapVariableDeclaration(it.declaration as VariableDeclaration)
                                     else
                                         null
                                 }
                         ),
                         "@"
                     )
-                )
+                ) + parseExprGoals()
         } catch (e: NullPointerException) {
             listOf(
                 EOBndExpr(
@@ -93,6 +96,26 @@ fun mapMethodDeclaration(dec: MethodDeclaration): EOBndExpr {
         obj,
         dec.name
     )
+}
+
+fun parseExprGoals(): List<EOBndExpr> {
+    val result = ArrayList<EOBndExpr>()
+
+    while (!ParseExprGoals.goals.empty()) {
+        val top = ParseExprGoals.goals.pop()
+        result.add(parseExprGoal(top.second, top.first))
+    }
+
+    return result
+}
+
+fun parseExprGoal(e: Entity, name: String): EOBndExpr {
+    return when (e) {
+        is Expression -> EOBndExpr(mapExpression(e), name)
+        is Initializer -> EOBndExpr(mapInitializer(e), name)
+        else ->
+            throw IllegalArgumentException("Entity of type ${e.javaClass.simpleName} is not supported")
+    }
 }
 
 fun BlockStatements.findAllLocalVariables(): List<VariableDeclaration> =

@@ -4,7 +4,9 @@ import arrow.core.None
 import arrow.core.Option
 import arrow.core.some
 import eotree.EOBndExpr
+import eotree.EOCopy
 import eotree.EODot
+import eotree.EOExpr
 import eotree.eoDot
 import lexer.TokenCode
 import tree.Declaration.ClassDeclaration
@@ -26,9 +28,9 @@ fun mapClassDeclaration(dec: Declaration): Option<EOBndExpr> {
         is NormalClassDeclaration -> {
             mapClass(dec as ClassDeclaration).some()
         }
-//        is VariableDeclaration -> {
-//            mapVariableDeclaration(dec).some()
-//        }
+        is VariableDeclaration -> {
+            preMapVariableDeclaration(dec).some()
+        }
         else -> {
             None
         }
@@ -50,6 +52,25 @@ fun preMapVariableDeclaration(dec: VariableDeclaration): EOBndExpr =
             throw IllegalArgumentException("Type of type " + dec.type.javaClass.name + " is not supported")
     }
 
+fun mapVariableDeclaration(dec: VariableDeclaration): EOExpr =
+    when (dec.type) {
+        is TypeName -> {
+            ParseExprGoals.addGoal(dec.initializer)
+            EOCopy(listOf(dec.name, "write").eoDot(), ParseExprGoals.c_name.eoDot())
+        }
+        is PrimitiveType -> {
+            ParseExprGoals.addGoal(dec.initializer)
+            EOCopy(
+                listOf(decodePrimitiveType(dec.type as PrimitiveType), "write").eoDot(),
+                listOf(dec.name.eoDot(), ParseExprGoals.c_name.eoDot())
+            )
+        }
+        null ->
+            throw IllegalArgumentException("\"var\" declarations are not supported yet")
+        else ->
+            throw IllegalArgumentException("Type of type " + dec.type.javaClass.name + " is not supported")
+    }
+
 fun decodePrimitiveType(type: PrimitiveType): String {
     return when (type.typeCode) {
         TokenCode.Int -> "class__Int"
@@ -58,5 +79,5 @@ fun decodePrimitiveType(type: PrimitiveType): String {
 }
 
 fun decodeInitializer(initializer: Initializer?): String {
-    return "constructor2"
+    return "constructor1"
 }

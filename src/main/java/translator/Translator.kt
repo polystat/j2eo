@@ -14,11 +14,26 @@ import tree.Compilation.CompilationUnit
 import tree.Compilation.Package
 import tree.Compilation.SimpleCompilationUnit
 import tree.Compilation.TopLevelComponent
+import tree.Entity
 import util.ListUtils
 import util.findMainClass
 import util.generateEntryPoint
 import util.logger
 import java.time.LocalDateTime
+import java.util.Stack
+
+class ParseExprGoals {
+    companion object {
+        val goals = Stack<Pair<String, Entity>>()
+        var c_name: String = "e_0"
+        private var goals_total = 0
+
+        fun addGoal(e: Entity) {
+            c_name = "e_${goals_total++}"
+            goals.push(Pair(c_name, e))
+        }
+    }
+}
 
 fun translate(unit: CompilationUnit): EOProgram {
     return if (unit is SimpleCompilationUnit)
