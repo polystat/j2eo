@@ -1,7 +1,7 @@
 +package stdlib
 +alias stdlib.class__Object
 
-[] > class__Int
+[] > class__Integer
   class__Object > super
   super > @
 
@@ -22,7 +22,7 @@
           self.v.as-string
 
       [self] > inc_post
-        class__Int.constructor1 > old
+        class__Integer.constructor1 > old
         seq > @
           old.v.write
             self.v
@@ -33,7 +33,7 @@
           old
 
       [self] > dec_post
-        class__Int.constructor1 > old
+        class__Integer.constructor1 > old
         seq > @
           old.v.write
             self.v
@@ -44,7 +44,7 @@
           old
 
       [self] > inc_pre
-        class__Int.constructor1 > old
+        class__Integer.constructor1 > old
         seq > @
           self.v.write
             add.
@@ -55,7 +55,7 @@
           old
 
       [self] > dec_pre
-        class__Int.constructor1 > old
+        class__Integer.constructor1 > old
         seq > @
           self.v.write
             sub.
@@ -65,50 +65,50 @@
             self.v
           old
 
+      [left right] > write
+        seq > @
+          left.v.write
+            right.v
+          class__Integer.constructor3
+            left
+
+      [left right] > add
+        seq > @
+          class__Integer.constructor2
+            add.
+              left.v
+              right.v
+
+      [left right] > sub
+        seq > @
+          class__Integer.constructor2
+            sub.
+              left.v
+              right.v
+
+      [left right] > mul
+        seq > @
+          class__Integer.constructor2
+            mul.
+              left.v
+              right.v
+
+      [left right] > div
+        seq > @
+          class__Integer.constructor2
+            div.
+              left.v
+              right.v
+
+      [left right] > mod
+        seq > @
+          class__Integer.constructor2
+            mod.
+              left.v
+              right.v
+
     seq > @
       this
-
-  [left right] > assign
-    seq > @
-      left.v.write
-        right.v
-      constructor3
-        left
-
-  [left right] > add
-    seq > @
-      constructor2
-        add.
-          left.v
-          right.v
-
-  [left right] > sub
-    seq > @
-      constructor2
-        sub.
-          left.v
-          right.v
-
-  [left right] > mul
-    seq > @
-      constructor2
-        mul.
-          left.v
-          right.v
-
-  [left right] > div
-    seq > @
-      constructor2
-        div.
-          left.v
-          right.v
-
-  [left right] > mod
-    seq > @
-      constructor2
-        mod.
-          left.v
-          right.v
 
   [] > constructor1
     new > self

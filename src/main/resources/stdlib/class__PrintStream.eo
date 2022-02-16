@@ -17,7 +17,8 @@
       [self x] > println
         seq > @
           stdout
-            x
+            x.toString
+              x
           stdout
             "\n"
 
