@@ -1,7 +1,9 @@
 package translator
 
 import arrow.core.None
+import arrow.core.Option
 import arrow.core.firstOrNone
+import arrow.core.getOrElse
 import eotree.EOBndExpr
 import eotree.EOCopy
 import eotree.EOObject
@@ -13,7 +15,6 @@ import tree.Entity
 import tree.Expression.Expression
 import tree.Initializer
 import tree.Statement.BlockStatements
-import java.util.stream.Collectors
 
 // fun MethodDeclaration.getLocalVariables(): List<Declaration> =
 //    // TODO: add support for nested block variables as well
@@ -23,17 +24,17 @@ import java.util.stream.Collectors
 
 fun mapMethodDeclaration(dec: MethodDeclaration): EOBndExpr {
     val isStatic = dec.modifiers != null &&
-        dec.modifiers.modifiers.modifiers.find { it == TokenCode.Static } != null
+            dec.modifiers.modifiers.modifiers.find { it == TokenCode.Static } != null
     val additionalParameters = if (!isStatic) listOf("this") else ArrayList()
 
     val obj = EOObject(
         // Non-vararg parameters
         if (dec.parameters != null) // Exclude 'String[] args' fon now
             additionalParameters +
-                dec.parameters.parameters.stream()
-                    .filter { param: ParameterDeclaration -> !param.signEllipsis }
-                    .map { param: ParameterDeclaration -> param.name }
-                    .collect(Collectors.toList())
+                    dec.parameters.parameters
+                        .filter { param: ParameterDeclaration -> !param.signEllipsis }
+                        .map { param: ParameterDeclaration -> param.name }
+                        .toList()
         else
             additionalParameters,
 
@@ -49,8 +50,8 @@ fun mapMethodDeclaration(dec: MethodDeclaration): EOBndExpr {
 
         // Bound attributes
         // TODO: implement
-        try {
-            dec.methodBody.block.findAllLocalVariables().map { preMapVariableDeclaration(it) } +
+//        try {
+        dec.methodBody.block.findAllLocalVariables().map { preMapVariableDeclaration(it) } +
                 listOf(
                     EOBndExpr(
                         EOCopy(
@@ -69,25 +70,35 @@ fun mapMethodDeclaration(dec: MethodDeclaration): EOBndExpr {
                         ),
                         "@"
                     )
-                ) + parseExprGoals()
-        } catch (e: NullPointerException) {
-            listOf(
-                EOBndExpr(
-                    EOCopy(
-                        "0",
-                        ArrayList()
-                    ),
-                    "@"
-                )
-            )
-        }
+                ) + parseExprGoals(),
+//        } catch (e: NullPointerException) {
+//            listOf(
+//                EOBndExpr(
+//                    EOCopy(
+//                        "0",
+//                        ArrayList()
+//                    ),
+//                    "@"
+//                )
+//            )
+//        },
+        "${dec.name} :: ${
+            dec.parameters.parameters
+                .joinToString(" -> ") { param ->
+                    param.type.getTypeName() + param.signEllipsis.let { if (it) "..." else "" }
+                }
+        } -> ${
+            Option.fromNullable(dec.type)
+                .map { it.getTypeName() }
+                .getOrElse { "void" }
+        }"
     )
 
     // Contract to check parameter count
     if (dec.parameters != null)
         assert(
             dec.parameters.parameters.size + (if (isStatic) 0 else 1) ==
-                obj.freeAttrs.size + if (obj.varargAttr.nonEmpty()) 1 else 0
+                    obj.freeAttrs.size + if (obj.varargAttr.nonEmpty()) 1 else 0
         ) {
             "Parameters count of Java method and EO method do not match: ${dec.parameters.parameters.size} vs ${obj.freeAttrs.size + if (obj.varargAttr.nonEmpty()) 1 else 0}"
         }
