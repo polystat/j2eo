@@ -1,11 +1,8 @@
 package translator
 
-import arrow.core.some
-import eotree.EOCopy
-import eotree.EODot
-import eotree.EOExpr
+import arrow.core.None
+import eotree.*
 import eotree.data.EOIntData
-import eotree.eoDot
 import lexer.TokenCode
 import tree.Expression.Binary
 import tree.Expression.Expression
@@ -18,31 +15,31 @@ import tree.Expression.SimpleReference
 import tree.Expression.UnaryPostfix
 import tree.Expression.UnaryPrefix
 
-fun mapExpression(expr: Expression): EOExpr =
+fun mapExpression(expr: Expression): EOObject =
     when (expr) {
         is MethodInvocation ->
             mapMethodInvocation(expr)
         is Literal ->
             mapLiteral(expr)
-        is UnaryPrefix ->
-            mapUnaryPrefix(expr)
-        is UnaryPostfix ->
-            mapUnaryPostfix(expr)
+//        is UnaryPrefix ->
+//            mapUnaryPrefix(expr)
+//        is UnaryPostfix ->
+//            mapUnaryPostfix(expr)
         is Binary ->
             mapBinary(expr)
         is SimpleReference ->
             mapSimpleReference(expr)
-        is FieldAccess ->
-            mapFieldAccess(expr)
-        is This ->
-            mapThis(expr)
+//        is FieldAccess ->
+//            mapFieldAccess(expr)
+//        is This ->
+//            mapThis(expr)
         is Parenthesized ->
             mapParenthesized(expr)
         else ->
             throw IllegalArgumentException("Expression of type ${expr.javaClass.simpleName} is not supported")
     }
 
-fun mapParenthesized(expr: Parenthesized): EOExpr =
+fun mapParenthesized(expr: Parenthesized): EOObject =
     mapExpression(expr.expression)
 
 // TODO: add support for type
@@ -85,7 +82,7 @@ fun mapUnaryPostfix(expr: UnaryPostfix): EOExpr {
 
 // TODO: add automatic casting for primitive types
 // TODO: populate with all Java binary operators
-fun mapBinary(expr: Binary): EOExpr {
+fun mapBinary(expr: Binary): EOObject {
     val function = when (expr.operator) {
         TokenCode.Plus -> "add"
         TokenCode.Minus -> "minus"
@@ -100,11 +97,34 @@ fun mapBinary(expr: Binary): EOExpr {
         else -> throw IllegalArgumentException("Binary operation ${expr.operator} is not supported")
     }
 
-    return EOCopy(
-        EODot(mapExpression(expr.left).some(), function),
-        mapExpression(expr.right)
+    ParseExprGoals.addGoal(expr.left)
+    val leftName = ParseExprGoals.c_name
+    ParseExprGoals.addGoal(expr.right)
+    val rightName = ParseExprGoals.c_name
+
+    return EOObject(
+        listOf(),
+        None,
+        listOf(
+            EOBndExpr(
+                EOCopy(
+                    listOf(leftName, function).eoDot(),
+                    rightName.eoDot()
+                ),
+                "@"
+            )
+        )
     )
 }
 
-fun mapSimpleReference(expr: SimpleReference): EOExpr =
-    expr.compoundName.eoDot()
+fun mapSimpleReference(expr: SimpleReference): EOObject =
+    EOObject(
+        listOf(),
+        None,
+        listOf(
+            EOBndExpr(
+                expr.compoundName.eoDot(),
+                "@"
+            )
+        )
+    )

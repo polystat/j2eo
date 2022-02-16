@@ -1,10 +1,10 @@
 package translator
 
-import eotree.EOExpr
+import eotree.EOObject
 import tree.Initializer
 import tree.InitializerSimple
 
-fun mapInitializer(initializer: Initializer): EOExpr {
+fun mapInitializer(initializer: Initializer): EOObject {
     return when (initializer) {
         is InitializerSimple -> mapInitializerSimple(initializer)
         else ->
@@ -12,6 +12,6 @@ fun mapInitializer(initializer: Initializer): EOExpr {
     }
 }
 
-fun mapInitializerSimple(initializerSimple: InitializerSimple): EOExpr {
+fun mapInitializerSimple(initializerSimple: InitializerSimple): EOObject {
     return mapExpression(initializerSimple.expression)
 }
