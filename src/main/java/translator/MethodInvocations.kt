@@ -1,18 +1,24 @@
 package translator
 
+import arrow.core.None
+import eotree.EOBndExpr
 import eotree.EOCopy
 import eotree.EODot
 import eotree.EOExpr
+import eotree.EOObject
 import eotree.eoDot
+import tree.Expression.Expression
 import tree.Expression.Primary.MethodInvocation
 import tree.Expression.SimpleReference
 import util.isSystemOutCall
 
 // TODO: create state object to store binding of expression
-fun mapMethodInvocation(methodInvocation: MethodInvocation): EOCopy {
+fun mapMethodInvocation(methodInvocation: MethodInvocation): EOObject {
     require(!methodInvocation.superSign) { "Super sign isn't supported yet" }
     require(methodInvocation.typeArguments == null) { "Type arguments aren't supported yet" }
+
     val isStaticCall = !isSystemOutCall(methodInvocation)
+
     val src: EODot = when (methodInvocation.qualifier) {
         is SimpleReference ->
             (methodInvocation.qualifier as SimpleReference).compoundName.eoDot()
@@ -28,9 +34,24 @@ fun mapMethodInvocation(methodInvocation: MethodInvocation): EOCopy {
         else ->
             throw IllegalArgumentException("Only SimpleReference is supported")
     }
-    return EOCopy(
-        src,
-        (if (!isStaticCall) listOf(callee) else ArrayList<EOExpr>()) +
-            (methodInvocation.arguments?.arguments?.map { obj -> mapExpression(obj) } ?: listOf())
+
+    return EOObject(
+        listOf(),
+        None,
+        listOf(
+            EOBndExpr(
+                EOCopy(
+                    src,
+                    (if (!isStaticCall) listOf(callee) else ArrayList<EOExpr>()) +
+                        (methodInvocation.arguments?.arguments?.map { obj -> parseArgument(obj) } ?: listOf())
+                ),
+                "@"
+            )
+        )
     )
+}
+
+fun parseArgument(expr: Expression): EOExpr {
+    ParseExprGoals.addGoal(expr)
+    return ParseExprGoals.c_name.eoDot()
 }
