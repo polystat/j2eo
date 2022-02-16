@@ -54,6 +54,7 @@ class Translator {
             .map { obj: TopLevelComponent? -> mapTopLevelComponent(obj!!) }
             .map { bnd: EOBnd -> bnd as EOBndExpr }
 
+
         // FIXME: assuming there is only one top-level component and it is a class
         var entrypointBnds = listOf<EOBndExpr>()
         try {
@@ -65,7 +66,6 @@ class Translator {
 
         // FIXME: assuming there is only one top-level component and it is a class
         // Always calling the 'main' method
-
 
         val stdAliases = preprocessor.stdClassesForCurrentAlias.stream()
             .map { EOMeta("alias", "stdlib.$it") }.toList()
