@@ -107,6 +107,7 @@ class TestJ2EO {
 
     companion object {
         private var testFolderRoot: String? = null
+        private var pomFilePath: String? = null
         private var mainFolderRoot: String? = null
         private val sep = File.separatorChar.toString()
 
@@ -121,12 +122,17 @@ class TestJ2EO {
             var testFolderPath = listOf("src", "test", "resources").joinToString(sep)
             if (testCandidates) {
                 testFolderPath += sep + "test_candidates"
+            } else {
+                testFolderPath += sep + "test_ready"
             }
             val mainFolderPath = listOf("src", "main", "resources").joinToString(sep)
             val fileMain = File(mainFolderPath)
             mainFolderRoot = fileMain.absolutePath
             val fileTest = File(testFolderPath)
             testFolderRoot = fileTest.absolutePath
+
+            val pomPath = listOf("src", "test", "resources", "eo_execution_pom", "pom.xml").joinToString(sep)
+            pomFilePath = File(pomPath).absolutePath
         }
 
         private fun testFile(path: Path): DynamicTest {
@@ -259,7 +265,7 @@ class TestJ2EO {
             try {
                 val eoFilePath = Files.createFile(Paths.get(eoExecDir.toString() + sep + "class_" + eoFileName + ".eo"))
                 Files.copy(
-                    Paths.get(testFolderRoot, "eo_execution_pom", "pom.xml"),
+                    Paths.get(pomFilePath),
                     Paths.get(eoExecDir.parent.toString() + sep + "pom.xml")
                 )
                 Paths.get(mainFolderRoot, "stdlib").toFile().copyRecursively(
