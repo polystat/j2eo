@@ -17,6 +17,7 @@ import tree.Declaration.VariableDeclaration
 import tree.Initializer
 import tree.Type.PrimitiveType
 import tree.Type.TypeName
+import util.ParseExprTasks
 
 fun mapClassDeclaration(dec: Declaration): Option<EOBndExpr> {
     // TODO: get rid of option and implement all cases
@@ -52,17 +53,15 @@ fun preMapVariableDeclaration(dec: VariableDeclaration): EOBndExpr =
             throw IllegalArgumentException("Type of type " + dec.type.javaClass.name + " is not supported")
     }
 
-fun mapVariableDeclaration(dec: VariableDeclaration): EOExpr =
+fun mapVariableDeclaration(parseExprTasks: ParseExprTasks, dec: VariableDeclaration): EOExpr =
     when (dec.type) {
         is TypeName -> {
-            ParseExprGoals.addGoal(dec.initializer)
-            EOCopy(listOf(dec.name, "write").eoDot(), ParseExprGoals.c_name.eoDot())
+            EOCopy(listOf(dec.name, "write").eoDot(), parseExprTasks.addTask(dec.initializer).eoDot())
         }
         is PrimitiveType -> {
-            ParseExprGoals.addGoal(dec.initializer)
             EOCopy(
-                listOf(decodePrimitiveType(dec.type as PrimitiveType), "write").eoDot(),
-                listOf(dec.name.eoDot(), ParseExprGoals.c_name.eoDot())
+                listOf(dec.name, "write").eoDot(),
+                listOf(dec.name.eoDot(), parseExprTasks.addTask(dec.initializer).eoDot())
             )
         }
         null ->
@@ -73,7 +72,8 @@ fun mapVariableDeclaration(dec: VariableDeclaration): EOExpr =
 
 fun decodePrimitiveType(type: PrimitiveType): String {
     return when (type.typeCode) {
-        TokenCode.Int -> "class__Int"
+        TokenCode.Int -> "class__Integer"
+        TokenCode.Float -> "class__Float"
         else -> throw IllegalArgumentException("Type code " + type.typeCode + " is not supported")
     }
 }

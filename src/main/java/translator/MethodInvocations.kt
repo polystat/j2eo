@@ -10,10 +10,11 @@ import eotree.eoDot
 import tree.Expression.Expression
 import tree.Expression.Primary.MethodInvocation
 import tree.Expression.SimpleReference
+import util.ParseExprTasks
 import util.isSystemOutCall
 
 // TODO: create state object to store binding of expression
-fun mapMethodInvocation(methodInvocation: MethodInvocation): EOObject {
+fun mapMethodInvocation(parseExprTasks: ParseExprTasks, methodInvocation: MethodInvocation): EOObject {
     require(!methodInvocation.superSign) { "Super sign isn't supported yet" }
     require(methodInvocation.typeArguments == null) { "Type arguments aren't supported yet" }
 
@@ -43,15 +44,10 @@ fun mapMethodInvocation(methodInvocation: MethodInvocation): EOObject {
                 EOCopy(
                     src,
                     (if (!isStaticCall) listOf(callee) else ArrayList<EOExpr>()) +
-                        (methodInvocation.arguments?.arguments?.map { obj -> parseArgument(obj) } ?: listOf())
+                        (methodInvocation.arguments?.arguments?.map { obj -> parseExprTasks.addTask(obj).eoDot() } ?: listOf())
                 ),
                 "@"
             )
         )
     )
-}
-
-fun parseArgument(expr: Expression): EOExpr {
-    ParseExprGoals.addGoal(expr)
-    return ParseExprGoals.c_name.eoDot()
 }

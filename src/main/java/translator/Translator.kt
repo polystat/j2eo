@@ -17,20 +17,6 @@ import java.time.LocalDateTime
 import java.util.*
 import kotlin.streams.toList
 
-class ParseExprGoals {
-    companion object {
-        val goals = Stack<Pair<String, Entity>>()
-        var c_name: String = "e_0"
-        private var goals_total = 0
-
-        fun addGoal(e: Entity) {
-            c_name = "e_${goals_total++}"
-            goals.push(Pair(c_name, e))
-        }
-    }
-}
-
-
 class Translator {
 
     fun translate(unit: CompilationUnit): EOProgram {
