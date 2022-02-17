@@ -2,10 +2,7 @@ package common
 
 import eotree.EOProgram
 import lexer.Scanner
-import org.junit.jupiter.api.Assertions
-import org.junit.jupiter.api.BeforeAll
-import org.junit.jupiter.api.DynamicTest
-import org.junit.jupiter.api.TestFactory
+import org.junit.jupiter.api.*
 import org.junit.jupiter.api.parallel.Execution
 import org.junit.jupiter.api.parallel.ExecutionMode
 import parser.JavaParser
@@ -19,6 +16,7 @@ import java.io.InputStreamReader
 import java.nio.file.Files
 import java.nio.file.Path
 import java.nio.file.Paths
+import java.time.Duration
 import java.util.Locale
 
 @Execution(ExecutionMode.CONCURRENT)
@@ -136,24 +134,28 @@ class TestJ2EO {
                 path.parent.fileName.toString() + "/" +
                     path.fileName.toString()
             ) {
-                logger.info("-- Current test file: $path")
+                assertTimeoutPreemptively(
+                    Duration.ofMinutes(4)
+                ) {
+                    logger.info("-- Current test file: $path")
 
-                // Compile and execute Java file
-                // FIXME: EO should generate '\r\n' symbols for Windows
-                val javaExecOutput = compileAndExecuteJava(path).replace("\r\n", "\n")
+                    // Compile and execute Java file
+                    // FIXME: EO should generate '\r\n' symbols for Windows
+                    val javaExecOutput = compileAndExecuteJava(path).replace("\r\n", "\n")
 
-                // Run parser
-                val unit = parseAndBuildAST(path)
+                    // Run parser
+                    val unit = parseAndBuildAST(path)
 
-                // EO tree to string
-                val eoCode = translateToEO(unit)
-                logger.info("-- Translation output --" + System.lineSeparator() + eoCode)
+                    // EO tree to string
+                    val eoCode = translateToEO(unit)
+                    logger.info("-- Translation output --" + System.lineSeparator() + eoCode)
 
-                // Compile and execute translated to EO Java file
-                val eoExecOutput = compileAndExecuteEO(eoCode, path)
+                    // Compile and execute translated to EO Java file
+                    val eoExecOutput = compileAndExecuteEO(eoCode, path)
 
-                // Assert equal execution outputs
-                Assertions.assertEquals(javaExecOutput, eoExecOutput)
+                    // Assert equal execution outputs
+                    Assertions.assertEquals(javaExecOutput, eoExecOutput)
+                }
             }
         }
 
