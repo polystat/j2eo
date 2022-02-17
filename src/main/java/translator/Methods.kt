@@ -1,12 +1,10 @@
 package translator
 
-import arrow.core.None
-import arrow.core.Option
-import arrow.core.firstOrNone
-import arrow.core.getOrElse
+import arrow.core.*
 import eotree.EOBndExpr
 import eotree.EOCopy
 import eotree.EOObject
+import eotree.eoDot
 import lexer.TokenCode
 import tree.Declaration.MethodDeclaration
 import tree.Declaration.ParameterDeclaration
@@ -15,6 +13,8 @@ import tree.Entity
 import tree.Expression.Expression
 import tree.Initializer
 import tree.Statement.BlockStatements
+import util.ParseExprTasks
+import kotlin.collections.flatten
 
 // fun MethodDeclaration.getLocalVariables(): List<Declaration> =
 //    // TODO: add support for nested block variables as well
@@ -26,6 +26,7 @@ fun mapMethodDeclaration(dec: MethodDeclaration): EOBndExpr {
     val isStatic = dec.modifiers != null &&
             dec.modifiers.modifiers.modifiers.find { it == TokenCode.Static } != null
     val additionalParameters = if (!isStatic) listOf("this") else ArrayList()
+    val parseExprTasks = ParseExprTasks()
 
     val obj = EOObject(
         // Non-vararg parameters
@@ -51,6 +52,7 @@ fun mapMethodDeclaration(dec: MethodDeclaration): EOBndExpr {
         // Bound attributes
         // TODO: implement
 //        try {
+        if (dec.methodBody != null) (
         dec.methodBody.block.findAllLocalVariables().map { preMapVariableDeclaration(it) } +
                 listOf(
                     EOBndExpr(
@@ -59,32 +61,33 @@ fun mapMethodDeclaration(dec: MethodDeclaration): EOBndExpr {
                             dec.methodBody.block.blockStatements
                                 .mapNotNull {
                                     if (it.statement != null)
-                                        mapStatement(it.statement)
-//                                    else if (it.expression != null)
-//                                        mapExpression(it.expression)
-                                    else if (it.declaration is VariableDeclaration && (it.declaration as VariableDeclaration).initializer != null)
-                                        mapVariableDeclaration(it.declaration as VariableDeclaration)
+                                        mapStatement(parseExprTasks, it.statement)
+                                    else if (it.expression != null) {
+                                        parseExprTasks.addTask(it.expression).eoDot()
+                                    } else if (it.declaration is VariableDeclaration && (it.declaration as VariableDeclaration).initializer != null)
+                                        mapVariableDeclaration(parseExprTasks, it.declaration as VariableDeclaration)
                                     else
                                         null
                                 }
                         ),
                         "@"
                     )
-                ) + parseExprGoals(),
+                ) + parseExprTasks(parseExprTasks)) else
 //        } catch (e: NullPointerException) {
-//            listOf(
-//                EOBndExpr(
-//                    EOCopy(
-//                        "0",
-//                        ArrayList()
-//                    ),
-//                    "@"
-//                )
-//            )
+            listOf(
+                EOBndExpr(
+                    EOCopy(
+                        "0",
+                        ArrayList()
+                    ),
+                    "@"
+                )
+            ),
 //        },
+
         "${dec.name} :: ${
-            dec.parameters.parameters
-                .joinToString(" -> ") { param ->
+            dec.parameters?.parameters
+                ?.joinToString(" -> ") { param ->
                     param.type.getTypeName() + param.signEllipsis.let { if (it) "..." else "" }
                 }
         } -> ${
@@ -109,23 +112,28 @@ fun mapMethodDeclaration(dec: MethodDeclaration): EOBndExpr {
     )
 }
 
-fun parseExprGoals(): List<EOBndExpr> {
-    val result = ArrayList<EOBndExpr>()
-
-    while (!ParseExprGoals.goals.empty()) {
-        val top = ParseExprGoals.goals.pop()
-        result.add(parseExprGoal(top.second, top.first))
+fun parseExprTasks(parseExprTasks: ParseExprTasks): List<EOBndExpr> {
+    return if (parseExprTasks.tasks.size > 0) {
+        parseExprTasks.tasks
+            .map { parseExprTask(it.second, it.first) }
+            .flatten()
+    } else {
+        listOf()
     }
-
-    return result
 }
 
-fun parseExprGoal(e: Entity, name: String): EOBndExpr {
+fun parseExprTask(e: Entity, name: String): List<EOBndExpr> {
+    val parseExprTasks = ParseExprTasks()
     return when (e) {
-        is Expression -> EOBndExpr(mapExpression(e), name)
-        is Initializer -> EOBndExpr(mapInitializer(e), name)
-        else ->
-            throw IllegalArgumentException("Entity of type ${e.javaClass.simpleName} is not supported")
+        is Expression -> {
+            listOf(EOBndExpr(mapExpression(parseExprTasks, e), name)) + parseExprTasks(parseExprTasks)
+        }
+        is Initializer -> {
+            listOf(EOBndExpr(mapInitializer(parseExprTasks, e), name)) + parseExprTasks(parseExprTasks)
+        }
+        else -> {
+            throw IllegalArgumentException("Entity of type ${e.javaClass.simpleName} cannot be parsed")
+        }
     }
 }
 

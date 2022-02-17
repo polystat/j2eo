@@ -4,6 +4,7 @@ import eotree.EOExpr
 import eotree.eoDot
 import tree.Statement.Statement
 import tree.Statement.StatementExpression
+import util.ParseExprTasks
 
 // fun mapBlockStatement(stmt: BlockStatement): EOExpr =
 //    // Block statement is one of three variants
@@ -18,19 +19,18 @@ import tree.Statement.StatementExpression
 //            throw IllegalArgumentException("BlockStatement does not have any known type")
 //    }
 
-fun mapStatement(statement: Statement): EOExpr =
+fun mapStatement(parseExprTasks: ParseExprTasks, statement: Statement): EOExpr =
     when (statement) {
         is StatementExpression ->
-            mapStatementExpression(statement)
+            mapStatementExpression(parseExprTasks, statement)
 //        is IfThenElse ->
 //            mapIfThenElse(statement)
         else ->
             throw IllegalArgumentException("Statement of type ${statement.javaClass.simpleName} is not supported")
     }
 
-fun mapStatementExpression(stmtExpr: StatementExpression): EOExpr {
-    ParseExprGoals.addGoal(stmtExpr.expression)
-    return ParseExprGoals.c_name.eoDot()
+fun mapStatementExpression(parseExprTasks: ParseExprTasks, stmtExpr: StatementExpression): EOExpr {
+    return parseExprTasks.addTask(stmtExpr.expression).eoDot()
 }
 
 // fun mapIfThenElse(statement: IfThenElse): EOExpr =

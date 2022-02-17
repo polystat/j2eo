@@ -1,5 +1,6 @@
 package translator.preprocessor
 
+import translator.decodePrimitiveType
 import tree.Compilation.CompilationUnit
 import tree.Compilation.SimpleCompilationUnit
 import tree.Compilation.TopLevelComponent
@@ -12,7 +13,10 @@ import tree.InitializerSimple
 import tree.Statement.BlockStatement
 import tree.Statement.Statement
 import tree.Statement.StatementExpression
+import tree.Type.PrimitiveType
+import tree.Type.Type
 import tree.Type.TypeName
+import util.collectPrimitivePackages
 
 /**
  * @property classNames
@@ -27,7 +31,9 @@ data class PreprocessorState(
         val stdClassesNeededForAlias: HashSet<String> = hashSetOf(
                 "class__Object",
                 "class__System",
-                "class__Int"
+                "class__Integer",
+                "class__Float",
+                "class__String"
         ),
         val stdClassesForCurrentAlias: HashSet<String> = hashSetOf(
                 "class__Object"  // We need it always
@@ -100,6 +106,7 @@ private fun preprocessSimpleCompilationUnit(state: PreprocessorState, unit: Simp
     }
 
     collectClassNames(unit)
+    collectPrimitivePackages(state.stdClassesForCurrentAlias, unit)
 
     unit.components.components
             .map { component: TopLevelComponent? -> preprocessTopLevelComponent(state, component!!) }
