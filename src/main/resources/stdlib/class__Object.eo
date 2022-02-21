@@ -3,6 +3,7 @@
 [] > class__Object
   [] > new
     [] > this
+      "class__Object" > className
       "OBJECT" > @
 
       [self] > init

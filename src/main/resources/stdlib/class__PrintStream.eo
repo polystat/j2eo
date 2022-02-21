@@ -8,6 +8,7 @@
 
   [] > new
     [] > this
+      "class__PrintStream" > className
       class__Object.new > super
       super > @
 
@@ -17,8 +18,9 @@
       [self x] > println
         seq > @
           stdout
-            x.toString
-              x
+            s.
+              x.toString
+                x
           stdout
             "\n"
 
