@@ -91,10 +91,7 @@ fun mapUnaryPrefix(parseExprTasks: ParseExprTasks, expr: UnaryPrefix): EOObject 
         None,
         listOf(
             EOBndExpr(
-                EOCopy(
-                    listOf(varName, function).eoDot(),
-                    varName.eoDot()
-                ),
+                listOf(varName, function).eoDot(),
                 "@"
             )
         )
@@ -115,10 +112,7 @@ fun mapUnaryPostfix(parseExprTasks: ParseExprTasks, expr: UnaryPostfix): EOObjec
         None,
         listOf(
             EOBndExpr(
-                EOCopy(
-                    listOf(varName, function).eoDot(),
-                    varName.eoDot()
-                ),
+                listOf(varName, function).eoDot(),
                 "@"
             )
         )
@@ -152,7 +146,7 @@ fun mapBinary(parseExprTasks: ParseExprTasks, expr: Binary): EOObject {
             EOBndExpr(
                 EOCopy(
                     listOf(leftName, function).eoDot(),
-                    listOf(leftName.eoDot(), rightName.eoDot())
+                    rightName.eoDot()
                 ),
                 "@"
             )

@@ -1,5 +1,6 @@
 +package stdlib
 +alias stdlib.class__Object
++alias org.eolang.txt.sprintf
 
 [] > class__String
   class__Object > super
@@ -7,6 +8,7 @@
 
   [] > new
     [] > this
+      "class__String" > className
       class__Object.new > super
       super > @
 
@@ -19,13 +21,25 @@
 
       [self] > toString
         seq > @
-          self.s
+          class__String.constructor3
+            self
 
-      [left right] > write
+      [right] > write
         seq > @
-          left.s.write
+          ^.s.write
             right.s
-          left
+          class__String.constructor3
+            ^
+
+      [right] > add
+        seq > @
+          class__String.constructor2
+            sprintf
+              "%s%s"
+              ^.s
+              s.
+                right.toString
+                  right
 
     seq > @
       this

@@ -10,6 +10,7 @@
 
   [] > new
     [] > this
+      "class__System" > className
       class__Object.new > super
       super > @
 

@@ -61,7 +61,7 @@ fun mapVariableDeclaration(parseExprTasks: ParseExprTasks, dec: VariableDeclarat
         is PrimitiveType -> {
             EOCopy(
                 listOf(dec.name, "write").eoDot(),
-                listOf(dec.name.eoDot(), parseExprTasks.addTask(dec.initializer).eoDot())
+                parseExprTasks.addTask(dec.initializer).eoDot()
             )
         }
         null ->

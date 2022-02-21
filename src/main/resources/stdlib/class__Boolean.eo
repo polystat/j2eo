@@ -1,0 +1,69 @@
++package stdlib
++alias stdlib.class__Object
++alias stdlib.class__String
+
+[] > class__Boolean
+  class__Object > super
+  super > @
+
+  [] > new
+    [] > this
+      "class__Boolean" > className
+      class__Object.new > super
+      super > @
+
+      memory > v
+
+      [self t] > init
+        seq > @
+          self.v.write
+            t
+
+      [self] > toString
+        seq > @
+          class__String.constructor2
+            if.
+              self.v
+              "true"
+              "false"
+
+      [] > not
+        seq > @
+          class__Boolean.constructor2
+            ^.v.not
+
+      [right] > and
+        seq > @
+          class__Boolean.constructor2
+            ^.v.and
+              right.v
+
+      [right] > or
+        seq > @
+          class__Boolean.constructor2
+            ^.v.or
+              right.v
+
+    seq > @
+      this
+
+  [] > constructor1
+    new > self
+    seq > @
+      self
+
+  [t] > constructor2
+    new > self
+    seq > @
+      self.init
+        self
+        t
+      self
+
+  [i_o] > constructor3
+    new > self
+    seq > @
+      self.init
+        self
+        i_o.v
+      self
