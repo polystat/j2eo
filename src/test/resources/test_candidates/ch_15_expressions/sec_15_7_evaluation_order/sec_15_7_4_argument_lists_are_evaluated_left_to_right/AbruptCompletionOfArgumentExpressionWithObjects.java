@@ -1,11 +1,4 @@
 
-class S {
-	public int id;
-	public S(int id) {
-		this.id = id;
-	}
-}
-
 public class AbruptCompletionOfArgumentExpressionWithObjects {
 	static S test(S a, S b, S c) {
 		return new S(a.id + b.id + c.id);
@@ -20,5 +13,12 @@ public class AbruptCompletionOfArgumentExpressionWithObjects {
 		S s = new S(0);
 		test(s = new S(1), oops(s), s = new S(2));
 		System.out.println("passed");
+	}
+}
+
+class S {
+	public int id;
+	public S(int id) {
+		this.id = id;
 	}
 }
