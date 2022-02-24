@@ -135,7 +135,7 @@ class TestJ2EO {
                     path.fileName.toString()
             ) {
                 assertTimeoutPreemptively(
-                    Duration.ofMinutes(4)
+                    Duration.ofMinutes(10)
                 ) {
                     logger.info("-- Current test file: $path")
 
