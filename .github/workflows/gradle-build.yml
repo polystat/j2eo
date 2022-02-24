@@ -59,7 +59,7 @@ jobs:
 
       - uses: gradle/gradle-build-action@v1
         with:
-          arguments: build --info
+          arguments: build --info -Pcandidates=true
 
       - name: Upload Gradle test report
         uses: actions/upload-artifact@v2
