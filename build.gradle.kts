@@ -247,6 +247,12 @@ tasks.withType<JacocoReport> {
     }
     reports.csv.required.set(true)
 }
+
+tasks.jacocoTestReport {
+    reports {
+        xml.required.set(true)
+    }
+}
 jacocoBadgeGenSetting {
     jacocoReportPath = "$buildDir/reports/jacoco/test/jacocoTestReport.xml"
     readmePath = "$projectDir/README.md"
