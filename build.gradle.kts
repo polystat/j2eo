@@ -247,6 +247,12 @@ tasks.withType<JacocoReport> {
     }
     reports.csv.required.set(true)
 }
+jacocoBadgeGenSetting {
+    jacocoReportPath = "$buildDir/reports/jacoco/test/jacocoTestReport.xml"
+    readmePath = "$projectDir/README.md"
+    // since v0.2.0, percentage limitation (0-100) for different type of coverage
+    // limit = ['instruction': 0, 'branch': 0, 'line': 0, 'method': 0, 'class': 0]
+}
 
 publishing {
     publications {
