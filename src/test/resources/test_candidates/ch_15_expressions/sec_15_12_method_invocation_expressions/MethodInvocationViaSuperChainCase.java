@@ -1,3 +1,9 @@
+public class MethodInvocationViaSuperChainCase {
+	public static void main(String[] args) {
+		new T().run();
+		System.out.println("passed");
+	}
+}
 
 class E {
 	void foo() { System.out.println("Hi"); }
@@ -9,12 +15,5 @@ class T extends S {
 	void foo() {}
 	void run() {
 		T.super.foo();
-	}
-}
-
-public class MethodInvocationViaSuperChainCase {
-	public static void main(String[] args) {
-		new T().run();
-		System.out.println("passed");
 	}
 }

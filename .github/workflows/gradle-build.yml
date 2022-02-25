@@ -27,10 +27,6 @@ jobs:
         with:
           arguments: build --info
 
-          #      - uses: gradle/gradle-build-action@v1
-          #        with:
-          #          arguments: test --info
-
       - name: Upload Gradle test report
         uses: actions/upload-artifact@v2
         if: ${{ always() }}
@@ -65,22 +61,12 @@ jobs:
         with:
           arguments: build --info
 
-          #      - uses: gradle/gradle-build-action@v1
-          #        with:
-          #          arguments: test --info
-
       - name: Upload Gradle test report
         uses: actions/upload-artifact@v2
         if: ${{ always() }}
         with:
           name: gradle-test-report-ubuntu-latest
           path: build/reports/tests/test/
-
-      - name: Generate JaCoCo Badge
-        uses: cicirello/jacoco-badge-generator@v2
-        with:
-          generate-branches-badge: true
-          jacoco-csv-file: build/reports/jacoco/test/jacocoTestReport.csv
 
       - name: Log coverage percentage
         run: |
@@ -91,13 +77,6 @@ jobs:
         run: |
           pwd
           rm -r ./bison-3.8
-
-      - name: Commit and push the badge (if it changed)
-        uses: EndBug/add-and-commit@v7
-        with:
-          default_author: user_info
-          message: 'commit badge'
-          add: '*.svg'
 
       - name: Upload JaCoCo coverage report
         uses: actions/upload-artifact@v2

@@ -1,13 +1,3 @@
-
-class S {
-	int x = 0;
-	int z() { return x; }
-}
-class T extends S {
-	int x = 1;
-	int z() { return x; }
-}
-
 public class StaticBindingForMethodAccess {
 	public static void main(String[] args) {
 		T t = new T();
@@ -18,4 +8,13 @@ public class StaticBindingForMethodAccess {
 		System.out.println(s.z());
 		System.out.println("passed");
 	}
+}
+
+class S {
+	int x = 0;
+	int z() { return x; }
+}
+class T extends S {
+	int x = 1;
+	int z() { return x; }
 }

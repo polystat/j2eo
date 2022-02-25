@@ -14,6 +14,7 @@ plugins {
     // id("org.jlleitschuh.gradle.ktlint") version "10.2.1"
     // id("org.cqfn.diktat.diktat-gradle-plugin") version "1.0.2"
     kotlin("jvm") version "1.6.0"
+	id("com.github.dawnwords.jacoco.badge") version "0.2.4"
 }
 
 val mvnUsername: String? by project
@@ -129,6 +130,7 @@ tasks {
     }
     jacocoTestReport {
         dependsOn(test)
+		finalizedBy(generateJacocoBadge)
     }
     test {
         dependsOn(pmdTest, checkstyleTest)
@@ -244,6 +246,18 @@ tasks.withType<JacocoReport> {
         )
     }
     reports.csv.required.set(true)
+}
+
+tasks.jacocoTestReport {
+    reports {
+        xml.required.set(true)
+    }
+}
+jacocoBadgeGenSetting {
+    jacocoReportPath = "$buildDir/reports/jacoco/test/jacocoTestReport.xml"
+    readmePath = "$projectDir/README.md"
+    // since v0.2.0, percentage limitation (0-100) for different type of coverage
+    // limit = ['instruction': 0, 'branch': 0, 'line': 0, 'method': 0, 'class': 0]
 }
 
 publishing {
