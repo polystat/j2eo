@@ -76,13 +76,12 @@ private fun preprocessSimpleCompilationUnit(state: PreprocessorState, unit: Simp
                         }
                     }
             (clsDec.extendedType as TypeName).compoundName.names
-                    .replaceAll {
-                        state.classNames[it]?.let {
-                            state.classNames[it]
+                    .replaceAll { str: String ->
+                        state.classNames[str]?.let {
+                            state.classNames[str]
+                        } ?: run {
+                            str
                         }
-                                ?: run {
-                                    it
-                                }
                     }
         }
 

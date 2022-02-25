@@ -2,6 +2,7 @@ package translator
 
 import eotree.EOExpr
 import eotree.eoDot
+import tree.Statement.Return
 import tree.Statement.Statement
 import tree.Statement.StatementExpression
 import util.ParseExprTasks
@@ -21,8 +22,8 @@ import util.ParseExprTasks
 
 fun mapStatement(parseExprTasks: ParseExprTasks, statement: Statement): EOExpr =
     when (statement) {
-        is StatementExpression ->
-            mapStatementExpression(parseExprTasks, statement)
+        is StatementExpression -> mapStatementExpression(parseExprTasks, statement)
+        is Return -> mapReturnStatement(parseExprTasks, statement)
 //        is IfThenElse ->
 //            mapIfThenElse(statement)
         else ->
@@ -31,6 +32,10 @@ fun mapStatement(parseExprTasks: ParseExprTasks, statement: Statement): EOExpr =
 
 fun mapStatementExpression(parseExprTasks: ParseExprTasks, stmtExpr: StatementExpression): EOExpr {
     return parseExprTasks.addTask(stmtExpr.expression).eoDot()
+}
+
+fun mapReturnStatement(parseExprTasks: ParseExprTasks, rn: Return): EOExpr {
+    return parseExprTasks.addTask(rn.expression).eoDot()
 }
 
 // fun mapIfThenElse(statement: IfThenElse): EOExpr =
