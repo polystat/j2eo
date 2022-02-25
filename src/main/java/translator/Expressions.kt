@@ -133,6 +133,17 @@ fun mapBinary(parseExprTasks: ParseExprTasks, expr: Binary): EOObject {
         TokenCode.Assign -> "write"
         TokenCode.Star -> "mul"
         TokenCode.Slash -> "div"
+        TokenCode.PlusAssign -> "add_equal"
+        TokenCode.MinusAssign -> "sub_equal"
+        TokenCode.StarAssign -> "mul_equal"
+        TokenCode.SlashAssign -> "div_equal"
+        TokenCode.PercentAssign -> "mod_equal"
+        TokenCode.RightShift -> "shift_r"
+        TokenCode.LeftShift -> "shift_l"
+        TokenCode.RightShiftAssign -> "shift_r_equal"
+        TokenCode.LeftShiftAssign -> "shift_l_equal"
+        TokenCode.ArithmRightShift -> "shift_u"
+        TokenCode.ArithmRightShiftAssign -> "shift_u_equal"
         else -> throw IllegalArgumentException("Binary operation ${expr.operator} is not supported")
     }
 
