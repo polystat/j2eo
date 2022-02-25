@@ -1,7 +1,6 @@
-
-public class SimpleFloatArray {
+public class SimpleEmptyStatement {
 	public static void main(String[] args) {
-		float[] array = new float[5];
+		;;;;
 		System.out.println("passed");
 	}
 }

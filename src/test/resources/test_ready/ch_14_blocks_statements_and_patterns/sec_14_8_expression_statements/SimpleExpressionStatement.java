@@ -1,6 +1,4 @@
-
-public class SimpleStatic {
-	static int i;
+public class SimpleExpressionStatement {
 	public static void main(String[] args) {
 		System.out.println("passed");
 	}
