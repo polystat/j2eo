@@ -18,6 +18,7 @@ import tree.Initializer
 import tree.Type.PrimitiveType
 import tree.Type.TypeName
 import util.ParseExprTasks
+import util.TokenCodes
 
 fun mapClassDeclaration(dec: Declaration): Option<EOBndExpr> {
     // TODO: get rid of option and implement all cases
@@ -72,8 +73,8 @@ fun mapVariableDeclaration(parseExprTasks: ParseExprTasks, dec: VariableDeclarat
 
 fun decodePrimitiveType(type: PrimitiveType): String {
     return when (type.typeCode) {
-        TokenCode.Int -> "class__Integer"
-        TokenCode.Float -> "class__Float"
+        TokenCode.Int -> TokenCodes.PRIM__INT.value
+        TokenCode.Float -> TokenCodes.PRIM__FLOAT.value
         else -> throw IllegalArgumentException("Type code " + type.typeCode + " is not supported")
     }
 }

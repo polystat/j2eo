@@ -1,0 +1,384 @@
++package stdlib
++alias stdlib.prim__number
++alias stdlib.prim__float
++alias stdlib.prim__boolean
+
+[] > prim__int
+  [is_left] > new
+    [] > right_v
+      "prim__int" > primName
+      prim__number.new > @
+        ^.is_left
+
+      [right] > add
+        seq > @
+          if.
+            right_v.primName.eq
+              "prim__float"
+            prim__float.constructor2
+              add.
+                ^.v.as-float
+                right.v
+            prim__int.constructor2
+              add.
+                ^.v
+                right.v
+
+      [right] > sub
+        seq > @
+          if.
+            right_v.primName.eq
+              "prim__float"
+            prim__float.constructor2
+              sub.
+                ^.v.as-float
+                right.v
+            prim__int.constructor2
+              sub.
+                ^.v
+                right.v
+
+      [right] > mul
+        seq > @
+          if.
+            right_v.primName.eq
+              "prim__float"
+            prim__float.constructor2
+              mul.
+                ^.v.as-float
+                right.v
+            prim__int.constructor2
+              mul.
+                ^.v
+                right.v
+
+      [right] > div
+        seq > @
+          if.
+            right_v.primName.eq
+              "prim__float"
+            prim__float.constructor2
+              div.
+                ^.v.as-float
+                right.v
+            prim__int.constructor2
+              div.
+                ^.v
+                right.v
+
+      [right] > mod
+        seq > @
+          if.
+            right_v.primName.eq
+              "prim__float"
+            prim__float.constructor2
+              mod.
+                ^.v.as-float
+                right.v
+            prim__int.constructor2
+              mod.
+                ^.v
+                right.v
+
+      [] > neg
+        seq > @
+          prim__int.constructor2
+            ^.v.neg
+
+      [right] > eq
+        seq > @
+          if.
+            right.primName.eq
+              "prim__float"
+            prim__boolean.constructor2
+              eq.
+                ^.v.as-float
+                right.v
+            prim__boolean.constructor2
+              eq.
+                ^.v
+                right.v
+
+      [right] > neq
+        seq > @
+          if.
+            right.primName.eq
+              "prim__float"
+            prim__boolean.constructor2
+              neq.
+                ^.v.as-float
+                right.v
+            prim__boolean.constructor2
+              neq.
+                ^.v
+                right.v
+
+      [right] > less
+        seq > @
+          if.
+            right.primName.eq
+              "prim__float"
+            prim__boolean.constructor2
+              less.
+                ^.v.as-float
+                right.v
+            prim__boolean.constructor2
+              less.
+                ^.v
+                right.v
+
+      [right] > leq
+        seq > @
+          if.
+            right.primName.eq
+              "prim__float"
+            prim__boolean.constructor2
+              leq.
+                ^.v.as-float
+                right.v
+            prim__boolean.constructor2
+              leq.
+                ^.v
+                right.v
+
+      [right] > greater
+        seq > @
+          if.
+            right.primName.eq
+              "prim__float"
+            prim__boolean.constructor2
+              greater.
+                ^.v.as-float
+                right.v
+            prim__boolean.constructor2
+              greater.
+                ^.v
+                right.v
+
+      [right] > geq
+        seq > @
+          if.
+            right.primName.eq
+              "prim__float"
+            prim__boolean.constructor2
+              geq.
+                ^.v.as-float
+                right.v
+            prim__boolean.constructor2
+              geq.
+                ^.v
+                right.v
+
+      [right] > shift_r
+        seq > @
+          if.
+            right.v.geq
+              0
+            prim__int.constructor2
+              ^.v.div
+                pow.
+                  2
+                  right.v
+            prim__int.constructor2
+              0
+
+      [right] > shift_l
+        seq > @
+          if.
+            right.v.geq
+              0
+            prim__int.constructor2
+              ^.v.mul
+                pow.
+                  2
+                  right.v
+            prim__int.constructor2
+              0
+
+      [right] > shift_u
+        [] > less_0
+          prim__int.constructor2 > @
+            div.
+              add.
+                2147483647
+                add.
+                  div.
+                    sub.
+                      ^.^.v
+                      1
+                    2
+                  1
+              pow.
+                2
+                sub.
+                  right.v
+                  1
+        [] > geq_0
+          ^.^.shift_r > @
+            ^.right
+        seq > @
+          if.
+            right.v.geq
+              0
+            if.
+              right.v.greater
+                0
+              if.
+                less.
+                  ^.v
+                  0
+                less_0
+                geq_0
+              prim__int.constructor2
+                ^.v
+            prim__int.constructor2
+              0
+
+    [] > this
+      right_v > @
+
+      [right] > write
+        seq > @
+          if.
+            right.primName.eq
+              "prim__int"
+            seq
+              ^.v.write
+                right.v
+              ^
+            []
+              "error: incompatible types: possible lossy conversion from double to int" > msg
+
+      [right] > add_equal
+        seq > @
+          ^.write
+            ^.add
+              right
+          ^
+
+      [right] > sub_equal
+        seq > @
+          ^.write
+            ^.sub
+              right
+          ^
+
+      [right] > mul_equal
+        seq > @
+          ^.write
+            ^.mul
+              right
+          ^
+
+      [right] > div_equal
+        seq > @
+          ^.write
+            ^.div
+              right
+          ^
+
+      [right] > mod_equal
+        seq > @
+          ^.write
+            ^.mod
+              right
+          ^
+
+      [right] > shift_r_equal
+        seq > @
+          ^.write
+            ^.shift_r
+              right
+          ^
+
+      [right] > shift_l_equal
+        seq > @
+          ^.write
+            ^.shift_l
+              right
+          ^
+
+      [right] > shift_u_equal
+        seq > @
+          ^.write
+            ^.shift_u
+              right
+          ^
+
+      [] > inc_post
+        prim__int.constructor2 > old
+          0
+        seq > @
+          old.v.write
+            ^.v
+          ^.v.write
+            add.
+              ^.v
+              1
+          old
+
+      [] > dec_post
+        prim__int.constructor2 > old
+          0
+        seq > @
+          old.v.write
+            ^.v
+          ^.v.write
+            add.
+              ^.v
+              -1
+          old
+
+      [] > inc_pre
+        prim__int.constructor2 > old
+          0
+        seq > @
+          ^.v.write
+            add.
+              ^.v
+              1
+          old.v.write
+            ^.v
+          old
+
+      [] > dec_pre
+        prim__int.constructor2 > old
+          0
+        seq > @
+          ^.v.write
+            add.
+              ^.v
+              -1
+          old.v.write
+            ^.v
+          old
+
+    seq > @
+      if.
+        is_left
+        this
+        right_v
+
+  [] > constructor1
+    new > self
+      TRUE
+    seq > @
+      self
+
+  [t] > constructor2
+    new > self
+      FALSE
+    seq > @
+      self.init
+        self
+        t
+      self
+
+  [i] > constructor3
+    new > self
+      FALSE
+    seq > @
+      self.init
+        self
+        i.v
+      self

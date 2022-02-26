@@ -26,9 +26,9 @@ private fun findPrimitivesInMethodInvocation(primitives: HashSet<String>, method
 
 private fun decodeLiteralCode(code: TokenCode): String? {
     return when(code) {
-        TokenCode.IntegerLiteral -> "class__Integer"
-        TokenCode.FloatingLiteral -> "class__Float"
-        TokenCode.StringLiteral -> "class__String"
+        TokenCode.IntegerLiteral -> TokenCodes.PRIM__INT.value
+        TokenCode.FloatingLiteral -> TokenCodes.PRIM__FLOAT.value
+        TokenCode.StringLiteral -> TokenCodes.CLASS__STRING.value
         else -> null
     }
 }
@@ -76,7 +76,7 @@ private fun findPrimitivesInVarDeclaration(primitives: HashSet<String>, varDeclT
     } else if (varDeclType is TypeName &&
         varDeclType.compoundName.names.size == 1 &&
             varDeclType.compoundName.names.last().equals("String")) {
-        primitives.add("class__String")
+        primitives.add(TokenCodes.CLASS__STRING.value)
     }
 }
 

@@ -9,19 +9,20 @@ import eotree.data.EOStringData
 import lexer.TokenCode
 import tree.Expression.Primary.Literal
 import tree.Type.PrimitiveType
+import util.TokenCodes
 
 fun mapLiteral(literal: Literal): EOObject =
     when (literal.code) {
         TokenCode.StringLiteral -> generateEOData(
-            listOf("class__String", "constructor2").eoDot(),
+            listOf(TokenCodes.CLASS__STRING.value, "constructor2").eoDot(),
             EOStringData(literal.value as String)
         )
         TokenCode.FloatingLiteral -> generateEOData(
-            listOf("class__Float", "constructor2").eoDot(),
+            listOf(TokenCodes.PRIM__FLOAT.value, "constructor2").eoDot(),
             EOFloatData((literal.value as String).toFloat())
         )
         TokenCode.IntegerLiteral -> generateEOData(
-            listOf("class__Integer", "constructor2").eoDot(),
+            listOf(TokenCodes.PRIM__INT.value, "constructor2").eoDot(),
             EOIntData((literal.value as String).toInt())
         )
         else -> throw IllegalArgumentException("Mapping of type ${literal.javaClass.simpleName} is not supported.")

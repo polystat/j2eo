@@ -3,6 +3,7 @@
 [] > class__Object
   [] > new
     [] > this
+      FALSE > is-prim
       "class__Object" > className
       "OBJECT" > @
 

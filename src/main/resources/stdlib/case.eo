@@ -1,0 +1,4 @@
++package stdlib
+
+[v a] > case
+  TRUE > is-case

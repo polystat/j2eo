@@ -16,11 +16,18 @@
         0 > @
 
       [self x] > println
+        [] > prim
+          x.as-string > @
+        [] > non-prim
+          s. > @
+            ^.x.toString
+              ^.x
         seq > @
           stdout
-            s.
-              x.toString
-                x
+            if.
+              x.is-prim
+              prim
+              non-prim
           stdout
             "\n"
 
