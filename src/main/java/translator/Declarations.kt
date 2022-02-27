@@ -75,6 +75,7 @@ fun decodePrimitiveType(type: PrimitiveType): String {
     return when (type.typeCode) {
         TokenCode.Int -> TokenCodes.PRIM__INT.value
         TokenCode.Float -> TokenCodes.PRIM__FLOAT.value
+        TokenCode.Boolean -> TokenCodes.PRIM__BOOLEAN.value
         else -> throw IllegalArgumentException("Type code " + type.typeCode + " is not supported")
     }
 }

@@ -1,5 +1,6 @@
 package translator.preprocessor
 
+import lexer.TokenCode
 import tree.Compilation.CompilationUnit
 import tree.Compilation.SimpleCompilationUnit
 import tree.Compilation.TopLevelComponent
@@ -12,9 +13,13 @@ import tree.InitializerSimple
 import tree.Statement.BlockStatement
 import tree.Statement.Statement
 import tree.Statement.StatementExpression
+import tree.Type.PrimitiveType
 import tree.Type.TypeName
 import util.TokenCodes
 import util.collectPrimitivePackages
+import java.util.*
+import kotlin.collections.HashMap
+import kotlin.collections.HashSet
 
 /**
  * @property classNames
@@ -23,8 +28,9 @@ import util.collectPrimitivePackages
  */
 data class PreprocessorState(
         val classNames: HashMap<String, String> = hashMapOf(
-            "Object" to TokenCodes.CLASS__OBJECT.value,
-            "System" to TokenCodes.CLASS__SYSTEM.value,
+                "Object" to TokenCodes.CLASS__OBJECT.value,
+                "System" to TokenCodes.CLASS__SYSTEM.value,
+                "int" to TokenCodes.PRIM__INT.value
         ),
         val stdClassesNeededForAlias: HashSet<String> = hashSetOf(
             TokenCodes.CLASS__OBJECT.value,
@@ -144,6 +150,15 @@ private fun preprocessMethodDecl(state: PreprocessorState, methodDecl: MethodDec
     try {
         methodDecl.methodBody.block.blockStatements
                 .map { blockStmt: BlockStatement -> preprocessBlockStmt(state, blockStmt) }
+        when (methodDecl.type) {
+            is PrimitiveType ->
+            {
+                tryAddClassForAliases(
+                        state, convertPrimTokenCode((methodDecl.type as PrimitiveType).typeCode)
+                )
+            }
+            else -> {}
+        }
     } catch (e: NullPointerException) {
         /* Ignore it */
     }
@@ -239,4 +254,14 @@ private fun tryAddClassForAliases(state: PreprocessorState, className: String) {
     if (state.stdClassesNeededForAlias.contains(className)) {
         state.stdClassesForCurrentAlias.add(className)
     }
+}
+
+/**
+ * Converts token code name of type to the stdlib EO class.
+ * Example: TokenCode.Int -> 'prim__int'
+ *
+ * @param tokenCode the token code of primitive type
+ */
+private fun convertPrimTokenCode(tokenCode: TokenCode) : String {
+    return "prim__${tokenCode.name.lowercase(Locale.getDefault())}"
 }

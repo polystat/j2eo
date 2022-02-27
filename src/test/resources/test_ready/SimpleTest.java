@@ -1,9 +1,8 @@
 public class SimpleTest {
-
+	
 	public static void main(String[] args) {
-		int a = 5;
-		int b = (-a);
-		System.out.println(b);
+		boolean a = true;
+		boolean b = false;
 		System.out.println("passed");
 	}
 }
