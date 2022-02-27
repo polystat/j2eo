@@ -27,7 +27,7 @@ class EODot : EOExpr {
     }
 
     constructor(name: CompoundName) {
-        println("Mapping ${name.concatenatedJava()}")
+        // println("Mapping ${name.concatenatedJava()}")
         // Recursively build a dot expression
         this.src =
             if (name.names.size >= 2)
