@@ -33,13 +33,20 @@
 
       [right] > add
         seq > @
-          class__String.constructor2
-            sprintf
-              "%s%s"
-              ^.s
-              s.
-                right.toString
-                  right
+          if.
+            right.is-prim
+            class__String.constructor2
+              sprintf
+                "%s%s"
+                ^.s
+                right.as-string
+            class__String.constructor2
+              sprintf
+                "%s%s"
+                ^.s
+                s.
+                  right.toString
+                    right
 
     seq > @
       this

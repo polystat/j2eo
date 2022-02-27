@@ -6,9 +6,9 @@
 <br>
 
 [![Gradle Build](https://github.com/polystat/j2eo/actions/workflows/gradle-build.yml/badge.svg)](https://github.com/polystat/j2eo/actions/workflows/gradle-build.yml)
-![LINE](https://img.shields.io/badge/line--coverage-36,33%25-red.svg)
-![BRANCH](https://img.shields.io/badge/branch--coverage-25,45%25-red.svg)
-![COMPLEXITY](https://img.shields.io/badge/complexity-6,48-brightgreen.svg)
+![LINE](https://img.shields.io/badge/line--coverage-41.57%25-orange.svg)
+![BRANCH](https://img.shields.io/badge/branch--coverage-31.03%25-red.svg)
+![COMPLEXITY](https://img.shields.io/badge/complexity-5.74-brightgreen.svg)
 
 This is a translator of **Java** programming language to [EOLANG](https://www.eolang.org) programming language.
 
@@ -16,59 +16,44 @@ This is a translator of **Java** programming language to [EOLANG](https://www.eo
 
 ## Usage
 
-### With Docker
-
-To use J2EO wrapped into Docker image:
-
-1. Build image
-```shell
-docker build -t polystat/j2eo:latest -f docker/Dockerfile .  
-```
-2. Use image
-```shell
-cat <.java filepath> | docker run --rm -i polystat/j2eo java -jar j2eo.jar -
-```
-
----
-
-### Without docker
-  
 1. Make sure you have installed:
-    - **Java 16+** (make sure command `java -version` shows 16+ version of Java in terminal if you have multiple Java version installed)
-    - **Maven 3.8+** (be aware of [possible conflicts](https://bugs.debian.org/cgi-bin/bugreport.cgi?bug=980467) of the latest versions of Maven and Java on some OSs)
-    - **Bison 3.7+** [3.7.5 recommended] (make sure the path to Bison executable is added to the `PATH` environmental variable)
+    - **Java 16+** (make sure command `java -version` shows 16+ version of Java in terminal if you have multiple Java
+      version installed)
+    - **Maven 3.8+** (be aware of [possible conflicts](https://bugs.debian.org/cgi-bin/bugreport.cgi?bug=980467) of the
+      latest versions of Maven and Java on some OSs)
 2. Clone the repo into your folder:
 
-    HTTPS:
+   HTTPS:
     ```shell
     git clone https://github.com/polystat/j2eo.git
     cd ./j2eo
     ```
-    or SSH:
+   or SSH:
     ```shell
     git clone git@github.com:polystat/j2eo.git
     cd ./j2eo
     ```
-3. Build the project (it takes some time and CPU power):
+3. Build the project:
     ```shell
     ./build.sh
     ```
-    The testing report is generated in the `./j2eo/build/reports/tests/test/index.html` file.
-4. After build process, **j2eo.jar** file will appear in the project root folder (`./j2eo`).
-    With this file, is it possible to translate **.java** files to **.eo** files. Run:
+   The testing report is generated in the `./j2eo/build/reports/tests/test/index.html` file.
+4. After build process, **j2eo.jar** file will appear in the project root folder (`./j2eo`). With this file, is it
+   possible to translate **.java** files or packages to **.eo** packages. Run:
 
     ```shell
-    java -jar j2eo.jar <source .java file> -o <output .eo file>
+    java -jar j2eo.jar <source .java file or directory with Java files> -o <output directory>
     ```
 
-    to get the translation.  
+   to get the translation.
 
-    For example,
+   For example,
     ```shell
-    java -jar j2eo.jar src/test/resources/SimpleTest.java -o output.eo
-
-    # Output may be displayed with 
-    cat output.eo
+    java -jar j2eo.jar src/test/resources/SimpleTest.java -o output_eo
+    ```
+   or
+    ```shell
+    java -jar j2eo.jar src/test/resources/polystat_tests/test1 -o output_eo
     ```
 
 ---
@@ -109,21 +94,21 @@ bugs in our code. It is also much easier to work with abstraction layer than wit
 
 ## NOT covered Java features list
 
-- Type Erasure  - Zouev
-- Subtyping     - discuss with Yegor
-- Conversions   - remove
-- Casting       - remove
-- Modules      
-- Exceptions     - remove
-- Asserts        - remove
-- Throws         - remove
+- Type Erasure - Zouev
+- Subtyping - discuss with Yegor
+- Conversions - remove
+- Casting - remove
+- Modules
+- Exceptions - remove
+- Asserts - remove
+- Throws - remove
 - ``synchronized`` blocks
-- ``try``/``catch`` blocks  - remove
+- ``try``/``catch`` blocks - remove
 - ``yeild`` feature
-- Threads and Locks 
+- Threads and Locks
 - Generics (all kinds of them) - remove
-- Native methods 
+- Native methods
 - break and continue statements - remove
-- RTTI (instanceof operator) ??????  - remove
+- RTTI (instanceof operator) ?????? - remove
 
 In general, we cover **91 feature of 112** described in the Java language specification.

@@ -276,6 +276,34 @@
           class__Integer.constructor3
             ^
 
+      [right] > bit_and
+        seq > @
+          class__Integer.constructor2
+            as-int.
+              as-bytes.
+                ^.v
+
+      [right] > bit_or
+        seq > @
+          class__Integer.constructor2
+            as-int.
+              as-bytes.
+                ^.v
+
+      [right] > bit_xor
+        seq > @
+          class__Integer.constructor2
+            as-int.
+              as-bytes.
+                ^.v
+
+      [] > bit_not
+        seq > @
+          class__Integer.constructor2
+            as-int.
+              as-bytes.
+                ^.v
+
     seq > @
       this
 

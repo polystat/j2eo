@@ -1,6 +1,5 @@
 package translator.preprocessor
 
-import translator.decodePrimitiveType
 import tree.Compilation.CompilationUnit
 import tree.Compilation.SimpleCompilationUnit
 import tree.Compilation.TopLevelComponent
@@ -13,9 +12,8 @@ import tree.InitializerSimple
 import tree.Statement.BlockStatement
 import tree.Statement.Statement
 import tree.Statement.StatementExpression
-import tree.Type.PrimitiveType
-import tree.Type.Type
 import tree.Type.TypeName
+import util.TokenCodes
 import util.collectPrimitivePackages
 
 /**
@@ -25,18 +23,19 @@ import util.collectPrimitivePackages
  */
 data class PreprocessorState(
         val classNames: HashMap<String, String> = hashMapOf(
-            "Object" to "class__Object",
-            "System" to "class__System"
+            "Object" to TokenCodes.CLASS__OBJECT.value,
+            "System" to TokenCodes.CLASS__SYSTEM.value,
         ),
         val stdClassesNeededForAlias: HashSet<String> = hashSetOf(
-                "class__Object",
-                "class__System",
-                "class__Integer",
-                "class__Float",
-                "class__String"
+            TokenCodes.CLASS__OBJECT.value,
+            TokenCodes.CLASS__SYSTEM.value,
+            TokenCodes.PRIM__INT.value,
+            TokenCodes.PRIM__FLOAT.value,
+            TokenCodes.PRIM__BOOLEAN.value,
+            TokenCodes.CLASS__STRING.value
         ),
         val stdClassesForCurrentAlias: HashSet<String> = hashSetOf(
-                "class__Object"  // We need it always
+            TokenCodes.CLASS__OBJECT.value  // We need it always
         )
 )
 

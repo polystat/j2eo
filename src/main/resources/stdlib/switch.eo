@@ -1,0 +1,4 @@
++package stdlib
+
+[c cases...] > switch
+  seq > @

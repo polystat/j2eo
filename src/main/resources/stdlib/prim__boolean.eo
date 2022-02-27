@@ -1,0 +1,61 @@
++package stdlib
+
+[] > prim__boolean
+  [] > new
+    [] > this
+      TRUE > is-prim
+
+      memory > v
+
+      [self t] > init
+        seq > @
+          self.v.write
+            t
+
+      [] > as-string
+        seq > @
+          if.
+            ^.v
+            "true"
+            "false"
+
+      [] > not
+        seq > @
+          prim__boolean.constructor2
+            ^.v.not
+
+      [right] > and
+        seq > @
+          prim__boolean.constructor2
+            ^.v.and
+              right.v
+
+      [right] > or
+        seq > @
+          prim__boolean.constructor2
+            ^.v.or
+              right.v
+
+    seq > @
+      this
+
+  [] > constructor1
+    new > self
+    seq > @
+      self
+
+  [t] > constructor2
+    new > self
+    seq > @
+      self.init
+        self
+        t
+      self
+
+  [b] > constructor3
+    new > self
+    seq > @
+      self.init
+        self
+        b.v
+      self

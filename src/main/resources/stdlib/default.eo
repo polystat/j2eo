@@ -1,0 +1,9 @@
++package stdlib
++alias stdlib.case
+
+[a] > default
+  case > @
+    0
+    a
+
+  FALSE > is-case
