@@ -3,6 +3,7 @@
 [] > prim__boolean
   [] > new
     [] > this
+      "prim__boolean" > primName
       TRUE > is-prim
 
       memory > v
@@ -11,6 +12,18 @@
         seq > @
           self.v.write
             t
+
+      [right] > write
+        seq > @
+          if.
+            right.primName.eq
+              "prim__boolean"
+            seq
+              ^.v.write
+                right.v
+              ^
+            []
+              "error: incompatible types: possible lossy conversion from double to boolean" > msg
 
       [] > as-string
         seq > @
