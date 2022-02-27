@@ -1,7 +1,7 @@
-public class SimpleTest {
+public class CharLiteral {
 	
 	public static void main(String[] args) {
-		String s = "some";
+		char c = 'f';
 		System.out.println("passed");
 	}
 }

@@ -30,7 +30,9 @@ data class PreprocessorState(
         val classNames: HashMap<String, String> = hashMapOf(
                 "Object" to TokenCodes.CLASS__OBJECT.value,
                 "System" to TokenCodes.CLASS__SYSTEM.value,
-                "int" to TokenCodes.PRIM__INT.value
+                "int" to TokenCodes.PRIM__INT.value,
+                "float" to TokenCodes.PRIM__FLOAT.value,
+                "boolean" to TokenCodes.PRIM__BOOLEAN.value
         ),
         val stdClassesNeededForAlias: HashSet<String> = hashSetOf(
             TokenCodes.CLASS__OBJECT.value,

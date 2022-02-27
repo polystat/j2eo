@@ -1,7 +1,8 @@
-public class SimpleTest {
+public class BooleanLiteral {
 	
 	public static void main(String[] args) {
-		String s = "some";
+		boolean a = true;
+		boolean b = false;
 		System.out.println("passed");
 	}
 }
