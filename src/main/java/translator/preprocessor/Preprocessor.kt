@@ -32,19 +32,21 @@ data class PreprocessorState(
                 "System" to TokenCodes.CLASS__SYSTEM.value,
                 "int" to TokenCodes.PRIM__INT.value,
                 "float" to TokenCodes.PRIM__FLOAT.value,
-                "boolean" to TokenCodes.PRIM__BOOLEAN.value
+                "boolean" to TokenCodes.PRIM__BOOLEAN.value,
         ),
         val stdClassesNeededForAlias: HashSet<String> = hashSetOf(
-            TokenCodes.CLASS__OBJECT.value,
-            TokenCodes.CLASS__SYSTEM.value,
-            TokenCodes.PRIM__INT.value,
-            TokenCodes.PRIM__FLOAT.value,
-            TokenCodes.PRIM__BOOLEAN.value,
-            TokenCodes.CLASS__STRING.value
+                TokenCodes.CLASS__OBJECT.value,
+                TokenCodes.CLASS__SYSTEM.value,
+                TokenCodes.PRIM__INT.value,
+                TokenCodes.PRIM__FLOAT.value,
+                TokenCodes.PRIM__BOOLEAN.value,
+                TokenCodes.CLASS__STRING.value,
+                TokenCodes.EO_CAGE.value
         ),
         val stdClassesForCurrentAlias: HashSet<String> = hashSetOf(
-            TokenCodes.CLASS__OBJECT.value  // We need it always
-        )
+                TokenCodes.CLASS__OBJECT.value  // We need it always
+        ),
+        val eoClassesForCurrentAlias: HashSet<String> = hashSetOf()
 )
 
 /**
@@ -206,6 +208,10 @@ private fun preprocessVarDecl(state: PreprocessorState, varDecl: VariableDeclara
             // this is a generated else block
         }
     }
+    when (varDecl.type) {
+        is TypeName -> tryAddClassForAliases(state, TokenCodes.EO_CAGE.value, false)
+        else -> {}
+    }
 }
 
 private fun preprocessSimpleInitializer(state: PreprocessorState, initializer: InitializerSimple) {
@@ -252,9 +258,13 @@ private fun preprocessCompoundName(state: PreprocessorState, compoundName: Compo
     tryAddClassForAliases(state, compoundName.names.first())
 }
 
-private fun tryAddClassForAliases(state: PreprocessorState, className: String) {
+private fun tryAddClassForAliases(state: PreprocessorState, className: String, forStdLib: Boolean = true) {
     if (state.stdClassesNeededForAlias.contains(className)) {
-        state.stdClassesForCurrentAlias.add(className)
+        if (forStdLib) {
+            state.stdClassesForCurrentAlias.add(className)
+        } else {
+            state.eoClassesForCurrentAlias.add(className)
+        }
     }
 }
 

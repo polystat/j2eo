@@ -7,5 +7,6 @@ enum class TokenCodes(val value: String) {
     PRIM__NUMBER("prim__number"),
     CLASS__SYSTEM("class__System"),
     CLASS__STRING("class__String"),
-    CLASS__OBJECT("class__Object")
+    CLASS__OBJECT("class__Object"),
+    EO_CAGE("gray.cage")
 }

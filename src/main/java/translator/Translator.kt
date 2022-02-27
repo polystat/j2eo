@@ -65,7 +65,9 @@ class Translator {
         // Always calling the 'main' method
 
         val stdAliases = preprocessorState.stdClassesForCurrentAlias.stream()
-            .map { EOMeta("alias", "stdlib.$it") }.toList()
+                .map { EOMeta("alias", "stdlib.$it") }.toList()
+        val eoAliases = preprocessorState.eoClassesForCurrentAlias.stream()
+                .map { EOMeta("alias", "org.eolang.$it") }.toList()
 
         return EOProgram(
             EOLicense(
@@ -74,7 +76,7 @@ class Translator {
             ),
             EOMetas(
                 None,
-                stdAliases
+                stdAliases + eoAliases
             ),
             bnds + entrypointBnds
         )
