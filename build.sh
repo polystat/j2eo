@@ -3,12 +3,7 @@
 # Fail on non-zero exit codes
 set -e
 
-# Tag should be exported from outside
-
-echo "Building and publishing J2EO"
-
-pwd
-ls -lha
-
-./gradlew assemble fatJar publish -Pcandidates=false --info -PmvnPublicationVersion=${tag} -Dsigning.secretKeyRingFile=/root/secring.gpg
-echo "Publish completed"
+echo "Building J2EO..."
+./gradlew fatJar -x test
+cp build/libs/J2EO-0.2.0.jar j2eo.jar
+echo "Build completed"
