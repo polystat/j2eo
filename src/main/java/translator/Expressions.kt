@@ -81,6 +81,8 @@ fun mapUnaryPrefix(parseExprTasks: ParseExprTasks, expr: UnaryPrefix): EOObject 
     val function = when (expr.operator) {
         TokenCode.PlusPlus -> "inc_pre"
         TokenCode.MinusMinus -> "dec_pre"
+        TokenCode.Minus -> "neg"
+        TokenCode.Plus -> null
         else -> throw IllegalArgumentException("Unary prefix ${expr.operator} is not supported")
     }
 
@@ -91,7 +93,11 @@ fun mapUnaryPrefix(parseExprTasks: ParseExprTasks, expr: UnaryPrefix): EOObject 
         None,
         listOf(
             EOBndExpr(
-                listOf(varName, function).eoDot(),
+                if (function != null) {
+                    listOf(varName, function).eoDot()
+                } else {
+                    varName.eoDot()
+                },
                 "@"
             )
         )
@@ -124,7 +130,7 @@ fun mapUnaryPostfix(parseExprTasks: ParseExprTasks, expr: UnaryPostfix): EOObjec
 fun mapBinary(parseExprTasks: ParseExprTasks, expr: Binary): EOObject {
     val function = when (expr.operator) {
         TokenCode.Plus -> "add"
-        TokenCode.Minus -> "minus"
+        TokenCode.Minus -> "sub"
         TokenCode.Greater -> "greater"
         TokenCode.GreaterEqual -> "geq"
         TokenCode.Equal -> "eq"

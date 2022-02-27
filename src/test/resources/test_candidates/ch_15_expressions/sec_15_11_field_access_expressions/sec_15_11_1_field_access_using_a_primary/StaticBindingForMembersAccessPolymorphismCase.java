@@ -1,11 +1,3 @@
-
-class S {
-	int x() { return 0; }
-}
-class T extends S {
-	int x() { return 1; }
-}
-
 public class StaticBindingForMembersAccessPolymorphismCase {
 	public static void main(String[] args) {
 		T t = new T();
@@ -16,4 +8,11 @@ public class StaticBindingForMembersAccessPolymorphismCase {
 		System.out.println(s.x());
 		System.out.println("passed");
 	}
+}
+
+class S {
+	int x() { return 0; }
+}
+class T extends S {
+	int x() { return 1; }
 }
