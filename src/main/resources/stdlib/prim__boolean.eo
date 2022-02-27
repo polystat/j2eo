@@ -5,6 +5,7 @@
     [] > this
       "prim__boolean" > primName
       TRUE > is-prim
+      "BOOLEAN" > @
 
       memory > v
 
