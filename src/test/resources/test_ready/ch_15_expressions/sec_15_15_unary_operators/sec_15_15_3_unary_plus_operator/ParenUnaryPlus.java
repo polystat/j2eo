@@ -1,4 +1,4 @@
-public class SimpleUnaryPlus {
+public class ParenUnaryPlus {
 
 	public static void main(String[] args) {
 		int a = -5;

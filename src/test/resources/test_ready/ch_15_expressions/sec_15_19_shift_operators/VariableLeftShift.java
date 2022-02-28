@@ -1,4 +1,4 @@
-public class VariableRightShift {
+public class VariableLeftShift {
 	
 	public static void main(String[] args) {
 		int a = 128;
