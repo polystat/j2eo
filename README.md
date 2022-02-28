@@ -6,9 +6,9 @@
 <br>
 
 [![Gradle Build](https://github.com/polystat/j2eo/actions/workflows/gradle-build.yml/badge.svg)](https://github.com/polystat/j2eo/actions/workflows/gradle-build.yml)
-![LINE](https://img.shields.io/badge/line--coverage-33,10%25-red.svg)
-![BRANCH](https://img.shields.io/badge/branch--coverage-23,49%25-red.svg)
-![COMPLEXITY](https://img.shields.io/badge/complexity-6,34-brightgreen.svg)
+![LINE](https://img.shields.io/badge/line--coverage-35,45%25-red.svg)
+![BRANCH](https://img.shields.io/badge/branch--coverage-25,44%25-red.svg)
+![COMPLEXITY](https://img.shields.io/badge/complexity-6,02-brightgreen.svg)
 
 This is a translator of **Java** programming language to [EOLANG](https://www.eolang.org) programming language.
 
