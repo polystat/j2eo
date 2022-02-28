@@ -1,4 +1,4 @@
-public class SimpleTest {
+public class ParenPrefixIncrement {
 
 	public static void main(String[] args) {
 		int a = 5;
