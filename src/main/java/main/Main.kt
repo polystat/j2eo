@@ -7,7 +7,6 @@ import parser.JavaParser
 import translator.Translator
 import tree.Compilation.CompilationUnit
 import tree.Entity
-import util.logger
 import java.io.File
 import java.io.FileNotFoundException
 import java.nio.file.Files
