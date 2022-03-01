@@ -7,9 +7,13 @@ import parser.JavaParser
 import translator.Translator
 import tree.Compilation.CompilationUnit
 import tree.Entity
+import util.logger
 import java.io.File
 import java.io.FileNotFoundException
-import java.io.PrintWriter
+import java.nio.file.Files
+import java.nio.file.Path
+import java.nio.file.Paths
+import kotlin.io.path.createDirectories
 import kotlin.system.exitProcess
 
 object Main {
@@ -98,11 +102,21 @@ object Main {
 
         translatedFiles.forEach { (file, eoProgram) ->
             val targetText = eoProgram.generateEO(0)
-            val outputPath = (cmd.getOptionValue("o") + "/" + file.path.replace(cmd.argList[0], ""))
-                .replace("//", "/").replace(".java", ".eo")
-            println("Printing output to file $outputPath")
-            File(outputPath.substringBeforeLast("/")).mkdirs()
-            PrintWriter(outputPath).use { writer -> writer.println(targetText) }
+            val outputPath = Paths.get(
+                    cmd.getOptionValue('o'),
+                    if (sourceFile.isDirectory)
+                        file.parentFile.toRelativeString(File(cmd.args[0]))
+                    else
+                        file.toRelativeString(File(cmd.args[0]))
+            )
+            val outputFile = Paths.get(
+                    outputPath.toString(),
+                    file.name.replace(".java", ".eo")
+            )
+
+            println("Printing output to file $outputFile")
+            outputPath.createDirectories()
+            Files.writeString(Files.createFile(outputFile), targetText)
         }
 
 //        Resource
