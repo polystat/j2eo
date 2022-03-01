@@ -1,8 +1,6 @@
-
-
 public class Test {
     boolean test() {
-        var main = new Main();
+        Main main = 1;
         main.divide(4, 0);
     }
 }

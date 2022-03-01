@@ -1,5 +1,6 @@
 package main
 
+import arrow.core.getOrElse
 import eotree.EOProgram
 import lexer.Scanner
 import org.apache.commons.cli.*
@@ -98,8 +99,17 @@ object Main {
 
         translatedFiles.forEach { (file, eoProgram) ->
             val targetText = eoProgram.generateEO(0)
-            val outputPath = (cmd.getOptionValue("o") + "/" + file.path.replace(cmd.argList[0], ""))
-                .replace("//", "/").replace(".java", ".eo")
+
+            val output_dir = cmd.getOptionValue("o") + "/";
+            val output_filename =
+                eoProgram.metas.packageName.getOrElse { "" } + "/" +
+                        file.path.substringAfterLast("/")
+
+            val outputPath =
+                (output_dir + output_filename)
+                    .replace("//", "/")
+                    .replace(".java", ".eo")
+
             println("Printing output to file $outputPath")
             File(outputPath.substringBeforeLast("/")).mkdirs()
             PrintWriter(outputPath).use { writer -> writer.println(targetText) }
