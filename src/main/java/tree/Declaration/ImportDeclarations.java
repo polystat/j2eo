@@ -1,7 +1,8 @@
 package tree.Declaration;
 
-import java.util.ArrayList;
 import tree.Entity;
+
+import java.util.ArrayList;
 
 // ImportDeclarationSeqOpt
 //    :  // empty
@@ -11,6 +12,12 @@ import tree.Entity;
 public class ImportDeclarations extends Entity {
     // Structure
     public ArrayList<ImportDeclaration> imports;
+
+    public ImportDeclarations(ArrayList<ImportDeclaration> imports) {
+        this.imports = imports;
+
+        this.imports.stream().findFirst().map(importDeclaration -> importDeclaration.parent = this);
+    }
 
     // Creation
     public ImportDeclarations(ImportDeclaration id) {

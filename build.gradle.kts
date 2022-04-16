@@ -5,6 +5,7 @@ import java.security.MessageDigest
 
 plugins {
     java
+    antlr
     jacoco
     pmd
     checkstyle
@@ -38,7 +39,7 @@ compileTestKotlin.kotlinOptions {
 }
 
 // The Java grammar source file for Bison
-val javaGrammarFilePath = "src/main/resources/Java_16_Grammar.y"
+val javaGrammarFilePath = "grammar/JavaParser.g4"
 
 // Where to put Bison compilation report
 val reportFilePath = "out/Java_16_Grammar.report"
@@ -72,6 +73,9 @@ dependencies {
     testImplementation("org.junit.jupiter:junit-jupiter-api:5.8.2")
     testRuntimeOnly("org.junit.jupiter:junit-jupiter-engine:5.8.2")
     implementation(kotlin("stdlib-jdk8"))
+
+    // Use ANTLR for parser generation
+    antlr("org.antlr:antlr4:4.9.3")
 
     implementation("org.polystat:j2ast:0.0.2")
 }
@@ -183,6 +187,17 @@ pmd {
 //    reporterType = "sarif"
 //    ignoreFailures = true
 //}
+
+tasks.getByName("build") {
+    // Only run Bison build if grammar file changed
+    if (readMD5FromFile(latestGrammarMD5FilePath) != grammarFileMD5()) {
+        println("Grammar file changed since last build; Rebuilding parser with ANTLR...")
+        runAntlr()
+        writeMD5ToFile(grammarFileMD5(), latestGrammarMD5FilePath)
+    } else {
+        println("Grammar file didn't change; Skipping parser build.")
+    }
+}
 
 checkstyle {
     toolVersion = "9.1"
@@ -320,3 +335,94 @@ signing {
 tasks.getByName("signMavenJavaPublication") {
     dependsOn(fatJar)
 }
+
+
+
+/**
+ * Runs Bison using OS-specific shell command.
+ */
+fun runAntlr() =
+    try {
+        when {
+//            Os.isFamily(Os.FAMILY_WINDOWS) ->
+//                exec {
+//                    workingDir = File(".")
+//                    executable = "bin/win_bison.exe"
+//                    args = mutableListOf(
+//                        "--report=states,lookaheads",
+//                        // "-r", "all",
+//                        // "--debug", "--help", "--stacktrace",
+//                        "--report-file=${reportFilePath}",
+//                        "--output=${javaParserFilePath}",
+//                        javaGrammarFilePath
+//                    )
+//                }
+            Os.isFamily(Os.FAMILY_MAC) ->
+                exec {
+                    workingDir = File("grammar")
+                    executable = "antlr"
+                    args = mutableListOf(
+                        javaGrammarFilePath.replace("grammar/", ""),
+                        "-visitor",
+                        "-o",
+                        "../src/main/java/parser"
+                    )
+                }
+//            Os.isFamily(Os.FAMILY_UNIX) ->
+//                exec {
+//                    workingDir = File(".")
+//                    executable = "bison"
+//                    args = mutableListOf(
+//                        "--report=states,lookaheads",
+//                        "--report-file=${reportFilePath}",
+//                        "--output=${javaParserFilePath}",
+//                        javaGrammarFilePath
+//                    )
+//                }
+            else ->
+                throw UnsupportedOperationException(
+                    "Your OS is not yet supported. File a GitHub or issue or " +
+                            "provide a Pull Request with support for Bison execution for your OS."
+                )
+        }
+    } catch (e: Exception) {
+        e.printStackTrace()
+    }
+
+
+/**
+ * Returns MD5 string for a given file.
+ */
+fun generateMD5(filepath: String): String {
+    val digest: MessageDigest = MessageDigest.getInstance("MD5")
+
+    println("Working Directory = " + System.getProperty("user.dir"))
+
+    File(filepath).inputStream().use { inputStream ->
+        val buffer = ByteArray(8192)
+        var read = 0
+        do {
+            digest.update(buffer, 0, read)
+            read = inputStream.read(buffer)
+        } while (read > 0)
+    }
+
+    val md5sum: ByteArray = digest.digest()
+    val bigInt = BigInteger(1, md5sum)
+
+    return bigInt.toString(16).padStart(32, '0')
+}
+
+fun grammarFileMD5(): String =
+    generateMD5(javaGrammarFilePath)
+
+fun readMD5FromFile(filepath: String): String =
+    File(filepath).let { f ->
+        if (f.exists())
+            File(filepath).readText()
+        else
+            ""
+    }
+
+fun writeMD5ToFile(md5: String, filepath: String) =
+    File(filepath).writeText(md5)

@@ -1,17 +1,20 @@
 package main
 
 import eotree.EOProgram
-import lexer.Scanner
+import org.antlr.v4.runtime.CharStreams
+import org.antlr.v4.runtime.CommonTokenStream
 import org.apache.commons.cli.*
+import parser.JavaLexer
 import parser.JavaParser
+import parser.Visitor
 import translator.Translator
 import tree.Compilation.CompilationUnit
 import tree.Entity
 import java.io.File
 import java.io.FileNotFoundException
 import java.nio.file.Files
-import java.nio.file.Path
 import java.nio.file.Paths
+import java.util.*
 import kotlin.io.path.createDirectories
 import kotlin.system.exitProcess
 
@@ -69,29 +72,43 @@ object Main {
         else
             listOf(sourceFile)
 
-        println("List of files to translate:" + filesToProcess.map { "\n  ${it.path}" }.joinToString(""))
+        println("List of files to translate:" + filesToProcess.joinToString("") { "\n  ${it.path}" })
 
         val parsedFiles: List<Pair<File, CompilationUnit>> = filesToProcess
             .mapNotNull { f ->
-                val scanner = Scanner()
-                scanner.readFile(f.absolutePath)
-                val parser = JavaParser(scanner)
+                Scanner(f).use { scanner ->
+                    val lexer = JavaLexer(CharStreams.fromFileName(f.absolutePath))
+                    val parser = JavaParser(CommonTokenStream(lexer))
+                    val tree = parser.compilationUnit()
 
-                try {
-                    val result: Boolean = parser.parse()
+                    val eval = Visitor()
+                    val cu = eval.visit(tree) as CompilationUnit
 
-                    if (!result)
-                        throw ParseException("Parsing of file \"${f.absolutePath}\" failed")
-
-                    if (Entity.debug)
-                        parser.ast.report(0)
-
-                    Pair(f, parser.ast)
-                } catch (exc: Exception) {
-                    exc.printStackTrace()
-                    null
+                    Pair(f, cu)
                 }
             }
+
+//        val parsedFiles: List<Pair<File, CompilationUnit>> = filesToProcess
+//            .mapNotNull { f ->
+//                val scanner = Scanner()
+//                scanner.readFile(f.absolutePath)
+//                val parser = JavaParser(scanner)
+//
+//                try {
+//                    val result: Boolean = parser.parse()
+//
+//                    if (!result)
+//                        throw ParseException("Parsing of file \"${f.absolutePath}\" failed")
+//
+//                    if (Entity.debug)
+//                        parser.ast.report(0)
+//
+//                    Pair(f, parser.ast)
+//                } catch (exc: Exception) {
+//                    exc.printStackTrace()
+//                    null
+//                }
+//            }
 
         val translatedFiles: List<Pair<File, EOProgram>> = parsedFiles
             .map { (file, ast) ->
@@ -99,18 +116,22 @@ object Main {
                 Pair(file, translator.translate(ast))
             }
 
+        val outputDirectory = File(cmd.getOptionValue('o'))
+        println("Cleaning up output directory \"$outputDirectory\" before printing")
+        outputDirectory.deleteRecursively()
+
         translatedFiles.forEach { (file, eoProgram) ->
             val targetText = eoProgram.generateEO(0)
             val outputPath = Paths.get(
-                    cmd.getOptionValue('o'),
-                    if (sourceFile.isDirectory)
-                        file.parentFile.toRelativeString(File(cmd.args[0]))
-                    else
-                        file.toRelativeString(File(cmd.args[0]))
+                cmd.getOptionValue('o'),
+                if (sourceFile.isDirectory)
+                    file.parentFile.toRelativeString(File(cmd.args[0]))
+                else
+                    file.toRelativeString(File(cmd.args[0]))
             )
             val outputFile = Paths.get(
-                    outputPath.toString(),
-                    file.name.replace(".java", ".eo")
+                outputPath.toString(),
+                file.name.replace(".java", ".eo")
             )
 
             println("Printing output to file $outputFile")
