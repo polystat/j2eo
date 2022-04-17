@@ -18,7 +18,7 @@ import java.util.*
 import kotlin.io.path.createDirectories
 import kotlin.system.exitProcess
 
-object Main {
+object Main2 {
     @Throws(FileNotFoundException::class)
     @JvmStatic
     fun main(args: Array<String>) {
