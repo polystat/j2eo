@@ -10,6 +10,7 @@ import tree.Declaration.*
 import tree.Expression.Expression
 import tree.Expression.Primary.Literal
 import tree.Expression.SimpleReference
+import tree.Expression.SwitchExpression
 import tree.Statement.*
 import tree.Type.*
 import kotlin.reflect.typeOf
@@ -103,10 +104,62 @@ fun LocalTypeDeclarationContext.toDeclaration() : Declaration =
 
 fun StatementContext.toStatement() : Statement =
     when (this) {
-        is StatementWhileContext -> While(null /* FIXME */, parExpression().expression().toExpression(), statement().toStatement())
+        is StatementWhileContext -> While(null /* FIXME */,
+            parExpression().expression().toExpression(),
+            statement().toStatement())
+        is StatementIfContext -> IfThenElse(null,
+            parExpression().expression().toExpression(),
+            statement(0).toStatement(),
+            statement(1)?.toStatement())
+        is StatementExpressionContext -> StatementExpression(null,
+            expression().toExpression())
+        is StatementAssertContext -> Assert(null,
+            this.expression(0).toExpression(),
+            this.expression(1)?.toExpression())
+        is StatementBreakContext -> Break(null, identifier()?.toToken())
+        is StatementContinueContext -> Continue(null, identifier()?.toToken())
+        is StatementForContext -> StatementExpression(null, SimpleReference(CompoundName("for_loop_placeholder"))) /* FIXME */
+        is StatementBlockLabelContext -> StatementExpression(null, SimpleReference(CompoundName("block_label_placeholder"))) /* FIXME */
+        is StatementDoContext -> Do(null, statement().toStatement(), parExpression().expression().toExpression())
+        is StatementReturnContext -> Return(null, expression()?.toExpression())
+        is StatementIdentifierLabelContext -> StatementExpression(null, SimpleReference(CompoundName("identifier_label_placeholder"))) /* FIXME */
+        is StatementSemiContext -> StatementExpression(null, SimpleReference(CompoundName("semi_noop_placeholder"))) /* FIXME */
+        is StatementSwitchContext -> StatementExpression(null, SimpleReference(CompoundName("switch_statement_placeholder"))) /* FIXME */
+        is StatementSwitchExpressionContext -> StatementExpression(null, switchExpression().toExpression())
+            /* Switch(null,
+            this.parExpression().expression().toExpression(),
+            SwitchBlocks(ArrayList(switchBlockStatementGroup().map { it.toSwitchBlock() })),
+            0 /* FIXME: switchLabels */
+        ) */
+        is StatementTryResourceSpecificationContext -> StatementExpression(null, SimpleReference(CompoundName("try_resource_placeholder"))) /* FIXME */
+        is StatementTryBlockContext -> StatementExpression(null, SimpleReference(CompoundName("try_block_placeholder"))) /* FIXME */
         else -> StatementExpression(null, SimpleReference(CompoundName("statement_placeholder"))) /* FIXME */
         // else -> throw Exception("Unsupported statement") /* FIXME */
     }
+
+fun SwitchExpressionContext.toExpression() : Expression =
+    SimpleReference(CompoundName("switch_expression_placeholder")) /* FIXME */
+    /* FIXME:
+    SwitchExpression(
+        parExpression().expression().toExpression(),
+        ???
+    ) */
+
+fun SwitchBlockStatementGroupContext.toSwitchBlock() : SwitchBlock =
+    SwitchBlock(
+        ArrayList(this.switchLabel().map { it.toSwitchLabel() }),
+        null
+    )
+
+fun SwitchLabelContext.toSwitchLabel() : SwitchLabel =
+    SwitchLabel(
+        constantExpression?.toExpression()
+            ?: enumConstantName?.toCompoundName()?.toExpression()
+            ?: null
+    )
+
+fun org.antlr.v4.runtime.Token.toCompoundName() : CompoundName = CompoundName(text)
+fun CompoundName.toExpression() : Expression = SimpleReference(this)
 
 fun ExpressionContext.toExpression() : Expression =
     SimpleReference(CompoundName("statement_placeholder")) /* FIXME */

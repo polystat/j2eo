@@ -5,11 +5,7 @@ import eotree.EOCopy
 import eotree.EODot
 import eotree.EOExpr
 import eotree.eoDot
-import tree.Statement.IfThenElse
-import tree.Statement.Return
-import tree.Statement.Statement
-import tree.Statement.StatementExpression
-import tree.Statement.While
+import tree.Statement.*
 import util.ParseExprTasks
 
 // fun mapBlockStatement(stmt: BlockStatement): EOExpr =
@@ -31,6 +27,8 @@ fun mapStatement(parseExprTasks: ParseExprTasks, statement: Statement): EOExpr =
         is Return -> mapReturnStatement(parseExprTasks, statement)
         is IfThenElse -> mapIfThenElseStatement(parseExprTasks, statement)
         is While -> mapWhileStatement(parseExprTasks, statement)
+        is Do -> mapDoStatement(parseExprTasks, statement)
+        // is Switch -> mapSwitchStatement(parseExprTasks, statement)
         else ->
             throw IllegalArgumentException("Statement of type ${statement.javaClass.simpleName} is not supported")
     }
@@ -40,20 +38,43 @@ fun mapStatementExpression(parseExprTasks: ParseExprTasks, stmtExpr: StatementEx
 }
 
 fun mapReturnStatement(parseExprTasks: ParseExprTasks, rn: Return): EOExpr {
-    return parseExprTasks.addTask(rn.expression).eoDot()
+    if (rn.expression != null) {
+        return parseExprTasks.addTask(rn.expression).eoDot()
+    } else {
+        return "return_placeholder".eoDot()
+    }
 }
 
 fun mapIfThenElseStatement(parseExprTasks: ParseExprTasks, rn: IfThenElse): EOExpr =
-    EOCopy(
+    if (rn.elsePart == null) {
+        EOCopy(
+            EODot(
+                Option.fromNullable(mapExpression(parseExprTasks, rn.condition)),
+                "if"
+            ),
+            mapStatement(parseExprTasks, rn.thenPart)
+        )
+    } else {
+        EOCopy(
             EODot(
                 Option.fromNullable(mapExpression(parseExprTasks, rn.condition)),
                 "if"
             ),
             mapStatement(parseExprTasks, rn.thenPart),
             mapStatement(parseExprTasks, rn.elsePart)
-    )
+        )
+    }
 
 fun mapWhileStatement(parseExprTasks: ParseExprTasks, rn: While): EOExpr =
+    EOCopy(
+        EODot(
+            Option.fromNullable(mapExpression(parseExprTasks, rn.condition)),
+            "while"
+        ),
+        mapStatement(parseExprTasks, rn.statement)
+    )
+
+fun mapDoStatement(parseExprTasks: ParseExprTasks, rn: Do): EOExpr =
     EOCopy(
         EODot(
             Option.fromNullable(mapExpression(parseExprTasks, rn.condition)),
