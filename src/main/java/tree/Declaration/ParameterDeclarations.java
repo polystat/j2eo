@@ -16,6 +16,13 @@ public class ParameterDeclarations extends Entity {
         }
     }
 
+    public ParameterDeclarations(ArrayList<ParameterDeclaration> pars) {
+        this.parameters = pars;
+        for (var par : pars) {
+            par.parent = this;
+        }
+    }
+
     public ParameterDeclarations add(ParameterDeclaration par) {
         this.parameters.add(par);
         if (par != null) {

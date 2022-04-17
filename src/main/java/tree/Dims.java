@@ -1,5 +1,6 @@
 package tree;
 
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 
 public class Dims extends Entity {
@@ -15,6 +16,13 @@ public class Dims extends Entity {
         this.dimensions = new ArrayList<>();
         this.dimensions.add(dim);
         if (dim != null) {
+            dim.parent = this;
+        }
+    }
+
+    public Dims(ArrayList<Dim> dimensions) {
+        this.dimensions = dimensions;
+        for (var dim : dimensions) {
             dim.parent = this;
         }
     }

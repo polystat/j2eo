@@ -484,25 +484,25 @@ localTypeDeclaration
     ;
 
 statement
-    : blockLabel=block
-    | ASSERT expression (':' expression)? ';'
-    | IF parExpression statement (ELSE statement)?
-    | FOR '(' forControl ')' statement
-    | WHILE parExpression statement
-    | DO statement WHILE parExpression ';'
-    | TRY block (catchClause+ finallyBlock? | finallyBlock)
-    | TRY resourceSpecification block catchClause* finallyBlock?
-    | SWITCH parExpression '{' switchBlockStatementGroup* switchLabel* '}'
-    | SYNCHRONIZED parExpression block
-    | RETURN expression? ';'
-    | THROW expression ';'
-    | BREAK identifier? ';'
-    | CONTINUE identifier? ';'
-    | YIELD expression ';' // Java17
-    | SEMI
-    | statementExpression=expression ';'
-    | switchExpression ';'? // Java17
-    | identifierLabel=identifier ':' statement
+    : blockLabel=block                                                      # statementBlockLabel
+    | ASSERT expression (':' expression)? ';'                               # statementAssert
+    | IF parExpression statement (ELSE statement)?                          # statementIf
+    | FOR '(' forControl ')' statement                                      # statementFor
+    | WHILE parExpression statement                                         # statementWhile
+    | DO statement WHILE parExpression ';'                                  # statementDo
+    | TRY block (catchClause+ finallyBlock? | finallyBlock)                 # statementTryBlock
+    | TRY resourceSpecification block catchClause* finallyBlock?            # statementTryResourceSpecification
+    | SWITCH parExpression '{' switchBlockStatementGroup* switchLabel* '}'  # statementSwitch
+    | SYNCHRONIZED parExpression block                                      # statementSynchronized
+    | RETURN expression? ';'                                                # statementReturn
+    | THROW expression ';'                                                  # statementThrow
+    | BREAK identifier? ';'                                                 # statementBreak
+    | CONTINUE identifier? ';'                                              # statementContinue
+    | YIELD expression ';' /* Java17 */                                     # statementYield
+    | SEMI                                                                  # statementSemi
+    | statementExpression=expression ';'                                    # statementExpression
+    | switchExpression ';'? /* Java17 */                                    # statementSwitchExpression
+    | identifierLabel=identifier ':' statement                              # statementIdentifierLabel
     ;
 
 catchClause

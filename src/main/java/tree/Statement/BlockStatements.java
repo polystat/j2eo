@@ -16,6 +16,13 @@ public class BlockStatements extends Entity {
         deconstruct(elem);
     }
 
+    public BlockStatements(ArrayList<BlockStatement> blockStatements) {
+        this.blockStatements = new ArrayList<>();
+        for (var s : blockStatements) {
+            deconstruct(s);
+        }
+    }
+
     public BlockStatements add(BlockStatement elem) {
         deconstruct(elem);
         return this;

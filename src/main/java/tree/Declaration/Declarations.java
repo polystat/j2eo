@@ -13,6 +13,13 @@ public class Declarations extends Entity {
         deconstruct(d);
     }
 
+    public Declarations(ArrayList<Declaration> declarations) {
+        this.declarations = new ArrayList<>();
+        for (var d : declarations){
+            deconstruct(d);
+        }
+    }
+
     public Declarations add(Declaration d) {
         deconstruct(d);
         return this;

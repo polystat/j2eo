@@ -505,11 +505,138 @@ public interface JavaParserVisitor<T> extends ParseTreeVisitor<T> {
 	 */
 	T visitLocalTypeDeclaration(JavaParser.LocalTypeDeclarationContext ctx);
 	/**
-	 * Visit a parse tree produced by {@link JavaParser#statement}.
+	 * Visit a parse tree produced by the {@code statementBlockLabel}
+	 * labeled alternative in {@link JavaParser#statement}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
-	T visitStatement(JavaParser.StatementContext ctx);
+	T visitStatementBlockLabel(JavaParser.StatementBlockLabelContext ctx);
+	/**
+	 * Visit a parse tree produced by the {@code statementAssert}
+	 * labeled alternative in {@link JavaParser#statement}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitStatementAssert(JavaParser.StatementAssertContext ctx);
+	/**
+	 * Visit a parse tree produced by the {@code statementIf}
+	 * labeled alternative in {@link JavaParser#statement}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitStatementIf(JavaParser.StatementIfContext ctx);
+	/**
+	 * Visit a parse tree produced by the {@code statementFor}
+	 * labeled alternative in {@link JavaParser#statement}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitStatementFor(JavaParser.StatementForContext ctx);
+	/**
+	 * Visit a parse tree produced by the {@code statementWhile}
+	 * labeled alternative in {@link JavaParser#statement}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitStatementWhile(JavaParser.StatementWhileContext ctx);
+	/**
+	 * Visit a parse tree produced by the {@code statementDo}
+	 * labeled alternative in {@link JavaParser#statement}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitStatementDo(JavaParser.StatementDoContext ctx);
+	/**
+	 * Visit a parse tree produced by the {@code statementTryBlock}
+	 * labeled alternative in {@link JavaParser#statement}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitStatementTryBlock(JavaParser.StatementTryBlockContext ctx);
+	/**
+	 * Visit a parse tree produced by the {@code statementTryResourceSpecification}
+	 * labeled alternative in {@link JavaParser#statement}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitStatementTryResourceSpecification(JavaParser.StatementTryResourceSpecificationContext ctx);
+	/**
+	 * Visit a parse tree produced by the {@code statementSwitch}
+	 * labeled alternative in {@link JavaParser#statement}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitStatementSwitch(JavaParser.StatementSwitchContext ctx);
+	/**
+	 * Visit a parse tree produced by the {@code statementSynchronized}
+	 * labeled alternative in {@link JavaParser#statement}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitStatementSynchronized(JavaParser.StatementSynchronizedContext ctx);
+	/**
+	 * Visit a parse tree produced by the {@code statementReturn}
+	 * labeled alternative in {@link JavaParser#statement}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitStatementReturn(JavaParser.StatementReturnContext ctx);
+	/**
+	 * Visit a parse tree produced by the {@code statementThrow}
+	 * labeled alternative in {@link JavaParser#statement}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitStatementThrow(JavaParser.StatementThrowContext ctx);
+	/**
+	 * Visit a parse tree produced by the {@code statementBreak}
+	 * labeled alternative in {@link JavaParser#statement}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitStatementBreak(JavaParser.StatementBreakContext ctx);
+	/**
+	 * Visit a parse tree produced by the {@code statementContinue}
+	 * labeled alternative in {@link JavaParser#statement}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitStatementContinue(JavaParser.StatementContinueContext ctx);
+	/**
+	 * Visit a parse tree produced by the {@code statementYield}
+	 * labeled alternative in {@link JavaParser#statement}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitStatementYield(JavaParser.StatementYieldContext ctx);
+	/**
+	 * Visit a parse tree produced by the {@code statementSemi}
+	 * labeled alternative in {@link JavaParser#statement}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitStatementSemi(JavaParser.StatementSemiContext ctx);
+	/**
+	 * Visit a parse tree produced by the {@code statementExpression}
+	 * labeled alternative in {@link JavaParser#statement}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitStatementExpression(JavaParser.StatementExpressionContext ctx);
+	/**
+	 * Visit a parse tree produced by the {@code statementSwitchExpression}
+	 * labeled alternative in {@link JavaParser#statement}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitStatementSwitchExpression(JavaParser.StatementSwitchExpressionContext ctx);
+	/**
+	 * Visit a parse tree produced by the {@code statementIdentifierLabel}
+	 * labeled alternative in {@link JavaParser#statement}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitStatementIdentifierLabel(JavaParser.StatementIdentifierLabelContext ctx);
 	/**
 	 * Visit a parse tree produced by {@link JavaParser#catchClause}.
 	 * @param ctx the parse tree
