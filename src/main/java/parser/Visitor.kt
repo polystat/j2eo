@@ -13,23 +13,23 @@ import tree.Entity
 import tree.Type.Type
 
 class Visitor : JavaParserBaseVisitor<Entity>() {
-    override fun visitCompilationUnit(ctx: CompilationUnitContext?): Entity {
-        return SimpleCompilationUnit(
-//            ctx!!.packageDeclaration().qualifiedName().toCompoundName(),
-            ImportDeclarations(ArrayList(ctx!!.importDeclaration().map { it.toImportDeclaration() })),
-            TopLevelComponents(
-                TopLevelComponent(
-                    NormalClassDeclaration(
-                        Token(TokenCode.StringLiteral),
-                        null,
-                        Type(null),
-                        null,
-                        null,
-                    ).run { name = "Main"; this }
-                )
-            ),
-        )
-    }
+    override fun visitCompilationUnit(ctx: CompilationUnitContext?): Entity = ctx!!.toCompilationUnit()
+//        return SimpleCompilationUnit(
+////            ctx!!.packageDeclaration().qualifiedName().toCompoundName(),
+//            ImportDeclarations(ArrayList(ctx!!.importDeclaration().map { it.toImportDeclaration() })),
+//            TopLevelComponents(
+//                TopLevelComponent(
+//                    NormalClassDeclaration(
+//                        Token(TokenCode.StringLiteral),
+//                        null,
+//                        Type(null),
+//                        null,
+//                        null,
+//                    ).run { name = "Main"; this }
+//                )
+//            ),
+//        )
+//    }
 
     override fun visitPackageDeclaration(ctx: JavaParser.PackageDeclarationContext?): Entity = ctx!!.toPackage()
 

@@ -1,5 +1,6 @@
 package tree.Compilation;
 
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 import tree.Entity;
 
@@ -17,6 +18,13 @@ public class TopLevelComponents extends Entity {
         this.components.add(tlc);
 
         if (tlc != null) {
+            tlc.parent = this;
+        }
+    }
+
+    public TopLevelComponents(ArrayList<TopLevelComponent> components) {
+        this.components = components;
+        for (var tlc : components) {
             tlc.parent = this;
         }
     }
