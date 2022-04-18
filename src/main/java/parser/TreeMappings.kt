@@ -7,6 +7,7 @@ import parser.JavaParser.*
 import tree.*
 import tree.Compilation.*
 import tree.Declaration.*
+import tree.Expression.Binary
 import tree.Expression.Expression
 import tree.Expression.Primary.Literal
 import tree.Expression.SimpleReference
@@ -159,10 +160,45 @@ fun SwitchLabelContext.toSwitchLabel() : SwitchLabel =
     )
 
 fun org.antlr.v4.runtime.Token.toCompoundName() : CompoundName = CompoundName(text)
+fun org.antlr.v4.runtime.Token.toToken() : Token =
+    when (type) {
+        ADD -> Token(TokenCode.Plus)
+        MUL -> Token(TokenCode.Star)
+        SUB -> Token(TokenCode.Minus)
+        DIV -> Token(TokenCode.Slash)
+        ADD_ASSIGN -> Token(TokenCode.PlusAssign)
+        MUL_ASSIGN -> Token(TokenCode.StarAssign)
+        SUB_ASSIGN -> Token(TokenCode.MinusAssign)
+        DIV_ASSIGN -> Token(TokenCode.SlashAssign)
+        ASSIGN -> Token(TokenCode.Assign)
+        EQUAL -> Token(TokenCode.Equal)
+        OR -> Token(TokenCode.DoubleVertical)
+        AND -> Token(TokenCode.DoubleAmpersand)
+        BITAND -> Token(TokenCode.Ampersand)
+        OR_ASSIGN -> Token(TokenCode.VerticalAssign)
+        BITOR -> Token(TokenCode.Vertical)
+        CARET -> Token(TokenCode.Caret)
+        GE -> Token(TokenCode.GreaterEqual)
+        LE -> Token(TokenCode.LessEqual)
+        GT -> Token(TokenCode.Greater)
+        LT -> Token(TokenCode.Less)
+        AND_ASSIGN -> Token(TokenCode.AmpersandAssign)
+        NOTEQUAL -> Token(TokenCode.NonEqual)
+        else -> throw Exception("unsupported token: $text ($type)")
+    }
+
 fun CompoundName.toExpression() : Expression = SimpleReference(this)
 
 fun ExpressionContext.toExpression() : Expression =
-    SimpleReference(CompoundName("statement_placeholder")) /* FIXME */
+    if (this.bop != null) {
+        if (expression(1) != null && expression(2) == null) {
+            Binary(expression(0).toExpression(), expression(1).toExpression(), bop.toToken())
+        } else {
+            SimpleReference(CompoundName("expression_placeholder")) /* FIXME */
+        }
+    } else {
+        SimpleReference(CompoundName("expression_placeholder")) /* FIXME */
+    }
 
 fun LocalVariableDeclarationContext.toDeclaration() : Declaration? =
     TypeAndDeclarators(

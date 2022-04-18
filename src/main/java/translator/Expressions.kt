@@ -150,6 +150,14 @@ fun mapBinary(parseExprTasks: ParseExprTasks, expr: Binary): EOObject {
         TokenCode.LeftShiftAssign -> "shift_l_equal"
         TokenCode.ArithmRightShift -> "shift_u"
         TokenCode.ArithmRightShiftAssign -> "shift_u_equal"
+        TokenCode.NonEqual -> "not_eq" /* TODO: double check */
+        TokenCode.DoubleVertical -> "or" /* TODO: double check */
+        TokenCode.DoubleAmpersand -> "and" /* TODO: double check */
+        TokenCode.Ampersand -> "bit_and" /* TODO: double check */
+        TokenCode.Vertical -> "bit_or" /* TODO: double check */
+        TokenCode.VerticalAssign -> "or_write" /* FIXME */
+        TokenCode.AmpersandAssign -> "and_write" /* FIXME */
+        TokenCode.Caret -> "bit_xor" /* TODO: double check */
         else -> throw IllegalArgumentException("Binary operation ${expr.operator} is not supported")
     }
 
