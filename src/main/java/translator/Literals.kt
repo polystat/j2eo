@@ -1,6 +1,7 @@
 package translator
 
 import arrow.core.None
+import arrow.core.Option
 import eotree.*
 import eotree.data.*
 import lexer.TokenCode
@@ -30,7 +31,11 @@ fun mapLiteral(literal: Literal): EOObject =
                 listOf(TokenCodes.PRIM__BOOLEAN.value, "constructor2").eoDot(),
                 EOBoolData(false)
         )
-        else -> throw IllegalArgumentException("Mapping of type ${literal.javaClass.simpleName} is not supported.")
+        TokenCode.Null -> generateEOData( /* FIXME: use proper null */
+            listOf(TokenCodes.PRIM__INT.value, "constructor2").eoDot(),
+            EOIntData(0)
+        )
+        else -> throw IllegalArgumentException("Mapping of type ${literal.javaClass.simpleName} (${literal.code}) is not supported.")
     }
 
 fun generateEOData(primitiveTypeCall: EODot, value: EOData) : EOObject =

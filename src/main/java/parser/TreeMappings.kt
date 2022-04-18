@@ -10,6 +10,7 @@ import tree.Declaration.*
 import tree.Expression.Binary
 import tree.Expression.Expression
 import tree.Expression.Primary.Literal
+import tree.Expression.Primary.This
 import tree.Expression.SimpleReference
 import tree.Expression.SwitchExpression
 import tree.Statement.*
@@ -190,6 +191,7 @@ fun org.antlr.v4.runtime.Token.toToken() : Token =
 fun CompoundName.toExpression() : Expression = SimpleReference(this)
 
 fun ExpressionContext.toExpression() : Expression =
+    primary()?.toExpression() ?:
     if (this.bop != null) {
         if (expression(1) != null && expression(2) == null) {
             Binary(expression(0).toExpression(), expression(1).toExpression(), bop.toToken())
@@ -199,6 +201,24 @@ fun ExpressionContext.toExpression() : Expression =
     } else {
         SimpleReference(CompoundName("expression_placeholder")) /* FIXME */
     }
+
+fun PrimaryContext.toExpression() : Expression? =
+    expression()?.toExpression() ?:
+    THIS()?.let { _ -> This(null) } ?:
+    /* FIXME: super */
+    literal()?.toLiteral() ?:
+    identifier()?.let { id -> SimpleReference(CompoundName(id.text)) }
+    /* FIXME: typeOrVoid . CLASS */
+    /* FIXME: nonWildcardTypeArguments (explicitGenericInvocationSuffix | THIS arguments) */
+
+fun LiteralContext.toLiteral() : Literal? =
+    BOOL_LITERAL()?.text?.let { txt -> Literal(Token(if (txt == "true") { TokenCode.True } else { TokenCode.False })) } ?:
+    integerLiteral()?.DECIMAL_LITERAL()?.let { n -> Literal(Token(TokenCode.IntegerLiteral, n.text))} ?:
+    NULL_LITERAL()?.let { _ -> Literal(Token(TokenCode.Null)) } ?:
+    floatLiteral()?.let { x -> Literal(Token(TokenCode.FloatingLiteral, x.text)) } ?:
+    STRING_LITERAL()?.let { s -> Literal(Token(TokenCode.StringLiteral, s.text)) } ?:
+    Literal(Token(TokenCode.IntegerLiteral, "123456")) ?: /* FIXME: support other literals */
+    throw Exception("unsupported literal $text") /* FIXME */
 
 fun LocalVariableDeclarationContext.toDeclaration() : Declaration? =
     TypeAndDeclarators(
