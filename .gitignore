@@ -7,3 +7,5 @@ j2eo.jar
 output.eo
 output_eo
 polystat_check
+/hadoop/
+/output_hadoop/
