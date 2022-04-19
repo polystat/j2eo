@@ -1,0 +1,116 @@
+# inc_pre, dec_pre, inc_post, dec_post, add, sub, mul, div are not precise operators
++package stdlib.primitives
++alias stdlib.primitives.prim__num
+
+[] > prim__double
+  prim__num > super
+  super > @
+
+  [] > new
+    [] > this
+      prim__num.new > super
+      super > @
+      "prim__double" > prim_name
+
+      [] > inc_pre
+        seq > @
+          ^.v.write
+            ^.v.add
+              1
+          prim__double.constructor_3
+            prim__double.new
+            ^
+
+      [] > dec_pre
+        seq > @
+          ^.v.write
+            ^.v.sub
+              1
+          prim__double.constructor_3
+            prim__double.new
+            ^
+
+      [] > inc_post
+        prim__double.constructor_1 > old
+          prim__double.new
+        seq > @
+          old.v.write
+            ^.v
+          ^.v.write
+            ^.v.add
+              1
+          old
+
+      [] > dec_post
+        prim__double.constructor_1 > old
+          prim__double.new
+        seq > @
+          old.v.write
+            ^.v
+          ^.v.write
+            ^.v.sub
+              1
+          old
+
+      [right] > write
+        seq > @
+          ^.v.write
+            right.v
+          prim__double.constructor_3
+            prim__double.new
+            ^
+
+      [right] > add
+        seq > @
+          prim__double.constructor_2
+            prim__double.new
+            ^.v.add
+              right.v
+
+      [right] > sub
+        seq > @
+          prim__double.constructor_2
+            prim__double.new
+            ^.v.sub
+              right.v
+
+      [right] > mul
+        seq > @
+          prim__double.constructor_2
+            prim__double.new
+            ^.v.mul
+              right.v
+
+      [right] > div
+        seq > @
+          prim__double.constructor_2
+            prim__double.new
+            ^.v.div
+              right.v
+
+      [right] > mod
+        seq > @
+          prim__double.constructor_2
+            prim__double.new
+            ^.v.mod
+              right.v
+
+    seq > @
+      this
+
+  [this] > constructor_1
+    seq > @
+      super.constructor_1
+        this
+
+  [this target] > constructor_2
+    seq > @
+      super.constructor_2
+        this
+        target
+
+  [this another_num] > constructor_3
+    seq > @
+      super.constructor_3
+        this
+        another_num
