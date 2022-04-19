@@ -73,7 +73,7 @@ dependencies {
     testRuntimeOnly("org.junit.jupiter:junit-jupiter-engine:5.8.2")
     implementation(kotlin("stdlib-jdk8"))
 
-    implementation("org.polystat:j2ast:0.0.2")
+    implementation("org.polystat:j2ast:0.1.0")
 }
 
 java {
