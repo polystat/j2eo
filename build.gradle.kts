@@ -95,7 +95,7 @@ val fatJar = task("fatJar", type = Jar::class) {
     // manifest Main-Class attribute is optional.
     // (Used only to provide default main class for executable jar)
     manifest {
-        attributes["Main-Class"] = "main.Main" // fully qualified class name of default main class
+        attributes["Main-Class"] = "main.Main2" // fully qualified class name of default main class
     }
     // Include dependencies
     from(configurations.runtimeClasspath.get().map { if (it.isDirectory) it else zipTree(it) })
