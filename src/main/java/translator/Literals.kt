@@ -21,7 +21,7 @@ fun mapLiteral(literal: Literal): EOObject =
         )
         TokenCode.IntegerLiteral -> generateEOData(
                 listOf(TokenCodes.PRIM__INT.value, "constructor2").eoDot(),
-                EOIntData((literal.value as String).toInt())
+                EOIntData(try {(literal.value as String).toInt()} catch (e: NumberFormatException) { 0 /* FIXME: parse integer literals */ })
         )
         TokenCode.True -> generateEOData(
                 listOf(TokenCodes.PRIM__BOOLEAN.value, "constructor2").eoDot(),

@@ -158,7 +158,9 @@ fun mapBinary(parseExprTasks: ParseExprTasks, expr: Binary): EOObject {
         TokenCode.VerticalAssign -> "or_write" /* FIXME */
         TokenCode.AmpersandAssign -> "and_write" /* FIXME */
         TokenCode.Caret -> "bit_xor" /* TODO: double check */
-        else -> throw IllegalArgumentException("Binary operation ${expr.operator} is not supported")
+        else ->
+            "binary_op_placeholder" // FIXME
+            // throw IllegalArgumentException("Binary operation ${expr.operator} is not supported")
     }
 
     val leftName = parseExprTasks.addTask(expr.left)

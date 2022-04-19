@@ -20,14 +20,14 @@ import kotlin.reflect.typeOf
 fun CompilationUnitContext.toCompilationUnit() : CompilationUnit =
     SimpleCompilationUnit(
         ImportDeclarations(ArrayList(importDeclaration().map { it.toImportDeclaration() })),
-        TopLevelComponents(ArrayList(typeDeclaration().map { it.toTopLevelComponent() }))
+        TopLevelComponents(ArrayList(typeDeclaration().mapNotNull { it.toTopLevelComponent() })) // FIXME: should be no nulls
     )
 
-fun TypeDeclarationContext.toTopLevelComponent() : TopLevelComponent =
+fun TypeDeclarationContext.toTopLevelComponent() : TopLevelComponent? =
     if (classDeclaration() != null) {
         TopLevelComponent(classDeclaration().toClassDeclaration())
     } else {
-        throw java.lang.Exception("Cannot translate") // FIXME
+        null // throw java.lang.Exception("Cannot translate") // FIXME
     }
 
 fun ClassDeclarationContext.toClassDeclaration() : ClassDeclaration =
@@ -35,7 +35,7 @@ fun ClassDeclarationContext.toClassDeclaration() : ClassDeclaration =
         identifier().toToken(),
         typeParameters()?.toTypeParameters(),
         typeType()?.toType(),
-        typeList(0).toTypeList(), // TODO: use this.typeList(1) for PERMITS (Java 17)
+        typeList(0)?.toTypeList(), // TODO: use this.typeList(1) for PERMITS (Java 17)
         classBody().toDeclarations()
     )
 
@@ -185,6 +185,9 @@ fun org.antlr.v4.runtime.Token.toToken() : Token =
         LT -> Token(TokenCode.Less)
         AND_ASSIGN -> Token(TokenCode.AmpersandAssign)
         NOTEQUAL -> Token(TokenCode.NonEqual)
+        MOD -> Token(TokenCode.Percent)
+        XOR_ASSIGN -> Token(TokenCode.CaretAssign)
+        LSHIFT_ASSIGN -> Token(TokenCode.LeftShiftAssign)
         else -> throw Exception("unsupported token: $text ($type)")
     }
 
@@ -308,7 +311,7 @@ fun TypeArgumentsContext.toTypeArguments() : TypeArguments =
     TypeArguments(ArrayList(typeArgument().map { it.toTypeArgument() }))
 
 fun TypeArgumentContext.toTypeArgument() : TypeArgument =
-    TypeArgument(this.typeType().toType(), 0 /* FIXME */, null)
+    TypeArgument(typeType()?.toType(), 0 /* FIXME */, null)
 
 fun IdentifierContext.toToken() : Token = Token(TokenCode.Identifier, this.text)
 

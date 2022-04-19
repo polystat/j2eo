@@ -30,7 +30,8 @@ fun mapStatement(parseExprTasks: ParseExprTasks, statement: Statement): EOExpr =
         is Do -> mapDoStatement(parseExprTasks, statement)
         // is Switch -> mapSwitchStatement(parseExprTasks, statement)
         else ->
-            throw IllegalArgumentException("Statement of type ${statement.javaClass.simpleName} is not supported")
+            "statement_placeholder".eoDot() // FIXME
+            // FIXME: throw IllegalArgumentException("Statement of type ${statement.javaClass.simpleName} is not supported")
     }
 
 fun mapStatementExpression(parseExprTasks: ParseExprTasks, stmtExpr: StatementExpression): EOExpr {

@@ -74,8 +74,10 @@ object Main2 {
 
         println("List of files to translate:" + filesToProcess.joinToString("") { "\n  ${it.path}" })
 
-        val parsedFiles: List<Pair<File, CompilationUnit>> = filesToProcess
-            .mapNotNull { f ->
+        val translatedFiles: List<Pair<File, EOProgram>> = filesToProcess
+            .reversed()
+            .mapIndexedNotNull { i, f ->
+                //println("[${i+1}/${filesToProcess.size}] Parsing ${f.absolutePath}")
                 Scanner(f).use { scanner ->
                     val lexer = JavaLexer(CharStreams.fromFileName(f.absolutePath))
                     val parser = JavaParser(CommonTokenStream(lexer))
@@ -87,7 +89,9 @@ object Main2 {
                     if (Entity.debug)
                         cu.report(0)
 
-                    Pair(f, cu)
+                    println("[${i+1}/${filesToProcess.size}] Translating ${f.absolutePath}")
+                    val translator = Translator()
+                    Pair(f, translator.translate(cu))
                 }
             }
 
@@ -114,11 +118,12 @@ object Main2 {
 //                }
 //            }
 
-        val translatedFiles: List<Pair<File, EOProgram>> = parsedFiles
-            .map { (file, ast) ->
-                val translator = Translator()
-                Pair(file, translator.translate(ast))
-            }
+//        val translatedFiles: List<Pair<File, EOProgram>> = parsedFiles
+//            .mapIndexed { i, (file, ast) ->
+//                println("[$i/${parsedFiles.size}] Translating ${file.absolutePath}")
+//                val translator = Translator()
+//                Pair(file, translator.translate(ast))
+//            }
 
         val outputDirectory = File(cmd.getOptionValue('o'))
         println("Cleaning up output directory \"$outputDirectory\" before printing")
