@@ -84,9 +84,13 @@ object Main2 {
                     val eval = Visitor()
                     val cu = eval.visit(tree) as CompilationUnit
 
+                    if (Entity.debug)
+                        cu.report(0)
+
                     Pair(f, cu)
                 }
             }
+
 
 //        val parsedFiles: List<Pair<File, CompilationUnit>> = filesToProcess
 //            .mapNotNull { f ->
