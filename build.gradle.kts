@@ -15,7 +15,7 @@ plugins {
     // id("org.jlleitschuh.gradle.ktlint") version "10.2.1"
     // id("org.cqfn.diktat.diktat-gradle-plugin") version "1.0.2"
     kotlin("jvm") version "1.6.0"
-	id("com.github.dawnwords.jacoco.badge") version "0.2.4"
+    id("com.github.dawnwords.jacoco.badge") version "0.2.4"
 }
 
 val mvnUsername: String? by project
@@ -38,11 +38,8 @@ compileTestKotlin.kotlinOptions {
     jvmTarget = "15"
 }
 
-// The Java grammar source file for Bison
+// The Java grammar source file for ANTLR
 val javaGrammarFilePath = "grammar/JavaParser.g4"
-
-// Where to put Bison compilation report
-val reportFilePath = "out/Java_16_Grammar.report"
 
 // Where to put generated parser
 val javaParserFilePath = "src/main/java/parser/JavaParser.java"
@@ -132,7 +129,7 @@ tasks {
     }
     jacocoTestReport {
         dependsOn(test)
-		finalizedBy(generateJacocoBadge)
+        finalizedBy(generateJacocoBadge)
     }
     test {
         dependsOn(pmdTest, checkstyleTest)
@@ -189,7 +186,9 @@ pmd {
 //}
 
 tasks.getByName("build") {
-    // Only run Bison build if grammar file changed
+    createOutDirs()
+
+    // Only run ANTLR build if grammar file changed
     if (readMD5FromFile(latestGrammarMD5FilePath) != grammarFileMD5()) {
         println("Grammar file changed since last build; Rebuilding parser with ANTLR...")
         runAntlr()
@@ -339,24 +338,35 @@ tasks.getByName("signMavenJavaPublication") {
 
 
 /**
- * Runs Bison using OS-specific shell command.
+ * Creates directories for all ANTLR output files.
+ */
+fun createOutDirs() {
+    // Create out directory if it doesn't exist, so latest grammar hashsum may be placed inside
+    val outPath = latestGrammarMD5FilePath.substring(0, latestGrammarMD5FilePath.lastIndexOf("/"))
+    file(outPath).mkdirs()
+
+    // Create parser directory if it doesn't exist, so parser may be placed inside
+//    val parserPath = javaParserFilePath.substring(0, javaParserFilePath.lastIndexOf("/"))
+//    file(parserPath).mkdirs()
+}
+
+/**
+ * Runs ANTLR using OS-specific shell command.
  */
 fun runAntlr() =
     try {
         when {
-//            Os.isFamily(Os.FAMILY_WINDOWS) ->
-//                exec {
-//                    workingDir = File(".")
-//                    executable = "bin/win_bison.exe"
-//                    args = mutableListOf(
-//                        "--report=states,lookaheads",
-//                        // "-r", "all",
-//                        // "--debug", "--help", "--stacktrace",
-//                        "--report-file=${reportFilePath}",
-//                        "--output=${javaParserFilePath}",
-//                        javaGrammarFilePath
-//                    )
-//                }
+            Os.isFamily(Os.FAMILY_WINDOWS) ->
+                exec {
+                    workingDir = File("grammar")
+                    executable = "antlr"
+                    args = mutableListOf(
+                        javaGrammarFilePath.replace("grammar/", ""),
+                        "-visitor",
+                        "-o",
+                        "../src/main/java/parser"
+                    )
+                }
             Os.isFamily(Os.FAMILY_MAC) ->
                 exec {
                     workingDir = File("grammar")
@@ -368,25 +378,26 @@ fun runAntlr() =
                         "../src/main/java/parser"
                     )
                 }
-//            Os.isFamily(Os.FAMILY_UNIX) ->
-//                exec {
-//                    workingDir = File(".")
-//                    executable = "bison"
-//                    args = mutableListOf(
-//                        "--report=states,lookaheads",
-//                        "--report-file=${reportFilePath}",
-//                        "--output=${javaParserFilePath}",
-//                        javaGrammarFilePath
-//                    )
-//                }
+            Os.isFamily(Os.FAMILY_UNIX) ->
+                exec {
+                    workingDir = File("grammar")
+                    executable = "antlr"
+                    args = mutableListOf(
+                        javaGrammarFilePath.replace("grammar/", ""),
+                        "-visitor",
+                        "-o",
+                        "../src/main/java/parser"
+                    )
+                }
             else ->
                 throw UnsupportedOperationException(
                     "Your OS is not yet supported. File a GitHub or issue or " +
-                            "provide a Pull Request with support for Bison execution for your OS."
+                            "provide a Pull Request with support for ANTLR execution for your OS."
                 )
         }
     } catch (e: Exception) {
-        e.printStackTrace()
+        println("Couldn't run ANTLR; ${e}")
+//        e.printStackTrace()
     }
 
 
