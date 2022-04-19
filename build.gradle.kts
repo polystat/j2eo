@@ -27,7 +27,7 @@ println("Provided Maven username of length ${mvnUsername?.length}")
 println("Provided Maven password of length ${mvnPassword?.length}")
 
 group = "org.polystat"
-version = mvnPublicationVersion ?: "0.2.0"
+version = mvnPublicationVersion ?: "0.4.0"
 
 val compileKotlin: KotlinCompile by tasks
 compileKotlin.kotlinOptions {
