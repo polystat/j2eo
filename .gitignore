@@ -9,3 +9,4 @@ output_eo
 polystat_check
 /hadoop/
 /output_hadoop/
+/bin
