@@ -19,6 +19,13 @@ public class VariableDeclarators extends Entity {
         }
     }
 
+    public VariableDeclarators(ArrayList<VariableDeclarator> declarators) {
+        this.declarators = declarators;
+        for (var d : declarators) {
+            d.parent = this;
+        }
+    }
+
     public VariableDeclarators add(VariableDeclarator decl) {
         this.declarators.add(decl);
         if (decl != null) {

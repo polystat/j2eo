@@ -1,6 +1,8 @@
 package tree.Type;
 
 import java.util.ArrayList;
+import java.util.List;
+
 import tree.Entity;
 
 // ClassTypeList1
@@ -23,6 +25,11 @@ public class TypeList extends Entity {
         if (t != null) {
             t.parent = this;
         }
+    }
+
+    public TypeList(ArrayList<Type> types) {
+        this.types = types;
+        for (Type t : types) { t.parent = this; }
     }
 
     public TypeList add(Type t) {
