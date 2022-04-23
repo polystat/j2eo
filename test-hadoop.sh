@@ -15,6 +15,8 @@ tar -xf ../hadoop.tar.gz -C ../
 
 echo "Starting J2EO on Hadoop..."
 # clean old output
-rm -rf output_hadoop
-# run j2eo on hadoop src
-java -jar J2EO-0.4.0.jar -o output_hadoop ../hadoop-3.2.3-src
+rm -rf ../output_hadoop
+
+# as it's not a part of the project
+# we may want to output to the parent directory
+java -jar J2EO-0.4.0.jar -o ../output_hadoop ../hadoop-3.2.3-src
