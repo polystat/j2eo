@@ -7,12 +7,14 @@ echo "Building J2EO..."
 ./gradlew build -x test jar
 cp build/libs/J2EO-0.4.0.jar .
 
-echo "Cloning Hadoop..."
-git clone https://github.com/apache/hadoop || true
-cd hadoop || exit
-echo "Checking out tested revision..."
-git checkout ec0ff1dc04b2ced199d71543a8260e9225d9e014
-cd ..
+echo "Downloading Hadoop..."
+# get hadoop from https://www.apache.org/dyn/closer.cgi/hadoop/common/hadoop-3.2.3/hadoop-3.2.3-src.tar.gz
+wget -O ../hadoop.tar.gz https://dlcdn.apache.org/hadoop/common/hadoop-3.2.3/hadoop-3.2.3-src.tar.gz
+# unpack
+tar -xf ../hadoop.tar.gz -C ../
 
 echo "Starting J2EO on Hadoop..."
-java -jar J2EO-0.4.0.jar -o output_hadoop hadoop
+# clean old output
+rm -rf output_hadoop
+# run j2eo on hadoop src
+java -jar J2EO-0.4.0.jar -o output_hadoop ../hadoop-3.2.3-src
