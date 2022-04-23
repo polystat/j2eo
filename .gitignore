@@ -10,3 +10,6 @@ polystat_check
 /hadoop/
 /output_hadoop/
 /bin
+/project
+.metals/
+.vscode
