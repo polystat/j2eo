@@ -68,6 +68,10 @@ Usage:
 ./test-hadoop.sh
 ```
 
+It will download zipped `hadoop` and unpack it (in a separate folder) into `../` relative to the project's root. If you no more need them, run 
+```sh
+rm -rf ../hadoop*
+```
 
 ---
 
