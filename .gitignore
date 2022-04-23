@@ -13,3 +13,5 @@ polystat_check
 /project
 .metals/
 .vscode
+hadoop*
+J2EO*.jar
