@@ -68,9 +68,9 @@ Usage:
 ./test-hadoop.sh
 ```
 
-It will download zipped `hadoop` and unpack it (in a separate folder) into `../` relative to the project's root. If you no more need them, run 
+It will download zipped `hadoop` and unpack it (in a separate folder) into `../j2eo-data` relative to the project's root. Next, it will put the If you no more need that folder, run 
 ```sh
-rm -rf ../hadoop*
+rm -rf ../j2eo-data
 ```
 
 ---
