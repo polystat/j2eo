@@ -10,6 +10,7 @@ import parser.Visitor
 import translator.Translator
 import tree.Compilation.CompilationUnit
 import tree.Entity
+import util.logger
 import java.io.File
 import java.io.FileNotFoundException
 import java.nio.file.Files
@@ -41,14 +42,14 @@ object Main2 {
             cmdLineParser.parse(options, args)
         } catch (e: ParseException) {
             e.printStackTrace()
-            System.err.println("Failed parsing command-line arguments")
+            logger.error("Failed parsing command-line arguments")
             printUsage(formatter, options)
             exitProcess(1)
         }
 
         // Check argv for all required data
         if (cmd.argList.size != 1) {
-            System.err.println("1 argument should be passed, but ${cmd.argList.size} were passed")
+            logger.error("1 argument should be passed, but ${cmd.argList.size} were passed")
             printUsage(formatter, options)
             exitProcess(1)
         }
@@ -62,7 +63,7 @@ object Main2 {
             throw FileNotFoundException("No source file or directory found at \"$inputFilepath\"")
         }
 
-        println("Parsing files in directory \"${sourceFile.absolutePath}\"")
+        logger.info("Parsing files in directory \"${sourceFile.absolutePath}\"")
 
         val filesToProcess: List<File> = if (sourceFile.isDirectory)
             sourceFile.walk()
@@ -72,13 +73,15 @@ object Main2 {
         else
             listOf(sourceFile)
 
-        println("List of files to translate:" + filesToProcess.joinToString("") { "\n  ${it.path}" })
+        if (cmd.hasOption("d")) {
+            logger.debug("List of files to translate:" + filesToProcess.joinToString("") { "\n  ${it.path}" })
+        }
 
         val translatedFiles: List<Pair<File, EOProgram>> = filesToProcess
             .reversed()
-            .mapIndexedNotNull { i, f ->
+            .mapIndexed { i, f ->
                 //println("[${i+1}/${filesToProcess.size}] Parsing ${f.absolutePath}")
-                Scanner(f).use { scanner ->
+                Scanner(f).use { _ ->
                     val lexer = JavaLexer(CharStreams.fromFileName(f.absolutePath))
                     val parser = JavaParser(CommonTokenStream(lexer))
                     val tree = parser.compilationUnit()
@@ -86,15 +89,21 @@ object Main2 {
                     val eval = Visitor()
                     val cu = eval.visit(tree) as CompilationUnit
 
-                    if (Entity.debug)
+                    if (Entity.debug) {
                         cu.report(0)
+                        logger.debug("[${i+1}/${filesToProcess.size}] Translating ${f.absolutePath}")
+                    } else {
+                        if (i % 100 == 0) {
+                            val percent = (1f * i / filesToProcess.size) * 100f
+                            print("Progress: %.2f".format(percent) + "% / 100.0%. --- Files left: ${filesToProcess.size - i}\r")
+                        }
+                    }
 
-                    println("[${i+1}/${filesToProcess.size}] Translating ${f.absolutePath}")
                     val translator = Translator()
                     Pair(f, translator.translate(cu))
                 }
             }
-
+        println()
 
 //        val parsedFiles: List<Pair<File, CompilationUnit>> = filesToProcess
 //            .mapNotNull { f ->
@@ -126,7 +135,7 @@ object Main2 {
 //            }
 
         val outputDirectory = File(cmd.getOptionValue('o'))
-        println("Cleaning up output directory \"$outputDirectory\" before printing")
+        logger.info("Cleaning up output directory \"$outputDirectory\" before printing")
         outputDirectory.deleteRecursively()
 
         translatedFiles.forEach { (file, eoProgram) ->
@@ -143,11 +152,14 @@ object Main2 {
                 file.name.replace(".java", ".eo")
             )
 
-            println("Printing output to file $outputFile")
+            if (cmd.hasOption("d")) {
+                logger.debug("Printing output to file $outputFile")
+            }
             outputPath.createDirectories()
             Files.writeString(Files.createFile(outputFile), targetText)
         }
 
+        logger.info("Translation complete.")
 //        Resource
 //        InputStream = javaClass.getResourceAsStream()
     }
