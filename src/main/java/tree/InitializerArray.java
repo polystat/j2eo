@@ -15,6 +15,13 @@ public class InitializerArray extends Initializer {
         }
     }
 
+    public InitializerArray(ArrayList<Initializer> initializers) {
+        this.initializers = initializers;
+        for (var init : initializers) {
+            init.parent = this;
+        }
+    }
+
     public InitializerArray add(Initializer init) {
         this.initializers.add(init);
         if (init != null) {

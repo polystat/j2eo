@@ -5,6 +5,7 @@ import java.security.MessageDigest
 
 plugins {
     java
+    antlr
     jacoco
     pmd
     checkstyle
@@ -14,7 +15,7 @@ plugins {
     // id("org.jlleitschuh.gradle.ktlint") version "10.2.1"
     // id("org.cqfn.diktat.diktat-gradle-plugin") version "1.0.2"
     kotlin("jvm") version "1.6.0"
-	id("com.github.dawnwords.jacoco.badge") version "0.2.4"
+    id("com.github.dawnwords.jacoco.badge") version "0.2.4"
 }
 
 val mvnUsername: String? by project
@@ -23,7 +24,7 @@ val mvnPublicationVersion: String? by project
 val candidates: String? by project
 
 group = "org.polystat"
-version = mvnPublicationVersion ?: "0.3.0"
+version = mvnPublicationVersion ?: "0.4.0"
 
 val compileKotlin: KotlinCompile by tasks
 compileKotlin.kotlinOptions {
@@ -34,11 +35,8 @@ compileTestKotlin.kotlinOptions {
     jvmTarget = "15"
 }
 
-// The Java grammar source file for Bison
-val javaGrammarFilePath = "src/main/resources/Java_16_Grammar.y"
-
-// Where to put Bison compilation report
-val reportFilePath = "out/Java_16_Grammar.report"
+// The Java grammar source file for ANTLR
+val javaGrammarFilePath = "grammar/JavaParser.g4"
 
 // Where to put generated parser
 val javaParserFilePath = "src/main/java/parser/JavaParser.java"
@@ -70,7 +68,10 @@ dependencies {
     testRuntimeOnly("org.junit.jupiter:junit-jupiter-engine:5.8.2")
     implementation(kotlin("stdlib-jdk8"))
 
-    implementation("org.polystat:j2ast:0.0.2")
+    // Use ANTLR for parser generation
+    antlr("org.antlr:antlr4:4.9.3")
+
+    implementation("org.polystat:j2ast:0.1.0")
 }
 
 java {
@@ -92,7 +93,7 @@ val fatJar = task("fatJar", type = Jar::class) {
     // manifest Main-Class attribute is optional.
     // (Used only to provide default main class for executable jar)
     manifest {
-        attributes["Main-Class"] = "main.Main" // fully qualified class name of default main class
+        attributes["Main-Class"] = "main.Main2" // fully qualified class name of default main class
     }
     // Include dependencies
     from(configurations.runtimeClasspath.get().map { if (it.isDirectory) it else zipTree(it) })
@@ -125,7 +126,7 @@ tasks {
     }
     jacocoTestReport {
         dependsOn(test)
-		finalizedBy(generateJacocoBadge)
+        finalizedBy(generateJacocoBadge)
     }
     test {
         dependsOn(pmdTest, checkstyleTest)
@@ -180,6 +181,19 @@ pmd {
 //    reporterType = "sarif"
 //    ignoreFailures = true
 //}
+
+tasks.getByName("build") {
+    createOutDirs()
+
+    // Only run ANTLR build if grammar file changed
+    if (readMD5FromFile(latestGrammarMD5FilePath) != grammarFileMD5()) {
+        println("Grammar file changed since last build; Rebuilding parser with ANTLR...")
+        runAntlr()
+        writeMD5ToFile(grammarFileMD5(), latestGrammarMD5FilePath)
+    } else {
+        println("Grammar file didn't change; Skipping parser build.")
+    }
+}
 
 checkstyle {
     toolVersion = "9.1"
@@ -317,3 +331,106 @@ signing {
 tasks.getByName("signMavenJavaPublication") {
     dependsOn(fatJar)
 }
+
+
+
+/**
+ * Creates directories for all ANTLR output files.
+ */
+fun createOutDirs() {
+    // Create out directory if it doesn't exist, so latest grammar hashsum may be placed inside
+    val outPath = latestGrammarMD5FilePath.substring(0, latestGrammarMD5FilePath.lastIndexOf("/"))
+    file(outPath).mkdirs()
+
+    // Create parser directory if it doesn't exist, so parser may be placed inside
+//    val parserPath = javaParserFilePath.substring(0, javaParserFilePath.lastIndexOf("/"))
+//    file(parserPath).mkdirs()
+}
+
+/**
+ * Runs ANTLR using OS-specific shell command.
+ */
+fun runAntlr() =
+    try {
+        when {
+            Os.isFamily(Os.FAMILY_WINDOWS) ->
+                exec {
+                    workingDir = File("grammar")
+                    executable = "antlr"
+                    args = mutableListOf(
+                        javaGrammarFilePath.replace("grammar/", ""),
+                        "-visitor",
+                        "-o",
+                        "../src/main/java/parser"
+                    )
+                }
+            Os.isFamily(Os.FAMILY_MAC) ->
+                exec {
+                    workingDir = File("grammar")
+                    executable = "antlr"
+                    args = mutableListOf(
+                        javaGrammarFilePath.replace("grammar/", ""),
+                        "-visitor",
+                        "-o",
+                        "../src/main/java/parser"
+                    )
+                }
+            Os.isFamily(Os.FAMILY_UNIX) ->
+                exec {
+                    workingDir = File("grammar")
+                    executable = "antlr"
+                    args = mutableListOf(
+                        javaGrammarFilePath.replace("grammar/", ""),
+                        "-visitor",
+                        "-o",
+                        "../src/main/java/parser"
+                    )
+                }
+            else ->
+                throw UnsupportedOperationException(
+                    "Your OS is not yet supported. File a GitHub or issue or " +
+                            "provide a Pull Request with support for ANTLR execution for your OS."
+                )
+        }
+    } catch (e: Exception) {
+        println("Couldn't run ANTLR; ${e}")
+//        e.printStackTrace()
+    }
+
+
+/**
+ * Returns MD5 string for a given file.
+ */
+fun generateMD5(filepath: String): String {
+    val digest: MessageDigest = MessageDigest.getInstance("MD5")
+
+    println("Working Directory = " + System.getProperty("user.dir"))
+
+    File(filepath).inputStream().use { inputStream ->
+        val buffer = ByteArray(8192)
+        var read = 0
+        do {
+            digest.update(buffer, 0, read)
+            read = inputStream.read(buffer)
+        } while (read > 0)
+    }
+
+    val md5sum: ByteArray = digest.digest()
+    val bigInt = BigInteger(1, md5sum)
+
+    return bigInt.toString(16).padStart(32, '0')
+}
+
+fun grammarFileMD5(): String =
+    generateMD5(javaGrammarFilePath)
+
+fun readMD5FromFile(filepath: String): String =
+    File(filepath).let { f ->
+        if (f.exists())
+            File(filepath).readText()
+        else
+            ""
+    }
+
+fun writeMD5ToFile(md5: String, filepath: String) =
+    File(filepath).writeText(md5)

@@ -4,10 +4,11 @@ public class PrivateConstructor {
 		new Some();
 		System.out.println("passed");
 	}
-
-
 }
 
 class Some {
 	private Some(int a) {}
+	public Some() {
+		this(5);
+	}
 }

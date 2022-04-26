@@ -3,7 +3,6 @@
 <img src="https://www.yegor256.com/images/books/elegant-objects/cactus.svg" height="100px"  alt="eolang icon"/>
 
 <br>
-<br>
 
 [![Gradle Build](https://github.com/polystat/j2eo/actions/workflows/gradle-build.yml/badge.svg)](https://github.com/polystat/j2eo/actions/workflows/gradle-build.yml)
 ![LINE](https://img.shields.io/badge/line--coverage-41,67%25-orange.svg)
@@ -19,8 +18,9 @@ This is a translator of **Java** programming language to [EOLANG](https://www.eo
 1. Make sure you have installed:
     - **Java 16+** (make sure command `java -version` shows 16+ version of Java in terminal if you have multiple Java
       version installed)
-    - **Maven 3.8+** (be aware of [possible conflicts](https://bugs.debian.org/cgi-bin/bugreport.cgi?bug=980467) of the
+    - **Maven 3.8+** to run tests (be aware of [possible conflicts](https://bugs.debian.org/cgi-bin/bugreport.cgi?bug=980467) of the
       latest versions of Maven and Java on some OSs)
+    - **ANTLR4 4.9.3** (if you want to build the parser on your own. If you don't have ANTLR, you still can build project using bundled version of parser.)
 2. Clone the repo into your folder:
 
    HTTPS:
@@ -37,7 +37,6 @@ This is a translator of **Java** programming language to [EOLANG](https://www.eo
     ```shell
     ./build.sh
     ```
-   The testing report is generated in the `./j2eo/build/reports/tests/test/index.html` file.
 4. After build process, **j2eo.jar** file will appear in the project root folder (`./j2eo`). With this file, is it
    possible to translate **.java** files or packages to **.eo** packages. Run:
 
@@ -56,6 +55,19 @@ This is a translator of **Java** programming language to [EOLANG](https://www.eo
     java -jar j2eo.jar src/test/resources/polystat_tests/test1 -o output_eo
     ```
 
+### Running translator on Hadoop
+
+Hadoop is a large Java project (contains ~1.8M lines of code as of time of writing this). We included it as a benchmark of the translator.
+
+Repository contains a script to build J2EO, download Hadoop repo and run J2EO on it.
+
+Usage:
+
+```shell
+./test-hadoop.sh
+```
+
+
 ---
 
 ## Motivation
@@ -73,6 +85,8 @@ particular repository contains translator from Java to EO.
 **A**: Publicly available parsers only support older versions of Java, while we aim to support the latest version (
 currently 16). Thus, we had to create our own parser.
 
+Also in recent versions, external Java grammar implemented in ANTLR was added as an alternative. It claims to support Java 17, and it does, as for our testing on big projects.
+
 <br>
 
 **Q**: Why do we implement EO AST?
@@ -89,26 +103,3 @@ bugs in our code. It is also much easier to work with abstraction layer than wit
 - First, the Java source code files are parsed recursively.
 - Then, for each file, translator converts Java AST to EO AST.
 - Then, EO AST is printed out as a source code to output directory in the same directory structure.
-
----
-
-## NOT covered Java features list
-
-- Type Erasure - Zouev
-- Subtyping - discuss with Yegor
-- Conversions - remove
-- Casting - remove
-- Modules
-- Exceptions - remove
-- Asserts - remove
-- Throws - remove
-- ``synchronized`` blocks
-- ``try``/``catch`` blocks - remove
-- ``yeild`` feature
-- Threads and Locks
-- Generics (all kinds of them) - remove
-- Native methods
-- break and continue statements - remove
-- RTTI (instanceof operator) ?????? - remove
-
-In general, we cover **91 feature of 112** described in the Java language specification.

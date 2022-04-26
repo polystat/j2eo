@@ -16,6 +16,13 @@ public class TypeParameters extends Entity {
         }
     }
 
+    public TypeParameters(ArrayList<TypeParameter> params) {
+        this.typeParameters = params;
+        for (var tpar : params) {
+            tpar.parent = this;
+        }
+    }
+
     public TypeParameters add(TypeParameter tpar) {
         this.typeParameters.add(tpar);
         if (tpar != null) {

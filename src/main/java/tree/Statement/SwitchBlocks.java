@@ -16,6 +16,13 @@ public class SwitchBlocks extends Entity {
         }
     }
 
+    public SwitchBlocks(ArrayList<SwitchBlock> blocks) {
+        this.blocks = blocks;
+        for (var block : blocks) {
+            block.parent = this;
+        }
+    }
+
     public SwitchBlocks add(SwitchBlock block) {
         this.blocks.add(block);
         if (block != null) {

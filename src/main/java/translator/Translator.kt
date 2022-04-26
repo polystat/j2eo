@@ -58,7 +58,7 @@ class Translator {
             val mainClassName = findMainClass(unit)
             entrypointBnds = generateEntryPoint(mainClassName)
         } catch (e: NullPointerException) {
-            logger.info { "No entry point here!" }
+            // FIXME: logger.info { "No entry point here!" }
         }
 
         // FIXME: assuming there is only one top-level component and it is a class

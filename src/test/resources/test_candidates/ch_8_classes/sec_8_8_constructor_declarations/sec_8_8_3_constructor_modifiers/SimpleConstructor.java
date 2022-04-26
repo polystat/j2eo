@@ -1,7 +1,7 @@
 public class SimpleConstructor {
 
 	public static void main(String[] args) {
-		new Some();
+		new Some(5);
 		System.out.println("passed");
 	}
 

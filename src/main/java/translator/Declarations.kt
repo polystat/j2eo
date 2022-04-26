@@ -73,9 +73,14 @@ fun mapVariableDeclaration(parseExprTasks: ParseExprTasks, dec: VariableDeclarat
 
 fun decodePrimitiveType(type: PrimitiveType): String {
     return when (type.typeCode) {
+        TokenCode.Char -> TokenCodes.PRIM__CHAR.value
         TokenCode.Int -> TokenCodes.PRIM__INT.value
         TokenCode.Float -> TokenCodes.PRIM__FLOAT.value
+        TokenCode.Double -> TokenCodes.PRIM__DOUBLE.value
         TokenCode.Boolean -> TokenCodes.PRIM__BOOLEAN.value
+        TokenCode.Long -> TokenCodes.PRIM__LONG.value
+        TokenCode.Byte -> TokenCodes.PRIM__BYTE.value
+        TokenCode.Short -> TokenCodes.PRIM__SHORT.value
         else -> throw IllegalArgumentException("Type code " + type.typeCode + " is not supported")
     }
 }
