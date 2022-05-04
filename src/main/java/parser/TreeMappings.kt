@@ -8,7 +8,7 @@ import tree.*
 import tree.Compilation.*
 import tree.Declaration.*
 import tree.Expression.*
-import tree.Expression.Primary.FieldAccess
+//import tree.Expression.Primary.FieldAccess
 import tree.Expression.Primary.Literal
 import tree.Expression.Primary.MethodInvocation
 import tree.Expression.Primary.This
@@ -197,20 +197,22 @@ fun ExpressionContext.toExpression() : Expression =
     if (this.bop != null) {
         val expr0 =
                 expression(0)?.toExpression() ?:
-                primary()?.toExpression()
+                primary()?.toExpression() ?:
+                identifier()?.toExpression()
         val expr1 =
                 expression(1)?.toExpression() ?:
                 primary()?.toExpression() ?:
+                identifier()?.toExpression() ?:
                 methodCall()?.toExpression(expr0) ?:
                 SimpleReference(CompoundName("expression_placeholder")) /* FIXME */
         if (this.bop.text == ".") {
             when (expr1) {
                 is MethodInvocation -> expr1
-                // is SimpleReference -> FieldAccess(
-                //         expr0,
-                //         SUPER() != null,
-                //         Token(TokenCode.Identifier, expr1.compoundName.names[0]) // FIXME: questionable
-                // )
+                is SimpleReference -> FieldAccess(
+                        expr0,
+                        SUPER() != null,
+                        Token(TokenCode.Identifier, expr1.compoundName.names[0]) // FIXME: questionable
+                )
                 else -> SimpleReference(CompoundName("expression_placeholder")) /* FIXME */
             }
         } else {
@@ -222,7 +224,9 @@ fun ExpressionContext.toExpression() : Expression =
         //     SimpleReference(CompoundName("expression_placeholder")) /* FIXME */
         // }
     } else {
+        expression(0)?.toExpression() ?:
         primary()?.toExpression() ?:
+        identifier()?.toExpression() ?:
         methodCall()?.toExpression(null) ?:
         SimpleReference(CompoundName("expression_placeholder")) /* FIXME */
     }
@@ -242,8 +246,12 @@ fun MethodCallContext.toExpression(expr: Expression?) : Expression {
     )
 }
 
+fun IdentifierContext.toExpression() : Expression =
+        SimpleReference(CompoundName(IDENTIFIER().text))
+
 fun PrimaryContext.toExpression() : Expression? =
     expression()?.toExpression() ?:
+    identifier()?.toExpression() ?:
     THIS()?.let { _ -> This(null) } ?:
     /* FIXME: super */
     literal()?.toLiteral() ?:

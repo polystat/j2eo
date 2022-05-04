@@ -7,11 +7,14 @@ import eotree.EODot
 import eotree.EOExpr
 import eotree.EOObject
 import eotree.eoDot
+import tree.CompoundName
 import tree.Expression.Expression
+import tree.Expression.FieldAccess
 import tree.Expression.Primary.MethodInvocation
 import tree.Expression.SimpleReference
 import util.ParseExprTasks
 import util.isSystemOutCall
+import java.lang.reflect.Field
 
 // TODO: create state object to store binding of expression
 fun mapMethodInvocation(parseExprTasks: ParseExprTasks, methodInvocation: MethodInvocation): EOObject {
@@ -20,20 +23,27 @@ fun mapMethodInvocation(parseExprTasks: ParseExprTasks, methodInvocation: Method
 
     val isStaticCall = !isSystemOutCall(methodInvocation)
 
-    val src: EODot = when (methodInvocation.qualifier) {
-        is SimpleReference ->
-            (methodInvocation.qualifier as SimpleReference).compoundName.eoDot()
+    val src: EODot = when (val methodQualifier = methodInvocation.qualifier) {
+        is SimpleReference -> methodQualifier.compoundName.eoDot()
+        is FieldAccess ->
+            when (val qualExpr = methodQualifier.expression) {
+                is SimpleReference -> CompoundName(
+                        qualExpr.compoundName.names + listOf(methodQualifier.identifier)
+                ).eoDot()
+                else -> throw IllegalArgumentException("Unsupported yet")
+            }
         else ->
-            throw IllegalArgumentException("Only SimpleReference is supported")
+            throw IllegalArgumentException("Unsupported method qualifier!")
     }
-    val callee: EODot = when (methodInvocation.qualifier) {
+    val callee: EODot = when (val methodQualifier = methodInvocation.qualifier) {
         is SimpleReference ->
-            if ((methodInvocation.qualifier as SimpleReference).compoundName.names.size > 1)
-                (methodInvocation.qualifier as SimpleReference).compoundName.names.dropLast(1).eoDot()
+            if (methodQualifier.compoundName.names.size > 1)
+                methodQualifier.compoundName.names.dropLast(1).eoDot()
             else
                 "this".eoDot()
+        is FieldAccess -> methodQualifier.identifier.eoDot()
         else ->
-            throw IllegalArgumentException("Only SimpleReference is supported")
+            throw IllegalArgumentException("Unsupported method qualifier!")
     }
 
     return EOObject(
