@@ -24,11 +24,11 @@ fun mapMethodInvocation(parseExprTasks: ParseExprTasks, methodInvocation: Method
     val isStaticCall = !isSystemOutCall(methodInvocation)
 
     val src: EODot = when (val methodQualifier = methodInvocation.qualifier) {
-        is SimpleReference -> methodQualifier.compoundName.eoDot()
+        is SimpleReference -> (methodQualifier.compoundName.names + listOf(methodInvocation.name)).eoDot()
         is FieldAccess ->
             when (val qualExpr = methodQualifier.expression) {
                 is SimpleReference -> CompoundName(
-                        qualExpr.compoundName.names + listOf(methodQualifier.identifier)
+                        qualExpr.compoundName.names + listOf(methodQualifier.identifier, methodInvocation.name)
                 ).eoDot()
                 else -> throw IllegalArgumentException("Unsupported yet")
             }
