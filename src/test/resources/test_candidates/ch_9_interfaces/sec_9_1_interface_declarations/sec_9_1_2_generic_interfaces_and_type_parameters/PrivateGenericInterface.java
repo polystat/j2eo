@@ -4,15 +4,16 @@ public class PrivateGenericInterface {
 		System.out.println(new Work().perform());
 		System.out.println("passed");
 	}
-}
 
-private interface IDoable<T> {
-	T perform();
-}
+	private interface IDoable<T> {
+		T perform();
+	}
 
-class Work implements IDoable<String> {
-	@Override
-	public String perform() {
-		return "working on it...";
+	private static class Work implements IDoable<String> {
+		@Override
+		public String perform() {
+			return "working on it...";
+		}
 	}
 }
+
