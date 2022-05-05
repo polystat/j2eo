@@ -5,5 +5,5 @@ public class ProtectedRecordClass {
 		System.out.println(p.address());
 		System.out.println("passed");
 	}
+	protected static record Person (String name, String address) {}
 }
-protected record Person (String name, String address) {}

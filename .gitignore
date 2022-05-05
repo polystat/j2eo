@@ -3,7 +3,7 @@ out
 .idea
 build
 compile_and_run_tests.bat
-j2eo.jar
+*.jar
 output.eo
 output_eo
 polystat_check
