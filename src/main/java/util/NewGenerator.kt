@@ -1,6 +1,7 @@
 package util
 
 import arrow.core.None
+import arrow.core.flatten
 import arrow.core.flattenOption
 import eotree.EOBndExpr
 import eotree.EOCopy
@@ -41,7 +42,7 @@ fun generateThis(clsDec: NormalClassDeclaration): EOBndExpr {
                                 dec.modifiers.modifiers.modifiers.find { code: TokenCode -> code == TokenCode.Static } == null
                         }
                         .map { mapClassDeclaration(it) }
-                        .flattenOption()
+                        .flatten()
                 else
                     listOf()
         ),

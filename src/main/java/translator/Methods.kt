@@ -50,30 +50,9 @@ fun mapMethodDeclaration(dec: MethodDeclaration): EOBndExpr {
             None,
 
         // Bound attributes
-        // TODO: implement
-//        try {
-        if (dec.methodBody != null) (
-        dec.methodBody.block.findAllLocalVariables().map { preMapVariableDeclaration(it) } +
-                listOf(
-                    EOBndExpr(
-                        EOCopy(
-                            "seq",
-                            dec.methodBody.block.blockStatements
-                                .mapNotNull {
-                                    if (it.statement != null)
-                                        mapStatement(parseExprTasks, it.statement)
-                                    else if (it.expression != null) {
-                                        parseExprTasks.addTask(it.expression).eoDot()
-                                    } else if (it.declaration is VariableDeclaration && (it.declaration as VariableDeclaration).initializer != null)
-                                        mapVariableDeclaration(parseExprTasks, it.declaration as VariableDeclaration)
-                                    else
-                                        null
-                                }
-                        ),
-                        "@"
-                    )
-                ) + parseExprTasks(parseExprTasks)) else
-//        } catch (e: NullPointerException) {
+        if (dec.methodBody != null) {
+            mapBlock(dec.methodBody)
+        } else {
             listOf(
                 EOBndExpr(
                     EOCopy(
@@ -82,8 +61,8 @@ fun mapMethodDeclaration(dec: MethodDeclaration): EOBndExpr {
                     ),
                     "@"
                 )
-            ),
-//        },
+            )
+        },
 
         "${dec.name} :: ${
             dec.parameters?.parameters
@@ -112,32 +91,32 @@ fun mapMethodDeclaration(dec: MethodDeclaration): EOBndExpr {
     )
 }
 
-fun parseExprTasks(parseExprTasks: ParseExprTasks): List<EOBndExpr> {
-    return if (parseExprTasks.tasks.size > 0) {
-        parseExprTasks.tasks
-            .map { parseExprTask(it.second, it.first) }
-            .flatten()
-    } else {
-        listOf()
-    }
-}
-
-fun parseExprTask(e: Entity, name: String): List<EOBndExpr> {
-    val parseExprTasks = ParseExprTasks()
-    return when (e) {
-        is Expression -> {
-            listOf(EOBndExpr(mapExpression(parseExprTasks, e), name)) + parseExprTasks(parseExprTasks)
-        }
-        is Initializer -> {
-            listOf(EOBndExpr(mapInitializer(parseExprTasks, e), name)) + parseExprTasks(parseExprTasks)
-        }
-        else -> {
-            throw IllegalArgumentException("Entity of type ${e.javaClass.simpleName} cannot be parsed")
-        }
-    }
-}
-
-fun BlockStatements.findAllLocalVariables(): List<VariableDeclaration> =
-    blockStatements
-        .filter { it.declaration is VariableDeclaration }
-        .map { it.declaration as VariableDeclaration }
+//fun parseExprTasks(parseExprTasks: ParseExprTasks): List<EOBndExpr> {
+//    return if (parseExprTasks.tasks.size > 0) {
+//        parseExprTasks.tasks
+//            .map { parseExprTask(it.second, it.first) }
+//            .flatten()
+//    } else {
+//        listOf()
+//    }
+//}
+//
+//fun parseExprTask(e: Entity, name: String): List<EOBndExpr> {
+//    val parseExprTasks = ParseExprTasks()
+//    return when (e) {
+//        is Expression -> {
+//            listOf(EOBndExpr(mapExpression(parseExprTasks, e), name)) + parseExprTasks(parseExprTasks)
+//        }
+//        is Initializer -> {
+//            listOf(EOBndExpr(mapInitializer(parseExprTasks, e), name)) + parseExprTasks(parseExprTasks)
+//        }
+//        else -> {
+//            throw IllegalArgumentException("Entity of type ${e.javaClass.simpleName} cannot be parsed")
+//        }
+//    }
+//}
+//
+//fun BlockStatements.findAllLocalVariables(): List<VariableDeclaration> =
+//    blockStatements
+//        .filter { it.declaration is VariableDeclaration }
+//        .map { it.declaration as VariableDeclaration }

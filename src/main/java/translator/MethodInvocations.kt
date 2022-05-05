@@ -14,7 +14,7 @@ import util.ParseExprTasks
 import util.isSystemOutCall
 
 // TODO: create state object to store binding of expression
-fun mapMethodInvocation(parseExprTasks: ParseExprTasks, methodInvocation: MethodInvocation): EOObject {
+fun mapMethodInvocation(methodInvocation: MethodInvocation, name: String): List<EOBndExpr> {
     require(!methodInvocation.superSign) { "Super sign isn't supported yet" }
     require(methodInvocation.typeArguments == null) { "Type arguments aren't supported yet" }
 
@@ -36,18 +36,23 @@ fun mapMethodInvocation(parseExprTasks: ParseExprTasks, methodInvocation: Method
             throw IllegalArgumentException("Only SimpleReference is supported")
     }
 
-    return EOObject(
-        listOf(),
-        None,
-        listOf(
-            EOBndExpr(
-                EOCopy(
-                    src,
-                    (if (!isStaticCall) listOf(callee) else ArrayList<EOExpr>()) +
-                        (methodInvocation.arguments?.arguments?.map { obj -> parseExprTasks.addTask(obj).eoDot() } ?: listOf())
-                ),
-                "@"
-            )
+    return listOf(
+        EOBndExpr (
+            EOObject(
+                listOf(),
+                None,
+                listOf(
+                    EOBndExpr(
+                        EOCopy(
+                            src,
+                            (if (!isStaticCall) listOf(callee) else ArrayList<EOExpr>()) +
+                                (methodInvocation.arguments?.arguments?.map { obj -> constructExprName(obj).eoDot() } ?: listOf())
+                        ),
+                        "@"
+                    )
+                )
+            ),
+            name
         )
-    )
+    ) + (methodInvocation.arguments?.arguments?.map { mapExpression(it, constructExprName(it)) }?.flatten() ?: listOf())
 }

@@ -16,118 +16,175 @@ import tree.Expression.UnaryPostfix
 import tree.Expression.UnaryPrefix
 import util.ParseExprTasks
 
-fun mapExpression(parseExprTasks: ParseExprTasks, expr: Expression): EOObject =
+fun mapExpression(expr: Expression, name: String): List<EOBndExpr> =
     when (expr) {
         is MethodInvocation ->
-            mapMethodInvocation(parseExprTasks, expr)
+            mapMethodInvocation(expr, name)
         is Literal ->
-            mapLiteral(expr)
+            listOf(mapLiteral(expr, name))
         is UnaryPrefix ->
-            mapUnaryPrefix(parseExprTasks, expr)
+            mapUnaryPrefix(expr, name)
         is UnaryPostfix ->
-            mapUnaryPostfix(parseExprTasks, expr)
+            mapUnaryPostfix(expr, name)
         is Binary ->
-            mapBinary(parseExprTasks, expr)
+            mapBinary(expr, name)
         is SimpleReference ->
-            mapSimpleReference(parseExprTasks, expr)
+            listOf(mapSimpleReference(expr, name))
         is FieldAccess ->
-            mapFieldAccess(parseExprTasks, expr)
+            mapFieldAccess(expr, name)
         is This ->
-            mapThis(expr)
+            listOf(mapThis(expr, name))
         is Parenthesized ->
-            mapParenthesized(parseExprTasks, expr)
+            mapParenthesized(expr, name)
         else ->
             throw IllegalArgumentException("Expression of type ${expr.javaClass.simpleName} is not supported")
     }
 
-fun mapParenthesized(parseExprTasks: ParseExprTasks, expr: Parenthesized): EOObject =
-    mapExpression(parseExprTasks, expr.expression)
+fun constructExprName(expr: Expression): String =
+    when (expr) {
+        is MethodInvocation ->
+            "m_i${expr.hashCode()}"
+        is Literal ->
+            "l${expr.hashCode()}"
+        is UnaryPrefix ->
+            "u_pre${expr.hashCode()}"
+        is UnaryPostfix ->
+            "u_post${expr.hashCode()}"
+        is Binary ->
+            "b${expr.hashCode()}"
+        is SimpleReference ->
+            "s_r${expr.hashCode()}"
+        is FieldAccess ->
+            "f_a${expr.hashCode()}"
+        is This ->
+            "t${expr.hashCode()}"
+        is Parenthesized ->
+            "p${expr.hashCode()}"
+        else ->
+            throw IllegalArgumentException("Expression of type ${expr.javaClass.simpleName} is not supported")
+    }
+
+fun mapParenthesized(expr: Parenthesized, name: String): List<EOBndExpr> =
+    listOf(
+        EOBndExpr(
+            EOObject(
+                listOf(),
+                None,
+                listOf(
+                    EOBndExpr(
+                        EOCopy(
+                            constructExprName(expr.expression)
+                        ),
+                        "@"
+                    )
+                )
+            ),
+            name
+        )
+    ) + mapExpression(expr.expression, constructExprName(expr.expression))
 
 // TODO: add support for type
-fun mapThis(expr: This): EOObject {
-    return EOObject(
-        listOf(),
-        None,
-        listOf(
-            EOBndExpr(
-                EOCopy(
-                    "this".eoDot()
-                ),
-                "@"
+fun mapThis(expr: This, name: String): EOBndExpr {
+    return EOBndExpr(
+        EOObject(
+            listOf(),
+            None,
+            listOf(
+                EOBndExpr(
+                    EOCopy(
+                        "this"
+                    ),
+                    "@"
+                )
             )
-        )
+        ),
+        name
     )
 }
 
-fun mapFieldAccess(parseExprTasks: ParseExprTasks, expr: FieldAccess): EOObject {
-    //"${mapExpression(expr.expression)}.${expr.identifier}".eoDot()
-
-    val exprName = parseExprTasks.addTask(expr.expression)
-    return EOObject(
-        listOf(),
-        None,
-        listOf(
-            EOBndExpr(
-                EOCopy(
-                    listOf(exprName, expr.identifier).eoDot()
-                ),
-                "@"
-            )
+fun mapFieldAccess(expr: FieldAccess, name: String): List<EOBndExpr> {
+    return listOf(
+        EOBndExpr(
+            EOObject(
+                listOf(),
+                None,
+                listOf(
+                    EOBndExpr(
+                        EOCopy(
+                            listOf(constructExprName(expr.expression), expr.identifier).eoDot()
+                        ),
+                        "@"
+                    )
+                )
+            ),
+            name
         )
-    )
+    ) + mapExpression(expr.expression, constructExprName(expr.expression))
 }
 
-fun mapUnaryPrefix(parseExprTasks: ParseExprTasks, expr: UnaryPrefix): EOObject {
+fun mapUnaryPrefix(expr: UnaryPrefix, name: String): List<EOBndExpr> {
     val function = when (expr.operator) {
         TokenCode.PlusPlus -> "inc_pre"
         TokenCode.MinusMinus -> "dec_pre"
         TokenCode.Minus -> "neg"
         TokenCode.Plus -> null
-        else -> throw IllegalArgumentException("Unary prefix ${expr.operator} is not supported")
+        else ->
+            "unary_placeholder" // FIXME
     }
 
-    val varName = parseExprTasks.addTask(expr.operand)
-
-    return EOObject(
-        listOf(),
-        None,
-        listOf(
-            EOBndExpr(
-                if (function != null) {
-                    listOf(varName, function).eoDot()
-                } else {
-                    varName.eoDot()
-                },
-                "@"
-            )
+    return listOf(
+        EOBndExpr(
+            EOObject(
+                listOf(),
+                None,
+                listOf(
+                    EOBndExpr(
+                        EOCopy(
+                            if (function != null) {
+                                listOf(constructExprName(expr.operand), function).eoDot()
+                            } else {
+                                constructExprName(expr.operand).eoDot()
+                            }
+                        ),
+                        "@"
+                    )
+                )
+            ),
+            name
         )
-    )
+    ) + mapExpression(expr.operand, constructExprName(expr.operand))
 }
 
-fun mapUnaryPostfix(parseExprTasks: ParseExprTasks, expr: UnaryPostfix): EOObject {
+fun mapUnaryPostfix(expr: UnaryPostfix, name: String): List<EOBndExpr> {
     val function = when (expr.operator) {
         TokenCode.PlusPlus -> "inc_post"
         TokenCode.MinusMinus -> "dec_post"
-        else -> throw IllegalArgumentException("Unary prefix ${expr.operator} is not supported")
+        else ->
+            "unary_placeholder" // FIXME
     }
 
-    val varName = parseExprTasks.addTask(expr.operand)
-
-    return EOObject(
-        listOf(),
-        None,
-        listOf(
-            EOBndExpr(
-                listOf(varName, function).eoDot(),
-                "@"
-            )
+    return listOf(
+        EOBndExpr(
+            EOObject(
+                listOf(),
+                None,
+                listOf(
+                    EOBndExpr(
+                        EOCopy(
+                            listOf(constructExprName(expr.operand), function).eoDot()
+                        ),
+                        "@"
+                    )
+                )
+            ),
+            name
         )
-    )
+    ) + mapExpression(expr.operand, constructExprName(expr.operand))
 }
 
 // TODO: add automatic casting for primitive types
 // TODO: populate with all Java binary operators
-fun mapBinary(parseExprTasks: ParseExprTasks, expr: Binary): EOObject {
+fun mapBinary(expr: Binary, name: String): List<EOBndExpr> {
     val function = when (expr.operator) {
         TokenCode.Plus -> "add"
         TokenCode.Minus -> "sub"
@@ -163,32 +220,39 @@ fun mapBinary(parseExprTasks: ParseExprTasks, expr: Binary): EOObject {
             // throw IllegalArgumentException("Binary operation ${expr.operator} is not supported")
     }
 
-    val leftName = parseExprTasks.addTask(expr.left)
-    val rightName = parseExprTasks.addTask(expr.right)
-
-    return EOObject(
-        listOf(),
-        None,
-        listOf(
-            EOBndExpr(
-                EOCopy(
-                    listOf(leftName, function).eoDot(),
-                    rightName.eoDot()
-                ),
-                "@"
-            )
+    return listOf(
+        EOBndExpr(
+            EOObject(
+                listOf(),
+                None,
+                listOf(
+                    EOBndExpr(
+                        EOCopy(
+                            listOf(constructExprName(expr.left), function).eoDot(),
+                            constructExprName(expr.right).eoDot()
+                        ),
+                        "@"
+                    )
+                )
+            ),
+            name
         )
-    )
+    ) + mapExpression(expr.left, constructExprName(expr.left)) + mapExpression(expr.right, constructExprName(expr.right))
 }
 
-fun mapSimpleReference(parseExprTasks: ParseExprTasks, expr: SimpleReference): EOObject =
-    EOObject(
-        listOf(),
-        None,
-        listOf(
-            EOBndExpr(
-                expr.compoundName.eoDot(),
-                "@"
+fun mapSimpleReference(expr: SimpleReference, name: String): EOBndExpr =
+    EOBndExpr(
+        EOObject(
+            listOf(),
+            None,
+            listOf(
+                EOBndExpr(
+                    EOCopy(
+                        expr.compoundName.eoDot()
+                    ),
+                    "@"
+                )
             )
-        )
+        ),
+        name
     )
