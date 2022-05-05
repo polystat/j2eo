@@ -9,3 +9,9 @@ output_eo
 polystat_check
 /hadoop/
 /output_hadoop/
+/bin
+/project
+.metals/
+.vscode
+hadoop*
+J2EO*.jar

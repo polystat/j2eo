@@ -37,6 +37,7 @@ This is a translator of **Java** programming language to [EOLANG](https://www.eo
     ```shell
     ./build.sh
     ```
+    - See the [troubleshooting section](./README.md#troubleshooting) in case of problems
 4. After build process, **j2eo.jar** file will appear in the project root folder (`./j2eo`). With this file, is it
    possible to translate **.java** files or packages to **.eo** packages. Run:
 
@@ -67,6 +68,10 @@ Usage:
 ./test-hadoop.sh
 ```
 
+It will download zipped `hadoop` and unpack it (in a separate folder) into `../j2eo-data` relative to the project's root. Next, it will put the If you no more need that folder, run 
+```sh
+rm -rf ../j2eo-data
+```
 
 ---
 
@@ -103,3 +108,14 @@ bugs in our code. It is also much easier to work with abstraction layer than wit
 - First, the Java source code files are parsed recursively.
 - Then, for each file, translator converts Java AST to EO AST.
 - Then, EO AST is printed out as a source code to output directory in the same directory structure.
+
+## Troubleshooting
+
+### Java
+Make sure you have these in sync (*mentioning* (not pointing to) the same `jdk` directory)
+- `which java`
+- `which javac`
+  - configure alternatives in case of mismatch ([link](https://stackoverflow.com/a/47432365))
+- `echo $JAVA_HOME`
+  - See how to set `$JAVA_HOME` ([link](https://stackoverflow.com/a/18972665))
+  - If it still points to a wrong directory, see where you might have set it ([link](https://unix.stackexchange.com/a/154957)) and edit that place
