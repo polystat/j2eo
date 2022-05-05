@@ -11,6 +11,7 @@ import tree.Expression.*
 //import tree.Expression.Primary.FieldAccess
 import tree.Expression.Primary.Literal
 import tree.Expression.Primary.MethodInvocation
+import tree.Expression.Primary.Parenthesized
 import tree.Expression.Primary.This
 import tree.Statement.*
 import tree.Type.*
@@ -120,7 +121,7 @@ fun StatementContext.toStatement() : Statement =
         is StatementBreakContext -> Break(null, identifier()?.toToken())
         is StatementContinueContext -> Continue(null, identifier()?.toToken())
         is StatementForContext -> StatementExpression(null, SimpleReference(CompoundName("for_loop_placeholder"))) /* FIXME */
-        is StatementBlockLabelContext -> StatementExpression(null, SimpleReference(CompoundName("block_label_placeholder"))) /* FIXME */
+        is StatementBlockLabelContext -> block().toBlock()
         is StatementDoContext -> Do(null, statement().toStatement(), parExpression().expression().toExpression())
         is StatementReturnContext -> Return(null, expression()?.toExpression())
         is StatementIdentifierLabelContext -> StatementExpression(null, SimpleReference(CompoundName("identifier_label_placeholder"))) /* FIXME */
@@ -188,13 +189,41 @@ fun org.antlr.v4.runtime.Token.toToken() : Token =
         XOR_ASSIGN -> Token(TokenCode.CaretAssign)
         LSHIFT_ASSIGN -> Token(TokenCode.LeftShiftAssign)
         DOT -> Token(TokenCode.Dot)
+        INC -> Token(TokenCode.PlusPlus)
+        DEC -> Token(TokenCode.MinusMinus)
         else -> throw Exception("unsupported token: $text ($type)")
     }
 
 fun CompoundName.toExpression() : Expression = SimpleReference(this)
 
+fun ExpressionContext.toBinaryExpression() : Binary? {
+    val expr0 = expression(0)?.toExpression()
+    val expr1 = expression(1)?.toExpression()
+    val operand = terminal(0)?.symbol
+    return if (expr0 != null && expr1 != null && operand != null)
+        Binary(expr0, expr1, operand.toToken())
+    else
+        null
+}
+
+fun ExpressionContext.toUnaryPrefixPostfix() : Expression? {
+    val expr = expression(0)?.toExpression()
+    val operand = terminal(0)?.symbol
+    return if (expr != null && operand != null) {
+        if (prefix != null) {
+            UnaryPrefix(operand.toToken(), expr)
+        } else if (postfix != null) {
+            UnaryPostfix(operand.toToken(), expr)
+        } else {
+            null
+        }
+    } else {
+        null
+    }
+}
+
 fun ExpressionContext.toExpression() : Expression =
-    if (this.bop != null) {
+    if (bop != null) {
         val expr0 =
                 expression(0)?.toExpression() ?:
                 primary()?.toExpression() ?:
@@ -205,16 +234,19 @@ fun ExpressionContext.toExpression() : Expression =
                 identifier()?.toExpression() ?:
                 methodCall()?.toExpression(expr0) ?:
                 SimpleReference(CompoundName("expression_placeholder")) /* FIXME */
-        if (this.bop.text == ".") {
+        if (bop.text == ".") {
             when (expr1) {
                 is MethodInvocation -> expr1
                 is SimpleReference -> FieldAccess(
-                        expr0,
-                        SUPER() != null,
-                        Token(TokenCode.Identifier, expr1.compoundName.names[0]) // FIXME: questionable
+                    expr0,
+                    SUPER() != null,
+                    Token(TokenCode.Identifier, expr1.compoundName.names[0]) // FIXME: questionable
                 )
                 else -> SimpleReference(CompoundName("expression_placeholder")) /* FIXME */
             }
+        } else if (bop.type in DOT..URSHIFT_ASSIGN) {
+            this.toBinaryExpression() ?:
+            SimpleReference(CompoundName("expression_placeholder")) /* FIXME */
         } else {
             SimpleReference(CompoundName("expression_placeholder")) /* FIXME */
         }
@@ -224,6 +256,7 @@ fun ExpressionContext.toExpression() : Expression =
         //     SimpleReference(CompoundName("expression_placeholder")) /* FIXME */
         // }
     } else {
+        this.toUnaryPrefixPostfix() ?:
         expression(0)?.toExpression() ?:
         primary()?.toExpression() ?:
         identifier()?.toExpression() ?:
@@ -249,7 +282,20 @@ fun MethodCallContext.toExpression(expr: Expression?) : Expression {
 fun IdentifierContext.toExpression() : Expression =
         SimpleReference(CompoundName(IDENTIFIER().text))
 
+fun PrimaryContext.toParenthesized(): Parenthesized? =
+    if (LPAREN() != null && RPAREN() != null) {
+        val expr = expression()?.toExpression()
+        if (expr != null) {
+            Parenthesized(expr)
+        } else {
+            null
+        }
+    } else {
+        null
+    }
+
 fun PrimaryContext.toExpression() : Expression? =
+    this.toParenthesized() ?:
     expression()?.toExpression() ?:
     identifier()?.toExpression() ?:
     THIS()?.let { _ -> This(null) } ?:

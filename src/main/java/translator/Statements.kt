@@ -27,6 +27,7 @@ fun mapStatement(statement: Statement, name: String): List<EOBndExpr> =
         is IfThenElse -> mapIfThenElseStatement(statement, name)
         is While -> mapWhileStatement(statement, name)
         is Do -> mapDoStatement(statement, name)
+        is Block -> mapBlock(statement, name)
         // is Switch -> mapSwitchStatement(parseExprTasks, statement)
         else ->
             listOf() // FIXME
@@ -57,6 +58,7 @@ fun constructStmtName(statement: Statement): String =
         is IfThenElse -> "if_t_e${statement.hashCode()}"
         is While -> "w${statement.hashCode()}"
         is Do -> "do${statement.hashCode()}"
+        is Block -> "b${statement.hashCode()}"
         // is Switch -> mapSwitchStatement(parseExprTasks, statement)
         else ->
             "unknown${statement.hashCode()}" // FIXME
@@ -120,7 +122,7 @@ fun mapIfThenElseStatement(rn: IfThenElse, name: String): List<EOBndExpr> {
     ) + mapExpression(rn.condition, constructExprName(rn.condition)) +
             mapStatement(rn.thenPart, constructStmtName(rn.thenPart)) +
         if (rn.elsePart != null) {
-            mapStatement(rn.elsePart,constructStmtName(rn.elsePart))
+            mapStatement(rn.elsePart, constructStmtName(rn.elsePart))
         } else {
             listOf(mapEmptyStmt(emptyName))
         }
@@ -138,11 +140,20 @@ fun mapWhileStatement(rn: While, name: String): List<EOBndExpr> {
                     EOBndExpr(
                         EOCopy(
                             listOf(constructExprName(rn.condition), "while").eoDot(),
-                            if (rn.statement != null) {
-                                constructStmtName(rn.statement).eoDot()
-                            } else {
-                                emptyName.eoDot()
-                            }
+                            EOObject(
+                                listOf("while_i"),
+                                None,
+                                listOf(
+                                    EOBndExpr(
+                                        if (rn.statement != null) {
+                                            constructStmtName(rn.statement).eoDot()
+                                        } else {
+                                            emptyName.eoDot()
+                                        },
+                                        "@"
+                                    )
+                                )
+                            )
                         ),
                         "@"
                     )
@@ -150,11 +161,12 @@ fun mapWhileStatement(rn: While, name: String): List<EOBndExpr> {
             ),
             name
         )
-    ) + if (rn.statement != null) {
-            mapStatement(rn.statement,constructStmtName(rn.statement))
-        } else {
-            listOf(mapEmptyStmt(emptyName))
-        }
+    ) + mapExpression(rn.condition, constructExprName(rn.condition)) +
+    if (rn.statement != null) {
+        mapStatement(rn.statement, constructStmtName(rn.statement))
+    } else {
+        listOf(mapEmptyStmt(emptyName))
+    }
 }
 
 fun mapDoStatement(rn: Do, name: String): List<EOBndExpr>  {
@@ -169,11 +181,20 @@ fun mapDoStatement(rn: Do, name: String): List<EOBndExpr>  {
                     EOBndExpr(
                         EOCopy(
                             listOf(constructExprName(rn.condition), "do").eoDot(),
-                            if (rn.statement != null) {
-                                constructStmtName(rn.statement).eoDot()
-                            } else {
-                                emptyName.eoDot()
-                            }
+                            EOObject(
+                                listOf("do_i"),
+                                None,
+                                listOf(
+                                    EOBndExpr(
+                                        if (rn.statement != null) {
+                                            constructStmtName(rn.statement).eoDot()
+                                        } else {
+                                            emptyName.eoDot()
+                                        },
+                                        "@"
+                                    )
+                                )
+                            )
                         ),
                         "@"
                     )
@@ -181,7 +202,8 @@ fun mapDoStatement(rn: Do, name: String): List<EOBndExpr>  {
             ),
             name
         )
-    ) + if (rn.statement != null) {
+    ) + mapExpression(rn.condition, constructExprName(rn.condition)) +
+    if (rn.statement != null) {
         mapStatement(rn.statement,constructStmtName(rn.statement))
     } else {
         listOf(mapEmptyStmt(emptyName))

@@ -1,7 +1,9 @@
 package translator
 
+import arrow.core.None
 import eotree.EOBndExpr
 import eotree.EOCopy
+import eotree.EOObject
 import eotree.eoDot
 import tree.Statement.Block
 import tree.Statement.BlockStatement
@@ -10,7 +12,20 @@ import tree.Statement.BlockStatement
  * In order to map Java block into EO, all variable declarations are separated out as memory objects and then seq
  * contains all the logic.
  */
-fun mapBlock(block: Block): List<EOBndExpr> {
+fun mapBlock(block: Block, name: String? = null): List<EOBndExpr> {
+    if (name != null) {
+        return listOf(
+            EOBndExpr(
+                EOObject(
+                    listOf(),
+                    None,
+                    mapBlock(block)
+                ),
+                name
+            )
+        )
+    }
+
     val parsedStatements = block.block.blockStatements
         .associate { constructName(it) to mapBlockStatement(it, constructName(it)) }
 
@@ -18,7 +33,10 @@ fun mapBlock(block: Block): List<EOBndExpr> {
         EOBndExpr(
             EOCopy(
                 "seq",
-                parsedStatements.keys.map { it.eoDot() }
+                if (parsedStatements.isNotEmpty())
+                    parsedStatements.keys.map { it.eoDot() }
+                else
+                    listOf("0".eoDot())
             ),
             "@"
         )
