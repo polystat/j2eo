@@ -7,6 +7,7 @@ import tree.Compilation.TopLevelComponent
 import tree.CompoundName
 import tree.Declaration.*
 import tree.Expression.Expression
+import tree.Expression.FieldAccess
 import tree.Expression.Primary.MethodInvocation
 import tree.Expression.SimpleReference
 import tree.InitializerSimple
@@ -226,6 +227,7 @@ private fun preprocessStmtExpr(state: PreprocessorState, stmExpr: StatementExpre
 
 private fun preprocessExpr(state: PreprocessorState, expr: Expression) {
     when (expr) {
+        is SimpleReference -> preprocessSimpleReference(state, expr)
         is MethodInvocation -> preprocessMethodInvocation(state, expr)
         else -> {
             // this is a generated else block
@@ -234,8 +236,12 @@ private fun preprocessExpr(state: PreprocessorState, expr: Expression) {
 }
 
 private fun preprocessMethodInvocation(state: PreprocessorState, methodInvocation: MethodInvocation) {
-    when (methodInvocation.qualifier) {
-        is SimpleReference -> preprocessSimpleReference(state, methodInvocation.qualifier as SimpleReference)
+    when (val methodQualifier = methodInvocation.qualifier) {
+        is SimpleReference -> preprocessSimpleReference(state, methodQualifier)
+        is FieldAccess -> {
+            preprocessExpr(state, methodQualifier.expression)
+            preprocessCompoundName(state, CompoundName(methodQualifier.identifier))
+        }
         else -> {
             // this is a generated else block
         }

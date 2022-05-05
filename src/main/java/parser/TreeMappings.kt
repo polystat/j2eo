@@ -7,12 +7,11 @@ import parser.JavaParser.*
 import tree.*
 import tree.Compilation.*
 import tree.Declaration.*
-import tree.Expression.Binary
-import tree.Expression.Expression
+import tree.Expression.*
+//import tree.Expression.Primary.FieldAccess
 import tree.Expression.Primary.Literal
+import tree.Expression.Primary.MethodInvocation
 import tree.Expression.Primary.This
-import tree.Expression.SimpleReference
-import tree.Expression.SwitchExpression
 import tree.Statement.*
 import tree.Type.*
 import kotlin.reflect.typeOf
@@ -188,25 +187,71 @@ fun org.antlr.v4.runtime.Token.toToken() : Token =
         MOD -> Token(TokenCode.Percent)
         XOR_ASSIGN -> Token(TokenCode.CaretAssign)
         LSHIFT_ASSIGN -> Token(TokenCode.LeftShiftAssign)
+        DOT -> Token(TokenCode.Dot)
         else -> throw Exception("unsupported token: $text ($type)")
     }
 
 fun CompoundName.toExpression() : Expression = SimpleReference(this)
 
 fun ExpressionContext.toExpression() : Expression =
-    primary()?.toExpression() ?:
     if (this.bop != null) {
-        if (expression(1) != null && expression(2) == null) {
-            Binary(expression(0).toExpression(), expression(1).toExpression(), bop.toToken())
+        val expr0 =
+                expression(0)?.toExpression() ?:
+                primary()?.toExpression() ?:
+                identifier()?.toExpression()
+        val expr1 =
+                expression(1)?.toExpression() ?:
+                primary()?.toExpression() ?:
+                identifier()?.toExpression() ?:
+                methodCall()?.toExpression(expr0) ?:
+                SimpleReference(CompoundName("expression_placeholder")) /* FIXME */
+        if (this.bop.text == ".") {
+            when (expr1) {
+                is MethodInvocation -> expr1
+                is SimpleReference -> FieldAccess(
+                        expr0,
+                        SUPER() != null,
+                        Token(TokenCode.Identifier, expr1.compoundName.names[0]) // FIXME: questionable
+                )
+                else -> SimpleReference(CompoundName("expression_placeholder")) /* FIXME */
+            }
         } else {
             SimpleReference(CompoundName("expression_placeholder")) /* FIXME */
         }
+        // if (expression(1) != null && expression(2) == null) {
+        //     Binary(expression(0).toExpression(), expression(1).toExpression(), bop.toToken())
+        // } else {
+        //     SimpleReference(CompoundName("expression_placeholder")) /* FIXME */
+        // }
     } else {
+        expression(0)?.toExpression() ?:
+        primary()?.toExpression() ?:
+        identifier()?.toExpression() ?:
+        methodCall()?.toExpression(null) ?:
         SimpleReference(CompoundName("expression_placeholder")) /* FIXME */
     }
 
+fun MethodCallContext.toExpression(expr: Expression?) : Expression {
+    val args = ArgumentList(
+            expressionList().expression().stream().map {
+                it.toExpression()
+            }.toList()
+    )
+    return MethodInvocation(
+            expr,
+            SUPER() != null,
+            null, // TODO: type arguments are somewhere else
+            identifier().toToken(),
+            args
+    )
+}
+
+fun IdentifierContext.toExpression() : Expression =
+        SimpleReference(CompoundName(IDENTIFIER().text))
+
 fun PrimaryContext.toExpression() : Expression? =
     expression()?.toExpression() ?:
+    identifier()?.toExpression() ?:
     THIS()?.let { _ -> This(null) } ?:
     /* FIXME: super */
     literal()?.toLiteral() ?:
@@ -219,7 +264,7 @@ fun LiteralContext.toLiteral() : Literal? =
     integerLiteral()?.DECIMAL_LITERAL()?.let { n -> Literal(Token(TokenCode.IntegerLiteral, n.text))} ?:
     NULL_LITERAL()?.let { _ -> Literal(Token(TokenCode.Null)) } ?:
     floatLiteral()?.let { x -> Literal(Token(TokenCode.FloatingLiteral, x.text)) } ?:
-    STRING_LITERAL()?.let { s -> Literal(Token(TokenCode.StringLiteral, s.text)) } ?:
+    STRING_LITERAL()?.let { s -> Literal(Token(TokenCode.StringLiteral, s.text.drop(1).dropLast(1))) } ?:
     Literal(Token(TokenCode.IntegerLiteral, "123456")) ?: /* FIXME: support other literals */
     throw Exception("unsupported literal $text") /* FIXME */
 
