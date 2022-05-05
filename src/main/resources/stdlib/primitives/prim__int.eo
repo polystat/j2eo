@@ -1,0 +1,133 @@
+# inc_pre, dec_pre, inc_post, dec_post, add, sub, mul, div are not precise operators
++package stdlib.primitives
++alias stdlib.primitives.prim__num
+
+[] > prim__int
+  prim__num > super
+  super > @
+  2147483647 > max_int
+  -2147483648 > min_int
+
+  [] > new
+    [] > this
+      prim__num.new > super
+      super > @
+      "prim__int" > prim_name
+
+      [] > inc_pre
+        seq > @
+          ^.v.write
+            ^.v.add
+              1
+          prim__int.constructor_3
+            prim__int.new
+            ^
+
+      [] > dec_pre
+        seq > @
+          ^.v.write
+            ^.v.sub
+              1
+          prim__int.constructor_3
+            prim__int.new
+            ^
+
+      [] > inc_post
+        prim__int.constructor_1 > old
+          prim__int.new
+        seq > @
+          old.v.write
+            ^.v
+          ^.v.write
+            ^.v.add
+              1
+          old
+
+      [] > dec_post
+        prim__int.constructor_1 > old
+          prim__int.new
+        seq > @
+          old.v.write
+            ^.v
+          ^.v.write
+            ^.v.sub
+              1
+          old
+
+      [right] > write
+        seq > @
+          ^.v.write
+            right.v
+          prim__int.constructor_3
+            prim__int.new
+            ^
+
+      [right] > add
+        seq > @
+          prim__int.constructor_2
+            prim__int.new
+            ^.v.add
+              right.v
+
+      [right] > sub
+        seq > @
+          prim__int.constructor_2
+            prim__int.new
+            ^.v.sub
+              right.v
+
+      [right] > mul
+        seq > @
+          prim__int.constructor_2
+            prim__int.new
+            ^.v.mul
+              right.v
+
+      [right] > div
+        seq > @
+          prim__int.constructor_2
+            prim__int.new
+            ^.v.div
+              right.v
+
+      [right] > mod
+        seq > @
+          prim__int.constructor_2
+            prim__int.new
+            ^.v.mod
+              right.v
+
+    seq > @
+      this
+
+  [right] > from
+    seq > @
+      if.
+        or.
+          right.prim_name.eq "prim__float"
+          right.prim_name.eq "prim__double"
+        prim__int.constructor_2
+          prim__int.new
+          right.v.as-int.mod
+            max_int
+        prim__int.constructor_2
+          prim__int.new
+          right.v.mod
+            max_int
+
+  [this] > constructor_1
+    seq > @
+      super.constructor_1
+        this
+
+  [this target] > constructor_2
+    seq > @
+      super.constructor_2
+        this
+        target
+
+  [this another_num] > constructor_3
+    seq > @
+      super.constructor_3
+        this
+        another_num
