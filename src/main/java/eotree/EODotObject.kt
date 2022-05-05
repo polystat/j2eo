@@ -1,19 +1,15 @@
 package eotree
 
-import arrow.core.None
-import arrow.core.Option
-import arrow.core.Some
-import arrow.core.getOrElse
-import arrow.core.some
+import arrow.core.*
 import tree.CompoundName
 
-class EODot : EOExpr {
+class EODotObject : EOObject {
     var src: Option<EOExpr>
     var name: String
 
     constructor(name: String) : this(name.split("."))
 
-    constructor(names: List<String>) {
+    constructor(names: List<String>) : super(listOf(), None, listOf()) {
         this.name = names.last()
         this.src = if (names.size > 1)
             EODot(names.dropLast(1)).some()
@@ -21,12 +17,12 @@ class EODot : EOExpr {
             None
     }
 
-    constructor(src: Option<EOExpr>, name: String) {
+    constructor(src: Option<EOExpr>, name: String) : super(listOf(), None, listOf()) {
         this.src = src
         this.name = name
     }
 
-    constructor(name: CompoundName) {
+    constructor(name: CompoundName) : super(listOf(), None, listOf()) {
         // println("Mapping ${name.concatenatedJava()}")
         // Recursively build a dot expression
         this.src =
@@ -38,11 +34,7 @@ class EODot : EOExpr {
 
     override fun generateEO(indent: Int): String =
         src
-            .map { src ->
-                val text = src.generateEO(indent).split("\n")
-                (listOf(text.first() + "." + name) + text.drop(1))
-                    .joinToString("\n")
-            }
+            .map { src -> src.generateEO(indent) + "." + name }
             .getOrElse { indent(indent) + name }
 
     override fun toString(): String =
@@ -51,8 +43,8 @@ class EODot : EOExpr {
             .getOrElse { name }
 }
 
-fun String.eoDot(): EODot = EODot(this)
+fun String.eoDotObject(): EODotObject = EODotObject(this)
 
-fun CompoundName.eoDot(): EODot = EODot(this)
+fun CompoundName.eoDotObject(): EODotObject = EODotObject(this)
 
-fun List<String>.eoDot(): EODot = EODot(this)
+fun List<String>.eoDotObject(): EODotObject = EODotObject(this)

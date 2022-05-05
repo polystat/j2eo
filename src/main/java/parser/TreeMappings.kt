@@ -8,13 +8,11 @@ import tree.*
 import tree.Compilation.*
 import tree.Declaration.*
 import tree.Expression.*
-//import tree.Expression.Primary.FieldAccess
 import tree.Expression.Primary.Literal
 import tree.Expression.Primary.MethodInvocation
 import tree.Expression.Primary.This
 import tree.Statement.*
 import tree.Type.*
-import kotlin.reflect.typeOf
 
 fun CompilationUnitContext.toCompilationUnit() : CompilationUnit =
     SimpleCompilationUnit(
@@ -204,7 +202,7 @@ fun ExpressionContext.toExpression() : Expression =
                 primary()?.toExpression() ?:
                 identifier()?.toExpression() ?:
                 methodCall()?.toExpression(expr0) ?:
-                SimpleReference(CompoundName("expression_placeholder")) /* FIXME */
+                SimpleReference(CompoundName("expression_placeholder_expr1")) /* FIXME */
         if (this.bop.text == ".") {
             when (expr1) {
                 is MethodInvocation -> expr1
@@ -213,10 +211,11 @@ fun ExpressionContext.toExpression() : Expression =
                         SUPER() != null,
                         Token(TokenCode.Identifier, expr1.compoundName.names[0]) // FIXME: questionable
                 )
-                else -> SimpleReference(CompoundName("expression_placeholder")) /* FIXME */
+                else -> SimpleReference(CompoundName("expression_placeholder_bop_dot")) /* FIXME */
             }
         } else {
-            SimpleReference(CompoundName("expression_placeholder")) /* FIXME */
+            Binary(expr0, expr1, bop.toToken())
+//            SimpleReference(CompoundName("expression_placeholder_not_bop_dot")) /* FIXME */
         }
         // if (expression(1) != null && expression(2) == null) {
         //     Binary(expression(0).toExpression(), expression(1).toExpression(), bop.toToken())
@@ -228,12 +227,12 @@ fun ExpressionContext.toExpression() : Expression =
         primary()?.toExpression() ?:
         identifier()?.toExpression() ?:
         methodCall()?.toExpression(null) ?:
-        SimpleReference(CompoundName("expression_placeholder")) /* FIXME */
+        SimpleReference(CompoundName("expression_placeholder_not_bop")) /* FIXME */
     }
 
 fun MethodCallContext.toExpression(expr: Expression?) : Expression {
     val args = ArgumentList(
-            expressionList().expression().stream().map {
+            expressionList().expression().map {
                 it.toExpression()
             }.toList()
     )

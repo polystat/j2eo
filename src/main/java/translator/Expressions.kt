@@ -160,25 +160,22 @@ fun mapBinary(parseExprTasks: ParseExprTasks, expr: Binary): EOObject {
         TokenCode.Caret -> "bit_xor" /* TODO: double check */
         else ->
             "binary_op_placeholder" // FIXME
-            // throw IllegalArgumentException("Binary operation ${expr.operator} is not supported")
+        // throw IllegalArgumentException("Binary operation ${expr.operator} is not supported")
     }
 
     val leftName = parseExprTasks.addTask(expr.left)
     val rightName = parseExprTasks.addTask(expr.right)
-
-    return EOObject(
-        listOf(),
-        None,
-        listOf(
-            EOBndExpr(
-                EOCopy(
-                    listOf(leftName, function).eoDot(),
-                    rightName.eoDot()
-                ),
-                "@"
-            )
+    val result = parseExprTasks.addReadyBinding(
+        EOBndExpr(
+            EOCopy(
+                listOf(leftName, function).eoDot(),
+                rightName.eoDot()
+            ),
+            "@"
         )
     )
+
+    return result.eoDotObject()
 }
 
 fun mapSimpleReference(parseExprTasks: ParseExprTasks, expr: SimpleReference): EOObject =
