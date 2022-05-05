@@ -5,5 +5,5 @@ public class PrivateRecordClass {
 		System.out.println(p.address());
 		System.out.println("passed");
 	}
+	private static record Person (String name, String address) {}
 }
-private record Person (String name, String address) {}
