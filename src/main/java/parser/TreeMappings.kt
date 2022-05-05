@@ -233,9 +233,10 @@ fun ExpressionContext.toExpression() : Expression =
 
 fun MethodCallContext.toExpression(expr: Expression?) : Expression {
     val args = ArgumentList(
-            expressionList().expression().stream().map {
-                it.toExpression()
-            }.toList()
+            if (expressionList() == null)
+                listOf()
+            else
+                expressionList().expression().stream().map { it.toExpression() }.toList()
     )
     return MethodInvocation(
             expr,

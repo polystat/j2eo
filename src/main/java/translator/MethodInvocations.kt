@@ -32,6 +32,7 @@ fun mapMethodInvocation(parseExprTasks: ParseExprTasks, methodInvocation: Method
                 ).eoDot()
                 else -> throw IllegalArgumentException("Unsupported yet")
             }
+        null -> methodInvocation.name.eoDot()
         else ->
             throw IllegalArgumentException("Unsupported method qualifier!")
     }
@@ -42,6 +43,7 @@ fun mapMethodInvocation(parseExprTasks: ParseExprTasks, methodInvocation: Method
             else
                 "this".eoDot()
         is FieldAccess -> methodQualifier.identifier.eoDot()
+        null -> "this".eoDot()
         else ->
             throw IllegalArgumentException("Unsupported method qualifier!")
     }
