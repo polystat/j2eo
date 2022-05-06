@@ -2,15 +2,10 @@ package translator
 
 import arrow.core.None
 import eotree.*
-import eotree.data.EOIntData
 import lexer.TokenCode
 import tree.Expression.Binary
 import tree.Expression.Expression
-import tree.Expression.FieldAccess
-import tree.Expression.Primary.Literal
-import tree.Expression.Primary.MethodInvocation
-import tree.Expression.Primary.Parenthesized
-import tree.Expression.Primary.This
+import tree.Expression.Primary.*
 import tree.Expression.SimpleReference
 import tree.Expression.UnaryPostfix
 import tree.Expression.UnaryPrefix

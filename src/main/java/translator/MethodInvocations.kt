@@ -8,13 +8,11 @@ import eotree.EOExpr
 import eotree.EOObject
 import eotree.eoDot
 import tree.CompoundName
-import tree.Expression.Expression
-import tree.Expression.FieldAccess
+import tree.Expression.Primary.FieldAccess
 import tree.Expression.Primary.MethodInvocation
 import tree.Expression.SimpleReference
 import util.ParseExprTasks
 import util.isSystemOutCall
-import java.lang.reflect.Field
 
 // TODO: create state object to store binding of expression
 fun mapMethodInvocation(parseExprTasks: ParseExprTasks, methodInvocation: MethodInvocation): EOObject {

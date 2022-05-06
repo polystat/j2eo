@@ -7,7 +7,7 @@ import tree.Compilation.TopLevelComponent
 import tree.CompoundName
 import tree.Declaration.*
 import tree.Expression.Expression
-import tree.Expression.FieldAccess
+import tree.Expression.Primary.FieldAccess
 import tree.Expression.Primary.MethodInvocation
 import tree.Expression.SimpleReference
 import tree.InitializerSimple
