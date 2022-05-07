@@ -14,20 +14,20 @@ import tree.Expression.Primary.This
 import tree.Statement.*
 import tree.Type.*
 
-fun CompilationUnitContext.toCompilationUnit() : CompilationUnit =
+fun CompilationUnitContext.toCompilationUnit(): CompilationUnit =
     SimpleCompilationUnit(
         ImportDeclarations(ArrayList(importDeclaration().map { it.toImportDeclaration() })),
         TopLevelComponents(ArrayList(typeDeclaration().mapNotNull { it.toTopLevelComponent() })) // FIXME: should be no nulls
     )
 
-fun TypeDeclarationContext.toTopLevelComponent() : TopLevelComponent? =
+fun TypeDeclarationContext.toTopLevelComponent(): TopLevelComponent? =
     if (classDeclaration() != null) {
         TopLevelComponent(classDeclaration().toClassDeclaration())
     } else {
         null // throw java.lang.Exception("Cannot translate") // FIXME
     }
 
-fun ClassDeclarationContext.toClassDeclaration() : ClassDeclaration =
+fun ClassDeclarationContext.toClassDeclaration(): ClassDeclaration =
     NormalClassDeclaration(
         identifier().toToken(),
         typeParameters()?.toTypeParameters(),
@@ -36,20 +36,20 @@ fun ClassDeclarationContext.toClassDeclaration() : ClassDeclaration =
         classBody().toDeclarations()
     )
 
-fun ClassBodyContext.toDeclarations() : Declarations =
+fun ClassBodyContext.toDeclarations(): Declarations =
     Declarations(ArrayList(this.classBodyDeclaration().map { it.toDeclaration() }.filterNotNull()))
 
-fun ClassBodyDeclarationContext.toDeclaration() : Declaration? =
+fun ClassBodyDeclarationContext.toDeclaration(): Declaration? =
     memberDeclaration()?.toDeclaration(modifier())
         ?: block()?.toDeclaration(STATIC())
         ?: null
 
-fun MemberDeclarationContext.toDeclaration(modifiers : List<ModifierContext>?) : Declaration? =
+fun MemberDeclarationContext.toDeclaration(modifiers: List<ModifierContext>?): Declaration? =
     methodDeclaration()?.toDeclaration()
-        // FIXME: support other declarations
+    // FIXME: support other declarations
         ?: null
 
-fun MethodDeclarationContext.toDeclaration() : Declaration =
+fun MethodDeclarationContext.toDeclaration(): Declaration =
     MethodDeclaration(
         null /* FIXME */,
         null /* FIXME */,
@@ -61,16 +61,16 @@ fun MethodDeclarationContext.toDeclaration() : Declaration =
         methodBody().toBlock() /* FIXME */
     )
 
-fun MethodBodyContext.toBlock() : Block =
+fun MethodBodyContext.toBlock(): Block =
     block()?.toBlock() ?: Block(ArrayList(), BlockStatements(ArrayList()))
 
-fun FormalParametersContext.toParameterDeclarations() : ParameterDeclarations? =
+fun FormalParametersContext.toParameterDeclarations(): ParameterDeclarations? =
     formalParameterList()?.toParameterDeclarations()
 
-fun FormalParameterListContext.toParameterDeclarations() : ParameterDeclarations =
+fun FormalParameterListContext.toParameterDeclarations(): ParameterDeclarations =
     ParameterDeclarations(ArrayList(formalParameter().map { it.toParameterDeclaration() }))
 
-fun FormalParameterContext.toParameterDeclaration() : ParameterDeclaration =
+fun FormalParameterContext.toParameterDeclaration(): ParameterDeclaration =
     ParameterDeclaration(
         null, // FIXME: Modifiers(ArrayList(variableModifier().map { it.toModifier() })),
         typeType().toType(),
@@ -80,85 +80,117 @@ fun FormalParameterContext.toParameterDeclaration() : ParameterDeclaration =
         null // FIXME
     )
 
-fun TypeTypeOrVoidContext.toType() : Type? = typeType()?.toType()
+fun TypeTypeOrVoidContext.toType(): Type? = typeType()?.toType()
 
-fun BlockContext.toDeclaration(isStatic : TerminalNode?) : Declaration =
+fun BlockContext.toDeclaration(isStatic: TerminalNode?): Declaration =
     ClassInitializer(this.toBlock(), isStatic != null)
 
-fun BlockContext.toBlock() : Block =
-    Block(null /* TODO: always null? */, BlockStatements(ArrayList(this.blockStatement().map { it.toBlockStatement() })))
+fun BlockContext.toBlock(): Block =
+    Block(
+        null /* TODO: always null? */,
+        BlockStatements(ArrayList(this.blockStatement().map { it.toBlockStatement() }))
+    )
 
-fun Declaration.toBlockStatement() : BlockStatement = BlockStatement(this)
-fun Statement.toBlockStatement() : BlockStatement = BlockStatement(this)
+fun Declaration.toBlockStatement(): BlockStatement = BlockStatement(this)
+fun Statement.toBlockStatement(): BlockStatement = BlockStatement(this)
 
-fun BlockStatementContext.toBlockStatement() : BlockStatement? =
+fun BlockStatementContext.toBlockStatement(): BlockStatement? =
     localVariableDeclaration()?.toDeclaration()?.toBlockStatement()
         ?: statement()?.toStatement()?.toBlockStatement()
         ?: localTypeDeclaration()?.toDeclaration()?.toBlockStatement()
         ?: throw Exception("Unsupported block statement: $this") /* FIXME */
 
-fun LocalTypeDeclarationContext.toDeclaration() : Declaration =
+fun LocalTypeDeclarationContext.toDeclaration(): Declaration =
     classDeclaration()?.toClassDeclaration()
         ?: throw Exception() /* FIXME */
 
-fun StatementContext.toStatement() : Statement =
+fun StatementContext.toStatement(): Statement =
     when (this) {
-        is StatementWhileContext -> While(null /* FIXME */,
+        is StatementWhileContext -> While(
+            null /* FIXME */,
             parExpression().expression().toExpression(),
-            statement().toStatement())
-        is StatementIfContext -> IfThenElse(null,
+            statement().toStatement()
+        )
+        is StatementIfContext -> IfThenElse(
+            null,
             parExpression().expression().toExpression(),
             statement(0).toStatement(),
-            statement(1)?.toStatement())
-        is StatementExpressionContext -> StatementExpression(null,
-            expression().toExpression())
-        is StatementAssertContext -> Assert(null,
+            statement(1)?.toStatement()
+        )
+        is StatementExpressionContext -> StatementExpression(
+            null,
+            expression().toExpression()
+        )
+        is StatementAssertContext -> Assert(
+            null,
             this.expression(0).toExpression(),
-            this.expression(1)?.toExpression())
+            this.expression(1)?.toExpression()
+        )
         is StatementBreakContext -> Break(null, identifier()?.toToken())
         is StatementContinueContext -> Continue(null, identifier()?.toToken())
-        is StatementForContext -> StatementExpression(null, SimpleReference(CompoundName("for_loop_placeholder"))) /* FIXME */
-        is StatementBlockLabelContext -> StatementExpression(null, SimpleReference(CompoundName("block_label_placeholder"))) /* FIXME */
+        is StatementForContext -> StatementExpression(
+            null,
+            SimpleReference(CompoundName("for_loop_placeholder"))
+        ) /* FIXME */
+        is StatementBlockLabelContext -> StatementExpression(
+            null,
+            SimpleReference(CompoundName("block_label_placeholder"))
+        ) /* FIXME */
         is StatementDoContext -> Do(null, statement().toStatement(), parExpression().expression().toExpression())
         is StatementReturnContext -> Return(null, expression()?.toExpression())
-        is StatementIdentifierLabelContext -> StatementExpression(null, SimpleReference(CompoundName("identifier_label_placeholder"))) /* FIXME */
-        is StatementSemiContext -> StatementExpression(null, SimpleReference(CompoundName("semi_noop_placeholder"))) /* FIXME */
-        is StatementSwitchContext -> StatementExpression(null, SimpleReference(CompoundName("switch_statement_placeholder"))) /* FIXME */
+        is StatementIdentifierLabelContext -> StatementExpression(
+            null,
+            SimpleReference(CompoundName("identifier_label_placeholder"))
+        ) /* FIXME */
+        is StatementSemiContext -> StatementExpression(
+            null,
+            SimpleReference(CompoundName("semi_noop_placeholder"))
+        ) /* FIXME */
+        is StatementSwitchContext -> StatementExpression(
+            null,
+            SimpleReference(CompoundName("switch_statement_placeholder"))
+        ) /* FIXME */
         is StatementSwitchExpressionContext -> StatementExpression(null, switchExpression().toExpression())
-            /* Switch(null,
-            this.parExpression().expression().toExpression(),
-            SwitchBlocks(ArrayList(switchBlockStatementGroup().map { it.toSwitchBlock() })),
-            0 /* FIXME: switchLabels */
-        ) */
-        is StatementTryResourceSpecificationContext -> StatementExpression(null, SimpleReference(CompoundName("try_resource_placeholder"))) /* FIXME */
-        is StatementTryBlockContext -> StatementExpression(null, SimpleReference(CompoundName("try_block_placeholder"))) /* FIXME */
+        /* Switch(null,
+        this.parExpression().expression().toExpression(),
+        SwitchBlocks(ArrayList(switchBlockStatementGroup().map { it.toSwitchBlock() })),
+        0 /* FIXME: switchLabels */
+    ) */
+        is StatementTryResourceSpecificationContext -> StatementExpression(
+            null,
+            SimpleReference(CompoundName("try_resource_placeholder"))
+        ) /* FIXME */
+        is StatementTryBlockContext -> StatementExpression(
+            null,
+            SimpleReference(CompoundName("try_block_placeholder"))
+        ) /* FIXME */
         else -> StatementExpression(null, SimpleReference(CompoundName("statement_placeholder"))) /* FIXME */
         // else -> throw Exception("Unsupported statement") /* FIXME */
     }
 
-fun SwitchExpressionContext.toExpression() : Expression =
+fun SwitchExpressionContext.toExpression(): Expression =
     SimpleReference(CompoundName("switch_expression_placeholder")) /* FIXME */
-    /* FIXME:
-    SwitchExpression(
-        parExpression().expression().toExpression(),
-        ???
-    ) */
+/* FIXME:
+SwitchExpression(
+    parExpression().expression().toExpression(),
+    ???
+) */
 
-fun SwitchBlockStatementGroupContext.toSwitchBlock() : SwitchBlock =
+fun SwitchBlockStatementGroupContext.toSwitchBlock(): SwitchBlock =
     SwitchBlock(
         ArrayList(this.switchLabel().map { it.toSwitchLabel() }),
         null
     )
 
-fun SwitchLabelContext.toSwitchLabel() : SwitchLabel =
+fun SwitchLabelContext.toSwitchLabel(): SwitchLabel =
     SwitchLabel(
         constantExpression?.toExpression()
             ?: enumConstantName?.toCompoundName()?.toExpression()
             ?: null
     )
 
-fun org.antlr.v4.runtime.Token.toCompoundName() : CompoundName = CompoundName(text)
-fun org.antlr.v4.runtime.Token.toToken() : Token =
+fun org.antlr.v4.runtime.Token.toCompoundName(): CompoundName = CompoundName(text)
+fun org.antlr.v4.runtime.Token.toToken(): Token =
     when (type) {
         ADD -> Token(TokenCode.Plus)
         MUL -> Token(TokenCode.Star)
@@ -186,30 +218,28 @@ fun org.antlr.v4.runtime.Token.toToken() : Token =
         XOR_ASSIGN -> Token(TokenCode.CaretAssign)
         LSHIFT_ASSIGN -> Token(TokenCode.LeftShiftAssign)
         DOT -> Token(TokenCode.Dot)
+        INSTANCEOF -> Token(TokenCode.Instanceof)
+        QUESTION -> Token(TokenCode.Question)
         else -> throw Exception("unsupported token: $text ($type)")
     }
 
-fun CompoundName.toExpression() : Expression = SimpleReference(this)
+fun CompoundName.toExpression(): Expression = SimpleReference(this)
 
-fun ExpressionContext.toExpression() : Expression =
+fun ExpressionContext.toExpression(): Expression =
     if (this.bop != null) {
         val expr0 =
-                expression(0)?.toExpression() ?:
-                primary()?.toExpression() ?:
-                identifier()?.toExpression()
+            expression(0)?.toExpression() ?: primary()?.toExpression() ?: identifier()?.toExpression()
         val expr1 =
-                expression(1)?.toExpression() ?:
-                primary()?.toExpression() ?:
-                identifier()?.toExpression() ?:
-                methodCall()?.toExpression(expr0) ?:
-                SimpleReference(CompoundName("expression_placeholder_expr1")) /* FIXME */
+            expression(1)?.toExpression() ?: primary()?.toExpression() ?: identifier()?.toExpression()
+            ?: methodCall()?.toExpression(expr0)
+            ?: SimpleReference(CompoundName("expression_placeholder_expr1")) /* FIXME */
         if (this.bop.text == ".") {
             when (expr1) {
                 is MethodInvocation -> expr1
                 is SimpleReference -> FieldAccess(
-                        expr0,
-                        SUPER() != null,
-                        Token(TokenCode.Identifier, expr1.compoundName.names[0]) // FIXME: questionable
+                    expr0,
+                    SUPER() != null,
+                    Token(TokenCode.Identifier, expr1.compoundName.names[0]) // FIXME: questionable
                 )
                 else -> SimpleReference(CompoundName("expression_placeholder_bop_dot")) /* FIXME */
             }
@@ -223,51 +253,57 @@ fun ExpressionContext.toExpression() : Expression =
         //     SimpleReference(CompoundName("expression_placeholder")) /* FIXME */
         // }
     } else {
-        expression(0)?.toExpression() ?:
-        primary()?.toExpression() ?:
-        identifier()?.toExpression() ?:
-        methodCall()?.toExpression(null) ?:
-        SimpleReference(CompoundName("expression_placeholder_not_bop")) /* FIXME */
+        expression(0)?.toExpression() ?: primary()?.toExpression() ?: identifier()?.toExpression()
+        ?: methodCall()?.toExpression(null)
+        ?: SimpleReference(CompoundName("expression_placeholder_not_bop")) /* FIXME */
     }
 
-fun MethodCallContext.toExpression(expr: Expression?) : Expression {
+fun MethodCallContext.toExpression(expr: Expression?): Expression {
     val args = ArgumentList(
-            expressionList().expression().map {
-                it.toExpression()
-            }.toList()
+        expressionList()?.expression()?.map {
+            it.toExpression()
+        }?.toList() ?: listOf()
     )
     return MethodInvocation(
-            expr,
-            SUPER() != null,
-            null, // TODO: type arguments are somewhere else
-            identifier().toToken(),
-            args
+        expr,
+        SUPER() != null,
+        null, // TODO: type arguments are somewhere else
+        identifier().toToken(),
+        args
     )
 }
 
-fun IdentifierContext.toExpression() : Expression =
-        SimpleReference(CompoundName(IDENTIFIER().text))
+fun IdentifierContext.toExpression(): Expression =
+    // TODO: fix this
+    SimpleReference(CompoundName(IDENTIFIER()?.text ?: "no_identifier"))
 
-fun PrimaryContext.toExpression() : Expression? =
-    expression()?.toExpression() ?:
-    identifier()?.toExpression() ?:
-    THIS()?.let { _ -> This(null) } ?:
+fun PrimaryContext.toExpression(): Expression? =
+    expression()?.toExpression() ?: identifier()?.toExpression() ?: THIS()?.let { _ -> This(null) } ?:
     /* FIXME: super */
-    literal()?.toLiteral() ?:
-    identifier()?.let { id -> SimpleReference(CompoundName(id.text)) }
-    /* FIXME: typeOrVoid . CLASS */
-    /* FIXME: nonWildcardTypeArguments (explicitGenericInvocationSuffix | THIS arguments) */
+    literal()?.toLiteral() ?: identifier()?.let { id -> SimpleReference(CompoundName(id.text)) }
+/* FIXME: typeOrVoid . CLASS */
+/* FIXME: nonWildcardTypeArguments (explicitGenericInvocationSuffix | THIS arguments) */
 
-fun LiteralContext.toLiteral() : Literal? =
-    BOOL_LITERAL()?.text?.let { txt -> Literal(Token(if (txt == "true") { TokenCode.True } else { TokenCode.False })) } ?:
-    integerLiteral()?.DECIMAL_LITERAL()?.let { n -> Literal(Token(TokenCode.IntegerLiteral, n.text))} ?:
-    NULL_LITERAL()?.let { _ -> Literal(Token(TokenCode.Null)) } ?:
-    floatLiteral()?.let { x -> Literal(Token(TokenCode.FloatingLiteral, x.text)) } ?:
-    STRING_LITERAL()?.let { s -> Literal(Token(TokenCode.StringLiteral, s.text.drop(1).dropLast(1))) } ?:
-    Literal(Token(TokenCode.IntegerLiteral, "123456")) ?: /* FIXME: support other literals */
+fun LiteralContext.toLiteral(): Literal? =
+    BOOL_LITERAL()?.text?.let { txt ->
+        Literal(
+            Token(
+                if (txt == "true") {
+                    TokenCode.True
+                } else {
+                    TokenCode.False
+                }
+            )
+        )
+    } ?: integerLiteral()?.DECIMAL_LITERAL()?.let { n -> Literal(Token(TokenCode.IntegerLiteral, n.text)) }
+    ?: NULL_LITERAL()?.let { _ -> Literal(Token(TokenCode.Null)) }
+    ?: floatLiteral()?.let { x -> Literal(Token(TokenCode.FloatingLiteral, x.text)) }
+    ?: STRING_LITERAL()?.let { s -> Literal(Token(TokenCode.StringLiteral, s.text.drop(1).dropLast(1))) } ?: Literal(
+        Token(TokenCode.IntegerLiteral, "123456")
+    ) ?: /* FIXME: support other literals */
     throw Exception("unsupported literal $text") /* FIXME */
 
-fun LocalVariableDeclarationContext.toDeclaration() : Declaration? =
+fun LocalVariableDeclarationContext.toDeclaration(): Declaration? =
     TypeAndDeclarators(
         typeType()?.toType(),
         if (identifier() != null) {
@@ -277,49 +313,49 @@ fun LocalVariableDeclarationContext.toDeclaration() : Declaration? =
         }
     )
 
-fun IdentifierContext.toVariableDeclarators(expression : ExpressionContext) : VariableDeclarators =
+fun IdentifierContext.toVariableDeclarators(expression: ExpressionContext): VariableDeclarators =
     VariableDeclarators(this.toVariableDeclarator(expression))
 
-fun IdentifierContext.toVariableDeclarator(expression : ExpressionContext) : VariableDeclarator =
+fun IdentifierContext.toVariableDeclarator(expression: ExpressionContext): VariableDeclarator =
     VariableDeclarator(this.toToken(), null, InitializerSimple(expression.toExpression()))
 
-fun VariableDeclaratorsContext.toVariableDeclarators() : VariableDeclarators =
+fun VariableDeclaratorsContext.toVariableDeclarators(): VariableDeclarators =
     VariableDeclarators(ArrayList(this.variableDeclarator().map { it.toVariableDeclarator() }))
 
-fun VariableDeclaratorContext.toVariableDeclarator() : VariableDeclarator =
+fun VariableDeclaratorContext.toVariableDeclarator(): VariableDeclarator =
     VariableDeclarator(
         this.variableDeclaratorId().identifier().toToken(),
         Dims(ArrayList<Dim>(variableDeclaratorId().LBRACK().size)),
         this.variableInitializer()?.toInitializer()
     )
 
-fun VariableInitializerContext.toInitializer() : Initializer =
+fun VariableInitializerContext.toInitializer(): Initializer =
     arrayInitializer()?.toInitializerArray()
         ?: InitializerSimple(expression().toExpression())
 
-fun ArrayInitializerContext.toInitializerArray() : InitializerArray =
+fun ArrayInitializerContext.toInitializerArray(): InitializerArray =
     InitializerArray(ArrayList(variableInitializer().map { it.toInitializer() }))
 
-fun TypeParametersContext.toTypeParameters() : TypeParameters =
-    TypeParameters(ArrayList(this.typeParameter().map { it.toTypeParameter()}))
+fun TypeParametersContext.toTypeParameters(): TypeParameters =
+    TypeParameters(ArrayList(this.typeParameter().map { it.toTypeParameter() }))
 
-fun TypeParameterContext.toTypeParameter() : TypeParameter =
+fun TypeParameterContext.toTypeParameter(): TypeParameter =
     TypeParameter(null /* FIXME */, TypeParameterTail(this.identifier().toToken(), null /* FIXME */))
 
-fun TypeListContext.toTypeList() : TypeList =
+fun TypeListContext.toTypeList(): TypeList =
     TypeList(ArrayList(this.typeType().map { it.toType() }))
 
-fun TypeTypeContext.toType() : Type =
+fun TypeTypeContext.toType(): Type =
     when (this) {
         is TypeClassOrInterfaceTypeContext -> this.toType()
         is TypePrimitiveTypeContext -> this.toType()
         else -> throw Exception("not supported") // FIXME: impossible?
     }
 
-fun TypePrimitiveTypeContext.toType() : Type =
+fun TypePrimitiveTypeContext.toType(): Type =
     primitiveType().toType() // FIXME: annotations and more?
 
-fun TerminalNode.toPrimitiveType() : PrimitiveType? =
+fun TerminalNode.toPrimitiveType(): PrimitiveType? =
     when (this.symbol.type) {
         BOOLEAN -> PrimitiveType(Token(TokenCode.Boolean))
         CHAR -> PrimitiveType(Token(TokenCode.Char))
@@ -331,7 +367,8 @@ fun TerminalNode.toPrimitiveType() : PrimitiveType? =
         DOUBLE -> PrimitiveType(Token(TokenCode.Double))
         else -> throw Exception("Unknown primitive type: " + this.symbol)
     }
-fun PrimitiveTypeContext.toType() : Type =
+
+fun PrimitiveTypeContext.toType(): Type =
     BOOLEAN()?.toPrimitiveType()
         ?: CHAR()?.toPrimitiveType()
         ?: BYTE()?.toPrimitiveType()
@@ -342,22 +379,23 @@ fun PrimitiveTypeContext.toType() : Type =
         ?: DOUBLE()?.toPrimitiveType()
         ?: throw Exception("Unsupported primitive type: $this")
 
-fun TypeClassOrInterfaceTypeContext.toType() : Type =
+fun TypeClassOrInterfaceTypeContext.toType(): Type =
     this.classOrInterfaceType().toType() // FIXME
 
-fun ClassOrInterfaceTypeContext.toType() : Type =
+fun ClassOrInterfaceTypeContext.toType(): Type =
     TypeName(
         CompoundName(this.identifier().map { it.text }),
-        this.typeArguments().lastOrNull()?.toTypeArguments()   // FIXME: we use last() since we do not support types like A<B>.C<D>
+        this.typeArguments().lastOrNull()
+            ?.toTypeArguments()   // FIXME: we use last() since we do not support types like A<B>.C<D>
     )
 
-fun TypeArgumentsContext.toTypeArguments() : TypeArguments =
+fun TypeArgumentsContext.toTypeArguments(): TypeArguments =
     TypeArguments(ArrayList(typeArgument().map { it.toTypeArgument() }))
 
-fun TypeArgumentContext.toTypeArgument() : TypeArgument =
+fun TypeArgumentContext.toTypeArgument(): TypeArgument =
     TypeArgument(typeType()?.toType(), 0 /* FIXME */, null)
 
-fun IdentifierContext.toToken() : Token = Token(TokenCode.Identifier, this.text)
+fun IdentifierContext.toToken(): Token = Token(TokenCode.Identifier, this.text)
 
 fun QualifiedNameContext.toCompoundName(): CompoundName =
     CompoundName(identifier().map { it.text })
