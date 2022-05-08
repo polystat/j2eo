@@ -61,9 +61,9 @@ class Translator {
         // FIXME: assuming there is only one top-level component and it is a class
         // Always calling the 'main' method
 
-        val stdAliases = preprocessorState.stdTokensForCurrentAlias.stream()
+        val stdAliases = preprocessorState.stdTokensForCurrentAlias
                 .map { EOMeta("alias", it) }.toList()
-        val eoAliases = preprocessorState.eoClassesForCurrentAlias.stream()
+        val eoAliases = preprocessorState.eoClassesForCurrentAlias
                 .map { EOMeta("alias", it) }.toList()
 
         return EOProgram(

@@ -2,7 +2,11 @@ package translator
 
 import arrow.core.None
 import arrow.core.Option
-import eotree.*
+import arrow.core.toOption
+import eotree.EOCopy
+import eotree.EODot
+import eotree.EOExpr
+import eotree.eoDot
 import tree.Statement.*
 import util.ParseExprTasks
 import java.util.Random

@@ -217,7 +217,7 @@ fun mapBinary(expr: Binary, name: String): List<EOBndExpr> {
         TokenCode.Caret -> "bit_xor" /* TODO: double check */
         else ->
             "binary_op_placeholder" // FIXME
-            // throw IllegalArgumentException("Binary operation ${expr.operator} is not supported")
+        // throw IllegalArgumentException("Binary operation ${expr.operator} is not supported")
     }
 
     return listOf(

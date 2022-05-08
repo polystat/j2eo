@@ -14,6 +14,7 @@ import tree.Expression.Primary.MethodInvocation
 import tree.Expression.SimpleReference
 import util.ParseExprTasks
 import util.isSystemOutCall
+import util.logger
 import java.lang.reflect.Field
 
 // TODO: create state object to store binding of expression
@@ -28,13 +29,21 @@ fun mapMethodInvocation(methodInvocation: MethodInvocation, name: String): List<
         is FieldAccess ->
             when (val qualExpr = methodQualifier.expression) {
                 is SimpleReference -> CompoundName(
-                        qualExpr.compoundName.names + listOf(methodQualifier.identifier, methodInvocation.name)
+                    qualExpr.compoundName.names + listOf(methodQualifier.identifier, methodInvocation.name)
                 ).eoDot()
-                else -> throw IllegalArgumentException("Unsupported yet")
+                else -> {
+                    logger.warn { "Unsupported field access expression" }
+                    "field_access_expression".eoDot()
+                }
             }
-        else ->
-            throw IllegalArgumentException("Unsupported method qualifier!")
+        // TODO: fix this with actual method invocation
+        is MethodInvocation -> "method_invocation_${methodInvocation.name}".eoDot()
+        else -> {
+            logger.warn { "Unsupported method qualifier: ${methodQualifier?.javaClass?.name}" }
+            "method_qualifier_${methodQualifier?.javaClass?.name}".eoDot()
+        }
     }
+
     val callee: EODot = when (val methodQualifier = methodInvocation.qualifier) {
         is SimpleReference ->
             if (methodQualifier.compoundName.names.size > 1)
@@ -42,8 +51,12 @@ fun mapMethodInvocation(methodInvocation: MethodInvocation, name: String): List<
             else
                 "this".eoDot()
         is FieldAccess -> methodQualifier.identifier.eoDot()
-        else ->
-            throw IllegalArgumentException("Unsupported method qualifier!")
+        // TODO: fix this with actual method invocation
+        is MethodInvocation -> "method_invocation_${methodInvocation.name}".eoDot()
+        else -> {
+            logger.warn { "Unsupported method qualifier: ${methodQualifier?.javaClass?.name}" }
+            "method_qualifier_${methodQualifier?.javaClass?.name}".eoDot()
+        }
     }
 
     return listOf(

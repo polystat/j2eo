@@ -48,7 +48,12 @@ fun mapClass(clsDec: ClassDeclaration): EOBndExpr {
                     "super".eoDot(),
                     "@"
                 )
-            ) + (generateNew(clsDec)) + generateStatic(clsDec)
+            )
+                    + (generateNew(clsDec))
+                    + generateStatic(clsDec)
+                    + clsDec.body.declarations
+                .filterIsInstance<NormalClassDeclaration>()
+                .map { mapClass(it) }
         ),
         clsDec.name
     )
