@@ -13,6 +13,7 @@ import tree.Expression.Primary.MethodInvocation
 import tree.Expression.SimpleReference
 import util.ParseExprTasks
 import util.isSystemOutCall
+import util.logger
 import java.lang.reflect.Field
 
 // TODO: create state object to store binding of expression
