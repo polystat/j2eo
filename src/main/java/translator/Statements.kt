@@ -1,6 +1,7 @@
 package translator
 
 import arrow.core.Option
+import arrow.core.toOption
 import eotree.EOCopy
 import eotree.EODot
 import eotree.EOExpr
@@ -30,7 +31,7 @@ fun mapStatement(parseExprTasks: ParseExprTasks, statement: Statement): EOExpr =
         is Do -> mapDoStatement(parseExprTasks, statement)
         // is Switch -> mapSwitchStatement(parseExprTasks, statement)
         else ->
-            "statement_placeholder".eoDot() // FIXME
+            "statement_placeholder_mapStatement".eoDot() // FIXME
             // FIXME: throw IllegalArgumentException("Statement of type ${statement.javaClass.simpleName} is not supported")
     }
 
@@ -50,7 +51,7 @@ fun mapIfThenElseStatement(parseExprTasks: ParseExprTasks, rn: IfThenElse): EOEx
     if (rn.elsePart == null) {
         EOCopy(
             EODot(
-                Option.fromNullable(mapExpression(parseExprTasks, rn.condition)),
+                mapExpression(parseExprTasks, rn.condition).toOption(),
                 "if"
             ),
             mapStatement(parseExprTasks, rn.thenPart)
@@ -58,7 +59,7 @@ fun mapIfThenElseStatement(parseExprTasks: ParseExprTasks, rn: IfThenElse): EOEx
     } else {
         EOCopy(
             EODot(
-                Option.fromNullable(mapExpression(parseExprTasks, rn.condition)),
+                mapExpression(parseExprTasks, rn.condition).toOption(),
                 "if"
             ),
             mapStatement(parseExprTasks, rn.thenPart),

@@ -1,24 +1,22 @@
-+package stdlib
++package stdlib.lang
 
 [] > class__Object
   [] > new
     [] > this
-      FALSE > is-prim
       "class__Object" > className
       "OBJECT" > @
 
-      [self] > init
+      [this] > init
         0 > @
 
-      [self] > toString
+      [this] > toString
         "OBJECT" > @
 
     seq > @
       this
 
-  [] > constructor
-    new > self
+  [this] > constructor
     seq > @
-      self.init
-        self
-      self
+      this.init
+        this
+      this

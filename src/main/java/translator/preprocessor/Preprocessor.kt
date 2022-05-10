@@ -26,28 +26,30 @@ import kotlin.collections.HashSet
 
 /**
  * @property classNames
- * @property stdClassesNeededForAlias
- * @property stdClassesForCurrentAlias
+ * @property stdTokensNeededForAlias
+ * @property stdTokensForCurrentAlias
  */
 data class PreprocessorState(
         val classNames: HashMap<String, String> = hashMapOf(
-                "Object" to TokenCodes.CLASS__OBJECT.value,
-                "System" to TokenCodes.CLASS__SYSTEM.value,
-                "int" to TokenCodes.PRIM__INT.value,
-                "float" to TokenCodes.PRIM__FLOAT.value,
-                "boolean" to TokenCodes.PRIM__BOOLEAN.value,
+            "Object" to TokenCodes.CLASS__OBJECT.value,
+            "System" to TokenCodes.CLASS__SYSTEM.value,
         ),
-        val stdClassesNeededForAlias: HashSet<String> = hashSetOf(
-                TokenCodes.CLASS__OBJECT.value,
-                TokenCodes.CLASS__SYSTEM.value,
-                TokenCodes.PRIM__INT.value,
-                TokenCodes.PRIM__FLOAT.value,
-                TokenCodes.PRIM__BOOLEAN.value,
-                TokenCodes.CLASS__STRING.value,
-                TokenCodes.EO_CAGE.value
+        val stdTokensNeededForAlias: HashSet<String> = hashSetOf(
+            TokenCodes.CLASS__OBJECT.value,
+            TokenCodes.CLASS__SYSTEM.value,
+            TokenCodes.PRIM__INT.value,
+            TokenCodes.PRIM__FLOAT.value,
+            TokenCodes.PRIM__BOOLEAN.value,
+            TokenCodes.CLASS__STRING.value,
+            TokenCodes.EO_CAGE.value,
+            TokenCodes.PRIM__LONG.value,
+            TokenCodes.PRIM__BYTE.value,
+            TokenCodes.PRIM__CHAR.value,
+            TokenCodes.PRIM__DOUBLE.value,
+            TokenCodes.PRIM__SHORT.value
         ),
-        val stdClassesForCurrentAlias: HashSet<String> = hashSetOf(
-                TokenCodes.CLASS__OBJECT.value  // We need it always
+        val stdTokensForCurrentAlias: HashSet<String> = hashSetOf(
+            TokenCodes.CLASS__OBJECT.importPath  // We need it always
         ),
         val eoClassesForCurrentAlias: HashSet<String> = hashSetOf()
 )
@@ -117,7 +119,7 @@ private fun preprocessSimpleCompilationUnit(state: PreprocessorState, unit: Simp
     }
 
     collectClassNames(unit)
-    collectPrimitivePackages(state.stdClassesForCurrentAlias, unit)
+    collectPrimitivePackages(state.stdTokensForCurrentAlias, unit)
 
     unit.components.components
             .map { component: TopLevelComponent? -> preprocessTopLevelComponent(state, component!!) }
@@ -281,9 +283,9 @@ private fun preprocessCompoundName(state: PreprocessorState, compoundName: Compo
 }
 
 private fun tryAddClassForAliases(state: PreprocessorState, className: String, forStdLib: Boolean = true) {
-    if (state.stdClassesNeededForAlias.contains(className)) {
+    if (state.stdTokensNeededForAlias.contains(className)) {
         if (forStdLib) {
-            state.stdClassesForCurrentAlias.add(className)
+            state.stdTokensForCurrentAlias.add(className)
         } else {
             state.eoClassesForCurrentAlias.add(className)
         }

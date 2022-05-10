@@ -13,6 +13,7 @@ import tree.Expression.Primary.MethodInvocation
 import tree.Expression.SimpleReference
 import util.ParseExprTasks
 import util.isSystemOutCall
+import java.lang.reflect.Field
 
 // TODO: create state object to store binding of expression
 fun mapMethodInvocation(parseExprTasks: ParseExprTasks, methodInvocation: MethodInvocation): EOObject {
@@ -26,9 +27,12 @@ fun mapMethodInvocation(parseExprTasks: ParseExprTasks, methodInvocation: Method
         is FieldAccess ->
             when (val qualExpr = methodQualifier.expression) {
                 is SimpleReference -> CompoundName(
-                        qualExpr.compoundName.names + listOf(methodQualifier.identifier, methodInvocation.name)
+                    qualExpr.compoundName.names + listOf(methodQualifier.identifier, methodInvocation.name)
                 ).eoDot()
-                else -> throw IllegalArgumentException("Unsupported yet")
+                else -> {
+                    logger.warn { "Unsupported field access expression" }
+                    "field_access_expression".eoDot()
+                }
             }
         null -> methodInvocation.name.eoDot()
         else ->
@@ -54,7 +58,8 @@ fun mapMethodInvocation(parseExprTasks: ParseExprTasks, methodInvocation: Method
                 EOCopy(
                     src,
                     (if (!isStaticCall) listOf(callee) else ArrayList<EOExpr>()) +
-                        (methodInvocation.arguments?.arguments?.map { obj -> parseExprTasks.addTask(obj).eoDot() } ?: listOf())
+                            (methodInvocation.arguments?.arguments?.map { obj -> parseExprTasks.addTask(obj).eoDot() }
+                                ?: listOf())
                 ),
                 "@"
             )

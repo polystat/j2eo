@@ -53,26 +53,30 @@ fun mapMethodDeclaration(dec: MethodDeclaration): EOBndExpr {
         // TODO: implement
 //        try {
         if (dec.methodBody != null) (
-        dec.methodBody.block.findAllLocalVariables().map { preMapVariableDeclaration(it) } +
-                listOf(
-                    EOBndExpr(
-                        EOCopy(
-                            "seq",
-                            dec.methodBody.block.blockStatements
-                                .mapNotNull {
-                                    if (it.statement != null)
-                                        mapStatement(parseExprTasks, it.statement)
-                                    else if (it.expression != null) {
-                                        parseExprTasks.addTask(it.expression).eoDot()
-                                    } else if (it.declaration is VariableDeclaration && (it.declaration as VariableDeclaration).initializer != null)
-                                        mapVariableDeclaration(parseExprTasks, it.declaration as VariableDeclaration)
-                                    else
-                                        null
-                                }
-                        ),
-                        "@"
-                    )
-                ) + parseExprTasks(parseExprTasks)) else
+                dec.methodBody.block.findAllLocalVariables().map { preMapVariableDeclaration(it) } +
+                        listOf(
+                            EOBndExpr(
+                                EOCopy(
+                                    "seq",
+                                    dec.methodBody.block.blockStatements
+                                        .mapNotNull {
+                                            if (it.statement != null)
+                                                mapStatement(parseExprTasks, it.statement)
+                                            else if (it.expression != null) {
+                                                parseExprTasks.addTask(it.expression).eoDot()
+                                            } else if (it.declaration is VariableDeclaration && (it.declaration as VariableDeclaration).initializer != null)
+                                                mapVariableDeclaration(
+                                                    parseExprTasks,
+                                                    it.declaration as VariableDeclaration
+                                                )
+                                            else
+                                                null
+                                        }
+                                ),
+                                "@"
+                            )
+                        ) + parseExprTasks(parseExprTasks))
+        else
 //        } catch (e: NullPointerException) {
             listOf(
                 EOBndExpr(
@@ -112,15 +116,12 @@ fun mapMethodDeclaration(dec: MethodDeclaration): EOBndExpr {
     )
 }
 
-fun parseExprTasks(parseExprTasks: ParseExprTasks): List<EOBndExpr> {
-    return if (parseExprTasks.tasks.size > 0) {
-        parseExprTasks.tasks
-            .map { parseExprTask(it.second, it.first) }
-            .flatten()
-    } else {
-        listOf()
-    }
-}
+fun parseExprTasks(parseExprTasks: ParseExprTasks): List<EOBndExpr> =
+    parseExprTasks.tasks
+        .map { parseExprTask(it.second, it.first) }
+        .flatten() +
+            parseExprTasks.readyBindings.map { it.second }
+
 
 fun parseExprTask(e: Entity, name: String): List<EOBndExpr> {
     val parseExprTasks = ParseExprTasks()

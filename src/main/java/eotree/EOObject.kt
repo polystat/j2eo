@@ -3,7 +3,7 @@ package eotree
 import arrow.core.Option
 import arrow.core.getOrElse
 
-class EOObject(
+open class EOObject(
     var freeAttrs: List<String>,
     var varargAttr: Option<String>,
     var bndAttrs: List<EOBndExpr>,

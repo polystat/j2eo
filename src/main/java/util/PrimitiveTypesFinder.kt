@@ -24,11 +24,13 @@ private fun findPrimitivesInMethodInvocation(primitives: HashSet<String>, method
         ?.map { findPrimitivesInExpression(primitives, it) }
 }
 
-private fun decodeLiteralCode(code: TokenCode): String? {
+private fun decodeLiteralCode(code: TokenCode): TokenCodes? {
     return when(code) {
-        TokenCode.IntegerLiteral -> TokenCodes.PRIM__INT.value
-        TokenCode.FloatingLiteral -> TokenCodes.PRIM__FLOAT.value
-        TokenCode.StringLiteral -> TokenCodes.CLASS__STRING.value
+        TokenCode.IntegerLiteral -> TokenCodes.PRIM__INT
+        TokenCode.FloatingLiteral -> TokenCodes.PRIM__FLOAT
+        TokenCode.StringLiteral -> TokenCodes.CLASS__STRING
+        TokenCode.False -> TokenCodes.PRIM__BOOLEAN
+        TokenCode.True -> TokenCodes.PRIM__BOOLEAN
         else -> null
     }
 }
@@ -36,7 +38,7 @@ private fun decodeLiteralCode(code: TokenCode): String? {
 private fun findPrimitivesInLiteral(primitives: HashSet<String>, literal: Literal) {
     val primitiveType = decodeLiteralCode(literal.code)
     if (primitiveType != null) {
-        primitives.add(primitiveType)
+        primitives.add(primitiveType.importPath)
     }
 }
 
@@ -46,6 +48,8 @@ private fun findPrimitivesInExpression(primitives: HashSet<String>, expr: Expres
         is Literal -> findPrimitivesInLiteral(primitives, expr)
         is Binary -> findPrimitivesInExpression(primitives, expr.right)
         is Parenthesized -> findPrimitivesInExpression(primitives, expr.expression)
+        is UnaryPrefix -> findPrimitivesInExpression(primitives, expr.operand)
+        is UnaryPostfix -> findPrimitivesInExpression(primitives, expr.operand)
     }
 }
 
@@ -72,11 +76,11 @@ private fun findPrimitivesInMethod(primitives: HashSet<String>, methodDecl: Meth
 
 private fun findPrimitivesInVarDeclaration(primitives: HashSet<String>, varDeclType: Type) {
     if (varDeclType is PrimitiveType) {
-        primitives.add(decodePrimitiveType(varDeclType))
+        primitives.add(decodePrimitiveType(varDeclType).importPath)
     } else if (varDeclType is TypeName &&
         varDeclType.compoundName.names.size == 1 &&
             varDeclType.compoundName.names.last().equals("String")) {
-        primitives.add(TokenCodes.CLASS__STRING.value)
+        primitives.add(TokenCodes.CLASS__STRING.importPath)
     }
 }
 

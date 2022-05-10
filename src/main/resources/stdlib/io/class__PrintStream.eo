@@ -1,0 +1,34 @@
++package stdlib.io
++alias stdlib.lang.class__Object
++alias org.eolang.io.stdout
+
+[] > class__PrintStream
+  class__Object > super
+  super > @
+
+  [] > new
+    [] > this
+      class__Object.new > super
+      super > @
+      "class__PrintStream" > className
+
+      [this] > init
+        0 > @
+
+      [this output] > println
+        seq > @
+          stdout
+            str.
+              output.toString
+                output
+          stdout
+            "\n"
+
+    seq > @
+      this
+
+  [this] > constructor
+    seq > @
+      this.init
+        this
+      this

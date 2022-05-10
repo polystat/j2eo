@@ -47,7 +47,13 @@ fun preMapVariableDeclaration(dec: VariableDeclaration): EOBndExpr =
         is TypeName ->
             EOBndExpr(EODot("cage"), dec.name)
         is PrimitiveType ->
-            EOBndExpr(listOf(decodePrimitiveType(dec.type as PrimitiveType), decodeInitializer(dec.initializer)).eoDot(), dec.name)
+            EOBndExpr(
+                EOCopy(
+                    listOf(decodePrimitiveType(dec.type as PrimitiveType).value, decodeInitializer(dec.initializer)).eoDot(),
+                    listOf(decodePrimitiveType(dec.type as PrimitiveType).value, "new").eoDot()
+                ),
+                dec.name
+            )
         null ->
             throw IllegalArgumentException("\"var\" declarations are not supported yet")
         else ->
@@ -71,20 +77,20 @@ fun mapVariableDeclaration(parseExprTasks: ParseExprTasks, dec: VariableDeclarat
             throw IllegalArgumentException("Type of type " + dec.type.javaClass.name + " is not supported")
     }
 
-fun decodePrimitiveType(type: PrimitiveType): String {
+fun decodePrimitiveType(type: PrimitiveType): TokenCodes {
     return when (type.typeCode) {
-        TokenCode.Char -> TokenCodes.PRIM__CHAR.value
-        TokenCode.Int -> TokenCodes.PRIM__INT.value
-        TokenCode.Float -> TokenCodes.PRIM__FLOAT.value
-        TokenCode.Double -> TokenCodes.PRIM__DOUBLE.value
-        TokenCode.Boolean -> TokenCodes.PRIM__BOOLEAN.value
-        TokenCode.Long -> TokenCodes.PRIM__LONG.value
-        TokenCode.Byte -> TokenCodes.PRIM__BYTE.value
-        TokenCode.Short -> TokenCodes.PRIM__SHORT.value
+        TokenCode.Char -> TokenCodes.PRIM__CHAR
+        TokenCode.Int -> TokenCodes.PRIM__INT
+        TokenCode.Float -> TokenCodes.PRIM__FLOAT
+        TokenCode.Double -> TokenCodes.PRIM__DOUBLE
+        TokenCode.Boolean -> TokenCodes.PRIM__BOOLEAN
+        TokenCode.Long -> TokenCodes.PRIM__LONG
+        TokenCode.Byte -> TokenCodes.PRIM__BYTE
+        TokenCode.Short -> TokenCodes.PRIM__SHORT
         else -> throw IllegalArgumentException("Type code " + type.typeCode + " is not supported")
     }
 }
 
 fun decodeInitializer(initializer: Initializer?): String {
-    return "constructor1"
+    return "constructor_1"
 }
