@@ -8,6 +8,7 @@ import tree.CompoundName
 import tree.Declaration.*
 import tree.Expression.Expression
 import tree.Expression.Primary.FieldAccess
+import tree.Expression.Primary.InstanceCreation
 import tree.Expression.Primary.MethodInvocation
 import tree.Expression.SimpleReference
 import tree.InitializerSimple
@@ -15,6 +16,7 @@ import tree.Statement.BlockStatement
 import tree.Statement.Statement
 import tree.Statement.StatementExpression
 import tree.Type.PrimitiveType
+import tree.Type.Type
 import tree.Type.TypeName
 import util.TokenCodes
 import util.collectPrimitivePackages
@@ -227,9 +229,23 @@ private fun preprocessExpr(state: PreprocessorState, expr: Expression) {
     when (expr) {
         is SimpleReference -> preprocessSimpleReference(state, expr)
         is MethodInvocation -> preprocessMethodInvocation(state, expr)
+        is InstanceCreation -> preprocessInstanceCreation(state, expr)
         else -> {
             // this is a generated else block
         }
+    }
+}
+
+private fun preprocessInstanceCreation(state: PreprocessorState, instanceCreation: InstanceCreation) {
+    preprocessType(state, instanceCreation.ctorType)
+    instanceCreation.args.arguments.forEach { preprocessExpr(state, it) }
+    instanceCreation.classBody.declarations.forEach { preprocessDecl(state, it) }
+}
+
+private fun preprocessType(state: PreprocessorState, type: Type) {
+    when (type) {
+        is TypeName -> preprocessCompoundName(state, type.compoundName)
+        else -> {}
     }
 }
 

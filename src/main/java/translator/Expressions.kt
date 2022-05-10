@@ -3,6 +3,7 @@ package translator
 import arrow.core.None
 import eotree.*
 import lexer.TokenCode
+import tree.CompoundName
 import tree.Expression.Binary
 import tree.Expression.Expression
 import tree.Expression.Primary.*
@@ -31,9 +32,27 @@ fun mapExpression(parseExprTasks: ParseExprTasks, expr: Expression): EOObject =
             mapThis(expr)
         is Parenthesized ->
             mapParenthesized(parseExprTasks, expr)
+        is InstanceCreation ->
+            mapInstanceCreation(parseExprTasks, expr)
         else ->
             throw IllegalArgumentException("Expression of type ${expr.javaClass.simpleName} is not supported")
     }
+
+fun mapInstanceCreation(parseExprTasks: ParseExprTasks, expr: InstanceCreation): EOObject {
+    return EOObject(
+        listOf(),
+        None,
+        listOf(
+            EOBndExpr(
+                EOCopy(
+                    CompoundName(listOf(expr.ctorType.getTypeName(), "new")).eoDot(),
+                    expr.args.arguments.map { mapExpression(parseExprTasks, it) }
+                ),
+                "@"
+            )
+        )
+    )
+}
 
 fun mapParenthesized(parseExprTasks: ParseExprTasks, expr: Parenthesized): EOObject =
     mapExpression(parseExprTasks, expr.expression)

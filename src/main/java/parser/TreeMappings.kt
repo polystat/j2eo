@@ -260,7 +260,9 @@ fun CreatorContext.toExpression() : Expression {
 
 fun ArgumentsContext.toArgList() : ArgumentList {
     return if (expressionList() == null) {
-        ArgumentList(null)
+        val args = ArgumentList(null)
+        args.arguments.removeIf { it == null }
+        args
     } else {
         val argsLst = ArrayList(expressionList().expression().map { it.toExpression() }.toList())
         val args = ArgumentList(argsLst.removeFirstOrNull())
