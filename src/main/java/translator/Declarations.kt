@@ -3,11 +3,7 @@ package translator
 import arrow.core.None
 import arrow.core.Option
 import arrow.core.some
-import eotree.EOBndExpr
-import eotree.EOCopy
-import eotree.EODot
-import eotree.EOExpr
-import eotree.eoDot
+import eotree.*
 import lexer.TokenCode
 import tree.Declaration.ClassDeclaration
 import tree.Declaration.Declaration
@@ -20,61 +16,91 @@ import tree.Type.TypeName
 import util.ParseExprTasks
 import util.TokenCodes
 
-fun mapClassDeclaration(dec: Declaration): Option<EOBndExpr> {
+fun mapClassDeclaration(dec: Declaration): List<EOBndExpr> {
     // TODO: get rid of option and implement all cases
 
     return when (dec) {
         is MethodDeclaration -> {
-            mapMethodDeclaration(dec).some()
+            listOf(mapMethodDeclaration(dec))
         }
         is NormalClassDeclaration -> {
-            mapClass(dec as ClassDeclaration).some()
+            listOf(mapClass(dec as ClassDeclaration))
         }
         is VariableDeclaration -> {
-            preMapVariableDeclaration(dec).some()
+            mapVariableDeclaration(dec, "n")
         }
         else -> {
-            None
+            listOf()
         }
     }
 }
 
-/**
- * Maps a variable declaration in class object (i.e. static variable).
- */
-fun preMapVariableDeclaration(dec: VariableDeclaration): EOBndExpr =
-    when (dec.type) {
-        is TypeName ->
-            EOBndExpr(EODot("cage"), dec.name)
-        is PrimitiveType ->
-            EOBndExpr(
-                EOCopy(
-                    listOf(decodePrimitiveType(dec.type as PrimitiveType).value, decodeInitializer(dec.initializer)).eoDot(),
-                    listOf(decodePrimitiveType(dec.type as PrimitiveType).value, "new").eoDot()
-                ),
-                dec.name
-            )
-        null ->
-            throw IllegalArgumentException("\"var\" declarations are not supported yet")
-        else ->
-            throw IllegalArgumentException("Type of type " + dec.type.javaClass.name + " is not supported")
+fun mapDeclaration(dec: Declaration, name: String): List<EOBndExpr> {
+    return when (dec) {
+        is MethodDeclaration -> {
+            listOf(mapMethodDeclaration(dec))
+        }
+        is NormalClassDeclaration -> {
+            listOf(mapClass(dec as ClassDeclaration))
+        }
+        is VariableDeclaration -> {
+            mapVariableDeclaration(dec, name)
+        }
+        else -> {
+            listOf()
+        }
     }
+}
 
-fun mapVariableDeclaration(parseExprTasks: ParseExprTasks, dec: VariableDeclaration): EOExpr =
+fun mapVariableDeclaration(dec: VariableDeclaration, name: String): List<EOBndExpr> =
     when (dec.type) {
         is TypeName -> {
-            EOCopy(listOf(dec.name, "write").eoDot(), parseExprTasks.addTask(dec.initializer).eoDot())
+            listOf(
+                EOBndExpr(
+                    EOCopy(
+                        EODot("cage"),
+                    ),
+                    dec.name
+                )
+            )
         }
         is PrimitiveType -> {
-            EOCopy(
-                listOf(dec.name, "write").eoDot(),
-                parseExprTasks.addTask(dec.initializer).eoDot()
+            listOf(
+                EOBndExpr(
+                    EOCopy(
+                        listOf(decodePrimitiveType(dec.type as PrimitiveType).value, decodeInitializer(dec.initializer)).eoDot(),
+                        listOf(decodePrimitiveType(dec.type as PrimitiveType).value, "new").eoDot()
+                    ),
+                    dec.name
+                )
             )
         }
         null ->
             throw IllegalArgumentException("\"var\" declarations are not supported yet")
         else ->
             throw IllegalArgumentException("Type of type " + dec.type.javaClass.name + " is not supported")
+    } + if (dec.initializer != null) {
+        listOf(
+            EOBndExpr(
+                EOObject(
+                    listOf(),
+                    None,
+                    listOf(
+                        EOBndExpr(
+                            EOCopy(
+                                listOf(dec.name, "write").eoDot(),
+                                constructInitName(dec.initializer).eoDot()
+                            ),
+                            "@"
+                        )
+                    )
+                ),
+                name
+            )
+        ) +
+        mapInitializer(dec.initializer, constructInitName(dec.initializer))
+    } else {
+        listOf()
     }
 
 fun decodePrimitiveType(type: PrimitiveType): TokenCodes {

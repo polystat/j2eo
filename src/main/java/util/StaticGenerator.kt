@@ -1,5 +1,6 @@
 package util
 
+import arrow.core.flatten
 import arrow.core.flattenOption
 import eotree.EOBndExpr
 import lexer.TokenCode
@@ -15,7 +16,7 @@ fun generateStatic(clsDec: NormalClassDeclaration): List<EOBndExpr> {
                     dec.modifiers.modifiers.modifiers.find { code: TokenCode -> code == TokenCode.Static } != null
             } // TODO
             .map { mapClassDeclaration(it) }
-            .flattenOption()
+            .flatten()
     } catch (e: NullPointerException) {
         return ArrayList()
     }

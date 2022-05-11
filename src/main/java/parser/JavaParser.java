@@ -9078,6 +9078,18 @@ public class JavaParser extends Parser {
 		public AnnotationContext annotation(int i) {
 			return getRuleContext(AnnotationContext.class,i);
 		}
+		public TerminalNode terminal(int i) {
+			int j = -1;
+			for (ParseTree o : children) {
+				if ( o instanceof TerminalNode ) {
+					j++;
+					if ( j == i ) {
+						return (TerminalNode)o;
+					}
+				}
+			}
+			return null;
+		}
 		public List<TerminalNode> BITAND() { return getTokens(JavaParser.BITAND); }
 		public TerminalNode BITAND(int i) {
 			return getToken(JavaParser.BITAND, i);
