@@ -1,6 +1,7 @@
 package translator
 
 import arrow.core.None
+import arrow.core.flatten
 import eotree.*
 import lexer.TokenCode
 import tree.Expression.Binary
@@ -56,6 +57,8 @@ fun constructExprName(expr: Expression): String =
             "t${expr.hashCode()}"
         is Parenthesized ->
             "p${expr.hashCode()}"
+        is InstanceCreation ->
+            "inst${expr.hashCode()}"
         else ->
             throw IllegalArgumentException("Expression of type ${expr.javaClass.simpleName} is not supported")
     }
@@ -71,8 +74,8 @@ fun mapInstanceCreation(expr: InstanceCreation, name: String): List<EOBndExpr> {
                         EOBndExpr(
                             EOCopy(
                                 listOf(expr.ctorType.getTypeName(), "constructor").eoDot(),
-                                listOf(expr.ctorType.getTypeName(), "new").eoDot()
-                                // expr.args.arguments.map { mapExpression() }
+                                listOf(listOf(expr.ctorType.getTypeName(), "new").eoDot()) +
+                                expr.args.arguments.map { constructExprName(it).eoDot() }.toList()
                             ),
                             "@"
                         )
@@ -80,19 +83,7 @@ fun mapInstanceCreation(expr: InstanceCreation, name: String): List<EOBndExpr> {
                 ),
                 name
             )
-    )
-    //     listOf(),
-    //     None,
-    //     listOf(
-    //         EOBndExpr(
-    //             EOCopy(
-    //                 CompoundName(listOf(expr.ctorType.getTypeName(), "new")).eoDot(),
-    //                 expr.args.arguments.map { mapExpression(parseExprTasks, it) }
-    //             ),
-    //             "@"
-    //         )
-    //     )
-    // )
+    ) + expr.args.arguments.map { mapExpression(it, constructExprName(it)) }.toList().flatten()
 }
 
 fun mapParenthesized(expr: Parenthesized, name: String): List<EOBndExpr> =
