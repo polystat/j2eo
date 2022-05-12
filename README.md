@@ -109,6 +109,8 @@ bugs in our code. It is also much easier to work with abstraction layer than wit
 - Then, for each file, translator converts Java AST to EO AST.
 - Then, EO AST is printed out as a source code to output directory in the same directory structure.
 
+---
+
 ## Troubleshooting
 
 ### Java
@@ -119,3 +121,269 @@ Make sure you have these in sync (*mentioning* (not pointing to) the same `jdk` 
 - `echo $JAVA_HOME`
   - See how to set `$JAVA_HOME` ([link](https://stackoverflow.com/a/18972665))
   - If it still points to a wrong directory, see where you might have set it ([link](https://unix.stackexchange.com/a/154957)) and edit that place
+
+---
+
+## Principles of Java to EOLang translation
+### Implemented:
+- [Class declarations](#class-declarations)
+- [Method declarations](#method-declarations)
+- [Method invocations](#method-invocations)
+- [Local variable declarations](#local-variable-declarations)
+- [Field access (via dot-notation)](#field-access)
+- [Expressions](#expressions)
+- [Instance creation](#instance-creation)
+
+<br />
+
+#### Class declarations
+```java
+public class Main { }
+```
+translates to
+```java
++alias stdlib.lang.class__Object
+
+[] > class__Main
+  class__Object > super
+  super > @
+  [] > new
+    [] > this
+      class__Object.new > super
+      super > @
+    seq > @
+      this
+```
+<br />
+
+#### Method declarations
+```java
+public class Main {
+   public static void main(String[] args) { }
+}
+```
+translates to  
+```java
+...
+# main :: String -> void
+[this args] > main 
+  seq > @
+    0
+...
+```
+<br />
+
+#### Method invocations
+```java
+public class Main {
+   public static void main(String[] args) {
+      method(1.0f, new Object());
+   }
+   int method (float a, Object b) {
+      return a;
+   }
+}
+```
+translates to
+```java
++alias stdlib.primitives.prim__float
++alias prim__int
++alias stdlib.lang.class__Object
+
+[] > class__Main
+  class__Object > super
+  super > @
+  [] > new
+    [] > this
+      class__Object.new > super
+      super > @
+      # main :: String -> void
+      [this args] > main
+        seq > @
+          s206835546
+        [] > s206835546
+          method > @
+            l758013696
+            inst1473611564
+        [] > l758013696
+          prim__float.constructor_2 > @
+            prim__float.new
+            1.0
+        [] > inst1473611564
+          Object.constructor > @
+            Object.new
+      # method :: float -> Object -> int
+      [this a b] > method
+        seq > @
+          s558187323
+        [] > s558187323
+          s_r680576081 > @
+        [] > s_r680576081
+          a > @
+    seq > @
+      this
+```
+<br />
+
+#### Local variable declarations
+```java
+public class Main { 
+   public static void main(String[] args) {
+      int local = 5;
+    }
+}
+```
+translates to
+```java
+...
+# main :: String -> void
+[this args] > main
+  seq > @
+    d912011468
+  prim__int.constructor_1 > local
+    prim__int.new
+  [] > d912011468
+    local.write > @
+      i_s1048027629
+  [] > i_s1048027629
+    l599491651 > @
+  [] > l599491651
+    prim__int.constructor_2 > @
+      prim__int.new
+      5
+...
+```
+<br />
+
+#### Field access
+```java
+public class Main { 
+   public static void main(String[] args) {
+      new SomeClass().localVar.otherVar;
+   }
+}
+```
+translates to
+```java
+...
+# main :: String -> void
+[this args] > main
+  seq > @
+    s756185697
+  [] > s756185697
+    f_a1308109015.otherVar > @
+  [] > f_a1308109015
+    inst300031246.localVar > @
+  [] > inst300031246
+    SomeClass.constructor > @
+      SomeClass.new
+...
+```
+<br />
+
+#### Expressions
+```java
+public class Main { 
+   public static void main(String[] args) {
+      int a = 1;
+      int expr = 1 + 2.0f * 3 - (--a) / 3.0;
+   }
+}
+```
+translates to
+```java
+...
+# main :: String -> void
+[this args] > main
+  seq > @
+    d148912029
+    d604125138
+  prim__int.constructor_1 > a
+    prim__int.new
+  [] > d148912029
+    a.write > @
+      i_s521960438
+  [] > i_s521960438
+    l726950788 > @
+  [] > l726950788
+    prim__int.constructor_2 > @
+      prim__int.new
+      1
+  prim__int.constructor_1 > expr
+    prim__int.new
+  [] > d604125138
+    expr.write > @
+      i_s631659383
+  [] > i_s631659383
+    b720167805 > @
+  [] > b720167805
+    b1466073198.sub > @
+      b398690014
+  [] > b1466073198
+    l1526298704.add > @
+      b1593180232
+  [] > l1526298704
+    prim__int.constructor_2 > @
+      prim__int.new
+      1
+  [] > b1593180232
+    l492079624.mul > @
+      l380242442
+  [] > l492079624
+    prim__float.constructor_2 > @
+      prim__float.new
+      2.0
+  [] > l380242442
+    prim__int.constructor_2 > @
+      prim__int.new
+      3
+  [] > b398690014
+    p1077199500.div > @
+      l240166646
+  [] > p1077199500
+    s_r351028485 > @
+  [] > s_r351028485
+    a > @
+  [] > l240166646
+    prim__float.constructor_2 > @
+      prim__float.new
+      3.0
+...
+```
+<br />
+
+#### Instance creation
+```java
+public class Main { 
+   public static void main(String[] args) {
+      new SomeClass(param1, "string", new Object());
+   }
+}
+```
+translates to
+```java
+...
+# main :: String -> void
+[this args] > main
+  seq > @
+    s599491651
+  [] > s599491651
+    class__SomeClass.constructor > @
+      class__SomeClass.new
+      s_r1161667116
+      l1898220577
+      inst1143371233
+  [] > s_r1161667116
+    param1 > @
+  [] > l1898220577
+    class__String.constructor_2 > @
+      class__String.new
+      "string"
+  [] > inst1143371233
+    class__Object.constructor > @
+      class__Object.new
+...
+```
+<br />
+
+
