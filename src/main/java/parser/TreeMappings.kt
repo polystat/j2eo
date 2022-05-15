@@ -305,11 +305,11 @@ fun ArgumentsContext.toArgList() : ArgumentList {
 
 fun MethodCallContext.toExpression(expr: Expression?) : Expression {
     val exprLst = if (expressionList() == null)
-        ArrayList(listOf())
+        listOf()
     else
-        ArrayList(expressionList().expression().stream().map { it.toExpression() }.toList())
-    val argList = ArgumentList(exprLst.removeFirstOrNull())
-    exprLst.forEach { argList.add(it) }
+        expressionList().expression().map { it.toExpression() }.toList()
+    val argList = ArgumentList(exprLst.firstOrNull())
+    exprLst.drop(1).forEach { argList.add(it) }
     argList.arguments.removeIf { it == null }
     return MethodInvocation(
             expr,
