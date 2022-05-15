@@ -1,23 +1,26 @@
 package util
 
 import arrow.core.flatten
-import arrow.core.flattenOption
 import eotree.EOBndExpr
 import lexer.TokenCode
 import translator.mapClassDeclaration
 import tree.Declaration.Declaration
 import tree.Declaration.NormalClassDeclaration
 
+/**
+ * Maps all static class members to EO bindings, skipping non-static ones.
+ */
 fun generateStatic(clsDec: NormalClassDeclaration): List<EOBndExpr> {
-    try {
-        return clsDec.body.declarations
+    return try {
+        clsDec.body.declarations
             .filter { dec: Declaration ->
                 dec.modifiers != null &&
-                    dec.modifiers.modifiers.modifiers.find { code: TokenCode -> code == TokenCode.Static } != null
-            } // TODO
+                        dec.modifiers.modifiers.modifiers.find { code: TokenCode -> code == TokenCode.Static } != null
+            }
             .map { mapClassDeclaration(it) }
             .flatten()
     } catch (e: NullPointerException) {
-        return ArrayList()
+        logger.warn { "Caught NullPointerException while mapping static class members in generateStatic" }
+        ArrayList()
     }
 }

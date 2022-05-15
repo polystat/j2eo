@@ -1,10 +1,8 @@
 package translator
 
 import arrow.core.None
-import arrow.core.Option
 import eotree.*
 import tree.Statement.*
-import util.ParseExprTasks
 import java.util.Random
 
 // fun mapBlockStatement(stmt: BlockStatement): EOExpr =
@@ -31,10 +29,10 @@ fun mapStatement(statement: Statement, name: String): List<EOBndExpr> =
         // is Switch -> mapSwitchStatement(parseExprTasks, statement)
         else ->
             listOf() // FIXME
-            // FIXME: throw IllegalArgumentException("Statement of type ${statement.javaClass.simpleName} is not supported")
+        // FIXME: throw IllegalArgumentException("Statement of type ${statement.javaClass.simpleName} is not supported")
     }
 
-fun mapEmptyStmt(name: String) : EOBndExpr =
+fun mapEmptyStmt(name: String): EOBndExpr =
     EOBndExpr(
         EOObject(
             listOf(),
@@ -70,6 +68,13 @@ fun mapStatementExpression(stmtExpr: StatementExpression, name: String): List<EO
     return mapExpression(stmtExpr.expression, name)
 }
 
+/**
+ * Outputs structure of form:
+ *
+ *     returnExpr > @
+ *
+ * returnExpr is mapped into separate object.
+ */
 fun mapReturnStatement(rn: Return, name: String): List<EOBndExpr> {
     return if (rn.expression != null) {
         listOf(
@@ -94,6 +99,15 @@ fun mapReturnStatement(rn: Return, name: String): List<EOBndExpr> {
     }
 }
 
+/**
+ * Outputs structure of form:
+ *
+ *     conditionExpr.if > @
+ *       thenPart
+ *       elsePart
+ *
+ * conditionExpr, thenPart and elsePart are mapped into separate objects.
+ */
 fun mapIfThenElseStatement(rn: IfThenElse, name: String): List<EOBndExpr> {
     val emptyName = "empty${Random().nextInt(Int.MAX_VALUE)}"
 
@@ -121,14 +135,25 @@ fun mapIfThenElseStatement(rn: IfThenElse, name: String): List<EOBndExpr> {
         )
     ) + mapExpression(rn.condition, constructExprName(rn.condition)) +
             mapStatement(rn.thenPart, constructStmtName(rn.thenPart)) +
-        if (rn.elsePart != null) {
-            mapStatement(rn.elsePart, constructStmtName(rn.elsePart))
-        } else {
-            listOf(mapEmptyStmt(emptyName))
-        }
+            if (rn.elsePart != null) {
+                mapStatement(rn.elsePart, constructStmtName(rn.elsePart))
+            } else {
+                listOf(mapEmptyStmt(emptyName))
+            }
 }
 
-fun mapWhileStatement(rn: While, name: String): List<EOBndExpr> {
+/**
+ * Outputs structure of form:
+ *
+ *     conditionExpr.while > @
+ *       [while_i]
+ *         statement
+ *
+ * conditionExpr and statement are mapped into separate objects.
+ *
+ * TODO: check if we can use iterator inside of statement.
+ */
+fun mapWhileStatement(wh: While, name: String): List<EOBndExpr> {
     val emptyName = "empty${Random().nextInt(Int.MAX_VALUE)}"
 
     return listOf(
@@ -139,14 +164,14 @@ fun mapWhileStatement(rn: While, name: String): List<EOBndExpr> {
                 listOf(
                     EOBndExpr(
                         EOCopy(
-                            listOf(constructExprName(rn.condition), "while").eoDot(),
+                            listOf(constructExprName(wh.condition), "while").eoDot(),
                             EOObject(
                                 listOf("while_i"),
                                 None,
                                 listOf(
                                     EOBndExpr(
-                                        if (rn.statement != null) {
-                                            constructStmtName(rn.statement).eoDot()
+                                        if (wh.statement != null) {
+                                            constructStmtName(wh.statement).eoDot()
                                         } else {
                                             emptyName.eoDot()
                                         },
@@ -161,15 +186,15 @@ fun mapWhileStatement(rn: While, name: String): List<EOBndExpr> {
             ),
             name
         )
-    ) + mapExpression(rn.condition, constructExprName(rn.condition)) +
-    if (rn.statement != null) {
-        mapStatement(rn.statement, constructStmtName(rn.statement))
-    } else {
-        listOf(mapEmptyStmt(emptyName))
-    }
+    ) + mapExpression(wh.condition, constructExprName(wh.condition)) +
+            if (wh.statement != null) {
+                mapStatement(wh.statement, constructStmtName(wh.statement))
+            } else {
+                listOf(mapEmptyStmt(emptyName))
+            }
 }
 
-fun mapDoStatement(rn: Do, name: String): List<EOBndExpr>  {
+fun mapDoStatement(rn: Do, name: String): List<EOBndExpr> {
     val emptyName = "empty${Random().nextInt()}"
 
     return listOf(
@@ -203,11 +228,11 @@ fun mapDoStatement(rn: Do, name: String): List<EOBndExpr>  {
             name
         )
     ) + mapExpression(rn.condition, constructExprName(rn.condition)) +
-    if (rn.statement != null) {
-        mapStatement(rn.statement,constructStmtName(rn.statement))
-    } else {
-        listOf(mapEmptyStmt(emptyName))
-    }
+            if (rn.statement != null) {
+                mapStatement(rn.statement, constructStmtName(rn.statement))
+            } else {
+                listOf(mapEmptyStmt(emptyName))
+            }
 }
 
 // fun mapIfThenElse(statement: IfThenElse): EOExpr =

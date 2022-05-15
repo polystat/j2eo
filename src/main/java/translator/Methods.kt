@@ -4,17 +4,9 @@ import arrow.core.*
 import eotree.EOBndExpr
 import eotree.EOCopy
 import eotree.EOObject
-import eotree.eoDot
 import lexer.TokenCode
 import tree.Declaration.MethodDeclaration
 import tree.Declaration.ParameterDeclaration
-import tree.Declaration.VariableDeclaration
-import tree.Entity
-import tree.Expression.Expression
-import tree.Initializer
-import tree.Statement.BlockStatements
-import util.ParseExprTasks
-import kotlin.collections.flatten
 
 // fun MethodDeclaration.getLocalVariables(): List<Declaration> =
 //    // TODO: add support for nested block variables as well
@@ -26,7 +18,6 @@ fun mapMethodDeclaration(dec: MethodDeclaration): EOBndExpr {
     val isStatic = dec.modifiers != null &&
             dec.modifiers.modifiers.modifiers.find { it == TokenCode.Static } != null
     val additionalParameters = if (!isStatic) listOf("this") else ArrayList()
-    val parseExprTasks = ParseExprTasks()
 
     val obj = EOObject(
         // Non-vararg parameters

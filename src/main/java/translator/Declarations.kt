@@ -1,8 +1,6 @@
 package translator
 
 import arrow.core.None
-import arrow.core.Option
-import arrow.core.some
 import eotree.*
 import lexer.TokenCode
 import tree.Declaration.ClassDeclaration
@@ -13,12 +11,14 @@ import tree.Declaration.VariableDeclaration
 import tree.Initializer
 import tree.Type.PrimitiveType
 import tree.Type.TypeName
-import util.ParseExprTasks
 import util.TokenCodes
+import util.logger
 
+/**
+ * Maps a declaration that resides inside of class.
+ * The name may be confusing, but this DOES NOT map the class declaration itself.
+ */
 fun mapClassDeclaration(dec: Declaration): List<EOBndExpr> {
-    // TODO: get rid of option and implement all cases
-
     return when (dec) {
         is MethodDeclaration -> {
             listOf(mapMethodDeclaration(dec))
@@ -27,9 +27,11 @@ fun mapClassDeclaration(dec: Declaration): List<EOBndExpr> {
             listOf(mapClass(dec as ClassDeclaration))
         }
         is VariableDeclaration -> {
+            // FIXME: why do we have static name "n" here?
             mapVariableDeclaration(dec, "n")
         }
         else -> {
+            logger.warn { "Skipping unsupported class declaration: ${dec.javaClass.name}" }
             listOf()
         }
     }
@@ -47,6 +49,7 @@ fun mapDeclaration(dec: Declaration, name: String): List<EOBndExpr> {
             mapVariableDeclaration(dec, name)
         }
         else -> {
+            logger.warn { "Skipping unsupported declaration: ${dec.javaClass.name}" }
             listOf()
         }
     }

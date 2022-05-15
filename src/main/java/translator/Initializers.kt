@@ -4,12 +4,10 @@ import arrow.core.None
 import eotree.EOBndExpr
 import eotree.EOCopy
 import eotree.EOObject
-import eotree.eoDot
 import tree.CompoundName
 import tree.Expression.SimpleReference
 import tree.Initializer
 import tree.InitializerSimple
-import util.ParseExprTasks
 
 fun mapInitializer(initializer: Initializer, name: String): List<EOBndExpr> {
     return when (initializer) {

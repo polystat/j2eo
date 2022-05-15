@@ -64,6 +64,15 @@ fun constructExprName(expr: Expression): String =
     }
 
 
+/**
+ * Maps Java instance creation using "new" operator to EO binding.
+ * The output has the following structure:
+ *
+ *             [] > name
+ *               class.constructor_1 > @
+ *                 class.new
+ *                 "value"
+ */
 fun mapInstanceCreation(expr: InstanceCreation, name: String): List<EOBndExpr> {
     return listOf(
             EOBndExpr(
