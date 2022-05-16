@@ -33,6 +33,8 @@ fun mapExpression(expr: Expression, name: String): List<EOBndExpr> =
             mapParenthesized(expr, name)
         is InstanceCreation ->
             mapInstanceCreation(expr, name)
+        is ArrayCreation ->
+            listOf(EOBndExpr(EOCopy("array"), "temp_placeholder"))
         else ->
             throw IllegalArgumentException("Expression of type ${expr.javaClass.simpleName} is not supported")
     }
@@ -59,6 +61,8 @@ fun constructExprName(expr: Expression): String =
             "p${expr.hashCode()}"
         is InstanceCreation ->
             "inst${expr.hashCode()}"
+        is ArrayCreation ->
+            "arr${expr.hashCode()}"
         else ->
             throw IllegalArgumentException("Expression of type ${expr.javaClass.simpleName} is not supported")
     }

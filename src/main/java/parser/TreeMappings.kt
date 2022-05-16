@@ -79,7 +79,13 @@ fun MethodDeclarationContext.toDeclaration(): Declaration =
     )
 
 fun MethodBodyContext.toBlock(): Block =
-    block()?.toBlock() ?: Block(ArrayList(), BlockStatements(null))
+    if (block() == null) {
+        val blockStmnts = BlockStatements(null)
+        blockStmnts.blockStatements.removeIf { it == null }
+        Block(ArrayList(), blockStmnts)
+    } else {
+        block().toBlock()
+    }
 
 fun FormalParametersContext.toParameterDeclarations(): ParameterDeclarations? =
     formalParameterList()?.toParameterDeclarations()
@@ -216,6 +222,7 @@ fun org.antlr.v4.runtime.Token.toToken() : Token =
         QUESTION -> Token(TokenCode.Question)
         INC -> Token(TokenCode.PlusPlus)
         DEC -> Token(TokenCode.MinusMinus)
+        VAR -> Token(TokenCode.Var)
         else -> throw Exception("unsupported token: $text ($type)")
     }
 
@@ -278,7 +285,8 @@ fun ExpressionContext.toExpression() : Expression {
 }
 
 fun CreatorContext.toExpression() : Expression {
-    return InstanceCreation(
+    if (classCreatorRest() != null)
+        return InstanceCreation(
             null, // No type arguments for now
             TypeName(
                     CompoundName(createdName().identifier().map { it.IDENTIFIER().text }.toList()),
@@ -287,6 +295,12 @@ fun CreatorContext.toExpression() : Expression {
             classCreatorRest().arguments()?.toArgList(),
             classCreatorRest().classBody()?.toDeclarations()
     )
+    if (arrayCreatorRest() != null)
+        return ArrayCreation(
+                null,
+                arrayCreatorRest().arrayInitializer()?.toInitializerArray()
+        )
+    return SimpleReference(CompoundName("expression_placeholder")) /* FIXME */
 }
 
 fun ArgumentsContext.toArgList() : ArgumentList {
@@ -321,7 +335,7 @@ fun MethodCallContext.toExpression(expr: Expression?) : Expression {
 }
 
 fun IdentifierContext.toExpression() : Expression =
-        SimpleReference(CompoundName(IDENTIFIER().text))
+        SimpleReference(CompoundName(IDENTIFIER()?.text ?: "var")) // A specific case
 
 fun PrimaryContext.toParenthesized(): Parenthesized? =
     if (LPAREN() != null && RPAREN() != null) {

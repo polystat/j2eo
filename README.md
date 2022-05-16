@@ -135,7 +135,7 @@ Java 16 language specification: [see .pdf file](https://docs.oracle.com/javase/s
 </summary>
 
 Table of content:
-- [Primitive Types and Values 4.2] - wip
+- [Primitive Types and Values 4.2](#primitive-types-and-values-42) - wip
 - [Reference Types and Values 4.3] - wip
 - [Type Variables 4.4] - wip
 - [Parametrized types 4.5] - wip
@@ -144,6 +144,56 @@ Table of content:
 - [Raw Types 4.8] - wip
 - [Intersection Types 4.9] - wip
 - [Subtyping 4.10] - wip
+
+### Primitive Types and Values 4.2
+```java
+public class IncrementOperator {
+   public static void main(String[] args) {
+      int a = 5;
+      System.out.println(a++);
+      System.out.println(++a);
+      System.out.println("passed");
+   }
+}
+```
+maps to
+```java
+# main :: String -> void
+[this args] > main
+  seq > @
+    d902830499
+    s2040467681
+    s341796579
+    s825936265
+  prim__int.constructor_1 > a
+    prim__int.new
+  [] > d902830499
+    a.write > @
+      i_s1754662105
+  [] > i_s1754662105
+    l403147759 > @
+  [] > l403147759
+    prim__int.constructor_2 > @
+      prim__int.new
+      5
+  [] > s2040467681
+    class__System.out.println > @
+      s_r1278677872
+  [] > s_r1278677872
+    a > @
+  [] > s341796579
+    class__System.out.println > @
+      s_r807657332
+  [] > s_r807657332
+    a > @
+  [] > s825936265
+    class__System.out.println > @
+      l1164107853
+  [] > l1164107853
+    class__String.constructor_2 > @
+      class__String.new
+      "passed"
+```
 </details>
 
 <details>
@@ -350,9 +400,213 @@ translates to
 </summary>
 
 Table of content:
+- [Evaluation order 15.7](#evaluation-order-157)
+- [Primary Expressions 15.8](#primary-expressions-158)
 - [Instance Creation 15.9](#instance-creation-159)
+- [Arrays 15.10](#arrays-1510)
 - [Field Access 15.11](#field-access-1511)
 - [Method invocations 15.12](#method-invocations-1512)
+
+### Evaluation Order 15.7
+```java
+public class SimpleLeftHandOperandIsEvaluatedFirst {
+    public static void main(String[] args) {
+        int i = 2;
+        int j = (i=3) * i;
+        System.out.println(j);
+        System.out.println("passed");
+    }
+}
+```
+maps to
+```java
+...
+# main :: String -> void
+[this args] > main
+  seq > @
+    d823723302
+    d1051876890
+    s25536233
+    s164974746
+  prim__int.constructor_1 > i
+    prim__int.new
+  [] > d823723302
+    i.write > @
+      i_s1714078840
+  [] > i_s1714078840
+    l1732502545 > @
+  [] > l1732502545
+    prim__int.constructor_2 > @
+      prim__int.new
+      2
+  prim__int.constructor_1 > j
+    prim__int.new
+  [] > d1051876890
+    j.write > @
+      i_s1199262943
+  [] > i_s1199262943
+    b2009221452 > @
+  [] > b2009221452
+    p257513673.mul > @
+      s_r590845366
+  [] > p257513673
+    b1052195003 > @
+  [] > b1052195003
+    s_r1541049864.write > @
+      l511707818
+  [] > s_r1541049864
+    i > @
+  [] > l511707818
+    prim__int.constructor_2 > @
+      prim__int.new
+      3
+  [] > s_r590845366
+    i > @
+  [] > s25536233
+    class__System.out.println > @
+      s_r116405378
+  [] > s_r116405378
+    j > @
+  [] > s164974746
+    class__System.out.println > @
+      l396283472
+  [] > l396283472
+    class__String.constructor_2 > @
+      class__String.new
+      "passed"
+...
+```
+
+### Primary Expressions 15.8
+```java
+public class BooleanLiteral {
+	public static void main(String[] args) {
+		boolean a = true;
+		boolean b = false;
+		System.out.println("passed");
+	}
+}
+```
+maps to
+```java
+...
+# main :: String -> void
+[this args] > main
+  seq > @
+    d1819063424
+    d690686166
+    s1165303897
+  prim__boolean.constructor_1 > a
+    prim__boolean.new
+  [] > d1819063424
+    a.write > @
+      i_s1011279482
+  [] > i_s1011279482
+    l208866101 > @
+  [] > l208866101
+    prim__boolean.constructor_2 > @
+      prim__boolean.new
+      TRUE
+  prim__boolean.constructor_1 > b
+    prim__boolean.new
+  [] > d690686166
+    b.write > @
+      i_s576020159
+  [] > i_s576020159
+    l921420643 > @
+  [] > l921420643
+    prim__boolean.constructor_2 > @
+      prim__boolean.new
+      FALSE
+  [] > s1165303897
+    class__System.out.println > @
+      l887750041
+  [] > l887750041
+    class__String.constructor_2 > @
+      class__String.new
+      "passed"
+...
+```
+<br />
+
+```java
+public class ComplexParenthExpression {
+	public static void main(String[] args) {
+		int a = (10 + ((((5 * (2 + (2)))))));
+		System.out.println(a);
+		System.out.println("passed");
+	}
+}
+```
+maps to
+```java
+...
+# main :: String -> void
+[this args] > main
+  seq > @
+    d1365008457
+    s678433396
+    s928294079
+  prim__int.constructor_1 > a
+    prim__int.new
+  [] > d1365008457
+    a.write > @
+      i_s1671179293
+  [] > i_s1671179293
+    p1609124502 > @
+  [] > p1609124502
+    b1144068272 > @
+  [] > b1144068272
+    l1985836631.add > @
+      p1948471365
+  [] > l1985836631
+    prim__int.constructor_2 > @
+      prim__int.new
+      10
+  [] > p1948471365
+    p1636506029 > @
+  [] > p1636506029
+    p758348212 > @
+  [] > p758348212
+    p817978763 > @
+  [] > p817978763
+    b1578009262 > @
+  [] > b1578009262
+    l1735507635.mul > @
+      p1362728240
+  [] > l1735507635
+    prim__int.constructor_2 > @
+      prim__int.new
+      5
+  [] > p1362728240
+    b1798219673 > @
+  [] > b1798219673
+    l1092572064.add > @
+      p728885526
+  [] > l1092572064
+    prim__int.constructor_2 > @
+      prim__int.new
+      2
+  [] > p728885526
+    l922511709 > @
+  [] > l922511709
+    prim__int.constructor_2 > @
+      prim__int.new
+      2
+  [] > s678433396
+    class__System.out.println > @
+      s_r331994761
+  [] > s_r331994761
+    a > @
+  [] > s928294079
+    class__System.out.println > @
+      l1647809929
+  [] > l1647809929
+    class__String.constructor_2 > @
+      class__String.new
+      "passed"
+...
+```
 
 ### Instance Creation 15.9
 ```java
@@ -385,6 +639,42 @@ translates to
   [] > inst1143371233
     class__Object.constructor > @
       class__Object.new
+...
+```
+<br />
+
+### Arrays 15.10
+```java
+public class SimpleIntegerArray {
+	public static void main(String[] args) {
+		int[] array = new int[5];
+		System.out.println("passed");
+	}
+}
+```
+maps to
+```java
+...
+# main :: String -> void
+[this args] > main
+  seq > @
+    d775081157
+    s693958407
+  prim__int.constructor_1 > array
+    prim__int.new
+  [] > d775081157
+    array.write > @
+      i_s1955021259
+  [] > i_s1955021259
+    arr1044705957 > @
+  array > temp_placeholder
+  [] > s693958407
+    class__System.out.println > @
+      l288379405
+  [] > l288379405
+    class__String.constructor_2 > @
+      class__String.new
+      "passed"
 ...
 ```
 <br />
