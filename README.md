@@ -124,19 +124,85 @@ Make sure you have these in sync (*mentioning* (not pointing to) the same `jdk` 
 
 ---
 
-## Principles of Java to EOLang translation
-### Implemented:
-- [Class declarations](#class-declarations)
-- [Method declarations](#method-declarations)
-- [Method invocations](#method-invocations)
-- [Local variable declarations](#local-variable-declarations)
-- [Field access (via dot-notation)](#field-access)
-- [Expressions](#expressions)
-- [Instance creation](#instance-creation)
+## Examples of Java to EOLang translation
 
-<br />
+We use Java language specification document as a foundation for Java feature hierarchy.  
+Java 16 language specification: [see .pdf file](https://docs.oracle.com/javase/specs/jls/se16/jls16.pdf)
 
-#### Class declarations
+<details>
+<summary>
+<b>--- Ch. 4 - Types, Values, and Variables</b>
+</summary>
+
+Table of content:
+- [Primitive Types and Values 4.2] - wip
+- [Reference Types and Values 4.3] - wip
+- [Type Variables 4.4] - wip
+- [Parametrized types 4.5] - wip
+- [Type erasure 4.6] - wip
+- [Reifiable types 4.7] - wip
+- [Raw Types 4.8] - wip
+- [Intersection Types 4.9] - wip
+- [Subtyping 4.10] - wip
+</details>
+
+<details>
+<summary>
+<b>--- Ch. 5 - Conversions and Contexts</b>
+</summary>
+
+Table of content:
+- [Assignment Contexts 5.2] - wip
+- [Invocation Contexts 5.3] - wip
+- [String Contexts 5.4] - wip
+- [Casting Contexts 5.5] - wip
+- [Numeric Contexts 5.6] - wip
+</details>
+
+<details>
+<summary>
+<b>--- Ch. 6 - Names</b>
+</summary>
+
+Table of content:
+- [Declarations 6.1] - wip
+- [Names and Identifiers 6.2] - wip
+- [Scope of a Declaration 6.3] - wip
+- [Shadowing and Obscuring 6.4] - wip
+</details>
+
+<details>
+<summary>
+<b>--- Ch. 7 - Packages and Modules [WIP]</b>
+</summary>
+
+Table of content:
+- [Package Members 7.1] - wip
+- [Compilation Units 7.3] - wip
+- [Package Declarations 7.4] - wip
+- [Import Declarations 7.5] - wip
+- [Top Level Class and Interface Declarations 7.6] - wip
+- [Module Declarations 7.7] - wip
+</details>
+
+<details>
+<summary>
+<b>--- Ch. 8 - Classes</b>
+</summary>
+
+Table of contents:  
+- [Class declarations 8.1](#class-declarations-81)
+- [Class members 8.2] - wip
+- [Field declarations 8.3] - wip
+- [Method declarations 8.4](#method-declarations-84)
+- [Member class and interface declaration 8.5] - wip
+- [Instance initializers 8.6] - wip
+- [Static initializers 8.7] - wip
+- [Constructor declarations 8.8] - wip
+- [Enum classes 8.9] - wip
+- [Record classes 8.10] - wip
+
+### Class declarations 8.1
 ```java
 public class Main { }
 ```
@@ -156,13 +222,16 @@ translates to
 ```
 <br />
 
-#### Method declarations
+### Class members 8.2
+### Field declarations 8.3
+
+### Method declarations 8.4
 ```java
 public class Main {
    public static void main(String[] args) { }
 }
 ```
-translates to  
+translates to
 ```java
 ...
 # main :: String -> void
@@ -173,7 +242,180 @@ translates to
 ```
 <br />
 
-#### Method invocations
+### Member class and interface declarations 8.5
+### Instance initializers 8.6
+### Static initializers 8.7
+### Constructor declarations 8.8
+### Enum classes 8.9
+### Record classes 8.10
+
+</details>
+
+<details>
+<summary>
+<b>--- Ch. 9 - Interfaces</b>
+</summary>
+
+Table of content:
+- [Interface Declarations 9.1] - wip
+- [Interface Members 9.2] - wip
+- [Field (Constant) Declarations 9.3] - wip
+- [Method Declarations 9.4] - wip
+- [Member Class and Interface Declarations 9.5] - wip
+- [Annotation Interfaces 9.6] - wip
+- [Annotations 9.7] - wip
+- [Functional Interfaces 9.8] - wip
+- [Function Types 9.9] - wip
+</details>
+
+<details>
+<summary>
+<b>--- Ch. 10 - Arrays</b>
+</summary>
+
+Table of content:
+- [Array Types 10.1] - wip
+- [Array Variables 10.2] - wip
+- [Array Creation 10.3] - wip
+- [Array Access 10.4] - wip
+- [Array Initializers 10.6] - wip
+- [Array Members 10.7] - wip
+- [Class Objects for Arrays 10.8] - wip
+</details>
+
+<details>
+<summary>
+<b>--- Ch. 11 - Exceptions [WIP]</b>
+</summary>
+</details>
+
+<details>
+<summary>
+<b>--- Ch. 14 - Block Statements, and Patterns</b>
+</summary>
+
+Table of content:
+- [Blocks 14.2] - wip
+- [Local Class and Interface Declarations 14.3] - wip
+- [Local Variable Declaration 14.4](#local-variable-declaration-144)
+- [Statements 14.5] - wip
+- [The Empty Statement 14.6] - wip
+- [Labeled Statements 14.7] - wip
+- [Expression Statements 14.8] - wip
+- [The IF Statement 14.9] - wip
+- [The assert Statement 14.10] - wip
+- [The switch Statement 14.11] - wip
+- [The while Statement 14.12] - wip
+- [The do Statement 14.13] - wip
+- [The for Statement 14.14] - wip
+- [The break Statement 14.15] - wip
+- [The continue Statement 14.16] - wip
+- [The return Statement 14.17] - wip
+
+### Local Variable Declaration 14.4
+```java
+public class Main {
+   public static void main(String[] args) {
+      int local = 5;
+   }
+}
+```
+translates to
+```java
+...
+# main :: String -> void
+[this args] > main
+  seq > @
+    d912011468
+  prim__int.constructor_1 > local
+    prim__int.new
+  [] > d912011468
+    local.write > @
+      i_s1048027629
+  [] > i_s1048027629
+    l599491651 > @
+  [] > l599491651
+    prim__int.constructor_2 > @
+      prim__int.new
+      5
+...
+```
+<br />
+
+</details>
+
+<details>
+<summary>
+<b>--- Ch. 15 - Expressions</b>
+</summary>
+
+Table of content:
+- [Instance Creation 15.9](#instance-creation-159)
+- [Field Access 15.11](#field-access-1511)
+- [Method invocations 15.12](#method-invocations-1512)
+
+### Instance Creation 15.9
+```java
+public class Main {
+   public static void main(String[] args) {
+      new SomeClass(param1, "string", new Object());
+   }
+}
+class SomeClass { ... }
+```
+translates to
+```java
+...
+# main :: String -> void
+[this args] > main
+  seq > @
+    s599491651
+  [] > s599491651
+    class__SomeClass.constructor > @
+      class__SomeClass.new
+      s_r1161667116
+      l1898220577
+      inst1143371233
+  [] > s_r1161667116
+    param1 > @
+  [] > l1898220577
+    class__String.constructor_2 > @
+      class__String.new
+      "string"
+  [] > inst1143371233
+    class__Object.constructor > @
+      class__Object.new
+...
+```
+<br />
+
+### Field Access 15.11
+```java
+public class Main {
+   public static void main(String[] args) {
+      new SomeClass().localVar.otherVar;
+   }
+}
+```
+translates to
+```java
+...
+# main :: String -> void
+[this args] > main
+  seq > @
+    s756185697
+  [] > s756185697
+    f_a1308109015.otherVar > @
+  [] > f_a1308109015
+    inst300031246.localVar > @
+  [] > inst300031246
+    SomeClass.constructor > @
+      SomeClass.new
+...
+```
+<br />
+
+### Method invocations 15.12
 ```java
 public class Main {
    public static void main(String[] args) {
@@ -225,165 +467,22 @@ translates to
 ```
 <br />
 
-#### Local variable declarations
-```java
-public class Main { 
-   public static void main(String[] args) {
-      int local = 5;
-    }
-}
-```
-translates to
-```java
-...
-# main :: String -> void
-[this args] > main
-  seq > @
-    d912011468
-  prim__int.constructor_1 > local
-    prim__int.new
-  [] > d912011468
-    local.write > @
-      i_s1048027629
-  [] > i_s1048027629
-    l599491651 > @
-  [] > l599491651
-    prim__int.constructor_2 > @
-      prim__int.new
-      5
-...
-```
-<br />
+</details>
 
-#### Field access
-```java
-public class Main { 
-   public static void main(String[] args) {
-      new SomeClass().localVar.otherVar;
-   }
-}
-```
-translates to
-```java
-...
-# main :: String -> void
-[this args] > main
-  seq > @
-    s756185697
-  [] > s756185697
-    f_a1308109015.otherVar > @
-  [] > f_a1308109015
-    inst300031246.localVar > @
-  [] > inst300031246
-    SomeClass.constructor > @
-      SomeClass.new
-...
-```
-<br />
+<details>
+<summary>
+<b>--- Ch. 16 - Definite Assignments [WIP]</b>
+</summary>
+</details>
 
-#### Expressions
-```java
-public class Main { 
-   public static void main(String[] args) {
-      int a = 1;
-      int expr = 1 + 2.0f * 3 - (--a) / 3.0;
-   }
-}
-```
-translates to
-```java
-...
-# main :: String -> void
-[this args] > main
-  seq > @
-    d148912029
-    d604125138
-  prim__int.constructor_1 > a
-    prim__int.new
-  [] > d148912029
-    a.write > @
-      i_s521960438
-  [] > i_s521960438
-    l726950788 > @
-  [] > l726950788
-    prim__int.constructor_2 > @
-      prim__int.new
-      1
-  prim__int.constructor_1 > expr
-    prim__int.new
-  [] > d604125138
-    expr.write > @
-      i_s631659383
-  [] > i_s631659383
-    b720167805 > @
-  [] > b720167805
-    b1466073198.sub > @
-      b398690014
-  [] > b1466073198
-    l1526298704.add > @
-      b1593180232
-  [] > l1526298704
-    prim__int.constructor_2 > @
-      prim__int.new
-      1
-  [] > b1593180232
-    l492079624.mul > @
-      l380242442
-  [] > l492079624
-    prim__float.constructor_2 > @
-      prim__float.new
-      2.0
-  [] > l380242442
-    prim__int.constructor_2 > @
-      prim__int.new
-      3
-  [] > b398690014
-    p1077199500.div > @
-      l240166646
-  [] > p1077199500
-    s_r351028485 > @
-  [] > s_r351028485
-    a > @
-  [] > l240166646
-    prim__float.constructor_2 > @
-      prim__float.new
-      3.0
-...
-```
-<br />
+<details>
+<summary>
+<b>--- Ch. 17 - Threads and Locks [EO support?]</b>
+</summary>
+</details>
 
-#### Instance creation
-```java
-public class Main { 
-   public static void main(String[] args) {
-      new SomeClass(param1, "string", new Object());
-   }
-}
-```
-translates to
-```java
-...
-# main :: String -> void
-[this args] > main
-  seq > @
-    s599491651
-  [] > s599491651
-    class__SomeClass.constructor > @
-      class__SomeClass.new
-      s_r1161667116
-      l1898220577
-      inst1143371233
-  [] > s_r1161667116
-    param1 > @
-  [] > l1898220577
-    class__String.constructor_2 > @
-      class__String.new
-      "string"
-  [] > inst1143371233
-    class__Object.constructor > @
-      class__Object.new
-...
-```
-<br />
-
-
+<details>
+<summary>
+<b>--- Ch. 18 - Type inference [WIP]</b>
+</summary>
+</details>
