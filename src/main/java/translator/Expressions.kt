@@ -33,6 +33,10 @@ fun mapExpression(expr: Expression, name: String): List<EOBndExpr> =
             mapParenthesized(expr, name)
         is InstanceCreation ->
             mapInstanceCreation(expr, name)
+        is ArrayCreation ->
+            mapArrayCreation(expr, name)
+        is ArrayAccess ->
+            mapArrayAccess(expr, name)
         else ->
             throw IllegalArgumentException("Expression of type ${expr.javaClass.simpleName} is not supported")
     }
@@ -59,10 +63,55 @@ fun constructExprName(expr: Expression): String =
             "p${expr.hashCode()}"
         is InstanceCreation ->
             "inst${expr.hashCode()}"
+        is ArrayCreation ->
+            "a_c${expr.hashCode()}"
+        is ArrayAccess ->
+            "a_a${expr.hashCode()}"
         else ->
             throw IllegalArgumentException("Expression of type ${expr.javaClass.simpleName} is not supported")
     }
 
+fun mapArrayAccess(access: ArrayAccess, name: String): List<EOBndExpr> {
+    return listOf(
+        EOBndExpr(
+            EOObject(
+                listOf(),
+                None,
+                listOf(
+                    EOBndExpr(
+                        EOCopy(
+                            listOf(constructExprName(access.expression), "get").eoDot(),
+                            listOf(constructExprName(access.size), "v").eoDot()
+                        ),
+                        "@"
+                    )
+                )
+            ),
+            name
+        )
+    ) + mapExpression(access.expression, constructExprName(access.expression)) +
+            mapExpression(access.size, constructExprName(access.size))
+}
+
+fun mapArrayCreation(arrayCreation: ArrayCreation, name: String): List<EOBndExpr> {
+    return listOf(
+        EOBndExpr(
+            EOObject(
+                listOf(),
+                None,
+                listOf(
+                    EOBndExpr(
+                        EOCopy(
+                            "cannot_get_access_to_array_initializer" // FIXME
+                        ),
+                        "@"
+                    )
+                )
+            ),
+            name
+        )
+    )
+}
 
 fun mapInstanceCreation(expr: InstanceCreation, name: String): List<EOBndExpr> {
     return listOf(

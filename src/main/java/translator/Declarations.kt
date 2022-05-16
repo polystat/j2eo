@@ -65,15 +65,29 @@ fun mapVariableDeclaration(dec: VariableDeclaration, name: String): List<EOBndEx
             )
         }
         is PrimitiveType -> {
-            listOf(
-                EOBndExpr(
-                    EOCopy(
-                        listOf(decodePrimitiveType(dec.type as PrimitiveType).value, decodeInitializer(dec.initializer)).eoDot(),
-                        listOf(decodePrimitiveType(dec.type as PrimitiveType).value, "new").eoDot()
-                    ),
-                    dec.name
+            if ((dec.type as PrimitiveType).dimensions.dimensions.isEmpty()) {
+                listOf(
+                    EOBndExpr(
+                        EOCopy(
+                            listOf(
+                                decodePrimitiveType(dec.type as PrimitiveType).value,
+                                decodeInitializer(dec.initializer)
+                            ).eoDot(),
+                            listOf(decodePrimitiveType(dec.type as PrimitiveType).value, "new").eoDot()
+                        ),
+                        dec.name
+                    )
                 )
-            )
+            } else {
+                listOf(
+                    EOBndExpr(
+                        EOCopy(
+                            EODot("cage"),
+                        ),
+                        dec.name
+                    )
+                )
+            }
         }
         null ->
             throw IllegalArgumentException("\"var\" declarations are not supported yet")

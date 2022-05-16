@@ -12,9 +12,13 @@ import tree.Expression.Primary.InstanceCreation
 import tree.Expression.Primary.MethodInvocation
 import tree.Expression.SimpleReference
 import tree.InitializerSimple
+import tree.Statement.Block
 import tree.Statement.BlockStatement
+import tree.Statement.Do
+import tree.Statement.IfThenElse
 import tree.Statement.Statement
 import tree.Statement.StatementExpression
+import tree.Statement.While
 import tree.Type.PrimitiveType
 import tree.Type.Type
 import tree.Type.TypeName
@@ -26,15 +30,16 @@ import kotlin.collections.HashSet
 
 /**
  * @property classNames
- * @property stdTokensNeededForAlias
+ * @property tokensNeededForAlias
  * @property stdTokensForCurrentAlias
  */
 data class PreprocessorState(
         val classNames: HashMap<String, String> = hashMapOf(
             "Object" to TokenCodes.CLASS__OBJECT.value,
             "System" to TokenCodes.CLASS__SYSTEM.value,
+            "String" to TokenCodes.CLASS__STRING.value
         ),
-        val stdTokensNeededForAlias: HashSet<String> = hashSetOf(
+        val tokensNeededForAlias: HashSet<String> = hashSetOf(
             TokenCodes.CLASS__OBJECT.value,
             TokenCodes.CLASS__SYSTEM.value,
             TokenCodes.PRIM__INT.value,
@@ -48,6 +53,8 @@ data class PreprocessorState(
             TokenCodes.PRIM__DOUBLE.value,
             TokenCodes.PRIM__SHORT.value
         ),
+        val tokensToImportPath: Map<String, String> = TokenCodes.values()
+            .associate { it.value to it.importPath },
         val stdTokensForCurrentAlias: HashSet<String> = hashSetOf(
             TokenCodes.CLASS__OBJECT.importPath  // We need it always
         ),
@@ -157,8 +164,7 @@ private fun preprocessClassDecl(state: PreprocessorState, clsDec: ClassDeclarati
 
 private fun preprocessMethodDecl(state: PreprocessorState, methodDecl: MethodDeclaration) {
     try {
-        methodDecl.methodBody.block.blockStatements
-                .map { blockStmt: BlockStatement -> preprocessBlockStmt(state, blockStmt) }
+        preprocessBlock(state, methodDecl.methodBody)
         when (methodDecl.type) {
             is PrimitiveType ->
             {
@@ -171,6 +177,11 @@ private fun preprocessMethodDecl(state: PreprocessorState, methodDecl: MethodDec
     } catch (e: NullPointerException) {
         /* Ignore it */
     }
+}
+
+private fun preprocessBlock(state: PreprocessorState, block: Block) {
+    block.block?.blockStatements
+        ?.map { blockStmt: BlockStatement -> preprocessBlockStmt(state, blockStmt) }
 }
 
 private fun preprocessBlockStmt(state: PreprocessorState, blockStmt: BlockStatement) {
@@ -198,8 +209,21 @@ private fun preprocessDecl(state: PreprocessorState, decl: Declaration) {
 
 private fun preprocessStmt(state: PreprocessorState, stmt: Statement) {
     when (stmt) {
+        is Block -> preprocessBlock(state, stmt)
         is BlockStatement -> preprocessBlockStmt(state, stmt)
         is StatementExpression -> preprocessStmtExpr(state, stmt)
+        is IfThenElse -> {
+            preprocessStmt(state, stmt.thenPart)
+            preprocessStmt(state, stmt.elsePart)
+        }
+        is While -> {
+            preprocessExpr(state, stmt.condition)
+            preprocessStmt(state, stmt.statement)
+        }
+        is Do -> {
+            preprocessExpr(state, stmt.condition)
+            preprocessStmt(state, stmt.statement)
+        }
         else -> {
             // this is a generated else block
         }
@@ -215,6 +239,11 @@ private fun preprocessVarDecl(state: PreprocessorState, varDecl: VariableDeclara
     }
     when (varDecl.type) {
         is TypeName -> tryAddClassForAliases(state, TokenCodes.EO_CAGE.value, false)
+        is PrimitiveType -> {
+            if ((varDecl.type as PrimitiveType).dimensions.dimensions.isNotEmpty()) {
+                tryAddClassForAliases(state, TokenCodes.EO_CAGE.value, false)
+            }
+        }
         else -> {}
     }
 }
@@ -262,6 +291,8 @@ private fun preprocessMethodInvocation(state: PreprocessorState, methodInvocatio
             // this is a generated else block
         }
     }
+    methodInvocation.arguments.arguments
+        .map { preprocessExpr(state, it) }
 }
 
 private fun preprocessSimpleReference(state: PreprocessorState, ref: SimpleReference) {
@@ -283,11 +314,11 @@ private fun preprocessCompoundName(state: PreprocessorState, compoundName: Compo
 }
 
 private fun tryAddClassForAliases(state: PreprocessorState, className: String, forStdLib: Boolean = true) {
-    if (state.stdTokensNeededForAlias.contains(className)) {
+    if (state.tokensNeededForAlias.contains(className)) {
         if (forStdLib) {
-            state.stdTokensForCurrentAlias.add(className)
+            state.tokensToImportPath[className]?.let { state.stdTokensForCurrentAlias.add(it) }
         } else {
-            state.eoClassesForCurrentAlias.add(className)
+            state.tokensToImportPath[className]?.let { state.eoClassesForCurrentAlias.add(it) }
         }
     }
 }

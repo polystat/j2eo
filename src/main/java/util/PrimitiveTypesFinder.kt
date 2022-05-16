@@ -22,6 +22,9 @@ import tree.Type.TypeName
 private fun findPrimitivesInMethodInvocation(primitives: HashSet<String>, methodInvocation: MethodInvocation) {
     methodInvocation.arguments?.arguments
         ?.map { findPrimitivesInExpression(primitives, it) }
+    if (methodInvocation.qualifier != null) {
+        findPrimitivesInExpression(primitives, methodInvocation.qualifier)
+    }
 }
 
 private fun decodeLiteralCode(code: TokenCode): TokenCodes? {
@@ -42,10 +45,22 @@ private fun findPrimitivesInLiteral(primitives: HashSet<String>, literal: Litera
     }
 }
 
+private fun findPrimitivesInSimpleReference(primitives: HashSet<String>, simpleReference: SimpleReference) {
+    simpleReference.compoundName.names
+        .map {
+            run {
+                if (it.equals("String")) {
+                    primitives.add(TokenCodes.CLASS__STRING.importPath)
+                }
+            }
+        }
+}
+
 private fun findPrimitivesInExpression(primitives: HashSet<String>, expr: Expression) {
     when (expr) {
         is MethodInvocation -> findPrimitivesInMethodInvocation(primitives, expr)
         is Literal -> findPrimitivesInLiteral(primitives, expr)
+        is SimpleReference -> findPrimitivesInSimpleReference(primitives, expr)
         is Binary -> findPrimitivesInExpression(primitives, expr.right)
         is Parenthesized -> findPrimitivesInExpression(primitives, expr.expression)
         is UnaryPrefix -> findPrimitivesInExpression(primitives, expr.operand)
