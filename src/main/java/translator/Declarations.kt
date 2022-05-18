@@ -114,7 +114,23 @@ fun mapVariableDeclaration(dec: VariableDeclaration, name: String): List<EOBndEx
         ) +
         mapInitializer(dec.initializer, constructInitName(dec.initializer))
     } else {
-        listOf()
+        listOf(
+            EOBndExpr(
+                EOObject(
+                    listOf(),
+                    None,
+                    listOf(
+                        EOBndExpr(
+                            EOCopy(
+                                "TRUE"
+                            ),
+                            "@"
+                        )
+                    )
+                ),
+                name
+            )
+        )
     }
 
 fun decodePrimitiveType(type: PrimitiveType): TokenCodes {

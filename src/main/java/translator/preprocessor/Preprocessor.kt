@@ -37,11 +37,13 @@ data class PreprocessorState(
         val classNames: HashMap<String, String> = hashMapOf(
             "Object" to TokenCodes.CLASS__OBJECT.value,
             "System" to TokenCodes.CLASS__SYSTEM.value,
-            "String" to TokenCodes.CLASS__STRING.value
+            "String" to TokenCodes.CLASS__STRING.value,
+            "Random" to TokenCodes.CLASS__RANDOM.value
         ),
         val tokensNeededForAlias: HashSet<String> = hashSetOf(
             TokenCodes.CLASS__OBJECT.value,
             TokenCodes.CLASS__SYSTEM.value,
+            TokenCodes.CLASS__RANDOM.value,
             TokenCodes.PRIM__INT.value,
             TokenCodes.PRIM__FLOAT.value,
             TokenCodes.PRIM__BOOLEAN.value,
@@ -270,7 +272,7 @@ private fun preprocessExpr(state: PreprocessorState, expr: Expression) {
 private fun preprocessInstanceCreation(state: PreprocessorState, instanceCreation: InstanceCreation) {
     preprocessType(state, instanceCreation.ctorType)
     instanceCreation.args.arguments.forEach { preprocessExpr(state, it) }
-    instanceCreation.classBody.declarations.forEach { preprocessDecl(state, it) }
+    instanceCreation.classBody?.declarations?.forEach { preprocessDecl(state, it) }
 }
 
 private fun preprocessType(state: PreprocessorState, type: Type) {
@@ -300,11 +302,11 @@ private fun preprocessSimpleReference(state: PreprocessorState, ref: SimpleRefer
 }
 
 private fun preprocessCompoundName(state: PreprocessorState, compoundName: CompoundName) {
-    if (compoundName.names.size == 1 &&
-            state.classNames[compoundName.names.first()] == null
-    ) {
-        compoundName.names.add(0, "^")
-    }
+//    if (compoundName.names.size == 1 &&
+//            state.classNames[compoundName.names.first()] == null
+//    ) {
+//        compoundName.names.add(0, "^")
+//    }
 
     compoundName.names
             .replaceAll {

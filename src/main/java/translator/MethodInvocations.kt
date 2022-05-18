@@ -60,8 +60,8 @@ fun mapMethodInvocation(methodInvocation: MethodInvocation, name: String): List<
     }
     val callee: EODot = when (val methodQualifier = methodInvocation.qualifier) {
         is SimpleReference ->
-            if (methodQualifier.compoundName.names.size > 1)
-                methodQualifier.compoundName.names.dropLast(1).eoDot()
+            if (methodQualifier.compoundName.names.size > 0)
+                methodQualifier.compoundName.names.eoDot()
             else
                 "this".eoDot()
         is FieldAccess -> getFullIdentifier(methodQualifier).eoDot()
