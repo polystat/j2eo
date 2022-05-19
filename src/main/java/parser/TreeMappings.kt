@@ -290,14 +290,23 @@ fun ExpressionContext.toArrayAccess(): ArrayAccess? {
     return null
 }
 
+fun ExpressionContext.toCastExpr(): Cast? {
+    val typeList = typeType()
+    val expr = expression(0)
+    if (LPAREN() != null && RPAREN() != null && typeList.isNotEmpty() && expr != null) {
+        return Cast(TypeList(typeList[0].toType()), expr.toExpression())
+    }
+    return null
+}
+
 fun ExpressionContext.toExpression(): Expression {
     val expr0 =
-        this.toArrayAccess() ?: this.toUnaryPrefixPostfix() ?: expression(0)?.toExpression()
+        this.toArrayAccess() ?: this.toUnaryPrefixPostfix() ?: this.toCastExpr() ?: expression(0)?.toExpression()
         ?: primary()?.toExpression() ?: identifier()?.toExpression() ?: creator()?.toExpression()
         ?: methodCall()?.toExpression(null) ?: SimpleReference(CompoundName("expression_placeholder")) /* FIXME */
     if (this.bop != null) {
         val expr1 =
-            this.toArrayAccess() ?: this.toUnaryPrefixPostfix() ?: expression(1)?.toExpression()
+            this.toArrayAccess() ?: this.toUnaryPrefixPostfix() ?: this.toCastExpr() ?: expression(1)?.toExpression()
             ?: primary()?.toExpression()
             ?: identifier()?.toExpression() ?: creator()?.toExpression() ?: methodCall()?.toExpression(expr0)
             ?: SimpleReference(CompoundName("expression_placeholder")) /* FIXME */

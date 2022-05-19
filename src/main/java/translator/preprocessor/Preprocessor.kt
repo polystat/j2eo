@@ -6,11 +6,15 @@ import tree.Compilation.SimpleCompilationUnit
 import tree.Compilation.TopLevelComponent
 import tree.CompoundName
 import tree.Declaration.*
+import tree.Expression.Cast
 import tree.Expression.Expression
 import tree.Expression.Primary.FieldAccess
 import tree.Expression.Primary.InstanceCreation
 import tree.Expression.Primary.MethodInvocation
+import tree.Expression.Primary.Parenthesized
 import tree.Expression.SimpleReference
+import tree.Initializer
+import tree.InitializerArray
 import tree.InitializerSimple
 import tree.Statement.Block
 import tree.Statement.BlockStatement
@@ -233,20 +237,29 @@ private fun preprocessStmt(state: PreprocessorState, stmt: Statement) {
 }
 
 private fun preprocessVarDecl(state: PreprocessorState, varDecl: VariableDeclaration) {
-    when (varDecl.initializer) {
-        is InitializerSimple -> preprocessSimpleInitializer(state, varDecl.initializer as InitializerSimple)
-        else -> {
-            // this is a generated else block
-        }
-    }
+    preprocessInitializer(state, varDecl.initializer)
     when (varDecl.type) {
-        is TypeName -> tryAddClassForAliases(state, TokenCodes.EO_CAGE.value, false)
+        is TypeName -> {
+            preprocessType(state, varDecl.type)
+            tryAddClassForAliases(state, TokenCodes.EO_CAGE.value, false)
+        }
         is PrimitiveType -> {
             if ((varDecl.type as PrimitiveType).dimensions.dimensions.isNotEmpty()) {
                 tryAddClassForAliases(state, TokenCodes.EO_CAGE.value, false)
             }
         }
         else -> {}
+    }
+}
+
+private fun preprocessInitializer(state: PreprocessorState, initializer: Initializer) {
+    when (initializer) {
+        is InitializerSimple -> preprocessSimpleInitializer(state, initializer)
+        is InitializerArray -> initializer.initializers
+            .map { preprocessInitializer(state, initializer) }
+        else -> {
+            // this is a generated else block
+        }
     }
 }
 
@@ -263,10 +276,18 @@ private fun preprocessExpr(state: PreprocessorState, expr: Expression) {
         is SimpleReference -> preprocessSimpleReference(state, expr)
         is MethodInvocation -> preprocessMethodInvocation(state, expr)
         is InstanceCreation -> preprocessInstanceCreation(state, expr)
+        is Cast -> preprocessCastExpr(state, expr)
+        is Parenthesized -> preprocessExpr(state, expr.expression)
         else -> {
             // this is a generated else block
         }
     }
+}
+
+private fun preprocessCastExpr(state: PreprocessorState, cast: Cast) {
+    preprocessExpr(state, cast.expression)
+    cast.types.types
+        .map { preprocessType(state, it) }
 }
 
 private fun preprocessInstanceCreation(state: PreprocessorState, instanceCreation: InstanceCreation) {
