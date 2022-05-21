@@ -1,11 +1,13 @@
 package translator.preprocessor
 
+import lexer.Token
 import lexer.TokenCode
 import tree.Compilation.CompilationUnit
 import tree.Compilation.SimpleCompilationUnit
 import tree.Compilation.TopLevelComponent
 import tree.CompoundName
 import tree.Declaration.*
+import tree.Expression.ArgumentList
 import tree.Expression.Cast
 import tree.Expression.Expression
 import tree.Expression.Primary.FieldAccess
@@ -16,13 +18,7 @@ import tree.Expression.SimpleReference
 import tree.Initializer
 import tree.InitializerArray
 import tree.InitializerSimple
-import tree.Statement.Block
-import tree.Statement.BlockStatement
-import tree.Statement.Do
-import tree.Statement.IfThenElse
-import tree.Statement.Statement
-import tree.Statement.StatementExpression
-import tree.Statement.While
+import tree.Statement.*
 import tree.Type.PrimitiveType
 import tree.Type.Type
 import tree.Type.TypeName
@@ -166,6 +162,35 @@ private fun preprocessClassDecl(state: PreprocessorState, clsDec: ClassDeclarati
     } catch (e: NullPointerException) {
         /* Ignore it */
     }
+    tryToAddConstructor(clsDec)
+}
+
+private fun tryToAddConstructor(clsDec: NormalClassDeclaration) {
+    if (clsDec.body?.declarations?.find { it is ConstructorDeclaration } == null) {
+        val argList = ArgumentList(null)
+        argList.arguments = ArrayList()
+        val genConstDecl = ConstructorDeclaration(
+            null, null, null, null, null,
+            Block(
+                ArrayList(),
+                BlockStatements(
+                    BlockStatement(
+                        StatementExpression(
+                            ArrayList(),
+                            MethodInvocation(
+                                null, true, null, Token(TokenCode.Super, "super"), argList
+                            )
+                        )
+                    )
+                )
+            )
+        )
+        if (clsDec.body != null) {
+            clsDec.body.add(genConstDecl)
+        } else {
+            clsDec.body = Declarations(genConstDecl)
+        }
+    }
 }
 
 private fun preprocessMethodDecl(state: PreprocessorState, methodDecl: MethodDeclaration) {
@@ -218,6 +243,12 @@ private fun preprocessStmt(state: PreprocessorState, stmt: Statement) {
         is Block -> preprocessBlock(state, stmt)
         is BlockStatement -> preprocessBlockStmt(state, stmt)
         is StatementExpression -> preprocessStmtExpr(state, stmt)
+        is Assert -> {
+            preprocessExpr(state, stmt.expression)
+            if (stmt.expression2 != null) {
+                preprocessExpr(state, stmt.expression2)
+            }
+        }
         is IfThenElse -> {
             preprocessStmt(state, stmt.thenPart)
             preprocessStmt(state, stmt.elsePart)

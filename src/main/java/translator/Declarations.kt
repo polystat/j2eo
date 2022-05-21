@@ -27,7 +27,7 @@ fun mapClassDeclaration(dec: Declaration): List<EOBndExpr> {
             listOf(mapClass(dec as ClassDeclaration))
         }
         is VariableDeclaration -> {
-            mapVariableDeclaration(dec, "n")
+            mapVariableDeclaration(dec, "dec", false)
         }
         else -> {
             listOf()
@@ -52,7 +52,7 @@ fun mapDeclaration(dec: Declaration, name: String): List<EOBndExpr> {
     }
 }
 
-fun mapVariableDeclaration(dec: VariableDeclaration, name: String): List<EOBndExpr> =
+fun mapVariableDeclaration(dec: VariableDeclaration, name: String, mapInitializer: Boolean = true): List<EOBndExpr> =
     when (dec.type) {
         is TypeName -> {
             listOf(
@@ -93,45 +93,47 @@ fun mapVariableDeclaration(dec: VariableDeclaration, name: String): List<EOBndEx
             throw IllegalArgumentException("\"var\" declarations are not supported yet")
         else ->
             throw IllegalArgumentException("Type of type " + dec.type.javaClass.name + " is not supported")
-    } + if (dec.initializer != null) {
-        listOf(
-            EOBndExpr(
-                EOObject(
-                    listOf(),
-                    None,
-                    listOf(
-                        EOBndExpr(
-                            EOCopy(
-                                listOf(dec.name, "write").eoDot(),
-                                constructInitName(dec.initializer).eoDot()
-                            ),
-                            "@"
+    } + if (mapInitializer) {
+        if (dec.initializer != null) {
+            listOf(
+                EOBndExpr(
+                    EOObject(
+                        listOf(),
+                        None,
+                        listOf(
+                            EOBndExpr(
+                                EOCopy(
+                                    listOf(dec.name, "write").eoDot(),
+                                    constructInitName(dec.initializer).eoDot()
+                                ),
+                                "@"
+                            )
                         )
-                    )
-                ),
-                name
-            )
-        ) +
-        mapInitializer(dec.initializer, constructInitName(dec.initializer))
-    } else {
-        listOf(
-            EOBndExpr(
-                EOObject(
-                    listOf(),
-                    None,
-                    listOf(
-                        EOBndExpr(
-                            EOCopy(
-                                "TRUE"
-                            ),
-                            "@"
+                    ),
+                    name
+                )
+            ) +
+                    mapInitializer(dec.initializer, constructInitName(dec.initializer))
+        } else {
+            listOf(
+                EOBndExpr(
+                    EOObject(
+                        listOf(),
+                        None,
+                        listOf(
+                            EOBndExpr(
+                                EOCopy(
+                                    "TRUE"
+                                ),
+                                "@"
+                            )
                         )
-                    )
-                ),
-                name
+                    ),
+                    name
+                )
             )
-        )
-    }
+        }
+    } else { listOf() }
 
 fun decodePrimitiveType(type: PrimitiveType): TokenCodes {
     return when (type.typeCode) {

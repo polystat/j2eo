@@ -751,6 +751,18 @@ public class JavaParser extends Parser {
 		public TerminalNode STRICTFP() { return getToken(JavaParser.STRICTFP, 0); }
 		public TerminalNode SEALED() { return getToken(JavaParser.SEALED, 0); }
 		public TerminalNode NON_SEALED() { return getToken(JavaParser.NON_SEALED, 0); }
+		public TerminalNode terminalNode(int i) {
+			int j = -1;
+			for (ParseTree o : children) {
+				if ( o instanceof TerminalNode ) {
+					j++;
+					if (i == j) {
+						return (TerminalNode) o;
+					}
+				}
+			}
+			return null;
+		}
 		public ClassOrInterfaceModifierContext(ParserRuleContext parent, int invokingState) {
 			super(parent, invokingState);
 		}

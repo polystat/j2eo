@@ -15,7 +15,6 @@ import tree.Expression.*
 import tree.Expression.Primary.*
 import tree.Statement.*
 import tree.Type.*
-import kotlin.reflect.typeOf
 
 fun CompilationUnitContext.toCompilationUnit(): CompilationUnit {
     val imports = ArrayList(importDeclaration().map { it.toImportDeclaration() })
@@ -51,24 +50,92 @@ fun ClassDeclarationContext.toClassDeclaration(): ClassDeclaration =
     )
 
 fun ClassBodyContext.toDeclarations(): Declarations {
-    val clsBodyDecls = ArrayList(this.classBodyDeclaration().mapNotNull { it.toDeclaration() })
+    val clsBodyDecls = ArrayList(
+        this.classBodyDeclaration().mapNotNull { it.toDeclaration() }.flatten()
+    )
     val decls = Declarations(clsBodyDecls.removeFirstOrNull())
     clsBodyDecls.forEach { decls.add(it) }
     decls.declarations.removeIf { it == null }
     return decls
 }
 
-fun ClassBodyDeclarationContext.toDeclaration(): Declaration? =
+fun ClassBodyDeclarationContext.toDeclaration(): List<Declaration>? =
     memberDeclaration()?.toDeclaration(modifier())
         ?: block()?.toDeclaration(STATIC())
 
-fun MemberDeclarationContext.toDeclaration(modifiers: List<ModifierContext>?): Declaration? =
-    methodDeclaration()?.toDeclaration()
+fun MemberDeclarationContext.toDeclaration(modifiers: List<ModifierContext>?): List<Declaration>? =
+    if (methodDeclaration() != null) { listOf(methodDeclaration().toDeclaration(modifiers)) } else { null } ?:
+    if (classDeclaration() != null) { listOf(classDeclaration().toClassDeclaration()) } else { null } ?:
+    fieldDeclaration()?.toDeclaration(modifiers) ?:
+    if (constructorDeclaration() != null) { listOf(constructorDeclaration().toDeclaration(modifiers)) } else { null }
 // FIXME: support other declarations
 
-fun MethodDeclarationContext.toDeclaration(): Declaration =
+fun ConstructorDeclarationContext.toDeclaration(modifiers: List<ModifierContext>?): Declaration {
+    val excsTypes = qualifiedNameList()?.qualifiedName()?.map { TypeName(it.toCompoundName(), null) }
+
+    var excsTypeList: TypeList? = null
+    if (excsTypes != null) {
+        excsTypeList = TypeList(null)
+        excsTypeList.types = ArrayList(excsTypes)
+    }
+
+    return ConstructorDeclaration(
+        modifiers.getModifiers(),
+        null,
+        formalParameters().toParameterDeclarations(),
+        excsTypeList,
+        null, /* FIXME (WHY DO WE SHOULD EXPLICIT DISTINGUISH SUPER CALL?) */
+        constructorBody.toBlock()
+    )
+}
+
+fun FieldDeclarationContext.toDeclaration(modifiers: List<ModifierContext>?): List<Declaration> {
+    val variableDeclarators = variableDeclarators().toVariableDeclarators()
+    val type = typeType()?.toType()
+    val trueModifiers = modifiers.getModifiers()
+    return variableDeclarators.declarators
+        .map {
+            VariableDeclaration(
+                it.name,
+                trueModifiers,
+                type,
+                it.dims,
+                it.initializer
+            )
+        }
+}
+
+fun TerminalNode.toTypeModifier(): TokenCode? {
+    return when(symbol.type) {
+        PUBLIC -> TokenCode.Public
+        PRIVATE -> TokenCode.Private
+        STATIC -> TokenCode.Static
+        PROTECTED -> TokenCode.Protected
+        ABSTRACT -> TokenCode.Abstract
+        FINAL -> TokenCode.Final
+        STRICTFP -> TokenCode.Strictfp
+        else -> null
+    }
+}
+
+fun List<ModifierContext>?.getModifiers(): Modifiers? {
+    if (this == null) {
+        return null
+    }
+    val tokenModifiers = mapNotNull { it.classOrInterfaceModifier()?.terminalNode(0)?.toTypeModifier() }
+    if (tokenModifiers.isNotEmpty()) {
+        val standardModifiers = StandardModifiers(Token(tokenModifiers[0]))
+        for (i in 1 until tokenModifiers.size) {
+            standardModifiers.add(Token(tokenModifiers[i]))
+        }
+        return Modifiers(null, standardModifiers)
+    }
+    return null
+}
+
+fun MethodDeclarationContext.toDeclaration(modifiers: List<ModifierContext>?): Declaration =
     MethodDeclaration(
-        null /* FIXME */,
+        modifiers.getModifiers(),
         null /* FIXME */,
         typeTypeOrVoid().toType() /* FIXME */,
         identifier().text /* FIXME */,
@@ -110,8 +177,8 @@ fun FormalParameterContext.toParameterDeclaration(): ParameterDeclaration =
 
 fun TypeTypeOrVoidContext.toType(): Type? = typeType()?.toType()
 
-fun BlockContext.toDeclaration(isStatic: TerminalNode?): Declaration =
-    ClassInitializer(this.toBlock(), isStatic != null)
+fun BlockContext.toDeclaration(isStatic: TerminalNode?): List<Declaration> =
+    listOf(ClassInitializer(this.toBlock(), isStatic != null))
 
 fun BlockContext.toBlock(): Block {
     val blockStmntsLst = ArrayList(this.blockStatement().map { it.toBlockStatement() })
@@ -386,11 +453,15 @@ fun MethodCallContext.toExpression(expr: Expression?): Expression {
     val argList = ArgumentList(exprLst.removeFirstOrNull())
     exprLst.forEach { argList.add(it) }
     argList.arguments.removeIf { it == null }
+    val t = THIS()
     return MethodInvocation(
         expr,
         SUPER() != null,
         null, // TODO: type arguments are somewhere else
-        identifier().toToken(),
+        identifier()?.toToken() ?:
+        if (SUPER() != null) {Token(TokenCode.Super, "super")} else { null } ?:
+        if (THIS() != null) {Token(TokenCode.This, "this")} else { null },
+        /* FIXME (SHOULD BE IMPLEMENTED IN ANOTHER WAY) */
         argList
     )
 }
