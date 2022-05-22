@@ -129,7 +129,10 @@ private fun findPrimitivesInVarDeclaration(primitives: HashSet<String>, dec: Var
     ) {
         primitives.add(TokenCodes.CLASS__STRING.importPath)
     }
-    findPrimitivesInInitializer(primitives, dec.initializer)
+    if (dec.initializer != null)
+        findPrimitivesInInitializer(primitives, dec.initializer)
+    else
+        logger.warn { "findPrimitivesInVarDeclaration: dec.initializer must not be null" }
 }
 
 private fun findPrimitivesInClass(primitives: HashSet<String>, clsDec: NormalClassDeclaration) {

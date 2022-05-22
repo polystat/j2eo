@@ -256,7 +256,7 @@ private fun preprocessInitializer(state: PreprocessorState, initializer: Initial
     when (initializer) {
         is InitializerSimple -> preprocessSimpleInitializer(state, initializer)
         is InitializerArray -> initializer.initializers
-            .map { preprocessInitializer(state, initializer) }
+            .map { preprocessInitializer(state, it) }
         else -> {
             // this is a generated else block
         }

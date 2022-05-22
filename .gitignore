@@ -16,3 +16,4 @@ polystat_check
 .vscode
 hadoop*
 J2EO*.jar
+j2eo-data

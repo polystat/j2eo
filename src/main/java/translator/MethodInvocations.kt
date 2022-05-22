@@ -55,8 +55,10 @@ fun mapMethodInvocation(methodInvocation: MethodInvocation, name: String): List<
         is SimpleReference -> (methodQualifier.compoundName.names + listOf(methodInvocation.name)).eoDot()
         is FieldAccess -> (getFullIdentifier(methodQualifier) + listOf(methodInvocation.name)).eoDot()
         null -> methodInvocation.name.eoDot()
-        else ->
-            throw IllegalArgumentException("Unsupported method qualifier!")
+        else -> {
+            util.logger.warn { "Unsupported method qualifier $methodQualifier; falling back to unsupported_qualifier" }
+            "unsupported_qualifier".eoDot()
+        }
     }
     val callee: EODot = when (val methodQualifier = methodInvocation.qualifier) {
         is SimpleReference ->
@@ -66,8 +68,10 @@ fun mapMethodInvocation(methodInvocation: MethodInvocation, name: String): List<
                 "this".eoDot()
         is FieldAccess -> getFullIdentifier(methodQualifier).eoDot()
         null -> "this".eoDot()
-        else ->
-            throw IllegalArgumentException("Unsupported method qualifier!")
+        else -> {
+            util.logger.warn { "Unsupported method qualifier $methodQualifier; falling back to unsupported_qualifier" }
+            "unsupported_qualifier".eoDot()
+        }
     }
 
     return listOf(

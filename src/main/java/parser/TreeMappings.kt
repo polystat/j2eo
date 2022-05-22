@@ -156,8 +156,8 @@ fun StatementContext.toStatement(): Statement =
             this.expression(0).toExpression(),
             this.expression(1)?.toExpression()
         )
-        is StatementBreakContext -> Break(null, identifier()?.toToken())
-        is StatementContinueContext -> Continue(null, identifier()?.toToken())
+        is StatementBreakContext -> Break(null, Token(TokenCode.Break))
+        is StatementContinueContext -> Continue(null, Token(TokenCode.Continue))
         is StatementForContext -> StatementExpression(
             null,
             SimpleReference(CompoundName("for_loop_placeholder"))
@@ -249,6 +249,7 @@ fun org.antlr.v4.runtime.Token.toToken(): Token =
         INC -> Token(TokenCode.PlusPlus)
         DEC -> Token(TokenCode.MinusMinus)
         VAR -> Token(TokenCode.Var)
+        BANG -> Token(TokenCode.Negation)
         else -> throw Exception("unsupported token: $text ($type)")
     }
 

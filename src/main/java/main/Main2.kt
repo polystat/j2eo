@@ -78,30 +78,31 @@ object Main2 {
         }
 
         val translatedFiles: List<Pair<File, EOProgram>> = filesToProcess
-            .reversed()
             .mapIndexed { i, f ->
-                //println("[${i+1}/${filesToProcess.size}] Parsing ${f.absolutePath}")
-                Scanner(f).use { _ ->
-                    val lexer = JavaLexer(CharStreams.fromFileName(f.absolutePath))
-                    val parser = JavaParser(CommonTokenStream(lexer))
-                    val tree = parser.compilationUnit()
+                val percent = (1f * i / filesToProcess.size) * 100f
+                util.logger.info("Progress: %.2f".format(percent) + "% / 100.0%. --- Files left: ${filesToProcess.size - i}; file: ${f.path}")
 
-                    val eval = Visitor()
-                    val cu = eval.visit(tree) as CompilationUnit
+                // Parse Java file using ANTLR parser
+                val lexer = JavaLexer(CharStreams.fromFileName(f.absolutePath))
+                val parser = JavaParser(CommonTokenStream(lexer))
 
-                    if (Entity.debug) {
-                        cu.report(0)
-                        logger.debug("[${i+1}/${filesToProcess.size}] Translating ${f.absolutePath}")
-                    } else {
-                        if (i % 100 == 0) {
-                            val percent = (1f * i / filesToProcess.size) * 100f
-                            print("Progress: %.2f".format(percent) + "% / 100.0%. --- Files left: ${filesToProcess.size - i}\r")
-                        }
+                // Traverse the ANTLR AST
+                val tree = parser.compilationUnit()
+                val eval = Visitor()
+                val cu = eval.visit(tree) as CompilationUnit
+
+                if (Entity.debug) {
+                    cu.report(0)
+                    logger.debug("[${i + 1}/${filesToProcess.size}] Translating ${f.absolutePath}")
+                } else {
+                    if (i % 100 == 0) {
+                        val percent = (1f * i / filesToProcess.size) * 100f
+                        print("Progress: %.2f".format(percent) + "% / 100.0%. --- Files left: ${filesToProcess.size - i}\r")
                     }
-
-                    val translator = Translator()
-                    Pair(f, translator.translate(cu))
                 }
+
+                val translator = Translator()
+                Pair(f, translator.translate(cu))
             }
         println()
 
