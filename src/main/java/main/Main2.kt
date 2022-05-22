@@ -94,12 +94,13 @@ object Main2 {
                 if (Entity.debug) {
                     cu.report(0)
                     logger.debug("[${i + 1}/${filesToProcess.size}] Translating ${f.absolutePath}")
-                } else {
-                    if (i % 100 == 0) {
-                        val percent = (1f * i / filesToProcess.size) * 100f
-                        print("Progress: %.2f".format(percent) + "% / 100.0%. --- Files left: ${filesToProcess.size - i}\r")
-                    }
                 }
+//                else {
+//                    if (i % 100 == 0) {
+//                        val percent = (1f * i / filesToProcess.size) * 100f
+//                        print("Progress: %.2f".format(percent) + "% / 100.0%. --- Files left: ${filesToProcess.size - i}\r")
+//                    }
+//                }
 
                 val translator = Translator()
                 Pair(f, translator.translate(cu))

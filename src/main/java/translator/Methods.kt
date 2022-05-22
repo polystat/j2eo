@@ -4,16 +4,11 @@ import arrow.core.*
 import eotree.EOBndExpr
 import eotree.EOCopy
 import eotree.EOObject
+import eotree.eoDot
 import lexer.TokenCode
 import tree.Declaration.ConstructorDeclaration
 import tree.Declaration.MethodDeclaration
 import tree.Declaration.ParameterDeclaration
-
-// fun MethodDeclaration.getLocalVariables(): List<Declaration> =
-//    // TODO: add support for nested block variables as well
-//    methodBody.block.blockStatements
-//        .filter { it.declaration != null }
-//        .map {  }
 
 fun mapMethodDeclaration(dec: MethodDeclaration): EOBndExpr {
     val isStatic = dec.modifiers != null &&
