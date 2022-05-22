@@ -102,18 +102,12 @@
 
   [right] > from
     seq > @
-      if.
-        or.
-          right.prim_name.eq "prim__float"
-          right.prim_name.eq "prim__double"
-        prim__int.constructor_2
-          prim__int.new
-          right.v.as-int.mod
-            max_int
-        prim__int.constructor_2
-          prim__int.new
-          right.v.mod
-            max_int
+      prim__int.constructor_2
+        prim__int.new
+        mod.
+          right.integer_part
+            right
+          max_int
 
   [this] > constructor_1
     seq > @

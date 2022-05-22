@@ -12,6 +12,42 @@
         seq > @
           ^.v.as-string
 
+      [this] > integer_part
+        seq > @
+          if.
+            not.
+              this.prim_name.eq "prim__boolean"
+            if.
+              and.
+                not.
+                  this.prim_name.eq "prim__float"
+                not.
+                  this.prim_name.eq "prim__double"
+              this.v
+              this.v.as-int
+            if.
+              this.v
+              1
+              0
+
+      [this] > float_part
+        seq > @
+          if.
+            not.
+              this.prim_name.eq "prim__boolean"
+            if.
+              and.
+                not.
+                  this.prim_name.eq "prim__float"
+                not.
+                  this.prim_name.eq "prim__double"
+              this.v.as-float
+              this.v
+            if.
+              this.v
+              1.0
+              0.0
+
       [this value] > init
         seq > @
           this.v.write

@@ -4,12 +4,10 @@ import arrow.core.None
 import arrow.core.flatten
 import eotree.*
 import lexer.TokenCode
-import tree.Expression.Binary
-import tree.Expression.Expression
+import tree.Expression.*
 import tree.Expression.Primary.*
-import tree.Expression.SimpleReference
-import tree.Expression.UnaryPostfix
-import tree.Expression.UnaryPrefix
+import tree.Type.PrimitiveType
+import tree.Type.TypeName
 
 fun mapExpression(expr: Expression, name: String): List<EOBndExpr> =
     when (expr) {
@@ -33,6 +31,12 @@ fun mapExpression(expr: Expression, name: String): List<EOBndExpr> =
             mapParenthesized(expr, name)
         is InstanceCreation ->
             mapInstanceCreation(expr, name)
+        is ArrayCreation ->
+            mapArrayCreation(expr, name)
+        is ArrayAccess ->
+            mapArrayAccess(expr, name)
+        is Cast ->
+            mapCastExpr(expr, name)
         else ->
             throw IllegalArgumentException("Expression of type ${expr.javaClass.simpleName} is not supported")
     }
@@ -59,10 +63,85 @@ fun constructExprName(expr: Expression): String =
             "p${expr.hashCode()}"
         is InstanceCreation ->
             "inst${expr.hashCode()}"
+        is ArrayCreation ->
+            "a_c${expr.hashCode()}"
+        is ArrayAccess ->
+            "a_a${expr.hashCode()}"
+        is Cast ->
+            "c${expr.hashCode()}"
         else ->
             throw IllegalArgumentException("Expression of type ${expr.javaClass.simpleName} is not supported")
     }
 
+fun mapCastExpr(cast: Cast, name: String): List<EOBndExpr> {
+    val castType = cast.types.types[0]
+    return listOf(
+        EOBndExpr(
+            EOObject(
+                listOf(),
+                None,
+                listOf(
+                    EOBndExpr(
+                        EOCopy(
+                            (when(castType) {
+                                    is PrimitiveType -> listOf(decodePrimitiveType(castType).value)
+                                    is TypeName -> castType.compoundName.names
+                                    else -> listOf("unknown_type_${castType.javaClass.simpleName}")
+                                } +
+                                listOf("from")
+                            ).eoDot(),
+                            constructExprName(cast.expression).eoDot()
+                        ),
+                        "@"
+                    )
+                )
+            ),
+            name
+        )
+    ) + mapExpression(cast.expression, constructExprName(cast.expression))
+}
+
+fun mapArrayAccess(access: ArrayAccess, name: String): List<EOBndExpr> {
+    return listOf(
+        EOBndExpr(
+            EOObject(
+                listOf(),
+                None,
+                listOf(
+                    EOBndExpr(
+                        EOCopy(
+                            listOf(constructExprName(access.expression), "get").eoDot(),
+                            listOf(constructExprName(access.size), "v").eoDot()
+                        ),
+                        "@"
+                    )
+                )
+            ),
+            name
+        )
+    ) + mapExpression(access.expression, constructExprName(access.expression)) +
+            mapExpression(access.size, constructExprName(access.size))
+}
+
+fun mapArrayCreation(arrayCreation: ArrayCreation, name: String): List<EOBndExpr> {
+    return listOf(
+        EOBndExpr(
+            EOObject(
+                listOf(),
+                None,
+                listOf(
+                    EOBndExpr(
+                        EOCopy(
+                            "cannot_get_access_to_array_initializer" // FIXME
+                        ),
+                        "@"
+                    )
+                )
+            ),
+            name
+        )
+    )
+}
 
 /**
  * Maps Java instance creation using "new" operator to EO binding.

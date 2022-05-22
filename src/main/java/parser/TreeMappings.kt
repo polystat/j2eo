@@ -17,7 +17,7 @@ import tree.Statement.*
 import tree.Type.*
 import kotlin.reflect.typeOf
 
-fun CompilationUnitContext.toCompilationUnit() : CompilationUnit {
+fun CompilationUnitContext.toCompilationUnit(): CompilationUnit {
     val imports = ArrayList(importDeclaration().map { it.toImportDeclaration() })
     val importDecls = ImportDeclarations(imports.removeFirstOrNull())
     imports.forEach { importDecls.add(it) }
@@ -29,19 +29,19 @@ fun CompilationUnitContext.toCompilationUnit() : CompilationUnit {
     topLevelCmpnts.components.removeIf { it == null }
 
     return SimpleCompilationUnit(
-            importDecls,
-            topLevelCmpnts
+        importDecls,
+        topLevelCmpnts
     )
 }
 
-fun TypeDeclarationContext.toTopLevelComponent() : TopLevelComponent? =
+fun TypeDeclarationContext.toTopLevelComponent(): TopLevelComponent? =
     if (classDeclaration() != null) {
         TopLevelComponent(classDeclaration().toClassDeclaration())
     } else {
         null // throw java.lang.Exception("Cannot translate") // FIXME
     }
 
-fun ClassDeclarationContext.toClassDeclaration() : ClassDeclaration =
+fun ClassDeclarationContext.toClassDeclaration(): ClassDeclaration =
     NormalClassDeclaration(
         identifier().toToken(),
         typeParameters()?.toTypeParameters(),
@@ -50,7 +50,7 @@ fun ClassDeclarationContext.toClassDeclaration() : ClassDeclaration =
         classBody().toDeclarations()
     )
 
-fun ClassBodyContext.toDeclarations() : Declarations {
+fun ClassBodyContext.toDeclarations(): Declarations {
     val clsBodyDecls = ArrayList(this.classBodyDeclaration().mapNotNull { it.toDeclaration() })
     val decls = Declarations(clsBodyDecls.removeFirstOrNull())
     clsBodyDecls.forEach { decls.add(it) }
@@ -64,7 +64,7 @@ fun ClassBodyDeclarationContext.toDeclaration(): Declaration? =
 
 fun MemberDeclarationContext.toDeclaration(modifiers: List<ModifierContext>?): Declaration? =
     methodDeclaration()?.toDeclaration()
-        // FIXME: support other declarations
+// FIXME: support other declarations
 
 fun MethodDeclarationContext.toDeclaration(): Declaration =
     MethodDeclaration(
@@ -79,12 +79,18 @@ fun MethodDeclarationContext.toDeclaration(): Declaration =
     )
 
 fun MethodBodyContext.toBlock(): Block =
-    block()?.toBlock() ?: Block(ArrayList(), BlockStatements(null))
+    if (block() == null) {
+        val blockStmnts = BlockStatements(null)
+        blockStmnts.blockStatements.removeIf { it == null }
+        Block(ArrayList(), blockStmnts)
+    } else {
+        block().toBlock()
+    }
 
 fun FormalParametersContext.toParameterDeclarations(): ParameterDeclarations? =
     formalParameterList()?.toParameterDeclarations()
 
-fun FormalParameterListContext.toParameterDeclarations() : ParameterDeclarations {
+fun FormalParameterListContext.toParameterDeclarations(): ParameterDeclarations {
     val formalParams = ArrayList(formalParameter().map { it.toParameterDeclaration() })
     val paramDecls = ParameterDeclarations(formalParams.removeFirstOrNull())
     formalParams.forEach { paramDecls.add(it) }
@@ -130,61 +136,87 @@ fun LocalTypeDeclarationContext.toDeclaration(): Declaration =
 
 fun StatementContext.toStatement(): Statement =
     when (this) {
-        is StatementWhileContext -> While(null /* FIXME */,
+        is StatementWhileContext -> While(
+            null /* FIXME */,
             parExpression().expression().toExpression(),
-            statement().toStatement())
-        is StatementIfContext -> IfThenElse(null,
+            statement().toStatement()
+        )
+        is StatementIfContext -> IfThenElse(
+            null,
             parExpression().expression().toExpression(),
             statement(0).toStatement(),
-            statement(1)?.toStatement())
-        is StatementExpressionContext -> StatementExpression(null,
-            expression().toExpression())
-        is StatementAssertContext -> Assert(null,
+            statement(1)?.toStatement()
+        )
+        is StatementExpressionContext -> StatementExpression(
+            null,
+            expression().toExpression()
+        )
+        is StatementAssertContext -> Assert(
+            null,
             this.expression(0).toExpression(),
-            this.expression(1)?.toExpression())
+            this.expression(1)?.toExpression()
+        )
         is StatementBreakContext -> Break(null, identifier()?.toToken())
         is StatementContinueContext -> Continue(null, identifier()?.toToken())
-        is StatementForContext -> StatementExpression(null, SimpleReference(CompoundName("for_loop_placeholder"))) /* FIXME */
+        is StatementForContext -> StatementExpression(
+            null,
+            SimpleReference(CompoundName("for_loop_placeholder"))
+        ) /* FIXME */
         is StatementBlockLabelContext -> block().toBlock()
         is StatementDoContext -> Do(null, statement().toStatement(), parExpression().expression().toExpression())
         is StatementReturnContext -> Return(null, expression()?.toExpression())
-        is StatementIdentifierLabelContext -> StatementExpression(null, SimpleReference(CompoundName("identifier_label_placeholder"))) /* FIXME */
-        is StatementSemiContext -> StatementExpression(null, SimpleReference(CompoundName("semi_noop_placeholder"))) /* FIXME */
-        is StatementSwitchContext -> StatementExpression(null, SimpleReference(CompoundName("switch_statement_placeholder"))) /* FIXME */
+        is StatementIdentifierLabelContext -> StatementExpression(
+            null,
+            SimpleReference(CompoundName("identifier_label_placeholder"))
+        ) /* FIXME */
+        is StatementSemiContext -> StatementExpression(
+            null,
+            SimpleReference(CompoundName("semi_noop_placeholder"))
+        ) /* FIXME */
+        is StatementSwitchContext -> StatementExpression(
+            null,
+            SimpleReference(CompoundName("switch_statement_placeholder"))
+        ) /* FIXME */
         is StatementSwitchExpressionContext -> StatementExpression(null, switchExpression().toExpression())
-            /* Switch(null,
-            this.parExpression().expression().toExpression(),
-            SwitchBlocks(ArrayList(switchBlockStatementGroup().map { it.toSwitchBlock() })),
-            0 /* FIXME: switchLabels */
-        ) */
-        is StatementTryResourceSpecificationContext -> StatementExpression(null, SimpleReference(CompoundName("try_resource_placeholder"))) /* FIXME */
-        is StatementTryBlockContext -> StatementExpression(null, SimpleReference(CompoundName("try_block_placeholder"))) /* FIXME */
+        /* Switch(null,
+        this.parExpression().expression().toExpression(),
+        SwitchBlocks(ArrayList(switchBlockStatementGroup().map { it.toSwitchBlock() })),
+        0 /* FIXME: switchLabels */
+    ) */
+        is StatementTryResourceSpecificationContext -> StatementExpression(
+            null,
+            SimpleReference(CompoundName("try_resource_placeholder"))
+        ) /* FIXME */
+        is StatementTryBlockContext -> StatementExpression(
+            null,
+            SimpleReference(CompoundName("try_block_placeholder"))
+        ) /* FIXME */
         else -> StatementExpression(null, SimpleReference(CompoundName("statement_placeholder"))) /* FIXME */
         // else -> throw Exception("Unsupported statement") /* FIXME */
     }
 
-fun SwitchExpressionContext.toExpression() : Expression =
+fun SwitchExpressionContext.toExpression(): Expression =
     SimpleReference(CompoundName("switch_expression_placeholder")) /* FIXME */
-    /* FIXME:
-    SwitchExpression(
-        parExpression().expression().toExpression(),
-        ???
-    ) */
+/* FIXME:
+SwitchExpression(
+    parExpression().expression().toExpression(),
+    ???
+) */
 
-fun SwitchBlockStatementGroupContext.toSwitchBlock() : SwitchBlock =
+fun SwitchBlockStatementGroupContext.toSwitchBlock(): SwitchBlock =
     SwitchBlock(
         ArrayList(this.switchLabel().map { it.toSwitchLabel() }),
         null
     )
 
-fun SwitchLabelContext.toSwitchLabel() : SwitchLabel =
+fun SwitchLabelContext.toSwitchLabel(): SwitchLabel =
     SwitchLabel(
         constantExpression?.toExpression()
             ?: enumConstantName?.toCompoundName()?.toExpression()
     )
 
-fun org.antlr.v4.runtime.Token.toCompoundName() : CompoundName = CompoundName(text)
-fun org.antlr.v4.runtime.Token.toToken() : Token =
+fun org.antlr.v4.runtime.Token.toCompoundName(): CompoundName = CompoundName(text)
+fun org.antlr.v4.runtime.Token.toToken(): Token =
     when (type) {
         ADD -> Token(TokenCode.Plus)
         MUL -> Token(TokenCode.Star)
@@ -216,12 +248,13 @@ fun org.antlr.v4.runtime.Token.toToken() : Token =
         QUESTION -> Token(TokenCode.Question)
         INC -> Token(TokenCode.PlusPlus)
         DEC -> Token(TokenCode.MinusMinus)
+        VAR -> Token(TokenCode.Var)
         else -> throw Exception("unsupported token: $text ($type)")
     }
 
 fun CompoundName.toExpression(): Expression = SimpleReference(this)
 
-fun ExpressionContext.toBinaryExpression() : Binary? {
+fun ExpressionContext.toBinaryExpression(): Binary? {
     val expr0 = expression(0)?.toExpression()
     val expr1 = expression(1)?.toExpression()
     val operand = terminal(0)?.symbol
@@ -231,7 +264,7 @@ fun ExpressionContext.toBinaryExpression() : Binary? {
         null
 }
 
-fun ExpressionContext.toUnaryPrefixPostfix() : Expression? {
+fun ExpressionContext.toUnaryPrefixPostfix(): Expression? {
     val expr = expression(0)?.toExpression()
     val operand = terminal(0)?.symbol
     return if (expr != null && operand != null) {
@@ -247,23 +280,43 @@ fun ExpressionContext.toUnaryPrefixPostfix() : Expression? {
     }
 }
 
-fun ExpressionContext.toExpression() : Expression {
+fun ExpressionContext.toArrayAccess(): ArrayAccess? {
+    if (LBRACK() != null && RBRACK() != null) {
+        return ArrayAccess(
+            expression(0).toExpression(),
+            expression(1).toExpression()
+        )
+    }
+    return null
+}
+
+fun ExpressionContext.toCastExpr(): Cast? {
+    val typeList = typeType()
+    val expr = expression(0)
+    if (LPAREN() != null && RPAREN() != null && typeList.isNotEmpty() && expr != null) {
+        return Cast(TypeList(typeList[0].toType()), expr.toExpression())
+    }
+    return null
+}
+
+fun ExpressionContext.toExpression(): Expression {
     val expr0 =
-            expression(0)?.toExpression() ?: primary()?.toExpression() ?: identifier()?.toExpression()
-            ?: creator()?.toExpression() ?: methodCall()?.toExpression(null)
-            ?: SimpleReference(CompoundName("expression_placeholder")) /* FIXME */
+        this.toArrayAccess() ?: this.toUnaryPrefixPostfix() ?: this.toCastExpr() ?: expression(0)?.toExpression()
+        ?: primary()?.toExpression() ?: identifier()?.toExpression() ?: creator()?.toExpression()
+        ?: methodCall()?.toExpression(null) ?: SimpleReference(CompoundName("expression_placeholder")) /* FIXME */
     if (this.bop != null) {
         val expr1 =
-                expression(1)?.toExpression() ?: primary()?.toExpression() ?: identifier()?.toExpression()
-                ?: creator()?.toExpression() ?: methodCall()?.toExpression(expr0)
-                ?: SimpleReference(CompoundName("expression_placeholder")) /* FIXME */
+            this.toArrayAccess() ?: this.toUnaryPrefixPostfix() ?: this.toCastExpr() ?: expression(1)?.toExpression()
+            ?: primary()?.toExpression()
+            ?: identifier()?.toExpression() ?: creator()?.toExpression() ?: methodCall()?.toExpression(expr0)
+            ?: SimpleReference(CompoundName("expression_placeholder")) /* FIXME */
         return if (this.bop.text == ".") {
             when (expr1) {
                 is MethodInvocation -> expr1
                 is SimpleReference -> FieldAccess(
-                        expr0,
-                        SUPER() != null,
-                        Token(TokenCode.Identifier, expr1.compoundName.names[0]) // FIXME: questionable
+                    expr0,
+                    SUPER() != null,
+                    Token(TokenCode.Identifier, expr1.compoundName.names[0]) // FIXME: questionable
                 )
                 else -> SimpleReference(CompoundName("expression_placeholder")) /* FIXME */
             }
@@ -277,19 +330,41 @@ fun ExpressionContext.toExpression() : Expression {
     }
 }
 
-fun CreatorContext.toExpression() : Expression {
-    return InstanceCreation(
+fun CreatorContext.toExpression(): Expression {
+    val arrayCreatorRestContext = arrayCreatorRest()
+    val classCreatorRestContext = classCreatorRest()
+
+    val createdNameContext = createdName()
+    val createdNameIdentifiers = createdNameContext.identifier()
+    val primitiveTypeContext = createdNameContext.primitiveType()
+
+    return if (classCreatorRestContext != null) {
+        InstanceCreation(
             null, // No type arguments for now
             TypeName(
-                    CompoundName(createdName().identifier().map { it.IDENTIFIER().text }.toList()),
-                    null // No type arguments for now
+                CompoundName(createdNameIdentifiers.map { it.IDENTIFIER().text }.toList()),
+                null // No type arguments for now
             ),
-            classCreatorRest().arguments()?.toArgList(),
-            classCreatorRest().classBody()?.toDeclarations()
-    )
+            classCreatorRestContext.arguments()?.toArgList(),
+            classCreatorRestContext.classBody()?.toDeclarations()
+        )
+    } else if (arrayCreatorRestContext != null) {
+        ArrayCreation(
+            primitiveTypeContext?.toType()
+                ?: TypeName(
+                    CompoundName(createdNameIdentifiers.map { it.IDENTIFIER().text }.toList()),
+                    null // No type arguments for now
+                ),
+            arrayCreatorRestContext.arrayInitializer()?.toInitializerArray() ?: InitializerArray(
+                InitializerSimple(arrayCreatorRestContext.expression(0).toExpression())
+            )
+        )
+    } else {
+        SimpleReference(CompoundName("unknown_creator_context_placeholder"))
+    }
 }
 
-fun ArgumentsContext.toArgList() : ArgumentList {
+fun ArgumentsContext.toArgList(): ArgumentList {
     return if (expressionList() == null) {
         val args = ArgumentList(null)
         args.arguments.removeIf { it == null }
@@ -303,7 +378,7 @@ fun ArgumentsContext.toArgList() : ArgumentList {
     }
 }
 
-fun MethodCallContext.toExpression(expr: Expression?) : Expression {
+fun MethodCallContext.toExpression(expr: Expression?): Expression {
     val exprLst = if (expressionList() == null)
         listOf()
     else
@@ -312,16 +387,16 @@ fun MethodCallContext.toExpression(expr: Expression?) : Expression {
     exprLst.drop(1).forEach { argList.add(it) }
     argList.arguments.removeIf { it == null }
     return MethodInvocation(
-            expr,
-            SUPER() != null,
-            null, // TODO: type arguments are somewhere else
-            identifier().toToken(),
-            argList
+        expr,
+        SUPER() != null,
+        null, // TODO: type arguments are somewhere else
+        identifier().toToken(),
+        argList
     )
 }
 
 fun IdentifierContext.toExpression() : Expression =
-        SimpleReference(CompoundName(IDENTIFIER().text))
+        SimpleReference(CompoundName(IDENTIFIER()?.text ?: "var")) // A specific case
 
 fun PrimaryContext.toParenthesized(): Parenthesized? =
     if (LPAREN() != null && RPAREN() != null) {
@@ -335,25 +410,36 @@ fun PrimaryContext.toParenthesized(): Parenthesized? =
         null
     }
 
-fun PrimaryContext.toExpression() : Expression =
-    this.toParenthesized() ?:
-    expression()?.toExpression() ?:
-    identifier()?.toExpression() ?:
-    THIS()?.let { _ -> This(null) } ?:
+fun PrimaryContext.toExpression(): Expression =
+    this.toParenthesized() ?: expression()?.toExpression() ?: identifier()?.toExpression() ?: THIS()?.let { _ ->
+        This(
+            null
+        )
+    } ?:
     /* FIXME: super */
-    literal()?.toLiteral() ?:
-    identifier()?.let { id -> SimpleReference(CompoundName(id.text)) } ?:
-    SimpleReference(CompoundName("expression_placeholder")) /* FIXME */
+    literal()?.toLiteral() ?: identifier()?.let { id -> SimpleReference(CompoundName(id.text)) } ?: SimpleReference(
+        CompoundName("expression_placeholder")
+    ) /* FIXME */
 /* FIXME: typeOrVoid . CLASS */
-    /* FIXME: nonWildcardTypeArguments (explicitGenericInvocationSuffix | THIS arguments) */
+/* FIXME: nonWildcardTypeArguments (explicitGenericInvocationSuffix | THIS arguments) */
 
-fun LiteralContext.toLiteral() : Literal? =
-    BOOL_LITERAL()?.text?.let { txt -> Literal(Token(if (txt == "true") { TokenCode.True } else { TokenCode.False })) } ?:
-    integerLiteral()?.DECIMAL_LITERAL()?.let { n -> Literal(Token(TokenCode.IntegerLiteral, n.text))} ?:
-    NULL_LITERAL()?.let { _ -> Literal(Token(TokenCode.Null)) } ?:
-    floatLiteral()?.let { x -> Literal(Token(TokenCode.FloatingLiteral, x.text)) } ?:
-    STRING_LITERAL()?.let { s -> Literal(Token(TokenCode.StringLiteral, s.text.drop(1).dropLast(1))) } ?:
-    Literal(Token(TokenCode.IntegerLiteral, "123456")) ?: /* FIXME: support other literals */
+fun LiteralContext.toLiteral(): Literal? =
+    BOOL_LITERAL()?.text?.let { txt ->
+        Literal(
+            Token(
+                if (txt == "true") {
+                    TokenCode.True
+                } else {
+                    TokenCode.False
+                }
+            )
+        )
+    } ?: integerLiteral()?.DECIMAL_LITERAL()?.let { n -> Literal(Token(TokenCode.IntegerLiteral, n.text)) }
+    ?: NULL_LITERAL()?.let { _ -> Literal(Token(TokenCode.Null)) }
+    ?: floatLiteral()?.let { x -> Literal(Token(TokenCode.FloatingLiteral, x.text)) }
+    ?: STRING_LITERAL()?.let { s -> Literal(Token(TokenCode.StringLiteral, s.text.drop(1).dropLast(1))) } ?: Literal(
+        Token(TokenCode.IntegerLiteral, "123456")
+    ) ?: /* FIXME: support other literals */
     throw Exception("unsupported literal $text") /* FIXME */
 
 fun LocalVariableDeclarationContext.toDeclaration(): Declaration =
@@ -372,7 +458,7 @@ fun IdentifierContext.toVariableDeclarators(expression: ExpressionContext): Vari
 fun IdentifierContext.toVariableDeclarator(expression: ExpressionContext): VariableDeclarator =
     VariableDeclarator(this.toToken(), null, InitializerSimple(expression.toExpression()))
 
-fun VariableDeclaratorsContext.toVariableDeclarators() : VariableDeclarators {
+fun VariableDeclaratorsContext.toVariableDeclarators(): VariableDeclarators {
     val varDeclsLst = ArrayList(this.variableDeclarator().map { it.toVariableDeclarator() })
     val varDecls = VariableDeclarators(varDeclsLst.removeFirstOrNull())
     varDeclsLst.forEach { varDecls.add(it) }
@@ -380,13 +466,13 @@ fun VariableDeclaratorsContext.toVariableDeclarators() : VariableDeclarators {
     return varDecls
 }
 
-fun VariableDeclaratorContext.toVariableDeclarator() : VariableDeclarator {
+fun VariableDeclaratorContext.toVariableDeclarator(): VariableDeclarator {
     // val dimLst = ArrayList<Dim>(variableDeclaratorId().LBRACK().size)
     val dims = Dims()
     return VariableDeclarator(
-            this.variableDeclaratorId().identifier().toToken(),
-            dims,
-            this.variableInitializer()?.toInitializer()
+        this.variableDeclaratorId().identifier().toToken(),
+        dims,
+        this.variableInitializer()?.toInitializer()
     )
 }
 
@@ -394,7 +480,7 @@ fun VariableInitializerContext.toInitializer(): Initializer =
     arrayInitializer()?.toInitializerArray()
         ?: InitializerSimple(expression().toExpression())
 
-fun ArrayInitializerContext.toInitializerArray() : InitializerArray {
+fun ArrayInitializerContext.toInitializerArray(): InitializerArray {
     val varInitLst = ArrayList(variableInitializer().map { it.toInitializer() })
     val initArr = InitializerArray(varInitLst.removeFirstOrNull())
     varInitLst.forEach { initArr.add(it) }
@@ -402,8 +488,8 @@ fun ArrayInitializerContext.toInitializerArray() : InitializerArray {
     return initArr
 }
 
-fun TypeParametersContext.toTypeParameters() : TypeParameters {
-    val typeLst = ArrayList(this.typeParameter().map { it.toTypeParameter()})
+fun TypeParametersContext.toTypeParameters(): TypeParameters {
+    val typeLst = ArrayList(this.typeParameter().map { it.toTypeParameter() })
     val typeParams = TypeParameters(typeLst.removeFirstOrNull())
     typeLst.forEach { typeParams.add(it) }
     typeParams.typeParameters.removeIf { it == null }
@@ -413,7 +499,7 @@ fun TypeParametersContext.toTypeParameters() : TypeParameters {
 fun TypeParameterContext.toTypeParameter(): TypeParameter =
     TypeParameter(null /* FIXME */, TypeParameterTail(this.identifier().toToken(), null /* FIXME */))
 
-fun TypeListContext.toTypeList() : TypeList {
+fun TypeListContext.toTypeList(): TypeList {
     val typeArr = ArrayList(this.typeType().map { it.toType() })
     val typeLst = TypeList(typeArr.removeFirstOrNull())
     typeArr.forEach { typeLst.add(it) }
@@ -428,10 +514,18 @@ fun TypeTypeContext.toType(): Type =
         else -> throw Exception("not supported") // FIXME: impossible?
     }
 
-fun TypePrimitiveTypeContext.toType(): Type =
-    primitiveType().toType() // FIXME: annotations and more?
+fun TypePrimitiveTypeContext.toType(): Type {
+    val leftBrackets = LBRACK()
+    val rnType = primitiveType().toType() as PrimitiveType
 
-fun TerminalNode.toPrimitiveType() : PrimitiveType =
+    for (leftBracket in leftBrackets) {
+        rnType.addDimension(Dim(null, null))
+    }
+
+    return rnType // FIXME: annotations?
+}
+
+fun TerminalNode.toPrimitiveType(): PrimitiveType =
     when (this.symbol.type) {
         BOOLEAN -> PrimitiveType(Token(TokenCode.Boolean))
         CHAR -> PrimitiveType(Token(TokenCode.Char))
@@ -455,16 +549,25 @@ fun PrimitiveTypeContext.toType(): Type =
         ?: DOUBLE()?.toPrimitiveType()
         ?: throw Exception("Unsupported primitive type: $this")
 
-fun TypeClassOrInterfaceTypeContext.toType(): Type =
-    this.classOrInterfaceType().toType() // FIXME
+fun TypeClassOrInterfaceTypeContext.toType(): Type {
+    val leftBrackets = LBRACK()
+    val rnType = classOrInterfaceType().toType() as TypeName
+
+    for (leftBracket in leftBrackets) {
+        rnType.addDimension(Dim(null, null))
+    }
+
+    return rnType // FIXME: annotations?
+}
 
 fun ClassOrInterfaceTypeContext.toType(): Type =
     TypeName(
         CompoundName(this.identifier().map { it.text }),
-        this.typeArguments().lastOrNull()?.toTypeArguments()   // FIXME: we use last() since we do not support types like A<B>.C<D>
+        this.typeArguments().lastOrNull()
+            ?.toTypeArguments()   // FIXME: we use last() since we do not support types like A<B>.C<D>
     )
 
-fun TypeArgumentsContext.toTypeArguments() : TypeArguments {
+fun TypeArgumentsContext.toTypeArguments(): TypeArguments {
     val typeArgsLst = ArrayList(typeArgument().map { it.toTypeArgument() })
     val typeArgs = TypeArguments(typeArgsLst.removeFirstOrNull())
     typeArgsLst.forEach { typeArgs.add(it) }
