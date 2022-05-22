@@ -323,23 +323,19 @@ fun org.antlr.v4.runtime.Token.toToken(): Token =
 fun CompoundName.toExpression(): Expression = SimpleReference(this)
 
 fun ExpressionContext.toBinaryExpression(): Binary? {
-    val expr0 = expression(0)?.toExpression()
-    val expr1 = expression(1)?.toExpression()
-    val operand = terminal(0)?.symbol
-    return if (expr0 != null && expr1 != null && operand != null)
-        Binary(expr0, expr1, operand.toToken())
+    return if (bop != null)
+        Binary(expression(0)?.toExpression(), expression(1)?.toExpression(), bop.toToken())
     else
         null
 }
 
 fun ExpressionContext.toUnaryPrefixPostfix(): Expression? {
-    val expr = expression(0)?.toExpression()
     val operand = terminal(0)?.symbol
-    return if (expr != null && operand != null) {
+    return if (operand != null) {
         if (prefix != null) {
-            UnaryPrefix(operand.toToken(), expr)
+            UnaryPrefix(operand.toToken(), expression(0)?.toExpression())
         } else if (postfix != null) {
-            UnaryPostfix(operand.toToken(), expr)
+            UnaryPostfix(operand.toToken(), expression(0)?.toExpression())
         } else {
             null
         }
@@ -360,9 +356,8 @@ fun ExpressionContext.toArrayAccess(): ArrayAccess? {
 
 fun ExpressionContext.toCastExpr(): Cast? {
     val typeList = typeType()
-    val expr = expression(0)
-    if (LPAREN() != null && RPAREN() != null && typeList.isNotEmpty() && expr != null) {
-        return Cast(TypeList(typeList[0].toType()), expr.toExpression())
+    if (LPAREN() != null && RPAREN() != null && typeList.isNotEmpty()) {
+        return Cast(TypeList(typeList[0].toType()), expression(0).toExpression())
     }
     return null
 }
