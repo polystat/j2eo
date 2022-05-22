@@ -43,18 +43,27 @@ private fun getFullIdentifier(fieldAccess: FieldAccess): List<String> {
     ) + listOf(fieldAccess.identifier)
 }
 
+fun trueMethodInvocationName(name: String): List<String> {
+    return when (name) {
+        "this" -> listOf("constructor") /* FIXME (IT'S NOT ALWAYS TRUE) */
+        "super" -> listOf("super", "constructor") /* FIXME (IT'S NOT ALWAYS TRUE) */
+        else -> listOf(name)
+    }
+}
 
 // TODO: create state object to store binding of expression
 fun mapMethodInvocation(methodInvocation: MethodInvocation, name: String): List<EOBndExpr> {
-    require(!methodInvocation.superSign) { "Super sign isn't supported yet" }
+    // require(!methodInvocation.superSign) { "Super sign isn't supported yet" }
+    /* FIXME (NOW PARTIALLY SUPPORTED) */
     require(methodInvocation.typeArguments == null) { "Type arguments aren't supported yet" }
 
     val isStaticCall = isStaticCall(methodInvocation)
+    val trueName = trueMethodInvocationName(methodInvocation.name)
 
     val src: EODot = when (val methodQualifier = methodInvocation.qualifier) {
-        is SimpleReference -> (methodQualifier.compoundName.names + listOf(methodInvocation.name)).eoDot()
-        is FieldAccess -> (getFullIdentifier(methodQualifier) + listOf(methodInvocation.name)).eoDot()
-        null -> methodInvocation.name.eoDot()
+        is SimpleReference -> (methodQualifier.compoundName.names + trueName).eoDot()
+        is FieldAccess -> (getFullIdentifier(methodQualifier) + trueName).eoDot()
+        null -> trueName.eoDot()
         else -> {
             util.logger.warn { "Unsupported method qualifier $methodQualifier; falling back to unsupported_qualifier" }
             "unsupported_qualifier".eoDot()

@@ -12,14 +12,16 @@ import tree.Statement.BlockStatement
  * In order to map Java block into EO, all variable declarations are separated out as memory objects and then seq
  * contains all the logic.
  */
-fun mapBlock(block: Block, name: String? = null): List<EOBndExpr> {
+fun mapBlock(block: Block,
+             name: String? = null,
+             additionalStmt: Pair<String, List<EOBndExpr>>? = null): List<EOBndExpr> {
     if (name != null) {
         return listOf(
             EOBndExpr(
                 EOObject(
                     listOf(),
                     None,
-                    mapBlock(block)
+                    mapBlock(block, additionalStmt = additionalStmt)
                 ),
                 name
             )
@@ -33,14 +35,24 @@ fun mapBlock(block: Block, name: String? = null): List<EOBndExpr> {
         EOBndExpr(
             EOCopy(
                 "seq",
+                if (additionalStmt != null) {
+                    listOf(additionalStmt.first.eoDot())
+                } else {
+                    listOf()
+                } +
                 if (parsedStatements.isNotEmpty())
                     parsedStatements.keys.map { it.eoDot() }
-                else
-                    listOf("0".eoDot())
+                else {
+                    if (additionalStmt == null) {
+                        listOf("TRUE".eoDot())
+                    } else {
+                        listOf()
+                    }
+                }
             ),
             "@"
         )
-    ) + parsedStatements.values.toList().flatten()
+    ) + (additionalStmt?.second ?: listOf()) + parsedStatements.values.toList().flatten()
 }
 
 

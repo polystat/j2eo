@@ -11,6 +11,7 @@ import tree.Compilation.SimpleCompilationUnit
 import tree.Compilation.TopLevelComponent
 import util.findMainClass
 import util.generateEntryPoint
+import util.logger
 import java.time.LocalDateTime
 import java.util.*
 
@@ -50,12 +51,12 @@ class Translator {
 
 
         // FIXME: assuming there is only one top-level component and it is a class
+        val mainClassName = findMainClass(unit)
         var entrypointBnds = listOf<EOBndExpr>()
-        try {
-            val mainClassName = findMainClass(unit)
+        if (mainClassName != null) {
             entrypointBnds = generateEntryPoint(mainClassName)
-        } catch (e: NullPointerException) {
-            // FIXME: logger.info { "No entry point here!" }
+        } else {
+            logger.info { "No entry point here!" }
         }
 
         // FIXME: assuming there is only one top-level component and it is a class
@@ -79,7 +80,7 @@ class Translator {
         )
     }
 
-    fun mapTopLevelComponent(component: TopLevelComponent): EOBnd {
+    private fun mapTopLevelComponent(component: TopLevelComponent): EOBnd {
         return if (component.classDecl != null) {
             mapClass(component.classDecl)
         } else if (component.interfaceDecl != null) {

@@ -27,6 +27,7 @@ fun mapStatement(statement: Statement, name: String): List<EOBndExpr> =
         is Do -> mapDoStatement(statement, name)
         is Block -> mapBlock(statement, name)
         // is Switch -> mapSwitchStatement(parseExprTasks, statement)
+        is Assert -> mapAssert(statement, name)
         else ->
             listOf() // FIXME
         // FIXME: throw IllegalArgumentException("Statement of type ${statement.javaClass.simpleName} is not supported")
@@ -40,7 +41,7 @@ fun mapEmptyStmt(name: String): EOBndExpr =
             listOf(
                 EOBndExpr(
                     EOCopy(
-                        "0".eoDot()
+                        "0"
                     ),
                     "@"
                 )
@@ -58,11 +59,53 @@ fun constructStmtName(statement: Statement): String =
         is Do -> "do${statement.hashCode()}"
         is Block -> "b${statement.hashCode()}"
         // is Switch -> mapSwitchStatement(parseExprTasks, statement)
+        is Assert -> "ast${statement.hashCode()}"
         else ->
             "unknown${statement.hashCode()}" // FIXME
         // FIXME: throw IllegalArgumentException("Statement of type ${statement.javaClass.simpleName} is not supported")
     }
 
+
+fun mapAssert(assert: Assert, name: String): List<EOBndExpr> {
+    return listOf(
+        EOBndExpr(
+            EOObject(
+                listOf(),
+                None,
+                listOf(
+                    EOBndExpr(
+                        EOCopy(
+                            listOf(constructExprName(assert.expression), "if").eoDot(),
+                            "TRUE".eoDot(),
+                            EOObject(
+                                listOf(),
+                                None,
+                                listOf(
+                                    EOBndExpr(
+                                        EOCopy(
+                                            if (assert.expression2 == null) {
+                                                "\"AssertionError\"".eoDot()
+                                            } else {
+                                                constructExprName(assert.expression2).eoDot()
+                                            }
+                                        ),
+                                        "msg"
+                                    )
+                                )
+                            ),
+                        ),
+                        "@"
+                    )
+                )
+            ),
+            name
+        )
+    ) + mapExpression(assert.expression, constructExprName(assert.expression)) + if (assert.expression2 != null) {
+        mapExpression(assert.expression2, constructExprName(assert.expression2))
+    } else {
+        listOf()
+    }
+}
 
 fun mapStatementExpression(stmtExpr: StatementExpression, name: String): List<EOBndExpr> {
     return mapExpression(stmtExpr.expression, name)

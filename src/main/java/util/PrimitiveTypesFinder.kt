@@ -15,6 +15,7 @@ import tree.Expression.Primary.Parenthesized
 import tree.Initializer
 import tree.InitializerArray
 import tree.InitializerSimple
+import tree.Statement.Assert
 import tree.Statement.BlockStatement
 import tree.Statement.Statement
 import tree.Statement.StatementExpression
@@ -94,6 +95,12 @@ private fun findPrimitivesInExpression(primitives: HashSet<String>, expr: Expres
 private fun findPrimitivesInStatement(primitives: HashSet<String>, stmt: Statement) {
     when (stmt) {
         is StatementExpression -> findPrimitivesInExpression(primitives, stmt.expression)
+        is Assert -> {
+            findPrimitivesInExpression(primitives, stmt.expression)
+            if (stmt.expression2 != null) {
+                findPrimitivesInExpression(primitives, stmt.expression2)
+            }
+        }
     }
 }
 
@@ -129,9 +136,9 @@ private fun findPrimitivesInVarDeclaration(primitives: HashSet<String>, dec: Var
     ) {
         primitives.add(TokenCodes.CLASS__STRING.importPath)
     }
-    if (dec.initializer != null)
+    if (dec.initializer != null) {
         findPrimitivesInInitializer(primitives, dec.initializer)
-    else
+    } else
         logger.warn { "findPrimitivesInVarDeclaration: dec.initializer must not be null" }
 }
 

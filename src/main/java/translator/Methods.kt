@@ -5,6 +5,7 @@ import eotree.EOBndExpr
 import eotree.EOCopy
 import eotree.EOObject
 import lexer.TokenCode
+import tree.Declaration.ConstructorDeclaration
 import tree.Declaration.MethodDeclaration
 import tree.Declaration.ParameterDeclaration
 
@@ -42,12 +43,37 @@ fun mapMethodDeclaration(dec: MethodDeclaration): EOBndExpr {
 
         // Bound attributes
         if (dec.methodBody != null) {
-            mapBlock(dec.methodBody)
+            mapBlock(
+                dec.methodBody,
+                additionalStmt = if (dec is ConstructorDeclaration) {
+                    "initialization" to listOf(
+                        EOBndExpr(
+                            EOObject(
+                                listOf(),
+                                None,
+                                listOf(
+                                    EOBndExpr(
+                                        EOCopy(
+                                            listOf("this", "init").eoDot(),
+                                            "this".eoDot()
+                                        ),
+                                        "@"
+                                    )
+                                )
+                            ),
+                            "initialization"
+                        )
+
+                    )
+                } else {
+                    null
+                }
+            )
         } else {
             listOf(
                 EOBndExpr(
                     EOCopy(
-                        "0",
+                        "TRUE",
                         ArrayList()
                     ),
                     "@"
@@ -78,36 +104,6 @@ fun mapMethodDeclaration(dec: MethodDeclaration): EOBndExpr {
 
     return EOBndExpr(
         obj,
-        dec.name
+        dec.name ?: "constructor"
     )
 }
-
-//fun parseExprTasks(parseExprTasks: ParseExprTasks): List<EOBndExpr> {
-//    return if (parseExprTasks.tasks.size > 0) {
-//        parseExprTasks.tasks
-//            .map { parseExprTask(it.second, it.first) }
-//            .flatten()
-//    } else {
-//        listOf()
-//    }
-//}
-//
-//fun parseExprTask(e: Entity, name: String): List<EOBndExpr> {
-//    val parseExprTasks = ParseExprTasks()
-//    return when (e) {
-//        is Expression -> {
-//            listOf(EOBndExpr(mapExpression(parseExprTasks, e), name)) + parseExprTasks(parseExprTasks)
-//        }
-//        is Initializer -> {
-//            listOf(EOBndExpr(mapInitializer(parseExprTasks, e), name)) + parseExprTasks(parseExprTasks)
-//        }
-//        else -> {
-//            throw IllegalArgumentException("Entity of type ${e.javaClass.simpleName} cannot be parsed")
-//        }
-//    }
-//}
-//
-//fun BlockStatements.findAllLocalVariables(): List<VariableDeclaration> =
-//    blockStatements
-//        .filter { it.declaration is VariableDeclaration }
-//        .map { it.declaration as VariableDeclaration }
