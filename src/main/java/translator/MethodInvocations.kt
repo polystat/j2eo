@@ -74,9 +74,9 @@ fun mapMethodInvocation(methodInvocation: MethodInvocation, name: String): List<
             if (methodQualifier.compoundName.names.size > 0)
                 methodQualifier.compoundName.names.eoDot()
             else
-                "this".eoDot()
+                if (!methodInvocation.superSign) "this".eoDot() else listOf("this", "super").eoDot()
         is FieldAccess -> getFullIdentifier(methodQualifier).eoDot()
-        null -> "this".eoDot()
+        null -> if (!methodInvocation.superSign) "this".eoDot() else listOf("this", "super").eoDot()
         else -> {
             util.logger.warn { "Unsupported method qualifier $methodQualifier; falling back to unsupported_qualifier" }
             "unsupported_qualifier".eoDot()

@@ -14,14 +14,15 @@ import tree.Statement.BlockStatement
  */
 fun mapBlock(block: Block,
              name: String? = null,
-             additionalStmt: Pair<String, List<EOBndExpr>>? = null): List<EOBndExpr> {
+             firstStmts: List<Pair<String, List<EOBndExpr>>>? = null,
+             lastStmts: List<Pair<String, List<EOBndExpr>>>? = null): List<EOBndExpr> {
     if (name != null) {
         return listOf(
             EOBndExpr(
                 EOObject(
                     listOf(),
                     None,
-                    mapBlock(block, additionalStmt = additionalStmt)
+                    mapBlock(block, firstStmts = firstStmts, lastStmts = lastStmts)
                 ),
                 name
             )
@@ -35,24 +36,23 @@ fun mapBlock(block: Block,
         EOBndExpr(
             EOCopy(
                 "seq",
-                if (additionalStmt != null) {
-                    listOf(additionalStmt.first.eoDot())
-                } else {
-                    listOf()
-                } +
+                (firstStmts?.map { it.first.eoDot() } ?: listOf()) +
                 if (parsedStatements.isNotEmpty())
                     parsedStatements.keys.map { it.eoDot() }
                 else {
-                    if (additionalStmt == null) {
+                    if (firstStmts == null && lastStmts == null) {
                         listOf("TRUE".eoDot())
                     } else {
                         listOf()
                     }
-                }
+                } +
+                (lastStmts?.map { it.first.eoDot() } ?: listOf())
             ),
             "@"
         )
-    ) + (additionalStmt?.second ?: listOf()) + parsedStatements.values.toList().flatten()
+    ) + (firstStmts?.map { it.second }?.flatten() ?: listOf()) +
+            parsedStatements.values.toList().flatten() +
+            (lastStmts?.map { it.second }?.flatten() ?: listOf())
 }
 
 
