@@ -317,21 +317,29 @@ fun org.antlr.v4.runtime.Token.toToken(): Token =
         DEC -> Token(TokenCode.MinusMinus)
         VAR -> Token(TokenCode.Var)
         BANG -> Token(TokenCode.Negation)
+        TILDE -> Token(TokenCode.Tilde)
         else -> throw Exception("unsupported token: $text ($type)")
     }
 
 fun CompoundName.toExpression(): Expression = SimpleReference(this)
 
 fun ExpressionContext.toBinaryExpression(): Binary? {
-    return if (bop != null)
-        Binary(expression(0)?.toExpression(), expression(1)?.toExpression(), bop.toToken())
-    else
+    val weakExpr0 = expression(0)
+    val weakExpr1 = expression(1)
+    val operand = terminal(0)?.symbol
+    return if (weakExpr0 != null && weakExpr1 != null && operand != null) {
+        val expr0 = weakExpr0.toExpression()
+        val expr1 = weakExpr1.toExpression()
+        Binary(expr0, expr1, operand.toToken())
+    } else
         null
 }
 
 fun ExpressionContext.toUnaryPrefixPostfix(): Expression? {
+    val weakExpr = expression(0)
     val operand = terminal(0)?.symbol
-    return if (operand != null) {
+    return if (weakExpr != null && operand != null && childCount == 2) {
+        val expr = weakExpr.toExpression()
         if (prefix != null) {
             UnaryPrefix(operand.toToken(), expression(0)?.toExpression())
         } else if (postfix != null) {
