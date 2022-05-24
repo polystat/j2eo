@@ -7,47 +7,99 @@ import eotree.EODot
 import eotree.EOExpr
 import eotree.EOObject
 import eotree.eoDot
-import tree.Expression.Expression
+import tree.CompoundName
+import tree.Expression.Primary.FieldAccess
 import tree.Expression.Primary.MethodInvocation
 import tree.Expression.SimpleReference
-import util.ParseExprTasks
-import util.isSystemOutCall
+
+
+private fun isStaticCall(methodInvocation: MethodInvocation): Boolean {
+    return when (val methodQualifier = methodInvocation.qualifier) {
+        is SimpleReference -> {
+            methodQualifier.compoundName.names.first().contains("class__") &&
+                    methodQualifier.compoundName.names.size == 1
+        }
+        is FieldAccess -> {
+            val fullIdentifier = getFullIdentifier(methodQualifier)
+            fullIdentifier.first().contains("class__") && fullIdentifier.size == 1
+        }
+        else -> false
+    }
+}
+
+private fun getFullIdentifier(fieldAccess: FieldAccess): List<String> {
+    return (
+        when (fieldAccess.expression) {
+            is FieldAccess -> {
+                getFullIdentifier(fieldAccess.expression as FieldAccess)
+            }
+            is SimpleReference -> {
+                (fieldAccess.expression as SimpleReference).compoundName.names
+            }
+            else -> {
+                listOf()
+            }
+        }
+    ) + listOf(fieldAccess.identifier)
+}
+
+fun trueMethodInvocationName(name: String): List<String> {
+    return when (name) {
+        "this" -> listOf("constructor") /* FIXME (IT'S NOT ALWAYS TRUE) */
+        "super" -> listOf("super", "constructor") /* FIXME (IT'S NOT ALWAYS TRUE) */
+        else -> listOf(name)
+    }
+}
 
 // TODO: create state object to store binding of expression
-fun mapMethodInvocation(parseExprTasks: ParseExprTasks, methodInvocation: MethodInvocation): EOObject {
-    require(!methodInvocation.superSign) { "Super sign isn't supported yet" }
+fun mapMethodInvocation(methodInvocation: MethodInvocation, name: String): List<EOBndExpr> {
+    // require(!methodInvocation.superSign) { "Super sign isn't supported yet" }
+    /* FIXME (NOW PARTIALLY SUPPORTED) */
     require(methodInvocation.typeArguments == null) { "Type arguments aren't supported yet" }
 
-    val isStaticCall = !isSystemOutCall(methodInvocation)
+    val isStaticCall = isStaticCall(methodInvocation)
+    val trueName = trueMethodInvocationName(methodInvocation.name)
 
-    val src: EODot = when (methodInvocation.qualifier) {
-        is SimpleReference ->
-            (methodInvocation.qualifier as SimpleReference).compoundName.eoDot()
-        else ->
-            throw IllegalArgumentException("Only SimpleReference is supported")
+    val src: EODot = when (val methodQualifier = methodInvocation.qualifier) {
+        is SimpleReference -> (methodQualifier.compoundName.names + trueName).eoDot()
+        is FieldAccess -> (getFullIdentifier(methodQualifier) + trueName).eoDot()
+        null -> trueName.eoDot()
+        else -> {
+            util.logger.warn { "Unsupported method qualifier $methodQualifier; falling back to unsupported_qualifier" }
+            "unsupported_qualifier".eoDot()
+        }
     }
-    val callee: EODot = when (methodInvocation.qualifier) {
+    val callee: EODot = when (val methodQualifier = methodInvocation.qualifier) {
         is SimpleReference ->
-            if ((methodInvocation.qualifier as SimpleReference).compoundName.names.size > 1)
-                (methodInvocation.qualifier as SimpleReference).compoundName.names.dropLast(1).eoDot()
+            if (methodQualifier.compoundName.names.size > 0)
+                methodQualifier.compoundName.names.eoDot()
             else
                 "this".eoDot()
-        else ->
-            throw IllegalArgumentException("Only SimpleReference is supported")
+        is FieldAccess -> getFullIdentifier(methodQualifier).eoDot()
+        null -> "this".eoDot()
+        else -> {
+            util.logger.warn { "Unsupported method qualifier $methodQualifier; falling back to unsupported_qualifier" }
+            "unsupported_qualifier".eoDot()
+        }
     }
 
-    return EOObject(
-        listOf(),
-        None,
-        listOf(
-            EOBndExpr(
-                EOCopy(
-                    src,
-                    (if (!isStaticCall) listOf(callee) else ArrayList<EOExpr>()) +
-                        (methodInvocation.arguments?.arguments?.map { obj -> parseExprTasks.addTask(obj).eoDot() } ?: listOf())
-                ),
-                "@"
-            )
+    return listOf(
+        EOBndExpr (
+            EOObject(
+                listOf(),
+                None,
+                listOf(
+                    EOBndExpr(
+                        EOCopy(
+                            src,
+                            (if (!isStaticCall) listOf(callee) else ArrayList<EOExpr>()) +
+                                (methodInvocation.arguments?.arguments?.map { obj -> constructExprName(obj).eoDot() } ?: listOf())
+                        ),
+                        "@"
+                    )
+                )
+            ),
+            name
         )
-    )
+    ) + (methodInvocation.arguments?.arguments?.map { mapExpression(it, constructExprName(it)) }?.flatten() ?: listOf())
 }

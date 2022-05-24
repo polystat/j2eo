@@ -1,0 +1,117 @@
++package stdlib.primitives
++alias stdlib.primitives.prim__boolean
+
+[] > prim__num
+  [] > new
+    [] > this
+      "prim__num" > prim_name
+      "prim" > @
+      memory > v
+
+      [] > as-string
+        seq > @
+          ^.v.as-string
+
+      [this] > integer_part
+        seq > @
+          if.
+            not.
+              this.prim_name.eq "prim__boolean"
+            if.
+              and.
+                not.
+                  this.prim_name.eq "prim__float"
+                not.
+                  this.prim_name.eq "prim__double"
+              this.v
+              this.v.as-int
+            if.
+              this.v
+              1
+              0
+
+      [this] > float_part
+        seq > @
+          if.
+            not.
+              this.prim_name.eq "prim__boolean"
+            if.
+              and.
+                not.
+                  this.prim_name.eq "prim__float"
+                not.
+                  this.prim_name.eq "prim__double"
+              this.v.as-float
+              this.v
+            if.
+              this.v
+              1.0
+              0.0
+
+      [this value] > init
+        seq > @
+          this.v.write
+            value
+
+      [right] > eq
+        seq > @
+          prim__boolean.constructor_2
+            prim__boolean.new
+            ^.v.eq
+              right.v
+
+      [right] > greater
+        seq > @
+          prim__boolean.constructor_2
+            prim__boolean.new
+            ^.v.greater
+              right.v
+
+      [right] > less
+        seq > @
+          prim__boolean.constructor_2
+            prim__boolean.new
+            ^.v.less
+              right.v
+
+      [right] > geq
+        seq > @
+          prim__boolean.constructor_2
+            prim__boolean.new
+            ^.v.geq
+              right.v
+
+      [right] > leq
+        seq > @
+          prim__boolean.constructor_2
+            prim__boolean.new
+            ^.v.leq
+              right.v
+
+      [right] > neq
+        seq > @
+          prim__boolean.constructor_2
+            prim__boolean.new
+            ^.v.neq
+              right.v
+
+    seq > @
+      this
+
+  [this] > constructor_1
+    seq > @
+      this
+
+  [this target] > constructor_2
+    seq > @
+      this.init
+        this
+        target
+      this
+
+  [this another_num] > constructor_3
+    seq > @
+      this.init
+        this
+        another_num.v
+      this

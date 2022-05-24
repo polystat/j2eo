@@ -4,16 +4,17 @@ public class ProtectedStrictfpInterface {
 		new Work().doSomething();
 		System.out.println("passed");
 	}
-}
 
-protected strictfp interface IDoable {
-	void doSomething();
-}
+	protected static strictfp interface IDoable {
+		void doSomething();
+	}
 
-class Work implements IDoable {
-	@Override
-	public void doSomething() {
-		double some_val = 2.8 * 3.9;
-		System.out.println("working... " + some_val);
+	private static class Work implements IDoable {
+		@Override
+		public void doSomething() {
+			double some_val = 2.8 * 3.9;
+			System.out.println("working... " + some_val);
+		}
 	}
 }
+

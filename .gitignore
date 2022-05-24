@@ -1,9 +1,10 @@
 out
+input
 .gradle
 .idea
 build
 compile_and_run_tests.bat
-j2eo.jar
+*.jar
 output.eo
 output_eo
 polystat_check
@@ -15,3 +16,4 @@ polystat_check
 .vscode
 hadoop*
 J2EO*.jar
+j2eo-data

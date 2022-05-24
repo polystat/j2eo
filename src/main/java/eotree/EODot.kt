@@ -38,7 +38,11 @@ class EODot : EOExpr {
 
     override fun generateEO(indent: Int): String =
         src
-            .map { src -> src.generateEO(indent) + "." + name }
+            .map { src ->
+                val text = src.generateEO(indent).split("\n")
+                (listOf(text.first() + "." + name) + text.drop(1))
+                    .joinToString("\n")
+            }
             .getOrElse { indent(indent) + name }
 
     override fun toString(): String =

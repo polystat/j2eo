@@ -9,13 +9,11 @@ import tree.Compilation.CompilationUnit
 import tree.Compilation.Package
 import tree.Compilation.SimpleCompilationUnit
 import tree.Compilation.TopLevelComponent
-import tree.Entity
 import util.findMainClass
 import util.generateEntryPoint
 import util.logger
 import java.time.LocalDateTime
 import java.util.*
-import kotlin.streams.toList
 
 class Translator {
 
@@ -53,21 +51,21 @@ class Translator {
 
 
         // FIXME: assuming there is only one top-level component and it is a class
+        val mainClassName = findMainClass(unit)
         var entrypointBnds = listOf<EOBndExpr>()
-        try {
-            val mainClassName = findMainClass(unit)
+        if (mainClassName != null) {
             entrypointBnds = generateEntryPoint(mainClassName)
-        } catch (e: NullPointerException) {
-            // FIXME: logger.info { "No entry point here!" }
+        } else {
+            logger.info { "No entry point here!" }
         }
 
         // FIXME: assuming there is only one top-level component and it is a class
         // Always calling the 'main' method
 
-        val stdAliases = preprocessorState.stdClassesForCurrentAlias.stream()
-                .map { EOMeta("alias", "stdlib.$it") }.toList()
-        val eoAliases = preprocessorState.eoClassesForCurrentAlias.stream()
-                .map { EOMeta("alias", "org.eolang.$it") }.toList()
+        val stdAliases = preprocessorState.stdTokensForCurrentAlias
+                .map { EOMeta("alias", it) }.toList()
+        val eoAliases = preprocessorState.eoClassesForCurrentAlias
+                .map { EOMeta("alias", it) }.toList()
 
         return EOProgram(
             EOLicense(
@@ -82,7 +80,7 @@ class Translator {
         )
     }
 
-    fun mapTopLevelComponent(component: TopLevelComponent): EOBnd {
+    private fun mapTopLevelComponent(component: TopLevelComponent): EOBnd {
         return if (component.classDecl != null) {
             mapClass(component.classDecl)
         } else if (component.interfaceDecl != null) {

@@ -1,0 +1,22 @@
++package stdlib.lang
+
+[] > class__Object
+  [] > new
+    [] > this
+      "class__Object" > className
+      "OBJECT" > @
+
+      [this] > init
+        0 > @
+
+      [this] > toString
+        "OBJECT" > @
+
+    seq > @
+      this
+
+  [this] > constructor
+    seq > @
+      this.init
+        this
+      this
