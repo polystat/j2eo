@@ -1,0 +1,181 @@
+# 2022-05-24T13:15:44.110887100
+# j2eo team
++alias stdlib.lang.class__Object
++alias stdlib.primitives.prim__int
++alias org.eolang.gray.cage
+
+[] > class__Base
+  class__Object > super
+  super > @
+  [] > new
+    [] > this
+      class__Object.new > super
+      super > @
+      "class__Base" > className
+      [this] > init
+        seq > @
+          d1233595751
+        [] > d1233595751
+          this.x.write > @
+            i_s1446001495
+        [] > i_s1446001495
+          l1261044180 > @
+        [] > l1261044180
+          prim__int.constructor_2 > @
+            prim__int.new
+            0
+      prim__int.constructor_1 > x
+        prim__int.new
+      # getX :: null -> int
+      [this] > getX
+        seq > @
+          s141110631
+        [] > s141110631
+          s_r2029372696 > @
+        [] > s_r2029372696
+          x > @
+      # n :: int -> void
+      [this v] > n
+        seq > @
+          s793293778
+        [] > s793293778
+          s_r888611662.write > @
+            s_r1966355106
+        [] > s_r888611662
+          x > @
+        [] > s_r1966355106
+          v > @
+      # m :: int -> void
+      [this v] > m
+        seq > @
+          s599782425
+        [] > s599782425
+          n > @
+            this
+            s_r1233327519
+        [] > s_r1233327519
+          v > @
+    seq > @
+      this
+  # null :: null -> void
+  [this] > constructor
+    seq > @
+      initialization
+      s1155769010
+    [] > initialization
+      this.init > @
+        this
+    [] > s1155769010
+      super.constructor > @
+        this
+
+[] > class__Derived
+  class__Base > super
+  super > @
+  [] > new
+    [] > this
+      class__Base.new > super
+      super > @
+      "class__Derived" > className
+      [this] > init
+        seq > @
+          TRUE
+    seq > @
+      this
+  # null :: null -> void
+  [this] > constructor
+    seq > @
+      initialization
+      s269892014
+    [] > initialization
+      this.init > @
+        this
+    [] > s269892014
+      super.constructor > @
+        this
+
+[] > class__DerivedAgain
+  class__Derived > super
+  super > @
+  [] > new
+    [] > this
+      class__Derived.new > super
+      super > @
+      "class__DerivedAgain" > className
+      [this] > init
+        seq > @
+          TRUE
+      # n :: int -> void
+      [this v] > n
+        seq > @
+          s1280641161
+        [] > s1280641161
+          m > @
+            this
+            s_r489411441
+        [] > s_r489411441
+          v > @
+    seq > @
+      this
+  # null :: null -> void
+  [this] > constructor
+    seq > @
+      initialization
+      s1141113940
+    [] > initialization
+      this.init > @
+        this
+    [] > s1141113940
+      super.constructor > @
+        this
+
+[] > class__Test
+  class__Object > super
+  super > @
+  [] > new
+    [] > this
+      class__Object.new > super
+      super > @
+      "class__Test" > className
+      [this] > init
+        seq > @
+          TRUE
+    seq > @
+      this
+  # main :: String[] -> void
+  [args] > main
+    seq > @
+      d1711185459
+      s649769713
+    cage > derivedAgainInstance
+    [] > d1711185459
+      derivedAgainInstance.write > @
+        i_s25936709
+    [] > i_s25936709
+      inst1123559518 > @
+    [] > inst1123559518
+      class__DerivedAgain.constructor > @
+        class__DerivedAgain.new
+    [] > s649769713
+      derivedAgainInstance.m > @
+        derivedAgainInstance
+        l925150995
+    [] > l925150995
+      prim__int.constructor_2 > @
+        prim__int.new
+        12
+  # null :: null -> void
+  [this] > constructor
+    seq > @
+      initialization
+      s1760219993
+    [] > initialization
+      this.init > @
+        this
+    [] > s1760219993
+      super.constructor > @
+        this
+
+[args...] > main
+  class__Test.main > @
+    *

@@ -1,0 +1,90 @@
+# 2022-05-24T13:18:23.641258
+# j2eo team
++alias stdlib.lang.class__Object
++alias stdlib.lang.class__System
++alias stdlib.lang.class__String
++alias org.eolang.gray.cage
+
+[] > class__SimpleFinalMethod
+  class__Object > super
+  super > @
+  [] > new
+    [] > this
+      class__Object.new > super
+      super > @
+      "class__SimpleFinalMethod" > className
+      [this] > init
+        seq > @
+          TRUE
+    seq > @
+      this
+  # main :: String[] -> void
+  [args] > main
+    seq > @
+      d2099802038
+      s2058135834
+      s1153907750
+    cage > obj
+    [] > d2099802038
+      obj.write > @
+        i_s1052212904
+    [] > i_s1052212904
+      inst2072724423 > @
+    [] > inst2072724423
+      class__OuterClass.constructor > @
+        class__OuterClass.new
+    [] > s2058135834
+      obj.method > @
+        obj
+    [] > s1153907750
+      class__System.out.println > @
+        class__System.out
+        l1090541608
+    [] > l1090541608
+      class__String.constructor_2 > @
+        class__String.new
+        "passed"
+  # null :: null -> void
+  [this] > constructor
+    seq > @
+      initialization
+      s1622458036
+    [] > initialization
+      this.init > @
+        this
+    [] > s1622458036
+      super.constructor > @
+        this
+
+[] > class__OuterClass
+  class__Object > super
+  super > @
+  [] > new
+    [] > this
+      class__Object.new > super
+      super > @
+      "class__OuterClass" > className
+      [this] > init
+        seq > @
+          TRUE
+      # method :: null -> void
+      [this] > method
+        seq > @
+          TRUE
+    seq > @
+      this
+  # null :: null -> void
+  [this] > constructor
+    seq > @
+      initialization
+      s2144284609
+    [] > initialization
+      this.init > @
+        this
+    [] > s2144284609
+      super.constructor > @
+        this
+
+[args...] > main
+  class__SimpleFinalMethod.main > @
+    *

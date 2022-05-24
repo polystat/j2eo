@@ -1,0 +1,50 @@
+# 2022-05-24T13:18:23.643259
+# j2eo team
++alias stdlib.lang.class__Object
++alias stdlib.lang.class__System
++alias stdlib.lang.class__String
+
+[] > class__SimpleNativeMethod
+  class__Object > super
+  super > @
+  [] > new
+    [] > this
+      class__Object.new > super
+      super > @
+      "class__SimpleNativeMethod" > className
+      [this] > init
+        seq > @
+          TRUE
+    seq > @
+      this
+  # method :: null -> void
+  [] > method
+    seq > @
+      TRUE
+  # main :: String[] -> void
+  [args] > main
+    seq > @
+      s34871826
+    [] > s34871826
+      class__System.out.println > @
+        class__System.out
+        l1100399456
+    [] > l1100399456
+      class__String.constructor_2 > @
+        class__String.new
+        "passed"
+  # null :: null -> void
+  [this] > constructor
+    seq > @
+      initialization
+      s68326648
+    [] > initialization
+      this.init > @
+        this
+    [] > s68326648
+      super.constructor > @
+        this
+
+[args...] > main
+  class__SimpleNativeMethod.main > @
+    *

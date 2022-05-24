@@ -1,0 +1,70 @@
+# 2022-05-24T13:18:23.562889400
+# j2eo team
++alias stdlib.lang.class__Object
++alias stdlib.lang.class__System
++alias stdlib.lang.class__String
+
+[] > class__SimplestProtectedStaticClass
+  class__Object > super
+  super > @
+  [] > new
+    [] > this
+      class__Object.new > super
+      super > @
+      "class__SimplestProtectedStaticClass" > className
+      [this] > init
+        seq > @
+          TRUE
+    seq > @
+      this
+  [] > class__ProtectedStaticTest
+    class__Object > super
+    super > @
+    [] > new
+      [] > this
+        class__Object.new > super
+        super > @
+        "class__ProtectedStaticTest" > className
+        [this] > init
+          seq > @
+            TRUE
+      seq > @
+        this
+    # null :: null -> void
+    [this] > constructor
+      seq > @
+        initialization
+        s659590237
+      [] > initialization
+        this.init > @
+          this
+      [] > s659590237
+        super.constructor > @
+          this
+  # main :: String[] -> void
+  [args] > main
+    seq > @
+      s1332757905
+    [] > s1332757905
+      class__System.out.println > @
+        class__System.out
+        l1263634860
+    [] > l1263634860
+      class__String.constructor_2 > @
+        class__String.new
+        "passed"
+  # null :: null -> void
+  [this] > constructor
+    seq > @
+      initialization
+      s508378341
+    [] > initialization
+      this.init > @
+        this
+    [] > s508378341
+      super.constructor > @
+        this
+
+[args...] > main
+  class__SimplestProtectedStaticClass.main > @
+    *

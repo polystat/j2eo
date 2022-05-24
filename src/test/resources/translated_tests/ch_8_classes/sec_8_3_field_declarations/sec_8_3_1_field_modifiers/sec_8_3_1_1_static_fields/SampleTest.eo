@@ -1,0 +1,66 @@
+# 2022-05-24T13:18:23.610886300
+# j2eo team
++alias stdlib.lang.class__System
++alias stdlib.lang.class__Object
++alias stdlib.primitives.prim__int
++alias stdlib.lang.class__String
+
+[] > class__SimpleStaticField
+  class__Object > super
+  super > @
+  [] > new
+    [] > this
+      class__Object.new > super
+      super > @
+      "class__SimpleStaticField" > className
+      [this] > init
+        seq > @
+          TRUE
+    seq > @
+      this
+  prim__int.constructor_1 > var
+    prim__int.new
+  # main :: String[] -> void
+  [args] > main
+    seq > @
+      d1472216456
+      s1368173251
+    prim__int.constructor_1 > a
+      prim__int.new
+    [] > d1472216456
+      a.write > @
+        i_s380274260
+    [] > i_s380274260
+      b114818087 > @
+    [] > b114818087
+      s_r1168924571.add > @
+        l324404955
+    [] > s_r1168924571
+      var > @
+    [] > l324404955
+      prim__int.constructor_2 > @
+        prim__int.new
+        1
+    [] > s1368173251
+      class__System.out.println > @
+        class__System.out
+        l1745043985
+    [] > l1745043985
+      class__String.constructor_2 > @
+        class__String.new
+        "passed"
+  # null :: null -> void
+  [this] > constructor
+    seq > @
+      initialization
+      s1333041165
+    [] > initialization
+      this.init > @
+        this
+    [] > s1333041165
+      super.constructor > @
+        this
+
+[args...] > main
+  class__SimpleStaticField.main > @
+    *

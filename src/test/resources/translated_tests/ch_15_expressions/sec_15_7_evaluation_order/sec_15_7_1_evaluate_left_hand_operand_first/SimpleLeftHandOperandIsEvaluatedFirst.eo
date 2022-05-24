@@ -1,0 +1,90 @@
+# 2022-05-24T13:18:23.310371500
+# j2eo team
++alias stdlib.lang.class__System
++alias stdlib.lang.class__Object
++alias stdlib.primitives.prim__int
++alias stdlib.lang.class__String
+
+[] > class__SimpleLeftHandOperandIsEvaluatedFirst
+  class__Object > super
+  super > @
+  [] > new
+    [] > this
+      class__Object.new > super
+      super > @
+      "class__SimpleLeftHandOperandIsEvaluatedFirst" > className
+      [this] > init
+        seq > @
+          TRUE
+    seq > @
+      this
+  # main :: String[] -> void
+  [args] > main
+    seq > @
+      d1865859824
+      d704106237
+      s795321555
+      s800088638
+    prim__int.constructor_1 > i
+      prim__int.new
+    [] > d1865859824
+      i.write > @
+        i_s257459516
+    [] > i_s257459516
+      l304354378 > @
+    [] > l304354378
+      prim__int.constructor_2 > @
+        prim__int.new
+        2
+    prim__int.constructor_1 > j
+      prim__int.new
+    [] > d704106237
+      j.write > @
+        i_s1880078449
+    [] > i_s1880078449
+      b993370665 > @
+    [] > b993370665
+      p159475521.mul > @
+        s_r504807594
+    [] > p159475521
+      b332873513 > @
+    [] > b332873513
+      s_r90567568.write > @
+        l131872530
+    [] > s_r90567568
+      i > @
+    [] > l131872530
+      prim__int.constructor_2 > @
+        prim__int.new
+        3
+    [] > s_r504807594
+      i > @
+    [] > s795321555
+      class__System.out.println > @
+        class__System.out
+        s_r98826337
+    [] > s_r98826337
+      j > @
+    [] > s800088638
+      class__System.out.println > @
+        class__System.out
+        l1236444285
+    [] > l1236444285
+      class__String.constructor_2 > @
+        class__String.new
+        "passed"
+  # null :: null -> void
+  [this] > constructor
+    seq > @
+      initialization
+      s1541525668
+    [] > initialization
+      this.init > @
+        this
+    [] > s1541525668
+      super.constructor > @
+        this
+
+[args...] > main
+  class__SimpleLeftHandOperandIsEvaluatedFirst.main > @
+    *

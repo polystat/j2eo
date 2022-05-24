@@ -1,0 +1,130 @@
+# 2022-05-24T13:15:44.083882500
+# j2eo team
++alias stdlib.lang.class__System
++alias stdlib.lang.class__Object
++alias stdlib.primitives.prim__boolean
++alias stdlib.primitives.prim__int
+
+[] > class__Test
+  class__Object > super
+  super > @
+  [] > new
+    [] > this
+      class__Object.new > super
+      super > @
+      "class__Test" > className
+      [this] > init
+        seq > @
+          TRUE
+    seq > @
+      this
+  # test :: boolean -> boolean -> int -> int -> int
+  [x y z w] > test
+    seq > @
+      d154988899
+      s408069119
+      s1877062907
+    prim__int.constructor_1 > result
+      prim__int.new
+    [] > d154988899
+      TRUE > @
+    [] > s408069119
+      s_r1912850431.if > @
+        b633326333
+        b1265012928
+    [] > s_r1912850431
+      x > @
+    [] > b633326333
+      seq > @
+        s1176932104
+      [] > s1176932104
+        s_r712410124.write > @
+          s_r1900366749
+      [] > s_r712410124
+        result > @
+      [] > s_r1900366749
+        z > @
+    [] > b1265012928
+      seq > @
+        s249177573
+      [] > s249177573
+        s_r2096539129.if > @
+          b1648232591
+          b972865270
+      [] > s_r2096539129
+        y > @
+      [] > b1648232591
+        seq > @
+          s1716932897
+        [] > s1716932897
+          s_r801569151.write > @
+            b1026483832
+        [] > s_r801569151
+          result > @
+        [] > b1026483832
+          s_r1635378213.div > @
+            s_r905080434
+        [] > s_r1635378213
+          w > @
+        [] > s_r905080434
+          z > @
+      [] > b972865270
+        seq > @
+          s761750706
+        [] > s761750706
+          s_r1731217984.write > @
+            s_r1237762639
+        [] > s_r1731217984
+          result > @
+        [] > s_r1237762639
+          w > @
+    [] > s1877062907
+      s_r2033524545 > @
+    [] > s_r2033524545
+      result > @
+  # main :: String[] -> void
+  [args] > main
+    seq > @
+      s473053293
+    [] > s473053293
+      class__System.out.println > @
+        class__System.out
+        m_i1670993182
+    [] > m_i1670993182
+      test > @
+        this
+        l20804602
+        l1344519051
+        l1566511282
+        l1959239586
+    [] > l20804602
+      prim__boolean.constructor_2 > @
+        prim__boolean.new
+        FALSE
+    [] > l1344519051
+      prim__boolean.constructor_2 > @
+        prim__boolean.new
+        TRUE
+    [] > l1566511282
+      prim__int.constructor_2 > @
+        prim__int.new
+        0
+    [] > l1959239586
+      prim__int.constructor_2 > @
+        prim__int.new
+        0
+  # null :: null -> void
+  [this] > constructor
+    seq > @
+      initialization
+      s504336483
+    [] > initialization
+      this.init > @
+        this
+    [] > s504336483
+      super.constructor > @
+        this
+
+[args...] > main
+  class__Test.main > @
+    *

@@ -1,0 +1,59 @@
+# 2022-05-24T13:18:23.319369200
+# j2eo team
++alias stdlib.primitives.prim__float
++alias stdlib.lang.class__System
++alias stdlib.lang.class__Object
++alias stdlib.lang.class__String
+
+[] > class__FloatLiteral
+  class__Object > super
+  super > @
+  [] > new
+    [] > this
+      class__Object.new > super
+      super > @
+      "class__FloatLiteral" > className
+      [this] > init
+        seq > @
+          TRUE
+    seq > @
+      this
+  # main :: String[] -> void
+  [args] > main
+    seq > @
+      d1346343363
+      s391135083
+    prim__float.constructor_1 > a
+      prim__float.new
+    [] > d1346343363
+      a.write > @
+        i_s324169305
+    [] > i_s324169305
+      l573958827 > @
+    [] > l573958827
+      prim__float.constructor_2 > @
+        prim__float.new
+        1.0
+    [] > s391135083
+      class__System.out.println > @
+        class__System.out
+        l1003292107
+    [] > l1003292107
+      class__String.constructor_2 > @
+        class__String.new
+        "passed"
+  # null :: null -> void
+  [this] > constructor
+    seq > @
+      initialization
+      s997033037
+    [] > initialization
+      this.init > @
+        this
+    [] > s997033037
+      super.constructor > @
+        this
+
+[args...] > main
+  class__FloatLiteral.main > @
+    *

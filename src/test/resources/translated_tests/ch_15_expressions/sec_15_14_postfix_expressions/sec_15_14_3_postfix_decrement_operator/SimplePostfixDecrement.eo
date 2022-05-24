@@ -1,0 +1,78 @@
+# 2022-05-24T13:18:23.126867600
+# j2eo team
++alias stdlib.lang.class__System
++alias stdlib.lang.class__Object
++alias stdlib.primitives.prim__int
++alias stdlib.lang.class__String
+
+[] > class__SimplePostfixDecrement
+  class__Object > super
+  super > @
+  [] > new
+    [] > this
+      class__Object.new > super
+      super > @
+      "class__SimplePostfixDecrement" > className
+      [this] > init
+        seq > @
+          TRUE
+    seq > @
+      this
+  # main :: String[] -> void
+  [args] > main
+    seq > @
+      d902830499
+      d2040467681
+      s825936265
+      s711327356
+    prim__int.constructor_1 > a
+      prim__int.new
+    [] > d902830499
+      a.write > @
+        i_s1754662105
+    [] > i_s1754662105
+      l403147759 > @
+    [] > l403147759
+      prim__int.constructor_2 > @
+        prim__int.new
+        5
+    prim__int.constructor_1 > b
+      prim__int.new
+    [] > d2040467681
+      b.write > @
+        i_s1278677872
+    [] > i_s1278677872
+      u_post341796579 > @
+    [] > u_post341796579
+      s_r807657332.dec_post > @
+    [] > s_r807657332
+      a > @
+    [] > s825936265
+      class__System.out.println > @
+        class__System.out
+        s_r1164107853
+    [] > s_r1164107853
+      b > @
+    [] > s711327356
+      class__System.out.println > @
+        class__System.out
+        l68377659
+    [] > l68377659
+      class__String.constructor_2 > @
+        class__String.new
+        "passed"
+  # null :: null -> void
+  [this] > constructor
+    seq > @
+      initialization
+      s1661123505
+    [] > initialization
+      this.init > @
+        this
+    [] > s1661123505
+      super.constructor > @
+        this
+
+[args...] > main
+  class__SimplePostfixDecrement.main > @
+    *

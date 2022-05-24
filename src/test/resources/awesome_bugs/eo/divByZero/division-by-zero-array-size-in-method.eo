@@ -1,0 +1,103 @@
+# 2022-05-24T13:15:43.937883900
+# j2eo team
++alias stdlib.lang.class__Object
++alias stdlib.lang.class__System
++alias org.eolang.gray.cage
+
+[] > class__A
+  class__Object > super
+  super > @
+  [] > new
+    [] > this
+      class__Object.new > super
+      super > @
+      "class__A" > className
+      [this] > init
+        seq > @
+          TRUE
+      # doSomething :: Vector -> void
+      [this args] > doSomething
+        seq > @
+          s1021258849
+        [] > s1021258849
+          class__System.out.println > @
+            class__System.out
+            b330128595
+        [] > b330128595
+          l473153915.div > @
+            m_i1542520418
+        [] > l473153915
+          prim__int.constructor_2 > @
+            prim__int.new
+            10
+        [] > m_i1542520418
+          args.size > @
+            args
+    seq > @
+      this
+  # null :: null -> void
+  [this] > constructor
+    seq > @
+      initialization
+      s503938393
+    [] > initialization
+      this.init > @
+        this
+    [] > s503938393
+      super.constructor > @
+        this
+
+[] > class__Test
+  class__Object > super
+  super > @
+  [] > new
+    [] > this
+      class__Object.new > super
+      super > @
+      "class__Test" > className
+      [this] > init
+        seq > @
+          TRUE
+    seq > @
+      this
+  # main :: String[] -> void
+  [args] > main
+    seq > @
+      d1731977615
+      d1827171553
+      s1997702454
+    cage > a
+    [] > d1731977615
+      a.write > @
+        i_s1703009290
+    [] > i_s1703009290
+      inst970865974 > @
+    [] > inst970865974
+      class__A.constructor > @
+        class__A.new
+    cage > v_s
+    [] > d1827171553
+      v_s.write > @
+        i_s1424482154
+    [] > i_s1424482154
+      inst1072506992 > @
+    [] > inst1072506992
+      Vector.constructor > @
+        Vector.new
+    [] > s1997702454
+      cout > @
+  # null :: null -> void
+  [this] > constructor
+    seq > @
+      initialization
+      s1479696465
+    [] > initialization
+      this.init > @
+        this
+    [] > s1479696465
+      super.constructor > @
+        this
+
+[args...] > main
+  class__Test.main > @
+    *

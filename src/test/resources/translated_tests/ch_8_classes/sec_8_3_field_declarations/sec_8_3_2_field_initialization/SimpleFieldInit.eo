@@ -1,0 +1,90 @@
+# 2022-05-24T13:18:23.617887400
+# j2eo team
++alias stdlib.lang.class__System
++alias stdlib.lang.class__Object
++alias stdlib.primitives.prim__int
++alias stdlib.lang.class__String
+
+[] > class__SimpleFieldInit
+  class__Object > super
+  super > @
+  [] > new
+    [] > this
+      class__Object.new > super
+      super > @
+      "class__SimpleFieldInit" > className
+      [this] > init
+        seq > @
+          d722951168
+        [] > d722951168
+          this.a.write > @
+            i_s1052253947
+        [] > i_s1052253947
+          b451460284 > @
+        [] > b451460284
+          l1826334428.add > @
+            b2101153819
+        [] > l1826334428
+          prim__int.constructor_2 > @
+            prim__int.new
+            2
+        [] > b2101153819
+          l51152513.mul > @
+            p1558103808
+        [] > l51152513
+          prim__int.constructor_2 > @
+            prim__int.new
+            2
+        [] > p1558103808
+          b1828873985 > @
+        [] > b1828873985
+          l2024415090.sub > @
+            p527804008
+        [] > l2024415090
+          prim__int.constructor_2 > @
+            prim__int.new
+            2
+        [] > p527804008
+          b892965953 > @
+        [] > b892965953
+          l1266534280.sub > @
+            l1661210650
+        [] > l1266534280
+          prim__int.constructor_2 > @
+            prim__int.new
+            2
+        [] > l1661210650
+          prim__int.constructor_2 > @
+            prim__int.new
+            2
+      prim__int.constructor_1 > a
+        prim__int.new
+    seq > @
+      this
+  # main :: String[] -> void
+  [args] > main
+    seq > @
+      s1366342900
+    [] > s1366342900
+      class__System.out.println > @
+        class__System.out
+        l672313607
+    [] > l672313607
+      class__String.constructor_2 > @
+        class__String.new
+        "passed"
+  # null :: null -> void
+  [this] > constructor
+    seq > @
+      initialization
+      s234250762
+    [] > initialization
+      this.init > @
+        this
+    [] > s234250762
+      super.constructor > @
+        this
+
+[args...] > main
+  class__SimpleFieldInit.main > @
+    *

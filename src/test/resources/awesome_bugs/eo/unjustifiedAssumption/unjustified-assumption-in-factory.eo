@@ -1,0 +1,262 @@
+# 2022-05-24T13:15:44.299883800
+# j2eo team
++alias stdlib.lang.class__Object
++alias stdlib.primitives.prim__int
++alias org.eolang.gray.cage
+
+[] > class__ParentFactory
+  class__Object > super
+  super > @
+  [] > new
+    [] > this
+      class__Object.new > super
+      super > @
+      "class__ParentFactory" > className
+      [this] > init
+        seq > @
+          TRUE
+    seq > @
+      this
+  [] > class__GetParent
+    class__Object > super
+    super > @
+    [] > new
+      [] > this
+        class__Object.new > super
+        super > @
+        "class__GetParent" > className
+        [this] > init
+          seq > @
+            TRUE
+        # f :: int -> int
+        [this x] > f
+          seq > @
+            d2002790740
+            s2086068243
+            s385332399
+          prim__int.constructor_1 > t
+            prim__int.new
+          [] > d2002790740
+            t.write > @
+              i_s237373286
+          [] > i_s237373286
+            b742255664 > @
+          [] > b742255664
+            s_r883521348.sub > @
+              l1115013644
+          [] > s_r883521348
+            x > @
+          [] > l1115013644
+            prim__int.constructor_2 > @
+              prim__int.new
+              5
+          [] > s2086068243
+            p1070194629.if > @
+              TRUE
+              []
+                "AssertionError" > msg
+          [] > p1070194629
+            b1076202543 > @
+          [] > b1076202543
+            s_r749486981.greater > @
+              l1731295355
+          [] > s_r749486981
+            t > @
+          [] > l1731295355
+            prim__int.constructor_2 > @
+              prim__int.new
+              0
+          [] > s385332399
+            s_r2061440682 > @
+          [] > s_r2061440682
+            x > @
+        # g :: int -> int
+        [this y] > g
+          seq > @
+            s883020319
+          [] > s883020319
+            m_i1488946768 > @
+          [] > m_i1488946768
+            f > @
+              this
+              s_r1942356772
+          [] > s_r1942356772
+            y > @
+        # h :: int -> int
+        [this z] > h
+          seq > @
+            s1907241392
+          [] > s1907241392
+            s_r1269118128 > @
+          [] > s_r1269118128
+            z > @
+      seq > @
+        this
+    # null :: null -> void
+    [this] > constructor
+      seq > @
+        initialization
+        s1863100050
+      [] > initialization
+        this.init > @
+          this
+      [] > s1863100050
+        super.constructor > @
+          this
+  # null :: null -> void
+  [this] > constructor
+    seq > @
+      initialization
+      s739264372
+    [] > initialization
+      this.init > @
+        this
+    [] > s739264372
+      super.constructor > @
+        this
+
+[] > class__Child
+  class__ParentFactory.class__GetParent > super
+  super > @
+  [] > new
+    [] > this
+      class__ParentFactory.class__GetParent.new > super
+      super > @
+      "class__Child" > className
+      [this] > init
+        seq > @
+          TRUE
+      # f :: int -> int
+      [this y] > f
+        seq > @
+          s749981943
+        [] > s749981943
+          s_r1313960293 > @
+        [] > s_r1313960293
+          y > @
+      # h :: int -> int
+      [this z] > h
+        seq > @
+          s1155757579
+        [] > s1155757579
+          m_i1785111044 > @
+        [] > m_i1785111044
+          g > @
+            this
+            s_r1482748887
+        [] > s_r1482748887
+          z > @
+    seq > @
+      this
+  # null :: null -> void
+  [this] > constructor
+    seq > @
+      initialization
+      s494894055
+    [] > initialization
+      this.init > @
+        this
+    [] > s494894055
+      super.constructor > @
+        this
+
+[] > class__Test
+  class__Object > super
+  super > @
+  [] > new
+    [] > this
+      class__Object.new > super
+      super > @
+      "class__Test" > className
+      [this] > init
+        seq > @
+          TRUE
+    seq > @
+      this
+  # main :: String[] -> void
+  [args] > main
+    seq > @
+      d1123226989
+      d616412281
+      s746394140
+      s1731763384
+      s864248990
+      s15892131
+      s1274247563
+      s1961129028
+    prim__int.constructor_1 > x
+      prim__int.new
+    [] > d1123226989
+      x.write > @
+        i_s500885941
+    [] > i_s500885941
+      l1115381650 > @
+    [] > l1115381650
+      prim__int.constructor_2 > @
+        prim__int.new
+        10
+    cage > p
+    [] > d616412281
+      p.write > @
+        i_s2118096382
+    [] > i_s2118096382
+      inst878861517 > @
+    [] > inst878861517
+      class__ParentFactory.class__GetParent.constructor > @
+        class__ParentFactory.class__GetParent.new
+    [] > s746394140
+      p.g > @
+        p
+        s_r1705665942
+    [] > s_r1705665942
+      x > @
+    [] > s1731763384
+      s_r1100619942.sub_equal > @
+        l87242619
+    [] > s_r1100619942
+      x > @
+    [] > l87242619
+      prim__int.constructor_2 > @
+        prim__int.new
+        5
+    [] > s864248990
+      p.h > @
+        p
+        s_r285074186
+    [] > s_r285074186
+      x > @
+    [] > s15892131
+      s_r484841769.write > @
+        inst879311295
+    [] > s_r484841769
+      p > @
+    [] > inst879311295
+      Child.constructor > @
+        Child.new
+    [] > s1274247563
+      p.g > @
+        p
+        s_r1483145520
+    [] > s_r1483145520
+      x > @
+    [] > s1961129028
+      p.h > @
+        p
+        s_r163385254
+    [] > s_r163385254
+      x > @
+  # null :: null -> void
+  [this] > constructor
+    seq > @
+      initialization
+      s1506938939
+    [] > initialization
+      this.init > @
+        this
+    [] > s1506938939
+      super.constructor > @
+        this
+
+[args...] > main
+  class__Test.main > @
+    *

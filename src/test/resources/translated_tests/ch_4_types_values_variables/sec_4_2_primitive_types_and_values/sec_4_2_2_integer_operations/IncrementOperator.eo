@@ -1,0 +1,77 @@
+# 2022-05-24T13:18:23.423293200
+# j2eo team
++alias stdlib.lang.class__System
++alias stdlib.lang.class__Object
++alias stdlib.primitives.prim__int
++alias stdlib.lang.class__String
+
+[] > class__IncrementOperator
+  class__Object > super
+  super > @
+  [] > new
+    [] > this
+      class__Object.new > super
+      super > @
+      "class__IncrementOperator" > className
+      [this] > init
+        seq > @
+          TRUE
+    seq > @
+      this
+  # main :: String[] -> void
+  [args] > main
+    seq > @
+      d610454273
+      s2003147568
+      s516537656
+      s1871612052
+    prim__int.constructor_1 > a
+      prim__int.new
+    [] > d610454273
+      a.write > @
+        i_s431506362
+    [] > i_s431506362
+      l1693226694 > @
+    [] > l1693226694
+      prim__int.constructor_2 > @
+        prim__int.new
+        5
+    [] > s2003147568
+      class__System.out.println > @
+        class__System.out
+        u_post1164799006
+    [] > u_post1164799006
+      s_r504582810.inc_post > @
+    [] > s_r504582810
+      a > @
+    [] > s516537656
+      class__System.out.println > @
+        class__System.out
+        u_pre1160649162
+    [] > u_pre1160649162
+      s_r1796047085.inc_pre > @
+    [] > s_r1796047085
+      a > @
+    [] > s1871612052
+      class__System.out.println > @
+        class__System.out
+        l1023268896
+    [] > l1023268896
+      class__String.constructor_2 > @
+        class__String.new
+        "passed"
+  # null :: null -> void
+  [this] > constructor
+    seq > @
+      initialization
+      s153646652
+    [] > initialization
+      this.init > @
+        this
+    [] > s153646652
+      super.constructor > @
+        this
+
+[args...] > main
+  class__IncrementOperator.main > @
+    *

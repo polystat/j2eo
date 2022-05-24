@@ -1,0 +1,83 @@
+# 2022-05-24T13:18:23.287002
+# j2eo team
++alias stdlib.lang.class__System
++alias stdlib.lang.class__Object
++alias stdlib.primitives.prim__int
++alias stdlib.lang.class__String
+
+[] > class__SimpleAssignmentOperatorReturnValue
+  class__Object > super
+  super > @
+  [] > new
+    [] > this
+      class__Object.new > super
+      super > @
+      "class__SimpleAssignmentOperatorReturnValue" > className
+      [this] > init
+        seq > @
+          TRUE
+    seq > @
+      this
+  # main :: String[] -> void
+  [args] > main
+    seq > @
+      d84113572
+      d76659128
+      s11249189
+      s370475881
+    prim__int.constructor_1 > a
+      prim__int.new
+    [] > d84113572
+      a.write > @
+        i_s1626343059
+    [] > i_s1626343059
+      l2032169857 > @
+    [] > l2032169857
+      prim__int.constructor_2 > @
+        prim__int.new
+        1
+    prim__int.constructor_1 > b
+      prim__int.new
+    [] > d76659128
+      b.write > @
+        i_s441001942
+    [] > i_s441001942
+      l2053996178 > @
+    [] > l2053996178
+      prim__int.constructor_2 > @
+        prim__int.new
+        2
+    [] > s11249189
+      class__System.out.println > @
+        class__System.out
+        b159290353
+    [] > b159290353
+      s_r1515877023.write > @
+        s_r1263668904
+    [] > s_r1515877023
+      a > @
+    [] > s_r1263668904
+      b > @
+    [] > s370475881
+      class__System.out.println > @
+        class__System.out
+        l1795816257
+    [] > l1795816257
+      class__String.constructor_2 > @
+        class__String.new
+        "passed"
+  # null :: null -> void
+  [this] > constructor
+    seq > @
+      initialization
+      s1649320501
+    [] > initialization
+      this.init > @
+        this
+    [] > s1649320501
+      super.constructor > @
+        this
+
+[args...] > main
+  class__SimpleAssignmentOperatorReturnValue.main > @
+    *

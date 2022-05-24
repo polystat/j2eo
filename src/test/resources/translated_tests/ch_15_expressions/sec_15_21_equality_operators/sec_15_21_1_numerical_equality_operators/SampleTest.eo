@@ -1,0 +1,95 @@
+# 2022-05-24T13:18:23.223122500
+# j2eo team
++alias stdlib.lang.class__System
++alias stdlib.lang.class__Object
++alias stdlib.primitives.prim__int
++alias stdlib.lang.class__String
+
+[] > class__SimpleEquality
+  class__Object > super
+  super > @
+  [] > new
+    [] > this
+      class__Object.new > super
+      super > @
+      "class__SimpleEquality" > className
+      [this] > init
+        seq > @
+          TRUE
+    seq > @
+      this
+  # main :: String[] -> void
+  [args] > main
+    seq > @
+      d510276116
+      d445918232
+      s121167003
+      s14183023
+      s1963862935
+    prim__int.constructor_1 > a
+      prim__int.new
+    [] > d510276116
+      a.write > @
+        i_s914507705
+    [] > i_s914507705
+      l443384617 > @
+    [] > l443384617
+      prim__int.constructor_2 > @
+        prim__int.new
+        5
+    prim__int.constructor_1 > b
+      prim__int.new
+    [] > d445918232
+      b.write > @
+        i_s1436633036
+    [] > i_s1436633036
+      l1908043086 > @
+    [] > l1908043086
+      prim__int.constructor_2 > @
+        prim__int.new
+        6
+    [] > s121167003
+      class__System.out.println > @
+        class__System.out
+        b1014486152
+    [] > b1014486152
+      s_r1664576493.eq > @
+        s_r1095088856
+    [] > s_r1664576493
+      a > @
+    [] > s_r1095088856
+      b > @
+    [] > s14183023
+      class__System.out.println > @
+        class__System.out
+        b42544488
+    [] > b42544488
+      s_r1522095831.not_eq > @
+        s_r910599202
+    [] > s_r1522095831
+      a > @
+    [] > s_r910599202
+      b > @
+    [] > s1963862935
+      class__System.out.println > @
+        class__System.out
+        l1042786867
+    [] > l1042786867
+      class__String.constructor_2 > @
+        class__String.new
+        "passed"
+  # null :: null -> void
+  [this] > constructor
+    seq > @
+      initialization
+      s775445710
+    [] > initialization
+      this.init > @
+        this
+    [] > s775445710
+      super.constructor > @
+        this
+
+[args...] > main
+  class__SimpleEquality.main > @
+    *

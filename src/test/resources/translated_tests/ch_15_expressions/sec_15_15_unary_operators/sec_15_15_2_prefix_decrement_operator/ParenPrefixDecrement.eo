@@ -1,0 +1,80 @@
+# 2022-05-24T13:18:23.132142
+# j2eo team
++alias stdlib.lang.class__System
++alias stdlib.lang.class__Object
++alias stdlib.primitives.prim__int
++alias stdlib.lang.class__String
+
+[] > class__ParenPrefixDecrement
+  class__Object > super
+  super > @
+  [] > new
+    [] > this
+      class__Object.new > super
+      super > @
+      "class__ParenPrefixDecrement" > className
+      [this] > init
+        seq > @
+          TRUE
+    seq > @
+      this
+  # main :: String[] -> void
+  [args] > main
+    seq > @
+      d1534745514
+      d2088371948
+      s1011279482
+      s543846639
+    prim__int.constructor_1 > a
+      prim__int.new
+    [] > d1534745514
+      a.write > @
+        i_s2003496028
+    [] > i_s2003496028
+      l30578394 > @
+    [] > l30578394
+      prim__int.constructor_2 > @
+        prim__int.new
+        5
+    prim__int.constructor_1 > b
+      prim__int.new
+    [] > d2088371948
+      b.write > @
+        i_s1976870338
+    [] > i_s1976870338
+      p1434234664 > @
+    [] > p1434234664
+      u_pre1083021083 > @
+    [] > u_pre1083021083
+      s_r1819063424.dec_pre > @
+    [] > s_r1819063424
+      a > @
+    [] > s1011279482
+      class__System.out.println > @
+        class__System.out
+        s_r208866101
+    [] > s_r208866101
+      b > @
+    [] > s543846639
+      class__System.out.println > @
+        class__System.out
+        l690686166
+    [] > l690686166
+      class__String.constructor_2 > @
+        class__String.new
+        "passed"
+  # null :: null -> void
+  [this] > constructor
+    seq > @
+      initialization
+      s576020159
+    [] > initialization
+      this.init > @
+        this
+    [] > s576020159
+      super.constructor > @
+        this
+
+[args...] > main
+  class__ParenPrefixDecrement.main > @
+    *

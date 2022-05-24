@@ -1,0 +1,104 @@
+# 2022-05-24T13:18:23.149190200
+# j2eo team
++alias stdlib.lang.class__System
++alias stdlib.lang.class__Object
++alias stdlib.primitives.prim__int
++alias stdlib.lang.class__String
+
+[] > class__SimpleBitwiseComplement
+  class__Object > super
+  super > @
+  [] > new
+    [] > this
+      class__Object.new > super
+      super > @
+      "class__SimpleBitwiseComplement" > className
+      [this] > init
+        seq > @
+          TRUE
+    seq > @
+      this
+  # main :: String[] -> void
+  [args] > main
+    seq > @
+      d1414506856
+      d2003891312
+      d2012330741
+      s770947228
+      s130668770
+    prim__int.constructor_1 > a
+      prim__int.new
+    [] > d1414506856
+      a.write > @
+        i_s612097453
+    [] > i_s612097453
+      l221634215 > @
+    [] > l221634215
+      prim__int.constructor_2 > @
+        prim__int.new
+        115
+    prim__int.constructor_1 > b
+      prim__int.new
+    [] > d2003891312
+      b.write > @
+        i_s1583159071
+    [] > i_s1583159071
+      u_pre607207372 > @
+    [] > u_pre607207372
+      s_r131206411.unary_placeholder > @
+    [] > s_r131206411
+      a > @
+    prim__int.constructor_1 > c
+      prim__int.new
+    [] > d2012330741
+      c.write > @
+        i_s1101184763
+    [] > i_s1101184763
+      b1816147548 > @
+    [] > b1816147548
+      p2079179914.sub > @
+        l20049680
+    [] > p2079179914
+      u_pre1437654187 > @
+    [] > u_pre1437654187
+      s_r951050903.neg > @
+    [] > s_r951050903
+      a > @
+    [] > l20049680
+      prim__int.constructor_2 > @
+        prim__int.new
+        1
+    [] > s770947228
+      class__System.out.println > @
+        class__System.out
+        b590646109
+    [] > b590646109
+      s_r1882349076.eq > @
+        s_r936292831
+    [] > s_r1882349076
+      b > @
+    [] > s_r936292831
+      c > @
+    [] > s130668770
+      class__System.out.println > @
+        class__System.out
+        l2151717
+    [] > l2151717
+      class__String.constructor_2 > @
+        class__String.new
+        "passed"
+  # null :: null -> void
+  [this] > constructor
+    seq > @
+      initialization
+      s1644231115
+    [] > initialization
+      this.init > @
+        this
+    [] > s1644231115
+      super.constructor > @
+        this
+
+[args...] > main
+  class__SimpleBitwiseComplement.main > @
+    *

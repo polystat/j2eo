@@ -1,0 +1,46 @@
+# 2022-05-24T13:18:23.061332400
+# j2eo team
++alias stdlib.lang.class__Object
++alias stdlib.lang.class__System
++alias stdlib.lang.class__String
+
+[] > class__SimpleExpressionStatement
+  class__Object > super
+  super > @
+  [] > new
+    [] > this
+      class__Object.new > super
+      super > @
+      "class__SimpleExpressionStatement" > className
+      [this] > init
+        seq > @
+          TRUE
+    seq > @
+      this
+  # main :: String[] -> void
+  [args] > main
+    seq > @
+      s511717113
+    [] > s511717113
+      class__System.out.println > @
+        class__System.out
+        l728739494
+    [] > l728739494
+      class__String.constructor_2 > @
+        class__String.new
+        "passed"
+  # null :: null -> void
+  [this] > constructor
+    seq > @
+      initialization
+      s2005733474
+    [] > initialization
+      this.init > @
+        this
+    [] > s2005733474
+      super.constructor > @
+        this
+
+[args...] > main
+  class__SimpleExpressionStatement.main > @
+    *

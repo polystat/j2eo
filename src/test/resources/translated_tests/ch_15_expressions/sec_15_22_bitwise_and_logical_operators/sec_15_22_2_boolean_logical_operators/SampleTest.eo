@@ -1,0 +1,83 @@
+# 2022-05-24T13:18:23.230421100
+# j2eo team
++alias stdlib.lang.class__System
++alias stdlib.lang.class__Object
++alias stdlib.primitives.prim__boolean
++alias stdlib.lang.class__String
+
+[] > class__SimpleAND
+  class__Object > super
+  super > @
+  [] > new
+    [] > this
+      class__Object.new > super
+      super > @
+      "class__SimpleAND" > className
+      [this] > init
+        seq > @
+          TRUE
+    seq > @
+      this
+  # main :: String[] -> void
+  [args] > main
+    seq > @
+      d540325452
+      d1902237905
+      s1715248762
+      s1363793720
+    prim__boolean.constructor_1 > a
+      prim__boolean.new
+    [] > d540325452
+      a.write > @
+        i_s1976804832
+    [] > i_s1976804832
+      l1959910454 > @
+    [] > l1959910454
+      prim__boolean.constructor_2 > @
+        prim__boolean.new
+        FALSE
+    prim__boolean.constructor_1 > b
+      prim__boolean.new
+    [] > d1902237905
+      b.write > @
+        i_s1961002599
+    [] > i_s1961002599
+      l485937598 > @
+    [] > l485937598
+      prim__boolean.constructor_2 > @
+        prim__boolean.new
+        TRUE
+    [] > s1715248762
+      class__System.out.println > @
+        class__System.out
+        b434398524
+    [] > b434398524
+      s_r2035616217.bit_and > @
+        s_r1392794732
+    [] > s_r2035616217
+      a > @
+    [] > s_r1392794732
+      b > @
+    [] > s1363793720
+      class__System.out.println > @
+        class__System.out
+        l1807648168
+    [] > l1807648168
+      class__String.constructor_2 > @
+        class__String.new
+        "passed"
+  # null :: null -> void
+  [this] > constructor
+    seq > @
+      initialization
+      s980697799
+    [] > initialization
+      this.init > @
+        this
+    [] > s980697799
+      super.constructor > @
+        this
+
+[args...] > main
+  class__SimpleAND.main > @
+    *

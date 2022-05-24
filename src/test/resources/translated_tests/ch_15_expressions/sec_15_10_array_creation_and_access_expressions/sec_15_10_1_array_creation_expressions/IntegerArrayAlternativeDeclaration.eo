@@ -1,0 +1,90 @@
+# 2022-05-24T13:18:23.083069900
+# j2eo team
++alias stdlib.lang.class__System
++alias stdlib.lang.class__Object
++alias stdlib.primitives.prim__int
++alias stdlib.lang.class__String
++alias org.eolang.gray.cage
+
+[] > class__IntegerArrayAlternativeDeclaration
+  class__Object > super
+  super > @
+  [] > new
+    [] > this
+      class__Object.new > super
+      super > @
+      "class__IntegerArrayAlternativeDeclaration" > className
+      [this] > init
+        seq > @
+          TRUE
+    seq > @
+      this
+  # main :: String[] -> void
+  [args] > main
+    seq > @
+      d1861781750
+      s77269878
+    cage > array
+    [] > d1861781750
+      array.write > @
+        i_a2095303566
+    [] > i_a2095303566
+      * > @
+        i_s2025221430
+        i_s1378084334
+        i_s200224114
+        i_s1773283386
+        i_s581318631
+    [] > i_s2025221430
+      l1877453512 > @
+    [] > l1877453512
+      prim__int.constructor_2 > @
+        prim__int.new
+        0
+    [] > i_s1378084334
+      l1704629915 > @
+    [] > l1704629915
+      prim__int.constructor_2 > @
+        prim__int.new
+        1
+    [] > i_s200224114
+      l1989184704 > @
+    [] > l1989184704
+      prim__int.constructor_2 > @
+        prim__int.new
+        2
+    [] > i_s1773283386
+      l611572016 > @
+    [] > l611572016
+      prim__int.constructor_2 > @
+        prim__int.new
+        3
+    [] > i_s581318631
+      l889486595 > @
+    [] > l889486595
+      prim__int.constructor_2 > @
+        prim__int.new
+        4
+    [] > s77269878
+      class__System.out.println > @
+        class__System.out
+        l1990160809
+    [] > l1990160809
+      class__String.constructor_2 > @
+        class__String.new
+        "passed"
+  # null :: null -> void
+  [this] > constructor
+    seq > @
+      initialization
+      s1285524499
+    [] > initialization
+      this.init > @
+        this
+    [] > s1285524499
+      super.constructor > @
+        this
+
+[args...] > main
+  class__IntegerArrayAlternativeDeclaration.main > @
+    *

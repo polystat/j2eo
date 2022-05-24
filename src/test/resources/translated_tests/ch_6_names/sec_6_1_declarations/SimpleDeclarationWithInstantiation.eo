@@ -1,0 +1,58 @@
+# 2022-05-24T13:18:23.475885300
+# j2eo team
++alias stdlib.lang.class__System
++alias stdlib.lang.class__Object
++alias stdlib.primitives.prim__int
++alias stdlib.lang.class__String
+
+[] > class__SimpleDeclarationWithInstantiation
+  class__Object > super
+  super > @
+  [] > new
+    [] > this
+      class__Object.new > super
+      super > @
+      "class__SimpleDeclarationWithInstantiation" > className
+      [this] > init
+        seq > @
+          d2079565272
+        [] > d2079565272
+          this.i.write > @
+            i_s1122130699
+        [] > i_s1122130699
+          l968113504 > @
+        [] > l968113504
+          prim__int.constructor_2 > @
+            prim__int.new
+            1
+      prim__int.constructor_1 > i
+        prim__int.new
+    seq > @
+      this
+  # main :: String[] -> void
+  [args] > main
+    seq > @
+      s1153302647
+    [] > s1153302647
+      class__System.out.println > @
+        class__System.out
+        l570794077
+    [] > l570794077
+      class__String.constructor_2 > @
+        class__String.new
+        "passed"
+  # null :: null -> void
+  [this] > constructor
+    seq > @
+      initialization
+      s1928301845
+    [] > initialization
+      this.init > @
+        this
+    [] > s1928301845
+      super.constructor > @
+        this
+
+[args...] > main
+  class__SimpleDeclarationWithInstantiation.main > @
+    *

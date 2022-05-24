@@ -1,0 +1,57 @@
+# 2022-05-24T13:18:23.086015500
+# j2eo team
++alias stdlib.primitives.prim__float
++alias stdlib.lang.class__System
++alias stdlib.lang.class__Object
++alias stdlib.lang.class__String
++alias org.eolang.gray.cage
+
+[] > class__SimpleFloatArray
+  class__Object > super
+  super > @
+  [] > new
+    [] > this
+      class__Object.new > super
+      super > @
+      "class__SimpleFloatArray" > className
+      [this] > init
+        seq > @
+          TRUE
+    seq > @
+      this
+  # main :: String[] -> void
+  [args] > main
+    seq > @
+      d1030228826
+      s1629687658
+    cage > array
+    [] > d1030228826
+      array.write > @
+        i_s1264413185
+    [] > i_s1264413185
+      a_c1099855928 > @
+    [] > a_c1099855928
+      cannot_get_access_to_array_initializer > @
+    [] > s1629687658
+      class__System.out.println > @
+        class__System.out
+        l1007880005
+    [] > l1007880005
+      class__String.constructor_2 > @
+        class__String.new
+        "passed"
+  # null :: null -> void
+  [this] > constructor
+    seq > @
+      initialization
+      s215219944
+    [] > initialization
+      this.init > @
+        this
+    [] > s215219944
+      super.constructor > @
+        this
+
+[args...] > main
+  class__SimpleFloatArray.main > @
+    *

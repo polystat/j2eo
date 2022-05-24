@@ -1,0 +1,105 @@
+# 2022-05-24T13:18:23.279011800
+# j2eo team
++alias stdlib.lang.class__System
++alias stdlib.lang.class__Object
++alias stdlib.primitives.prim__boolean
++alias stdlib.lang.class__String
+
+[] > class__SimpleConditionalOR
+  class__Object > super
+  super > @
+  [] > new
+    [] > this
+      class__Object.new > super
+      super > @
+      "class__SimpleConditionalOR" > className
+      [this] > init
+        seq > @
+          TRUE
+    seq > @
+      this
+  # main :: String[] -> void
+  [args] > main
+    seq > @
+      d120360571
+      d944140566
+      s1551446957
+      s352083716
+    prim__boolean.constructor_1 > a
+      prim__boolean.new
+    [] > d120360571
+      a.write > @
+        i_s1710814638
+    [] > i_s1710814638
+      l1125964210 > @
+    [] > l1125964210
+      prim__boolean.constructor_2 > @
+        prim__boolean.new
+        FALSE
+    prim__boolean.constructor_1 > b
+      prim__boolean.new
+    [] > d944140566
+      b.write > @
+        i_s1534754611
+    [] > i_s1534754611
+      l2030937207 > @
+    [] > l2030937207
+      prim__boolean.constructor_2 > @
+        prim__boolean.new
+        TRUE
+    [] > s1551446957
+      b1471948789.if > @
+        b1605851606
+        b1267556427
+    [] > b1471948789
+      s_r1585239756.or > @
+        s_r1758056825
+    [] > s_r1585239756
+      a > @
+    [] > s_r1758056825
+      b > @
+    [] > b1605851606
+      seq > @
+        s223693919
+      [] > s223693919
+        class__System.out.println > @
+          class__System.out
+          l771418758
+      [] > l771418758
+        class__String.constructor_2 > @
+          class__String.new
+          "true block"
+    [] > b1267556427
+      seq > @
+        s361268035
+      [] > s361268035
+        class__System.out.println > @
+          class__System.out
+          l871160466
+      [] > l871160466
+        class__String.constructor_2 > @
+          class__String.new
+          "false block"
+    [] > s352083716
+      class__System.out.println > @
+        class__System.out
+        l1848125895
+    [] > l1848125895
+      class__String.constructor_2 > @
+        class__String.new
+        "passed"
+  # null :: null -> void
+  [this] > constructor
+    seq > @
+      initialization
+      s1072377306
+    [] > initialization
+      this.init > @
+        this
+    [] > s1072377306
+      super.constructor > @
+        this
+
+[args...] > main
+  class__SimpleConditionalOR.main > @
+    *
