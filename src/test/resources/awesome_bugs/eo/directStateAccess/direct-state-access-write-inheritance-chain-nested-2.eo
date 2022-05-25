@@ -1,4 +1,4 @@
-# 2022-05-24T13:15:43.895884600
+# 2022-05-25T15:02:28.571792
 # j2eo team
 +alias stdlib.lang.class__Object
 +alias stdlib.primitives.prim__int
@@ -59,34 +59,37 @@
         seq > @
           initialization
           s1714113641
+          this
         [] > initialization
           this.init > @
             this
         [] > s1714113641
           super.constructor > @
-            this
+            this.super
     # null :: null -> void
     [this] > constructor
       seq > @
         initialization
         s262445056
+        this
       [] > initialization
         this.init > @
           this
       [] > s262445056
         super.constructor > @
-          this
+          this.super
   # null :: null -> void
   [this] > constructor
     seq > @
       initialization
       s1898155970
+      this
     [] > initialization
       this.init > @
         this
     [] > s1898155970
       super.constructor > @
-        this
+        this.super
 
 [] > class__B
   class__A.class__Inner.class__VeryInner > super
@@ -106,12 +109,13 @@
     seq > @
       initialization
       s710190911
+      this
     [] > initialization
       this.init > @
         this
     [] > s710190911
       super.constructor > @
-        this
+        this.super
 
 [] > class__C
   class__B > super
@@ -131,12 +135,13 @@
     seq > @
       initialization
       s379645464
+      this
     [] > initialization
       this.init > @
         this
     [] > s379645464
       super.constructor > @
-        this
+        this.super
 
 [] > class__D
   class__C > super
@@ -174,12 +179,13 @@
     seq > @
       initialization
       s621300254
+      this
     [] > initialization
       this.init > @
         this
     [] > s621300254
       super.constructor > @
-        this
+        this.super
 
 [] > class__Test
   class__Object > super
@@ -221,12 +227,13 @@
     seq > @
       initialization
       s1296456465
+      this
     [] > initialization
       this.init > @
         this
     [] > s1296456465
       super.constructor > @
-        this
+        this.super
 
 [args...] > main
   class__Test.main > @

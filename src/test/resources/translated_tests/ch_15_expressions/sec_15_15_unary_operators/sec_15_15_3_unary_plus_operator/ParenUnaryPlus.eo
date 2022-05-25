@@ -1,4 +1,4 @@
-# 2022-05-24T13:18:23.136144800
+# 2022-05-25T15:02:54.059530600
 # j2eo team
 +alias stdlib.lang.class__System
 +alias stdlib.lang.class__Object
@@ -21,47 +21,47 @@
   # main :: String[] -> void
   [args] > main
     seq > @
-      d757004314
-      d18242360
-      s1430439149
-      s1632682988
+      d1279271200
+      d1276261147
+      s359922172
+      s1153447573
     prim__int.constructor_1 > a
       prim__int.new
-    [] > d757004314
+    [] > d1279271200
       a.write > @
-        i_s1279271200
-    [] > i_s1279271200
-      u_pre52908367 > @
-    [] > u_pre52908367
-      l1527953000.neg > @
-    [] > l1527953000
+        i_s52908367
+    [] > i_s52908367
+      u_pre1527953000 > @
+    [] > u_pre1527953000
+      l18242360.neg > @
+    [] > l18242360
       prim__int.constructor_2 > @
         prim__int.new
         5
     prim__int.constructor_1 > b
       prim__int.new
-    [] > d18242360
+    [] > d1276261147
       b.write > @
-        i_s1276261147
-    [] > i_s1276261147
-      p1971764991 > @
-    [] > p1971764991
-      u_pre996796369 > @
-    [] > u_pre996796369
-      s_r135640095 > @
-    [] > s_r135640095
+        i_s1971764991
+    [] > i_s1971764991
+      p996796369 > @
+    [] > p996796369
+      u_pre135640095 > @
+    [] > u_pre135640095
+      s_r1430439149 > @
+    [] > s_r1430439149
       a > @
-    [] > s1430439149
+    [] > s359922172
       class__System.out.println > @
         class__System.out
-        s_r359922172
-    [] > s_r359922172
+        s_r1632682988
+    [] > s_r1632682988
       b > @
-    [] > s1632682988
+    [] > s1153447573
       class__System.out.println > @
         class__System.out
-        l1153447573
-    [] > l1153447573
+        l132577100
+    [] > l132577100
       class__String.constructor_2 > @
         class__String.new
         "passed"
@@ -69,13 +69,14 @@
   [this] > constructor
     seq > @
       initialization
-      s132577100
+      s231756373
+      this
     [] > initialization
       this.init > @
         this
-    [] > s132577100
+    [] > s231756373
       super.constructor > @
-        this
+        this.super
 
 [args...] > main
   class__ParenUnaryPlus.main > @

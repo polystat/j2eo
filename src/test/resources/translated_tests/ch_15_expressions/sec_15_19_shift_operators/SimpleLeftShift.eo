@@ -1,4 +1,4 @@
-# 2022-05-24T13:18:23.202086200
+# 2022-05-25T15:02:54.102529400
 # j2eo team
 +alias stdlib.lang.class__System
 +alias stdlib.lang.class__Object
@@ -21,39 +21,39 @@
   # main :: String[] -> void
   [args] > main
     seq > @
-      d1292040526
-      s542365801
-      s1270038388
-      s63387985
+      d726181440
+      s2051120548
+      s1973233403
+      s1029472813
     prim__int.constructor_1 > a
       prim__int.new
-    [] > d1292040526
+    [] > d726181440
       a.write > @
-        i_s726181440
-    [] > i_s726181440
-      l510147134 > @
-    [] > l510147134
+        i_s510147134
+    [] > i_s510147134
+      l542365801 > @
+    [] > l542365801
       prim__int.constructor_2 > @
         prim__int.new
         128
-    [] > s542365801
-      s_r2051120548.write > @
-        s_r341138954
-    [] > s_r2051120548
-      a > @
+    [] > s2051120548
+      s_r341138954.write > @
+        s_r1270038388
     [] > s_r341138954
       a > @
-    [] > s1270038388
-      class__System.out.println > @
-        class__System.out
-        s_r1973233403
-    [] > s_r1973233403
+    [] > s_r1270038388
       a > @
-    [] > s63387985
+    [] > s1973233403
       class__System.out.println > @
         class__System.out
-        l1029472813
-    [] > l1029472813
+        s_r63387985
+    [] > s_r63387985
+      a > @
+    [] > s1029472813
+      class__System.out.println > @
+        class__System.out
+        l1866875501
+    [] > l1866875501
       class__String.constructor_2 > @
         class__String.new
         "passed"
@@ -61,13 +61,14 @@
   [this] > constructor
     seq > @
       initialization
-      s1866875501
+      s1936722816
+      this
     [] > initialization
       this.init > @
         this
-    [] > s1866875501
+    [] > s1936722816
       super.constructor > @
-        this
+        this.super
 
 [args...] > main
   class__SimpleLeftShift.main > @

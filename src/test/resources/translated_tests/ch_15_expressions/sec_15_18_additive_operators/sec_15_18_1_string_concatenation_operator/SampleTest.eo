@@ -1,4 +1,4 @@
-# 2022-05-24T13:18:23.195117500
+# 2022-05-25T15:02:54.094531600
 # j2eo team
 +alias stdlib.lang.class__System
 +alias stdlib.lang.class__Object
@@ -22,76 +22,76 @@
   # main :: String[] -> void
   [args] > main
     seq > @
-      d1376790324
-      d694452085
-      s1785397234
-      s8805846
-      s963815509
+      d893504292
+      d857068247
+      s373928166
+      s81412691
+      s1659367709
     cage > str1
-    [] > d1376790324
+    [] > d893504292
       str1.write > @
-        i_s893504292
-    [] > i_s893504292
-      b561480862 > @
-    [] > b561480862
-      b1087081975.add > @
-        l330382173
+        i_s561480862
+    [] > i_s561480862
+      b1087081975 > @
     [] > b1087081975
-      l680712932.add > @
-        l895281180
-    [] > l680712932
+      b330382173.add > @
+        l680712932
+    [] > b330382173
+      l895281180.add > @
+        l694452085
+    [] > l895281180
       class__String.constructor_2 > @
         class__String.new
         "str"
-    [] > l895281180
+    [] > l694452085
       prim__int.constructor_2 > @
         prim__int.new
         1
-    [] > l330382173
+    [] > l680712932
       prim__int.constructor_2 > @
         prim__int.new
         2
     cage > str2
-    [] > d694452085
+    [] > d857068247
       str2.write > @
-        i_s857068247
-    [] > i_s857068247
-      b225344427 > @
-    [] > b225344427
-      b1604353554.add > @
-        l1437941060
+        i_s225344427
+    [] > i_s225344427
+      b1604353554 > @
     [] > b1604353554
-      l1210830415.add > @
-        l912672706
-    [] > l1210830415
-      prim__int.constructor_2 > @
-        prim__int.new
-        1
+      b1437941060.add > @
+        l1210830415
+    [] > b1437941060
+      l912672706.add > @
+        l1785397234
     [] > l912672706
       prim__int.constructor_2 > @
         prim__int.new
+        1
+    [] > l1785397234
+      prim__int.constructor_2 > @
+        prim__int.new
         2
-    [] > l1437941060
+    [] > l1210830415
       class__String.constructor_2 > @
         class__String.new
         "str"
-    [] > s1785397234
+    [] > s373928166
       class__System.out.println > @
         class__System.out
-        s_r373928166
-    [] > s_r373928166
+        s_r8805846
+    [] > s_r8805846
       str1 > @
-    [] > s8805846
+    [] > s81412691
       class__System.out.println > @
         class__System.out
-        s_r81412691
-    [] > s_r81412691
+        s_r963815509
+    [] > s_r963815509
       str2 > @
-    [] > s963815509
+    [] > s1659367709
       class__System.out.println > @
         class__System.out
-        l1659367709
-    [] > l1659367709
+        l1346201722
+    [] > l1346201722
       class__String.constructor_2 > @
         class__String.new
         "passed"
@@ -99,13 +99,14 @@
   [this] > constructor
     seq > @
       initialization
-      s1346201722
+      s111374580
+      this
     [] > initialization
       this.init > @
         this
-    [] > s1346201722
+    [] > s111374580
       super.constructor > @
-        this
+        this.super
 
 [args...] > main
   class__AssociativeStringConcat.main > @

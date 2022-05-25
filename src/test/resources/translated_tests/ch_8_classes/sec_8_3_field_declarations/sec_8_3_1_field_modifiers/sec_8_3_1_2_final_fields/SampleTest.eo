@@ -1,4 +1,4 @@
-# 2022-05-24T13:18:23.611886600
+# 2022-05-25T15:02:54.626239900
 # j2eo team
 +alias stdlib.lang.class__System
 +alias stdlib.lang.class__Object
@@ -23,29 +23,29 @@
   # main :: String[] -> void
   [args] > main
     seq > @
-      d1815556070
-      s115433442
+      d1482246673
+      s1760670079
     prim__int.constructor_1 > a
       prim__int.new
-    [] > d1815556070
+    [] > d1482246673
       a.write > @
-        i_s1482246673
-    [] > i_s1482246673
-      b708348097 > @
-    [] > b708348097
-      s_r1097324923.add > @
-        l351962798
-    [] > s_r1097324923
+        i_s708348097
+    [] > i_s708348097
+      b1097324923 > @
+    [] > b1097324923
+      s_r351962798.add > @
+        l115433442
+    [] > s_r351962798
       var > @
-    [] > l351962798
+    [] > l115433442
       prim__int.constructor_2 > @
         prim__int.new
         1
-    [] > s115433442
+    [] > s1760670079
       class__System.out.println > @
         class__System.out
-        l1760670079
-    [] > l1760670079
+        l388104475
+    [] > l388104475
       class__String.constructor_2 > @
         class__String.new
         "passed"
@@ -53,13 +53,14 @@
   [this] > constructor
     seq > @
       initialization
-      s388104475
+      s1470966439
+      this
     [] > initialization
       this.init > @
         this
-    [] > s388104475
+    [] > s1470966439
       super.constructor > @
-        this
+        this.super
 
 [args...] > main
   class__SimpleFinalField.main > @

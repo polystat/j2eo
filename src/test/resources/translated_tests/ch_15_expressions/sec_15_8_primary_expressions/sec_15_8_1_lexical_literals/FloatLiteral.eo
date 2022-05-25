@@ -1,4 +1,4 @@
-# 2022-05-24T13:18:23.319369200
+# 2022-05-25T15:02:54.207532
 # j2eo team
 +alias stdlib.primitives.prim__float
 +alias stdlib.lang.class__System
@@ -21,24 +21,24 @@
   # main :: String[] -> void
   [args] > main
     seq > @
-      d1346343363
-      s391135083
+      d324169305
+      s1003292107
     prim__float.constructor_1 > a
       prim__float.new
-    [] > d1346343363
+    [] > d324169305
       a.write > @
-        i_s324169305
-    [] > i_s324169305
-      l573958827 > @
-    [] > l573958827
+        i_s573958827
+    [] > i_s573958827
+      l391135083 > @
+    [] > l391135083
       prim__float.constructor_2 > @
         prim__float.new
         1.0
-    [] > s391135083
+    [] > s1003292107
       class__System.out.println > @
         class__System.out
-        l1003292107
-    [] > l1003292107
+        l997033037
+    [] > l997033037
       class__String.constructor_2 > @
         class__String.new
         "passed"
@@ -46,13 +46,14 @@
   [this] > constructor
     seq > @
       initialization
-      s997033037
+      s914374969
+      this
     [] > initialization
       this.init > @
         this
-    [] > s997033037
+    [] > s914374969
       super.constructor > @
-        this
+        this.super
 
 [args...] > main
   class__FloatLiteral.main > @

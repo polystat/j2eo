@@ -1,4 +1,4 @@
-# 2022-05-24T13:18:23.275036800
+# 2022-05-25T15:02:54.160529700
 # j2eo team
 +alias stdlib.lang.class__System
 +alias stdlib.lang.class__Object
@@ -21,70 +21,70 @@
   # main :: String[] -> void
   [args] > main
     seq > @
-      d1721246982
-      d1272883899
-      s1896305732
-      s1038677529
+      d1892627171
+      d1816725203
+      s1328718765
+      s716487794
     prim__boolean.constructor_1 > a
       prim__boolean.new
-    [] > d1721246982
+    [] > d1892627171
       a.write > @
-        i_s1892627171
-    [] > i_s1892627171
-      l1515833950 > @
-    [] > l1515833950
+        i_s1515833950
+    [] > i_s1515833950
+      l1272883899 > @
+    [] > l1272883899
       prim__boolean.constructor_2 > @
         prim__boolean.new
         FALSE
     prim__boolean.constructor_1 > b
       prim__boolean.new
-    [] > d1272883899
+    [] > d1816725203
       b.write > @
-        i_s1816725203
-    [] > i_s1816725203
-      l1704491411 > @
-    [] > l1704491411
+        i_s1704491411
+    [] > i_s1704491411
+      l1896305732 > @
+    [] > l1896305732
       prim__boolean.constructor_2 > @
         prim__boolean.new
         TRUE
-    [] > s1896305732
-      b116734858.if > @
-        b438589491
+    [] > s1328718765
+      b1551945522.if > @
         b1732238286
-    [] > b116734858
-      s_r93740343.and > @
-        s_r2052910813
-    [] > s_r93740343
-      a > @
+        b93740343
+    [] > b1551945522
+      s_r2052910813.and > @
+        s_r1107412069
     [] > s_r2052910813
+      a > @
+    [] > s_r1107412069
       b > @
-    [] > b438589491
+    [] > b1732238286
       seq > @
-        s1107412069
-      [] > s1107412069
+        s1534694976
+      [] > s1534694976
         class__System.out.println > @
           class__System.out
-          l1534694976
-      [] > l1534694976
+          l1823541245
+      [] > l1823541245
         class__String.constructor_2 > @
           class__String.new
           "true block"
-    [] > b1732238286
+    [] > b93740343
       seq > @
-        s1823541245
-      [] > s1823541245
+        s1896232624
+      [] > s1896232624
         class__System.out.println > @
           class__System.out
-          l1896232624
-      [] > l1896232624
+          l1038677529
+      [] > l1038677529
         class__String.constructor_2 > @
           class__String.new
           "false block"
-    [] > s1038677529
+    [] > s716487794
       class__System.out.println > @
         class__System.out
-        l716487794
-    [] > l716487794
+        l1314838582
+    [] > l1314838582
       class__String.constructor_2 > @
         class__String.new
         "passed"
@@ -92,13 +92,14 @@
   [this] > constructor
     seq > @
       initialization
-      s1314838582
+      s246273275
+      this
     [] > initialization
       this.init > @
         this
-    [] > s1314838582
+    [] > s246273275
       super.constructor > @
-        this
+        this.super
 
 [args...] > main
   class__SimpleConditionalAND.main > @

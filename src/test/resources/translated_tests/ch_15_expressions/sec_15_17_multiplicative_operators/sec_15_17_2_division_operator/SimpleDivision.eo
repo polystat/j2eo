@@ -1,4 +1,4 @@
-# 2022-05-24T13:18:23.190081600
+# 2022-05-25T15:02:54.087532
 # j2eo team
 +alias stdlib.lang.class__System
 +alias stdlib.lang.class__Object
@@ -21,28 +21,28 @@
   # main :: String[] -> void
   [args] > main
     seq > @
-      s270056930
-      s1355457888
-    [] > s270056930
+      s1706292388
+      s707161353
+    [] > s1706292388
       class__System.out.println > @
         class__System.out
-        b1706292388
-    [] > b1706292388
-      l254801937.div > @
-        l90767234
-    [] > l254801937
-      prim__int.constructor_2 > @
-        prim__int.new
-        56
+        b254801937
+    [] > b254801937
+      l90767234.div > @
+        l1355457888
     [] > l90767234
       prim__int.constructor_2 > @
         prim__int.new
+        56
+    [] > l1355457888
+      prim__int.constructor_2 > @
+        prim__int.new
         8
-    [] > s1355457888
+    [] > s707161353
       class__System.out.println > @
         class__System.out
-        l707161353
-    [] > l707161353
+        l1522132780
+    [] > l1522132780
       class__String.constructor_2 > @
         class__String.new
         "passed"
@@ -50,13 +50,14 @@
   [this] > constructor
     seq > @
       initialization
-      s1522132780
+      s409962262
+      this
     [] > initialization
       this.init > @
         this
-    [] > s1522132780
+    [] > s409962262
       super.constructor > @
-        this
+        this.super
 
 [args...] > main
   class__SimpleDivision.main > @

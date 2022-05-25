@@ -1,4 +1,4 @@
-# 2022-05-24T13:18:23.549884100
+# 2022-05-25T15:02:54.597227900
 # j2eo team
 +alias stdlib.lang.class__Object
 +alias stdlib.lang.class__System
@@ -34,22 +34,23 @@
     [this] > constructor
       seq > @
         initialization
-        s1986417638
+        s1309129055
+        this
       [] > initialization
         this.init > @
           this
-      [] > s1986417638
+      [] > s1309129055
         super.constructor > @
-          this
+          this.super
   # main :: String[] -> void
   [args] > main
     seq > @
-      s1309129055
-    [] > s1309129055
+      s682910755
+    [] > s682910755
       class__System.out.println > @
         class__System.out
-        l682910755
-    [] > l682910755
+        l2143582219
+    [] > l2143582219
       class__String.constructor_2 > @
         class__String.new
         "passed"
@@ -57,13 +58,14 @@
   [this] > constructor
     seq > @
       initialization
-      s2143582219
+      s997850486
+      this
     [] > initialization
       this.init > @
         this
-    [] > s2143582219
+    [] > s997850486
       super.constructor > @
-        this
+        this.super
 
 [args...] > main
   class__SimplestPublicFinalClass.main > @

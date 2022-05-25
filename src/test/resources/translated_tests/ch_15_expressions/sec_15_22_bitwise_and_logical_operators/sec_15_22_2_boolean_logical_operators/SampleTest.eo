@@ -1,4 +1,4 @@
-# 2022-05-24T13:18:23.230421100
+# 2022-05-25T15:02:54.151529500
 # j2eo team
 +alias stdlib.lang.class__System
 +alias stdlib.lang.class__Object
@@ -21,48 +21,48 @@
   # main :: String[] -> void
   [args] > main
     seq > @
-      d540325452
-      d1902237905
-      s1715248762
-      s1363793720
+      d1976804832
+      d1961002599
+      s434398524
+      s1807648168
     prim__boolean.constructor_1 > a
       prim__boolean.new
-    [] > d540325452
+    [] > d1976804832
       a.write > @
-        i_s1976804832
-    [] > i_s1976804832
-      l1959910454 > @
-    [] > l1959910454
+        i_s1959910454
+    [] > i_s1959910454
+      l1902237905 > @
+    [] > l1902237905
       prim__boolean.constructor_2 > @
         prim__boolean.new
         FALSE
     prim__boolean.constructor_1 > b
       prim__boolean.new
-    [] > d1902237905
+    [] > d1961002599
       b.write > @
-        i_s1961002599
-    [] > i_s1961002599
-      l485937598 > @
-    [] > l485937598
+        i_s485937598
+    [] > i_s485937598
+      l1715248762 > @
+    [] > l1715248762
       prim__boolean.constructor_2 > @
         prim__boolean.new
         TRUE
-    [] > s1715248762
+    [] > s434398524
       class__System.out.println > @
         class__System.out
-        b434398524
-    [] > b434398524
-      s_r2035616217.bit_and > @
-        s_r1392794732
-    [] > s_r2035616217
-      a > @
+        b2035616217
+    [] > b2035616217
+      s_r1392794732.bit_and > @
+        s_r1363793720
     [] > s_r1392794732
+      a > @
+    [] > s_r1363793720
       b > @
-    [] > s1363793720
+    [] > s1807648168
       class__System.out.println > @
         class__System.out
-        l1807648168
-    [] > l1807648168
+        l980697799
+    [] > l980697799
       class__String.constructor_2 > @
         class__String.new
         "passed"
@@ -70,13 +70,14 @@
   [this] > constructor
     seq > @
       initialization
-      s980697799
+      s1273143001
+      this
     [] > initialization
       this.init > @
         this
-    [] > s980697799
+    [] > s1273143001
       super.constructor > @
-        this
+        this.super
 
 [args...] > main
   class__SimpleAND.main > @

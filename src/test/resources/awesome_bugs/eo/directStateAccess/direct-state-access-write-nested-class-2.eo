@@ -1,4 +1,4 @@
-# 2022-05-24T13:15:43.905882200
+# 2022-05-25T15:02:28.590802400
 # j2eo team
 +alias stdlib.lang.class__Object
 +alias stdlib.primitives.prim__int
@@ -59,12 +59,13 @@
         seq > @
           initialization
           s586127428
+          this
         [] > initialization
           this.init > @
             this
         [] > s586127428
           super.constructor > @
-            this
+            this.super
     [] > class__B
       class__A > super
       super > @
@@ -101,34 +102,37 @@
         seq > @
           initialization
           s1223850219
+          this
         [] > initialization
           this.init > @
             this
         [] > s1223850219
           super.constructor > @
-            this
+            this.super
     # null :: null -> void
     [this] > constructor
       seq > @
         initialization
         s790722099
+        this
       [] > initialization
         this.init > @
           this
       [] > s790722099
         super.constructor > @
-          this
+          this.super
   # null :: null -> void
   [this] > constructor
     seq > @
       initialization
       s173214986
+      this
     [] > initialization
       this.init > @
         this
     [] > s173214986
       super.constructor > @
-        this
+        this.super
 
 [] > class__Test
   class__Object > super
@@ -178,12 +182,13 @@
     seq > @
       initialization
       s416841088
+      this
     [] > initialization
       this.init > @
         this
     [] > s416841088
       super.constructor > @
-        this
+        this.super
 
 [args...] > main
   class__Test.main > @

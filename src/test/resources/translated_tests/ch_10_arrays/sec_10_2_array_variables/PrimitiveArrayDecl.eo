@@ -1,8 +1,10 @@
-# 2022-05-24T13:18:22.983719300
+# 2022-05-25T15:02:53.819242800
 # j2eo team
++alias stdlib.lang.class__System
 +alias stdlib.lang.class__Object
 +alias stdlib.primitives.prim__int
 +alias stdlib.lang.class__String
++alias org.eolang.gray.cage
 
 [] > class__PrimitiveArrayDecl
   class__Object > super
@@ -20,16 +22,16 @@
   # main :: String[] -> void
   [args] > main
     seq > @
-      d1543148593
-      s1571967156
+      d2028555727
+      s591391158
     cage > arr
-    [] > d1543148593
+    [] > d2028555727
       TRUE > @
-    [] > s1571967156
-      System.out.println > @
-        System.out
-        l574568002
-    [] > l574568002
+    [] > s591391158
+      class__System.out.println > @
+        class__System.out
+        l898557489
+    [] > l898557489
       class__String.constructor_2 > @
         class__String.new
         "passed"
@@ -37,13 +39,14 @@
   [this] > constructor
     seq > @
       initialization
-      s247944893
+      s1024597427
+      this
     [] > initialization
       this.init > @
         this
-    [] > s247944893
+    [] > s1024597427
       super.constructor > @
-        this
+        this.super
 
 [args...] > main
   class__PrimitiveArrayDecl.main > @

@@ -1,4 +1,4 @@
-# 2022-05-24T13:18:23.645271
+# 2022-05-25T15:02:54.682137900
 # j2eo team
 +alias stdlib.lang.class__Object
 +alias stdlib.lang.class__System
@@ -24,16 +24,16 @@
   # main :: String[] -> void
   [args] > main
     seq > @
-      s35984028
       s541285440
-    [] > s35984028
+      s1463355115
+    [] > s541285440
       method > @
         this
-    [] > s541285440
+    [] > s1463355115
       class__System.out.println > @
         class__System.out
-        l1463355115
-    [] > l1463355115
+        l1201466784
+    [] > l1201466784
       class__String.constructor_2 > @
         class__String.new
         "passed"
@@ -41,13 +41,14 @@
   [this] > constructor
     seq > @
       initialization
-      s1201466784
+      s1829217853
+      this
     [] > initialization
       this.init > @
         this
-    [] > s1201466784
+    [] > s1829217853
       super.constructor > @
-        this
+        this.super
 
 [args...] > main
   class__SimpleStrictFPMethod.main > @

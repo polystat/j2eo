@@ -1,4 +1,4 @@
-# 2022-05-24T13:18:23.606883100
+# 2022-05-25T15:02:54.619212700
 # j2eo team
 +alias stdlib.lang.class__System
 +alias stdlib.lang.class__Object
@@ -19,10 +19,10 @@
       # func :: null -> int
       [this] > func
         seq > @
-          s69329761
-        [] > s69329761
-          l1507118393 > @
-        [] > l1507118393
+          s1507118393
+        [] > s1507118393
+          l949767857 > @
+        [] > l949767857
           prim__int.constructor_2 > @
             prim__int.new
             0
@@ -31,12 +31,12 @@
   # main :: String[] -> void
   [args] > main
     seq > @
-      s888557915
-    [] > s888557915
+      s1261764601
+    [] > s1261764601
       class__System.out.println > @
         class__System.out
-        l1261764601
-    [] > l1261764601
+        l294111720
+    [] > l294111720
       class__String.constructor_2 > @
         class__String.new
         "passed"
@@ -44,13 +44,14 @@
   [this] > constructor
     seq > @
       initialization
-      s294111720
+      s310016558
+      this
     [] > initialization
       this.init > @
         this
-    [] > s294111720
+    [] > s310016558
       super.constructor > @
-        this
+        this.super
 
 [args...] > main
   class__MethodClassMember.main > @

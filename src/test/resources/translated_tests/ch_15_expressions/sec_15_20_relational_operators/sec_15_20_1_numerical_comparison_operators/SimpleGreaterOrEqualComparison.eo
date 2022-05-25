@@ -1,4 +1,4 @@
-# 2022-05-24T13:18:23.216473200
+# 2022-05-25T15:02:54.133531500
 # j2eo team
 +alias stdlib.lang.class__System
 +alias stdlib.lang.class__Object
@@ -21,48 +21,48 @@
   # main :: String[] -> void
   [args] > main
     seq > @
-      d1259174396
-      d227755469
-      s1498438472
-      s335359181
+      d1276709283
+      d762384154
+      s1325056130
+      s194707680
     prim__int.constructor_1 > a
       prim__int.new
-    [] > d1259174396
+    [] > d1276709283
       a.write > @
-        i_s1276709283
-    [] > i_s1276709283
-      l1116094714 > @
-    [] > l1116094714
+        i_s1116094714
+    [] > i_s1116094714
+      l227755469 > @
+    [] > l227755469
       prim__int.constructor_2 > @
         prim__int.new
         5
     prim__int.constructor_1 > b
       prim__int.new
-    [] > d227755469
+    [] > d762384154
       b.write > @
-        i_s762384154
-    [] > i_s762384154
-      l690052870 > @
-    [] > l690052870
+        i_s690052870
+    [] > i_s690052870
+      l1498438472 > @
+    [] > l1498438472
       prim__int.constructor_2 > @
         prim__int.new
         6
-    [] > s1498438472
+    [] > s1325056130
       class__System.out.println > @
         class__System.out
-        b1325056130
-    [] > b1325056130
-      s_r1809194904.geq > @
-        s_r1219273867
-    [] > s_r1809194904
-      a > @
+        b1809194904
+    [] > b1809194904
+      s_r1219273867.geq > @
+        s_r335359181
     [] > s_r1219273867
+      a > @
+    [] > s_r335359181
       b > @
-    [] > s335359181
+    [] > s194707680
       class__System.out.println > @
         class__System.out
-        l194707680
-    [] > l194707680
+        l1349182676
+    [] > l1349182676
       class__String.constructor_2 > @
         class__String.new
         "passed"
@@ -70,13 +70,14 @@
   [this] > constructor
     seq > @
       initialization
-      s1349182676
+      s2102368942
+      this
     [] > initialization
       this.init > @
         this
-    [] > s1349182676
+    [] > s2102368942
       super.constructor > @
-        this
+        this.super
 
 [args...] > main
   class__SimpleGreaterOrEqualComparison.main > @

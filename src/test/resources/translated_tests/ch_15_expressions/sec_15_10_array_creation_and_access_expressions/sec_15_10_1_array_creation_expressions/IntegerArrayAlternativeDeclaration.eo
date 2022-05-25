@@ -1,4 +1,4 @@
-# 2022-05-24T13:18:23.083069900
+# 2022-05-25T15:02:53.992179200
 # j2eo team
 +alias stdlib.lang.class__System
 +alias stdlib.lang.class__Object
@@ -22,54 +22,54 @@
   # main :: String[] -> void
   [args] > main
     seq > @
-      d1861781750
-      s77269878
+      d283717519
+      s1990160809
     cage > array
-    [] > d1861781750
+    [] > d283717519
       array.write > @
-        i_a2095303566
-    [] > i_a2095303566
+        i_a2025221430
+    [] > i_a2025221430
       * > @
-        i_s2025221430
         i_s1378084334
         i_s200224114
         i_s1773283386
         i_s581318631
-    [] > i_s2025221430
-      l1877453512 > @
-    [] > l1877453512
+        i_s1877453512
+    [] > i_s1378084334
+      l487694075 > @
+    [] > l487694075
       prim__int.constructor_2 > @
         prim__int.new
         0
-    [] > i_s1378084334
-      l1704629915 > @
-    [] > l1704629915
-      prim__int.constructor_2 > @
-        prim__int.new
-        1
     [] > i_s200224114
       l1989184704 > @
     [] > l1989184704
       prim__int.constructor_2 > @
         prim__int.new
-        2
+        1
     [] > i_s1773283386
       l611572016 > @
     [] > l611572016
       prim__int.constructor_2 > @
         prim__int.new
-        3
+        2
     [] > i_s581318631
       l889486595 > @
     [] > l889486595
       prim__int.constructor_2 > @
         prim__int.new
+        3
+    [] > i_s1877453512
+      l77269878 > @
+    [] > l77269878
+      prim__int.constructor_2 > @
+        prim__int.new
         4
-    [] > s77269878
+    [] > s1990160809
       class__System.out.println > @
         class__System.out
-        l1990160809
-    [] > l1990160809
+        l1285524499
+    [] > l1285524499
       class__String.constructor_2 > @
         class__String.new
         "passed"
@@ -77,13 +77,14 @@
   [this] > constructor
     seq > @
       initialization
-      s1285524499
+      s1524960486
+      this
     [] > initialization
       this.init > @
         this
-    [] > s1285524499
+    [] > s1524960486
       super.constructor > @
-        this
+        this.super
 
 [args...] > main
   class__IntegerArrayAlternativeDeclaration.main > @

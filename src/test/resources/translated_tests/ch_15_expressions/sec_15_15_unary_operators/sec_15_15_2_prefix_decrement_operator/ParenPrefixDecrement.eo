@@ -1,4 +1,4 @@
-# 2022-05-24T13:18:23.132142
+# 2022-05-25T15:02:54.053292600
 # j2eo team
 +alias stdlib.lang.class__System
 +alias stdlib.lang.class__Object
@@ -21,45 +21,45 @@
   # main :: String[] -> void
   [args] > main
     seq > @
-      d1534745514
-      d2088371948
-      s1011279482
-      s543846639
+      d2003496028
+      d1976870338
+      s208866101
+      s690686166
     prim__int.constructor_1 > a
       prim__int.new
-    [] > d1534745514
+    [] > d2003496028
       a.write > @
-        i_s2003496028
-    [] > i_s2003496028
-      l30578394 > @
-    [] > l30578394
+        i_s30578394
+    [] > i_s30578394
+      l2088371948 > @
+    [] > l2088371948
       prim__int.constructor_2 > @
         prim__int.new
         5
     prim__int.constructor_1 > b
       prim__int.new
-    [] > d2088371948
+    [] > d1976870338
       b.write > @
-        i_s1976870338
-    [] > i_s1976870338
-      p1434234664 > @
-    [] > p1434234664
-      u_pre1083021083 > @
-    [] > u_pre1083021083
-      s_r1819063424.dec_pre > @
-    [] > s_r1819063424
+        i_s1434234664
+    [] > i_s1434234664
+      p1083021083 > @
+    [] > p1083021083
+      u_pre1819063424 > @
+    [] > u_pre1819063424
+      s_r1011279482.dec_pre > @
+    [] > s_r1011279482
       a > @
-    [] > s1011279482
+    [] > s208866101
       class__System.out.println > @
         class__System.out
-        s_r208866101
-    [] > s_r208866101
+        s_r543846639
+    [] > s_r543846639
       b > @
-    [] > s543846639
+    [] > s690686166
       class__System.out.println > @
         class__System.out
-        l690686166
-    [] > l690686166
+        l576020159
+    [] > l576020159
       class__String.constructor_2 > @
         class__String.new
         "passed"
@@ -67,13 +67,14 @@
   [this] > constructor
     seq > @
       initialization
-      s576020159
+      s921420643
+      this
     [] > initialization
       this.init > @
         this
-    [] > s576020159
+    [] > s921420643
       super.constructor > @
-        this
+        this.super
 
 [args...] > main
   class__ParenPrefixDecrement.main > @

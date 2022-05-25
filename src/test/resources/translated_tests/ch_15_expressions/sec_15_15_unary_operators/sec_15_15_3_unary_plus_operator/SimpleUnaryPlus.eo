@@ -1,4 +1,4 @@
-# 2022-05-24T13:18:23.138892300
+# 2022-05-25T15:02:54.061529
 # j2eo team
 +alias stdlib.lang.class__System
 +alias stdlib.lang.class__Object
@@ -21,45 +21,45 @@
   # main :: String[] -> void
   [args] > main
     seq > @
-      d231756373
-      d275266973
-      s945591847
-      s109228794
+      d1786294176
+      d1069716895
+      s328827614
+      s561959774
     prim__int.constructor_1 > a
       prim__int.new
-    [] > d231756373
+    [] > d1786294176
       a.write > @
-        i_s1786294176
-    [] > i_s1786294176
-      u_pre793331940 > @
-    [] > u_pre793331940
-      l522553046.neg > @
-    [] > l522553046
+        i_s793331940
+    [] > i_s793331940
+      u_pre522553046 > @
+    [] > u_pre522553046
+      l275266973.neg > @
+    [] > l275266973
       prim__int.constructor_2 > @
         prim__int.new
         5
     prim__int.constructor_1 > b
       prim__int.new
-    [] > d275266973
+    [] > d1069716895
       b.write > @
-        i_s1069716895
-    [] > i_s1069716895
-      u_pre1521083627 > @
-    [] > u_pre1521083627
-      s_r1770642014 > @
-    [] > s_r1770642014
+        i_s1521083627
+    [] > i_s1521083627
+      u_pre1770642014 > @
+    [] > u_pre1770642014
+      s_r945591847 > @
+    [] > s_r945591847
       a > @
-    [] > s945591847
+    [] > s328827614
       class__System.out.println > @
         class__System.out
-        s_r328827614
-    [] > s_r328827614
+        s_r109228794
+    [] > s_r109228794
       b > @
-    [] > s109228794
+    [] > s561959774
       class__System.out.println > @
         class__System.out
-        l561959774
-    [] > l561959774
+        l2110756088
+    [] > l2110756088
       class__String.constructor_2 > @
         class__String.new
         "passed"
@@ -67,13 +67,14 @@
   [this] > constructor
     seq > @
       initialization
-      s2110756088
+      s580871917
+      this
     [] > initialization
       this.init > @
         this
-    [] > s2110756088
+    [] > s580871917
       super.constructor > @
-        this
+        this.super
 
 [args...] > main
   class__SimpleUnaryPlus.main > @

@@ -1,4 +1,4 @@
-# 2022-05-24T13:18:23.124835800
+# 2022-05-25T15:02:54.043944400
 # j2eo team
 +alias stdlib.lang.class__System
 +alias stdlib.lang.class__Object
@@ -21,43 +21,43 @@
   # main :: String[] -> void
   [args] > main
     seq > @
-      d1793799654
-      d258931371
-      s953742666
-      s891093184
+      d310623126
+      d1008315045
+      s1239759990
+      s708533063
     prim__int.constructor_1 > a
       prim__int.new
-    [] > d1793799654
+    [] > d310623126
       a.write > @
-        i_s310623126
-    [] > i_s310623126
-      l1961945640 > @
-    [] > l1961945640
+        i_s1961945640
+    [] > i_s1961945640
+      l258931371 > @
+    [] > l258931371
       prim__int.constructor_2 > @
         prim__int.new
         5
     prim__int.constructor_1 > b
       prim__int.new
-    [] > d258931371
+    [] > d1008315045
       b.write > @
-        i_s1008315045
-    [] > i_s1008315045
-      u_post860481979 > @
-    [] > u_post860481979
-      s_r1083962448.inc_post > @
-    [] > s_r1083962448
+        i_s860481979
+    [] > i_s860481979
+      u_post1083962448 > @
+    [] > u_post1083962448
+      s_r953742666.inc_post > @
+    [] > s_r953742666
       a > @
-    [] > s953742666
+    [] > s1239759990
       class__System.out.println > @
         class__System.out
-        s_r1239759990
-    [] > s_r1239759990
+        s_r891093184
+    [] > s_r891093184
       b > @
-    [] > s891093184
+    [] > s708533063
       class__System.out.println > @
         class__System.out
-        l708533063
-    [] > l708533063
+        l1438030319
+    [] > l1438030319
       class__String.constructor_2 > @
         class__String.new
         "passed"
@@ -65,13 +65,14 @@
   [this] > constructor
     seq > @
       initialization
-      s1438030319
+      s902830499
+      this
     [] > initialization
       this.init > @
         this
-    [] > s1438030319
+    [] > s902830499
       super.constructor > @
-        this
+        this.super
 
 [args...] > main
   class__SimplePostfixIncrement.main > @

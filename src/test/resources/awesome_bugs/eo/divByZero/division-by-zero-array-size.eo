@@ -1,4 +1,4 @@
-# 2022-05-24T13:15:43.940884200
+# 2022-05-25T15:02:28.645792500
 # j2eo team
 +alias stdlib.lang.class__Object
 +alias stdlib.lang.class__System
@@ -63,12 +63,13 @@
     seq > @
       initialization
       s1677458155
+      this
     [] > initialization
       this.init > @
         this
     [] > s1677458155
       super.constructor > @
-        this
+        this.super
 
 [args...] > main
   class__Test.main > @

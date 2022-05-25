@@ -1,4 +1,4 @@
-# 2022-05-24T13:15:43.858074300
+# 2022-05-25T15:02:28.479792700
 # j2eo team
 +alias stdlib.lang.class__Object
 +alias stdlib.lang.class__System
@@ -60,12 +60,13 @@
         seq > @
           initialization
           s169663597
+          this
         [] > initialization
           this.init > @
             this
         [] > s169663597
           super.constructor > @
-            this
+            this.super
     [] > class__B
       class__A > super
       super > @
@@ -84,12 +85,13 @@
         seq > @
           initialization
           s391877669
+          this
         [] > initialization
           this.init > @
             this
         [] > s391877669
           super.constructor > @
-            this
+            this.super
     [] > class__C
       class__B > super
       super > @
@@ -108,12 +110,13 @@
         seq > @
           initialization
           s815320891
+          this
         [] > initialization
           this.init > @
             this
         [] > s815320891
           super.constructor > @
-            this
+            this.super
     [] > class__D
       class__C > super
       super > @
@@ -145,34 +148,37 @@
         seq > @
           initialization
           s1443435931
+          this
         [] > initialization
           this.init > @
             this
         [] > s1443435931
           super.constructor > @
-            this
+            this.super
     # null :: null -> void
     [this] > constructor
       seq > @
         initialization
         s555273695
+        this
       [] > initialization
         this.init > @
           this
       [] > s555273695
         super.constructor > @
-          this
+          this.super
   # null :: null -> void
   [this] > constructor
     seq > @
       initialization
       s396883763
+      this
     [] > initialization
       this.init > @
         this
     [] > s396883763
       super.constructor > @
-        this
+        this.super
 
 [] > class__Test
   class__Object > super
@@ -226,12 +232,13 @@
     seq > @
       initialization
       s726379593
+      this
     [] > initialization
       this.init > @
         this
     [] > s726379593
       super.constructor > @
-        this
+        this.super
 
 [args...] > main
   class__Test.main > @

@@ -1,4 +1,4 @@
-# 2022-05-24T13:18:23.192085300
+# 2022-05-25T15:02:54.090532900
 # j2eo team
 +alias stdlib.lang.class__System
 +alias stdlib.lang.class__Object
@@ -21,28 +21,28 @@
   # main :: String[] -> void
   [args] > main
     seq > @
-      s1620948027
-      s20094719
-    [] > s1620948027
+      s1442191055
+      s1687662712
+    [] > s1442191055
       class__System.out.println > @
         class__System.out
-        b1442191055
-    [] > b1442191055
-      l324457684.binary_op_placeholder > @
-        l201576232
-    [] > l324457684
-      prim__int.constructor_2 > @
-        prim__int.new
-        57
+        b324457684
+    [] > b324457684
+      l201576232.binary_op_placeholder > @
+        l20094719
     [] > l201576232
       prim__int.constructor_2 > @
         prim__int.new
+        57
+    [] > l20094719
+      prim__int.constructor_2 > @
+        prim__int.new
         8
-    [] > s20094719
+    [] > s1687662712
       class__System.out.println > @
         class__System.out
-        l1687662712
-    [] > l1687662712
+        l1103243338
+    [] > l1103243338
       class__String.constructor_2 > @
         class__String.new
         "passed"
@@ -50,13 +50,14 @@
   [this] > constructor
     seq > @
       initialization
-      s1103243338
+      s1403704789
+      this
     [] > initialization
       this.init > @
         this
-    [] > s1103243338
+    [] > s1403704789
       super.constructor > @
-        this
+        this.super
 
 [args...] > main
   class__SimpleRemainder.main > @

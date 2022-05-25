@@ -1,4 +1,4 @@
-# 2022-05-24T13:18:23.223122500
+# 2022-05-25T15:02:54.142530500
 # j2eo team
 +alias stdlib.lang.class__System
 +alias stdlib.lang.class__Object
@@ -21,60 +21,60 @@
   # main :: String[] -> void
   [args] > main
     seq > @
-      d510276116
-      d445918232
-      s121167003
-      s14183023
-      s1963862935
+      d914507705
+      d1436633036
+      s1014486152
+      s42544488
+      s1042786867
     prim__int.constructor_1 > a
       prim__int.new
-    [] > d510276116
+    [] > d914507705
       a.write > @
-        i_s914507705
-    [] > i_s914507705
-      l443384617 > @
-    [] > l443384617
+        i_s443384617
+    [] > i_s443384617
+      l445918232 > @
+    [] > l445918232
       prim__int.constructor_2 > @
         prim__int.new
         5
     prim__int.constructor_1 > b
       prim__int.new
-    [] > d445918232
+    [] > d1436633036
       b.write > @
-        i_s1436633036
-    [] > i_s1436633036
-      l1908043086 > @
-    [] > l1908043086
+        i_s1908043086
+    [] > i_s1908043086
+      l121167003 > @
+    [] > l121167003
       prim__int.constructor_2 > @
         prim__int.new
         6
-    [] > s121167003
+    [] > s1014486152
       class__System.out.println > @
         class__System.out
-        b1014486152
-    [] > b1014486152
-      s_r1664576493.eq > @
-        s_r1095088856
-    [] > s_r1664576493
-      a > @
+        b1664576493
+    [] > b1664576493
+      s_r1095088856.eq > @
+        s_r14183023
     [] > s_r1095088856
-      b > @
-    [] > s14183023
-      class__System.out.println > @
-        class__System.out
-        b42544488
-    [] > b42544488
-      s_r1522095831.not_eq > @
-        s_r910599202
-    [] > s_r1522095831
       a > @
-    [] > s_r910599202
+    [] > s_r14183023
       b > @
-    [] > s1963862935
+    [] > s42544488
       class__System.out.println > @
         class__System.out
-        l1042786867
-    [] > l1042786867
+        b1522095831
+    [] > b1522095831
+      s_r910599202.not_eq > @
+        s_r1963862935
+    [] > s_r910599202
+      a > @
+    [] > s_r1963862935
+      b > @
+    [] > s1042786867
+      class__System.out.println > @
+        class__System.out
+        l775445710
+    [] > l775445710
       class__String.constructor_2 > @
         class__String.new
         "passed"
@@ -82,13 +82,14 @@
   [this] > constructor
     seq > @
       initialization
-      s775445710
+      s769432223
+      this
     [] > initialization
       this.init > @
         this
-    [] > s775445710
+    [] > s769432223
       super.constructor > @
-        this
+        this.super
 
 [args...] > main
   class__SimpleEquality.main > @
