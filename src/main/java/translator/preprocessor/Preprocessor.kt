@@ -268,7 +268,9 @@ private fun preprocessStmt(state: PreprocessorState, stmt: Statement) {
 }
 
 private fun preprocessVarDecl(state: PreprocessorState, varDecl: VariableDeclaration) {
-    preprocessInitializer(state, varDecl.initializer)
+    if (varDecl.initializer != null) {
+        preprocessInitializer(state, varDecl.initializer)
+    }
     when (varDecl.type) {
         is TypeName -> {
             preprocessType(state, varDecl.type)

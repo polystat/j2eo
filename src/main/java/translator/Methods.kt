@@ -10,6 +10,24 @@ import tree.Declaration.ConstructorDeclaration
 import tree.Declaration.MethodDeclaration
 import tree.Declaration.ParameterDeclaration
 
+fun genInit(): EOBndExpr =
+    EOBndExpr(
+        EOObject(
+            listOf(),
+            None,
+            listOf(
+                EOBndExpr(
+                    EOCopy(
+                        listOf("this", "init").eoDot(),
+                        "this".eoDot()
+                    ),
+                    "@"
+                )
+            )
+        ),
+        "initialization"
+    )
+
 fun mapMethodDeclaration(dec: MethodDeclaration): EOBndExpr {
     val isStatic = dec.modifiers != null &&
             dec.modifiers.modifiers.modifiers.find { it == TokenCode.Static } != null
@@ -40,26 +58,13 @@ fun mapMethodDeclaration(dec: MethodDeclaration): EOBndExpr {
         if (dec.methodBody != null) {
             mapBlock(
                 dec.methodBody,
-                additionalStmt = if (dec is ConstructorDeclaration) {
-                    "initialization" to listOf(
-                        EOBndExpr(
-                            EOObject(
-                                listOf(),
-                                None,
-                                listOf(
-                                    EOBndExpr(
-                                        EOCopy(
-                                            listOf("this", "init").eoDot(),
-                                            "this".eoDot()
-                                        ),
-                                        "@"
-                                    )
-                                )
-                            ),
-                            "initialization"
-                        )
-
-                    )
+                firstStmts = if (dec is ConstructorDeclaration) {
+                    listOf("initialization" to listOf(genInit()))
+                } else {
+                    null
+                },
+                lastStmts = if (dec is ConstructorDeclaration) {
+                    listOf("this" to listOf())
                 } else {
                     null
                 }
