@@ -126,6 +126,13 @@ Make sure you have these in sync (*mentioning* (not pointing to) the same `jdk` 
 ## Awesome Bugs translation
 [Awesome bugs repo](https://github.com/polystat/awesome-bugs)
 
+.java files:
+- [directStateAccess](src/test/resources/awesome_bugs/java/directStateAccess)
+- [divByZero](src/test/resources/awesome_bugs/java/divByZero)
+- [inheritance](src/test/resources/awesome_bugs/java/inheritance)
+- [unjustifiedAssumption](src/test/resources/awesome_bugs/java/unjustifiedAssumption)
+
+Translations:
 - [directStateAccess](src/test/resources/awesome_bugs/eo/directStateAccess)
 - [divByZero](src/test/resources/awesome_bugs/eo/divByZero)
 - [inheritance](src/test/resources/awesome_bugs/eo/inheritance)
