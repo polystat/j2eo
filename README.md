@@ -145,43 +145,95 @@ Translations:
 We use Java language specification document as a foundation for Java feature hierarchy.  
 Java 16 language specification: [see .pdf file](https://docs.oracle.com/javase/specs/jls/se16/jls16.pdf)
 
-### Ch. 4 - Types, Values, and Variables
-[Ch. 4 - Types, Values, and Variables](src/test/resources/test_ready/ch_4_types_values_variables)
-Key examples:
+###[Ch. 4 - Types, Values, and Variables](src/test/resources/test_ready/ch_4_types_values_variables)  
 - Increment operator:
-	- [Java](src/test/resources/test_ready/ch_4_types_values_variables/sec_4_2_primitive_types_and_values/sec_4_2_2_integer_operations/IncrementOperator.java)
-	- [EO](src/test/resources/translated_tests/ch_4_types_values_variables/sec_4_2_primitive_types_and_values/sec_4_2_2_integer_operations/IncrementOperator.eo)
+	[Java](src/test/resources/test_ready/ch_4_types_values_variables/sec_4_2_primitive_types_and_values/sec_4_2_2_integer_operations/IncrementOperator.java)
+	to
+	[EO](src/test/resources/translated_tests/ch_4_types_values_variables/sec_4_2_primitive_types_and_values/sec_4_2_2_integer_operations/IncrementOperator.eo)
 
-### Ch. 5 - Conversions and Contexts
-[Ch. 5 - Conversions and Contexts](src/test/resources/test_ready/ch_5_conversions_and_contexts)
+###[Ch. 5 - Conversions and Contexts](src/test/resources/test_ready/ch_5_conversions_and_contexts)
 
-### Ch. 6 - Names
-[Ch. 6 - Names](src/test/resources/test_ready/ch_6_names)
+###[Ch. 6 - Names](src/test/resources/test_ready/ch_6_names)
+- A simple declaration:
+	[Java](src/test/resources/test_ready/ch_6_names/sec_6_1_declarations/SimpleDeclaration.java)
+	to
+	[EO](src/test/resources/translated_tests/ch_6_names/sec_6_1_declarations/SimpleDeclaration.eo)
 
-### Ch. 7 - Packages and Modules WIP
-[Ch. 7 - Packages and Modules WIP](src/test/resources/test_ready/ch_7_packages_and_modules)
+###[Ch. 7 - Packages and Modules WIP](src/test/resources/test_ready/ch_7_packages_and_modules)
 
-### Ch. 8 - Classes
-[Ch. 8 - Classes](src/test/resources/test_ready/ch_8_classes)
+###[Ch. 8 - Classes](src/test/resources/test_ready/ch_8_classes)
+- Method class member:
+	[Java](src/test/resources/test_ready/ch_8_classes/sec_8_2_class_members/MethodClassMember.java)
+	to
+	[EO](src/test/resources/translated_tests/ch_8_classes/sec_8_2_class_members/MethodClassMember.eo)
+- Field initialization:
+	[Java](src/test/resources/test_ready/ch_8_classes/sec_8_3_field_declarations/sec_8_3_2_field_initialization/SimpleFieldInit.java)
+	to
+	[EO](src/test/resources/translated_tests/ch_8_classes/sec_8_3_field_declarations/sec_8_3_2_field_initialization/SimpleFieldInit.eo)
+- Method declaration:
+	[Java](src/test/resources/test_ready/ch_8_classes/sec_8_4_method_declarations/sec_8_4_1_formal_parametes/SimpleMethod.java)
+	to
+	[EO](src/test/resources/translated_tests/ch_8_classes/sec_8_4_method_declarations/sec_8_4_1_formal_parametes/SimpleMethod.eo)
+- Inner class:
+	[Java](src/test/resources/test_ready/ch_8_classes/sec_8_5_member_class_and_interface_declarations/SimpleInnerClass.java)
+	to
+	[EO](src/test/resources/translated_tests/ch_8_classes/sec_8_5_member_class_and_interface_declarations/SimpleInnerClass.eo)
 
-### Ch. 9 - Interfaces
-[Ch. 9 - Interfaces](src/test/resources/test_ready/ch_9_interfaces)
+###[Ch. 9 - Interfaces](src/test/resources/test_ready/ch_9_interfaces)
 
-### Ch. 10 - Arrays
-[Ch. 10 - Arrays](src/test/resources/test_ready/ch_10_arrays)
+###[Ch. 10 - Arrays](src/test/resources/test_ready/ch_10_arrays)
+- Primitive array declaration:
+    [Java](src/test/resources/test_ready/ch_10_arrays/sec_10_2_array_variables/PrimitiveArrayDecl.java)
+    to
+    [EO](src/test/resources/translated_tests/ch_10_arrays/sec_10_2_array_variables/PrimitiveArrayDecl.eo)
 
-### Ch. 11 - Exceptions WIP
-[Ch. 11 - Exceptions WIP](src/test/resources/test_ready/ch_11_exceptions)
+###[Ch. 11 - Exceptions WIP](src/test/resources/test_ready/ch_11_exceptions)
 
-### Ch. 14 - Block Statements, and Patterns
-[Ch. 14 - Block Statements, and Patterns](src/test/resources/test_ready/ch_14_blocks_statements_and_patterns)
+###[Ch. 14 - Block Statements, and Patterns](src/test/resources/test_ready/ch_14_blocks_statements_and_patterns)
 
-### Ch. 15 - Expressions
-[Ch. 15 - Expressions](src/test/resources/test_ready/ch_15_expressions)
+###[Ch. 15 - Expressions](src/test/resources/test_ready/ch_15_expressions)
+- Left-hand operands are evaluated first: 
+    [Java](src/test/resources/test_ready/ch_15_expressions/sec_15_7_evaluation_order/sec_15_7_1_evaluate_left_hand_operand_first/SimpleLeftHandOperandIsEvaluatedFirst.java)
+    to
+    [EO](src/test/resources/translated_tests/ch_15_expressions/sec_15_7_evaluation_order/sec_15_7_1_evaluate_left_hand_operand_first/SimpleLeftHandOperandIsEvaluatedFirst.eo)
+- Integer literal:
+    [Java](src/test/resources/test_ready/ch_15_expressions/sec_15_8_primary_expressions/sec_15_8_1_lexical_literals/IntegerLiteral.java)
+    to
+    [EO](src/test/resources/translated_tests/ch_15_expressions/sec_15_8_primary_expressions/sec_15_8_1_lexical_literals/IntegerLiteral.eo)
+- Complex parenthesized expression:
+    [Java](src/test/resources/test_ready/ch_15_expressions/sec_15_8_primary_expressions/sec_15_8_5_parenthesized_expressions/ComplexParenthExpression.java)
+    to
+    [EO](src/test/resources/translated_tests/ch_15_expressions/sec_15_8_primary_expressions/sec_15_8_5_parenthesized_expressions/ComplexParenthExpression.eo)
+- Creation of a simple integer array:
+    [Java](src/test/resources/test_ready/ch_15_expressions/sec_15_10_array_creation_and_access_expressions/sec_15_10_1_array_creation_expressions/SimpleIntegerArray.java)
+    to
+    [EO](src/test/resources/translated_tests/ch_15_expressions/sec_15_10_array_creation_and_access_expressions/sec_15_10_1_array_creation_expressions/SimpleIntegerArray.eo)
+- Postfix increment:
+    [Java](src/test/resources/test_ready/ch_15_expressions/sec_15_14_postfix_expressions/sec_15_14_2_postfix_increment_operator/SimplePostfixIncrement.java)
+    to
+    [EO](src/test/resources/translated_tests/ch_15_expressions/sec_15_14_postfix_expressions/sec_15_14_2_postfix_increment_operator/SimplePostfixIncrement.eo)
+- Unary plus operator:
+    [Java](src/test/resources/test_ready/ch_15_expressions/sec_15_15_unary_operators/sec_15_15_3_unary_plus_operator/SimpleUnaryPlus.java)
+    to
+    [EO](src/test/resources/translated_tests/ch_15_expressions/sec_15_15_unary_operators/sec_15_15_3_unary_plus_operator/SimpleUnaryPlus.eo)
+- Multiplication operator:
+    [Java](src/test/resources/test_ready/ch_15_expressions/sec_15_17_multiplicative_operators/sec_15_17_1_multiplication_operator/SimpleMultiplication.java)
+    to
+    [EO](src/test/resources/translated_tests/ch_15_expressions/sec_15_17_multiplicative_operators/sec_15_17_1_multiplication_operator/SimpleMultiplication.eo)
+- Variable right shift:
+    [Java](src/test/resources/test_ready/ch_15_expressions/sec_15_19_shift_operators/VariableRightShift.java)
+    to
+    [EO](src/test/resources/translated_tests/ch_15_expressions/sec_15_19_shift_operators/VariableRightShift.eo)
+- Greater operator:
+    [Java](src/test/resources/test_ready/ch_15_expressions/sec_15_20_relational_operators/sec_15_20_1_numerical_comparison_operators/SimpleGreaterComparison.java)
+    to
+    [EO](src/test/resources/translated_tests/ch_15_expressions/sec_15_20_relational_operators/sec_15_20_1_numerical_comparison_operators/SimpleGreaterComparison.eo)
+- Assignment operator:
+    [Java](src/test/resources/test_ready/ch_15_expressions/sec_15_26_assignment_operators/sec_15_26_1_simple_assignment_operator/SimpleAssignmentOperator.java)
+    to
+    [EO](src/test/resources/translated_tests/ch_15_expressions/sec_15_26_assignment_operators/sec_15_26_1_simple_assignment_operator/SimpleAssignmentOperator.eo)
 
-### Ch. 16 - Definite Assignments WIP
-[Ch. 16 - Definite Assignments WIP](src/test/resources/test_ready/ch_16_definite_assignment)
+###[Ch. 16 - Definite Assignments WIP](src/test/resources/test_ready/ch_16_definite_assignment)
 
-### Ch. 18 - Type inference WIP
-[Ch. 18 - Type inference WIP](src/test/resources/test_ready/ch_18_type_inference)
+###[Ch. 18 - Type inference WIP](src/test/resources/test_ready/ch_18_type_inference)
 
