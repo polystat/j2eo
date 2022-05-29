@@ -1,0 +1,33 @@
+# 2022-05-25T15:02:53.930450600
+# j2eo team
++alias stdlib.lang.class__Object
+
+[] > class__SampleTest
+  class__Object > super
+  super > @
+  [] > new
+    [] > this
+      class__Object.new > super
+      super > @
+      "class__SampleTest" > className
+      [this] > init
+        seq > @
+          TRUE
+    seq > @
+      this
+  # Main :: String[] -> void
+  [args] > Main
+    seq > @
+      TRUE
+  # null :: null -> void
+  [this] > constructor
+    seq > @
+      initialization
+      s71587369
+      this
+    [] > initialization
+      this.init > @
+        this
+    [] > s71587369
+      super.constructor > @
+        this.super

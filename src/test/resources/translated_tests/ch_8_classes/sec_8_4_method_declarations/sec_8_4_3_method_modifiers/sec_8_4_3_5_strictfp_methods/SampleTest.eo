@@ -1,0 +1,55 @@
+# 2022-05-25T15:02:54.682137900
+# j2eo team
++alias stdlib.lang.class__Object
++alias stdlib.lang.class__System
++alias stdlib.lang.class__String
+
+[] > class__SimpleStrictFPMethod
+  class__Object > super
+  super > @
+  [] > new
+    [] > this
+      class__Object.new > super
+      super > @
+      "class__SimpleStrictFPMethod" > className
+      [this] > init
+        seq > @
+          TRUE
+    seq > @
+      this
+  # method :: null -> void
+  [] > method
+    seq > @
+      TRUE
+  # main :: String[] -> void
+  [args] > main
+    seq > @
+      s541285440
+      s1463355115
+    [] > s541285440
+      method > @
+        this
+    [] > s1463355115
+      class__System.out.println > @
+        class__System.out
+        l1201466784
+    [] > l1201466784
+      class__String.constructor_2 > @
+        class__String.new
+        "passed"
+  # null :: null -> void
+  [this] > constructor
+    seq > @
+      initialization
+      s1829217853
+      this
+    [] > initialization
+      this.init > @
+        this
+    [] > s1829217853
+      super.constructor > @
+        this.super
+
+[args...] > main
+  class__SimpleStrictFPMethod.main > @
+    *

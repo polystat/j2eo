@@ -1,0 +1,96 @@
+# 2022-05-25T15:02:54.145530900
+# j2eo team
++alias stdlib.lang.class__System
++alias stdlib.lang.class__Object
++alias stdlib.primitives.prim__boolean
++alias stdlib.lang.class__String
+
+[] > class__SimpleEquality
+  class__Object > super
+  super > @
+  [] > new
+    [] > this
+      class__Object.new > super
+      super > @
+      "class__SimpleEquality" > className
+      [this] > init
+        seq > @
+          TRUE
+    seq > @
+      this
+  # main :: String[] -> void
+  [args] > main
+    seq > @
+      d696933920
+      d252480153
+      s259564670
+      s1422238463
+      s1754444726
+    prim__boolean.constructor_1 > a
+      prim__boolean.new
+    [] > d696933920
+      a.write > @
+        i_s712974096
+    [] > i_s712974096
+      l1187903677 > @
+    [] > l1187903677
+      prim__boolean.constructor_2 > @
+        prim__boolean.new
+        FALSE
+    prim__boolean.constructor_1 > b
+      prim__boolean.new
+    [] > d252480153
+      b.write > @
+        i_s1946988038
+    [] > i_s1946988038
+      l651802632 > @
+    [] > l651802632
+      prim__boolean.constructor_2 > @
+        prim__boolean.new
+        TRUE
+    [] > s259564670
+      class__System.out.println > @
+        class__System.out
+        b1682681674
+    [] > b1682681674
+      s_r1965445467.eq > @
+        s_r517254671
+    [] > s_r1965445467
+      a > @
+    [] > s_r517254671
+      b > @
+    [] > s1422238463
+      class__System.out.println > @
+        class__System.out
+        b1833789138
+    [] > b1833789138
+      s_r707157673.not_eq > @
+        s_r288958772
+    [] > s_r707157673
+      a > @
+    [] > s_r288958772
+      b > @
+    [] > s1754444726
+      class__System.out.println > @
+        class__System.out
+        l1852777344
+    [] > l1852777344
+      class__String.constructor_2 > @
+        class__String.new
+        "passed"
+  # null :: null -> void
+  [this] > constructor
+    seq > @
+      initialization
+      s1990519794
+      this
+    [] > initialization
+      this.init > @
+        this
+    [] > s1990519794
+      super.constructor > @
+        this.super
+
+[args...] > main
+  class__SimpleEquality.main > @
+    *

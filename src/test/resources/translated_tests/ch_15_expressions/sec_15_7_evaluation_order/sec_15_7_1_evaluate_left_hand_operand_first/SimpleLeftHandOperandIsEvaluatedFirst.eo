@@ -1,0 +1,91 @@
+# 2022-05-25T15:02:54.196783200
+# j2eo team
++alias stdlib.lang.class__System
++alias stdlib.lang.class__Object
++alias stdlib.primitives.prim__int
++alias stdlib.lang.class__String
+
+[] > class__SimpleLeftHandOperandIsEvaluatedFirst
+  class__Object > super
+  super > @
+  [] > new
+    [] > this
+      class__Object.new > super
+      super > @
+      "class__SimpleLeftHandOperandIsEvaluatedFirst" > className
+      [this] > init
+        seq > @
+          TRUE
+    seq > @
+      this
+  # main :: String[] -> void
+  [args] > main
+    seq > @
+      d257459516
+      d1880078449
+      s98826337
+      s1236444285
+    prim__int.constructor_1 > i
+      prim__int.new
+    [] > d257459516
+      i.write > @
+        i_s304354378
+    [] > i_s304354378
+      l704106237 > @
+    [] > l704106237
+      prim__int.constructor_2 > @
+        prim__int.new
+        2
+    prim__int.constructor_1 > j
+      prim__int.new
+    [] > d1880078449
+      j.write > @
+        i_s993370665
+    [] > i_s993370665
+      b159475521 > @
+    [] > b159475521
+      p504807594.mul > @
+        s_r332873513
+    [] > p504807594
+      b90567568 > @
+    [] > b90567568
+      s_r131872530.write > @
+        l795321555
+    [] > s_r131872530
+      i > @
+    [] > l795321555
+      prim__int.constructor_2 > @
+        prim__int.new
+        3
+    [] > s_r332873513
+      i > @
+    [] > s98826337
+      class__System.out.println > @
+        class__System.out
+        s_r800088638
+    [] > s_r800088638
+      j > @
+    [] > s1236444285
+      class__System.out.println > @
+        class__System.out
+        l1541525668
+    [] > l1541525668
+      class__String.constructor_2 > @
+        class__String.new
+        "passed"
+  # null :: null -> void
+  [this] > constructor
+    seq > @
+      initialization
+      s1096485705
+      this
+    [] > initialization
+      this.init > @
+        this
+    [] > s1096485705
+      super.constructor > @
+        this.super
+
+[args...] > main
+  class__SimpleLeftHandOperandIsEvaluatedFirst.main > @
+    *

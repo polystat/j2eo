@@ -1,0 +1,122 @@
+# 2022-05-25T15:02:54.673848500
+# j2eo team
++alias stdlib.lang.class__Object
++alias stdlib.lang.class__System
++alias stdlib.lang.class__String
++alias org.eolang.gray.cage
+
+[] > class__SimpleAbstractMethod
+  class__Object > super
+  super > @
+  [] > new
+    [] > this
+      class__Object.new > super
+      super > @
+      "class__SimpleAbstractMethod" > className
+      [this] > init
+        seq > @
+          TRUE
+    seq > @
+      this
+  # main :: String[] -> void
+  [args] > main
+    seq > @
+      d1758624236
+      s1812823171
+      s392918519
+    cage > obj
+    [] > d1758624236
+      obj.write > @
+        i_s630028734
+    [] > i_s630028734
+      inst351877391 > @
+    [] > inst351877391
+      class__OuterClass.constructor > @
+        class__OuterClass.new
+    [] > s1812823171
+      obj.method > @
+        obj
+    [] > s392918519
+      class__System.out.println > @
+        class__System.out
+        l1499840045
+    [] > l1499840045
+      class__String.constructor_2 > @
+        class__String.new
+        "passed"
+  # null :: null -> void
+  [this] > constructor
+    seq > @
+      initialization
+      s67749199
+      this
+    [] > initialization
+      this.init > @
+        this
+    [] > s67749199
+      super.constructor > @
+        this.super
+
+[] > class__OuterAbstractClass
+  class__Object > super
+  super > @
+  [] > new
+    [] > this
+      class__Object.new > super
+      super > @
+      "class__OuterAbstractClass" > className
+      [this] > init
+        seq > @
+          TRUE
+      # method :: null -> void
+      [this] > method
+        seq > @
+          TRUE
+    seq > @
+      this
+  # null :: null -> void
+  [this] > constructor
+    seq > @
+      initialization
+      s65488937
+      this
+    [] > initialization
+      this.init > @
+        this
+    [] > s65488937
+      super.constructor > @
+        this.super
+
+[] > class__OuterClass
+  class__OuterAbstractClass > super
+  super > @
+  [] > new
+    [] > this
+      class__OuterAbstractClass.new > super
+      super > @
+      "class__OuterClass" > className
+      [this] > init
+        seq > @
+          TRUE
+      # method :: null -> void
+      [this] > method
+        seq > @
+          TRUE
+    seq > @
+      this
+  # null :: null -> void
+  [this] > constructor
+    seq > @
+      initialization
+      s1332691311
+      this
+    [] > initialization
+      this.init > @
+        this
+    [] > s1332691311
+      super.constructor > @
+        this.super
+
+[args...] > main
+  class__SimpleAbstractMethod.main > @
+    *
