@@ -112,6 +112,7 @@ private fun preprocessSimpleCompilationUnit(state: PreprocessorState, unit: Simp
             clsDec.body.declarations
                     .filterIsInstance<NormalClassDeclaration>()
                     .map { innerClsDec: NormalClassDeclaration -> findClassDeclaration(innerClsDec) }
+            /* FIXME: no check of method declarations */
         } catch (e: NullPointerException) {
             /* Ignore it*/
         }
@@ -154,7 +155,7 @@ private fun preprocessClassDecl(state: PreprocessorState, clsDec: ClassDeclarati
         )
     }
 
-    clsDec.name = state.classNames[clsDec.name]
+    clsDec.name = state.classNames[clsDec.name] ?: clsDec.name
 
     try {
         clsDec.body.declarations

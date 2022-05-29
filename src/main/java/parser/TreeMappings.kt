@@ -5,16 +5,13 @@ import lexer.TokenCode
 import org.antlr.v4.runtime.tree.TerminalNode
 import parser.JavaParser.*
 import tree.*
-import tree.Compilation.CompilationUnit
-import tree.Compilation.SimpleCompilationUnit
-import tree.Compilation.TopLevelComponent
-import tree.Compilation.TopLevelComponents
-import tree.Compilation.Package
+import tree.Compilation.*
 import tree.Declaration.*
 import tree.Expression.*
 import tree.Expression.Primary.*
 import tree.Statement.*
 import tree.Type.*
+import java.util.TimeZone
 
 fun CompilationUnitContext.toCompilationUnit(): CompilationUnit {
     val imports = ArrayList(importDeclaration().map { it.toImportDeclaration() })
@@ -118,11 +115,20 @@ fun TerminalNode.toTypeModifier(): TokenCode? {
     }
 }
 
+fun ClassOrInterfaceModifierContext.terminalNode() : TerminalNode? {
+    for (o in children) {
+        if (o is TerminalNode) {
+            return o;
+        }
+    }
+    return null
+}
+
 fun List<ModifierContext>?.getModifiers(): Modifiers? {
     if (this == null) {
         return null
     }
-    val tokenModifiers = mapNotNull { it.classOrInterfaceModifier()?.terminalNode(0)?.toTypeModifier() }
+    val tokenModifiers = mapNotNull { it.classOrInterfaceModifier()?.terminalNode()?.toTypeModifier() }
     if (tokenModifiers.isNotEmpty()) {
         val standardModifiers = StandardModifiers(Token(tokenModifiers[0]))
         for (i in 1 until tokenModifiers.size) {
@@ -310,6 +316,7 @@ fun org.antlr.v4.runtime.Token.toToken(): Token =
         MOD -> Token(TokenCode.Percent)
         XOR_ASSIGN -> Token(TokenCode.CaretAssign)
         LSHIFT_ASSIGN -> Token(TokenCode.LeftShiftAssign)
+        RSHIFT_ASSIGN -> Token(TokenCode.RightShiftAssign)
         DOT -> Token(TokenCode.Dot)
         INSTANCEOF -> Token(TokenCode.Instanceof)
         QUESTION -> Token(TokenCode.Question)
@@ -318,87 +325,88 @@ fun org.antlr.v4.runtime.Token.toToken(): Token =
         VAR -> Token(TokenCode.Var)
         BANG -> Token(TokenCode.Negation)
         TILDE -> Token(TokenCode.Tilde)
+        MOD_ASSIGN -> Token(TokenCode.PercentAssign)
+        URSHIFT_ASSIGN -> Token(TokenCode.ArithmRightShiftAssign)
         else -> throw Exception("unsupported token: $text ($type)")
     }
 
 fun CompoundName.toExpression(): Expression = SimpleReference(this)
 
-fun ExpressionContext.toBinaryExpression(): Binary? {
-    val weakExpr0 = expression(0)
-    val weakExpr1 = expression(1)
-    val operand = terminal(0)?.symbol
-    return if (weakExpr0 != null && weakExpr1 != null && operand != null) {
-        val expr0 = weakExpr0.toExpression()
-        val expr1 = weakExpr1.toExpression()
-        Binary(expr0, expr1, operand.toToken())
-    } else
-        null
-}
-
-fun ExpressionContext.toUnaryPrefixPostfix(): Expression? {
-    val weakExpr = expression(0)
-    val operand = terminal(0)?.symbol
-    return if (weakExpr != null && operand != null && childCount == 2) {
-        val expr = weakExpr.toExpression()
-        if (prefix != null) {
-            UnaryPrefix(operand.toToken(), expr)
-        } else if (postfix != null) {
-            UnaryPostfix(operand.toToken(), expr)
-        } else {
-            null
-        }
-    } else {
-        null
-    }
-}
-
-fun ExpressionContext.toArrayAccess(): ArrayAccess? {
-    if (LBRACK() != null && RBRACK() != null) {
-        return ArrayAccess(
-            expression(0).toExpression(),
-            expression(1).toExpression()
-        )
-    }
-    return null
-}
-
-fun ExpressionContext.toCastExpr(): Cast? {
-    val typeList = typeType()
-    val expr = expression(0)
-    if (LPAREN() != null && RPAREN() != null && typeList.isNotEmpty() && expr != null) {
-        return Cast(TypeList(typeList[0].toType()), expr.toExpression())
-    }
-    return null
-}
-
 fun ExpressionContext.toExpression(): Expression {
-    val expr0 =
-        this.toArrayAccess() ?: this.toUnaryPrefixPostfix() ?: this.toCastExpr() ?: expression(0)?.toExpression()
-        ?: primary()?.toExpression() ?: identifier()?.toExpression() ?: creator()?.toExpression()
-        ?: methodCall()?.toExpression(null) ?: SimpleReference(CompoundName("expression_placeholder")) /* FIXME */
-    if (this.bop != null) {
-        val expr1 =
-            this.toArrayAccess() ?: this.toUnaryPrefixPostfix() ?: this.toCastExpr() ?: expression(1)?.toExpression()
-            ?: primary()?.toExpression()
-            ?: identifier()?.toExpression() ?: creator()?.toExpression() ?: methodCall()?.toExpression(expr0)
-            ?: SimpleReference(CompoundName("expression_placeholder")) /* FIXME */
-        return if (this.bop.text == ".") {
-            when (expr1) {
-                is MethodInvocation -> expr1
-                is SimpleReference -> FieldAccess(
-                    expr0,
-                    SUPER() != null,
-                    Token(TokenCode.Identifier, expr1.compoundName.names[0]) // FIXME: questionable
-                )
-                else -> SimpleReference(CompoundName("expression_placeholder")) /* FIXME */
-            }
-        } else if (bop.type in DOT..URSHIFT_ASSIGN) {
-            this.toBinaryExpression() ?: SimpleReference(CompoundName("expression_placeholder")) /* FIXME */
-        } else {
-            SimpleReference(CompoundName("expression_placeholder")) /* FIXME */
-        }
-    } else {
-        return expr0
+    return when (this) {
+        is BinaryExpressionContext -> Binary(
+            expression(0).toExpression(),
+            expression(1).toExpression(),
+            bop?.toToken() ?:
+            if (LT().size == 2) { Token(TokenCode.LeftShift) } else { null } ?:
+            if (GT().size == 2) { Token(TokenCode.RightShift) } else { null } ?:
+            if (GT().size == 3) { Token(TokenCode.ArithmRightShift) } else { null }
+        )
+        is PrefixExpressionContext -> UnaryPrefix(prefix.toToken(), expression().toExpression())
+        is PostfixExpressionContext -> UnaryPostfix(postfix.toToken(), expression().toExpression())
+        is ArrayAccessContext -> ArrayAccess(expression(0).toExpression(), expression(1).toExpression())
+        is CastExpresionContext -> Cast(TypeList(typeType(0).toType()), expression().toExpression())
+        is InstanceOfExpressionContext -> InstanceOf(expression().toExpression(), typeType()?.toType()) /* FIXME */
+        is InstanceCreationContext -> creator().toExpression()
+        is MethodInvocationContext -> methodCall().toExpression(null)
+        is PrimaryExpresionContext -> primary().toExpression()
+        is ReferenceContext -> toExpression()
+        else -> SimpleReference(CompoundName("expression_placeholder"))
+    }
+}
+
+fun ReferenceContext.toExpression(): Expression {
+    val expr = expression().toExpression()
+
+    val identifier = identifier()
+    if (identifier != null) {
+        return FieldAccess(expr, false, identifier.toToken())
+    }
+
+    val methodCall = methodCall()
+    if (methodCall != null) {
+        return methodCall.toExpression(expr)
+    }
+
+    val thisSign = THIS()
+    if (thisSign != null) {
+        return FieldAccess(expr, false, Token(TokenCode.This)) /* FIXME: No idea how it can be possible */
+    }
+
+    val innerCreator = innerCreator()
+    if (innerCreator != null) {
+        return innerCreator.toInstanceCreationQualified(expr)
+    }
+
+    val superSuffix = superSuffix()
+    if (superSuffix != null){
+        return SimpleReference(CompoundName("super_suffix_placeholder")) /* FIXME: No idea what it is*/
+    }
+
+    val explicitGenericInvocation = explicitGenericInvocation()
+    if (explicitGenericInvocation != null) {
+        return SimpleReference(CompoundName("explicit_generic_invocation_placeholder")) /* FIXME: No idea what it is*/
+    }
+
+    return SimpleReference(CompoundName("reference_placeholder"))
+}
+
+fun InnerCreatorContext.toInstanceCreationQualified(expr: Expression): InstanceCreationQualified {
+    val instanceCreation = InstanceCreation(
+        null, // No type arguments for now
+        TypeName(
+            CompoundName(identifier().text),
+            null // No type arguments for now
+        ),
+        classCreatorRest().arguments()?.toArgList(),
+        classCreatorRest().classBody()?.toDeclarations()
+    )
+    return when (expr) {
+        is SimpleReference -> InstanceCreationQualified(expr.compoundName, instanceCreation)
+        is Primary -> InstanceCreationQualified(expr, instanceCreation)
+        else -> InstanceCreationQualified(
+            CompoundName("unknown_expr_${expr.javaClass.simpleName}"), instanceCreation
+        )
     }
 }
 
@@ -458,7 +466,6 @@ fun MethodCallContext.toExpression(expr: Expression?): Expression {
     val argList = ArgumentList(exprLst.firstOrNull())
     exprLst.drop(1).forEach { argList.add(it) }
     argList.arguments.removeIf { it == null }
-    val t = THIS()
     return MethodInvocation(
         expr,
         SUPER() != null,
@@ -474,32 +481,17 @@ fun MethodCallContext.toExpression(expr: Expression?): Expression {
 fun IdentifierContext.toExpression() : Expression =
         SimpleReference(CompoundName(IDENTIFIER()?.text ?: "var")) // A specific case
 
-fun PrimaryContext.toParenthesized(): Parenthesized? =
-    if (LPAREN() != null && RPAREN() != null) {
-        val expr = expression()?.toExpression()
-        if (expr != null) {
-            Parenthesized(expr)
-        } else {
-            null
-        }
-    } else {
-        null
-    }
-
 fun PrimaryContext.toExpression(): Expression =
-    this.toParenthesized() ?: expression()?.toExpression() ?: identifier()?.toExpression() ?: THIS()?.let { _ ->
-        This(
-            null
-        )
-    } ?:
-    /* FIXME: super */
-    literal()?.toLiteral() ?: identifier()?.let { id -> SimpleReference(CompoundName(id.text)) } ?: SimpleReference(
-        CompoundName("expression_placeholder")
-    ) /* FIXME */
+    when (this) {
+        is ParenthesizedExpressionContext -> Parenthesized(expression().toExpression())
+        is LiteralExpressionContext -> literal().toLiteral()
+        is IdentifierExpresionContext -> SimpleReference(CompoundName(identifier().text ?: "var"))
+        else -> SimpleReference(CompoundName("primary_expression_placeholder"))
+    }
 /* FIXME: typeOrVoid . CLASS */
 /* FIXME: nonWildcardTypeArguments (explicitGenericInvocationSuffix | THIS arguments) */
 
-fun LiteralContext.toLiteral(): Literal? =
+fun LiteralContext.toLiteral(): Literal =
     BOOL_LITERAL()?.text?.let { txt ->
         Literal(
             Token(

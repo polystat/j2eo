@@ -63,9 +63,11 @@ fun mapMethodInvocation(methodInvocation: MethodInvocation, name: String): List<
     val src: EODot = when (val methodQualifier = methodInvocation.qualifier) {
         is SimpleReference -> (methodQualifier.compoundName.names + trueName).eoDot()
         is FieldAccess -> (getFullIdentifier(methodQualifier) + trueName).eoDot()
+        is MethodInvocation -> (listOf(constructExprName(methodQualifier)) + trueName).eoDot()
         null -> trueName.eoDot()
         else -> {
-            util.logger.warn { "Unsupported method qualifier $methodQualifier; falling back to unsupported_qualifier" }
+            util.logger.warn { "Unsupported method qualifier ${methodQualifier.javaClass.simpleName}; " +
+                    "falling back to unsupported_qualifier" }
             "unsupported_qualifier".eoDot()
         }
     }
@@ -76,9 +78,11 @@ fun mapMethodInvocation(methodInvocation: MethodInvocation, name: String): List<
             else
                 if (!methodInvocation.superSign) "this".eoDot() else listOf("this", "super").eoDot()
         is FieldAccess -> getFullIdentifier(methodQualifier).eoDot()
+        is MethodInvocation -> constructExprName(methodQualifier).eoDot()
         null -> if (!methodInvocation.superSign) "this".eoDot() else listOf("this", "super").eoDot()
         else -> {
-            util.logger.warn { "Unsupported method qualifier $methodQualifier; falling back to unsupported_qualifier" }
+            util.logger.warn { "Unsupported method qualifier ${methodQualifier.javaClass.simpleName}; " +
+                    "falling back to unsupported_qualifier" }
             "unsupported_qualifier".eoDot()
         }
     }
@@ -101,5 +105,13 @@ fun mapMethodInvocation(methodInvocation: MethodInvocation, name: String): List<
             ),
             name
         )
-    ) + (methodInvocation.arguments?.arguments?.map { mapExpression(it, constructExprName(it)) }?.flatten() ?: listOf())
+    ) + (methodInvocation.arguments?.arguments?.map { mapExpression(it, constructExprName(it)) }?.flatten() ?: listOf()) +
+        if (methodInvocation.qualifier is MethodInvocation) {
+            mapMethodInvocation(
+                methodInvocation.qualifier as MethodInvocation,
+                constructExprName(methodInvocation.qualifier)
+            )
+        } else {
+            listOf()
+        }
 }

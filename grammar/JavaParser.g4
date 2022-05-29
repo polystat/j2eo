@@ -573,7 +573,7 @@ methodCall
     ;
 
 expression
-    : primary
+    : primary                                                                                       # primaryExpresion
     | expression bop='.'
       (
          identifier
@@ -582,36 +582,36 @@ expression
        | NEW nonWildcardTypeArguments? innerCreator
        | SUPER superSuffix
        | explicitGenericInvocation
-      )
-    | expression '[' expression ']'
-    | methodCall
-    | NEW creator
-    | '(' annotation* typeType ('&' typeType)* ')' expression
-    | expression postfix=('++' | '--')
-    | prefix=('+'|'-'|'++'|'--') expression
-    | prefix=('~'|'!') expression
-    | expression bop=('*'|'/'|'%') expression
-    | expression bop=('+'|'-') expression
-    | expression ('<' '<' | '>' '>' '>' | '>' '>') expression
-    | expression bop=('<=' | '>=' | '>' | '<') expression
-    | expression bop=INSTANCEOF (typeType | pattern)
-    | expression bop=('==' | '!=') expression
-    | expression bop='&' expression
-    | expression bop='^' expression
-    | expression bop='|' expression
-    | expression bop='&&' expression
-    | expression bop='||' expression
-    | <assoc=right> expression bop='?' expression ':' expression
+      )                                                                                             # reference
+    | expression '[' expression ']'                                                                 # arrayAccess
+    | methodCall                                                                                    # methodInvocation
+    | NEW creator                                                                                   # instanceCreation
+    | '(' annotation* typeType ('&' typeType)* ')' expression                                       # castExpresion
+    | expression postfix=('++' | '--')                                                              # postfixExpression
+    | prefix=('+'|'-'|'++'|'--') expression                                                         # prefixExpression
+    | prefix=('~'|'!') expression                                                                   # prefixExpression
+    | expression bop=('*'|'/'|'%') expression                                                       # binaryExpression
+    | expression bop=('+'|'-') expression                                                           # binaryExpression
+    | expression ('<' '<' | '>' '>' '>' | '>' '>') expression                                       # binaryExpression
+    | expression bop=('<=' | '>=' | '>' | '<') expression                                           # binaryExpression
+    | expression bop=INSTANCEOF (typeType | pattern)                                                # instanceOfExpression
+    | expression bop=('==' | '!=') expression                                                       # binaryExpression
+    | expression bop='&' expression                                                                 # binaryExpression
+    | expression bop='^' expression                                                                 # binaryExpression
+    | expression bop='|' expression                                                                 # binaryExpression
+    | expression bop='&&' expression                                                                # binaryExpression
+    | expression bop='||' expression                                                                # binaryExpression
+    | <assoc=right> expression bop='?' expression ':' expression                                    # ternaryExpression
     | <assoc=right> expression
       bop=('=' | '+=' | '-=' | '*=' | '/=' | '&=' | '|=' | '^=' | '>>=' | '>>>=' | '<<=' | '%=')
-      expression
-    | lambdaExpression // Java8
-    | switchExpression // Java17
+      expression                                                                                    # binaryExpression
+    | lambdaExpression                                                                              # lambda // Java8
+    | switchExpression                                                                              # switch // Java17
 
     // Java 8 methodReference
-    | expression '::' typeArguments? identifier
-    | typeType '::' (typeArguments? identifier | NEW)
-    | classType '::' typeArguments? NEW
+    | expression '::' typeArguments? identifier                                                     # methodReference
+    | typeType '::' (typeArguments? identifier | NEW)                                               # methodReference
+    | classType '::' typeArguments? NEW                                                             # methodReference
     ;
 
 // Java17
@@ -639,13 +639,13 @@ lambdaBody
     ;
 
 primary
-    : '(' expression ')'
-    | THIS
-    | SUPER
-    | literal
-    | identifier
-    | typeTypeOrVoid '.' CLASS
-    | nonWildcardTypeArguments (explicitGenericInvocationSuffix | THIS arguments)
+    : '(' expression ')'                                                          # parenthesizedExpression
+    | THIS                                                                        # thisExpresion
+    | SUPER                                                                       # superExpression
+    | literal                                                                     # literalExpression
+    | identifier                                                                  # identifierExpresion
+    | typeTypeOrVoid '.' CLASS                                                    # classExpression
+    | nonWildcardTypeArguments (explicitGenericInvocationSuffix | THIS arguments) # nonWildcardTypeArgumentsExpression
     ;
 
 // Java17
