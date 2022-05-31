@@ -1,0 +1,76 @@
+# 2022-05-25T15:02:28.645792500
+# j2eo team
++alias stdlib.lang.class__Object
++alias stdlib.lang.class__System
++alias stdlib.primitives.prim__int
++alias org.eolang.gray.cage
+
+[] > class__Test
+  class__Object > super
+  super > @
+  [] > new
+    [] > this
+      class__Object.new > super
+      super > @
+      "class__Test" > className
+      [this] > init
+        seq > @
+          TRUE
+    seq > @
+      this
+  # test :: int -> int
+  [x] > test
+    seq > @
+      d851765426
+      s1277108979
+    cage > a
+    [] > d851765426
+      a.write > @
+        i_s1690101810
+    [] > i_s1690101810
+      inst124058278 > @
+    [] > inst124058278
+      Vector.constructor > @
+        Vector.new
+    [] > s1277108979
+      b1502335674 > @
+    [] > b1502335674
+      s_r1517640897.div > @
+        m_i2061774051
+    [] > s_r1517640897
+      x > @
+    [] > m_i2061774051
+      a.size > @
+        a
+  # main :: String[] -> void
+  [args] > main
+    seq > @
+      s1331270134
+    [] > s1331270134
+      class__System.out.println > @
+        class__System.out
+        m_i1212191909
+    [] > m_i1212191909
+      test > @
+        this
+        l941836856
+    [] > l941836856
+      prim__int.constructor_2 > @
+        prim__int.new
+        100
+  # null :: null -> void
+  [this] > constructor
+    seq > @
+      initialization
+      s1677458155
+      this
+    [] > initialization
+      this.init > @
+        this
+    [] > s1677458155
+      super.constructor > @
+        this.super
+
+[args...] > main
+  class__Test.main > @
+    *

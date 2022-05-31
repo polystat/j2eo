@@ -2,16 +2,15 @@
 
 <img src="https://www.yegor256.com/images/books/elegant-objects/cactus.svg" height="100px"  alt="eolang icon"/>
 
-<br>
-
 [![Gradle Build](https://github.com/polystat/j2eo/actions/workflows/gradle-build.yml/badge.svg)](https://github.com/polystat/j2eo/actions/workflows/gradle-build.yml)
 ![LINE](https://img.shields.io/badge/line--coverage-41,67%25-orange.svg)
 ![BRANCH](https://img.shields.io/badge/branch--coverage-33,81%25-red.svg)
 ![COMPLEXITY](https://img.shields.io/badge/complexity-5,17-brightgreen.svg)
 
-This is a translator of **Java** programming language to [EOLANG](https://www.eolang.org) programming language.
+[![Hits-of-Code](https://hitsofcode.com/github/polystat/j2eo)](https://hitsofcode.com/view/github/polystat/j2eo)
+![Lines of code](https://img.shields.io/tokei/lines/github/polystat/j2eo)
 
----
+This is a translator of **Java** programming language to [EOLANG](https://www.eolang.org) programming language.
 
 ## Usage
 
@@ -124,655 +123,117 @@ Make sure you have these in sync (*mentioning* (not pointing to) the same `jdk` 
 
 ---
 
+## Awesome Bugs translation
+[Awesome bugs repo](https://github.com/polystat/awesome-bugs)
+
+.java files:
+- [directStateAccess](src/test/resources/awesome_bugs/java/directStateAccess)
+- [divByZero](src/test/resources/awesome_bugs/java/divByZero)
+- [inheritance](src/test/resources/awesome_bugs/java/inheritance)
+- [unjustifiedAssumption](src/test/resources/awesome_bugs/java/unjustifiedAssumption)
+
+Translations:
+- [directStateAccess](src/test/resources/awesome_bugs/eo/directStateAccess)
+- [divByZero](src/test/resources/awesome_bugs/eo/divByZero)
+- [inheritance](src/test/resources/awesome_bugs/eo/inheritance)
+- [unjustifiedAssumption](src/test/resources/awesome_bugs/eo/unjustifiedAssumption)
+
+---
+
 ## Examples of Java to EOLang translation
 
 We use Java language specification document as a foundation for Java feature hierarchy.  
 Java 16 language specification: [see .pdf file](https://docs.oracle.com/javase/specs/jls/se16/jls16.pdf)
 
-<details>
-<summary>
-<b>--- Ch. 4 - Types, Values, and Variables</b>
-</summary>
+###[Ch. 4 - Types, Values, and Variables](src/test/resources/test_ready/ch_4_types_values_variables)  
+- Increment operator:
+	[Java](src/test/resources/test_ready/ch_4_types_values_variables/sec_4_2_primitive_types_and_values/sec_4_2_2_integer_operations/IncrementOperator.java)
+	to
+	[EO](src/test/resources/translated_tests/ch_4_types_values_variables/sec_4_2_primitive_types_and_values/sec_4_2_2_integer_operations/IncrementOperator.eo)
 
-Table of content:
-- [Primitive Types and Values 4.2](#primitive-types-and-values-42) - wip
-- [Reference Types and Values 4.3] - wip
-- [Type Variables 4.4] - wip
-- [Parametrized types 4.5] - wip
-- [Type erasure 4.6] - wip
-- [Reifiable types 4.7] - wip
-- [Raw Types 4.8] - wip
-- [Intersection Types 4.9] - wip
-- [Subtyping 4.10] - wip
+###[Ch. 5 - Conversions and Contexts](src/test/resources/test_ready/ch_5_conversions_and_contexts)
 
-### Primitive Types and Values 4.2
-```java
-public class IncrementOperator {
-   public static void main(String[] args) {
-      int a = 5;
-      System.out.println(a++);
-      System.out.println(++a);
-      System.out.println("passed");
-   }
-}
-```
-maps to
-```java
-# main :: String -> void
-[this args] > main
-  seq > @
-    d902830499
-    s2040467681
-    s341796579
-    s825936265
-  prim__int.constructor_1 > a
-    prim__int.new
-  [] > d902830499
-    a.write > @
-      i_s1754662105
-  [] > i_s1754662105
-    l403147759 > @
-  [] > l403147759
-    prim__int.constructor_2 > @
-      prim__int.new
-      5
-  [] > s2040467681
-    class__System.out.println > @
-      s_r1278677872
-  [] > s_r1278677872
-    a > @
-  [] > s341796579
-    class__System.out.println > @
-      s_r807657332
-  [] > s_r807657332
-    a > @
-  [] > s825936265
-    class__System.out.println > @
-      l1164107853
-  [] > l1164107853
-    class__String.constructor_2 > @
-      class__String.new
-      "passed"
-```
-</details>
+###[Ch. 6 - Names](src/test/resources/test_ready/ch_6_names)
+- A simple declaration:
+	[Java](src/test/resources/test_ready/ch_6_names/sec_6_1_declarations/SimpleDeclaration.java)
+	to
+	[EO](src/test/resources/translated_tests/ch_6_names/sec_6_1_declarations/SimpleDeclaration.eo)
 
-<details>
-<summary>
-<b>--- Ch. 5 - Conversions and Contexts</b>
-</summary>
+###[Ch. 7 - Packages and Modules WIP](src/test/resources/test_ready/ch_7_packages_and_modules)
 
-Table of content:
-- [Assignment Contexts 5.2] - wip
-- [Invocation Contexts 5.3] - wip
-- [String Contexts 5.4] - wip
-- [Casting Contexts 5.5] - wip
-- [Numeric Contexts 5.6] - wip
-</details>
+###[Ch. 8 - Classes](src/test/resources/test_ready/ch_8_classes)
+- Method class member:
+	[Java](src/test/resources/test_ready/ch_8_classes/sec_8_2_class_members/MethodClassMember.java)
+	to
+	[EO](src/test/resources/translated_tests/ch_8_classes/sec_8_2_class_members/MethodClassMember.eo)
+- Field initialization:
+	[Java](src/test/resources/test_ready/ch_8_classes/sec_8_3_field_declarations/sec_8_3_2_field_initialization/SimpleFieldInit.java)
+	to
+	[EO](src/test/resources/translated_tests/ch_8_classes/sec_8_3_field_declarations/sec_8_3_2_field_initialization/SimpleFieldInit.eo)
+- Method declaration:
+	[Java](src/test/resources/test_ready/ch_8_classes/sec_8_4_method_declarations/sec_8_4_1_formal_parametes/SimpleMethod.java)
+	to
+	[EO](src/test/resources/translated_tests/ch_8_classes/sec_8_4_method_declarations/sec_8_4_1_formal_parametes/SimpleMethod.eo)
+- Inner class:
+	[Java](src/test/resources/test_ready/ch_8_classes/sec_8_5_member_class_and_interface_declarations/SimpleInnerClass.java)
+	to
+	[EO](src/test/resources/translated_tests/ch_8_classes/sec_8_5_member_class_and_interface_declarations/SimpleInnerClass.eo)
 
-<details>
-<summary>
-<b>--- Ch. 6 - Names</b>
-</summary>
+###[Ch. 9 - Interfaces](src/test/resources/test_ready/ch_9_interfaces)
 
-Table of content:
-- [Declarations 6.1] - wip
-- [Names and Identifiers 6.2] - wip
-- [Scope of a Declaration 6.3] - wip
-- [Shadowing and Obscuring 6.4] - wip
-</details>
+###[Ch. 10 - Arrays](src/test/resources/test_ready/ch_10_arrays)
+- Primitive array declaration:
+    [Java](src/test/resources/test_ready/ch_10_arrays/sec_10_2_array_variables/PrimitiveArrayDecl.java)
+    to
+    [EO](src/test/resources/translated_tests/ch_10_arrays/sec_10_2_array_variables/PrimitiveArrayDecl.eo)
 
-<details>
-<summary>
-<b>--- Ch. 7 - Packages and Modules [WIP]</b>
-</summary>
+###[Ch. 11 - Exceptions WIP](src/test/resources/test_ready/ch_11_exceptions)
 
-Table of content:
-- [Package Members 7.1] - wip
-- [Compilation Units 7.3] - wip
-- [Package Declarations 7.4] - wip
-- [Import Declarations 7.5] - wip
-- [Top Level Class and Interface Declarations 7.6] - wip
-- [Module Declarations 7.7] - wip
-</details>
+###[Ch. 14 - Block Statements, and Patterns](src/test/resources/test_ready/ch_14_blocks_statements_and_patterns)
 
-<details>
-<summary>
-<b>--- Ch. 8 - Classes</b>
-</summary>
+###[Ch. 15 - Expressions](src/test/resources/test_ready/ch_15_expressions)
+- Left-hand operands are evaluated first: 
+    [Java](src/test/resources/test_ready/ch_15_expressions/sec_15_7_evaluation_order/sec_15_7_1_evaluate_left_hand_operand_first/SimpleLeftHandOperandIsEvaluatedFirst.java)
+    to
+    [EO](src/test/resources/translated_tests/ch_15_expressions/sec_15_7_evaluation_order/sec_15_7_1_evaluate_left_hand_operand_first/SimpleLeftHandOperandIsEvaluatedFirst.eo)
+- Integer literal:
+    [Java](src/test/resources/test_ready/ch_15_expressions/sec_15_8_primary_expressions/sec_15_8_1_lexical_literals/IntegerLiteral.java)
+    to
+    [EO](src/test/resources/translated_tests/ch_15_expressions/sec_15_8_primary_expressions/sec_15_8_1_lexical_literals/IntegerLiteral.eo)
+- Complex parenthesized expression:
+    [Java](src/test/resources/test_ready/ch_15_expressions/sec_15_8_primary_expressions/sec_15_8_5_parenthesized_expressions/ComplexParenthExpression.java)
+    to
+    [EO](src/test/resources/translated_tests/ch_15_expressions/sec_15_8_primary_expressions/sec_15_8_5_parenthesized_expressions/ComplexParenthExpression.eo)
+- Creation of a simple integer array:
+    [Java](src/test/resources/test_ready/ch_15_expressions/sec_15_10_array_creation_and_access_expressions/sec_15_10_1_array_creation_expressions/SimpleIntegerArray.java)
+    to
+    [EO](src/test/resources/translated_tests/ch_15_expressions/sec_15_10_array_creation_and_access_expressions/sec_15_10_1_array_creation_expressions/SimpleIntegerArray.eo)
+- Postfix increment:
+    [Java](src/test/resources/test_ready/ch_15_expressions/sec_15_14_postfix_expressions/sec_15_14_2_postfix_increment_operator/SimplePostfixIncrement.java)
+    to
+    [EO](src/test/resources/translated_tests/ch_15_expressions/sec_15_14_postfix_expressions/sec_15_14_2_postfix_increment_operator/SimplePostfixIncrement.eo)
+- Unary plus operator:
+    [Java](src/test/resources/test_ready/ch_15_expressions/sec_15_15_unary_operators/sec_15_15_3_unary_plus_operator/SimpleUnaryPlus.java)
+    to
+    [EO](src/test/resources/translated_tests/ch_15_expressions/sec_15_15_unary_operators/sec_15_15_3_unary_plus_operator/SimpleUnaryPlus.eo)
+- Multiplication operator:
+    [Java](src/test/resources/test_ready/ch_15_expressions/sec_15_17_multiplicative_operators/sec_15_17_1_multiplication_operator/SimpleMultiplication.java)
+    to
+    [EO](src/test/resources/translated_tests/ch_15_expressions/sec_15_17_multiplicative_operators/sec_15_17_1_multiplication_operator/SimpleMultiplication.eo)
+- Variable right shift:
+    [Java](src/test/resources/test_ready/ch_15_expressions/sec_15_19_shift_operators/VariableRightShift.java)
+    to
+    [EO](src/test/resources/translated_tests/ch_15_expressions/sec_15_19_shift_operators/VariableRightShift.eo)
+- Greater operator:
+    [Java](src/test/resources/test_ready/ch_15_expressions/sec_15_20_relational_operators/sec_15_20_1_numerical_comparison_operators/SimpleGreaterComparison.java)
+    to
+    [EO](src/test/resources/translated_tests/ch_15_expressions/sec_15_20_relational_operators/sec_15_20_1_numerical_comparison_operators/SimpleGreaterComparison.eo)
+- Assignment operator:
+    [Java](src/test/resources/test_ready/ch_15_expressions/sec_15_26_assignment_operators/sec_15_26_1_simple_assignment_operator/SimpleAssignmentOperator.java)
+    to
+    [EO](src/test/resources/translated_tests/ch_15_expressions/sec_15_26_assignment_operators/sec_15_26_1_simple_assignment_operator/SimpleAssignmentOperator.eo)
 
-Table of contents:  
-- [Class declarations 8.1](#class-declarations-81)
-- [Class members 8.2] - wip
-- [Field declarations 8.3] - wip
-- [Method declarations 8.4](#method-declarations-84)
-- [Member class and interface declaration 8.5] - wip
-- [Instance initializers 8.6] - wip
-- [Static initializers 8.7] - wip
-- [Constructor declarations 8.8] - wip
-- [Enum classes 8.9] - wip
-- [Record classes 8.10] - wip
+###[Ch. 16 - Definite Assignments WIP](src/test/resources/test_ready/ch_16_definite_assignment)
 
-### Class declarations 8.1
-```java
-public class Main { }
-```
-translates to
-```java
-+alias stdlib.lang.class__Object
+###[Ch. 18 - Type inference WIP](src/test/resources/test_ready/ch_18_type_inference)
 
-[] > class__Main
-  class__Object > super
-  super > @
-  [] > new
-    [] > this
-      class__Object.new > super
-      super > @
-    seq > @
-      this
-```
-<br />
-
-### Class members 8.2
-### Field declarations 8.3
-
-### Method declarations 8.4
-```java
-public class Main {
-   public static void main(String[] args) { }
-}
-```
-translates to
-```java
-...
-# main :: String -> void
-[this args] > main 
-  seq > @
-    0
-...
-```
-<br />
-
-### Member class and interface declarations 8.5
-### Instance initializers 8.6
-### Static initializers 8.7
-### Constructor declarations 8.8
-### Enum classes 8.9
-### Record classes 8.10
-
-</details>
-
-<details>
-<summary>
-<b>--- Ch. 9 - Interfaces</b>
-</summary>
-
-Table of content:
-- [Interface Declarations 9.1] - wip
-- [Interface Members 9.2] - wip
-- [Field (Constant) Declarations 9.3] - wip
-- [Method Declarations 9.4] - wip
-- [Member Class and Interface Declarations 9.5] - wip
-- [Annotation Interfaces 9.6] - wip
-- [Annotations 9.7] - wip
-- [Functional Interfaces 9.8] - wip
-- [Function Types 9.9] - wip
-</details>
-
-<details>
-<summary>
-<b>--- Ch. 10 - Arrays</b>
-</summary>
-
-Table of content:
-- [Array Types 10.1] - wip
-- [Array Variables 10.2] - wip
-- [Array Creation 10.3] - wip
-- [Array Access 10.4] - wip
-- [Array Initializers 10.6] - wip
-- [Array Members 10.7] - wip
-- [Class Objects for Arrays 10.8] - wip
-</details>
-
-<details>
-<summary>
-<b>--- Ch. 11 - Exceptions [WIP]</b>
-</summary>
-</details>
-
-<details>
-<summary>
-<b>--- Ch. 14 - Block Statements, and Patterns</b>
-</summary>
-
-Table of content:
-- [Blocks 14.2] - wip
-- [Local Class and Interface Declarations 14.3] - wip
-- [Local Variable Declaration 14.4](#local-variable-declaration-144)
-- [Statements 14.5] - wip
-- [The Empty Statement 14.6] - wip
-- [Labeled Statements 14.7] - wip
-- [Expression Statements 14.8] - wip
-- [The IF Statement 14.9] - wip
-- [The assert Statement 14.10] - wip
-- [The switch Statement 14.11] - wip
-- [The while Statement 14.12] - wip
-- [The do Statement 14.13] - wip
-- [The for Statement 14.14] - wip
-- [The break Statement 14.15] - wip
-- [The continue Statement 14.16] - wip
-- [The return Statement 14.17] - wip
-
-### Local Variable Declaration 14.4
-```java
-public class Main {
-   public static void main(String[] args) {
-      int local = 5;
-   }
-}
-```
-translates to
-```java
-...
-# main :: String -> void
-[this args] > main
-  seq > @
-    d912011468
-  prim__int.constructor_1 > local
-    prim__int.new
-  [] > d912011468
-    local.write > @
-      i_s1048027629
-  [] > i_s1048027629
-    l599491651 > @
-  [] > l599491651
-    prim__int.constructor_2 > @
-      prim__int.new
-      5
-...
-```
-<br />
-
-</details>
-
-<details>
-<summary>
-<b>--- Ch. 15 - Expressions</b>
-</summary>
-
-Table of content:
-- [Evaluation order 15.7](#evaluation-order-157)
-- [Primary Expressions 15.8](#primary-expressions-158)
-- [Instance Creation 15.9](#instance-creation-159)
-- [Arrays 15.10](#arrays-1510)
-- [Field Access 15.11](#field-access-1511)
-- [Method invocations 15.12](#method-invocations-1512)
-
-### Evaluation Order 15.7
-```java
-public class SimpleLeftHandOperandIsEvaluatedFirst {
-    public static void main(String[] args) {
-        int i = 2;
-        int j = (i=3) * i;
-        System.out.println(j);
-        System.out.println("passed");
-    }
-}
-```
-maps to
-```java
-...
-# main :: String -> void
-[this args] > main
-  seq > @
-    d823723302
-    d1051876890
-    s25536233
-    s164974746
-  prim__int.constructor_1 > i
-    prim__int.new
-  [] > d823723302
-    i.write > @
-      i_s1714078840
-  [] > i_s1714078840
-    l1732502545 > @
-  [] > l1732502545
-    prim__int.constructor_2 > @
-      prim__int.new
-      2
-  prim__int.constructor_1 > j
-    prim__int.new
-  [] > d1051876890
-    j.write > @
-      i_s1199262943
-  [] > i_s1199262943
-    b2009221452 > @
-  [] > b2009221452
-    p257513673.mul > @
-      s_r590845366
-  [] > p257513673
-    b1052195003 > @
-  [] > b1052195003
-    s_r1541049864.write > @
-      l511707818
-  [] > s_r1541049864
-    i > @
-  [] > l511707818
-    prim__int.constructor_2 > @
-      prim__int.new
-      3
-  [] > s_r590845366
-    i > @
-  [] > s25536233
-    class__System.out.println > @
-      s_r116405378
-  [] > s_r116405378
-    j > @
-  [] > s164974746
-    class__System.out.println > @
-      l396283472
-  [] > l396283472
-    class__String.constructor_2 > @
-      class__String.new
-      "passed"
-...
-```
-
-### Primary Expressions 15.8
-```java
-public class BooleanLiteral {
-	public static void main(String[] args) {
-		boolean a = true;
-		boolean b = false;
-		System.out.println("passed");
-	}
-}
-```
-maps to
-```java
-...
-# main :: String -> void
-[this args] > main
-  seq > @
-    d1819063424
-    d690686166
-    s1165303897
-  prim__boolean.constructor_1 > a
-    prim__boolean.new
-  [] > d1819063424
-    a.write > @
-      i_s1011279482
-  [] > i_s1011279482
-    l208866101 > @
-  [] > l208866101
-    prim__boolean.constructor_2 > @
-      prim__boolean.new
-      TRUE
-  prim__boolean.constructor_1 > b
-    prim__boolean.new
-  [] > d690686166
-    b.write > @
-      i_s576020159
-  [] > i_s576020159
-    l921420643 > @
-  [] > l921420643
-    prim__boolean.constructor_2 > @
-      prim__boolean.new
-      FALSE
-  [] > s1165303897
-    class__System.out.println > @
-      l887750041
-  [] > l887750041
-    class__String.constructor_2 > @
-      class__String.new
-      "passed"
-...
-```
-<br />
-
-```java
-public class ComplexParenthExpression {
-	public static void main(String[] args) {
-		int a = (10 + ((((5 * (2 + (2)))))));
-		System.out.println(a);
-		System.out.println("passed");
-	}
-}
-```
-maps to
-```java
-...
-# main :: String -> void
-[this args] > main
-  seq > @
-    d1365008457
-    s678433396
-    s928294079
-  prim__int.constructor_1 > a
-    prim__int.new
-  [] > d1365008457
-    a.write > @
-      i_s1671179293
-  [] > i_s1671179293
-    p1609124502 > @
-  [] > p1609124502
-    b1144068272 > @
-  [] > b1144068272
-    l1985836631.add > @
-      p1948471365
-  [] > l1985836631
-    prim__int.constructor_2 > @
-      prim__int.new
-      10
-  [] > p1948471365
-    p1636506029 > @
-  [] > p1636506029
-    p758348212 > @
-  [] > p758348212
-    p817978763 > @
-  [] > p817978763
-    b1578009262 > @
-  [] > b1578009262
-    l1735507635.mul > @
-      p1362728240
-  [] > l1735507635
-    prim__int.constructor_2 > @
-      prim__int.new
-      5
-  [] > p1362728240
-    b1798219673 > @
-  [] > b1798219673
-    l1092572064.add > @
-      p728885526
-  [] > l1092572064
-    prim__int.constructor_2 > @
-      prim__int.new
-      2
-  [] > p728885526
-    l922511709 > @
-  [] > l922511709
-    prim__int.constructor_2 > @
-      prim__int.new
-      2
-  [] > s678433396
-    class__System.out.println > @
-      s_r331994761
-  [] > s_r331994761
-    a > @
-  [] > s928294079
-    class__System.out.println > @
-      l1647809929
-  [] > l1647809929
-    class__String.constructor_2 > @
-      class__String.new
-      "passed"
-...
-```
-
-### Instance Creation 15.9
-```java
-public class Main {
-   public static void main(String[] args) {
-      new SomeClass(param1, "string", new Object());
-   }
-}
-class SomeClass { ... }
-```
-translates to
-```java
-...
-# main :: String -> void
-[this args] > main
-  seq > @
-    s599491651
-  [] > s599491651
-    class__SomeClass.constructor > @
-      class__SomeClass.new
-      s_r1161667116
-      l1898220577
-      inst1143371233
-  [] > s_r1161667116
-    param1 > @
-  [] > l1898220577
-    class__String.constructor_2 > @
-      class__String.new
-      "string"
-  [] > inst1143371233
-    class__Object.constructor > @
-      class__Object.new
-...
-```
-<br />
-
-### Arrays 15.10
-```java
-public class SimpleIntegerArray {
-	public static void main(String[] args) {
-		int[] array = new int[5];
-		System.out.println("passed");
-	}
-}
-```
-maps to
-```java
-...
-# main :: String -> void
-[this args] > main
-  seq > @
-    d775081157
-    s693958407
-  prim__int.constructor_1 > array
-    prim__int.new
-  [] > d775081157
-    array.write > @
-      i_s1955021259
-  [] > i_s1955021259
-    arr1044705957 > @
-  array > temp_placeholder
-  [] > s693958407
-    class__System.out.println > @
-      l288379405
-  [] > l288379405
-    class__String.constructor_2 > @
-      class__String.new
-      "passed"
-...
-```
-<br />
-
-### Field Access 15.11
-```java
-public class Main {
-   public static void main(String[] args) {
-      new SomeClass().localVar.otherVar;
-   }
-}
-```
-translates to
-```java
-...
-# main :: String -> void
-[this args] > main
-  seq > @
-    s756185697
-  [] > s756185697
-    f_a1308109015.otherVar > @
-  [] > f_a1308109015
-    inst300031246.localVar > @
-  [] > inst300031246
-    SomeClass.constructor > @
-      SomeClass.new
-...
-```
-<br />
-
-### Method invocations 15.12
-```java
-public class Main {
-   public static void main(String[] args) {
-      method(1.0f, new Object());
-   }
-   int method (float a, Object b) {
-      return a;
-   }
-}
-```
-translates to
-```java
-+alias stdlib.primitives.prim__float
-+alias prim__int
-+alias stdlib.lang.class__Object
-
-[] > class__Main
-  class__Object > super
-  super > @
-  [] > new
-    [] > this
-      class__Object.new > super
-      super > @
-      # main :: String -> void
-      [this args] > main
-        seq > @
-          s206835546
-        [] > s206835546
-          method > @
-            l758013696
-            inst1473611564
-        [] > l758013696
-          prim__float.constructor_2 > @
-            prim__float.new
-            1.0
-        [] > inst1473611564
-          Object.constructor > @
-            Object.new
-      # method :: float -> Object -> int
-      [this a b] > method
-        seq > @
-          s558187323
-        [] > s558187323
-          s_r680576081 > @
-        [] > s_r680576081
-          a > @
-    seq > @
-      this
-```
-<br />
-
-</details>
-
-<details>
-<summary>
-<b>--- Ch. 16 - Definite Assignments [WIP]</b>
-</summary>
-</details>
-
-<details>
-<summary>
-<b>--- Ch. 17 - Threads and Locks [EO support?]</b>
-</summary>
-</details>
-
-<details>
-<summary>
-<b>--- Ch. 18 - Type inference [WIP]</b>
-</summary>
-</details>

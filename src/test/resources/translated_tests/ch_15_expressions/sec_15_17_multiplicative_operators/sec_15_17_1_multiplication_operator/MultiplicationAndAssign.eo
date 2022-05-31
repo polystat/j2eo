@@ -1,0 +1,77 @@
+# 2022-05-25T15:02:54.079532100
+# j2eo team
++alias stdlib.lang.class__System
++alias stdlib.lang.class__Object
++alias stdlib.primitives.prim__int
++alias stdlib.lang.class__String
+
+[] > class__MultiplicationAndAssign
+  class__Object > super
+  super > @
+  [] > new
+    [] > this
+      class__Object.new > super
+      super > @
+      "class__MultiplicationAndAssign" > className
+      [this] > init
+        seq > @
+          TRUE
+    seq > @
+      this
+  # main :: String[] -> void
+  [args] > main
+    seq > @
+      d966544353
+      s1536471117
+      s63390
+      s525968792
+    prim__int.constructor_1 > a
+      prim__int.new
+    [] > d966544353
+      a.write > @
+        i_s689745064
+    [] > i_s689745064
+      l945722724 > @
+    [] > l945722724
+      prim__int.constructor_2 > @
+        prim__int.new
+        5
+    [] > s1536471117
+      s_r9190301.mul_equal > @
+        l1278852808
+    [] > s_r9190301
+      a > @
+    [] > l1278852808
+      prim__int.constructor_2 > @
+        prim__int.new
+        5
+    [] > s63390
+      class__System.out.println > @
+        class__System.out
+        s_r2129144075
+    [] > s_r2129144075
+      a > @
+    [] > s525968792
+      class__System.out.println > @
+        class__System.out
+        l504858437
+    [] > l504858437
+      class__String.constructor_2 > @
+        class__String.new
+        "passed"
+  # null :: null -> void
+  [this] > constructor
+    seq > @
+      initialization
+      s422330142
+      this
+    [] > initialization
+      this.init > @
+        this
+    [] > s422330142
+      super.constructor > @
+        this.super
+
+[args...] > main
+  class__MultiplicationAndAssign.main > @
+    *

@@ -1,0 +1,135 @@
+# 2022-05-25T15:02:54.024046300
+# j2eo team
++alias stdlib.primitives.prim__float
++alias stdlib.lang.class__System
++alias stdlib.lang.class__Object
++alias stdlib.primitives.prim__int
++alias stdlib.lang.class__String
++alias org.eolang.gray.cage
+
+[] > class__ComplexArrayElementAccess
+  class__Object > super
+  super > @
+  [] > new
+    [] > this
+      class__Object.new > super
+      super > @
+      "class__ComplexArrayElementAccess" > className
+      [this] > init
+        seq > @
+          TRUE
+    seq > @
+      this
+  # main :: String[] -> void
+  [args] > main
+    seq > @
+      d320304382
+      d2131670196
+      s1617550160
+      s1922464006
+      s1427651360
+    cage > a
+    [] > d320304382
+      a.write > @
+        i_a361571968
+    [] > i_a361571968
+      * > @
+        i_s2005169944
+        i_s2134607032
+    [] > i_s2005169944
+      l1470344997 > @
+    [] > l1470344997
+      prim__int.constructor_2 > @
+        prim__int.new
+        0
+    [] > i_s2134607032
+      l728115831 > @
+    [] > l728115831
+      prim__int.constructor_2 > @
+        prim__int.new
+        1
+    cage > b
+    [] > d2131670196
+      b.write > @
+        i_a1546908073
+    [] > i_a1546908073
+      * > @
+        i_s371439501
+        i_s210506412
+    [] > i_s371439501
+      u_pre112049309 > @
+    [] > u_pre112049309
+      l1321530272.neg > @
+    [] > l1321530272
+      prim__float.constructor_2 > @
+        prim__float.new
+        0.5
+    [] > i_s210506412
+      l156856360 > @
+    [] > l156856360
+      prim__float.constructor_2 > @
+        prim__float.new
+        0.5
+    [] > s1617550160
+      a_a1325124186.write > @
+        l461160828
+    [] > a_a1325124186
+      s_r1499867659.get > @
+        a_a2012993836.v
+    [] > s_r1499867659
+      b > @
+    [] > a_a2012993836
+      s_r1740797075.get > @
+        l440938038.v
+    [] > s_r1740797075
+      a > @
+    [] > l440938038
+      prim__int.constructor_2 > @
+        prim__int.new
+        0
+    [] > l461160828
+      prim__float.constructor_2 > @
+        prim__float.new
+        1.0
+    [] > s1922464006
+      class__System.out.println > @
+        class__System.out
+        a_a1536031937
+    [] > a_a1536031937
+      s_r798981583.get > @
+        a_a1954406292.v
+    [] > s_r798981583
+      b > @
+    [] > a_a1954406292
+      s_r904058452.get > @
+        l29183965.v
+    [] > s_r904058452
+      a > @
+    [] > l29183965
+      prim__int.constructor_2 > @
+        prim__int.new
+        0
+    [] > s1427651360
+      class__System.out.println > @
+        class__System.out
+        l1334042472
+    [] > l1334042472
+      class__String.constructor_2 > @
+        class__String.new
+        "passed"
+  # null :: null -> void
+  [this] > constructor
+    seq > @
+      initialization
+      s1827725498
+      this
+    [] > initialization
+      this.init > @
+        this
+    [] > s1827725498
+      super.constructor > @
+        this.super
+
+[args...] > main
+  class__ComplexArrayElementAccess.main > @
+    *

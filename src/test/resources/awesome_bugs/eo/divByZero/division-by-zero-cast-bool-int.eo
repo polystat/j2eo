@@ -1,0 +1,84 @@
+# 2022-05-25T15:02:28.658795200
+# j2eo team
++alias stdlib.lang.class__System
++alias stdlib.lang.class__Object
++alias stdlib.primitives.prim__boolean
++alias stdlib.primitives.prim__int
+
+[] > class__Test
+  class__Object > super
+  super > @
+  [] > new
+    [] > this
+      class__Object.new > super
+      super > @
+      "class__Test" > className
+      [this] > init
+        seq > @
+          TRUE
+    seq > @
+      this
+  # test :: boolean -> int
+  [x] > test
+    seq > @
+      d1874028013
+      s1189084611
+    prim__int.constructor_1 > intX
+      prim__int.new
+    [] > d1874028013
+      intX.write > @
+        i_s1855261647
+    [] > i_s1855261647
+      b373378624 > @
+    [] > b373378624
+      s_r1958402562.binary_op_placeholder > @
+        l5395829
+    [] > s_r1958402562
+      x > @
+    [] > l5395829
+      prim__int.constructor_2 > @
+        prim__int.new
+        1
+    [] > s1189084611
+      b1517328406 > @
+    [] > b1517328406
+      l2016949136.div > @
+        s_r1792227359
+    [] > l2016949136
+      prim__int.constructor_2 > @
+        prim__int.new
+        100
+    [] > s_r1792227359
+      intX > @
+  # main :: String[] -> void
+  [args] > main
+    seq > @
+      s1406919011
+    [] > s1406919011
+      class__System.out.println > @
+        class__System.out
+        m_i229995302
+    [] > m_i229995302
+      test > @
+        this
+        l883455411
+    [] > l883455411
+      prim__boolean.constructor_2 > @
+        prim__boolean.new
+        FALSE
+  # null :: null -> void
+  [this] > constructor
+    seq > @
+      initialization
+      s1195942137
+      this
+    [] > initialization
+      this.init > @
+        this
+    [] > s1195942137
+      super.constructor > @
+        this.super
+
+[args...] > main
+  class__Test.main > @
+    *

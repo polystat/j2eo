@@ -1,0 +1,50 @@
+# 2022-05-25T15:02:54.621212300
+# j2eo team
++alias stdlib.lang.class__System
++alias stdlib.lang.class__Object
++alias stdlib.primitives.prim__int
++alias stdlib.lang.class__String
+
+[] > class__PrimitiveClassMember
+  class__Object > super
+  super > @
+  [] > new
+    [] > this
+      class__Object.new > super
+      super > @
+      "class__PrimitiveClassMember" > className
+      [this] > init
+        seq > @
+          TRUE
+      prim__int.constructor_1 > a
+        prim__int.new
+    seq > @
+      this
+  # main :: String[] -> void
+  [args] > main
+    seq > @
+      s335580595
+    [] > s335580595
+      class__System.out.println > @
+        class__System.out
+        l2024240125
+    [] > l2024240125
+      class__String.constructor_2 > @
+        class__String.new
+        "passed"
+  # null :: null -> void
+  [this] > constructor
+    seq > @
+      initialization
+      s1472216456
+      this
+    [] > initialization
+      this.init > @
+        this
+    [] > s1472216456
+      super.constructor > @
+        this.super
+
+[args...] > main
+  class__PrimitiveClassMember.main > @
+    *

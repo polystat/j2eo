@@ -1,0 +1,80 @@
+# 2022-05-25T15:02:54.670849500
+# j2eo team
++alias stdlib.primitives.prim__float
++alias stdlib.lang.class__System
++alias stdlib.lang.class__Object
++alias stdlib.primitives.prim__int
++alias stdlib.lang.class__String
+
+[] > class__SimpleMethodSignature
+  class__Object > super
+  super > @
+  [] > new
+    [] > this
+      class__Object.new > super
+      super > @
+      "class__SimpleMethodSignature" > className
+      [this] > init
+        seq > @
+          TRUE
+    seq > @
+      this
+  # method :: float -> long -> int
+  [param1 param2] > method
+    seq > @
+      s417557780
+    [] > s417557780
+      l1350751778 > @
+    [] > l1350751778
+      prim__int.constructor_2 > @
+        prim__int.new
+        0
+  # main :: String[] -> void
+  [args] > main
+    seq > @
+      d332699949
+      s1616359099
+    prim__int.constructor_1 > a
+      prim__int.new
+    [] > d332699949
+      a.write > @
+        i_s808417649
+    [] > i_s808417649
+      m_i858204589 > @
+    [] > m_i858204589
+      method > @
+        this
+        l1976752685
+        l1115170891
+    [] > l1976752685
+      prim__float.constructor_2 > @
+        prim__float.new
+        1.0
+    [] > l1115170891
+      prim__int.constructor_2 > @
+        prim__int.new
+        0
+    [] > s1616359099
+      class__System.out.println > @
+        class__System.out
+        l1676605578
+    [] > l1676605578
+      class__String.constructor_2 > @
+        class__String.new
+        "passed"
+  # null :: null -> void
+  [this] > constructor
+    seq > @
+      initialization
+      s1394940518
+      this
+    [] > initialization
+      this.init > @
+        this
+    [] > s1394940518
+      super.constructor > @
+        this.super
+
+[args...] > main
+  class__SimpleMethodSignature.main > @
+    *
