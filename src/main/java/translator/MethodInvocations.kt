@@ -10,6 +10,7 @@ import eotree.eoDot
 import tree.CompoundName
 import tree.Expression.Primary.FieldAccess
 import tree.Expression.Primary.MethodInvocation
+import tree.Expression.Primary.This
 import tree.Expression.SimpleReference
 
 
@@ -64,6 +65,7 @@ fun mapMethodInvocation(methodInvocation: MethodInvocation, name: String): List<
         is SimpleReference -> (methodQualifier.compoundName.names + trueName).eoDot()
         is FieldAccess -> (getFullIdentifier(methodQualifier) + trueName).eoDot()
         is MethodInvocation -> (listOf(constructExprName(methodQualifier)) + trueName).eoDot()
+        is This -> (listOf("this") + trueName).eoDot()
         null -> trueName.eoDot()
         else -> {
             util.logger.warn { "Unsupported method qualifier ${methodQualifier.javaClass.simpleName}; " +
@@ -79,6 +81,7 @@ fun mapMethodInvocation(methodInvocation: MethodInvocation, name: String): List<
                 if (!methodInvocation.superSign) "this".eoDot() else listOf("this", "super").eoDot()
         is FieldAccess -> getFullIdentifier(methodQualifier).eoDot()
         is MethodInvocation -> constructExprName(methodQualifier).eoDot()
+        is This -> "this".eoDot()
         null -> if (!methodInvocation.superSign) "this".eoDot() else listOf("this", "super").eoDot()
         else -> {
             util.logger.warn { "Unsupported method qualifier ${methodQualifier.javaClass.simpleName}; " +

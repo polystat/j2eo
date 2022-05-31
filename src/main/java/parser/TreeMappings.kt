@@ -486,7 +486,9 @@ fun PrimaryContext.toExpression(): Expression =
         is ParenthesizedExpressionContext -> Parenthesized(expression().toExpression())
         is LiteralExpressionContext -> literal().toLiteral()
         is IdentifierExpresionContext -> SimpleReference(CompoundName(identifier().text ?: "var"))
-        else -> SimpleReference(CompoundName("primary_expression_placeholder"))
+        is ThisExpresionContext -> This(null)
+        is SuperExpressionContext -> SimpleReference(CompoundName("super"))
+        else -> SimpleReference(CompoundName("primary_expression_placeholder_${this.javaClass.simpleName}"))
     }
 /* FIXME: typeOrVoid . CLASS */
 /* FIXME: nonWildcardTypeArguments (explicitGenericInvocationSuffix | THIS arguments) */
