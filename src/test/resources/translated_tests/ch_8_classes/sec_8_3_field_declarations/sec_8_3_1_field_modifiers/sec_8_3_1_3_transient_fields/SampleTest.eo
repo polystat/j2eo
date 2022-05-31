@@ -1,0 +1,67 @@
+# 2022-05-25T15:02:54.627235200
+# j2eo team
++alias stdlib.lang.class__System
++alias stdlib.lang.class__Object
++alias stdlib.primitives.prim__int
++alias stdlib.lang.class__String
+
+[] > class__SimpleTransientField
+  class__Object > super
+  super > @
+  [] > new
+    [] > this
+      class__Object.new > super
+      super > @
+      "class__SimpleTransientField" > className
+      [this] > init
+        seq > @
+          TRUE
+    seq > @
+      this
+  prim__int.constructor_1 > var
+    prim__int.new
+  # main :: String[] -> void
+  [args] > main
+    seq > @
+      d1530880511
+      s462039519
+    prim__int.constructor_1 > a
+      prim__int.new
+    [] > d1530880511
+      a.write > @
+        i_s1042307502
+    [] > i_s1042307502
+      b965586344 > @
+    [] > b965586344
+      s_r130764844.add > @
+        l660339123
+    [] > s_r130764844
+      var > @
+    [] > l660339123
+      prim__int.constructor_2 > @
+        prim__int.new
+        1
+    [] > s462039519
+      class__System.out.println > @
+        class__System.out
+        l1337866219
+    [] > l1337866219
+      class__String.constructor_2 > @
+        class__String.new
+        "passed"
+  # null :: null -> void
+  [this] > constructor
+    seq > @
+      initialization
+      s313082880
+      this
+    [] > initialization
+      this.init > @
+        this
+    [] > s313082880
+      super.constructor > @
+        this.super
+
+[args...] > main
+  class__SimpleTransientField.main > @
+    *

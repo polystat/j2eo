@@ -1,0 +1,77 @@
+# 2022-05-25T15:02:54.177531100
+# j2eo team
++alias stdlib.lang.class__System
++alias stdlib.lang.class__Object
++alias stdlib.primitives.prim__int
++alias stdlib.lang.class__String
+
+[] > class__BitwiseAndAssignmentOperator
+  class__Object > super
+  super > @
+  [] > new
+    [] > this
+      class__Object.new > super
+      super > @
+      "class__BitwiseAndAssignmentOperator" > className
+      [this] > init
+        seq > @
+          TRUE
+    seq > @
+      this
+  # main :: String[] -> void
+  [args] > main
+    seq > @
+      d308433917
+      s1552326679
+      s1902671237
+      s462526099
+    prim__int.constructor_1 > a
+      prim__int.new
+    [] > d308433917
+      a.write > @
+        i_s1473981203
+    [] > i_s1473981203
+      l1197251633 > @
+    [] > l1197251633
+      prim__int.constructor_2 > @
+        prim__int.new
+        1
+    [] > s1552326679
+      s_r1551629761.and_write > @
+        l1383519982
+    [] > s_r1551629761
+      a > @
+    [] > l1383519982
+      prim__int.constructor_2 > @
+        prim__int.new
+        1
+    [] > s1902671237
+      class__System.out.println > @
+        class__System.out
+        s_r403174823
+    [] > s_r403174823
+      a > @
+    [] > s462526099
+      class__System.out.println > @
+        class__System.out
+        l2142565033
+    [] > l2142565033
+      class__String.constructor_2 > @
+        class__String.new
+        "passed"
+  # null :: null -> void
+  [this] > constructor
+    seq > @
+      initialization
+      s1304589447
+      this
+    [] > initialization
+      this.init > @
+        this
+    [] > s1304589447
+      super.constructor > @
+        this.super
+
+[args...] > main
+  class__BitwiseAndAssignmentOperator.main > @
+    *

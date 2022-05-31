@@ -1,4 +1,4 @@
-// Generated from JavaParser.g4 by ANTLR 4.9.3
+// Generated from /home/ilia-milioshin/Desktop/eo/j2eo/grammar/JavaParser.g4 by ANTLR 4.7.2
 
 package parser;
 
@@ -722,11 +722,103 @@ public interface JavaParserVisitor<T> extends ParseTreeVisitor<T> {
 	 */
 	T visitMethodCall(JavaParser.MethodCallContext ctx);
 	/**
-	 * Visit a parse tree produced by {@link JavaParser#expression}.
+	 * Visit a parse tree produced by the {@code castExpresion}
+	 * labeled alternative in {@link JavaParser#expression}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
-	T visitExpression(JavaParser.ExpressionContext ctx);
+	T visitCastExpresion(JavaParser.CastExpresionContext ctx);
+	/**
+	 * Visit a parse tree produced by the {@code methodInvocation}
+	 * labeled alternative in {@link JavaParser#expression}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitMethodInvocation(JavaParser.MethodInvocationContext ctx);
+	/**
+	 * Visit a parse tree produced by the {@code instanceCreation}
+	 * labeled alternative in {@link JavaParser#expression}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitInstanceCreation(JavaParser.InstanceCreationContext ctx);
+	/**
+	 * Visit a parse tree produced by the {@code primaryExpresion}
+	 * labeled alternative in {@link JavaParser#expression}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitPrimaryExpresion(JavaParser.PrimaryExpresionContext ctx);
+	/**
+	 * Visit a parse tree produced by the {@code switch}
+	 * labeled alternative in {@link JavaParser#expression}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitSwitch(JavaParser.SwitchContext ctx);
+	/**
+	 * Visit a parse tree produced by the {@code binaryExpression}
+	 * labeled alternative in {@link JavaParser#expression}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitBinaryExpression(JavaParser.BinaryExpressionContext ctx);
+	/**
+	 * Visit a parse tree produced by the {@code reference}
+	 * labeled alternative in {@link JavaParser#expression}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitReference(JavaParser.ReferenceContext ctx);
+	/**
+	 * Visit a parse tree produced by the {@code lambda}
+	 * labeled alternative in {@link JavaParser#expression}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitLambda(JavaParser.LambdaContext ctx);
+	/**
+	 * Visit a parse tree produced by the {@code prefixExpression}
+	 * labeled alternative in {@link JavaParser#expression}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitPrefixExpression(JavaParser.PrefixExpressionContext ctx);
+	/**
+	 * Visit a parse tree produced by the {@code methodReference}
+	 * labeled alternative in {@link JavaParser#expression}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitMethodReference(JavaParser.MethodReferenceContext ctx);
+	/**
+	 * Visit a parse tree produced by the {@code arrayAccess}
+	 * labeled alternative in {@link JavaParser#expression}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitArrayAccess(JavaParser.ArrayAccessContext ctx);
+	/**
+	 * Visit a parse tree produced by the {@code ternaryExpression}
+	 * labeled alternative in {@link JavaParser#expression}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitTernaryExpression(JavaParser.TernaryExpressionContext ctx);
+	/**
+	 * Visit a parse tree produced by the {@code postfixExpression}
+	 * labeled alternative in {@link JavaParser#expression}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitPostfixExpression(JavaParser.PostfixExpressionContext ctx);
+	/**
+	 * Visit a parse tree produced by the {@code instanceOfExpression}
+	 * labeled alternative in {@link JavaParser#expression}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitInstanceOfExpression(JavaParser.InstanceOfExpressionContext ctx);
 	/**
 	 * Visit a parse tree produced by {@link JavaParser#pattern}.
 	 * @param ctx the parse tree
@@ -752,11 +844,54 @@ public interface JavaParserVisitor<T> extends ParseTreeVisitor<T> {
 	 */
 	T visitLambdaBody(JavaParser.LambdaBodyContext ctx);
 	/**
-	 * Visit a parse tree produced by {@link JavaParser#primary}.
+	 * Visit a parse tree produced by the {@code parenthesizedExpression}
+	 * labeled alternative in {@link JavaParser#primary}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
-	T visitPrimary(JavaParser.PrimaryContext ctx);
+	T visitParenthesizedExpression(JavaParser.ParenthesizedExpressionContext ctx);
+	/**
+	 * Visit a parse tree produced by the {@code thisExpresion}
+	 * labeled alternative in {@link JavaParser#primary}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitThisExpresion(JavaParser.ThisExpresionContext ctx);
+	/**
+	 * Visit a parse tree produced by the {@code superExpression}
+	 * labeled alternative in {@link JavaParser#primary}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitSuperExpression(JavaParser.SuperExpressionContext ctx);
+	/**
+	 * Visit a parse tree produced by the {@code literalExpression}
+	 * labeled alternative in {@link JavaParser#primary}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitLiteralExpression(JavaParser.LiteralExpressionContext ctx);
+	/**
+	 * Visit a parse tree produced by the {@code identifierExpresion}
+	 * labeled alternative in {@link JavaParser#primary}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitIdentifierExpresion(JavaParser.IdentifierExpresionContext ctx);
+	/**
+	 * Visit a parse tree produced by the {@code classExpression}
+	 * labeled alternative in {@link JavaParser#primary}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitClassExpression(JavaParser.ClassExpressionContext ctx);
+	/**
+	 * Visit a parse tree produced by the {@code nonWildcardTypeArgumentsExpression}
+	 * labeled alternative in {@link JavaParser#primary}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitNonWildcardTypeArgumentsExpression(JavaParser.NonWildcardTypeArgumentsExpressionContext ctx);
 	/**
 	 * Visit a parse tree produced by {@link JavaParser#switchExpression}.
 	 * @param ctx the parse tree

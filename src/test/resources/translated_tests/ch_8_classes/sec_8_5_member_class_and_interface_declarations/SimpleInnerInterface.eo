@@ -1,0 +1,47 @@
+# 2022-05-25T15:02:54.699447700
+# j2eo team
++alias stdlib.lang.class__Object
++alias stdlib.lang.class__System
++alias stdlib.lang.class__String
+
+[] > class__SimpleInnerInterface
+  class__Object > super
+  super > @
+  [] > new
+    [] > this
+      class__Object.new > super
+      super > @
+      "class__SimpleInnerInterface" > className
+      [this] > init
+        seq > @
+          TRUE
+    seq > @
+      this
+  # main :: String[] -> void
+  [args] > main
+    seq > @
+      s916835004
+    [] > s916835004
+      class__System.out.println > @
+        class__System.out
+        l1126185196
+    [] > l1126185196
+      class__String.constructor_2 > @
+        class__String.new
+        "passed"
+  # null :: null -> void
+  [this] > constructor
+    seq > @
+      initialization
+      s2108297149
+      this
+    [] > initialization
+      this.init > @
+        this
+    [] > s2108297149
+      super.constructor > @
+        this.super
+
+[args...] > main
+  class__SimpleInnerInterface.main > @
+    *
