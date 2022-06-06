@@ -2,6 +2,7 @@ package translator.preprocessor
 
 import lexer.Token
 import lexer.TokenCode
+import translator.getTypeName
 import tree.Compilation.CompilationUnit
 import tree.Compilation.SimpleCompilationUnit
 import tree.Compilation.TopLevelComponent
@@ -83,11 +84,48 @@ fun preprocess(state: PreprocessorState, unit: CompilationUnit) {
 private fun findClassDecl(state: PreprocessorState, decl: Declaration) {
     when (decl) {
         is NormalClassDeclaration -> findClassDeclInClass(state, decl)
-        is MethodDeclaration -> {
-            decl.methodBody?.block?.blockStatements
-                ?.mapNotNull { it.declaration }
-                ?.map { findClassDecl(state, it) }
+        is MethodDeclaration -> findClassDeclInMethod(state, decl)
+        is VariableDeclaration -> findClassDeclInVar(state, decl)
+    }
+}
+
+private fun findClassDeclInMethod(state: PreprocessorState, decl: MethodDeclaration) {
+    decl.methodBody?.block?.blockStatements
+        ?.mapNotNull { it.declaration }
+        ?.map { findClassDecl(state, it) }
+}
+
+private fun findClassDeclInVar(state: PreprocessorState, decl: VariableDeclaration) {
+    val initializer = decl.initializer
+
+    if (initializer is InitializerSimple) {
+        findClassDeclInInit(state, initializer)
+    }
+
+    if (initializer is InitializerArray) {
+        initializer.initializers
+            .filterIsInstance<InitializerSimple>()
+            .map { findClassDeclInInit(state, it) }
+    }
+}
+
+private fun findClassDeclInInit(state: PreprocessorState, initializer: InitializerSimple) {
+    val expr = initializer.expression
+    if (expr is InstanceCreation) {
+        val ctorType = expr.ctorType
+
+        if (ctorType is TypeName) {
+            ctorType.compoundName.names
+                .map {
+                    state.classNames[it] ?: run {
+                        state.classNames[it] = "class__$it"
+                        tryAddClassForAliases(state, "class__$it")
+                    }
+                }
         }
+
+        expr.classBody?.declarations
+            ?.map { findClassDecl(state, it) }
     }
 }
 
