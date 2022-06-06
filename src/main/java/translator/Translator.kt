@@ -12,10 +12,11 @@ import tree.Compilation.TopLevelComponent
 import util.findMainClass
 import util.generateEntryPoint
 import util.logger
+import java.nio.file.Path
 import java.time.LocalDateTime
 import java.util.*
 
-class Translator {
+class Translator(val relativePath: Path) {
 
     fun translate(unit: CompilationUnit): EOProgram {
         return if (unit is SimpleCompilationUnit)
@@ -66,6 +67,7 @@ class Translator {
                 .map { EOMeta("alias", it) }.toList()
         val eoAliases = preprocessorState.eoClassesForCurrentAlias
                 .map { EOMeta("alias", it) }.toList()
+        val pkg = relativePath.toList().dropLast(1).joinToString(".")
 
         return EOProgram(
             EOLicense(
@@ -73,7 +75,7 @@ class Translator {
                 EOComment("j2eo team")
             ),
             EOMetas(
-                None,
+                if (pkg.isNotEmpty()) Some(pkg) else None,
                 stdAliases + eoAliases
             ),
             bnds + entrypointBnds

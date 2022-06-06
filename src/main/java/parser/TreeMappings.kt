@@ -238,7 +238,8 @@ fun StatementContext.toStatement(): Statement =
         ) /* FIXME */
         is StatementSemiContext -> StatementExpression(
             null,
-            SimpleReference(CompoundName("semi_noop_placeholder"))
+                SimpleReference(CompoundName("FALSE"))
+            // SimpleReference(CompoundName("semi_noop_placeholder"))
         ) /* FIXME */
         is StatementSwitchContext -> StatementExpression(
             null,

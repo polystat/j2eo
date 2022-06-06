@@ -132,7 +132,8 @@ fun mapArrayCreation(arrayCreation: ArrayCreation, name: String): List<EOBndExpr
                 listOf(
                     EOBndExpr(
                         EOCopy(
-                            "cannot_get_access_to_array_initializer" // FIXME
+                            // "cannot_get_access_to_array_initializer" // FIXME
+                        "FALSE"
                         ),
                         "@"
                     )

@@ -15,7 +15,6 @@ import java.io.File
 import java.io.FileNotFoundException
 import java.nio.file.Files
 import java.nio.file.Paths
-import java.util.*
 import kotlin.io.path.createDirectories
 import kotlin.system.exitProcess
 
@@ -80,7 +79,7 @@ object Main2 {
         val translatedFiles: List<Pair<File, EOProgram>> = filesToProcess
             .mapIndexed { i, f ->
                 val percent = (1f * i / filesToProcess.size) * 100f
-                util.logger.info("Progress: %.2f".format(percent) + "% / 100.0%. --- Files left: ${filesToProcess.size - i}; file: ${f.path}")
+                logger.info("Progress: %.2f".format(percent) + "% / 100.0%. --- Files left: ${filesToProcess.size - i}; file: ${f.path}")
 
                 // Parse Java file using ANTLR parser
                 val lexer = JavaLexer(CharStreams.fromFileName(f.absolutePath))
@@ -102,7 +101,7 @@ object Main2 {
 //                    }
 //                }
 
-                val translator = Translator()
+                val translator = Translator(f.relativeTo(sourceFile).toPath())
                 Pair(f, translator.translate(cu))
             }
         println()
