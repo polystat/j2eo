@@ -80,54 +80,53 @@ fun preprocess(state: PreprocessorState, unit: CompilationUnit) {
     }
 }
 
+private fun findClassDecl(state: PreprocessorState, decl: Declaration) {
+    when (decl) {
+        is NormalClassDeclaration -> findClassDeclInClass(state, decl)
+        is MethodDeclaration -> {
+            decl.methodBody?.block?.blockStatements
+                ?.mapNotNull { it.declaration }
+                ?.map { findClassDecl(state, it) }
+        }
+    }
+}
+
+private fun findClassDeclInClass(state: PreprocessorState, clsDec: NormalClassDeclaration) {
+    state.classNames[clsDec.name] ?: run {
+        state.classNames[clsDec.name] = "class__${clsDec.name}"
+        tryAddClassForAliases(state, "class__${clsDec.name}")
+    }
+
+    if (clsDec.extendedType is TypeName) {
+        (clsDec.extendedType as TypeName).compoundName.names
+            .map {
+                state.classNames[it] ?: run {
+                    state.classNames[it] = "class__$it"
+                    tryAddClassForAliases(state, "class__$it")
+                }
+            }
+        (clsDec.extendedType as TypeName).compoundName.names
+            .replaceAll { str: String ->
+                state.classNames[str]?.let {
+                    state.classNames[str]
+                } ?: run {
+                    str
+                }
+            }
+    }
+
+    clsDec.body?.declarations
+        ?.map { findClassDecl(state, it) }
+}
+
+private fun collectClassNames(state: PreprocessorState, unit: SimpleCompilationUnit) {
+    unit.components?.components
+        ?.mapNotNull { component: TopLevelComponent -> component.classDecl }
+        ?.map { findClassDecl(state, it) }
+}
+
 private fun preprocessSimpleCompilationUnit(state: PreprocessorState, unit: SimpleCompilationUnit) {
-    /**
-     * @param clsDec
-     */
-    fun findClassDeclaration(clsDec: NormalClassDeclaration) {
-        state.classNames[clsDec.name] ?: run {
-            state.classNames[clsDec.name] = "class__${clsDec.name}"
-            tryAddClassForAliases(state, "class__${clsDec.name}")
-        }
-
-        if (clsDec.extendedType is TypeName) {
-            (clsDec.extendedType as TypeName).compoundName.names
-                    .map {
-                        state.classNames[it] ?: run {
-                            state.classNames[it] = "class__$it"
-                            tryAddClassForAliases(state, "class__$it")
-                        }
-                    }
-            (clsDec.extendedType as TypeName).compoundName.names
-                    .replaceAll { str: String ->
-                        state.classNames[str]?.let {
-                            state.classNames[str]
-                        } ?: run {
-                            str
-                        }
-                    }
-        }
-
-        try {
-            clsDec.body.declarations
-                    .filterIsInstance<NormalClassDeclaration>()
-                    .map { innerClsDec: NormalClassDeclaration -> findClassDeclaration(innerClsDec) }
-        } catch (e: NullPointerException) {
-            /* Ignore it*/
-        }
-    }
-
-    /**
-     * @param unit
-     */
-    fun collectClassNames(unit: SimpleCompilationUnit) {
-        unit.components.components
-                .mapNotNull { component: TopLevelComponent -> component.classDecl }
-                .filterIsInstance<NormalClassDeclaration>()
-                .map { clsDec: NormalClassDeclaration -> findClassDeclaration(clsDec) }
-    }
-
-    collectClassNames(unit)
+    collectClassNames(state, unit)
     collectPrimitivePackages(state.stdTokensForCurrentAlias, unit)
 
     unit.components.components
@@ -154,7 +153,7 @@ private fun preprocessClassDecl(state: PreprocessorState, clsDec: ClassDeclarati
         )
     }
 
-    clsDec.name = state.classNames[clsDec.name]
+    clsDec.name = state.classNames[clsDec.name] ?: clsDec.name
 
     try {
         clsDec.body.declarations

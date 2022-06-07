@@ -4,6 +4,7 @@ import arrow.core.None
 import arrow.core.flatten
 import eotree.*
 import lexer.TokenCode
+import tree.CompoundName
 import tree.Expression.*
 import tree.Expression.Primary.*
 import tree.Type.PrimitiveType
@@ -37,6 +38,12 @@ fun mapExpression(expr: Expression, name: String): List<EOBndExpr> =
             mapArrayAccess(expr, name)
         is Cast ->
             mapCastExpr(expr, name)
+        is InstanceOf -> listOf(
+            mapSimpleReference(SimpleReference(CompoundName("instance_of_placeholder")), name) /* FIXME */
+        )
+        is InstanceCreationQualified -> listOf(
+            mapSimpleReference(SimpleReference(CompoundName("instance_creation_q_placeholder")), name) /* FIXME */
+        )
         else ->
             throw IllegalArgumentException("Expression of type ${expr.javaClass.simpleName} is not supported")
     }
@@ -69,6 +76,10 @@ fun constructExprName(expr: Expression): String =
             "a_a${expr.hashCode()}"
         is Cast ->
             "c${expr.hashCode()}"
+        is InstanceOf ->
+            "i_of${expr.hashCode()}"
+        is InstanceCreationQualified ->
+            "inst_q${expr.hashCode()}"
         else ->
             throw IllegalArgumentException("Expression of type ${expr.javaClass.simpleName} is not supported")
     }

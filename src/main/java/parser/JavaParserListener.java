@@ -1,4 +1,4 @@
-// Generated from JavaParser.g4 by ANTLR 4.9.3
+// Generated from /home/ilia-milioshin/Desktop/eo/j2eo/grammar/JavaParser.g4 by ANTLR 4.7.2
 
 package parser;
 
@@ -1198,15 +1198,173 @@ public interface JavaParserListener extends ParseTreeListener {
 	 */
 	void exitMethodCall(JavaParser.MethodCallContext ctx);
 	/**
-	 * Enter a parse tree produced by {@link JavaParser#expression}.
+	 * Enter a parse tree produced by the {@code castExpresion}
+	 * labeled alternative in {@link JavaParser#expression}.
 	 * @param ctx the parse tree
 	 */
-	void enterExpression(JavaParser.ExpressionContext ctx);
+	void enterCastExpresion(JavaParser.CastExpresionContext ctx);
 	/**
-	 * Exit a parse tree produced by {@link JavaParser#expression}.
+	 * Exit a parse tree produced by the {@code castExpresion}
+	 * labeled alternative in {@link JavaParser#expression}.
 	 * @param ctx the parse tree
 	 */
-	void exitExpression(JavaParser.ExpressionContext ctx);
+	void exitCastExpresion(JavaParser.CastExpresionContext ctx);
+	/**
+	 * Enter a parse tree produced by the {@code methodInvocation}
+	 * labeled alternative in {@link JavaParser#expression}.
+	 * @param ctx the parse tree
+	 */
+	void enterMethodInvocation(JavaParser.MethodInvocationContext ctx);
+	/**
+	 * Exit a parse tree produced by the {@code methodInvocation}
+	 * labeled alternative in {@link JavaParser#expression}.
+	 * @param ctx the parse tree
+	 */
+	void exitMethodInvocation(JavaParser.MethodInvocationContext ctx);
+	/**
+	 * Enter a parse tree produced by the {@code instanceCreation}
+	 * labeled alternative in {@link JavaParser#expression}.
+	 * @param ctx the parse tree
+	 */
+	void enterInstanceCreation(JavaParser.InstanceCreationContext ctx);
+	/**
+	 * Exit a parse tree produced by the {@code instanceCreation}
+	 * labeled alternative in {@link JavaParser#expression}.
+	 * @param ctx the parse tree
+	 */
+	void exitInstanceCreation(JavaParser.InstanceCreationContext ctx);
+	/**
+	 * Enter a parse tree produced by the {@code primaryExpresion}
+	 * labeled alternative in {@link JavaParser#expression}.
+	 * @param ctx the parse tree
+	 */
+	void enterPrimaryExpresion(JavaParser.PrimaryExpresionContext ctx);
+	/**
+	 * Exit a parse tree produced by the {@code primaryExpresion}
+	 * labeled alternative in {@link JavaParser#expression}.
+	 * @param ctx the parse tree
+	 */
+	void exitPrimaryExpresion(JavaParser.PrimaryExpresionContext ctx);
+	/**
+	 * Enter a parse tree produced by the {@code switch}
+	 * labeled alternative in {@link JavaParser#expression}.
+	 * @param ctx the parse tree
+	 */
+	void enterSwitch(JavaParser.SwitchContext ctx);
+	/**
+	 * Exit a parse tree produced by the {@code switch}
+	 * labeled alternative in {@link JavaParser#expression}.
+	 * @param ctx the parse tree
+	 */
+	void exitSwitch(JavaParser.SwitchContext ctx);
+	/**
+	 * Enter a parse tree produced by the {@code binaryExpression}
+	 * labeled alternative in {@link JavaParser#expression}.
+	 * @param ctx the parse tree
+	 */
+	void enterBinaryExpression(JavaParser.BinaryExpressionContext ctx);
+	/**
+	 * Exit a parse tree produced by the {@code binaryExpression}
+	 * labeled alternative in {@link JavaParser#expression}.
+	 * @param ctx the parse tree
+	 */
+	void exitBinaryExpression(JavaParser.BinaryExpressionContext ctx);
+	/**
+	 * Enter a parse tree produced by the {@code reference}
+	 * labeled alternative in {@link JavaParser#expression}.
+	 * @param ctx the parse tree
+	 */
+	void enterReference(JavaParser.ReferenceContext ctx);
+	/**
+	 * Exit a parse tree produced by the {@code reference}
+	 * labeled alternative in {@link JavaParser#expression}.
+	 * @param ctx the parse tree
+	 */
+	void exitReference(JavaParser.ReferenceContext ctx);
+	/**
+	 * Enter a parse tree produced by the {@code lambda}
+	 * labeled alternative in {@link JavaParser#expression}.
+	 * @param ctx the parse tree
+	 */
+	void enterLambda(JavaParser.LambdaContext ctx);
+	/**
+	 * Exit a parse tree produced by the {@code lambda}
+	 * labeled alternative in {@link JavaParser#expression}.
+	 * @param ctx the parse tree
+	 */
+	void exitLambda(JavaParser.LambdaContext ctx);
+	/**
+	 * Enter a parse tree produced by the {@code prefixExpression}
+	 * labeled alternative in {@link JavaParser#expression}.
+	 * @param ctx the parse tree
+	 */
+	void enterPrefixExpression(JavaParser.PrefixExpressionContext ctx);
+	/**
+	 * Exit a parse tree produced by the {@code prefixExpression}
+	 * labeled alternative in {@link JavaParser#expression}.
+	 * @param ctx the parse tree
+	 */
+	void exitPrefixExpression(JavaParser.PrefixExpressionContext ctx);
+	/**
+	 * Enter a parse tree produced by the {@code methodReference}
+	 * labeled alternative in {@link JavaParser#expression}.
+	 * @param ctx the parse tree
+	 */
+	void enterMethodReference(JavaParser.MethodReferenceContext ctx);
+	/**
+	 * Exit a parse tree produced by the {@code methodReference}
+	 * labeled alternative in {@link JavaParser#expression}.
+	 * @param ctx the parse tree
+	 */
+	void exitMethodReference(JavaParser.MethodReferenceContext ctx);
+	/**
+	 * Enter a parse tree produced by the {@code arrayAccess}
+	 * labeled alternative in {@link JavaParser#expression}.
+	 * @param ctx the parse tree
+	 */
+	void enterArrayAccess(JavaParser.ArrayAccessContext ctx);
+	/**
+	 * Exit a parse tree produced by the {@code arrayAccess}
+	 * labeled alternative in {@link JavaParser#expression}.
+	 * @param ctx the parse tree
+	 */
+	void exitArrayAccess(JavaParser.ArrayAccessContext ctx);
+	/**
+	 * Enter a parse tree produced by the {@code ternaryExpression}
+	 * labeled alternative in {@link JavaParser#expression}.
+	 * @param ctx the parse tree
+	 */
+	void enterTernaryExpression(JavaParser.TernaryExpressionContext ctx);
+	/**
+	 * Exit a parse tree produced by the {@code ternaryExpression}
+	 * labeled alternative in {@link JavaParser#expression}.
+	 * @param ctx the parse tree
+	 */
+	void exitTernaryExpression(JavaParser.TernaryExpressionContext ctx);
+	/**
+	 * Enter a parse tree produced by the {@code postfixExpression}
+	 * labeled alternative in {@link JavaParser#expression}.
+	 * @param ctx the parse tree
+	 */
+	void enterPostfixExpression(JavaParser.PostfixExpressionContext ctx);
+	/**
+	 * Exit a parse tree produced by the {@code postfixExpression}
+	 * labeled alternative in {@link JavaParser#expression}.
+	 * @param ctx the parse tree
+	 */
+	void exitPostfixExpression(JavaParser.PostfixExpressionContext ctx);
+	/**
+	 * Enter a parse tree produced by the {@code instanceOfExpression}
+	 * labeled alternative in {@link JavaParser#expression}.
+	 * @param ctx the parse tree
+	 */
+	void enterInstanceOfExpression(JavaParser.InstanceOfExpressionContext ctx);
+	/**
+	 * Exit a parse tree produced by the {@code instanceOfExpression}
+	 * labeled alternative in {@link JavaParser#expression}.
+	 * @param ctx the parse tree
+	 */
+	void exitInstanceOfExpression(JavaParser.InstanceOfExpressionContext ctx);
 	/**
 	 * Enter a parse tree produced by {@link JavaParser#pattern}.
 	 * @param ctx the parse tree
@@ -1248,15 +1406,89 @@ public interface JavaParserListener extends ParseTreeListener {
 	 */
 	void exitLambdaBody(JavaParser.LambdaBodyContext ctx);
 	/**
-	 * Enter a parse tree produced by {@link JavaParser#primary}.
+	 * Enter a parse tree produced by the {@code parenthesizedExpression}
+	 * labeled alternative in {@link JavaParser#primary}.
 	 * @param ctx the parse tree
 	 */
-	void enterPrimary(JavaParser.PrimaryContext ctx);
+	void enterParenthesizedExpression(JavaParser.ParenthesizedExpressionContext ctx);
 	/**
-	 * Exit a parse tree produced by {@link JavaParser#primary}.
+	 * Exit a parse tree produced by the {@code parenthesizedExpression}
+	 * labeled alternative in {@link JavaParser#primary}.
 	 * @param ctx the parse tree
 	 */
-	void exitPrimary(JavaParser.PrimaryContext ctx);
+	void exitParenthesizedExpression(JavaParser.ParenthesizedExpressionContext ctx);
+	/**
+	 * Enter a parse tree produced by the {@code thisExpresion}
+	 * labeled alternative in {@link JavaParser#primary}.
+	 * @param ctx the parse tree
+	 */
+	void enterThisExpresion(JavaParser.ThisExpresionContext ctx);
+	/**
+	 * Exit a parse tree produced by the {@code thisExpresion}
+	 * labeled alternative in {@link JavaParser#primary}.
+	 * @param ctx the parse tree
+	 */
+	void exitThisExpresion(JavaParser.ThisExpresionContext ctx);
+	/**
+	 * Enter a parse tree produced by the {@code superExpression}
+	 * labeled alternative in {@link JavaParser#primary}.
+	 * @param ctx the parse tree
+	 */
+	void enterSuperExpression(JavaParser.SuperExpressionContext ctx);
+	/**
+	 * Exit a parse tree produced by the {@code superExpression}
+	 * labeled alternative in {@link JavaParser#primary}.
+	 * @param ctx the parse tree
+	 */
+	void exitSuperExpression(JavaParser.SuperExpressionContext ctx);
+	/**
+	 * Enter a parse tree produced by the {@code literalExpression}
+	 * labeled alternative in {@link JavaParser#primary}.
+	 * @param ctx the parse tree
+	 */
+	void enterLiteralExpression(JavaParser.LiteralExpressionContext ctx);
+	/**
+	 * Exit a parse tree produced by the {@code literalExpression}
+	 * labeled alternative in {@link JavaParser#primary}.
+	 * @param ctx the parse tree
+	 */
+	void exitLiteralExpression(JavaParser.LiteralExpressionContext ctx);
+	/**
+	 * Enter a parse tree produced by the {@code identifierExpresion}
+	 * labeled alternative in {@link JavaParser#primary}.
+	 * @param ctx the parse tree
+	 */
+	void enterIdentifierExpresion(JavaParser.IdentifierExpresionContext ctx);
+	/**
+	 * Exit a parse tree produced by the {@code identifierExpresion}
+	 * labeled alternative in {@link JavaParser#primary}.
+	 * @param ctx the parse tree
+	 */
+	void exitIdentifierExpresion(JavaParser.IdentifierExpresionContext ctx);
+	/**
+	 * Enter a parse tree produced by the {@code classExpression}
+	 * labeled alternative in {@link JavaParser#primary}.
+	 * @param ctx the parse tree
+	 */
+	void enterClassExpression(JavaParser.ClassExpressionContext ctx);
+	/**
+	 * Exit a parse tree produced by the {@code classExpression}
+	 * labeled alternative in {@link JavaParser#primary}.
+	 * @param ctx the parse tree
+	 */
+	void exitClassExpression(JavaParser.ClassExpressionContext ctx);
+	/**
+	 * Enter a parse tree produced by the {@code nonWildcardTypeArgumentsExpression}
+	 * labeled alternative in {@link JavaParser#primary}.
+	 * @param ctx the parse tree
+	 */
+	void enterNonWildcardTypeArgumentsExpression(JavaParser.NonWildcardTypeArgumentsExpressionContext ctx);
+	/**
+	 * Exit a parse tree produced by the {@code nonWildcardTypeArgumentsExpression}
+	 * labeled alternative in {@link JavaParser#primary}.
+	 * @param ctx the parse tree
+	 */
+	void exitNonWildcardTypeArgumentsExpression(JavaParser.NonWildcardTypeArgumentsExpressionContext ctx);
 	/**
 	 * Enter a parse tree produced by {@link JavaParser#switchExpression}.
 	 * @param ctx the parse tree
