@@ -37,6 +37,7 @@ private fun getFullIdentifier(fieldAccess: FieldAccess): List<String> {
             is SimpleReference -> {
                 (fieldAccess.expression as SimpleReference).compoundName.names
             }
+            is This -> listOf("this")
             else -> {
                 listOf()
             }

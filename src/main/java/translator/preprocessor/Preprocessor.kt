@@ -2,7 +2,6 @@ package translator.preprocessor
 
 import lexer.Token
 import lexer.TokenCode
-import translator.getTypeName
 import tree.Compilation.CompilationUnit
 import tree.Compilation.SimpleCompilationUnit
 import tree.Compilation.TopLevelComponent
@@ -15,6 +14,7 @@ import tree.Expression.Primary.FieldAccess
 import tree.Expression.Primary.InstanceCreation
 import tree.Expression.Primary.MethodInvocation
 import tree.Expression.Primary.Parenthesized
+import tree.Expression.Primary.This
 import tree.Expression.SimpleReference
 import tree.Initializer
 import tree.InitializerArray
@@ -374,6 +374,8 @@ private fun preprocessType(state: PreprocessorState, type: Type) {
 }
 
 private fun preprocessMethodInvocation(state: PreprocessorState, methodInvocation: MethodInvocation) {
+    methodInvocation.qualifier = methodInvocation.qualifier ?: This(null) /* FIXME: TEMPORARY */
+
     when (val methodQualifier = methodInvocation.qualifier) {
         is SimpleReference -> preprocessSimpleReference(state, methodQualifier)
         is FieldAccess -> {
@@ -384,6 +386,7 @@ private fun preprocessMethodInvocation(state: PreprocessorState, methodInvocatio
             // this is a generated else block
         }
     }
+
     methodInvocation.arguments.arguments
         .map { preprocessExpr(state, it) }
 }
