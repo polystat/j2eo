@@ -5,6 +5,7 @@ public class SimpleRawType<E> {
 	E get() { return value; }
 	void set(E v) { value = v; }
 
+	@SuppressWarnings("unchecked")
 	public static void main(String[] args) {
 		SimpleRawType x = new SimpleRawType<String>("abc");
 		System.out.println(x.value); // OK, has type Object
