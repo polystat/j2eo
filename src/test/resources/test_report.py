@@ -28,12 +28,12 @@ testReadyPath = "./test_ready/"
 testCandidatesPath = "./test_candidates/"
 
 uniqueTests = set()
+readyTests = set()
 
-overallUnitTests(testReadyPath, uniqueTests)
-readyNum = len(uniqueTests)
-print("[J2EO test report] Ready/Successfull unit tests:", readyNum)
+overallUnitTests(testReadyPath, readyTests)
+print("[J2EO test report] Ready/Successfull unit tests:", len(readyTests))
 overallUnitTests(testCandidatesPath, uniqueTests)
-print("[J2EO test report] Candidate unit tests:", len(uniqueTests) - readyNum)
+print("[J2EO test report] Candidate unit tests:", len(uniqueTests) - len(readyTests))
 print("[J2EO test report] Overall unit tests:", len(uniqueTests))
 print("[J2EO test report] Overall sections:", sectionsOverall(testReadyPath))
 print("[J2EO test report] Successfull sections:", sectionsSuccess(testReadyPath))
