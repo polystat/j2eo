@@ -1,7 +1,7 @@
 assets:
-  gradle.properties: yegor256/home#assets/polystat/gradle.properties
-  pubring.gpg: yegor256/home#assets/pubring.gpg
-  secring.gpg: yegor256/home#assets/secring.gpg
+  gradle.properties: yegor256/polystat-secrets#gradle.properties
+  pubring.gpg: yegor256/polystat-secrets#pubring.gpg
+  secring.gpg: yegor256/polystat-secrets#secring.gpg
 docker:
   image: "iammaxim/j2eo:latest"
   as_root: true
