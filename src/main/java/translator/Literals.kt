@@ -30,14 +30,14 @@ fun mapLiteral(literal: Literal, name: String): EOBndExpr =
         TokenCode.FloatingLiteral -> generateEOData(
             listOf(TokenCodes.PRIM__FLOAT.value, "constructor_2").eoDot(),
             listOf(TokenCodes.PRIM__FLOAT.value, "new").eoDot(),
-            EOFloatData((literal.value as String).toFloat()),
+            EOFloatData((literal.value as String).replace("_", "").toFloat()),
             name
         )
         TokenCode.IntegerLiteral -> generateEOData(
             listOf(TokenCodes.PRIM__INT.value, "constructor_2").eoDot(),
             listOf(TokenCodes.PRIM__INT.value, "new").eoDot(),
             EOIntData(try {
-                (literal.value as String).toInt()
+                (literal.value as String).replace("_", "").toInt()
             } catch (e: NumberFormatException) {
                 logger.warn { "Integer literal parsing is not implemented; falling back to 0" }
                 0 /* FIXME: parse integer literals */
