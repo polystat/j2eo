@@ -31,7 +31,7 @@ fun mapBlock(block: Block,
         )
     }
 
-    val statementsNames = block.block.blockStatements.associateWith { context.genUniqueEntityName(it) }
+    val statementsNames = block.block.blockStatements.associateWith { getBlockStmtName(it, context) }
 
     val parsedStatements = block.block.blockStatements
         .associate { statementsNames[it]!! to mapBlockStatement(it, statementsNames[it]!!, context) }
@@ -57,6 +57,18 @@ fun mapBlock(block: Block,
     ) + (firstStmts?.map { it.second }?.flatten() ?: listOf()) +
             parsedStatements.values.toList().flatten() +
             (lastStmts?.map { it.second }?.flatten() ?: listOf())
+}
+
+fun getBlockStmtName(blockStatement: BlockStatement, context: Context): String {
+    return if (blockStatement.statement != null) {
+        context.genUniqueEntityName(blockStatement.statement)
+    } else if (blockStatement.expression != null) {
+        context.genUniqueEntityName(blockStatement.expression)
+    } else if (blockStatement.declaration != null) {
+        context.genUniqueEntityName(blockStatement.declaration)
+    } else {
+        throw java.lang.IllegalArgumentException("Invalid block statement!")
+    }
 }
 
 fun mapBlockStatement(blockStatement: BlockStatement, name: String, context: Context): List<EOBndExpr> {
