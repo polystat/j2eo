@@ -378,6 +378,11 @@ private fun preprocessExpr(state: PreprocessorState, expr: Expression) {
         is InstanceCreation -> preprocessInstanceCreation(state, expr)
         is Cast -> preprocessCastExpr(state, expr)
         is Parenthesized -> preprocessExpr(state, expr.expression)
+        is FieldAccess -> {
+            preprocessExpr(state, expr.expression)
+            preprocessCompoundName(state, CompoundName(expr.identifier))
+            expr.identifier = state.classNames[expr.identifier] ?: expr.identifier
+        }
         else -> {
             // this is a generated else block
         }
@@ -408,12 +413,11 @@ private fun preprocessMethodInvocation(state: PreprocessorState, methodInvocatio
 
     when (val methodQualifier = methodInvocation.qualifier) {
         is SimpleReference -> preprocessSimpleReference(state, methodQualifier)
+        is MethodInvocation -> preprocessMethodInvocation(state, methodQualifier)
         is FieldAccess -> {
             preprocessExpr(state, methodQualifier.expression)
             preprocessCompoundName(state, CompoundName(methodQualifier.identifier))
-        }
-        else -> {
-            // this is a generated else block
+            methodQualifier.identifier = state.classNames[methodQualifier.identifier] ?: methodQualifier.identifier
         }
     }
 
