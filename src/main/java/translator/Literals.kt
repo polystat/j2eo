@@ -19,7 +19,7 @@ import util.logger
  *         prim__int.new
  *         2
  */
-fun mapLiteral(literal: Literal, name: String): EOBndExpr =
+fun mapLiteral(literal: Literal, name: String, context: Context): EOBndExpr =
     when (literal.code) {
         TokenCode.StringLiteral -> generateEOData(
             listOf(TokenCodes.CLASS__STRING.value, "constructor_2").eoDot(),

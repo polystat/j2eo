@@ -18,17 +18,17 @@ import util.logger
  * Maps a declaration that resides inside of class.
  * The name may be confusing, but this DOES NOT map the class declaration itself.
  */
-fun mapClassDeclaration(dec: Declaration): List<EOBndExpr> {
+fun mapClassDeclaration(dec: Declaration, context: Context): List<EOBndExpr> {
     return when (dec) {
         is MethodDeclaration -> {
-            listOf(mapMethodDeclaration(dec))
+            listOf(mapMethodDeclaration(dec, context))
         }
         is NormalClassDeclaration -> {
-            listOf(mapClass(dec as ClassDeclaration))
+            listOf(mapClass(dec as ClassDeclaration, context))
         }
         is VariableDeclaration -> {
             // FIXME: why do we have static name "dec" here?
-            mapVariableDeclaration(dec, "dec", false)
+            mapVariableDeclaration(dec, "dec", context, false)
         }
         else -> {
             logger.warn { "Skipping unsupported class declaration: ${dec.javaClass.name}" }
@@ -37,16 +37,16 @@ fun mapClassDeclaration(dec: Declaration): List<EOBndExpr> {
     }
 }
 
-fun mapDeclaration(dec: Declaration, name: String): List<EOBndExpr> {
+fun mapDeclaration(dec: Declaration, name: String, context: Context): List<EOBndExpr> {
     return when (dec) {
         is MethodDeclaration -> {
-            listOf(mapMethodDeclaration(dec))
+            listOf(mapMethodDeclaration(dec, context))
         }
         is NormalClassDeclaration -> {
-            listOf(mapClass(dec as ClassDeclaration))
+            listOf(mapClass(dec as ClassDeclaration, context))
         }
         is VariableDeclaration -> {
-            mapVariableDeclaration(dec, name)
+            mapVariableDeclaration(dec, name, context)
         }
         else -> {
             logger.warn { "Skipping unsupported declaration: ${dec.javaClass.name}" }
@@ -55,8 +55,10 @@ fun mapDeclaration(dec: Declaration, name: String): List<EOBndExpr> {
     }
 }
 
-fun mapVariableDeclaration(dec: VariableDeclaration, name: String, mapInitializer: Boolean = true): List<EOBndExpr> =
-    when (dec.type) {
+fun mapVariableDeclaration(dec: VariableDeclaration, name: String, context: Context, mapInitializer: Boolean = true): List<EOBndExpr> {
+    val initName = context.genUniqueEntityName(dec.initializer)
+
+    return when (dec.type) {
         is TypeName -> {
             listOf(
                 EOBndExpr(
@@ -107,7 +109,7 @@ fun mapVariableDeclaration(dec: VariableDeclaration, name: String, mapInitialize
                             EOBndExpr(
                                 EOCopy(
                                     listOf(dec.name, "write").eoDot(),
-                                    constructInitName(dec.initializer).eoDot()
+                                    initName.eoDot()
                                 ),
                                 "@"
                             )
@@ -116,7 +118,7 @@ fun mapVariableDeclaration(dec: VariableDeclaration, name: String, mapInitialize
                     name
                 )
             ) +
-                    mapInitializer(dec.initializer, constructInitName(dec.initializer))
+                    mapInitializer(dec.initializer, initName, context)
         } else {
             listOf(
                 EOBndExpr(
@@ -136,7 +138,10 @@ fun mapVariableDeclaration(dec: VariableDeclaration, name: String, mapInitialize
                 )
             )
         }
-    } else { listOf() }
+    } else {
+        listOf()
+    }
+}
 
 fun decodePrimitiveType(type: PrimitiveType): TokenCodes {
     return when (type.typeCode) {

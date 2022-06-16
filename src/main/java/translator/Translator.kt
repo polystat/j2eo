@@ -18,9 +18,9 @@ import java.util.*
 
 class Translator {
 
-    fun translate(unit: CompilationUnit): EOProgram {
+    fun translate(unit: CompilationUnit, context: Context): EOProgram {
         return if (unit is SimpleCompilationUnit)
-            mapSimpleCompilationUnit(unit)
+            mapSimpleCompilationUnit(unit, context)
         else
             throw IllegalArgumentException(
                 "CompilationUnit of type " +
@@ -29,7 +29,7 @@ class Translator {
             )
     }
 
-    fun mapPackage(pkg: Package): EOProgram {
+    fun mapPackage(pkg: Package, context: Context): EOProgram {
         return EOProgram(
             EOLicense(), // TODO: add license?
             EOMetas(
@@ -37,17 +37,17 @@ class Translator {
                 ArrayList()
             ),
             pkg.components.components
-                .map { obj -> mapTopLevelComponent(obj) }
+                .map { obj -> mapTopLevelComponent(obj, context) }
         )
     }
 
-    private fun mapSimpleCompilationUnit(unit: SimpleCompilationUnit): EOProgram {
+    private fun mapSimpleCompilationUnit(unit: SimpleCompilationUnit, context: Context): EOProgram {
         // preprocessUnit(unit)
         val preprocessorState = PreprocessorState()
         preprocess(preprocessorState, unit)
 
         val bnds = unit.components.components
-            .map { obj: TopLevelComponent? -> mapTopLevelComponent(obj!!) }
+            .map { obj: TopLevelComponent? -> mapTopLevelComponent(obj!!, context) }
             .map { bnd: EOBnd -> bnd as EOBndExpr }
 
 
@@ -66,7 +66,7 @@ class Translator {
         val stdAliases = (
             preprocessorState.stdTokensForCurrentAlias
                 .map { EOMeta("alias", it) }.toList() +
-            (unit.imports?.imports?.map { mapImport(it) } ?: listOf())
+            (unit.imports?.imports?.map { mapImport(it, context) } ?: listOf())
         ).distinct()
 
         val eoAliases = preprocessorState.eoClassesForCurrentAlias
@@ -85,17 +85,17 @@ class Translator {
         )
     }
 
-    private fun mapTopLevelComponent(component: TopLevelComponent): EOBnd {
+    private fun mapTopLevelComponent(component: TopLevelComponent, context: Context): EOBnd {
         return if (component.classDecl != null) {
-            mapClass(component.classDecl)
+            mapClass(component.classDecl, context)
         } else if (component.interfaceDecl != null) {
-            mapInterface(component.interfaceDecl)
+            mapInterface(component.interfaceDecl, context)
         } else {
             throw IllegalArgumentException("Supplied TopLevelComponent does not have neither class nor interface")
         }
     }
 
-    private fun mapImport(importDecl: ImportDeclaration): EOMeta {
+    private fun mapImport(importDecl: ImportDeclaration, context: Context): EOMeta {
         return EOMeta("alias", importDecl.compoundName.names.joinToString("."))
     }
 }

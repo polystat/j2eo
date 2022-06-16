@@ -28,7 +28,7 @@ fun genInit(): EOBndExpr =
         "initialization"
     )
 
-fun mapMethodDeclaration(dec: MethodDeclaration): EOBndExpr {
+fun mapMethodDeclaration(dec: MethodDeclaration, context: Context): EOBndExpr {
     val isStatic = dec.modifiers != null &&
             dec.modifiers.modifiers.modifiers.find { it == TokenCode.Static } != null
     val additionalParameters = if (!isStatic) listOf("this") else ArrayList()
@@ -58,6 +58,7 @@ fun mapMethodDeclaration(dec: MethodDeclaration): EOBndExpr {
         if (dec.methodBody != null) {
             mapBlock(
                 dec.methodBody,
+                context,
                 firstStmts = if (dec is ConstructorDeclaration) {
                     listOf("initialization" to listOf(genInit()))
                 } else {

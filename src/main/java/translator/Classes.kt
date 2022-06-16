@@ -13,7 +13,7 @@ import tree.Type.TypeName
 import util.generateNew
 import util.generateStatic
 
-fun mapClass(clsDec: ClassDeclaration): EOBndExpr {
+fun mapClass(clsDec: ClassDeclaration, context: Context): EOBndExpr {
     require(clsDec is NormalClassDeclaration) {
         (
             "Only NormalClassDeclaration is supported, but " +
@@ -50,8 +50,8 @@ fun mapClass(clsDec: ClassDeclaration): EOBndExpr {
                     "@"
                 )
             )
-                    + (generateNew(clsDec))
-                    + generateStatic(clsDec)
+                    + (generateNew(clsDec, context))
+                    + generateStatic(clsDec, context)
 //                    + clsDec.body.declarations
 //                .filterIsInstance<NormalClassDeclaration>()
 //                .map { mapClass(it) }
@@ -60,6 +60,6 @@ fun mapClass(clsDec: ClassDeclaration): EOBndExpr {
     )
 }
 
-fun mapInterface(interfaceDeclaration: InterfaceDeclaration?): EOBnd {
+fun mapInterface(interfaceDeclaration: InterfaceDeclaration?, context: Context): EOBnd {
     throw IllegalArgumentException("Interface declarations are not yet implemented")
 }

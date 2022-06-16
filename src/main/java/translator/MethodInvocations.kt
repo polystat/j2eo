@@ -54,18 +54,19 @@ fun trueMethodInvocationName(name: String): List<String> {
 }
 
 // TODO: create state object to store binding of expression
-fun mapMethodInvocation(methodInvocation: MethodInvocation, name: String): List<EOBndExpr> {
+fun mapMethodInvocation(methodInvocation: MethodInvocation, name: String, context: Context): List<EOBndExpr> {
     // require(!methodInvocation.superSign) { "Super sign isn't supported yet" }
     /* FIXME (NOW PARTIALLY SUPPORTED) */
     require(methodInvocation.typeArguments == null) { "Type arguments aren't supported yet" }
 
     val isStaticCall = isStaticCall(methodInvocation)
     val trueName = trueMethodInvocationName(methodInvocation.name)
+    val qualifierName = context.genUniqueEntityName(methodInvocation.qualifier)
 
     val src: EODot = when (val methodQualifier = methodInvocation.qualifier) {
         is SimpleReference -> (methodQualifier.compoundName.names + trueName).eoDot()
         is FieldAccess -> (getFullIdentifier(methodQualifier) + trueName).eoDot()
-        is MethodInvocation -> (listOf(constructExprName(methodQualifier)) + trueName).eoDot()
+        is MethodInvocation -> (listOf(qualifierName) + trueName).eoDot()
         is This -> (listOf("this") + trueName).eoDot()
         null -> trueName.eoDot()
         else -> {
@@ -81,7 +82,7 @@ fun mapMethodInvocation(methodInvocation: MethodInvocation, name: String): List<
             else
                 if (!methodInvocation.superSign) "this".eoDot() else listOf("this", "super").eoDot()
         is FieldAccess -> getFullIdentifier(methodQualifier).eoDot()
-        is MethodInvocation -> constructExprName(methodQualifier).eoDot()
+        is MethodInvocation -> qualifierName.eoDot()
         is This -> "this".eoDot()
         null -> if (!methodInvocation.superSign) "this".eoDot() else listOf("this", "super").eoDot()
         else -> {
@@ -90,6 +91,8 @@ fun mapMethodInvocation(methodInvocation: MethodInvocation, name: String): List<
             "unsupported_qualifier".eoDot()
         }
     }
+
+    val argNames = methodInvocation.arguments?.arguments?.map { context.genUniqueEntityName(it) }
 
     return listOf(
         EOBndExpr (
@@ -101,7 +104,7 @@ fun mapMethodInvocation(methodInvocation: MethodInvocation, name: String): List<
                         EOCopy(
                             src,
                             (if (!isStaticCall) listOf(callee) else ArrayList<EOExpr>()) +
-                                (methodInvocation.arguments?.arguments?.map { obj -> constructExprName(obj).eoDot() } ?: listOf())
+                                (argNames?.map { it.eoDot() } ?: listOf())
                         ),
                         "@"
                     )
@@ -109,11 +112,13 @@ fun mapMethodInvocation(methodInvocation: MethodInvocation, name: String): List<
             ),
             name
         )
-    ) + (methodInvocation.arguments?.arguments?.map { mapExpression(it, constructExprName(it)) }?.flatten() ?: listOf()) +
+    ) + (methodInvocation.arguments?.arguments
+            ?.mapIndexed { idx, it -> mapExpression(it, argNames!![idx], context) }?.flatten() ?: listOf()) +
         if (methodInvocation.qualifier is MethodInvocation) {
             mapMethodInvocation(
                 methodInvocation.qualifier as MethodInvocation,
-                constructExprName(methodInvocation.qualifier)
+                qualifierName,
+                context
             )
         } else {
             listOf()

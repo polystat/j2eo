@@ -14,12 +14,14 @@ import tree.CompoundName
 import tree.Declaration.*
 import tree.Type.TypeName
 
-fun generateInit(clsDec: NormalClassDeclaration): EOBndExpr {
+fun generateInit(clsDec: NormalClassDeclaration, context: Context): EOBndExpr {
     val nonStaticVarDecls = clsDec.body?.declarations
         ?.filterIsInstance<VariableDeclaration>()
-        ?.filter { it.modifiers?.modifiers?.modifiers?.find { it == TokenCode.Static } == null &&
-                it.initializer != null
+        ?.filter { it ->
+            it.modifiers?.modifiers?.modifiers?.find { it == TokenCode.Static } == null && it.initializer != null
         } ?: listOf()
+
+    val initNames = nonStaticVarDecls.associateWith { context.genUniqueEntityName(it.initializer) }
 
     val parsedInits = nonStaticVarDecls
         .associate {
@@ -32,7 +34,7 @@ fun generateInit(clsDec: NormalClassDeclaration): EOBndExpr {
                             EOBndExpr(
                                 EOCopy(
                                     listOf("this", it.name, "write").eoDot(),
-                                    constructInitName(it.initializer).eoDot()
+                                    initNames[it]!!.eoDot()
                                 ),
                                 "@"
                             )
@@ -40,7 +42,7 @@ fun generateInit(clsDec: NormalClassDeclaration): EOBndExpr {
                     ),
                     "d${it.hashCode()}"
                 )
-            ) + mapInitializer(it.initializer, constructInitName(it.initializer))
+            ) + mapInitializer(it.initializer, initNames[it]!!, context)
         }
 
     return EOBndExpr(
@@ -64,7 +66,7 @@ fun generateInit(clsDec: NormalClassDeclaration): EOBndExpr {
     )
 }
 
-fun generateThis(clsDec: NormalClassDeclaration): EOBndExpr {
+fun generateThis(clsDec: NormalClassDeclaration, context: Context): EOBndExpr {
     return EOBndExpr(
         EOObject(
             ArrayList(),
@@ -88,7 +90,7 @@ fun generateThis(clsDec: NormalClassDeclaration): EOBndExpr {
                     EOStringData(clsDec.name),
                     "className"
                 ),
-                generateInit(clsDec)
+                generateInit(clsDec, context)
             ) +
                 if (clsDec.body != null)
                     clsDec.body.declarations
@@ -97,7 +99,7 @@ fun generateThis(clsDec: NormalClassDeclaration): EOBndExpr {
                                     dec !is ConstructorDeclaration &&
                                     dec !is ClassDeclaration /* FIXME (IT'S NOT ALWAYS TRUE) */
                         }
-                        .map { mapClassDeclaration(it) }
+                        .map { mapClassDeclaration(it, context) }
                         .flatten()
                 else
                     listOf()
@@ -106,13 +108,13 @@ fun generateThis(clsDec: NormalClassDeclaration): EOBndExpr {
     )
 }
 
-fun generateNew(clsDec: NormalClassDeclaration): EOBndExpr {
+fun generateNew(clsDec: NormalClassDeclaration, context: Context): EOBndExpr {
     return EOBndExpr(
         EOObject(
             ArrayList(),
             None,
             listOf(
-                generateThis(clsDec)
+                generateThis(clsDec, context)
             ) + (
                 EOBndExpr(
                     EOCopy(

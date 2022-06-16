@@ -7,6 +7,7 @@ import org.apache.commons.cli.*
 import parser.JavaLexer
 import parser.JavaParser
 import parser.Visitor
+import translator.Context
 import translator.Translator
 import tree.Compilation.CompilationUnit
 import tree.Entity
@@ -103,7 +104,7 @@ object Main2 {
 //                }
 
                 val translator = Translator()
-                Pair(f, translator.translate(cu))
+                Pair(f, translator.translate(cu, Context(0)))
             }
         println()
 
