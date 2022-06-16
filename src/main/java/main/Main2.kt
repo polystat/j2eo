@@ -17,6 +17,7 @@ import java.io.FileNotFoundException
 import java.nio.file.Files
 import java.nio.file.Paths
 import java.util.*
+import kotlin.collections.HashMap
 import kotlin.io.path.createDirectories
 import kotlin.system.exitProcess
 
@@ -104,7 +105,7 @@ object Main2 {
 //                }
 
                 val translator = Translator()
-                Pair(f, translator.translate(cu, Context(0)))
+                Pair(f, translator.translate(cu, Context(HashMap())))
             }
         println()
 

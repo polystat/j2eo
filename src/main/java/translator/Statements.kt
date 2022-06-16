@@ -140,7 +140,7 @@ fun mapReturnStatement(rn: Return, name: String, context: Context): List<EOBndEx
  * conditionExpr, thenPart and elsePart are mapped into separate objects.
  */
 fun mapIfThenElseStatement(rn: IfThenElse, name: String, context: Context): List<EOBndExpr> {
-    val emptyName = "empty_${context.uniqueObjectId++}"
+    val emptyName = context.genUniqueEntityName("empty")
     val condName = context.genUniqueEntityName(rn.condition)
     val thenName = context.genUniqueEntityName(rn.thenPart)
     val elseName = context.genUniqueEntityName(rn.elsePart)
@@ -188,7 +188,7 @@ fun mapIfThenElseStatement(rn: IfThenElse, name: String, context: Context): List
  * TODO: check if we can use iterator inside of statement.
  */
 fun mapWhileStatement(wh: While, name: String, context: Context): List<EOBndExpr> {
-    val emptyName = "empty_${context.uniqueObjectId++}"
+    val emptyName = context.genUniqueEntityName("empty")
     val condName = context.genUniqueEntityName(wh.condition)
     val stmtName = context.genUniqueEntityName(wh.statement)
 
@@ -231,7 +231,7 @@ fun mapWhileStatement(wh: While, name: String, context: Context): List<EOBndExpr
 }
 
 fun mapDoStatement(do_stmt: Do, name: String, context: Context): List<EOBndExpr> {
-    val emptyName = "empty_${context.uniqueObjectId++}"
+    val emptyName = context.genUniqueEntityName("empty")
     val condName = context.genUniqueEntityName(do_stmt.condition)
     val stmtName = context.genUniqueEntityName(do_stmt.statement)
 
