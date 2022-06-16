@@ -167,8 +167,38 @@ private fun preprocessSimpleCompilationUnit(state: PreprocessorState, unit: Simp
     collectClassNames(state, unit)
     collectPrimitivePackages(state.stdTokensForCurrentAlias, unit)
 
+    unit.imports?.imports
+        ?.map { preprocessImportDeclaration(state, it) }
+
     unit.components.components
             .map { component: TopLevelComponent? -> preprocessTopLevelComponent(state, component!!) }
+}
+
+private fun preprocessImportDeclaration(state: PreprocessorState, importDecl: ImportDeclaration) {
+    if (importDecl.compoundName.names.size == 0) {
+        return
+    }
+
+    if (importDecl.compoundName.names[0].equals("java")) {
+        importDecl.compoundName.names[0] = "stdlib"
+    }
+
+    val checkEntity = if (!importDecl.signStatic) {
+        importDecl.compoundName.names.last()
+    } else {
+        importDecl.compoundName.names[importDecl.compoundName.names.size - 2] // Always works, no static without class
+    }
+
+    state.classNames[checkEntity] ?: run { state.classNames[checkEntity] = "class__$checkEntity" }
+
+    importDecl.compoundName.names
+        .replaceAll { str: String ->
+            state.classNames[str]?.let {
+                state.classNames[str]
+            } ?: run {
+                str
+            }
+        }
 }
 
 private fun preprocessTopLevelComponent(state: PreprocessorState, component: TopLevelComponent) {

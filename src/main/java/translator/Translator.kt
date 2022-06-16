@@ -9,6 +9,7 @@ import tree.Compilation.CompilationUnit
 import tree.Compilation.Package
 import tree.Compilation.SimpleCompilationUnit
 import tree.Compilation.TopLevelComponent
+import tree.Declaration.ImportDeclaration
 import util.findMainClass
 import util.generateEntryPoint
 import util.logger
@@ -62,8 +63,12 @@ class Translator {
         // FIXME: assuming there is only one top-level component and it is a class
         // Always calling the 'main' method
 
-        val stdAliases = preprocessorState.stdTokensForCurrentAlias
-                .map { EOMeta("alias", it) }.toList()
+        val stdAliases = (
+            preprocessorState.stdTokensForCurrentAlias
+                .map { EOMeta("alias", it) }.toList() +
+            (unit.imports?.imports?.map { mapImport(it) } ?: listOf())
+        ).distinct()
+
         val eoAliases = preprocessorState.eoClassesForCurrentAlias
                 .map { EOMeta("alias", it) }.toList()
 
@@ -88,5 +93,9 @@ class Translator {
         } else {
             throw IllegalArgumentException("Supplied TopLevelComponent does not have neither class nor interface")
         }
+    }
+
+    private fun mapImport(importDecl: ImportDeclaration): EOMeta {
+        return EOMeta("alias", importDecl.compoundName.names.joinToString("."))
     }
 }
