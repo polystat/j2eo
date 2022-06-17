@@ -403,7 +403,11 @@ private fun preprocessInstanceCreation(state: PreprocessorState, instanceCreatio
 
 private fun preprocessType(state: PreprocessorState, type: Type) {
     when (type) {
-        is TypeName -> preprocessCompoundName(state, type.compoundName)
+        is TypeName -> {
+            type.compoundName.names
+                .map { state.classNames[it] ?: run { state.classNames[it] = "class__$it" } }
+            preprocessCompoundName(state, type.compoundName)
+        }
         else -> {}
     }
 }

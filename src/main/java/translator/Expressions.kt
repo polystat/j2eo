@@ -210,7 +210,11 @@ fun mapFieldAccess(expr: FieldAccess, name: String, context: Context): List<EOBn
                 listOf(
                     EOBndExpr(
                         EOCopy(
-                            listOf(fieldExprName, expr.identifier).eoDot()
+                            if (!expr.superSign) {
+                                listOf(fieldExprName, expr.identifier).eoDot()
+                            } else {
+                                listOf(fieldExprName, "super", expr.identifier).eoDot()
+                            }
                         ),
                         "@"
                     )
