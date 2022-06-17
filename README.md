@@ -237,3 +237,220 @@ Java 16 language specification: [see .pdf file](https://docs.oracle.com/javase/s
 
 ###[Ch. 18 - Type inference WIP](src/test/resources/test_ready/ch_18_type_inference)
 
+---
+
+## Examples of translation projections
+
+Bellow there are all designed mappings at the current moment.
+
+#### Identifiers
+Each identifier preserves name. There is no name mangling.
+
+### 15 Expressions
+
+---
+
+#### 15.8.1 Lexical Literals
+
+Now supported only integer, floating point and string literals:
+
+`1` -> 
+```
+[] > literal_1
+  prim__int.constructor_2 > @
+    prim__int.new
+    1
+```
+
+`1.0` ->
+```
+[] > literal_1
+  prim__float.constructor_2 > @
+    prim__float.new
+    1.0
+```
+
+`"string"` ->
+```
+[] > literal_1
+  class__String.constructor_2 > @
+    class__String.new
+    "string"
+```
+
+#### 15.8.3 this
+
+It's remaining unchanged.
+
+#### 15.8.5 Parenthesized Expressions
+
+`(expresion)` -> 
+```
+[] > parenthesized_1
+  expresion > @
+```
+
+#### 15.9 Class Instance Creation Expression
+
+`new A(arg)` ->
+```
+[] > statementExpression_1
+  class__A.constructor > @
+    class__A.new
+    simpleReference_1
+[] > simpleReference_1
+  arg > @
+```
+
+#### 15.10.1 Array Creation Expressions
+
+`int[] array = {1}` ->
+```
+[] > variableDeclaration_1
+  array.write > @
+    initializerArray_1
+[] > initializerArray_1
+  * > @
+    initializerSimple_1
+[] > initializerSimple_1
+  literal_1 > @
+[] > literal_1
+  prim__int.constructor_2 > @
+    prim__int.new
+    1
+```
+
+#### 15.10.3 Array Access Expressions
+
+`array[idx]` ->
+```
+[] > statementExpression_1
+  simpleReference_1.get > @
+    simpleReference_2.v
+[] > simpleReference_1
+  array > @
+[] > simpleReference_2
+  idx > @
+```
+
+#### 15.11 Field Access Expressions
+
+`a.b` ->
+```
+[] > statementExpression_1
+  simpleReference_1.b > @
+[] > simpleReference_1
+  a > @
+```
+
+#### 15.11.2 Accessing Superclass Members using `super`
+
+`a.super.b` ->
+```
+[] > statementExpression_1
+  simpleReference_1.super.b > @
+[] > simpleReference_1
+  a > @
+```
+
+#### 15.12 Method Invocation Expressions
+
+`a.b(arg)` ->
+```
+[] > statementExpression_1
+  a.b > @
+    a
+    simpleReference_2
+[] > simpleReference_2
+  arg > @
+```
+
+#### 15.14.2 Postfix Increment Operator `++`
+
+`expr++` ->
+```
+[] > statementExpression_1
+  simpleReference_1.inc_post > @
+[] > simpleReference_1
+  expr > @
+```
+
+#### 15.14.3 Postfix Decrement Operator `--`
+
+`expr--` ->
+```
+[] > statementExpression_1
+  simpleReference_1.dec_post > @
+[] > simpleReference_1
+  expr > @
+```
+
+#### 15.15.1 Prefix Increment Operator `++`
+
+`++expr` ->
+```
+[] > statementExpression_1
+  simpleReference_1.inc_pre > @
+[] > simpleReference_1
+  expr > @
+```
+
+#### 15.15.2 Prefix Decrement Operator `--`
+
+`--expr` ->
+```
+[] > statementExpression_1
+  simpleReference_1.dec_pre > @
+[] > simpleReference_1
+  expr > @
+```
+
+#### 15.15.3 Unary Plus Operator `+`
+
+`+expr` -> 
+```
+[] > statementExpression_1
+  simpleReference_1 > @
+[] > simpleReference_1
+  expr > @
+```
+
+#### 15.15.4 Unary Minus Operator `-`
+
+`-expr` ->
+```
+[] > statementExpression_1
+  simpleReference_1.neg > @
+[] > simpleReference_1
+  expr > @
+```
+
+#### 15.16 Cast Expressions
+
+Only cast to integer is supported
+
+`(int) 1.0` ->
+```
+[] > statementExpression_1
+  prim__int.from > @
+    literal_1
+[] > literal_1
+  prim__float.constructor_2 > @
+    prim__float.new
+    1.0
+```
+
+#### 15.17-26 Binary Operators
+
+`left operand right` ->
+```
+[] > statementExpression_1
+  simpleReference_1.t_operand > @
+    simpleReference_2
+[] > simpleReference_1
+  left > @
+[] > simpleReference_2
+  right > @
+```
+
+`t_opernad` is translated `operand`
