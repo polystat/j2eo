@@ -244,7 +244,109 @@ Java 16 language specification: [see .pdf file](https://docs.oracle.com/javase/s
 Bellow there are all designed mappings at the current moment.
 
 #### Identifiers
-Each identifier preserves name. There is no name mangling.
+Each identifier preserves name except classes. Their names are prepended with `class__`. There is no name mangling for variables. 
+
+### 4 Types, Values, and Variables
+
+----
+
+#### 4.12.1 Variables of Primitive Type
+
+Any primitive type variable is being stored on special handwritten objects (`primitives`). For example, `int` value will be stored in `prim__int` object, `long` in `prim__long` and so on. 
+
+Example:
+```Java
+float a;
+```
+-->
+```
+prim__float.constructor_1 > a
+  prim__float.new
+```
+
+#### 4.12.2 Variables of Reference Type
+
+Any reference type variable is being stored on `cage`. 
+
+Example:
+```Java
+Ref a;
+```
+-->
+```
+cage > a
+```
+
+### 8 Classes
+
+---
+
+#### 8.1.1 Class Modifiers
+
+Any modifiers except `static` are being omitted during translation. `static` is needed to distinguish a inner class from nested one. 
+
+#### 8.3 Field Declarations
+
+Currently, only non-`static` fields are supported. 
+
+### 14 Blocks, Statements, and Patterns
+
+---
+
+#### 14.2 Blocks
+
+By Java grammar, blocks are sequence of declarations and statements separated by curly braces. Translator creates new EO object for each block. Example: 
+
+```Java
+{
+    declaration;
+    statement;
+}
+``` 
+-->
+```
+[] > block_1
+  seq > @
+    declaration_1
+    statement_1
+```
+Number after object name is needed just for avoiding name collisions. `declaration_1` and `statement_1` are EO objects. They describe internal structure of itself. Inside a `seq` object they are just dataizing. 
+
+Now let's look to real Java code:
+```Java
+void foo() {
+    int a = 1;
+    println(a);
+}
+```
+->
+```
+1  [this] > foo
+2    seq > @
+3      variableDeclaration_1
+4      statementExpression_1
+5    prim__int.constructor_1 > a
+6      prim__int.new
+7    [] > variableDeclaration_1
+8      a.write > @
+9        initializerSimple_1
+10   [] > initializerSimple_1
+11     literal_1 > @
+12   [] > literal_1
+13     prim__int.constructor_2 > @
+14       prim__int.new
+15       1
+16   [] > statementExpression_1
+17     this.println > @
+18       this
+19       simpleReference_1
+20   [] > simpleReference_1
+21     a > @
+```
+
+Any variables in blocks are declared separately from the `seq` object. In this case `int a` was declared at lines 5-6. Also it has an initializer `1`. So translator assign `a` to initializer value at lines 7-9. This initializer is simple one. It is a just literal. Translator mentioned it on lines 10-11. Literals are translated to EO objects itself (lines 12-15). 
+
+Any statement in blocks are statement expression by default. Their behaviour as a declarations are described separately. In this case statement `println(a)` is declared on lines 16-19. By default, any method is considered as class method. So access to it is performed via `this` (line 17). Moreover, it is necessary to pass `this` as argument during method invocation (line 18). `println(a)` is call with single argument `a`. It is a simple reference that was mentioned at line 19. Simple reference is itself a distinct object which translator declared on lines 20-21.   
 
 ### 15 Expressions
 
