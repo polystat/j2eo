@@ -1,24 +1,24 @@
 +package stdlib.primitives
 +alias stdlib.primitives.prim__num
 
-[] > prim__short
+[] > prim__long
   prim__num > @
-  32767 > max_value
-  -32768 > min_value
-  16 > bits_len
+  9223372036854775807 > max_value
+  -9223372036854775808 > min_value
+  64 > bits_len
 
   [] > new
     prim__num.new > @
-    "prim__short" > prim_name
-    16 > bits_len
+    "prim__long" > prim_name
+    64 > bits_len
 
     [] > inc_pre
       seq > @
         ^.v.write
           ^.v.plus
             1
-        prim__short.constructor_3
-          prim__short.new
+        prim__long.constructor_3
+          prim__long.new
           ^
 
     [] > dec_pre
@@ -26,13 +26,13 @@
         ^.v.write
           ^.v.minus
             1
-        prim__short.constructor_3
-          prim__short.new
+        prim__long.constructor_3
+          prim__long.new
           ^
 
     [] > inc_post
-      prim__short.constructor_1 > old
-        prim__short.new
+      prim__long.constructor_1 > old
+        prim__long.new
       seq > @
         old.v.write
           ^.v
@@ -42,8 +42,8 @@
         old
 
     [] > dec_post
-      prim__short.constructor_1 > old
-        prim__short.new
+      prim__long.constructor_1 > old
+        prim__long.new
       seq > @
         old.v.write
           ^.v
@@ -56,68 +56,68 @@
       seq > @
         ^.v.write
           arg__right.v
-        prim__short.constructor_3
-          prim__short.new
+        prim__long.constructor_3
+          prim__long.new
           ^
 
     [arg__right] > plus
       seq > @
-        prim__short.constructor_2
-          prim__short.new
+        prim__long.constructor_2
+          prim__long.new
           ^.v.plus
             arg__right.v
 
     [arg__right] > minus
       seq > @
-        prim__short.constructor_2
-          prim__short.new
+        prim__long.constructor_2
+          prim__long.new
           ^.v.minus
             arg__right.v
 
     [arg__right] > times
       seq > @
-        prim__short.constructor_2
-          prim__short.new
+        prim__long.constructor_2
+          prim__long.new
           ^.v.times
             arg__right.v
 
     [arg__right] > div
       seq > @
-        prim__short.constructor_2
-          prim__short.new
+        prim__long.constructor_2
+          prim__long.new
           ^.v.div
             arg__right.v
 
     [arg__right] > mod
       seq > @
-        prim__short.constructor_2
-          prim__short.new
+        prim__long.constructor_2
+          prim__long.new
           ^.v.mod
             arg__right.v
 
     [arg__right] > left
       seq > @
-        prim__short.constructor_2
-          prim__short.new
+        prim__long.constructor_2
+          prim__long.new
           ^.v.left
             arg__right.v
 
     [arg__right] > right
       seq > @
-        prim__short.constructor_2
-          prim__short.new
+        prim__long.constructor_2
+          prim__long.new
           ^.v.arg__right
             arg__right.v
 
     [arg__right] > right_u
       seq > @
-        prim__short.constructor_2
-          prim__short.new
+        prim__long.constructor_2
+          prim__long.new
           if.
             arg__right.v.gt 0
             as-int.
               and.
-                32767.as-bytes.right
+                9223372036854775807.as-bytes.right
                   arg__right.v.minus 1
                 as-bytes.
                   ^.v.right
@@ -127,7 +127,7 @@
 
   [arg__right] > from
     arg__right.integer_part > right_value
-    65535.as-bytes > mask
+    -1.as-bytes > mask
     mask.not > inv_mask
 
     [] > is_floating_point
@@ -137,39 +137,39 @@
 
     [] > integer_case
       if. > @
-        arg__right.byte_len.gt (prim__short.byte_len)
+        arg__right.byte_len.gt (prim__long.byte_len)
         downcast
         upcast
 
     [] > downcast
       right_value.as-bytes.and mask > pseudo_res
       if. > @
-        pseudo_res.as-int.gt prim__short.max_value
-        prim__short.constructor_2
-          prim__short.new
+        pseudo_res.as-int.gt prim__long.max_value
+        prim__long.constructor_2
+          prim__long.new
           (inv_mask.or pseudo_res).as-int
-        prim__short.constructor_2
-          prim__short.new
+        prim__long.constructor_2
+          prim__long.new
           pseudo_res.as-int
 
     [] > upcast
-      prim__short.constructor_2 > @
-        prim__short.new
+      prim__long.constructor_2 > @
+        prim__long.new
         right_value
 
     [] > floating_point_case
       if. > @
-        right_value.gte (prim__short.max_value)
-        prim__short.constructor_2
-          prim__short.new
-          prim__short.max_value
+        right_value.gte (prim__long.max_value)
+        prim__long.constructor_2
+          prim__long.new
+          prim__long.max_value
         if.
-          right_value.lte (prim__short.min_value)
-          prim__short.constructor_2
-            prim__short.new
-            prim__short.min_value
-          prim__short.constructor_2
-            prim__short.new
+          right_value.lte (prim__long.min_value)
+          prim__long.constructor_2
+            prim__long.new
+            prim__long.min_value
+          prim__long.constructor_2
+            prim__long.new
             right_value
 
     seq > @
@@ -180,20 +180,20 @@
 
   [self] > constructor_1
     seq > @
-      prim__short.@.constructor_1
+      prim__long.@.constructor_1
         self.@
       self
 
   [self var__num] > constructor_2
     seq > @
-      prim__short.@.constructor_2
+      prim__long.@.constructor_2
         self.@
         var__num
       self
 
   [self another__num] > constructor_3
     seq > @
-      prim__short.@.constructor_3
+      prim__long.@.constructor_3
         self.@
         another__num
       self

@@ -4,42 +4,32 @@
 +alias stdlib.primitives.prim__float
 
 [] > class__Random
-  class__Object > super
-  super > @
+  class__Object > @
 
   [] > new
-    [] > this
-      class__Object.new > super
-      super > @
-      "class__Random" > className
+    class__Object.new > @
+    "class__Random" > className
+    random' > r
 
-      [this] > init
-        0 > @
+    [self] > nextInt
+      seq > @
+        prim__int.constructor_2
+          prim__int.new
+          as-int.
+            sub.
+              mul.
+                4294967295.0
+                self.r
+              2147483648.0
 
-      [this] > nextInt
-        random > r
-        seq > @
-          prim__int.constructor_2
-            prim__int.new
-            as-int.
-              sub.
-                mul.
-                  4294967295.0
-                  r
-                2147483648.0
+    [self] > nextFloat
+      seq > @
+        prim__float.constructor_2
+          prim__float.new
+          self.r
 
-      [this] > nextFloat
-        random > r
-        seq > @
-          prim__float.constructor_2
-            prim__float.new
-            r
-
+  [self] > constructor
     seq > @
-      this
-
-  [this] > constructor
-    seq > @
-      this.init
-        this
-      this
+      class__Random.@.constructor
+        self.@
+      self

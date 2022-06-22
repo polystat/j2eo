@@ -2,116 +2,106 @@
 +alias stdlib.primitives.prim__boolean
 
 [] > prim__num
+  0 > bits_len
+
   [] > new
-    [] > this
-      "prim__num" > prim_name
-      "prim" > @
-      memory > v
+    "prim__num" > prim_name
+    "prim" > @
+    memory' > v
+    0 > bits_len
 
-      [] > as-string
-        seq > @
-          ^.v.as-string
+    [] > as-string
+      seq > @
+        ^.v.as-string
 
-      [this] > integer_part
-        seq > @
+    [self] > integer_part
+      seq > @
+        if.
+          not.
+            self.prim_name.eq "prim__boolean"
           if.
-            not.
-              this.prim_name.eq "prim__boolean"
-            if.
-              and.
-                not.
-                  this.prim_name.eq "prim__float"
-                not.
-                  this.prim_name.eq "prim__double"
-              this.v
-              this.v.as-int
-            if.
-              this.v
-              1
-              0
-
-      [this] > float_part
-        seq > @
+            and.
+              not.
+                self.prim_name.eq "prim__float"
+              not.
+                self.prim_name.eq "prim__double"
+            self.v
+            self.v.as-int
           if.
-            not.
-              this.prim_name.eq "prim__boolean"
-            if.
-              and.
-                not.
-                  this.prim_name.eq "prim__float"
-                not.
-                  this.prim_name.eq "prim__double"
-              this.v.as-float
-              this.v
-            if.
-              this.v
-              1.0
-              0.0
+            self.v
+            1
+            0
 
-      [this value] > init
-        seq > @
-          this.v.write
-            value
+    [self] > float_part
+      seq > @
+        if.
+          not.
+            self.prim_name.eq "prim__boolean"
+          if.
+            and.
+              not.
+                self.prim_name.eq "prim__float"
+              not.
+                self.prim_name.eq "prim__double"
+            self.v.as-float
+            self.v
+          if.
+            self.v
+            1.0
+            0.0
 
-      [right] > eq
-        seq > @
-          prim__boolean.constructor_2
-            prim__boolean.new
-            ^.v.eq
-              right.v
+    [arg__right] > eq
+      seq > @
+        prim__boolean.constructor_2
+          prim__boolean.new
+          ^.v.eq
+            arg__right.v
 
-      [right] > greater
-        seq > @
-          prim__boolean.constructor_2
-            prim__boolean.new
-            ^.v.greater
-              right.v
+    [arg__right] > neq
+      seq > @
+        prim__boolean.constructor_2
+          prim__boolean.new
+          ^.v.neq
+            arg__right.v
 
-      [right] > less
-        seq > @
-          prim__boolean.constructor_2
-            prim__boolean.new
-            ^.v.less
-              right.v
+    [arg__right] > greater
+      seq > @
+        prim__boolean.constructor_2
+          prim__boolean.new
+          ^.v.gt
+            arg__right.v
 
-      [right] > geq
-        seq > @
-          prim__boolean.constructor_2
-            prim__boolean.new
-            ^.v.geq
-              right.v
+    [arg__right] > less
+      seq > @
+        prim__boolean.constructor_2
+          prim__boolean.new
+          ^.v.lt
+            arg__right.v
 
-      [right] > leq
-        seq > @
-          prim__boolean.constructor_2
-            prim__boolean.new
-            ^.v.leq
-              right.v
+    [arg__right] > geq
+      seq > @
+        prim__boolean.constructor_2
+          prim__boolean.new
+          ^.v.gte
+            arg__right.v
 
-      [right] > neq
-        seq > @
-          prim__boolean.constructor_2
-            prim__boolean.new
-            ^.v.neq
-              right.v
+    [arg__right] > leq
+      seq > @
+        prim__boolean.constructor_2
+          prim__boolean.new
+          ^.v.lte
+            arg__right.v
 
+  [self] > constructor_1
     seq > @
-      this
+      self
 
-  [this] > constructor_1
+  [self var__num] > constructor_2
     seq > @
-      this
+      self.v.write var__num
+      self
 
-  [this target] > constructor_2
+  [self another__num] > constructor_3
     seq > @
-      this.init
-        this
-        target
-      this
-
-  [this another_num] > constructor_3
-    seq > @
-      this.init
-        this
-        another_num.v
-      this
+      self.v.write (another__num.v)
+      self

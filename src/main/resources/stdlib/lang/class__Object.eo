@@ -2,21 +2,12 @@
 
 [] > class__Object
   [] > new
-    [] > this
-      "class__Object" > className
+    "class__Object" > className
+    "OBJECT" > @
+
+    [self] > toString
       "OBJECT" > @
 
-      [this] > init
-        0 > @
-
-      [this] > toString
-        "OBJECT" > @
-
+  [self] > constructor
     seq > @
-      this
-
-  [this] > constructor
-    seq > @
-      this.init
-        this
-      this
+      self
