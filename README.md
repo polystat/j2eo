@@ -1,5 +1,3 @@
-# J2EO: Java to EO Translator
-
 <img src="https://www.yegor256.com/images/books/elegant-objects/cactus.svg" height="100px"  alt="eolang icon"/>
 
 [![Gradle Build](https://github.com/polystat/j2eo/actions/workflows/gradle-build.yml/badge.svg)](https://github.com/polystat/j2eo/actions/workflows/gradle-build.yml)
@@ -20,6 +18,7 @@ This is a translator of **Java** programming language to [EOLANG](https://www.eo
     - **Maven 3.8+** to run tests (be aware of [possible conflicts](https://bugs.debian.org/cgi-bin/bugreport.cgi?bug=980467) of the
       latest versions of Maven and Java on some OSs)
     - **ANTLR4 4.9.3** (if you want to build the parser on your own. If you don't have ANTLR, you still can build project using bundled version of parser.)
+
 2. Clone the repo into your folder:
 
    HTTPS:
@@ -54,6 +53,14 @@ This is a translator of **Java** programming language to [EOLANG](https://www.eo
     ```shell
     java -jar j2eo.jar src/test/resources/polystat_tests/test1 -o output_eo
     ```
+
+You can also use [yegor256/j2eo](https://hub.docker.com/r/yegor256/j2eo) image for [Docker](https://docs.docker.com/get-docker/):
+
+```
+$ docker run -v $(pwd):/eo yegor256/j2eo hello.java --target output
+```
+
+This command will translate `hello.java` in the current directory, saving the output to `output/` subdirectory.
 
 ### Running translator on Hadoop
 
