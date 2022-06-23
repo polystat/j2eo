@@ -250,9 +250,92 @@ Each identifier preserves name except classes. Their names are prepended with `c
 
 ----
 
+#### 4.2 Primitive Types and Values
+
+Any primitives types are supported. For handling them we use a [primitives](src/main/resources/stdlib/primitives) package. It provides `memory` wrappers for any primitive types. 
+
+Wrappers are more convenient way to simulate primitives types. For, example `memory.write` returns `bool` object instead itself, so for handling `=` operator we should do something like this:
+```
+[a b] > write
+  seq > @
+    a.write b
+    a
+```
+It is more complex than just `a.write b`, where `a` and `b` are wrappers. Moreover, pure `memory` does not support in-place operations and conversions. 
+Therefore, we decided to generate more beautiful EO code and use wrappers instead generation of unreadable code with pure 'memory'.
+
+#### 4.2.2 Integer Operations
+The Java programming language provides a number of operators that act on integral
+values. Supported ones:
+* The comparison operators, which result in a value of type boolean:
+  - The numerical comparison operators <, <=, >, and >=
+  - The numerical equality operators == and !=
+* The unary plus and minus operators + and - 
+* The multiplicative operators *, /, and %
+* The additive operators + and - 
+* The increment operator ++, both prefix and postfix
+* The decrement operator --, both prefix and postfix
+* The signed and unsigned shift operators <<, >>, and >>>
+* The cast operator, which can convert from an integral value to a value
+of any specified numeric type
+
+Common translation scheme:
+```Java
+expr_1 op expr_2 
+```
+-->
+```
+[] > binary
+  expr_1.translated_op > @
+    expr_2
+```
+
+Unary case:
+```Java
+expr op
+// OR
+op expr
+```
+-->
+```
+[] > unary
+  expr.translated_op > @
+```
+
+Cast case:
+```Java
+(primitive_type) expr
+```
+-->
+```
+[] > cast
+  translated_primitive_type.from expr
+```
+
+#### 4.2.3 Floating-Point Types, Formats, and Values
+
+Currently, there is only runtime support for `double`. Nevertheless, translator can handle `float` well, but output EO code would not be equivalent to initial one during runtime.
+
 #### 4.12.1 Variables of Primitive Type
 
-Any primitive type variable is being stored on special handwritten objects (`primitives`). For example, `int` value will be stored in `prim__int` object, `long` in `prim__long` and so on. 
+Any primitive type variable is being stored on special handwritten objects (`primitives`). For example, `int` value will be stored in `prim__int` object, `long` in `prim__long` and so on.
+
+#### 4.2.4 Floating-Point Operations
+The Java programming language provides a number of operators that act on
+floating-point values. Supported operators:
+* The comparison operators, which result in a value of type boolean:
+  - The numerical comparison operators <, <=, >, and >=
+  - The numerical equality operators == and !=
+* The numerical operators, which result in a value of type float or double:
+  - The unary plus and minus operators + and -
+  - The multiplicative operators *, /, and % 
+* The additive operators + and -
+* The increment operator ++, both prefix and postfix
+* The decrement operator --, both prefix and postfix
+* The cast operator, which can convert from a floating-point value to a
+value of any specified numeric type
+
+Scheme of translation is the same as in [4.2.2](#4.2.2-integer-operations)
 
 Example:
 ```Java
