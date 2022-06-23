@@ -9,24 +9,26 @@
   [] > new
     class__Object.new > @
     "class__Random" > className
-    random' > r
 
     [self] > nextInt
+      random > r
       seq > @
         prim__int.constructor_2
           prim__int.new
           as-int.
-            sub.
-              mul.
-                4294967295.0
-                self.r
-              2147483648.0
+            as-bytes.
+              minus.
+                times.
+                  4294967295.0
+                  r
+                2147483648.0
 
     [self] > nextFloat
+      random > r
       seq > @
         prim__float.constructor_2
           prim__float.new
-          self.r
+          r
 
   [self] > constructor
     seq > @

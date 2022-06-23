@@ -57,6 +57,14 @@
           ^.v
           f
 
+  [arg__right] > from
+    prim__boolean.constructor_2 > @
+      prim__boolean.new
+      neq.
+        arg__right.integer_part
+          arg__right
+        0
+
   [self] > constructor_1
     seq > @
       prim__boolean.@.constructor_1

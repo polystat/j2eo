@@ -1,5 +1,6 @@
 +package stdlib.primitives
 +alias stdlib.primitives.prim__num
++alias org.eolang.txt.sprintf
 
 [] > prim__float
   prim__num > @
@@ -9,6 +10,10 @@
     prim__num.new > @
     "prim__float" > prim_name
     32 > bits_len
+
+    [] > as-string
+      seq > @
+        sprintf "%f" (^.v)
 
     [] > inc_pre
       seq > @

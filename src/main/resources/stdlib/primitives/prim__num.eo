@@ -1,5 +1,6 @@
 +package stdlib.primitives
 +alias stdlib.primitives.prim__boolean
++alias org.eolang.txt.sprintf
 
 [] > prim__num
   0 > bits_len
@@ -12,7 +13,7 @@
 
     [] > as-string
       seq > @
-        ^.v.as-string
+        sprintf "%d" (^.v)
 
     [self] > integer_part
       seq > @
