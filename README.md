@@ -241,9 +241,12 @@ Java 16 language specification: [see .pdf file](https://docs.oracle.com/javase/s
 
 ## Examples of translation projections
 
-Bellow there are all designed mappings at the current moment.
+Bellow there are all designed mappings at the current moment. If you didn't find a construction in the list bellow it is probably unsupported.
 
-#### Identifiers
+### 0 Identifiers (this section would be removed)
+
+---
+
 Each identifier preserves name except classes. Their names are prepended with `class__`. There is no name mangling for variables. 
 
 ### 4 Types, Values, and Variables
@@ -316,26 +319,46 @@ Cast case:
 
 Currently, there is only runtime support for `double`. Nevertheless, translator can handle `float` well, but output EO code would not be equivalent to initial one during runtime.
 
-#### 4.12.1 Variables of Primitive Type
-
-Any primitive type variable is being stored on special handwritten objects (`primitives`). For example, `int` value will be stored in `prim__int` object, `long` in `prim__long` and so on.
-
 #### 4.2.4 Floating-Point Operations
 The Java programming language provides a number of operators that act on
 floating-point values. Supported operators:
 * The comparison operators, which result in a value of type boolean:
-  - The numerical comparison operators <, <=, >, and >=
-  - The numerical equality operators == and !=
+    - The numerical comparison operators <, <=, >, and >=
+    - The numerical equality operators == and !=
 * The numerical operators, which result in a value of type float or double:
-  - The unary plus and minus operators + and -
-  - The multiplicative operators *, /, and % 
+    - The unary plus and minus operators + and -
+    - The multiplicative operators *, /, and %
 * The additive operators + and -
 * The increment operator ++, both prefix and postfix
 * The decrement operator --, both prefix and postfix
 * The cast operator, which can convert from a floating-point value to a
-value of any specified numeric type
+  value of any specified numeric type
 
 Scheme of translation is the same as in [4.2.2](#4.2.2-integer-operations)
+
+#### 4.3 Reference Types and Values
+
+Currently, only classes as reference types are supported. Identifier of class is prepended with `class__` during translation.
+
+#### 4.4 Type Variables
+
+Type variables are omitted due to lack of types in EO.
+
+#### 4.5 Parameterized Types
+
+The same situation as [4.4](#4.4-type-variables) 
+
+#### 4.6 Type Erasure 
+
+The same situation as [4.4](#4.4-type-variables)
+
+#### 4.9 Intersection Types
+
+The same situation as [4.4](#4.4-type-variables)
+
+#### 4.12.1 Variables of Primitive Type
+
+Any primitive type variable is being stored on special handwritten objects (`primitives`). For example, `int` value will be stored in `prim__int` object, `long` in `prim__long` and so on.
 
 Example:
 ```Java
@@ -359,6 +382,54 @@ Ref a;
 ```
 cage > a
 ```
+
+### 5 Conversions and Contexts
+
+---
+
+#### 5.1.2 Widening Primitive Conversion
+
+19 specific conversions on primitive types are called the widening primitive
+conversions:
+* `byte` to `short`, `int`, `long`, `float` or `double`
+* `short` to `int`, `long`, `float` or `double`
+* `char` to `int`, `long`, `float` or `double`
+* `int` to `long`, `float` or `double`
+* `long` to `float` or `double`
+* `float` to `double` (runtime support is not precise)
+
+All of them has runtime support.
+
+Example:
+```Java
+(primitive_type) expr
+```
+-->
+```
+[] > cast
+  translated_type.from > @
+    expr
+```
+
+`translated_type` is obtained according to [4.12.1](#4.12.1-Variables of Primitive Type)
+
+#### 5.1.3 Narrowing Primitive Conversion
+22 specific conversions on primitive types are called the narrowing primitive
+conversions:
+* `short` to `byte` or `char`
+* `char` to `byte` or `short`
+* `int` to `byte`, `short` or `char`
+* `long` to `byte`, `short`, `char` or `int`
+* `float` to `byte`, `short`, `char`, `int` or `long`
+* `double` to `byte`, `short`, `char`, `int`, `long` or `float` (runtime support is not precise)
+
+All of them has runtime support.
+
+Translation scheme is the same as [5.1.2](#5.1.2-widening-primitive-conversion)
+
+#### 5.1.5 Widening Reference Conversion / 5.1.6 Narrowing Reference Conversion
+
+The same situation as [4.4](#4.4-type-variables)
 
 ### 8 Classes
 
