@@ -243,12 +243,6 @@ Java 16 language specification: [see .pdf file](https://docs.oracle.com/javase/s
 
 Bellow there are all designed mappings at the current moment. If you didn't find a construction in the list bellow it is probably unsupported.
 
-### 0 Identifiers (this section would be removed)
-
----
-
-Each identifier preserves name except classes. Their names are prepended with `class__`. There is no name mangling for variables. 
-
 ### 4 Types, Values, and Variables
 
 ----
@@ -387,6 +381,10 @@ cage > a
 
 ---
 
+#### 5.1.1 Identity Conversion
+
+This conversion is omitted by the translator. E.g., `(ClassA) class_a_instance` is `class_a_instance` in the translator perspective.
+
 #### 5.1.2 Widening Primitive Conversion
 
 19 specific conversions on primitive types are called the widening primitive
@@ -430,6 +428,111 @@ Translation scheme is the same as [5.1.2](#5.1.2-widening-primitive-conversion)
 #### 5.1.5 Widening Reference Conversion / 5.1.6 Narrowing Reference Conversion
 
 The same situation as [4.4](#4.4-type-variables)
+
+#### 5.1.11 String Conversion
+
+Currently, there is no support for this type of conversion. User should manually resolve them. For example:
+```Java
+"1" + 1
+```
+it should be manually rewritten to:
+```Java
+"1" + String.valueOf(1)
+```
+In this case the translator would convert it to:
+```
+[] > binary_1
+  literal_1.add > @
+    methodInvocation_1
+[] > literal_1
+  class__String.constructor_2
+    class__String.new
+    "1"
+[] > methodInvocation_1
+  class__String.valueOf > @
+    literal_2
+[] > literal_2
+  prim__int.constructor_2
+    prim__int.new
+    1 
+```
+
+### 6 Names
+
+---
+#### 6.1 Declarations
+A declaration introduces an entity into a program and includes an identifier. Supported declared entity is one of the following:
+
+* An imported class or interface, declared in a single-type-import declaration or a
+type-import-on-demand declaration
+* An imported static member, declared in a single-static-import declaration or a
+static-import-on-demand declaration
+* A class, declared by a normal class declaration
+* A member of a reference type, one of the following:
+  - A member class
+  - A field, one of the following:
+    - A field declared in a class
+    - The field length, which is implicitly a member of every array type
+  - A method, one of the following:
+    - A method (abstract or otherwise) declared in a class
+* A formal parameter, one of the following:
+  - A formal parameter of a method of a class
+  - A formal parameter of a constructor of a class
+* A local variable, one of the following:
+  - A local variable declared by a local variable declaration statement in a block
+* A local class, one of the following:
+  - A local class declared by a normal class declaration
+
+Any declaration is translated into EO object or EO copy of specific object. Example:
+
+```Java
+class A { body }
+```
+->
+```
+[] > class__A
+  ...
+  body
+  ...
+```
+Or,
+```Java
+int a;
+```
+-->
+```
+prim__int.constructor_1 > a
+  prim__int.new
+```
+
+#### 6.2 Names and Identifiers
+A name is used to refer to an entity declared in a program.
+
+A *simple name* is a single identifier. Each simple identifier preserves name except classes. Their names are prepended with `class__`. There is no name mangling for variables.
+
+A *qualified name* consists of a name, a "." token, and an identifier. Qualified names are separated to several objects during translation. Example: 
+```Java
+a.b.c;
+```
+-->
+```
+[] > fieldAcces_1
+  fieldAcess_2.c > @
+[] > fieldAcces_2
+  simpleRefence_1.b > @
+[] > simpleRefence_1
+  a
+```
+
+Of course, it can be optimized to just one EO object, but at this moment translator does not perform such optimization for keeping translation of dot-separated entities more general.
+
+#### 6.4 Shadowing and Obscuring
+
+For now there is now handling of shadowing and obscuring.
+
+#### 6.6 Access Control
+
+EO does not support access modifiers. All objects in an EO is public by default. Therefore, during translation such information is being lost.
 
 ### 8 Classes
 
