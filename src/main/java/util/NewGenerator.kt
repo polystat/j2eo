@@ -2,7 +2,6 @@ package util
 
 import arrow.core.None
 import arrow.core.flatten
-import arrow.core.flattenOption
 import eotree.EOBndExpr
 import eotree.EOCopy
 import eotree.EOObject
@@ -22,10 +21,11 @@ fun generateInit(clsDec: NormalClassDeclaration, context: Context): EOBndExpr {
         } ?: listOf()
 
     val initNames = nonStaticVarDecls.associateWith { context.genUniqueEntityName(it.initializer) }
+    val declNames = nonStaticVarDecls.associateWith { context.genUniqueEntityName(it) }
 
     val parsedInits = nonStaticVarDecls
         .associate {
-            "d${it.hashCode()}" to listOf(
+            declNames[it]!! to listOf(
                 EOBndExpr(
                     EOObject(
                         listOf(),
@@ -40,7 +40,7 @@ fun generateInit(clsDec: NormalClassDeclaration, context: Context): EOBndExpr {
                             )
                         )
                     ),
-                    "d${it.hashCode()}"
+                    declNames[it]!!
                 )
             ) + mapInitializer(it.initializer, initNames[it]!!, context)
         }
@@ -66,45 +66,37 @@ fun generateInit(clsDec: NormalClassDeclaration, context: Context): EOBndExpr {
     )
 }
 
-fun generateThis(clsDec: NormalClassDeclaration, context: Context): EOBndExpr {
-    return EOBndExpr(
-        EOObject(
-            ArrayList(),
-            None,
-            listOf(
-                if (clsDec.extendedType is TypeName)
-                    EOBndExpr(
-                        CompoundName((clsDec.extendedType as TypeName).compoundName.names + "new").eoDot(),
-                        "super"
-                    )
-                else
-                    EOBndExpr(
-                        "class__Object.new".eoDot(),
-                        "super"
-                    ),
-                EOBndExpr(
-                    "super".eoDot(),
-                    "@"
-                ),
-                EOBndExpr(
-                    EOStringData(clsDec.name),
-                    "className"
-                ),
-                generateInit(clsDec, context)
-            ) +
-                if (clsDec.body != null)
-                    clsDec.body.declarations
-                        .filter { dec: Declaration ->
-                            dec.modifiers?.modifiers?.modifiers?.find { it == TokenCode.Static } == null &&
-                                    dec !is ConstructorDeclaration &&
-                                    dec !is ClassDeclaration /* FIXME (IT'S NOT ALWAYS TRUE) */
-                        }
-                        .map { mapClassDeclaration(it, context) }
-                        .flatten()
-                else
-                    listOf()
+fun generateNewBody(clsDec: NormalClassDeclaration, context: Context): List<EOBndExpr> {
+    return listOf(
+        if (clsDec.extendedType is TypeName)
+            EOBndExpr(
+                CompoundName((clsDec.extendedType as TypeName).compoundName.names + "new").eoDot(),
+                "super"
+            )
+        else
+            EOBndExpr(
+                "class__Object.new".eoDot(),
+                "super"
+            ),
+        EOBndExpr(
+            "super".eoDot(),
+            "@"
         ),
-        "this"
+        EOBndExpr(
+            EOStringData(clsDec.name),
+            "className"
+        ),
+        generateInit(clsDec, context)
+    ) + (
+        clsDec.body?.declarations
+            ?.filter { dec: Declaration ->
+                dec.modifiers?.modifiers?.modifiers?.find { it == TokenCode.Static } == null &&
+                        dec !is ConstructorDeclaration &&
+                        dec !is ClassDeclaration /* FIXME (IT'S NOT ALWAYS TRUE) */
+            }
+            ?.map { mapClassDeclaration(it, context) }
+            ?.flatten()
+        ?: listOf()
     )
 }
 
@@ -113,22 +105,7 @@ fun generateNew(clsDec: NormalClassDeclaration, context: Context): EOBndExpr {
         EOObject(
             ArrayList(),
             None,
-            listOf(
-                generateThis(clsDec, context)
-            ) + (
-                EOBndExpr(
-                    EOCopy(
-                        "seq",
-                        listOf(
-                            EOCopy(
-                                "this",
-                                listOf()
-                            )
-                        )
-                    ),
-                    "@"
-                )
-                )
+            generateNewBody(clsDec, context)
         ),
         "new"
     )

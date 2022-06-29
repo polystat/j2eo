@@ -25,11 +25,6 @@ fun mapClass(clsDec: ClassDeclaration, context: Context): EOBndExpr {
         EOObject(
             ArrayList(),
             None,
-            /* Static variables */
-            //                                clsDec.getStaticVariables().stream()
-            //                                        .map(varDec -> Declarations.mapClassDeclaration(varDec))
-            //                                                .collect(Collectors.toList())),
-
             listOf(
                 /* Super class extension */
                 (
@@ -44,7 +39,7 @@ fun mapClass(clsDec: ClassDeclaration, context: Context): EOBndExpr {
                             "class__Object".eoDot(),
                             "super"
                         )
-                    ),
+                ),
                 EOBndExpr(
                     "super".eoDot(),
                     "@"
@@ -52,9 +47,6 @@ fun mapClass(clsDec: ClassDeclaration, context: Context): EOBndExpr {
             )
                     + (generateNew(clsDec, context))
                     + generateStatic(clsDec, context)
-//                    + clsDec.body.declarations
-//                .filterIsInstance<NormalClassDeclaration>()
-//                .map { mapClass(it) }
         ),
         clsDec.name
     )
