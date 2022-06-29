@@ -8,14 +8,20 @@ import tree.Compilation.TopLevelComponent
 import tree.CompoundName
 import tree.Declaration.*
 import tree.Expression.ArgumentList
+import tree.Expression.Binary
 import tree.Expression.Cast
 import tree.Expression.Expression
+import tree.Expression.InstanceOf
+import tree.Expression.Primary.ArrayAccess
+import tree.Expression.Primary.ArrayCreation
 import tree.Expression.Primary.FieldAccess
 import tree.Expression.Primary.InstanceCreation
 import tree.Expression.Primary.MethodInvocation
 import tree.Expression.Primary.Parenthesized
 import tree.Expression.Primary.This
 import tree.Expression.SimpleReference
+import tree.Expression.UnaryPostfix
+import tree.Expression.UnaryPrefix
 import tree.Initializer
 import tree.InitializerArray
 import tree.InitializerSimple
@@ -222,13 +228,9 @@ private fun preprocessClassDecl(state: PreprocessorState, clsDec: ClassDeclarati
     }
 
     clsDec.name = state.classNames[clsDec.name] ?: clsDec.name
+    clsDec.body?.declarations
+        ?.map { decl: Declaration -> preprocessDecl(state, decl) }
 
-    try {
-        clsDec.body.declarations
-                .map { decl: Declaration -> preprocessDecl(state, decl) }
-    } catch (e: NullPointerException) {
-        /* Ignore it */
-    }
     tryToAddConstructor(clsDec)
 }
 
@@ -261,19 +263,9 @@ private fun tryToAddConstructor(clsDec: NormalClassDeclaration) {
 }
 
 private fun preprocessMethodDecl(state: PreprocessorState, methodDecl: MethodDeclaration) {
-    try {
-        preprocessBlock(state, methodDecl.methodBody)
-        when (methodDecl.type) {
-            is PrimitiveType ->
-            {
-                tryAddClassForAliases(
-                        state, convertPrimTokenCode((methodDecl.type as PrimitiveType).typeCode)
-                )
-            }
-            else -> {}
-        }
-    } catch (e: NullPointerException) {
-        /* Ignore it */
+    preprocessBlock(state, methodDecl.methodBody)
+    when (val methodType = methodDecl.type) {
+        is PrimitiveType -> tryAddClassForAliases(state, convertPrimTokenCode(methodType.typeCode))
     }
 }
 
@@ -310,6 +302,11 @@ private fun preprocessStmt(state: PreprocessorState, stmt: Statement) {
         is Block -> preprocessBlock(state, stmt)
         is BlockStatement -> preprocessBlockStmt(state, stmt)
         is StatementExpression -> preprocessStmtExpr(state, stmt)
+        is Return -> {
+            if (stmt.expression != null) {
+                preprocessExpr(state, stmt.expression)
+            }
+        }
         is Assert -> {
             preprocessExpr(state, stmt.expression)
             if (stmt.expression2 != null) {
@@ -317,16 +314,23 @@ private fun preprocessStmt(state: PreprocessorState, stmt: Statement) {
             }
         }
         is IfThenElse -> {
+            preprocessExpr(state, stmt.condition)
             preprocessStmt(state, stmt.thenPart)
-            preprocessStmt(state, stmt.elsePart)
+            if (stmt.elsePart != null) {
+                preprocessStmt(state, stmt.elsePart)
+            }
         }
         is While -> {
             preprocessExpr(state, stmt.condition)
-            preprocessStmt(state, stmt.statement)
+            if (stmt.statement != null) {
+                preprocessStmt(state, stmt.statement)
+            }
         }
         is Do -> {
             preprocessExpr(state, stmt.condition)
-            preprocessStmt(state, stmt.statement)
+            if (stmt.statement != null) {
+                preprocessStmt(state, stmt.statement)
+            }
         }
         else -> {
             // this is a generated else block
@@ -378,6 +382,24 @@ private fun preprocessExpr(state: PreprocessorState, expr: Expression) {
         is InstanceCreation -> preprocessInstanceCreation(state, expr)
         is Cast -> preprocessCastExpr(state, expr)
         is Parenthesized -> preprocessExpr(state, expr.expression)
+        is UnaryPrefix -> preprocessExpr(state, expr.operand)
+        is UnaryPostfix -> preprocessExpr(state, expr.operand)
+        is ArrayCreation -> preprocessArrayCreation(state, expr)
+        is InstanceOf -> {
+            preprocessExpr(state, expr.expression)
+            preprocessType(state, expr.type)
+            if (expr.declaration != null) {
+                preprocessDecl(state, expr.declaration)
+            }
+        }
+        is ArrayAccess -> {
+            preprocessExpr(state, expr.expression)
+            preprocessExpr(state, expr.size)
+        }
+        is Binary -> {
+            preprocessExpr(state, expr.left)
+            preprocessExpr(state, expr.right)
+        }
         is FieldAccess -> {
             preprocessExpr(state, expr.expression)
             preprocessCompoundName(state, CompoundName(expr.identifier))
@@ -397,8 +419,12 @@ private fun preprocessCastExpr(state: PreprocessorState, cast: Cast) {
 
 private fun preprocessInstanceCreation(state: PreprocessorState, instanceCreation: InstanceCreation) {
     preprocessType(state, instanceCreation.ctorType)
-    instanceCreation.args.arguments.forEach { preprocessExpr(state, it) }
+    instanceCreation.args?.arguments?.forEach { preprocessExpr(state, it) }
     instanceCreation.classBody?.declarations?.forEach { preprocessDecl(state, it) }
+}
+
+private fun preprocessArrayCreation(state: PreprocessorState, arrayCreation: ArrayCreation) {
+    /* FIXME: arrayCreation.type should be a public */
 }
 
 private fun preprocessType(state: PreprocessorState, type: Type) {
@@ -425,8 +451,8 @@ private fun preprocessMethodInvocation(state: PreprocessorState, methodInvocatio
         }
     }
 
-    methodInvocation.arguments.arguments
-        .map { preprocessExpr(state, it) }
+    methodInvocation.arguments?.arguments
+        ?.map { preprocessExpr(state, it) }
 }
 
 private fun preprocessSimpleReference(state: PreprocessorState, ref: SimpleReference) {
@@ -434,12 +460,6 @@ private fun preprocessSimpleReference(state: PreprocessorState, ref: SimpleRefer
 }
 
 private fun preprocessCompoundName(state: PreprocessorState, compoundName: CompoundName) {
-//    if (compoundName.names.size == 1 &&
-//            state.classNames[compoundName.names.first()] == null
-//    ) {
-//        compoundName.names.add(0, "^")
-//    }
-
     compoundName.names
             .replaceAll {
                 state.classNames[it] ?: it

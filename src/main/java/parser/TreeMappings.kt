@@ -369,7 +369,7 @@ fun ReferenceContext.toExpression(): Expression {
 
     val thisSign = THIS()
     if (thisSign != null) {
-        return FieldAccess(expr, false, Token(TokenCode.This)) /* FIXME: No idea how it can be possible */
+        return FieldAccess(expr, false, Token(TokenCode.This, "this")) /* FIXME: No idea how it can be possible */
     }
 
     val innerCreator = innerCreator()
