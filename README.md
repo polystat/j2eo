@@ -3,9 +3,9 @@
 <img src="https://www.yegor256.com/images/books/elegant-objects/cactus.svg" height="100px"  alt="eolang icon"/>
 
 [![Gradle Build](https://github.com/polystat/j2eo/actions/workflows/gradle-build.yml/badge.svg)](https://github.com/polystat/j2eo/actions/workflows/gradle-build.yml)
-![LINE](https://img.shields.io/badge/line--coverage-41,67%25-orange.svg)
-![BRANCH](https://img.shields.io/badge/branch--coverage-33,81%25-red.svg)
-![COMPLEXITY](https://img.shields.io/badge/complexity-5,17-brightgreen.svg)
+![LINE](https://img.shields.io/badge/line--coverage-0.00%25-red.svg)
+![BRANCH](https://img.shields.io/badge/branch--coverage-0.00%25-red.svg)
+![COMPLEXITY](https://img.shields.io/badge/complexity-Infinity-red.svg)
 
 [![Hits-of-Code](https://hitsofcode.com/github/polystat/j2eo)](https://hitsofcode.com/view/github/polystat/j2eo)
 ![Lines of code](https://img.shields.io/tokei/lines/github/polystat/j2eo)
