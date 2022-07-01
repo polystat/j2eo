@@ -3,26 +3,17 @@
 +alias stdlib.io.class__PrintStream
 
 [] > class__System
-  class__Object > super
-  super > @
+  class__Object > @
 
   class__PrintStream.constructor > out
     class__PrintStream.new
 
   [] > new
-    [] > this
-      class__Object.new > super
-      super > @
-      "class__System" > className
+    class__Object.new > @
+    "class__System" > className
 
-      [this] > init
-        0 > @
-
+  [self] > constructor
     seq > @
-      this
-
-  [this] > constructor
-    seq > @
-      this.init
-        this
-      this
+      class__System.@.constructor
+        self.@
+      self

@@ -11,27 +11,20 @@ import tree.Initializer
 import tree.InitializerArray
 import tree.InitializerSimple
 
-fun mapInitializer(initializer: Initializer, name: String): List<EOBndExpr> {
+fun mapInitializer(initializer: Initializer, name: String, context: Context): List<EOBndExpr> {
     return when (initializer) {
-        is InitializerSimple -> mapInitializerSimple(initializer, name)
-        is InitializerArray -> mapInitializerArray(initializer, name)
+        is InitializerSimple -> mapInitializerSimple(initializer, name, context)
+        is InitializerArray -> mapInitializerArray(initializer, name, context)
         else ->
             mapInitializerSimple(
-                InitializerSimple(SimpleReference(CompoundName("unknown_initializer_placeholder"))), name
+                InitializerSimple(SimpleReference(CompoundName("unknown_initializer_placeholder"))), name, context
             ) // FIXME
     }
 }
 
-fun constructInitName(initializer: Initializer): String {
-    return when (initializer) {
-        is InitializerSimple -> "i_s${initializer.hashCode()}"
-        is InitializerArray -> "i_a${initializer.hashCode()}"
-        else ->
-            "un_i${initializer.hashCode()}"
-    }
-}
+fun mapInitializerSimple(initializerSimple: InitializerSimple, name: String, context: Context): List<EOBndExpr> {
+    val initExprName = context.genUniqueEntityName(initializerSimple.expression)
 
-fun mapInitializerSimple(initializerSimple: InitializerSimple, name: String): List<EOBndExpr> {
     return listOf(
         EOBndExpr(
             EOObject(
@@ -40,7 +33,7 @@ fun mapInitializerSimple(initializerSimple: InitializerSimple, name: String): Li
                 listOf(
                     EOBndExpr(
                         EOCopy(
-                            constructExprName(initializerSimple.expression)
+                            initExprName
                         ),
                         "@"
                     )
@@ -48,10 +41,12 @@ fun mapInitializerSimple(initializerSimple: InitializerSimple, name: String): Li
             ),
             name
         )
-    ) + mapExpression(initializerSimple.expression, constructExprName(initializerSimple.expression))
+    ) + mapExpression(initializerSimple.expression, initExprName, context)
 }
 
-fun mapInitializerArray(initializerArray: InitializerArray, name: String): List<EOBndExpr> {
+fun mapInitializerArray(initializerArray: InitializerArray, name: String, context: Context): List<EOBndExpr> {
+    val initNames = initializerArray.initializers.map { context.genUniqueEntityName(it) }
+
     return listOf(
         EOBndExpr(
             EOObject(
@@ -61,7 +56,7 @@ fun mapInitializerArray(initializerArray: InitializerArray, name: String): List<
                     EOBndExpr(
                         EOCopy(
                             "*",
-                            initializerArray.initializers.map { constructInitName(it).eoDot() }
+                            initNames.map { it.eoDot() }
                         ),
                         "@"
                     )
@@ -69,5 +64,5 @@ fun mapInitializerArray(initializerArray: InitializerArray, name: String): List<
             ),
             name
         )
-    ) + initializerArray.initializers.map { mapInitializer(it, constructInitName(it)) }.flatten()
+    ) + initializerArray.initializers.mapIndexed{ idx, it -> mapInitializer(it, initNames[idx], context) }.flatten()
 }

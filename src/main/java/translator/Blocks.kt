@@ -13,24 +13,28 @@ import tree.Statement.BlockStatement
  * contains all the logic.
  */
 fun mapBlock(block: Block,
+             context: Context,
              name: String? = null,
              firstStmts: List<Pair<String, List<EOBndExpr>>>? = null,
-             lastStmts: List<Pair<String, List<EOBndExpr>>>? = null): List<EOBndExpr> {
+             lastStmts: List<Pair<String, List<EOBndExpr>>>? = null,
+             paramList: List<String>? = null): List<EOBndExpr> {
     if (name != null) {
         return listOf(
             EOBndExpr(
                 EOObject(
-                    listOf(),
+                    paramList ?: listOf(),
                     None,
-                    mapBlock(block, firstStmts = firstStmts, lastStmts = lastStmts)
+                    mapBlock(block, context, firstStmts = firstStmts, lastStmts = lastStmts)
                 ),
                 name
             )
         )
     }
 
+    val statementsNames = block.block.blockStatements.associateWith { getBlockStmtName(it, context) }
+
     val parsedStatements = block.block.blockStatements
-        .associate { constructName(it) to mapBlockStatement(it, constructName(it)) }
+        .associate { statementsNames[it]!! to mapBlockStatement(it, statementsNames[it]!!, context) }
 
     return listOf(
         EOBndExpr(
@@ -55,27 +59,25 @@ fun mapBlock(block: Block,
             (lastStmts?.map { it.second }?.flatten() ?: listOf())
 }
 
-
-fun constructName(blockStatement: BlockStatement): String {
+fun getBlockStmtName(blockStatement: BlockStatement, context: Context): String {
     return if (blockStatement.statement != null) {
-        "s${blockStatement.hashCode()}"
+        context.genUniqueEntityName(blockStatement.statement)
     } else if (blockStatement.expression != null) {
-        "e${blockStatement.hashCode()}"
+        context.genUniqueEntityName(blockStatement.expression)
     } else if (blockStatement.declaration != null) {
-        "d${blockStatement.hashCode()}"
+        context.genUniqueEntityName(blockStatement.declaration)
     } else {
         throw java.lang.IllegalArgumentException("Invalid block statement!")
     }
 }
 
-
-fun mapBlockStatement(blockStatement: BlockStatement, name: String): List<EOBndExpr> {
+fun mapBlockStatement(blockStatement: BlockStatement, name: String, context: Context): List<EOBndExpr> {
     return if (blockStatement.statement != null) {
-        mapStatement(blockStatement.statement, name)
+        mapStatement(blockStatement.statement, name, context)
     } else if (blockStatement.expression != null) {
-        mapExpression(blockStatement.expression, name)
+        mapExpression(blockStatement.expression, name, context)
     } else if (blockStatement.declaration != null) {
-        mapDeclaration(blockStatement.declaration, name)
+        mapDeclaration(blockStatement.declaration, name, context)
     } else {
         throw java.lang.IllegalArgumentException("Invalid block statement!")
     }

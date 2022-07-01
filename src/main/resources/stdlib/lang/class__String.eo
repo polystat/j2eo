@@ -3,49 +3,38 @@
 +alias org.eolang.txt.sprintf
 
 [] > class__String
-  class__Object > super
-  super > @
+  class__Object > @
 
   [] > new
-    [] > this
-      class__Object.new > super
-      super > @
-      "class__String" > className
+    class__Object.new > @
+    "class__String" > className
 
-      memory > str
+    memory > str
 
-      [this input_string] > init
-        seq > @
-          this.str.write
-            input_string
+    [self] > toString
+      seq > @
+        class__String.constructor_3
+          class__String.new
+          self
 
-      [this] > toString
-        seq > @
-          class__String.constructor_3
-            class__String.new
-            this
+    [right] > write
+      seq > @
+        ^.str.write
+          right.str
+        class__String.constructor_3
+          class__String.new
+          ^
 
-      [right] > write
-        seq > @
-          ^.str.write
-            right.str
-          class__String.constructor_3
-            class__String.new
-            ^
-
-      [right] > add
-        seq > @
-          class__String.constructor_2
-            class__String.new
-            sprintf
-              "%s%s"
-              ^.str
-              str.
-                right.toString
-                  right
-
-    seq > @
-      this
+    [right] > add
+      seq > @
+        class__String.constructor_2
+          class__String.new
+          sprintf
+            "%s%s"
+            ^.str
+            str.
+              right.toString
+                right
 
   [right] > valueOf
     seq > @
@@ -53,20 +42,22 @@
         class__String.new
         right.as-string
 
-  [this] > constructor_1
+  [self] > constructor_1
     seq > @
-      this
+      class__String.@.constructor
+        self.@
+      self
 
-  [this target] > constructor_2
+  [self var__str] > constructor_2
     seq > @
-      this.init
-        this
-        target
-      this
+      class__String.@.constructor
+        self.@
+      self.str.write var__str
+      self
 
-  [this another_string] > constructor_3
+  [self another__string] > constructor_3
     seq > @
-      this.init
-        this
-        another_string.str
-      this
+      class__String.@.constructor
+        self.@
+      self.str.write (another__string.str)
+      self

@@ -1,45 +1,38 @@
 +package stdlib.util
++alias org.eolang.math.random
 +alias stdlib.lang.class__Object
 +alias stdlib.primitives.prim__int
 +alias stdlib.primitives.prim__float
 
 [] > class__Random
-  class__Object > super
-  super > @
+  class__Object > @
 
   [] > new
-    [] > this
-      class__Object.new > super
-      super > @
-      "class__Random" > className
+    class__Object.new > @
+    "class__Random" > className
 
-      [this] > init
-        0 > @
-
-      [this] > nextInt
-        random > r
-        seq > @
-          prim__int.constructor_2
-            prim__int.new
-            as-int.
-              sub.
-                mul.
+    [self] > nextInt
+      random > r
+      seq > @
+        prim__int.constructor_2
+          prim__int.new
+          as-int.
+            as-bytes.
+              minus.
+                times.
                   4294967295.0
                   r
                 2147483648.0
 
-      [this] > nextFloat
-        random > r
-        seq > @
-          prim__float.constructor_2
-            prim__float.new
-            r
+    [self] > nextFloat
+      random > r
+      seq > @
+        prim__float.constructor_2
+          prim__float.new
+          r
 
+  [self] > constructor
     seq > @
-      this
-
-  [this] > constructor
-    seq > @
-      this.init
-        this
-      this
+      class__Random.@.constructor
+        self.@
+      self

@@ -13,7 +13,7 @@ import tree.Type.TypeName
 import util.generateNew
 import util.generateStatic
 
-fun mapClass(clsDec: ClassDeclaration): EOBndExpr {
+fun mapClass(clsDec: ClassDeclaration, context: Context): EOBndExpr {
     require(clsDec is NormalClassDeclaration) {
         (
             "Only NormalClassDeclaration is supported, but " +
@@ -25,11 +25,6 @@ fun mapClass(clsDec: ClassDeclaration): EOBndExpr {
         EOObject(
             ArrayList(),
             None,
-            /* Static variables */
-            //                                clsDec.getStaticVariables().stream()
-            //                                        .map(varDec -> Declarations.mapClassDeclaration(varDec))
-            //                                                .collect(Collectors.toList())),
-
             listOf(
                 /* Super class extension */
                 (
@@ -44,22 +39,19 @@ fun mapClass(clsDec: ClassDeclaration): EOBndExpr {
                             "class__Object".eoDot(),
                             "super"
                         )
-                    ),
+                ),
                 EOBndExpr(
                     "super".eoDot(),
                     "@"
                 )
             )
-                    + (generateNew(clsDec))
-                    + generateStatic(clsDec)
-//                    + clsDec.body.declarations
-//                .filterIsInstance<NormalClassDeclaration>()
-//                .map { mapClass(it) }
+                    + (generateNew(clsDec, context))
+                    + generateStatic(clsDec, context)
         ),
         clsDec.name
     )
 }
 
-fun mapInterface(interfaceDeclaration: InterfaceDeclaration?): EOBnd {
+fun mapInterface(interfaceDeclaration: InterfaceDeclaration?, context: Context): EOBnd {
     throw IllegalArgumentException("Interface declarations are not yet implemented")
 }

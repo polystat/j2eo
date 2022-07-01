@@ -3,7 +3,6 @@ package translator
 import arrow.core.None
 import eotree.*
 import tree.Statement.*
-import java.util.Random
 
 // fun mapBlockStatement(stmt: BlockStatement): EOExpr =
 //    // Block statement is one of three variants
@@ -18,16 +17,16 @@ import java.util.Random
 //            throw IllegalArgumentException("BlockStatement does not have any known type")
 //    }
 
-fun mapStatement(statement: Statement, name: String): List<EOBndExpr> =
+fun mapStatement(statement: Statement, name: String, context: Context): List<EOBndExpr> =
     when (statement) {
-        is StatementExpression -> mapStatementExpression(statement, name)
-        is Return -> mapReturnStatement(statement, name)
-        is IfThenElse -> mapIfThenElseStatement(statement, name)
-        is While -> mapWhileStatement(statement, name)
-        is Do -> mapDoStatement(statement, name)
-        is Block -> mapBlock(statement, name)
+        is StatementExpression -> mapStatementExpression(statement, name, context)
+        is Return -> mapReturnStatement(statement, name, context)
+        is IfThenElse -> mapIfThenElseStatement(statement, name, context)
+        is While -> mapWhileStatement(statement, name, context)
+        is Do -> mapDoStatement(statement, name, context)
+        is Block -> mapBlock(statement, context, name)
         // is Switch -> mapSwitchStatement(parseExprTasks, statement)
-        is Assert -> mapAssert(statement, name)
+        is Assert -> mapAssert(statement, name, context)
         else ->
             listOf() // FIXME
         // FIXME: throw IllegalArgumentException("Statement of type ${statement.javaClass.simpleName} is not supported")
@@ -41,7 +40,7 @@ fun mapEmptyStmt(name: String): EOBndExpr =
             listOf(
                 EOBndExpr(
                     EOCopy(
-                        "0"
+                        "TRUE"
                     ),
                     "@"
                 )
@@ -50,23 +49,10 @@ fun mapEmptyStmt(name: String): EOBndExpr =
         name
     )
 
-fun constructStmtName(statement: Statement): String =
-    when (statement) {
-        is StatementExpression -> "se${statement.hashCode()}"
-        is Return -> "r${statement.hashCode()}"
-        is IfThenElse -> "if_t_e${statement.hashCode()}"
-        is While -> "w${statement.hashCode()}"
-        is Do -> "do${statement.hashCode()}"
-        is Block -> "b${statement.hashCode()}"
-        // is Switch -> mapSwitchStatement(parseExprTasks, statement)
-        is Assert -> "ast${statement.hashCode()}"
-        else ->
-            "unknown${statement.hashCode()}" // FIXME
-        // FIXME: throw IllegalArgumentException("Statement of type ${statement.javaClass.simpleName} is not supported")
-    }
+fun mapAssert(assert: Assert, name: String, context: Context): List<EOBndExpr> {
+    val assertExprName = context.genUniqueEntityName(assert.expression)
+    val assertExpr2Name = context.genUniqueEntityName(assert.expression2)
 
-
-fun mapAssert(assert: Assert, name: String): List<EOBndExpr> {
     return listOf(
         EOBndExpr(
             EOObject(
@@ -75,7 +61,7 @@ fun mapAssert(assert: Assert, name: String): List<EOBndExpr> {
                 listOf(
                     EOBndExpr(
                         EOCopy(
-                            listOf(constructExprName(assert.expression), "if").eoDot(),
+                            listOf(assertExprName, "if").eoDot(),
                             "TRUE".eoDot(),
                             EOObject(
                                 listOf(),
@@ -86,7 +72,7 @@ fun mapAssert(assert: Assert, name: String): List<EOBndExpr> {
                                             if (assert.expression2 == null) {
                                                 "\"AssertionError\"".eoDot()
                                             } else {
-                                                constructExprName(assert.expression2).eoDot()
+                                                assertExpr2Name.eoDot()
                                             }
                                         ),
                                         "msg"
@@ -100,15 +86,15 @@ fun mapAssert(assert: Assert, name: String): List<EOBndExpr> {
             ),
             name
         )
-    ) + mapExpression(assert.expression, constructExprName(assert.expression)) + if (assert.expression2 != null) {
-        mapExpression(assert.expression2, constructExprName(assert.expression2))
+    ) + mapExpression(assert.expression, assertExprName, context) + if (assert.expression2 != null) {
+        mapExpression(assert.expression2, assertExpr2Name, context)
     } else {
         listOf()
     }
 }
 
-fun mapStatementExpression(stmtExpr: StatementExpression, name: String): List<EOBndExpr> {
-    return mapExpression(stmtExpr.expression, name)
+fun mapStatementExpression(stmtExpr: StatementExpression, name: String, context: Context): List<EOBndExpr> {
+    return mapExpression(stmtExpr.expression, name, context)
 }
 
 /**
@@ -118,7 +104,9 @@ fun mapStatementExpression(stmtExpr: StatementExpression, name: String): List<EO
  *
  * returnExpr is mapped into separate object.
  */
-fun mapReturnStatement(rn: Return, name: String): List<EOBndExpr> {
+fun mapReturnStatement(rn: Return, name: String, context: Context): List<EOBndExpr> {
+    val rnExprName = context.genUniqueEntityName(rn.expression)
+
     return if (rn.expression != null) {
         listOf(
             EOBndExpr(
@@ -128,7 +116,7 @@ fun mapReturnStatement(rn: Return, name: String): List<EOBndExpr> {
                     listOf(
                         EOBndExpr(
                             EOCopy(
-                                constructExprName(rn.expression)
+                                rnExprName
                             ),
                             "@"
                         )
@@ -136,7 +124,7 @@ fun mapReturnStatement(rn: Return, name: String): List<EOBndExpr> {
                 ),
                 name
             )
-        ) + mapExpression(rn.expression, constructExprName(rn.expression))
+        ) + mapExpression(rn.expression, rnExprName, context)
     } else {
         listOf()
     }
@@ -151,8 +139,11 @@ fun mapReturnStatement(rn: Return, name: String): List<EOBndExpr> {
  *
  * conditionExpr, thenPart and elsePart are mapped into separate objects.
  */
-fun mapIfThenElseStatement(rn: IfThenElse, name: String): List<EOBndExpr> {
-    val emptyName = "empty${Random().nextInt(Int.MAX_VALUE)}"
+fun mapIfThenElseStatement(rn: IfThenElse, name: String, context: Context): List<EOBndExpr> {
+    val emptyName = context.genUniqueEntityName("empty")
+    val condName = context.genUniqueEntityName(rn.condition)
+    val thenName = context.genUniqueEntityName(rn.thenPart)
+    val elseName = context.genUniqueEntityName(rn.elsePart)
 
     return listOf(
         EOBndExpr(
@@ -162,10 +153,10 @@ fun mapIfThenElseStatement(rn: IfThenElse, name: String): List<EOBndExpr> {
                 listOf(
                     EOBndExpr(
                         EOCopy(
-                            listOf(constructExprName(rn.condition), "if").eoDot(),
-                            constructStmtName(rn.thenPart).eoDot(),
+                            listOf(condName, "if").eoDot(),
+                            thenName.eoDot(),
                             if (rn.elsePart != null) {
-                                constructStmtName(rn.elsePart).eoDot()
+                                elseName.eoDot()
                             } else {
                                 emptyName.eoDot()
                             }
@@ -176,10 +167,10 @@ fun mapIfThenElseStatement(rn: IfThenElse, name: String): List<EOBndExpr> {
             ),
             name
         )
-    ) + mapExpression(rn.condition, constructExprName(rn.condition)) +
-            mapStatement(rn.thenPart, constructStmtName(rn.thenPart)) +
+    ) + mapExpression(rn.condition, condName, context) +
+            mapStatement(rn.thenPart, thenName, context) +
             if (rn.elsePart != null) {
-                mapStatement(rn.elsePart, constructStmtName(rn.elsePart))
+                mapStatement(rn.elsePart, elseName, context)
             } else {
                 listOf(mapEmptyStmt(emptyName))
             }
@@ -196,8 +187,10 @@ fun mapIfThenElseStatement(rn: IfThenElse, name: String): List<EOBndExpr> {
  *
  * TODO: check if we can use iterator inside of statement.
  */
-fun mapWhileStatement(wh: While, name: String): List<EOBndExpr> {
-    val emptyName = "empty${Random().nextInt(Int.MAX_VALUE)}"
+fun mapWhileStatement(wh: While, name: String, context: Context): List<EOBndExpr> {
+    val emptyName = context.genUniqueEntityName("empty")
+    val condName = context.genUniqueEntityName(wh.condition)
+    val stmtName = context.genUniqueEntityName(wh.statement)
 
     return listOf(
         EOBndExpr(
@@ -207,14 +200,14 @@ fun mapWhileStatement(wh: While, name: String): List<EOBndExpr> {
                 listOf(
                     EOBndExpr(
                         EOCopy(
-                            listOf(constructExprName(wh.condition), "while").eoDot(),
+                            listOf(condName, "while").eoDot(),
                             EOObject(
                                 listOf("while_i"),
                                 None,
                                 listOf(
                                     EOBndExpr(
                                         if (wh.statement != null) {
-                                            constructStmtName(wh.statement).eoDot()
+                                            stmtName.eoDot()
                                         } else {
                                             emptyName.eoDot()
                                         },
@@ -229,16 +222,18 @@ fun mapWhileStatement(wh: While, name: String): List<EOBndExpr> {
             ),
             name
         )
-    ) + mapExpression(wh.condition, constructExprName(wh.condition)) +
+    ) + mapExpression(wh.condition, condName, context) +
             if (wh.statement != null) {
-                mapStatement(wh.statement, constructStmtName(wh.statement))
+                mapStatement(wh.statement, stmtName, context)
             } else {
                 listOf(mapEmptyStmt(emptyName))
             }
 }
 
-fun mapDoStatement(rn: Do, name: String): List<EOBndExpr> {
-    val emptyName = "empty${Random().nextInt()}"
+fun mapDoStatement(do_stmt: Do, name: String, context: Context): List<EOBndExpr> {
+    val emptyName = context.genUniqueEntityName("empty")
+    val condName = context.genUniqueEntityName(do_stmt.condition)
+    val stmtName = context.genUniqueEntityName(do_stmt.statement)
 
     return listOf(
         EOBndExpr(
@@ -248,14 +243,14 @@ fun mapDoStatement(rn: Do, name: String): List<EOBndExpr> {
                 listOf(
                     EOBndExpr(
                         EOCopy(
-                            listOf(constructExprName(rn.condition), "do").eoDot(),
+                            listOf(condName, "do").eoDot(),
                             EOObject(
                                 listOf("do_i"),
                                 None,
                                 listOf(
                                     EOBndExpr(
-                                        if (rn.statement != null) {
-                                            constructStmtName(rn.statement).eoDot()
+                                        if (do_stmt.statement != null) {
+                                            stmtName.eoDot()
                                         } else {
                                             emptyName.eoDot()
                                         },
@@ -270,9 +265,9 @@ fun mapDoStatement(rn: Do, name: String): List<EOBndExpr> {
             ),
             name
         )
-    ) + mapExpression(rn.condition, constructExprName(rn.condition)) +
-            if (rn.statement != null) {
-                mapStatement(rn.statement, constructStmtName(rn.statement))
+    ) + mapExpression(do_stmt.condition, condName, context) +
+            if (do_stmt.statement != null) {
+                mapStatement(do_stmt.statement, stmtName, context)
             } else {
                 listOf(mapEmptyStmt(emptyName))
             }

@@ -3,79 +3,84 @@
 +alias stdlib.primitives.prim__num
 
 [] > prim__boolean
-  prim__num > super
-  super > @
+  prim__num > @
 
   [] > new
-    [] > this
-      prim__num.new > super
-      super > @
-      "prim__boolean" > prim_name
+    prim__num.new > @
+    "prim__boolean" > prim_name
 
-      [] > as-string
-        seq > @
-          if.
-            ^.v
-            "true"
-            "false"
+    [] > as-string
+      seq > @
+        if.
+          ^.v
+          "true"
+          "false"
 
-      [right] > write
-        seq > @
-          ^.v.write
-            right.v
-          prim__boolean.constructor_3
-            prim__boolean.new
-            ^
+    [arg__right] > write
+      seq > @
+        ^.v.write
+          arg__right.v
+        prim__boolean.constructor_3
+          prim__boolean.new
+          ^
 
-      [right] > and
-        seq > @
-          prim__boolean.constructor_2
-            prim__boolean.new
-            ^.v.and
-              right.v
+    [arg__right] > and
+      seq > @
+        prim__boolean.constructor_2
+          prim__boolean.new
+          ^.v.and
+            arg__right.v
 
-      [right] > or
-        seq > @
-          prim__boolean.constructor_2
-            prim__boolean.new
-            ^.v.or
-              right.v
+    [arg__right] > or
+      seq > @
+        prim__boolean.constructor_2
+          prim__boolean.new
+          ^.v.or
+            arg__right.v
 
-      [] > not
-        seq > @
-          prim__boolean.constructor_2
-            prim__boolean.new
-            ^.v.not
+    [] > not
+      seq > @
+        prim__boolean.constructor_2
+          prim__boolean.new
+          ^.v.not
 
-      [t_s f_s] > if
-        seq > @
-          if.
-            ^.v
-            t_s
-            f_s
+    [t_s f_s] > if
+      seq > @
+        if.
+          ^.v
+          t_s
+          f_s
 
-      [f] > while
-        seq > @
-          while.
-            ^.v
-            f
+    [f] > while
+      seq > @
+        while.
+          ^.v
+          f
 
+  [arg__right] > from
+    prim__boolean.constructor_2 > @
+      prim__boolean.new
+      neq.
+        arg__right.integer_part
+          arg__right
+        0
+
+  [self] > constructor_1
     seq > @
-      this
+      prim__boolean.@.constructor_1
+        self.@
+      self
 
-  [this] > constructor_1
+  [self var__num] > constructor_2
     seq > @
-      super.constructor_1
-        this
+      prim__boolean.@.constructor_2
+        self.@
+        var__num
+      self
 
-  [this target] > constructor_2
+  [self another__num] > constructor_3
     seq > @
-      super.constructor_2
-        this
-        target
-
-  [this another_num] > constructor_3
-    seq > @
-      super.constructor_3
-        this
-        another_num
+      prim__boolean.@.constructor_3
+        self.@
+        another__num
+      self

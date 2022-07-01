@@ -2,7 +2,6 @@ package util
 
 import arrow.core.None
 import arrow.core.flatten
-import arrow.core.flattenOption
 import eotree.EOBndExpr
 import eotree.EOCopy
 import eotree.EOObject
@@ -14,16 +13,19 @@ import tree.CompoundName
 import tree.Declaration.*
 import tree.Type.TypeName
 
-fun generateInit(clsDec: NormalClassDeclaration): EOBndExpr {
+fun generateInit(clsDec: NormalClassDeclaration, context: Context): EOBndExpr {
     val nonStaticVarDecls = clsDec.body?.declarations
         ?.filterIsInstance<VariableDeclaration>()
-        ?.filter { it.modifiers?.modifiers?.modifiers?.find { it == TokenCode.Static } == null &&
-                it.initializer != null
+        ?.filter { it ->
+            it.modifiers?.modifiers?.modifiers?.find { it == TokenCode.Static } == null && it.initializer != null
         } ?: listOf()
+
+    val initNames = nonStaticVarDecls.associateWith { context.genUniqueEntityName(it.initializer) }
+    val declNames = nonStaticVarDecls.associateWith { context.genUniqueEntityName(it) }
 
     val parsedInits = nonStaticVarDecls
         .associate {
-            "d${it.hashCode()}" to listOf(
+            declNames[it]!! to listOf(
                 EOBndExpr(
                     EOObject(
                         listOf(),
@@ -32,15 +34,15 @@ fun generateInit(clsDec: NormalClassDeclaration): EOBndExpr {
                             EOBndExpr(
                                 EOCopy(
                                     listOf("this", it.name, "write").eoDot(),
-                                    constructInitName(it.initializer).eoDot()
+                                    initNames[it]!!.eoDot()
                                 ),
                                 "@"
                             )
                         )
                     ),
-                    "d${it.hashCode()}"
+                    declNames[it]!!
                 )
-            ) + mapInitializer(it.initializer, constructInitName(it.initializer))
+            ) + mapInitializer(it.initializer, initNames[it]!!, context)
         }
 
     return EOBndExpr(
@@ -64,69 +66,46 @@ fun generateInit(clsDec: NormalClassDeclaration): EOBndExpr {
     )
 }
 
-fun generateThis(clsDec: NormalClassDeclaration): EOBndExpr {
-    return EOBndExpr(
-        EOObject(
-            ArrayList(),
-            None,
-            listOf(
-                if (clsDec.extendedType is TypeName)
-                    EOBndExpr(
-                        CompoundName((clsDec.extendedType as TypeName).compoundName.names + "new").eoDot(),
-                        "super"
-                    )
-                else
-                    EOBndExpr(
-                        "class__Object.new".eoDot(),
-                        "super"
-                    ),
-                EOBndExpr(
-                    "super".eoDot(),
-                    "@"
-                ),
-                EOBndExpr(
-                    EOStringData(clsDec.name),
-                    "className"
-                ),
-                generateInit(clsDec)
-            ) +
-                if (clsDec.body != null)
-                    clsDec.body.declarations
-                        .filter { dec: Declaration ->
-                            dec.modifiers?.modifiers?.modifiers?.find { it == TokenCode.Static } == null &&
-                                    dec !is ConstructorDeclaration &&
-                                    dec !is ClassDeclaration /* FIXME (IT'S NOT ALWAYS TRUE) */
-                        }
-                        .map { mapClassDeclaration(it) }
-                        .flatten()
-                else
-                    listOf()
+fun generateNewBody(clsDec: NormalClassDeclaration, context: Context): List<EOBndExpr> {
+    return listOf(
+        if (clsDec.extendedType is TypeName)
+            EOBndExpr(
+                CompoundName((clsDec.extendedType as TypeName).compoundName.names + "new").eoDot(),
+                "super"
+            )
+        else
+            EOBndExpr(
+                "class__Object.new".eoDot(),
+                "super"
+            ),
+        EOBndExpr(
+            "super".eoDot(),
+            "@"
         ),
-        "this"
+        EOBndExpr(
+            EOStringData(clsDec.name),
+            "className"
+        ),
+        generateInit(clsDec, context)
+    ) + (
+        clsDec.body?.declarations
+            ?.filter { dec: Declaration ->
+                dec.modifiers?.modifiers?.modifiers?.find { it == TokenCode.Static } == null &&
+                        dec !is ConstructorDeclaration &&
+                        dec !is ClassDeclaration /* FIXME (IT'S NOT ALWAYS TRUE) */
+            }
+            ?.map { mapClassDeclaration(it, context) }
+            ?.flatten()
+        ?: listOf()
     )
 }
 
-fun generateNew(clsDec: NormalClassDeclaration): EOBndExpr {
+fun generateNew(clsDec: NormalClassDeclaration, context: Context): EOBndExpr {
     return EOBndExpr(
         EOObject(
             ArrayList(),
             None,
-            listOf(
-                generateThis(clsDec)
-            ) + (
-                EOBndExpr(
-                    EOCopy(
-                        "seq",
-                        listOf(
-                            EOCopy(
-                                "this",
-                                listOf()
-                            )
-                        )
-                    ),
-                    "@"
-                )
-                )
+            generateNewBody(clsDec, context)
         ),
         "new"
     )

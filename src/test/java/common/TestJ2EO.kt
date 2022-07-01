@@ -8,6 +8,7 @@ import org.junit.jupiter.api.parallel.ExecutionMode
 import parser.JavaLexer
 import parser.JavaParser
 import parser.Visitor
+import translator.Context
 import translator.Translator
 import tree.Compilation.CompilationUnit
 import util.logger
@@ -23,7 +24,7 @@ import kotlin.io.path.absolutePathString
 import kotlin.io.path.name
 import kotlin.io.path.relativeTo
 
-@Execution(ExecutionMode.CONCURRENT)
+@Execution(ExecutionMode.SAME_THREAD)
 @TestMethodOrder(MethodOrderer.OrderAnnotation::class)
 class TestJ2EO {
 
@@ -35,6 +36,7 @@ class TestJ2EO {
             .filter { file -> isReadyTest(file.toPath()) }
             .filter { file -> isNotClassFile(file.toPath()) }
             .filter { file -> isJavaFile(file.toPath()) }
+            // .filter { file -> isSimpleTest(file.toPath()) }
             .map { file -> translateFile(file.toPath()) }
             .toList()
     }
@@ -146,7 +148,7 @@ class TestJ2EO {
                     val tree = parser.compilationUnit()
                     val eval = Visitor()
                     val cu = eval.visit(tree) as CompilationUnit
-                    val genEOLangText = Translator(path.relativeTo(testFolderRoot)).translate(cu)
+                    val genEOLangText = Translator(path.relativeTo(testFolderRoot)).translate(cu, Context(HashMap()))
                     val newFileName = path.fileName.name.removeSuffix(".java") + ".eo"
                     val newPath = File(path.parent.toString() + sep + newFileName).toPath()
                     Files.writeString(newPath, genEOLangText.generateEO(0))
@@ -235,6 +237,10 @@ class TestJ2EO {
 
         private fun isEOFile(path: Path): Boolean {
             return path.toString().endsWith(".eo")
+        }
+
+        private fun isSimpleTest(path: Path): Boolean {
+            return path.toString().endsWith("SimpleTest.java")
         }
     }
 }

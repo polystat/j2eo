@@ -3,32 +3,23 @@
 +alias org.eolang.io.stdout
 
 [] > class__PrintStream
-  class__Object > super
-  super > @
+  class__Object > @
 
   [] > new
-    [] > this
-      class__Object.new > super
-      super > @
-      "class__PrintStream" > className
+    class__Object.new > @
+    "class__PrintStream" > className
 
-      [this] > init
-        0 > @
+    [self output] > println
+      seq > @
+        stdout
+          str.
+            output.toString
+              output
+        stdout
+          "\n"
 
-      [this output] > println
-        seq > @
-          stdout
-            str.
-              output.toString
-                output
-          stdout
-            "\n"
-
+  [self] > constructor
     seq > @
-      this
-
-  [this] > constructor
-    seq > @
-      this.init
-        this
-      this
+      class__PrintStream.@.constructor
+        self.@
+      self

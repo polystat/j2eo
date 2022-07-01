@@ -11,7 +11,6 @@ import tree.Expression.*
 import tree.Expression.Primary.*
 import tree.Statement.*
 import tree.Type.*
-import java.util.TimeZone
 
 fun CompilationUnitContext.toCompilationUnit(): CompilationUnit {
     val imports = ArrayList(importDeclaration().map { it.toImportDeclaration() })
@@ -371,7 +370,7 @@ fun ReferenceContext.toExpression(): Expression {
 
     val thisSign = THIS()
     if (thisSign != null) {
-        return FieldAccess(expr, false, Token(TokenCode.This)) /* FIXME: No idea how it can be possible */
+        return FieldAccess(expr, false, Token(TokenCode.This, "this")) /* FIXME: No idea how it can be possible */
     }
 
     val innerCreator = innerCreator()
@@ -380,8 +379,13 @@ fun ReferenceContext.toExpression(): Expression {
     }
 
     val superSuffix = superSuffix()
-    if (superSuffix != null){
-        return SimpleReference(CompoundName("super_suffix_placeholder")) /* FIXME: No idea what it is*/
+    if (superSuffix != null) {
+        val ssIdentifier = superSuffix.identifier()
+        return if (ssIdentifier != null) {
+            FieldAccess(expr, true, ssIdentifier.toToken())
+        } else {
+            SimpleReference(CompoundName("super_suffix_placeholder")) /* FIXME: No idea what it is*/
+        }
     }
 
     val explicitGenericInvocation = explicitGenericInvocation()

@@ -28,10 +28,10 @@ SOFTWARE.
   <artifactId>j2eo-testing</artifactId>
   <version>1.0-SNAPSHOT</version>
   <properties>
-    <eolang.version>0.23.5</eolang.version>
-		<maven.compiler.source>16</maven.compiler.source>
-        <maven.compiler.target>16</maven.compiler.target>
-        <java.version>16</java.version>
+    <eolang.version>0.23.15</eolang.version>
+    <maven.compiler.source>16</maven.compiler.source>
+    <maven.compiler.target>16</maven.compiler.target>
+    <java.version>16</java.version>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
   </properties>
@@ -49,6 +49,9 @@ SOFTWARE.
         <groupId>org.eolang</groupId>
         <artifactId>eo-maven-plugin</artifactId>
         <version>${eolang.version}</version>
+        <configuration>
+          <failOnError>false</failOnError>
+        </configuration>
         <executions>
           <execution>
             <goals>

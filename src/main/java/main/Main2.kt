@@ -7,6 +7,7 @@ import org.apache.commons.cli.*
 import parser.JavaLexer
 import parser.JavaParser
 import parser.Visitor
+import translator.Context
 import translator.Translator
 import tree.Compilation.CompilationUnit
 import tree.Entity
@@ -15,6 +16,7 @@ import java.io.File
 import java.io.FileNotFoundException
 import java.nio.file.Files
 import java.nio.file.Paths
+import kotlin.collections.HashMap
 import kotlin.io.path.createDirectories
 import kotlin.system.exitProcess
 
@@ -102,7 +104,7 @@ object Main2 {
 //                }
 
                 val translator = Translator(f.relativeTo(sourceFile).toPath())
-                Pair(f, translator.translate(cu))
+                Pair(f, translator.translate(cu, Context(HashMap())))
             }
         println()
 
