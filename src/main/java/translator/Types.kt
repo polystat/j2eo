@@ -10,7 +10,6 @@ fun TokenCode.mapPrimitiveType(): String =
         else -> throw IllegalArgumentException("Primitive type \"$this\" is not supported")
     }
 
-
 fun Type.getTypeName(): String =
     when (this) {
         is TypeName -> this.compoundName.concatenatedJava() + this.dimensions.dimensions.joinToString("") { "[]" }

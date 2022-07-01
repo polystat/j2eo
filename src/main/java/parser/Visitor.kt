@@ -1,21 +1,12 @@
 package parser
 
-import lexer.Token
-import lexer.TokenCode
 import parser.JavaParser.CompilationUnitContext
-import tree.Compilation.SimpleCompilationUnit
-import tree.Compilation.TopLevelComponent
-import tree.Compilation.TopLevelComponents
-import tree.Declaration.Declarations
-import tree.Declaration.ImportDeclarations
-import tree.Declaration.NormalClassDeclaration
 import tree.Entity
-import tree.Type.Type
 
 class Visitor : JavaParserBaseVisitor<Entity>() {
     override fun visitCompilationUnit(ctx: CompilationUnitContext?): Entity = ctx!!.toCompilationUnit()
 //        return SimpleCompilationUnit(
-////            ctx!!.packageDeclaration().qualifiedName().toCompoundName(),
+// //            ctx!!.packageDeclaration().qualifiedName().toCompoundName(),
 //            ImportDeclarations(ArrayList(ctx!!.importDeclaration().map { it.toImportDeclaration() })),
 //            TopLevelComponents(
 //                TopLevelComponent(
@@ -51,5 +42,4 @@ class Visitor : JavaParserBaseVisitor<Entity>() {
 //    override fun visitTypeList(ctx: JavaParser.TypeListContext?): Entity {
 //        return super.visitTypeList(ctx)
 //    }
-
 }

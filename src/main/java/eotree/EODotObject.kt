@@ -1,7 +1,13 @@
 package eotree
 
-import arrow.core.*
+/* ktlint-disable */
+import arrow.core.None
+import arrow.core.Option
+import arrow.core.Some
+import arrow.core.getOrElse
+import arrow.core.some
 import tree.CompoundName
+/* ktlint-disable */
 
 class EODotObject : EOObject {
     var src: Option<EOExpr>

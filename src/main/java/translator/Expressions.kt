@@ -2,11 +2,11 @@ package translator
 
 import arrow.core.None
 import arrow.core.flatten
-import eotree.*
+import eotree.* // ktlint-disable no-wildcard-imports
 import lexer.TokenCode
 import tree.CompoundName
-import tree.Expression.*
-import tree.Expression.Primary.*
+import tree.Expression.* // ktlint-disable no-wildcard-imports
+import tree.Expression.Primary.* // ktlint-disable no-wildcard-imports
 import tree.Type.PrimitiveType
 import tree.Type.TypeName
 
@@ -61,13 +61,13 @@ fun mapCastExpr(cast: Cast, name: String, context: Context): List<EOBndExpr> {
                     EOBndExpr(
                         EOCopy(
                             (
-                                when(castType) {
+                                when (castType) {
                                     is PrimitiveType -> listOf(decodePrimitiveType(castType).value)
                                     is TypeName -> castType.compoundName.names
                                     else -> listOf("unknown_type_${castType.javaClass.simpleName}")
                                 } +
-                                listOf("from")
-                            ).eoDot(),
+                                    listOf("from")
+                                ).eoDot(),
                             castExprName.eoDot()
                         ),
                         "@"
@@ -101,7 +101,7 @@ fun mapArrayAccess(access: ArrayAccess, name: String, context: Context): List<EO
             name
         )
     ) + mapExpression(access.expression, accessExprName, context) +
-            mapExpression(access.size, accessSizeName, context)
+        mapExpression(access.size, accessSizeName, context)
 }
 
 fun mapArrayCreation(arrayCreation: ArrayCreation, name: String, context: Context): List<EOBndExpr> {
@@ -114,7 +114,7 @@ fun mapArrayCreation(arrayCreation: ArrayCreation, name: String, context: Contex
                     EOBndExpr(
                         EOCopy(
                             // "cannot_get_access_to_array_initializer" // FIXME
-                        "FALSE"
+                            "FALSE"
                         ),
                         "@"
                     )
@@ -138,25 +138,25 @@ fun mapInstanceCreation(expr: InstanceCreation, name: String, context: Context):
     val argNames = expr.args.arguments.map { context.genUniqueEntityName(it) }
 
     return listOf(
-            EOBndExpr(
-                EOObject(
-                    listOf(),
-                    None,
-                    listOf(
-                        EOBndExpr(
-                            EOCopy(
-                                listOf(expr.ctorType.getTypeName(), "constructor").eoDot(),
-                                listOf(listOf(expr.ctorType.getTypeName(), "new").eoDot()) +
+        EOBndExpr(
+            EOObject(
+                listOf(),
+                None,
+                listOf(
+                    EOBndExpr(
+                        EOCopy(
+                            listOf(expr.ctorType.getTypeName(), "constructor").eoDot(),
+                            listOf(listOf(expr.ctorType.getTypeName(), "new").eoDot()) +
                                 argNames.map { it.eoDot() }
-                            ),
-                            "@"
-                        )
+                        ),
+                        "@"
                     )
-                ),
-                name
-            )
+                )
+            ),
+            name
+        )
     ) + expr.args.arguments
-            .mapIndexed { idx, it -> mapExpression(it, argNames[idx], context) }.toList().flatten()
+        .mapIndexed { idx, it -> mapExpression(it, argNames[idx], context) }.toList().flatten()
 }
 
 fun mapParenthesized(expr: Parenthesized, name: String, context: Context): List<EOBndExpr> {
@@ -325,7 +325,7 @@ fun mapBinary(expr: Binary, name: String, context: Context): List<EOBndExpr> {
         TokenCode.Caret -> "bit_xor" /* TODO: double check */
         else ->
             "binary_op_placeholder" // FIXME
-            // throw IllegalArgumentException("Binary operation ${expr.operator} is not supported")
+        // throw IllegalArgumentException("Binary operation ${expr.operator} is not supported")
     }
 
     val leftName = context.genUniqueEntityName(expr.left)
@@ -349,7 +349,7 @@ fun mapBinary(expr: Binary, name: String, context: Context): List<EOBndExpr> {
             name
         )
     ) + mapExpression(expr.left, leftName, context) +
-            mapExpression(expr.right, rightName, context)
+        mapExpression(expr.right, rightName, context)
 }
 
 fun mapSimpleReference(expr: SimpleReference, name: String, context: Context): EOBndExpr =

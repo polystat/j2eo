@@ -1,5 +1,6 @@
 package parser
 
+/* ktlint-disable no-wildcard-imports */
 import lexer.Token
 import lexer.TokenCode
 import org.antlr.v4.runtime.tree.TerminalNode
@@ -11,6 +12,7 @@ import tree.Expression.*
 import tree.Expression.Primary.*
 import tree.Statement.*
 import tree.Type.*
+/* ktlint-disable no-wildcard-imports */
 
 fun CompilationUnitContext.toCompilationUnit(): CompilationUnit {
     val imports = ArrayList(importDeclaration().map { it.toImportDeclaration() })
@@ -60,10 +62,10 @@ fun ClassBodyDeclarationContext.toDeclaration(): List<Declaration>? =
         ?: block()?.toDeclaration(STATIC())
 
 fun MemberDeclarationContext.toDeclaration(modifiers: List<ModifierContext>?): List<Declaration>? =
-    if (methodDeclaration() != null) { listOf(methodDeclaration().toDeclaration(modifiers)) } else { null } ?:
-    if (classDeclaration() != null) { listOf(classDeclaration().toClassDeclaration()) } else { null } ?:
-    fieldDeclaration()?.toDeclaration(modifiers) ?:
-    if (constructorDeclaration() != null) { listOf(constructorDeclaration().toDeclaration(modifiers)) } else { null }
+    if (methodDeclaration() != null) { listOf(methodDeclaration().toDeclaration(modifiers)) } else { null }
+        ?: if (classDeclaration() != null) { listOf(classDeclaration().toClassDeclaration()) } else { null }
+        ?: fieldDeclaration()?.toDeclaration(modifiers)
+        ?: if (constructorDeclaration() != null) { listOf(constructorDeclaration().toDeclaration(modifiers)) } else { null }
 // FIXME: support other declarations
 
 fun ConstructorDeclarationContext.toDeclaration(modifiers: List<ModifierContext>?): Declaration {
@@ -102,7 +104,7 @@ fun FieldDeclarationContext.toDeclaration(modifiers: List<ModifierContext>?): Li
 }
 
 fun TerminalNode.toTypeModifier(): TokenCode? {
-    return when(symbol.type) {
+    return when (symbol.type) {
         PUBLIC -> TokenCode.Public
         PRIVATE -> TokenCode.Private
         STATIC -> TokenCode.Static
@@ -114,10 +116,10 @@ fun TerminalNode.toTypeModifier(): TokenCode? {
     }
 }
 
-fun ClassOrInterfaceModifierContext.terminalNode() : TerminalNode? {
+fun ClassOrInterfaceModifierContext.terminalNode(): TerminalNode? {
     for (o in children) {
         if (o is TerminalNode) {
-            return o;
+            return o
         }
     }
     return null
@@ -243,7 +245,7 @@ fun StatementContext.toStatement(): Statement =
         ) /* FIXME */
         is StatementSemiContext -> StatementExpression(
             null,
-                SimpleReference(CompoundName("FALSE"))
+            SimpleReference(CompoundName("FALSE"))
             // SimpleReference(CompoundName("semi_noop_placeholder"))
         ) /* FIXME */
         is StatementSwitchContext -> StatementExpression(
@@ -337,10 +339,10 @@ fun ExpressionContext.toExpression(): Expression {
         is BinaryExpressionContext -> Binary(
             expression(0).toExpression(),
             expression(1).toExpression(),
-            bop?.toToken() ?:
-            if (LT().size == 2) { Token(TokenCode.LeftShift) } else { null } ?:
-            if (GT().size == 2) { Token(TokenCode.RightShift) } else { null } ?:
-            if (GT().size == 3) { Token(TokenCode.ArithmRightShift) } else { null }
+            bop?.toToken()
+                ?: if (LT().size == 2) { Token(TokenCode.LeftShift) } else { null }
+                ?: if (GT().size == 2) { Token(TokenCode.RightShift) } else { null }
+                ?: if (GT().size == 3) { Token(TokenCode.ArithmRightShift) } else { null }
         )
         is PrefixExpressionContext -> UnaryPrefix(prefix.toToken(), expression().toExpression())
         is PostfixExpressionContext -> UnaryPostfix(postfix.toToken(), expression().toExpression())
@@ -475,16 +477,16 @@ fun MethodCallContext.toExpression(expr: Expression?): Expression {
         expr,
         SUPER() != null,
         null, // TODO: type arguments are somewhere else
-        identifier()?.toToken() ?:
-        if (SUPER() != null) {Token(TokenCode.Super, "super")} else { null } ?:
-        if (THIS() != null) {Token(TokenCode.This, "this")} else { null },
+        identifier()?.toToken()
+            ?: if (SUPER() != null) { Token(TokenCode.Super, "super") } else { null }
+            ?: if (THIS() != null) { Token(TokenCode.This, "this") } else { null },
         /* FIXME (SHOULD BE IMPLEMENTED IN ANOTHER WAY) */
         argList
     )
 }
 
-fun IdentifierContext.toExpression() : Expression =
-        SimpleReference(CompoundName(IDENTIFIER()?.text ?: "var")) // A specific case
+fun IdentifierContext.toExpression(): Expression =
+    SimpleReference(CompoundName(IDENTIFIER()?.text ?: "var")) // A specific case
 
 fun PrimaryContext.toExpression(): Expression =
     when (this) {
@@ -510,12 +512,12 @@ fun LiteralContext.toLiteral(): Literal =
             )
         )
     } ?: integerLiteral()?.DECIMAL_LITERAL()?.let { n -> Literal(Token(TokenCode.IntegerLiteral, n.text)) }
-    ?: NULL_LITERAL()?.let { _ -> Literal(Token(TokenCode.Null)) }
-    ?: floatLiteral()?.let { x -> Literal(Token(TokenCode.FloatingLiteral, x.text)) }
-    ?: STRING_LITERAL()?.let { s -> Literal(Token(TokenCode.StringLiteral, s.text.drop(1).dropLast(1))) } ?: Literal(
+        ?: NULL_LITERAL()?.let { _ -> Literal(Token(TokenCode.Null)) }
+        ?: floatLiteral()?.let { x -> Literal(Token(TokenCode.FloatingLiteral, x.text)) }
+        ?: STRING_LITERAL()?.let { s -> Literal(Token(TokenCode.StringLiteral, s.text.drop(1).dropLast(1))) } ?: Literal(
         Token(TokenCode.IntegerLiteral, "123456")
     ) ?: /* FIXME: support other literals */
-    throw Exception("unsupported literal $text") /* FIXME */
+        throw Exception("unsupported literal $text") /* FIXME */
 
 fun LocalVariableDeclarationContext.toDeclaration(): Declaration =
     TypeAndDeclarators(
@@ -639,7 +641,7 @@ fun ClassOrInterfaceTypeContext.toType(): Type =
     TypeName(
         CompoundName(this.identifier().map { it.text }),
         this.typeArguments().lastOrNull()
-            ?.toTypeArguments()   // FIXME: we use last() since we do not support types like A<B>.C<D>
+            ?.toTypeArguments() // FIXME: we use last() since we do not support types like A<B>.C<D>
     )
 
 fun TypeArgumentsContext.toTypeArguments(): TypeArguments {
@@ -665,7 +667,7 @@ fun PackageDeclarationContext.toPackage(): Package =
         null, /* FIXME */
     )
 
-//fun ExpressionContext.toExpression(): Expression =
+// fun ExpressionContext.toExpression(): Expression =
 //    when (this) {
 //
 //    }

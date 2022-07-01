@@ -2,7 +2,16 @@ package open_jdk
 
 import org.antlr.v4.runtime.CharStreams
 import org.antlr.v4.runtime.CommonTokenStream
-import org.junit.jupiter.api.*
+import org.junit.jupiter.api.AfterAll
+import org.junit.jupiter.api.Assertions
+import org.junit.jupiter.api.BeforeAll
+import org.junit.jupiter.api.DynamicTest
+import org.junit.jupiter.api.MethodOrderer
+import org.junit.jupiter.api.Order
+import org.junit.jupiter.api.Test
+import org.junit.jupiter.api.TestFactory
+import org.junit.jupiter.api.TestMethodOrder
+import org.junit.jupiter.api.assertTimeoutPreemptively
 import org.junit.jupiter.api.parallel.Execution
 import org.junit.jupiter.api.parallel.ExecutionMode
 import parser.JavaLexer
@@ -21,9 +30,14 @@ import java.nio.file.Path
 import java.nio.file.Paths
 import java.nio.file.StandardCopyOption
 import java.time.Duration
-import java.util.*
+import java.util.Locale
 import kotlin.collections.HashMap
-import kotlin.io.path.*
+import kotlin.io.path.absolutePathString
+import kotlin.io.path.createDirectories
+import kotlin.io.path.deleteIfExists
+import kotlin.io.path.name
+import kotlin.io.path.notExists
+import kotlin.io.path.relativeTo
 
 @Execution(ExecutionMode.CONCURRENT)
 @TestMethodOrder(MethodOrderer.OrderAnnotation::class)
@@ -90,7 +104,6 @@ class TestJ2EOonOpenJDK {
             .toList()
     }
 
-
     companion object {
         private val openJdkUrl = URL("https://github.com/openjdk/jdk/archive/refs/tags/jdk-16+36.zip")
         private val sep = File.separatorChar.toString()
@@ -116,7 +129,8 @@ class TestJ2EOonOpenJDK {
 
                 val sources = Files.walk(openJdkTestPath)
                 for (source in sources) {
-                    Files.copy(source, workingDir.resolve(openJdkTestPath.relativize(source)),
+                    Files.copy(
+                        source, workingDir.resolve(openJdkTestPath.relativize(source)),
                         StandardCopyOption.REPLACE_EXISTING
                     )
                 }
@@ -134,7 +148,7 @@ class TestJ2EOonOpenJDK {
         private fun translateFile(path: Path): DynamicTest {
             return DynamicTest.dynamicTest(
                 path.parent.fileName.toString() + "/" +
-                        path.fileName.toString()
+                    path.fileName.toString()
             ) {
                 assertTimeoutPreemptively(
                     Duration.ofSeconds(90)
@@ -156,7 +170,7 @@ class TestJ2EOonOpenJDK {
         private fun executeTranslatedTest(path: Path): DynamicTest {
             return DynamicTest.dynamicTest(
                 path.parent.fileName.toString() + "/" +
-                        path.fileName.toString()
+                    path.fileName.toString()
             ) {
                 val isWindows = System.getProperty("os.name").lowercase(Locale.getDefault())
                     .contains("windows") // Matters a lot

@@ -2,7 +2,7 @@ package translator
 
 import arrow.core.None
 import arrow.core.Some
-import eotree.*
+import eotree.* // ktlint-disable no-wildcard-imports
 import translator.preprocessor.PreprocessorState
 import translator.preprocessor.preprocess
 import tree.Compilation.CompilationUnit
@@ -15,7 +15,7 @@ import util.generateEntryPoint
 import util.logger
 import java.nio.file.Path
 import java.time.LocalDateTime
-import java.util.*
+import java.util.* // ktlint-disable no-wildcard-imports
 
 class Translator(val relativePath: Path) {
 
@@ -25,8 +25,8 @@ class Translator(val relativePath: Path) {
         else
             throw IllegalArgumentException(
                 "CompilationUnit of type " +
-                        unit.javaClass.simpleName +
-                        " is not supported"
+                    unit.javaClass.simpleName +
+                    " is not supported"
             )
     }
 
@@ -51,7 +51,6 @@ class Translator(val relativePath: Path) {
             .map { obj: TopLevelComponent? -> mapTopLevelComponent(obj!!, context) }
             .map { bnd: EOBnd -> bnd as EOBndExpr }
 
-
         // FIXME: assuming there is only one top-level component and it is a class
         val mainClassName = findMainClass(unit)
         var entrypointBnds = listOf<EOBndExpr>()
@@ -67,11 +66,11 @@ class Translator(val relativePath: Path) {
         val stdAliases = (
             preprocessorState.stdTokensForCurrentAlias
                 .map { EOMeta("alias", it) }.toList() +
-            (unit.imports?.imports?.map { mapImport(it, context) } ?: listOf())
-        ).distinct()
+                (unit.imports?.imports?.map { mapImport(it, context) } ?: listOf())
+            ).distinct()
 
         val eoAliases = preprocessorState.eoClassesForCurrentAlias
-                .map { EOMeta("alias", it) }.toList()
+            .map { EOMeta("alias", it) }.toList()
         val pkg = relativePath.toList().dropLast(1).joinToString(".")
 
         return EOProgram(

@@ -1,12 +1,10 @@
 package translator
 
 import arrow.core.None
-import arrow.core.Option
-import eotree.*
-import eotree.data.*
+import eotree.* // ktlint-disable no-wildcard-imports
+import eotree.data.* // ktlint-disable no-wildcard-imports
 import lexer.TokenCode
 import tree.Expression.Primary.Literal
-import tree.Type.PrimitiveType
 import util.TokenCodes
 import util.logger
 
@@ -36,12 +34,14 @@ fun mapLiteral(literal: Literal, name: String, context: Context): EOBndExpr =
         TokenCode.IntegerLiteral -> generateEOData(
             listOf(TokenCodes.PRIM__INT.value, "constructor_2").eoDot(),
             listOf(TokenCodes.PRIM__INT.value, "new").eoDot(),
-            EOIntData(try {
-                (literal.value as String).replace("_", "").toInt()
-            } catch (e: NumberFormatException) {
-                logger.warn { "Integer literal parsing is not implemented; falling back to 0" }
-                0 /* FIXME: parse integer literals */
-            }),
+            EOIntData(
+                try {
+                    (literal.value as String).replace("_", "").toInt()
+                } catch (e: NumberFormatException) {
+                    logger.warn { "Integer literal parsing is not implemented; falling back to 0" }
+                    0 /* FIXME: parse integer literals */
+                }
+            ),
             name
         )
         TokenCode.True -> generateEOData(

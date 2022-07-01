@@ -4,7 +4,6 @@ import arrow.core.None
 import eotree.EOBnd
 import eotree.EOBndExpr
 import eotree.EOObject
-import eotree.data.EOStringData
 import eotree.eoDot
 import tree.Declaration.ClassDeclaration
 import tree.Declaration.InterfaceDeclaration
@@ -39,14 +38,14 @@ fun mapClass(clsDec: ClassDeclaration, context: Context): EOBndExpr {
                             "class__Object".eoDot(),
                             "super"
                         )
-                ),
+                    ),
                 EOBndExpr(
                     "super".eoDot(),
                     "@"
                 )
-            )
-                    + (generateNew(clsDec, context))
-                    + generateStatic(clsDec, context)
+            ) +
+                (generateNew(clsDec, context)) +
+                generateStatic(clsDec, context)
         ),
         clsDec.name
     )

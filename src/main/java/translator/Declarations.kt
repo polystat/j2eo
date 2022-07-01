@@ -1,7 +1,7 @@
 package translator
 
 import arrow.core.None
-import eotree.*
+import eotree.* // ktlint-disable no-wildcard-imports
 import lexer.TokenCode
 import tree.Declaration.ClassDeclaration
 import tree.Declaration.Declaration
@@ -118,7 +118,7 @@ fun mapVariableDeclaration(dec: VariableDeclaration, name: String, context: Cont
                     name
                 )
             ) +
-                    mapInitializer(dec.initializer, initName, context)
+                mapInitializer(dec.initializer, initName, context)
         } else {
             listOf(
                 EOBndExpr(

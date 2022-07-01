@@ -8,9 +8,9 @@ import eotree.EOObject
 import eotree.data.EOStringData
 import eotree.eoDot
 import lexer.TokenCode
-import translator.*
+import translator.* // ktlint-disable no-wildcard-imports
 import tree.CompoundName
-import tree.Declaration.*
+import tree.Declaration.* // ktlint-disable no-wildcard-imports
 import tree.Type.TypeName
 
 fun generateInit(clsDec: NormalClassDeclaration, context: Context): EOBndExpr {
@@ -91,13 +91,13 @@ fun generateNewBody(clsDec: NormalClassDeclaration, context: Context): List<EOBn
         clsDec.body?.declarations
             ?.filter { dec: Declaration ->
                 dec.modifiers?.modifiers?.modifiers?.find { it == TokenCode.Static } == null &&
-                        dec !is ConstructorDeclaration &&
-                        dec !is ClassDeclaration /* FIXME (IT'S NOT ALWAYS TRUE) */
+                    dec !is ConstructorDeclaration &&
+                    dec !is ClassDeclaration /* FIXME (IT'S NOT ALWAYS TRUE) */
             }
             ?.map { mapClassDeclaration(it, context) }
             ?.flatten()
-        ?: listOf()
-    )
+            ?: listOf()
+        )
 }
 
 fun generateNew(clsDec: NormalClassDeclaration, context: Context): EOBndExpr {

@@ -1,6 +1,6 @@
 package translator
 
-import arrow.core.*
+import arrow.core.* // ktlint-disable no-wildcard-imports
 import eotree.EOBndExpr
 import eotree.EOCopy
 import eotree.EOObject
@@ -30,17 +30,17 @@ fun genInit(): EOBndExpr =
 
 fun mapMethodDeclaration(dec: MethodDeclaration, context: Context): EOBndExpr {
     val isStatic = dec.modifiers != null &&
-            dec.modifiers.modifiers.modifiers.find { it == TokenCode.Static } != null
+        dec.modifiers.modifiers.modifiers.find { it == TokenCode.Static } != null
     val additionalParameters = if (!isStatic) listOf("this") else ArrayList()
 
     val obj = EOObject(
         // Non-vararg parameters
         if (dec.parameters != null) // Exclude 'String[] args' fon now
             additionalParameters +
-                    dec.parameters.parameters
-                        .filter { param: ParameterDeclaration -> !param.signEllipsis }
-                        .map { param: ParameterDeclaration -> param.name }
-                        .toList()
+                dec.parameters.parameters
+                    .filter { param: ParameterDeclaration -> !param.signEllipsis }
+                    .map { param: ParameterDeclaration -> param.name }
+                    .toList()
         else
             additionalParameters,
 
@@ -83,14 +83,14 @@ fun mapMethodDeclaration(dec: MethodDeclaration, context: Context): EOBndExpr {
         },
 
         "${dec.name} :: ${
-            dec.parameters?.parameters
-                ?.joinToString(" -> ") { param ->
-                    param.type.getTypeName() + param.signEllipsis.let { if (it) "..." else "" }
-                }
+        dec.parameters?.parameters
+            ?.joinToString(" -> ") { param ->
+                param.type.getTypeName() + param.signEllipsis.let { if (it) "..." else "" }
+            }
         } -> ${
-            Option.fromNullable(dec.type)
-                .map { it.getTypeName() }
-                .getOrElse { "void" }
+        Option.fromNullable(dec.type)
+            .map { it.getTypeName() }
+            .getOrElse { "void" }
         }"
     )
 
@@ -98,7 +98,7 @@ fun mapMethodDeclaration(dec: MethodDeclaration, context: Context): EOBndExpr {
     if (dec.parameters != null)
         assert(
             dec.parameters.parameters.size + (if (isStatic) 0 else 1) ==
-                    obj.freeAttrs.size + if (obj.varargAttr.nonEmpty()) 1 else 0
+                obj.freeAttrs.size + if (obj.varargAttr.nonEmpty()) 1 else 0
         ) {
             "Parameters count of Java method and EO method do not match: ${dec.parameters.parameters.size} vs ${obj.freeAttrs.size + if (obj.varargAttr.nonEmpty()) 1 else 0}"
         }

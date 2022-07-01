@@ -12,15 +12,16 @@ import tree.Expression.Primary.MethodInvocation
 import tree.Expression.Primary.This
 import tree.Expression.SimpleReference
 
-
 private fun isStaticCall(fullIdentifier: List<String>): Boolean {
     return fullIdentifier.size == 1 && fullIdentifier.first().startsWith("class__")
 }
 
-private fun getCalleeFullIdentifier(methodInvocation: MethodInvocation,
-                                    context: Context,
-                                    additionalBindings: ArrayList<Pair<Expression, String>>,
-                                    qualifierName: String): List<String> {
+private fun getCalleeFullIdentifier(
+    methodInvocation: MethodInvocation,
+    context: Context,
+    additionalBindings: ArrayList<Pair<Expression, String>>,
+    qualifierName: String
+): List<String> {
     return when (val methodQualifier = methodInvocation.qualifier) {
         is SimpleReference -> methodQualifier.compoundName.names
         is FieldAccess -> getFullIdentifier(methodQualifier, context, additionalBindings)
@@ -31,16 +32,20 @@ private fun getCalleeFullIdentifier(methodInvocation: MethodInvocation,
         is This -> listOf("this")
         null -> listOf()
         else -> {
-            util.logger.warn { "Unsupported method qualifier ${methodQualifier.javaClass.simpleName}; " +
-                    "falling back to unsupported_qualifier" }
+            util.logger.warn {
+                "Unsupported method qualifier ${methodQualifier.javaClass.simpleName}; " +
+                    "falling back to unsupported_qualifier"
+            }
             listOf("unsupported_qualifier")
         }
     }
 }
 
-private fun getFullIdentifier(fieldAccess: FieldAccess,
-                              context: Context,
-                              additionalBindings: ArrayList<Pair<Expression, String>>): List<String> {
+private fun getFullIdentifier(
+    fieldAccess: FieldAccess,
+    context: Context,
+    additionalBindings: ArrayList<Pair<Expression, String>>
+): List<String> {
     return (
         when (val expr = fieldAccess.expression) {
             is FieldAccess -> getFullIdentifier(expr, context, additionalBindings)
@@ -53,7 +58,7 @@ private fun getFullIdentifier(fieldAccess: FieldAccess,
             }
             else -> listOf()
         }
-    ) + listOf(fieldAccess.identifier)
+        ) + listOf(fieldAccess.identifier)
 }
 
 fun trueMethodInvocationName(name: String): List<String> {
@@ -84,7 +89,7 @@ fun mapMethodInvocation(methodInvocation: MethodInvocation, name: String, contex
     val argNames = methodInvocation.arguments?.arguments?.map { context.genUniqueEntityName(it) }
 
     return listOf(
-        EOBndExpr (
+        EOBndExpr(
             EOObject(
                 listOf(),
                 None,
@@ -104,5 +109,5 @@ fun mapMethodInvocation(methodInvocation: MethodInvocation, name: String, contex
     ) + (
         methodInvocation.arguments?.arguments
             ?.mapIndexed { idx, it -> mapExpression(it, argNames!![idx], context) }?.flatten() ?: listOf()
-    ) + additionalBindings.map { mapExpression(it.first, it.second, context) }.flatten()
+        ) + additionalBindings.map { mapExpression(it.first, it.second, context) }.flatten()
 }
