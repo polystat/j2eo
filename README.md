@@ -145,23 +145,23 @@ Translations:
 We use Java language specification document as a foundation for Java feature hierarchy.  
 Java 16 language specification: [see .pdf file](https://docs.oracle.com/javase/specs/jls/se16/jls16.pdf)
 
-###[Ch. 4 - Types, Values, and Variables](src/test/resources/test_ready/ch_4_types_values_variables)  
+[Ch. 4 - Types, Values, and Variables](src/test/resources/test_ready/ch_4_types_values_variables)  
 - Increment operator:
 	[Java](src/test/resources/test_ready/ch_4_types_values_variables/sec_4_2_primitive_types_and_values/sec_4_2_2_integer_operations/IncrementOperator.java)
 	to
 	[EO](src/test/resources/translated_tests/ch_4_types_values_variables/sec_4_2_primitive_types_and_values/sec_4_2_2_integer_operations/IncrementOperator.eo)
 
-###[Ch. 5 - Conversions and Contexts](src/test/resources/test_ready/ch_5_conversions_and_contexts)
+[Ch. 5 - Conversions and Contexts](src/test/resources/test_ready/ch_5_conversions_and_contexts)
 
-###[Ch. 6 - Names](src/test/resources/test_ready/ch_6_names)
+[Ch. 6 - Names](src/test/resources/test_ready/ch_6_names)
 - A simple declaration:
 	[Java](src/test/resources/test_ready/ch_6_names/sec_6_1_declarations/SimpleDeclaration.java)
 	to
 	[EO](src/test/resources/translated_tests/ch_6_names/sec_6_1_declarations/SimpleDeclaration.eo)
 
-###[Ch. 7 - Packages and Modules WIP](src/test/resources/test_ready/ch_7_packages_and_modules)
+[Ch. 7 - Packages and Modules WIP](src/test/resources/test_ready/ch_7_packages_and_modules)
 
-###[Ch. 8 - Classes](src/test/resources/test_ready/ch_8_classes)
+[Ch. 8 - Classes](src/test/resources/test_ready/ch_8_classes)
 - Method class member:
 	[Java](src/test/resources/test_ready/ch_8_classes/sec_8_2_class_members/MethodClassMember.java)
 	to
@@ -179,19 +179,19 @@ Java 16 language specification: [see .pdf file](https://docs.oracle.com/javase/s
 	to
 	[EO](src/test/resources/translated_tests/ch_8_classes/sec_8_5_member_class_and_interface_declarations/SimpleInnerClass.eo)
 
-###[Ch. 9 - Interfaces](src/test/resources/test_ready/ch_9_interfaces)
+[Ch. 9 - Interfaces](src/test/resources/test_ready/ch_9_interfaces)
 
-###[Ch. 10 - Arrays](src/test/resources/test_ready/ch_10_arrays)
+[Ch. 10 - Arrays](src/test/resources/test_ready/ch_10_arrays)
 - Primitive array declaration:
     [Java](src/test/resources/test_ready/ch_10_arrays/sec_10_2_array_variables/PrimitiveArrayDecl.java)
     to
     [EO](src/test/resources/translated_tests/ch_10_arrays/sec_10_2_array_variables/PrimitiveArrayDecl.eo)
 
-###[Ch. 11 - Exceptions WIP](src/test/resources/test_ready/ch_11_exceptions)
+[Ch. 11 - Exceptions WIP](src/test/resources/test_ready/ch_11_exceptions)
 
-###[Ch. 14 - Block Statements, and Patterns](src/test/resources/test_ready/ch_14_blocks_statements_and_patterns)
+[Ch. 14 - Block Statements, and Patterns](src/test/resources/test_ready/ch_14_blocks_statements_and_patterns)
 
-###[Ch. 15 - Expressions](src/test/resources/test_ready/ch_15_expressions)
+[Ch. 15 - Expressions](src/test/resources/test_ready/ch_15_expressions)
 - Left-hand operands are evaluated first: 
     [Java](src/test/resources/test_ready/ch_15_expressions/sec_15_7_evaluation_order/sec_15_7_1_evaluate_left_hand_operand_first/SimpleLeftHandOperandIsEvaluatedFirst.java)
     to
@@ -233,9 +233,9 @@ Java 16 language specification: [see .pdf file](https://docs.oracle.com/javase/s
     to
     [EO](src/test/resources/translated_tests/ch_15_expressions/sec_15_26_assignment_operators/sec_15_26_1_simple_assignment_operator/SimpleAssignmentOperator.eo)
 
-###[Ch. 16 - Definite Assignments WIP](src/test/resources/test_ready/ch_16_definite_assignment)
+[Ch. 16 - Definite Assignments WIP](src/test/resources/test_ready/ch_16_definite_assignment)
 
-###[Ch. 18 - Type inference WIP](src/test/resources/test_ready/ch_18_type_inference)
+[Ch. 18 - Type inference WIP](src/test/resources/test_ready/ch_18_type_inference)
 
 ---
 
