@@ -1,6 +1,7 @@
 import org.apache.tools.ant.taskdefs.condition.Os
 import org.gradle.jvm.tasks.Jar
 import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
+import org.jlleitschuh.gradle.ktlint.reporter.ReporterType
 import java.security.MessageDigest
 
 plugins {
@@ -12,7 +13,7 @@ plugins {
     `maven-publish`
     signing
     id("io.spring.dependency-management") version "1.0.11.RELEASE"
-    // id("org.jlleitschuh.gradle.ktlint") version "10.2.1"
+    id("org.jlleitschuh.gradle.ktlint") version "10.2.1"
     // id("org.cqfn.diktat.diktat-gradle-plugin") version "1.0.2"
     kotlin("jvm") version "1.6.0"
     id("com.github.dawnwords.jacoco.badge") version "0.2.4"
@@ -102,16 +103,15 @@ val fatJar = task("fatJar", type = Jar::class) {
 }
 
 tasks {
-//    classes {
-//        dependsOn(diktatFix)
-//    }
-//     ktlintFormat {
-//         finalizedBy(ktlintCheck)
-//     }
-//  diktatFix {
-//      dependsOn(ktlintFormat)
-//      finalizedBy(diktatCheck)
-//  }
+    classes {
+        dependsOn(ktlintFormat)
+    }
+    ktlintFormat {
+        finalizedBy(ktlintCheck)
+    }
+    //  diktatFix {
+    //      finalizedBy(diktatCheck)
+    //  }
     pmdMain {
         dependsOn(classes)
     }
@@ -163,25 +163,25 @@ pmd {
     ruleSets = listOf("category/java/codestyle.xml")
 }
 
-// ktlint {
-//     verbose.set(true)
-//     outputToConsole.set(true)
-//     coloredOutput.set(true)
-//     ignoreFailures.set(false)
-//     reporters {
-//         reporter(ReporterType.CHECKSTYLE)
-//         reporter(ReporterType.JSON)
-//         reporter(ReporterType.HTML)
-//     }
-//     filter {
-//         exclude("**/style-violations.kt")
-//     }
-// }
+ktlint {
+    verbose.set(true)
+    outputToConsole.set(true)
+    coloredOutput.set(true)
+    ignoreFailures.set(false)
+    reporters {
+        reporter(ReporterType.CHECKSTYLE)
+        reporter(ReporterType.JSON)
+        reporter(ReporterType.HTML)
+    }
+    filter {
+        exclude("**/style-violations.kt")
+    }
+}
 
-//diktat {
+// diktat {
 //    reporterType = "sarif"
 //    ignoreFailures = true
-//}
+// }
 
 tasks.getByName("build") {
     createOutDirs()
@@ -333,8 +333,6 @@ tasks.getByName("signMavenJavaPublication") {
     dependsOn(fatJar)
 }
 
-
-
 /**
  * Creates directories for all ANTLR output files.
  */
@@ -390,14 +388,13 @@ fun runAntlr() =
             else ->
                 throw UnsupportedOperationException(
                     "Your OS is not yet supported. File a GitHub or issue or " +
-                            "provide a Pull Request with support for ANTLR execution for your OS."
+                        "provide a Pull Request with support for ANTLR execution for your OS."
                 )
         }
     } catch (e: Exception) {
-        println("Couldn't run ANTLR; ${e}")
+        println("Couldn't run ANTLR; $e")
 //        e.printStackTrace()
     }
-
 
 /**
  * Returns MD5 string for a given file.

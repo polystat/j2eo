@@ -12,12 +12,14 @@ import tree.Statement.BlockStatement
  * In order to map Java block into EO, all variable declarations are separated out as memory objects and then seq
  * contains all the logic.
  */
-fun mapBlock(block: Block,
-             context: Context,
-             name: String? = null,
-             firstStmts: List<Pair<String, List<EOBndExpr>>>? = null,
-             lastStmts: List<Pair<String, List<EOBndExpr>>>? = null,
-             paramList: List<String>? = null): List<EOBndExpr> {
+fun mapBlock(
+    block: Block,
+    context: Context,
+    name: String? = null,
+    firstStmts: List<Pair<String, List<EOBndExpr>>>? = null,
+    lastStmts: List<Pair<String, List<EOBndExpr>>>? = null,
+    paramList: List<String>? = null
+): List<EOBndExpr> {
     if (name != null) {
         return listOf(
             EOBndExpr(
@@ -41,22 +43,22 @@ fun mapBlock(block: Block,
             EOCopy(
                 "seq",
                 (firstStmts?.map { it.first.eoDot() } ?: listOf()) +
-                if (parsedStatements.isNotEmpty())
-                    parsedStatements.keys.map { it.eoDot() }
-                else {
-                    if (firstStmts == null && lastStmts == null) {
-                        listOf("TRUE".eoDot())
-                    } else {
-                        listOf()
-                    }
-                } +
-                (lastStmts?.map { it.first.eoDot() } ?: listOf())
+                    if (parsedStatements.isNotEmpty())
+                        parsedStatements.keys.map { it.eoDot() }
+                    else {
+                        if (firstStmts == null && lastStmts == null) {
+                            listOf("TRUE".eoDot())
+                        } else {
+                            listOf()
+                        }
+                    } +
+                    (lastStmts?.map { it.first.eoDot() } ?: listOf())
             ),
             "@"
         )
     ) + (firstStmts?.map { it.second }?.flatten() ?: listOf()) +
-            parsedStatements.values.toList().flatten() +
-            (lastStmts?.map { it.second }?.flatten() ?: listOf())
+        parsedStatements.values.toList().flatten() +
+        (lastStmts?.map { it.second }?.flatten() ?: listOf())
 }
 
 fun getBlockStmtName(blockStatement: BlockStatement, context: Context): String {

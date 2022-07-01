@@ -6,7 +6,7 @@ import tree.Compilation.CompilationUnit
 import tree.Compilation.SimpleCompilationUnit
 import tree.Compilation.TopLevelComponent
 import tree.CompoundName
-import tree.Declaration.*
+import tree.Declaration.* // ktlint-disable no-wildcard-imports
 import tree.Expression.ArgumentList
 import tree.Expression.Binary
 import tree.Expression.Cast
@@ -25,13 +25,13 @@ import tree.Expression.UnaryPrefix
 import tree.Initializer
 import tree.InitializerArray
 import tree.InitializerSimple
-import tree.Statement.*
+import tree.Statement.* // ktlint-disable no-wildcard-imports
 import tree.Type.PrimitiveType
 import tree.Type.Type
 import tree.Type.TypeName
 import util.TokenCodes
 import util.collectPrimitivePackages
-import java.util.*
+import java.util.* // ktlint-disable no-wildcard-imports
 import kotlin.collections.HashMap
 import kotlin.collections.HashSet
 
@@ -41,33 +41,33 @@ import kotlin.collections.HashSet
  * @property stdTokensForCurrentAlias
  */
 data class PreprocessorState(
-        val classNames: HashMap<String, String> = hashMapOf(
-            "Object" to TokenCodes.CLASS__OBJECT.value,
-            "System" to TokenCodes.CLASS__SYSTEM.value,
-            "String" to TokenCodes.CLASS__STRING.value,
-            "Random" to TokenCodes.CLASS__RANDOM.value
-        ),
-        val tokensNeededForAlias: HashSet<String> = hashSetOf(
-            TokenCodes.CLASS__OBJECT.value,
-            TokenCodes.CLASS__SYSTEM.value,
-            TokenCodes.CLASS__RANDOM.value,
-            TokenCodes.PRIM__INT.value,
-            TokenCodes.PRIM__FLOAT.value,
-            TokenCodes.PRIM__BOOLEAN.value,
-            TokenCodes.CLASS__STRING.value,
-            // TokenCodes.EO_CAGE.value,
-            TokenCodes.PRIM__LONG.value,
-            TokenCodes.PRIM__BYTE.value,
-            TokenCodes.PRIM__CHAR.value,
-            TokenCodes.PRIM__DOUBLE.value,
-            TokenCodes.PRIM__SHORT.value
-        ),
-        val tokensToImportPath: Map<String, String> = TokenCodes.values()
-            .associate { it.value to it.importPath },
-        val stdTokensForCurrentAlias: HashSet<String> = hashSetOf(
-            TokenCodes.CLASS__OBJECT.importPath  // We need it always
-        ),
-        val eoClassesForCurrentAlias: HashSet<String> = hashSetOf()
+    val classNames: HashMap<String, String> = hashMapOf(
+        "Object" to TokenCodes.CLASS__OBJECT.value,
+        "System" to TokenCodes.CLASS__SYSTEM.value,
+        "String" to TokenCodes.CLASS__STRING.value,
+        "Random" to TokenCodes.CLASS__RANDOM.value
+    ),
+    val tokensNeededForAlias: HashSet<String> = hashSetOf(
+        TokenCodes.CLASS__OBJECT.value,
+        TokenCodes.CLASS__SYSTEM.value,
+        TokenCodes.CLASS__RANDOM.value,
+        TokenCodes.PRIM__INT.value,
+        TokenCodes.PRIM__FLOAT.value,
+        TokenCodes.PRIM__BOOLEAN.value,
+        TokenCodes.CLASS__STRING.value,
+        // TokenCodes.EO_CAGE.value,
+        TokenCodes.PRIM__LONG.value,
+        TokenCodes.PRIM__BYTE.value,
+        TokenCodes.PRIM__CHAR.value,
+        TokenCodes.PRIM__DOUBLE.value,
+        TokenCodes.PRIM__SHORT.value
+    ),
+    val tokensToImportPath: Map<String, String> = TokenCodes.values()
+        .associate { it.value to it.importPath },
+    val stdTokensForCurrentAlias: HashSet<String> = hashSetOf(
+        TokenCodes.CLASS__OBJECT.importPath // We need it always
+    ),
+    val eoClassesForCurrentAlias: HashSet<String> = hashSetOf()
 )
 
 /**
@@ -80,9 +80,9 @@ fun preprocess(state: PreprocessorState, unit: CompilationUnit) {
         preprocessSimpleCompilationUnit(state, unit)
     } else {
         throw IllegalArgumentException(
-                "CompilationUnit of type " +
-                        unit.javaClass.simpleName +
-                        " cannot be preprocessed"
+            "CompilationUnit of type " +
+                unit.javaClass.simpleName +
+                " cannot be preprocessed"
         )
     }
 }
@@ -177,7 +177,7 @@ private fun preprocessSimpleCompilationUnit(state: PreprocessorState, unit: Simp
         ?.map { preprocessImportDeclaration(state, it) }
 
     unit.components.components
-            .map { component: TopLevelComponent? -> preprocessTopLevelComponent(state, component!!) }
+        .map { component: TopLevelComponent? -> preprocessTopLevelComponent(state, component!!) }
 }
 
 private fun preprocessImportDeclaration(state: PreprocessorState, importDecl: ImportDeclaration) {
@@ -213,18 +213,18 @@ private fun preprocessTopLevelComponent(state: PreprocessorState, component: Top
     } else component.interfaceDecl?.let {
         /* To discuss */
     }
-            ?: run {
-                throw IllegalArgumentException("Preprocessor: Supplied TopLevelComponent does not have neither class nor interface")
-            }
+        ?: run {
+            throw IllegalArgumentException("Preprocessor: Supplied TopLevelComponent does not have neither class nor interface")
+        }
 }
 
 private fun preprocessClassDecl(state: PreprocessorState, clsDec: ClassDeclaration) {
     require(clsDec is NormalClassDeclaration) {
         (
             "Preprocessor: Only NormalClassDeclaration is supported, but " +
-                    clsDec.javaClass.simpleName +
-                    " was passed"
-        )
+                clsDec.javaClass.simpleName +
+                " was passed"
+            )
     }
 
     clsDec.name = state.classNames[clsDec.name] ?: clsDec.name
@@ -359,8 +359,9 @@ private fun preprocessVarDecl(state: PreprocessorState, varDecl: VariableDeclara
 private fun preprocessInitializer(state: PreprocessorState, initializer: Initializer) {
     when (initializer) {
         is InitializerSimple -> preprocessSimpleInitializer(state, initializer)
-        is InitializerArray -> initializer.initializers
-            .map { preprocessInitializer(state, it) }
+        is InitializerArray ->
+            initializer.initializers
+                .map { preprocessInitializer(state, it) }
         else -> {
             // this is a generated else block
         }
@@ -461,9 +462,9 @@ private fun preprocessSimpleReference(state: PreprocessorState, ref: SimpleRefer
 
 private fun preprocessCompoundName(state: PreprocessorState, compoundName: CompoundName) {
     compoundName.names
-            .replaceAll {
-                state.classNames[it] ?: it
-            }
+        .replaceAll {
+            state.classNames[it] ?: it
+        }
     tryAddClassForAliases(state, compoundName.names.first())
 }
 
@@ -483,6 +484,6 @@ private fun tryAddClassForAliases(state: PreprocessorState, className: String, f
  *
  * @param tokenCode the token code of primitive type
  */
-private fun convertPrimTokenCode(tokenCode: TokenCode) : String {
+private fun convertPrimTokenCode(tokenCode: TokenCode): String {
     return "prim__${tokenCode.name.lowercase(Locale.getDefault())}"
 }

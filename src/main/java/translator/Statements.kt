@@ -1,8 +1,8 @@
 package translator
 
 import arrow.core.None
-import eotree.*
-import tree.Statement.*
+import eotree.* // ktlint-disable no-wildcard-imports
+import tree.Statement.* // ktlint-disable no-wildcard-imports
 
 // fun mapBlockStatement(stmt: BlockStatement): EOExpr =
 //    // Block statement is one of three variants
@@ -168,12 +168,12 @@ fun mapIfThenElseStatement(rn: IfThenElse, name: String, context: Context): List
             name
         )
     ) + mapExpression(rn.condition, condName, context) +
-            mapStatement(rn.thenPart, thenName, context) +
-            if (rn.elsePart != null) {
-                mapStatement(rn.elsePart, elseName, context)
-            } else {
-                listOf(mapEmptyStmt(emptyName))
-            }
+        mapStatement(rn.thenPart, thenName, context) +
+        if (rn.elsePart != null) {
+            mapStatement(rn.elsePart, elseName, context)
+        } else {
+            listOf(mapEmptyStmt(emptyName))
+        }
 }
 
 /**
@@ -223,11 +223,11 @@ fun mapWhileStatement(wh: While, name: String, context: Context): List<EOBndExpr
             name
         )
     ) + mapExpression(wh.condition, condName, context) +
-            if (wh.statement != null) {
-                mapStatement(wh.statement, stmtName, context)
-            } else {
-                listOf(mapEmptyStmt(emptyName))
-            }
+        if (wh.statement != null) {
+            mapStatement(wh.statement, stmtName, context)
+        } else {
+            listOf(mapEmptyStmt(emptyName))
+        }
 }
 
 fun mapDoStatement(do_stmt: Do, name: String, context: Context): List<EOBndExpr> {
@@ -266,11 +266,11 @@ fun mapDoStatement(do_stmt: Do, name: String, context: Context): List<EOBndExpr>
             name
         )
     ) + mapExpression(do_stmt.condition, condName, context) +
-            if (do_stmt.statement != null) {
-                mapStatement(do_stmt.statement, stmtName, context)
-            } else {
-                listOf(mapEmptyStmt(emptyName))
-            }
+        if (do_stmt.statement != null) {
+            mapStatement(do_stmt.statement, stmtName, context)
+        } else {
+            listOf(mapEmptyStmt(emptyName))
+        }
 }
 
 // fun mapIfThenElse(statement: IfThenElse): EOExpr =

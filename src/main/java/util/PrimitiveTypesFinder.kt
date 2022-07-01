@@ -8,7 +8,7 @@ import tree.Declaration.Declaration
 import tree.Declaration.MethodDeclaration
 import tree.Declaration.NormalClassDeclaration
 import tree.Declaration.VariableDeclaration
-import tree.Expression.*
+import tree.Expression.* // ktlint-disable no-wildcard-imports
 import tree.Expression.Primary.Literal
 import tree.Expression.Primary.MethodInvocation
 import tree.Expression.Primary.Parenthesized
@@ -122,8 +122,9 @@ private fun findPrimitivesInMethod(primitives: HashSet<String>, methodDecl: Meth
 private fun findPrimitivesInInitializer(primitives: HashSet<String>, initializer: Initializer) {
     when (initializer) {
         is InitializerSimple -> findPrimitivesInExpression(primitives, initializer.expression)
-        is InitializerArray -> initializer.initializers
-            .map { findPrimitivesInInitializer(primitives, it) }
+        is InitializerArray ->
+            initializer.initializers
+                .map { findPrimitivesInInitializer(primitives, it) }
     }
 }
 
@@ -161,4 +162,3 @@ fun collectPrimitivePackages(primitives: HashSet<String>, unit: SimpleCompilatio
         .filterIsInstance<NormalClassDeclaration>()
         .map { findPrimitivesInDeclaration(primitives, it) }
 }
-

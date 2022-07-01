@@ -64,5 +64,5 @@ fun mapInitializerArray(initializerArray: InitializerArray, name: String, contex
             ),
             name
         )
-    ) + initializerArray.initializers.mapIndexed{ idx, it -> mapInitializer(it, initNames[idx], context) }.flatten()
+    ) + initializerArray.initializers.mapIndexed { idx, it -> mapInitializer(it, initNames[idx], context) }.flatten()
 }
