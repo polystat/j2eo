@@ -29,6 +29,7 @@ import java.nio.file.Path
 import java.nio.file.Paths
 import java.time.Duration
 import java.util.Locale
+import java.util.concurrent.TimeUnit
 import kotlin.collections.HashMap
 import kotlin.io.path.absolutePathString
 import kotlin.io.path.name
@@ -151,7 +152,7 @@ class TestJ2EO {
                     path.fileName.toString()
             ) {
                 assertTimeoutPreemptively(
-                    Duration.ofSeconds(90)
+                    Duration.ofSeconds(20)
                 ) {
                     val lexer = JavaLexer(CharStreams.fromFileName(path.absolutePathString()))
                     val parser = JavaParser(CommonTokenStream(lexer))
@@ -172,60 +173,70 @@ class TestJ2EO {
                 path.parent.fileName.toString() + "/" +
                     path.fileName.toString()
             ) {
-                val isWindows = System.getProperty("os.name").lowercase(Locale.getDefault())
-                    .contains("windows") // Matters a lot
+                assertTimeoutPreemptively(Duration.ofSeconds(30)) {
+                    val isWindows = System.getProperty("os.name").lowercase(Locale.getDefault())
+                        .contains("windows") // Matters a lot
 
-                // Execute Java
-                val execPbJava = ProcessBuilder(
-                    "java", path.toAbsolutePath().toString()
-                )
-                execPbJava.directory(testFolderRoot.toFile())
-                execPbJava.redirectErrorStream(true)
-                val execProcessJava = execPbJava.start()
+                    // Execute Java
+                    val execPbJava = ProcessBuilder(
+                        "java", path.toAbsolutePath().toString()
+                    )
+                    execPbJava.directory(testFolderRoot.toFile())
+                    execPbJava.redirectErrorStream(true)
+                    val execProcessJava = execPbJava.start()
+                    logger.info("-- Executing Java... --")
 
-                // Receive output
-                val outputJava = StringBuilder()
-                val stdInputJava = BufferedReader(InputStreamReader(execProcessJava.inputStream))
-                var s: String?
-                while (stdInputJava.readLine().also { s = it } != null) {
-                    outputJava.append(s).append(System.lineSeparator())
+                    // Receive output
+                    val outputJava = StringBuilder()
+                    val stdInputJava = BufferedReader(InputStreamReader(execProcessJava.inputStream))
+                    var s: String?
+                    while (stdInputJava.readLine().also { s = it } != null) {
+                        outputJava.append(s).append(sep)
+                    }
+                    execProcessJava.waitFor()
+                    execProcessJava.destroy()
+                    logger.info("-- Java execution output --${sep}" + outputJava.toString())
+
+                    // Execute EO
+                    val relPath = path.relativeTo(testFolderRoot)
+                    val pkg = relPath.toList().dropLast(1).joinToString(".")
+                    val execPb = ProcessBuilder(
+                        "java", "-cp",
+                        if (isWindows)
+                            "\"target/classes;target/eo-runtime.jar\""
+                        else
+                            "target/classes:target/eo-runtime.jar",
+                        "org.eolang.Main",
+                        "$pkg.main",
+                        if (isWindows)
+                            "%*"
+                        else
+                            "\"$@\"1"
+                    )
+                    execPb.directory(testFolderRoot.toFile())
+                    execPb.redirectErrorStream(true)
+                    val execProcess = execPb.start()
+                    logger.info("-- Executing EO... --")
+
+                    // Receive EO execution output
+                    val outputEO = StringBuilder()
+                    val stdInputEO = BufferedReader(InputStreamReader(execProcess.inputStream))
+                    var sEO: String?
+                    while (stdInputEO.readLine().also { sEO = it } != null) {
+                        outputEO.append(sEO).append(sep)
+                    }
+                    if (execProcess.waitFor(10, TimeUnit.SECONDS)) {
+                        logger.warn("-- EO process has finished. ---")
+                        execProcess.destroy()
+                    } else {
+                        logger.warn("-- EO process is stuck!!! ---")
+                        execProcess.destroyForcibly()
+                    }
+
+                    logger.info("-- EO execution output --${sep}" + outputEO.toString())
+
+                    Assertions.assertEquals(outputJava.toString(), outputEO.toString())
                 }
-                execProcessJava.waitFor()
-                execProcessJava.destroy()
-                logger.info("-- Java execution output --" + System.lineSeparator() + outputJava.toString())
-
-                // Execute EO
-                val relPath = path.relativeTo(testFolderRoot)
-                val pkg = relPath.toList().dropLast(1).joinToString(".")
-                val execPb = ProcessBuilder(
-                    "java", "-cp",
-                    if (isWindows)
-                        "\"target/classes;target/eo-runtime.jar\""
-                    else
-                        "target/classes:target/eo-runtime.jar",
-                    "org.eolang.Main",
-                    "$pkg.main",
-                    if (isWindows)
-                        "%*"
-                    else
-                        "\"$@\"1"
-                )
-                execPb.directory(testFolderRoot.toFile())
-                execPb.redirectErrorStream(true)
-                val execProcess = execPb.start()
-
-                // Receive EO execution output
-                val outputEO = StringBuilder()
-                val stdInputEO = BufferedReader(InputStreamReader(execProcess.inputStream))
-                var sEO: String?
-                while (stdInputEO.readLine().also { sEO = it } != null) {
-                    outputEO.append(sEO).append(System.lineSeparator())
-                }
-                execProcess.waitFor()
-                execProcess.destroy()
-                logger.info("-- EO execution output --${System.lineSeparator()}$outputEO")
-
-                Assertions.assertEquals(outputJava.toString(), outputEO.toString())
             }
         }
 
