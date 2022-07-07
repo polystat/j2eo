@@ -1,4 +1,4 @@
-// Generated from /home/ilia-milioshin/Desktop/eo/j2eo/grammar/JavaParser.g4 by ANTLR 4.7.2
+// Generated from JavaParser.g4 by ANTLR 4.7.2
 
 package parser;
 

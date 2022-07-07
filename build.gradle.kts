@@ -28,11 +28,11 @@ version = mvnPublicationVersion ?: "0.4.0"
 
 val compileKotlin: KotlinCompile by tasks
 compileKotlin.kotlinOptions {
-    jvmTarget = "15"
+    jvmTarget = "11"
 }
 val compileTestKotlin: KotlinCompile by tasks
 compileTestKotlin.kotlinOptions {
-    jvmTarget = "15"
+    jvmTarget = "11"
 }
 
 // The Java grammar source file for ANTLR
@@ -71,12 +71,12 @@ dependencies {
     // Use ANTLR for parser generation
     antlr("org.antlr:antlr4:4.9.3")
 
-    implementation("org.polystat:j2ast:0.1.0")
+    implementation("org.polystat:j2ast:0.2.0")
 }
 
 java {
-    sourceCompatibility = JavaVersion.VERSION_15
-    targetCompatibility = JavaVersion.VERSION_15
+    sourceCompatibility = JavaVersion.VERSION_11
+    targetCompatibility = JavaVersion.VERSION_11
 
     withJavadocJar()
     withSourcesJar()
@@ -378,7 +378,7 @@ fun runAntlr() =
             Os.isFamily(Os.FAMILY_UNIX) ->
                 exec {
                     workingDir = File("grammar")
-                    executable = "antlr"
+                    executable = "antlr4"
                     args = mutableListOf(
                         javaGrammarFilePath.replace("grammar/", ""),
                         "-visitor",

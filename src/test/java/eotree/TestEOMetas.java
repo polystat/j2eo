@@ -20,10 +20,9 @@ public class TestEOMetas {
                         new EOMeta("key2", "value2")
                 )
         );
-        assertEquals("""
-                        +package org.eolang.package
-                        +key1 value1
-                        +key2 value2""",
+        assertEquals("+package org.eolang.package\n" +
+                     "+key1 value1\n" +
+                     "+key2 value2",
                 f.generateEO(0));
     }
 
@@ -36,10 +35,9 @@ public class TestEOMetas {
                         new EOMeta("key2", "value2")
                 )
         );
-        assertEquals("""
-                        +package org.eolang.package
-                        +key1 value1
-                        +key2 value2""",
+        assertEquals("+package org.eolang.package\n" +
+                     "+key1 value1\n" + 
+                     "+key2 value2",
                 f.generateEO(1));
     }
 }

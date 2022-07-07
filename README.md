@@ -1,9 +1,9 @@
 <img src="https://www.yegor256.com/images/books/elegant-objects/cactus.svg" height="100px"  alt="eolang icon"/>
 
 [![Gradle Build](https://github.com/polystat/j2eo/actions/workflows/gradle-build.yml/badge.svg)](https://github.com/polystat/j2eo/actions/workflows/gradle-build.yml)
-![LINE](https://img.shields.io/badge/line--coverage-41,67%25-orange.svg)
-![BRANCH](https://img.shields.io/badge/branch--coverage-33,81%25-red.svg)
-![COMPLEXITY](https://img.shields.io/badge/complexity-5,17-brightgreen.svg)
+![LINE](https://img.shields.io/badge/line--coverage-7.15%25-red.svg)
+![BRANCH](https://img.shields.io/badge/branch--coverage-1.22%25-red.svg)
+![COMPLEXITY](https://img.shields.io/badge/complexity-14.94-yellow.svg)
 
 [![Hits-of-Code](https://hitsofcode.com/github/polystat/j2eo)](https://hitsofcode.com/view/github/polystat/j2eo)
 ![Lines of code](https://img.shields.io/tokei/lines/github/polystat/j2eo)
@@ -13,7 +13,7 @@ This is a translator of **Java** programming language to [EOLANG](https://www.eo
 ## Usage
 
 1. Make sure you have installed:
-    - **Java 16+** (make sure command `java -version` shows 16+ version of Java in terminal if you have multiple Java
+    - **Java 11+** (make sure command `java -version` shows 11+ version of Java in terminal if you have multiple Java
       version installed)
     - **Maven 3.8+** to run tests (be aware of [possible conflicts](https://bugs.debian.org/cgi-bin/bugreport.cgi?bug=980467) of the
       latest versions of Maven and Java on some OSs)
