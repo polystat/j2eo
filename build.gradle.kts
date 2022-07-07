@@ -23,6 +23,7 @@ val mvnUsername: String? by project
 val mvnPassword: String? by project
 val mvnPublicationVersion: String? by project
 val candidates: String? by project
+val amount: String? by project
 
 group = "org.polystat"
 version = mvnPublicationVersion ?: "0.4.0"
@@ -153,6 +154,7 @@ tasks.test {
     ignoreFailures = true
     useJUnitPlatform()
     systemProperty("candidates", candidates ?: "false")
+    systemProperty("amount", amount ?: "15")
 }
 
 pmd {

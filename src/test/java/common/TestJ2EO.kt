@@ -56,9 +56,9 @@ class TestJ2EO {
     @Order(2)
     fun compileEOFiles() {
         // Copy all necessary files
-        val pomClonePath = File(testFolderRoot.toString() + sep + "pom.xml").toPath()
+        val pomClonePath = File(testFolderRoot.toString() + fileSep + "pom.xml").toPath()
         Files.copy(pomFilePath, pomClonePath)
-        val stdClonePath = File(testFolderRoot.toString() + sep + "stdlib").toPath()
+        val stdClonePath = File(testFolderRoot.toString() + fileSep + "stdlib").toPath()
         stdlibFolderRoot.toFile().copyRecursively(stdClonePath.toFile())
 
         // Execute generated EO code
@@ -78,11 +78,11 @@ class TestJ2EO {
         var m: String?
         val mvnSb = StringBuilder()
         while (mvnStdInput.readLine().also { m = it } != null) {
-            mvnSb.append(m).append(System.lineSeparator())
+            mvnSb.append(m).append(fileSep)
         }
         compileProcess.waitFor()
         compileProcess.destroy()
-        logger.info(" -- EO compilation output --" + System.lineSeparator() + mvnSb.toString())
+        logger.info(" -- EO compilation output --$fileSep$mvnSb")
 
         pomClonePath.toFile().delete()
         stdClonePath.toFile().deleteRecursively()
@@ -106,29 +106,29 @@ class TestJ2EO {
         private var testFolderRoot = Paths.get("")
         private var pomFilePath = Paths.get("")
         private var stdlibFolderRoot = Paths.get("")
-        private val sep = File.separatorChar.toString()
+        private val fileSep = File.separatorChar.toString()
+        private val lineSep = System.lineSeparator() // New line character
 
         @BeforeAll
         @JvmStatic
         fun setup() {
-            val testCandidates =
-                System.getProperty("candidates") != null &&
-                    System.getProperty("candidates") == "true"
+            val candidatesProp = System.getProperty("candidates")
+            val testCandidates = candidatesProp == "true"
             if (testCandidates)
                 logger.info("-- Executing candidate tests --")
-            var testFolderPath = listOf("src", "test", "resources").joinToString(sep)
-            testFolderPath += sep + if (testCandidates) "test_candidates" else "test_ready"
-            val stdlibFolderPath = listOf("src", "main", "resources", "stdlib").joinToString(sep)
+            var testFolderPath = listOf("src", "test", "resources").joinToString(fileSep)
+            testFolderPath += fileSep + if (testCandidates) "test_candidates" else "test_ready"
+            val stdlibFolderPath = listOf("src", "main", "resources", "stdlib").joinToString(fileSep)
             val fileStd = File(stdlibFolderPath)
             stdlibFolderRoot = fileStd.toPath().toAbsolutePath()
             val fileTest = File(testFolderPath)
             testFolderRoot = fileTest.toPath().toAbsolutePath()
 
-            val pomPath = listOf("src", "test", "resources", "eo_execution_pom", "pom.xml").joinToString(sep)
+            val pomPath = listOf("src", "test", "resources", "eo_execution_pom", "pom.xml").joinToString(fileSep)
             pomFilePath = File(pomPath).toPath().toAbsolutePath()
 
             // Double check for test files (in case testing exited abruptly)
-            val targetFolder = File(testFolderRoot.toString() + sep + "target")
+            val targetFolder = File(testFolderRoot.toString() + fileSep + "target")
             if (targetFolder.exists()) {
                 targetFolder.deleteRecursively()
             }
@@ -140,7 +140,7 @@ class TestJ2EO {
         @AfterAll
         @JvmStatic
         fun cleanup() {
-            File(testFolderRoot.toString() + sep + "target").deleteRecursively()
+            File(testFolderRoot.toString() + fileSep + "target").deleteRecursively()
             testFolderRoot.toFile().walk()
                 .filter { file -> file.isFile }
                 .filter { file -> isEOFile(file.toPath()) }.forEach { it.delete() }
@@ -148,7 +148,7 @@ class TestJ2EO {
 
         private fun translateFile(path: Path): DynamicTest {
             return DynamicTest.dynamicTest(
-                path.parent.fileName.toString() + "/" +
+                path.parent.fileName.toString() + fileSep +
                     path.fileName.toString()
             ) {
                 assertTimeoutPreemptively(
@@ -161,7 +161,7 @@ class TestJ2EO {
                     val cu = eval.visit(tree) as CompilationUnit
                     val genEOLangText = Translator(path.relativeTo(testFolderRoot)).translate(cu, Context(HashMap()))
                     val newFileName = path.fileName.name.removeSuffix(".java") + ".eo"
-                    val newPath = File(path.parent.toString() + sep + newFileName).toPath()
+                    val newPath = File(path.parent.toString() + fileSep + newFileName).toPath()
                     Files.writeString(newPath, genEOLangText.generateEO(0))
                     assert(true)
                 }
@@ -191,11 +191,11 @@ class TestJ2EO {
                     val stdInputJava = BufferedReader(InputStreamReader(execProcessJava.inputStream))
                     var s: String?
                     while (stdInputJava.readLine().also { s = it } != null) {
-                        outputJava.append(s).append(sep)
+                        outputJava.append(s).append(lineSep)
                     }
                     execProcessJava.waitFor()
                     execProcessJava.destroy()
-                    logger.info("-- Java execution output --${sep}" + outputJava.toString())
+                    logger.info("-- Java execution output --$lineSep$outputJava")
 
                     // Execute EO
                     val relPath = path.relativeTo(testFolderRoot)
@@ -223,7 +223,7 @@ class TestJ2EO {
                     val stdInputEO = BufferedReader(InputStreamReader(execProcess.inputStream))
                     var sEO: String?
                     while (stdInputEO.readLine().also { sEO = it } != null) {
-                        outputEO.append(sEO).append(sep)
+                        outputEO.append(sEO).append(lineSep)
                     }
                     if (execProcess.waitFor(10, TimeUnit.SECONDS)) {
                         logger.warn("-- EO process has finished. ---")
@@ -233,7 +233,7 @@ class TestJ2EO {
                         execProcess.destroyForcibly()
                     }
 
-                    logger.info("-- EO execution output --${sep}" + outputEO.toString())
+                    logger.info("-- EO execution output --$lineSep$outputEO")
 
                     Assertions.assertEquals(outputJava.toString(), outputEO.toString())
                 }

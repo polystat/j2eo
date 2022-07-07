@@ -144,7 +144,8 @@ class TestJ2EOonOpenJDK {
             setupVars()
             clearWorkingDirectories()
 
-            amountOfFiles = 10
+            val amountProp = System.getProperty("amount")
+            amountOfFiles = amountProp.toInt()
 
             workingDir.createDirectories()
             if (openjdkZipSavePath.notExists())
