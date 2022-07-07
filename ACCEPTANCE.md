@@ -13,6 +13,7 @@
     - [Performing the assessment](#performing-the-assessment)
       - [Benchmarks](#benchmarks)
       - [Unit tests](#unit-tests)
+      - [Bundled test suite](#bundled-test-suite)
   - [Working with J2EO](#working-with-j2eo)
   
 ---
@@ -124,6 +125,15 @@ Built-in unit tests may be executed using:
 ```shell
 ./gradlew test
 ```
+
+#### Bundled test suite
+
+J2EO comes with 1000+ bundled tests. These tests are used with parallel execution:
+- original Java source code of the text is compiled with Java compiler and executed. Stdout output is saved.
+- Java source code is translated to EO using J2EO project, then compiled with EO compiler and executed. Stdout output is stored.
+- Stdout outputs are compared. If they match — test is passed. If not — test is failed.
+
+Bundled tests may be executed using `./test_candidates.sh` script.
 
 ---
 
