@@ -35,6 +35,7 @@ import kotlin.collections.HashMap
 import kotlin.io.path.absolutePathString
 import kotlin.io.path.createDirectories
 import kotlin.io.path.deleteIfExists
+import kotlin.io.path.exists
 import kotlin.io.path.name
 import kotlin.io.path.notExists
 import kotlin.io.path.relativeTo
@@ -45,11 +46,17 @@ class TestJ2EOonOpenJDK {
     @TestFactory
     @Order(1)
     fun checkTranslation(): Collection<DynamicTest> {
-        return workingDir.toFile().walk()
+        traversedFiles = workingDir.toFile().walk()
             .filter { file -> file.isFile }
             .filter { file -> isTest(file.toPath()) }
             .filter { file -> isNotClassFile(file.toPath()) }
             .filter { file -> isJavaFile(file.toPath()) }
+
+        if (amountOfFiles != null) {
+            traversedFiles = traversedFiles!!.take(amountOfFiles!!)
+        }
+
+        return traversedFiles!!
             .map { file -> translateFile(file.toPath()) }
             .toList()
     }
@@ -68,8 +75,10 @@ class TestJ2EOonOpenJDK {
             .contains("windows") // Matters a lot
 
         // Compile EO file
-        val mvnCommands = if (isWindows) listOf("mvn.cmd", "clean", "compile")
-        else listOf("mvn", "clean", "compile")
+        val mvnCommands = if (isWindows)
+            listOf("mvn.cmd", "clean", "compile")
+        else
+            listOf("mvn", "clean", "compile")
         val compileProcess = ProcessBuilder(mvnCommands)
             .directory(workingDir.toFile())
             .redirectErrorStream(true)
@@ -95,54 +104,82 @@ class TestJ2EOonOpenJDK {
     @TestFactory
     @Order(3)
     fun executeAndCheckEO(): Collection<DynamicTest> {
-        return workingDir.toFile().walk()
-            .filter { file -> file.isFile }
-            .filter { file -> isTest(file.toPath()) }
-            .filter { file -> isNotClassFile(file.toPath()) }
-            .filter { file -> isJavaFile(file.toPath()) }
+        return traversedFiles!!
             .map { file -> executeTranslatedTest(file.toPath()) }
             .toList()
     }
 
     companion object {
-        private val openJdkUrl = URL("https://github.com/openjdk/jdk/archive/refs/tags/jdk-16+36.zip")
+        private lateinit var openJdkUrl: URL
+        private lateinit var unzipCommand: List<String>
         private val sep = File.separatorChar.toString()
         private val pomFilePath = Paths.get("src", "test", "resources", "eo_execution_pom", "pom.xml")
             .toAbsolutePath()
         private val stdlibFolderRoot = Paths.get("src", "main", "resources", "stdlib").toAbsolutePath()
         private val workingDir = Paths.get("src", "test", "resources", "open_jdk").toAbsolutePath()
-        private val openjdkZipSavePath = Paths.get("jdk.zip").toAbsolutePath()
+        private val openjdkZipSavePath = Paths.get("jdk.tar.gz").toAbsolutePath()
         private val openJdkTestPath = Paths.get("jdk-jdk-16-36", "test").toAbsolutePath()
+
+        private var amountOfFiles: Int? = null
+        private var traversedFiles: Sequence<File>? = null
+
+        private fun clearWorkingDirectories() {
+            if (workingDir.exists()) {
+                workingDir.toFile().deleteRecursively()
+            }
+            if (openJdkTestPath.parent.exists()) {
+                openJdkTestPath.parent.toFile().deleteRecursively()
+            }
+            openjdkZipSavePath.deleteIfExists()
+        }
+
+        private fun setupVars() {
+            unzipCommand = listOf("tar", "-xf", openjdkZipSavePath.toString())
+            openJdkUrl = URL("https://github.com/openjdk/jdk/archive/refs/tags/jdk-16+36.tar.gz")
+        }
 
         @BeforeAll
         @JvmStatic
         fun setup() {
-            if (workingDir.notExists()) {
-                workingDir.createDirectories()
-                openJdkUrl.openStream().use { Files.copy(it, Paths.get(openjdkZipSavePath.toString())) }
-                ProcessBuilder()
-                    .command("unzip", openjdkZipSavePath.toString())
-                    .redirectError(ProcessBuilder.Redirect.INHERIT)
-                    .redirectOutput(ProcessBuilder.Redirect.INHERIT)
-                    .start()
-                    .waitFor()
+            setupVars()
+            clearWorkingDirectories()
 
-                val sources = Files.walk(openJdkTestPath)
-                for (source in sources) {
-                    Files.copy(
-                        source, workingDir.resolve(openJdkTestPath.relativize(source)),
-                        StandardCopyOption.REPLACE_EXISTING
-                    )
-                }
-                openjdkZipSavePath.deleteIfExists()
-                openJdkTestPath.parent.deleteIfExists()
+            amountOfFiles = 10
+
+            workingDir.createDirectories()
+            if (openjdkZipSavePath.notExists())
+                openJdkUrl.openStream().use { Files.copy(it, Paths.get(openjdkZipSavePath.toString())) }
+
+            ProcessBuilder()
+                .command(unzipCommand)
+                .redirectError(ProcessBuilder.Redirect.INHERIT)
+                .redirectOutput(ProcessBuilder.Redirect.INHERIT)
+                .start()
+                .waitFor()
+
+            val sources = Files.walk(openJdkTestPath)
+            for (source in sources) {
+                Files.copy(
+                    source, workingDir.resolve(openJdkTestPath.relativize(source)),
+                    StandardCopyOption.REPLACE_EXISTING
+                )
             }
+
+            if (openJdkTestPath.parent.exists()) {
+                openJdkTestPath.parent.toFile().deleteRecursively()
+            }
+            // openjdkZipSavePath.deleteIfExists()
         }
 
         @AfterAll
         @JvmStatic
         fun cleanup() {
-            workingDir.deleteIfExists()
+            if (workingDir.exists()) {
+                workingDir.toFile().deleteRecursively()
+            }
+            logger.info(workingDir.toString())
+            logger.info(openjdkZipSavePath.toString())
+            logger.info(openJdkTestPath.toString())
         }
 
         private fun translateFile(path: Path): DynamicTest {

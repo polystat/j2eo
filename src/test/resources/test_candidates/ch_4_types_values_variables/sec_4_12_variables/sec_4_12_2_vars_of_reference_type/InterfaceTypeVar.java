@@ -1,5 +1,6 @@
 
-interface A {}
+interface A {
+}
 
 public class InterfaceTypeVar {
     public static void main(String[] args) {

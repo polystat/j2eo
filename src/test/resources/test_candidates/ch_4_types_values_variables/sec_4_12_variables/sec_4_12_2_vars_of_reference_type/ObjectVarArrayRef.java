@@ -1,11 +1,13 @@
 
-class A {}
+class A {
+}
 
-class B {}
+class B {
+}
 
 public class ObjectVarArrayRef {
     public static void main(String[] args) {
-        Object[] array = { new A(), new B(), "String" };
+        Object[] array = {new A(), new B(), "String"};
         Object o = array;
         System.out.println(((Object[]) o)[0] instanceof A);
         System.out.println(((Object[]) o)[1] instanceof B);

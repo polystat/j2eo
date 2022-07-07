@@ -7,7 +7,7 @@ class A {
 
 public class RefTypeArrayVar {
     public static void main(String[] args) {
-        A[] array = { new A(), new A(), new A() };
+        A[] array = {new A(), new A(), new A()};
         System.out.println(array[0].f());
         System.out.println(array[1].f());
         System.out.println(array[2].f());

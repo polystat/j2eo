@@ -13,7 +13,7 @@ class B extends A {
 
 public class RefTypeArrayInheritanceVar {
     public static void main(String[] args) {
-        A[] array = { new B(), new A(), new B() };
+        A[] array = {new B(), new A(), new B()};
         System.out.println(array[0].f());
         System.out.println(array[1].f());
         System.out.println(array[2].f());
