@@ -9,7 +9,6 @@ docker:
 release:
   script: |-
     [[ "${tag}" =~ ^[0-9]+\.[0-9]+\.[0-9]+$ ]] || exit -1
-    image=yegor256/j2eo
 
     cp ../gradle.properties .
     echo "Home dir: $HOME"
@@ -23,6 +22,7 @@ release:
     echo "Done."
 
     mv "J2EO-${tag}.jar" j2eo.jar
-    sudo docker build "$(pwd)" --tag "${repo}:${tag}"
+    image=yegor256/j2eo
+    sudo docker build "$(pwd)" --tag "${image}:${tag}"
     cat ../docker-password | sudo docker login --password-stdin --username yegor256
-    sudo docker push "${repo}:${tag}"
+    sudo docker push "${image}:${tag}"
