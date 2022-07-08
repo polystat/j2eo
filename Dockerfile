@@ -38,8 +38,6 @@ ENV LANGUAGE en_US.UTF-8
 
 RUN apt-get install -y openjdk-17-jdk
 
-RUN apt install -y wget
-RUN wget -P /usr/local https://repo.maven.apache.org/maven2/org/polystat/j2eo/0.5.3/j2eo-0.5.3.jar
-RUN mv /usr/local/j2eo-0.5.3.jar /usr/local/j2eo.jar
+COPY j2eo.jar /usr/local/j2eo.jar
 
 ENTRYPOINT ["java", "-jar", "/usr/local/j2eo.jar"]
