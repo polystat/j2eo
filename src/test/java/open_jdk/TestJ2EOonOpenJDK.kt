@@ -8,7 +8,6 @@ import org.junit.jupiter.api.BeforeAll
 import org.junit.jupiter.api.DynamicTest
 import org.junit.jupiter.api.MethodOrderer
 import org.junit.jupiter.api.Order
-import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.TestFactory
 import org.junit.jupiter.api.TestMethodOrder
 import org.junit.jupiter.api.assertTimeoutPreemptively
@@ -40,72 +39,14 @@ import kotlin.io.path.name
 import kotlin.io.path.notExists
 import kotlin.io.path.relativeTo
 
-@Execution(ExecutionMode.CONCURRENT)
+@Execution(ExecutionMode.SAME_THREAD)
 @TestMethodOrder(MethodOrderer.OrderAnnotation::class)
 class TestJ2EOonOpenJDK {
     @TestFactory
     @Order(1)
-    fun checkTranslation(): Collection<DynamicTest> {
-        traversedFiles = workingDir.toFile().walk()
-            .filter { file -> file.isFile }
-            .filter { file -> isTest(file.toPath()) }
-            .filter { file -> isNotClassFile(file.toPath()) }
-            .filter { file -> isJavaFile(file.toPath()) }
-
-        if (amountOfFiles != null) {
-            traversedFiles = traversedFiles!!.take(amountOfFiles!!)
-        }
-
-        return traversedFiles!!
-            .map { file -> translateFile(file.toPath()) }
-            .toList()
-    }
-
-    @Test
-    @Order(2)
-    fun compileEOFiles() {
-        // Copy all necessary files
-        val pomClonePath = File(workingDir.toString() + sep + "pom.xml").toPath()
-        Files.copy(pomFilePath, pomClonePath)
-        val stdClonePath = File(workingDir.toString() + sep + "stdlib").toPath()
-        stdlibFolderRoot.toFile().copyRecursively(stdClonePath.toFile())
-
-        // Execute generated EO code
-        val isWindows = System.getProperty("os.name").lowercase(Locale.getDefault())
-            .contains("windows") // Matters a lot
-
-        // Compile EO file
-        val mvnCommands = if (isWindows)
-            listOf("mvn.cmd", "clean", "compile")
-        else
-            listOf("mvn", "clean", "compile")
-        val compileProcess = ProcessBuilder(mvnCommands)
-            .directory(workingDir.toFile())
-            .redirectErrorStream(true)
-            .start()
-
-        // Receive compilation output (maybe useful)
-        val mvnStdInput = BufferedReader(InputStreamReader(compileProcess.inputStream))
-        var m: String?
-        val mvnSb = StringBuilder()
-        while (mvnStdInput.readLine().also { m = it } != null) {
-            mvnSb.append(m).append(System.lineSeparator())
-        }
-        compileProcess.waitFor()
-        compileProcess.destroy()
-        logger.info(" -- EO compilation output --" + System.lineSeparator() + mvnSb.toString())
-
-        pomClonePath.toFile().delete()
-        stdClonePath.toFile().deleteRecursively()
-
-        assert(true)
-    }
-
-    @TestFactory
-    @Order(3)
     fun executeAndCheckEO(): Collection<DynamicTest> {
-        return traversedFiles!!
-            .map { file -> executeTranslatedTest(file.toPath()) }
+        return translatedFiles
+            .map { file -> executeTranslatedTest(file.first.toPath(), file.second) }
             .toList()
     }
 
@@ -121,31 +62,24 @@ class TestJ2EOonOpenJDK {
         private val openJdkTestPath = Paths.get("jdk-jdk-16-36", "test").toAbsolutePath()
 
         private var amountOfFiles: Int? = null
-        private var traversedFiles: Sequence<File>? = null
-
-        private fun clearWorkingDirectories() {
-            if (workingDir.exists()) {
-                workingDir.toFile().deleteRecursively()
-            }
-            if (openJdkTestPath.parent.exists()) {
-                openJdkTestPath.parent.toFile().deleteRecursively()
-            }
-            openjdkZipSavePath.deleteIfExists()
-        }
+        private lateinit var traversedFiles: Sequence<File>
+        private lateinit var translatedFiles: Sequence<Pair<File, Boolean>>
 
         private fun setupVars() {
             unzipCommand = listOf("tar", "-xf", openjdkZipSavePath.toString())
             openJdkUrl = URL("https://github.com/openjdk/jdk/archive/refs/tags/jdk-16+36.tar.gz")
+
+            amountOfFiles = try {
+                System.getProperty("amount")?.toInt()
+            } catch (e: NumberFormatException) {
+                null
+            }
         }
 
         @BeforeAll
         @JvmStatic
         fun setup() {
             setupVars()
-            clearWorkingDirectories()
-
-            val amountProp = System.getProperty("amount")
-            amountOfFiles = amountProp.toInt()
 
             workingDir.createDirectories()
             if (openjdkZipSavePath.notExists())
@@ -169,7 +103,10 @@ class TestJ2EOonOpenJDK {
             if (openJdkTestPath.parent.exists()) {
                 openJdkTestPath.parent.toFile().deleteRecursively()
             }
-            // openjdkZipSavePath.deleteIfExists()
+            openjdkZipSavePath.deleteIfExists()
+
+            checkTranslation()
+            compileEOFiles()
         }
 
         @AfterAll
@@ -183,11 +120,23 @@ class TestJ2EOonOpenJDK {
             logger.info(openJdkTestPath.toString())
         }
 
-        private fun translateFile(path: Path): DynamicTest {
-            return DynamicTest.dynamicTest(
-                path.parent.fileName.toString() + "/" +
-                    path.fileName.toString()
-            ) {
+        private fun checkTranslation() {
+            traversedFiles = workingDir.toFile().walk()
+                .filter { file -> file.isFile }
+                .filter { file -> isTest(file.toPath()) }
+                .filter { file -> isNotClassFile(file.toPath()) }
+                .filter { file -> isJavaFile(file.toPath()) }
+
+            if (amountOfFiles != null) {
+                traversedFiles = traversedFiles.take(amountOfFiles!!)
+            }
+
+            translatedFiles = traversedFiles
+                .map { file -> file to translateFile(file.toPath()) }
+        }
+
+        private fun translateFile(path: Path): Boolean {
+            try {
                 assertTimeoutPreemptively(
                     Duration.ofSeconds(90)
                 ) {
@@ -200,16 +149,58 @@ class TestJ2EOonOpenJDK {
                     val newFileName = path.fileName.name.removeSuffix(".java") + ".eo"
                     val newPath = File(path.parent.toString() + sep + newFileName).toPath()
                     Files.writeString(newPath, genEOLangText.generateEO(0))
-                    assert(true)
                 }
+            } catch (e: Exception) {
+                return false
             }
+            return true
         }
 
-        private fun executeTranslatedTest(path: Path): DynamicTest {
+        private fun compileEOFiles() {
+            // Copy all necessary files
+            val pomClonePath = File(workingDir.toString() + sep + "pom.xml").toPath()
+            Files.copy(pomFilePath, pomClonePath)
+            val stdClonePath = File(workingDir.toString() + sep + "stdlib").toPath()
+            stdlibFolderRoot.toFile().copyRecursively(stdClonePath.toFile())
+
+            // Execute generated EO code
+            val isWindows = System.getProperty("os.name").lowercase(Locale.getDefault())
+                .contains("windows") // Matters a lot
+
+            // Compile EO file
+            val mvnCommands = if (isWindows)
+                listOf("mvn.cmd", "clean", "compile")
+            else
+                listOf("mvn", "clean", "compile")
+            val compileProcess = ProcessBuilder(mvnCommands)
+                .directory(workingDir.toFile())
+                .redirectErrorStream(true)
+                .start()
+
+            // Receive compilation output (maybe useful)
+            val mvnStdInput = BufferedReader(InputStreamReader(compileProcess.inputStream))
+            var m: String?
+            val mvnSb = StringBuilder()
+            while (mvnStdInput.readLine().also { m = it } != null) {
+                mvnSb.append(m).append(System.lineSeparator())
+            }
+            compileProcess.waitFor()
+            compileProcess.destroy()
+            logger.info(" -- EO compilation output --" + System.lineSeparator() + mvnSb.toString())
+
+            pomClonePath.toFile().delete()
+            stdClonePath.toFile().deleteRecursively()
+        }
+
+        private fun executeTranslatedTest(path: Path, isTranslated: Boolean): DynamicTest {
             return DynamicTest.dynamicTest(
                 path.parent.fileName.toString() + "/" +
                     path.fileName.toString()
             ) {
+                if (!isTranslated) {
+                    assert(false)
+                }
+
                 val isWindows = System.getProperty("os.name").lowercase(Locale.getDefault())
                     .contains("windows") // Matters a lot
 
