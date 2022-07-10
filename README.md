@@ -534,6 +534,37 @@ For now there is now handling of shadowing and obscuring.
 
 EO does not support access modifiers. All objects in an EO is public by default. Therefore, during translation such information is being lost.
 
+### 7 Packages and Modules
+
+---
+
+#### 7.5 Import Declarations
+
+Currently, translator supports only single type import declaration and single static support declarations.
+
+Example:
+```Java
+import a.b.c;
+import static d.e.f;
+```
+-->
+```
++alias a.b.class__c
++alias d.class_e.f
+```
+
+Any identifier in import declaration would be prepended with class__ if it's known that it is a class.
+Identifier `java` will be replaced with `stdlib`.
+
+Example:
+```Java
+import java.lang.Random;
+```
+-->
+```
++alias stdlib.lang.class__Random
+```
+
 ### 8 Classes
 
 ---
@@ -545,6 +576,94 @@ Any modifiers except `static` are being omitted during translation. `static` is 
 #### 8.3 Field Declarations
 
 Currently, only non-`static` fields are supported. 
+
+#### 8.4 Method Declarations
+
+Any method would be translated into EO object. Name in this case would be saved.
+
+Example:
+```Java
+static String m(int p_int, String p_str) {
+    return p_int + p_str;
+}
+```
+-->
+```
+[p_int p_str] > m
+  seq > @
+    return_1
+  [] > return_1
+    binary_1 > @
+  [] > binary_1
+    simpleReference_1.add > @
+      simpleReference_2
+  [] > simpleReference_1
+    p_int > @
+  [] > simpleReference_2
+    p_str > @
+```
+
+Any non-`static` method will have additional parameter `this` that refers callee itself. It is necessary to implement overriding methods in EO correctly. 
+
+#### 8.5 Member Class and Interface Declarations
+
+Now only `static` nested classes are supported. Nested interfaces are unsupported. Example:
+
+```Java
+class Outer {
+    class Inner {}
+} 
+```
+-->
+```
+[] > class__Outer
+  ...
+  [] > class Inner
+    ...
+```
+
+#### 8.8 Constructor Declarations
+
+Only non-multiple construction declarations with explicit `super` call are supported. 
+
+Example:
+
+```java
+public A() {
+    super();
+    ...
+}
+```
+-->
+```
+[this] > constructor
+  seq > @
+    initialization
+    statementExpression_1
+    ...
+    this
+  [] > initialization
+    this.init > @
+      this
+  [] > statementExpression_1
+    this.super.constructor > @
+      this.super
+```
+
+`initialization` is responsible for init of default values.
+
+`statementExpression_1` is a super call emulation.
+
+`this` is created object itself.
+
+If no constructor is provided then translator generate default constructor.
+### 10 Arrays
+
+___
+
+#### 10.3 Array Creation
+
+Look at [15.10.1](#15.10.1-array-creation-expressions) section. 
 
 ### 14 Blocks, Statements, and Patterns
 
@@ -611,7 +730,11 @@ Any statement in blocks are statement expression by default. Their behaviour as 
 
 #### 15.8.1 Lexical Literals
 
-Now supported only integer, floating point and string literals:
+Now supported only integer, floating point and string literals. Translator use wrappers to simulate behaviour of Java primitives.
+Let's consider an assign operator in Java write value into variable and return its value. `memory` in EO does not provide a such behaviour. 
+Therefore, we need to use a wrapper.
+
+Examples:
 
 `1` -> 
 ```
@@ -649,6 +772,8 @@ It's remaining unchanged.
   expresion > @
 ```
 
+It can be simplified, but we keep such translation to maintain more complex cases.
+
 #### 15.9 Class Instance Creation Expression
 
 `new A(arg)` ->
@@ -660,6 +785,8 @@ It's remaining unchanged.
 [] > simpleReference_1
   arg > @
 ```
+
+For referencing variables `simpleReference_1` is used. It can be simplified, but it's used for maintaining complex cases.
 
 #### 15.10.1 Array Creation Expressions
 
