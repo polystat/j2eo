@@ -14,6 +14,7 @@
       - [Benchmarks](#benchmarks)
       - [Unit tests](#unit-tests)
       - [Bundled test suite](#bundled-test-suite)
+      - [OpenJDK test suite](#openjdk-test-suite)
   - [Working with J2EO](#working-with-j2eo)
   
 ---
@@ -133,7 +134,19 @@ J2EO comes with 1000+ bundled tests. These tests are used with parallel executio
 - Java source code is translated to EO using J2EO project, then compiled with EO compiler and executed. Stdout output is stored.
 - Stdout outputs are compared. If they match — test is passed. If not — test is failed.
 
+Test suite follows the Java Language Specification structure, covering applicable chapters and sections of the Java specifications.
+
 Bundled tests may be executed using `./test_candidates.sh` script.
+
+#### OpenJDK test suite
+
+J2EO contains tools for executing OpenJDK test suite. You can execute these tests using the following command:
+
+```shell
+./gradlew test --tests "open_jdk.TestJ2EOonOpenJDK" -Pamount=<number of tests from openjdk to process>
+```
+
+These tests follow the same execution flow as the bundled test suite. Since J2EO does not cover the language completely, some of these tests fail.
 
 ---
 
