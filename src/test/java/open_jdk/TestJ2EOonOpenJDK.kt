@@ -5,6 +5,7 @@ import org.antlr.v4.runtime.CommonTokenStream
 import org.junit.jupiter.api.AfterAll
 import org.junit.jupiter.api.Assertions
 import org.junit.jupiter.api.BeforeAll
+import org.junit.jupiter.api.Disabled
 import org.junit.jupiter.api.DynamicTest
 import org.junit.jupiter.api.MethodOrderer
 import org.junit.jupiter.api.Order
@@ -40,8 +41,9 @@ import kotlin.io.path.name
 import kotlin.io.path.notExists
 import kotlin.io.path.relativeTo
 
-@Execution(ExecutionMode.CONCURRENT)
+@Execution(ExecutionMode.SAME_THREAD)
 @TestMethodOrder(MethodOrderer.OrderAnnotation::class)
+@Disabled
 class TestJ2EOonOpenJDK {
     @TestFactory
     @Order(1)
