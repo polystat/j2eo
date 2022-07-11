@@ -152,7 +152,7 @@ class TestJ2EO {
                     path.fileName.toString()
             ) {
                 assertTimeoutPreemptively(
-                    Duration.ofSeconds(20)
+                    Duration.ofSeconds(10)
                 ) {
                     val lexer = JavaLexer(CharStreams.fromFileName(path.absolutePathString()))
                     val parser = JavaParser(CommonTokenStream(lexer))
@@ -173,7 +173,7 @@ class TestJ2EO {
                 path.parent.fileName.toString() + "/" +
                     path.fileName.toString()
             ) {
-                assertTimeoutPreemptively(Duration.ofSeconds(30)) {
+                assertTimeoutPreemptively(Duration.ofSeconds(15)) {
                     val isWindows = System.getProperty("os.name").lowercase(Locale.getDefault())
                         .contains("windows") // Matters a lot
 
@@ -225,7 +225,7 @@ class TestJ2EO {
                     while (stdInputEO.readLine().also { sEO = it } != null) {
                         outputEO.append(sEO).append(lineSep)
                     }
-                    if (execProcess.waitFor(10, TimeUnit.SECONDS)) {
+                    if (execProcess.waitFor(5, TimeUnit.SECONDS)) {
                         logger.warn("-- EO process has finished. ---")
                         execProcess.destroy()
                     } else {
