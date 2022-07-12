@@ -243,6 +243,9 @@ Java 16 language specification: [see .pdf file](https://docs.oracle.com/javase/s
 
 Bellow there are all designed mappings at the current moment. If you didn't find a construction in the list bellow it is probably unsupported.
 
+This list is created accordingly [Java SE 16](https://docs.oracle.com/javase/specs/jls/se16/jls16.pdf). Some chapters are omitted because they related only to internal structure of Java. 
+Others are omitted due to lack of implementation of translation.
+
 ### 4 Types, Values, and Variables
 
 ----
@@ -661,9 +664,60 @@ If no constructor is provided then translator generate default constructor.
 
 ___
 
+#### 10.2 Array Variables
+
+Translator supports both types of arrays: primitive and reference. Examples: `int[]` and `String[]`
+
 #### 10.3 Array Creation
 
 Look at [15.10.1](#15.10.1-array-creation-expressions) section. 
+
+#### 10.4 Array Access
+
+For access to array elements translator uses `get` provided by EO `array` object. However, as indexes it uses primitive wrappers.
+Example is provided in [15.10.3](#15.10.3-array-access-expressions) section.
+
+#### 10.6 Array Initializers
+
+An array initializer is written as a comma-separated list of expressions, enclosed
+by braces { and }. Example, `{ 1 + 1, 2 }`
+
+Currently, it is the only way to store something in array. Other types of initializers (e.g. `new Type[num]`) are unsupported.
+
+Example:
+```java
+{ 1 + 1, 2 }
+```
+-->
+```
+[] > initializerArray_1
+  * > @
+    initializerSimple_1
+    initializerSimple_2
+[] > initializerSimple_1
+  binary_1 > @
+[] > binary_1
+  literal_1.add > @
+    literal_2
+[] > literal_1
+  prim__int.constructor_2 > @
+    prim__int.new
+    1
+[] > literal_2
+  prim__int.constructor_2 > @
+    prim__int.new
+    1
+[] > initializerSimple_2
+  literal_3 > @
+[] > literal_3
+  prim__int.constructor_2 > @
+    prim__int.new
+    2
+```
+
+#### 10.7 Array Members
+
+For now only `length` attribute is supported. During translation, it remains unchanged.
 
 ### 14 Blocks, Statements, and Patterns
 
@@ -723,6 +777,211 @@ void foo() {
 Any variables in blocks are declared separately from the `seq` object. In this case `int a` was declared at lines 5-6. Also it has an initializer `1`. So translator assign `a` to initializer value at lines 7-9. This initializer is simple one. It is a just literal. Translator mentioned it on lines 10-11. Literals are translated to EO objects itself (lines 12-15). 
 
 Any statement in blocks are statement expression by default. Their behaviour as a declarations are described separately. In this case statement `println(a)` is declared on lines 16-19. By default, any method is considered as class method. So access to it is performed via `this` (line 17). Moreover, it is necessary to pass `this` as argument during method invocation (line 18). `println(a)` is call with single argument `a`. It is a simple reference that was mentioned at line 19. Simple reference is itself a distinct object which translator declared on lines 20-21.   
+
+#### 14.4 Local Variable Declarations
+
+A local variable declaration declares and optionally initializes one or more local
+variables. Translator keeps location of declaration unchanged. 
+E.g. class member declarations stay inside class body, local method variables stays inside a method body and e.t.c. Depending on the type declared entity can be stored in `cage`, primitive wrapper or in separate EO object.
+
+Example of class member declaration:
+
+```java
+class A {
+    int member;
+}
+```
+-->
+```
+[] > class__A
+  ...
+  [] > new
+    ...
+    prim__int.constructor_1 > member
+      prim__int.new
+  ...
+```
+
+Example of class member with initializer:
+```java
+class A {
+    int member = 0;
+}
+```
+-->
+```
+[] > class__A
+  ...
+  [] > new
+    ...
+    [this] > init
+      seq > @
+        variableDeclaration_1
+      [] > variableDeclaration_1
+        this.member.write > @
+          initializerSimple_1
+      [] > initializerSimple_1
+        literal_1 > @
+      [] > literal_1
+        prim__int.constructor_2 > @
+          prim__int.new
+          0
+    prim__int.constructor_1 > member
+      prim__int.new
+  ...
+```
+
+In this case when instance of class `A` would be created, `init` object would be called for initializing variables.
+
+Example of local method variable with initializer:
+```java
+void m() {
+    int a = 0;
+}
+```
+-->
+```
+[this] > m
+  seq > @
+    variableDeclaration_1
+  prim__int.constructor_1 > a
+    prim__int.new
+  [] > variableDeclaration_1
+    a.write > @
+      initializerSimple_1
+  [] > initializerSimple_1
+    literal_1 > @
+  [] > literal_1
+    prim__int.constructor_2 > @
+      prim__int.new
+      0
+```
+
+Here the same logic is applicable as in previous example. Variable itself is being stored out of `seq` object, but it dataizes its initialization. 
+
+Example with nested class is located in [8.5](#8.5 Member Class and Interface Declarations).
+
+#### 14.5 Statements
+
+All statements of block are being stored inside `seq` object after translation. Each of them is represented by unique name which during dataization simulates behaviour of initial statement. 
+
+Example:
+```java
+{
+    int a = 1;
+    method();
+}
+```
+-->
+```
+[] > block_1
+  seq > @
+    variableDeclaration_1       # int a = 1;
+    statementExpression_1       # method();
+  prim__int.constructor_1 > a   # int a
+    prim__int.new
+  [] > variableDeclaration_1    # assignment
+    a.write > @
+      initializerSimple_1
+  [] > initializerSimple_1
+    literal_1 > @
+  [] > literal_1                # literal: 1
+    prim__int.constructor_2 > @
+      prim__int.new
+      1
+  [] > statementExpression_1    # method()
+    this.method > @             # call
+      this
+```
+
+#### 14.6 The Empty Statement
+
+Translator ignores it.
+
+#### 14.9 The if Statement
+
+Example:
+
+```java
+if (cond) 
+    then_block;
+else
+    else_block;
+```
+-->
+```
+[] > ifThenElse_1
+  translated_cond.if > @
+    block_1
+    block_2
+...                         # translation of cond
+[] > block_1
+  ...                       # then_block translation
+[] > block_2
+  ...                       # else_block translation
+```
+
+If no else part is provided then translator generate empty block (`empty`):
+```
+[] > empty_1
+  TRUE > @
+```
+
+#### 14.10 The assert Statement
+
+Example:
+```java
+assert cond : expr;
+```
+-->
+```
+[] > assert_1
+  translated_cond.if > @
+    TRUE
+    []
+      translated_expr > msg
+...                         # translation of cond
+...                         # translation of expr
+```
+
+#### 14.12 The while Statement
+
+Example:
+```java
+while (cond)
+    block;
+```
+-->
+```
+[] > while_1
+  translated_cond.while > @
+    [while_i]
+      block_1 > @
+...                         # translation of cond
+[] > block_1
+  ...                       # block translation
+```
+
+#### 14.13 The do Statement
+
+Example:
+```java
+do
+    block;
+while (cond);
+```
+-->
+```
+[] > do_1
+  translated_cond.do > @
+    [do_i]
+      block_1 > @
+...                         # translation of cond
+[] > block_1
+  ...                       # block translation
+```
+
+Note: currently there is no runtime support of `do` object.
 
 ### 15 Expressions
 
@@ -790,6 +1049,10 @@ For referencing variables `simpleReference_1` is used. It can be simplified, but
 
 #### 15.10.1 Array Creation Expressions
 
+Currently, only creation with array initializers is supported. Example of array initializers: `{1, 2, 3}`.
+
+For storing array translator uses `cage` object. For simulation of array initializers translator uses `array` aka `*` object from EO.
+
 `int[] array = {1}` ->
 ```
 [] > variableDeclaration_1
@@ -819,6 +1082,8 @@ For referencing variables `simpleReference_1` is used. It can be simplified, but
   idx > @
 ```
 
+`simpleReference_2.v` is getting int value from wrapper.
+
 #### 15.11 Field Access Expressions
 
 `a.b` ->
@@ -828,6 +1093,8 @@ For referencing variables `simpleReference_1` is used. It can be simplified, but
 [] > simpleReference_1
   a > @
 ```
+
+It can be simplified, but we keep such translation for generalization.
 
 #### 15.11.2 Accessing Superclass Members using `super`
 
@@ -844,9 +1111,9 @@ For referencing variables `simpleReference_1` is used. It can be simplified, but
 `a.b(arg)` ->
 ```
 [] > statementExpression_1
-  a.b > @
-    a
-    simpleReference_2
+  a.b > @                   # call of b
+    a                       # a should be passed
+    simpleReference_2       # args
 [] > simpleReference_2
   arg > @
 ```
@@ -856,7 +1123,7 @@ For referencing variables `simpleReference_1` is used. It can be simplified, but
 `expr++` ->
 ```
 [] > statementExpression_1
-  simpleReference_1.inc_post > @
+  simpleReference_1.inc_post > @    # increment itself
 [] > simpleReference_1
   expr > @
 ```
@@ -866,7 +1133,7 @@ For referencing variables `simpleReference_1` is used. It can be simplified, but
 `expr--` ->
 ```
 [] > statementExpression_1
-  simpleReference_1.dec_post > @
+  simpleReference_1.dec_post > @    # decrement itself
 [] > simpleReference_1
   expr > @
 ```
@@ -876,7 +1143,7 @@ For referencing variables `simpleReference_1` is used. It can be simplified, but
 `++expr` ->
 ```
 [] > statementExpression_1
-  simpleReference_1.inc_pre > @
+  simpleReference_1.inc_pre > @    # increment itself
 [] > simpleReference_1
   expr > @
 ```
@@ -886,7 +1153,7 @@ For referencing variables `simpleReference_1` is used. It can be simplified, but
 `--expr` ->
 ```
 [] > statementExpression_1
-  simpleReference_1.dec_pre > @
+  simpleReference_1.dec_pre > @    # decrement itself
 [] > simpleReference_1
   expr > @
 ```
@@ -901,24 +1168,24 @@ For referencing variables `simpleReference_1` is used. It can be simplified, but
   expr > @
 ```
 
+It can be simplified, but we keep such translation for generalization.
+
 #### 15.15.4 Unary Minus Operator `-`
 
 `-expr` ->
 ```
 [] > statementExpression_1
-  simpleReference_1.neg > @
+  simpleReference_1.neg > @    # negation itself
 [] > simpleReference_1
   expr > @
 ```
 
 #### 15.16 Cast Expressions
 
-Only cast to integer is supported
-
 `(int) 1.0` ->
 ```
 [] > statementExpression_1
-  prim__int.from > @
+  prim__int.from > @               # cast itself
     literal_1
 [] > literal_1
   prim__float.constructor_2 > @
@@ -940,3 +1207,6 @@ Only cast to integer is supported
 ```
 
 `t_opernad` is translated `operand`
+
+There are only runtime support only for following operands: 
+`+`, `-`, `*`, `%`, `/`, `&&`, `||`, `>`, `<`, `>=`, `<=`, `==`, `!=`, `<<`, `>>` and `>>>`
