@@ -63,21 +63,21 @@
           prim__double.new
           ^
 
-    [arg__right] > plus
+    [arg__right] > add
       seq > @
         prim__double.constructor_2
           prim__double.new
           ^.v.plus
             arg__right.v
 
-    [arg__right] > minus
+    [arg__right] > sub
       seq > @
         prim__double.constructor_2
           prim__double.new
           ^.v.minus
             arg__right.v
 
-    [arg__right] > times
+    [arg__right] > mul
       seq > @
         prim__double.constructor_2
           prim__double.new
