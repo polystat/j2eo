@@ -660,6 +660,31 @@ public A() {
 `this` is created object itself.
 
 If no constructor is provided then translator generate default constructor.
+
+#### Class translation structure:
+
+```
+[] > class__<Name of class>
+  class__<Parent name> > super              # Inheritance simulation
+  super > @
+  [] > new                                  # new is representation 
+                                            # of object itself
+    class__<Parent name>.new > super
+    super > @                               # Inheritance simulation
+    "class__<Name of class>" > className    # Name of class is being saved
+
+    1 > address                             # Identify that it 
+                                            # isn't a null object
+
+    [this] > init                           # Initializes class members
+      ...                                   # default values
+
+    ...                                     # Class methods and variables
+  ...                                       # Static methods and variables
+  [this] > constructor                      # Constructor
+    ...
+```
+
 ### 10 Arrays
 
 ___
