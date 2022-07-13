@@ -26,6 +26,9 @@ jobs:
         with:
           java-version: 16
 
+      - name: Make gradlew executable
+        run: chmod +x ./gradlew
+
       - name: Gradle Build
         run: ./gradlew build --info
 
@@ -61,6 +64,9 @@ jobs:
           make
           sudo make install
           bison -V
+
+      - name: Make gradlew executable
+        run: chmod +x ./gradlew
 
       - name: Gradle Build
         run: ./gradlew build --info
