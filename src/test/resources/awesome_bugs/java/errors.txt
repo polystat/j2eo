@@ -1,4 +1,0 @@
-division-by-zero
-mutual-recursion
-unjustified-assumption
-direct-state-access

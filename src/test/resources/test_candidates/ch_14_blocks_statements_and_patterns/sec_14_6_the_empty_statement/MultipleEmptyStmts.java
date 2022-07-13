@@ -1,6 +1,0 @@
-public class MultipleEmptyStmts {
-	public static void main(String[] args) {
-		;;;;
-		System.out.println("passed");
-	}
-}
