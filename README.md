@@ -62,6 +62,25 @@ $ docker run -v $(pwd):/eo yegor256/j2eo hello.java --target output
 
 This command will translate `hello.java` in the current directory, saving the output to `output/` subdirectory.
 
+### Unit tests
+
+Built-in unit tests may be executed using:
+
+```shell
+./gradlew test
+```
+
+### Bundled test suite
+
+J2EO comes with 1000+ bundled tests. These tests are used with parallel execution:
+- original Java source code of the text is compiled with Java compiler and executed. Stdout output is saved.
+- Java source code is translated to EO using J2EO project, then compiled with EO compiler and executed. Stdout output is stored.
+- Stdout outputs are compared. If they match — test is passed. If not — test is failed.
+
+Test suite follows the Java Language Specification structure, covering applicable chapters and sections of the Java specifications.
+
+Bundled tests may be executed using `./test_candidates.sh` script.
+
 ### Running translator on Hadoop
 
 Hadoop is a large Java project (contains ~1.8M lines of code as of time of writing this). We included it as a benchmark of the translator.
