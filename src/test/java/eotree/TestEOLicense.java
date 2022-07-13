@@ -5,6 +5,8 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import java.util.Arrays;
 import java.util.stream.Collectors;
 import org.junit.jupiter.api.Test;
+import org.polystat.j2eo.eotree.EOComment;
+import org.polystat.j2eo.eotree.EOLicense;
 
 /**
  * EO license tests.

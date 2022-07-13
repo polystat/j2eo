@@ -15,13 +15,13 @@ import org.junit.jupiter.api.TestMethodOrder
 import org.junit.jupiter.api.assertTimeoutPreemptively
 import org.junit.jupiter.api.parallel.Execution
 import org.junit.jupiter.api.parallel.ExecutionMode
-import parser.JavaLexer
-import parser.JavaParser
-import parser.Visitor
-import translator.Context
-import translator.Translator
+import org.polystat.j2eo.parser.JavaLexer
+import org.polystat.j2eo.parser.JavaParser
+import org.polystat.j2eo.parser.Visitor
+import org.polystat.j2eo.translator.Context
+import org.polystat.j2eo.translator.Translator
+import org.polystat.j2eo.util.logger
 import tree.Compilation.CompilationUnit
-import util.logger
 import java.io.BufferedReader
 import java.io.File
 import java.io.InputStreamReader
@@ -69,7 +69,7 @@ class TestJ2EOonOpenJDK {
         // Copy all necessary files
         val pomClonePath = File(workingDir.toString() + sep + "pom.xml").toPath()
         Files.copy(pomFilePath, pomClonePath)
-        val stdClonePath = File(workingDir.toString() + sep + "stdlib").toPath()
+        val stdClonePath = File(workingDir.toString() + sep + "eo/org/polystat/stdlib").toPath()
         stdlibFolderRoot.toFile().copyRecursively(stdClonePath.toFile())
 
         // Execute generated EO code
@@ -117,7 +117,7 @@ class TestJ2EOonOpenJDK {
         private val sep = File.separatorChar.toString()
         private val pomFilePath = Paths.get("src", "test", "resources", "eo_execution_pom", "pom.xml")
             .toAbsolutePath()
-        private val stdlibFolderRoot = Paths.get("src", "main", "resources", "stdlib").toAbsolutePath()
+        private val stdlibFolderRoot = Paths.get("src", "main", "eo", "org", "polystat", "stdlib").toAbsolutePath()
         private val workingDir = Paths.get("src", "test", "resources", "open_jdk").toAbsolutePath()
         private val openjdkZipSavePath = Paths.get("jdk.tar.gz").toAbsolutePath()
         private val openJdkTestPath = Paths.get("jdk-jdk-16-36", "test").toAbsolutePath()

@@ -3,6 +3,7 @@ package eotree.data;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import org.junit.jupiter.api.Test;
+import org.polystat.j2eo.eotree.data.EOByte;
 
 /**
  * EO byte tests.
