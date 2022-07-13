@@ -1,0 +1,138 @@
+# 2022-07-13T17:59:02.138174500
+# j2eo team
++package ch_15_expressions.sec_15_16_cast_expressions
++alias stdlib.lang.class__System
++alias stdlib.lang.class__Object
++alias stdlib.lang.class__String
++alias stdlib.primitives.prim__int
+
+[] > class__CastToParentViaMethod
+  class__Object > super
+  super > @
+  [] > new
+    class__Object.new > super
+    super > @
+    "class__CastToParentViaMethod" > className
+    [this] > init
+      seq > @
+        TRUE
+  # getT :: null -> T
+  [] > getT
+    seq > @
+      return_1
+    [] > return_1
+      instanceCreation_1 > @
+    [] > instanceCreation_1
+      class__T.constructor > @
+        class__T.new
+  # main :: String[] -> void
+  [args] > main
+    seq > @
+      statementExpression_1
+      statementExpression_2
+    [] > statementExpression_1
+      class__System.out.println > @
+        class__System.out
+        fieldAccess_2
+    [] > fieldAccess_2
+      parenthesized_1.x > @
+    [] > parenthesized_1
+      cast_1 > @
+    [] > cast_1
+      class__S.from > @
+        methodInvocation_1
+    [] > methodInvocation_1
+      this.getT > @
+        this
+    [] > statementExpression_2
+      class__System.out.println > @
+        class__System.out
+        literal_1
+    [] > literal_1
+      class__String.constructor_2 > @
+        class__String.new
+        "passed"
+  # null :: null -> void
+  [this] > constructor
+    seq > @
+      initialization
+      statementExpression_3
+      this
+    [] > initialization
+      this.init > @
+        this
+    [] > statementExpression_3
+      this.super.constructor > @
+        this.super
+
+[] > class__S
+  class__Object > super
+  super > @
+  [] > new
+    class__Object.new > super
+    super > @
+    "class__S" > className
+    [this] > init
+      seq > @
+        variableDeclaration_1
+      [] > variableDeclaration_1
+        this.x.write > @
+          initializerSimple_1
+      [] > initializerSimple_1
+        literal_2 > @
+      [] > literal_2
+        prim__int.constructor_2 > @
+          prim__int.new
+          0
+    prim__int.constructor_1 > x
+      prim__int.new
+  # null :: null -> void
+  [this] > constructor
+    seq > @
+      initialization
+      statementExpression_4
+      this
+    [] > initialization
+      this.init > @
+        this
+    [] > statementExpression_4
+      this.super.constructor > @
+        this.super
+
+[] > class__T
+  class__S > super
+  super > @
+  [] > new
+    class__S.new > super
+    super > @
+    "class__T" > className
+    [this] > init
+      seq > @
+        variableDeclaration_2
+      [] > variableDeclaration_2
+        this.x.write > @
+          initializerSimple_3
+      [] > initializerSimple_3
+        literal_3 > @
+      [] > literal_3
+        prim__int.constructor_2 > @
+          prim__int.new
+          1
+    prim__int.constructor_1 > x
+      prim__int.new
+  # null :: null -> void
+  [this] > constructor
+    seq > @
+      initialization
+      statementExpression_5
+      this
+    [] > initialization
+      this.init > @
+        this
+    [] > statementExpression_5
+      this.super.constructor > @
+        this.super
+
+[args...] > main
+  class__CastToParentViaMethod.main > @
+    *

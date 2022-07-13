@@ -1,0 +1,253 @@
+# 2022-07-13T17:59:03.502533
+# j2eo team
++package ch_8_classes.sec_8_4_method_declarations.sec_8_4_8_inheritance_overrideing_and_hiding.sec_8_4_8_1_overriding_by_instance_methods
++alias stdlib.lang.class__System
++alias stdlib.lang.class__Object
++alias stdlib.primitives.prim__int
++alias stdlib.lang.class__String
+
+[] > class__SimpleOverriding
+  class__Object > super
+  super > @
+  [] > new
+    class__Object.new > super
+    super > @
+    "class__SimpleOverriding" > className
+    [this] > init
+      seq > @
+        TRUE
+  # main :: String[] -> void
+  [args] > main
+    seq > @
+      variableDeclaration_1
+      statementExpression_1
+      statementExpression_2
+      statementExpression_3
+      statementExpression_4
+      statementExpression_5
+    cage > p
+    [] > variableDeclaration_1
+      p.write > @
+        initializerSimple_1
+    [] > initializerSimple_1
+      instanceCreation_1 > @
+    [] > instanceCreation_1
+      class__SlowPoint.constructor > @
+        class__SlowPoint.new
+    [] > statementExpression_1
+      fieldAccess_1.write > @
+        literal_1
+    [] > fieldAccess_1
+      simpleReference_1.xLimit > @
+    [] > simpleReference_1
+      p > @
+    [] > literal_1
+      prim__int.constructor_2 > @
+        prim__int.new
+        10
+    [] > statementExpression_2
+      fieldAccess_2.write > @
+        literal_2
+    [] > fieldAccess_2
+      simpleReference_2.yLimit > @
+    [] > simpleReference_2
+      p > @
+    [] > literal_2
+      prim__int.constructor_2 > @
+        prim__int.new
+        15
+    [] > statementExpression_3
+      p.move > @
+        p
+        literal_3
+        unaryPrefix_1
+    [] > literal_3
+      prim__int.constructor_2 > @
+        prim__int.new
+        100
+    [] > unaryPrefix_1
+      literal_4.neg > @
+    [] > literal_4
+      prim__int.constructor_2 > @
+        prim__int.new
+        100
+    [] > statementExpression_4
+      class__System.out.println > @
+        class__System.out
+        binary_1
+    [] > binary_1
+      binary_2.add > @
+        fieldAccess_4
+    [] > binary_2
+      binary_3.add > @
+        literal_5
+    [] > binary_3
+      literal_6.add > @
+        fieldAccess_5
+    [] > literal_6
+      class__String.constructor_2 > @
+        class__String.new
+        "x: "
+    [] > fieldAccess_5
+      simpleReference_4.x > @
+    [] > simpleReference_4
+      p > @
+    [] > literal_5
+      class__String.constructor_2 > @
+        class__String.new
+        ", y: "
+    [] > fieldAccess_4
+      simpleReference_5.y > @
+    [] > simpleReference_5
+      p > @
+    [] > statementExpression_5
+      class__System.out.println > @
+        class__System.out
+        literal_7
+    [] > literal_7
+      class__String.constructor_2 > @
+        class__String.new
+        "passed"
+  # null :: null -> void
+  [this] > constructor
+    seq > @
+      initialization
+      statementExpression_6
+      this
+    [] > initialization
+      this.init > @
+        this
+    [] > statementExpression_6
+      this.super.constructor > @
+        this.super
+
+[] > class__Point
+  class__Object > super
+  super > @
+  [] > new
+    class__Object.new > super
+    super > @
+    "class__Point" > className
+    [this] > init
+      seq > @
+        variableDeclaration_2
+        variableDeclaration_3
+      [] > variableDeclaration_2
+        this.x.write > @
+          initializerSimple_2
+      [] > initializerSimple_2
+        literal_8 > @
+      [] > literal_8
+        prim__int.constructor_2 > @
+          prim__int.new
+          0
+      [] > variableDeclaration_3
+        this.y.write > @
+          initializerSimple_3
+      [] > initializerSimple_3
+        literal_9 > @
+      [] > literal_9
+        prim__int.constructor_2 > @
+          prim__int.new
+          0
+    prim__int.constructor_1 > x
+      prim__int.new
+    prim__int.constructor_1 > y
+      prim__int.new
+    # move :: int -> int -> void
+    [this dx dy] > move
+      seq > @
+        statementExpression_7
+        statementExpression_8
+      [] > statementExpression_7
+        simpleReference_6.add_equal > @
+          simpleReference_7
+      [] > simpleReference_6
+        x > @
+      [] > simpleReference_7
+        dx > @
+      [] > statementExpression_8
+        simpleReference_8.add_equal > @
+          simpleReference_9
+      [] > simpleReference_8
+        y > @
+      [] > simpleReference_9
+        dy > @
+  # null :: null -> void
+  [this] > constructor
+    seq > @
+      initialization
+      statementExpression_9
+      this
+    [] > initialization
+      this.init > @
+        this
+    [] > statementExpression_9
+      this.super.constructor > @
+        this.super
+
+[] > class__SlowPoint
+  class__Point > super
+  super > @
+  [] > new
+    class__Point.new > super
+    super > @
+    "class__SlowPoint" > className
+    [this] > init
+      seq > @
+        TRUE
+    prim__int.constructor_1 > xLimit
+      prim__int.new
+    prim__int.constructor_1 > yLimit
+      prim__int.new
+    # move :: int -> int -> void
+    [this dx dy] > move
+      seq > @
+        statementExpression_10
+      [] > statementExpression_10
+        super.move > @
+          super
+          methodInvocation_1
+          methodInvocation_2
+      [] > methodInvocation_1
+        this.limit > @
+          this
+          simpleReference_11
+          simpleReference_12
+      [] > simpleReference_11
+        dx > @
+      [] > simpleReference_12
+        xLimit > @
+      [] > methodInvocation_2
+        this.limit > @
+          this
+          simpleReference_13
+          simpleReference_14
+      [] > simpleReference_13
+        dy > @
+      [] > simpleReference_14
+        yLimit > @
+  # limit :: int -> int -> int
+  [d limit] > limit
+    seq > @
+      return_1
+    [] > return_1
+      simpleReference_15 > @
+    [] > simpleReference_15
+      expression_placeholder > @
+  # null :: null -> void
+  [this] > constructor
+    seq > @
+      initialization
+      statementExpression_11
+      this
+    [] > initialization
+      this.init > @
+        this
+    [] > statementExpression_11
+      this.super.constructor > @
+        this.super
+
+[args...] > main
+  class__SimpleOverriding.main > @
+    *

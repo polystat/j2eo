@@ -1,0 +1,80 @@
+# 2022-07-13T17:59:03.023156900
+# j2eo team
++package ch_4_types_values_variables.sec_4_2_primitive_types_and_values.sec_4_2_2_integer_operations
++alias stdlib.lang.class__System
++alias stdlib.lang.class__Object
++alias stdlib.lang.class__String
++alias stdlib.primitives.prim__int
+
+[] > class__MethodGreaterOperator
+  class__Object > super
+  super > @
+  [] > new
+    class__Object.new > super
+    super > @
+    "class__MethodGreaterOperator" > className
+    [this] > init
+      seq > @
+        TRUE
+  # main :: String[] -> void
+  [args] > main
+    seq > @
+      statementExpression_1
+      statementExpression_2
+    [] > statementExpression_1
+      class__System.out.println > @
+        class__System.out
+        binary_1
+    [] > binary_1
+      methodInvocation_1.greater > @
+        methodInvocation_2
+    [] > methodInvocation_1
+      this.num1 > @
+        this
+    [] > methodInvocation_2
+      this.num2 > @
+        this
+    [] > statementExpression_2
+      class__System.out.println > @
+        class__System.out
+        literal_1
+    [] > literal_1
+      class__String.constructor_2 > @
+        class__String.new
+        "passed"
+  # num1 :: null -> int
+  [] > num1
+    seq > @
+      return_1
+    [] > return_1
+      literal_2 > @
+    [] > literal_2
+      prim__int.constructor_2 > @
+        prim__int.new
+        1
+  # num2 :: null -> int
+  [] > num2
+    seq > @
+      return_2
+    [] > return_2
+      literal_3 > @
+    [] > literal_3
+      prim__int.constructor_2 > @
+        prim__int.new
+        2
+  # null :: null -> void
+  [this] > constructor
+    seq > @
+      initialization
+      statementExpression_3
+      this
+    [] > initialization
+      this.init > @
+        this
+    [] > statementExpression_3
+      this.super.constructor > @
+        this.super
+
+[args...] > main
+  class__MethodGreaterOperator.main > @
+    *

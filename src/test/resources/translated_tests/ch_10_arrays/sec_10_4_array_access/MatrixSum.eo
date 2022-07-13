@@ -1,0 +1,177 @@
+# 2022-07-13T17:59:01.523246400
+# j2eo team
++package ch_10_arrays.sec_10_4_array_access
++alias stdlib.lang.class__System
++alias stdlib.lang.class__Object
++alias stdlib.primitives.prim__int
++alias stdlib.lang.class__String
+
+[] > class__MatrixSum
+  class__Object > super
+  super > @
+  [] > new
+    class__Object.new > super
+    super > @
+    "class__MatrixSum" > className
+    [this] > init
+      seq > @
+        TRUE
+  # main :: String[] -> void
+  [args] > main
+    seq > @
+      variableDeclaration_1
+      variableDeclaration_2
+      statementExpression_1
+      statementExpression_2
+    prim__int.constructor_1 > a
+      prim__int.new
+    [] > variableDeclaration_1
+      a.write > @
+        initializerArray_1
+    [] > initializerArray_1
+      * > @
+        initializerArray_2
+        initializerArray_3
+        initializerArray_4
+    [] > initializerArray_2
+      * > @
+        initializerSimple_1
+        initializerSimple_2
+        initializerSimple_3
+    [] > initializerSimple_1
+      literal_1 > @
+    [] > literal_1
+      prim__int.constructor_2 > @
+        prim__int.new
+        1
+    [] > initializerSimple_2
+      literal_2 > @
+    [] > literal_2
+      prim__int.constructor_2 > @
+        prim__int.new
+        2
+    [] > initializerSimple_3
+      literal_3 > @
+    [] > literal_3
+      prim__int.constructor_2 > @
+        prim__int.new
+        3
+    [] > initializerArray_3
+      * > @
+        initializerSimple_4
+        initializerSimple_5
+        initializerSimple_6
+    [] > initializerSimple_4
+      literal_4 > @
+    [] > literal_4
+      prim__int.constructor_2 > @
+        prim__int.new
+        4
+    [] > initializerSimple_5
+      literal_5 > @
+    [] > literal_5
+      prim__int.constructor_2 > @
+        prim__int.new
+        5
+    [] > initializerSimple_6
+      literal_6 > @
+    [] > literal_6
+      prim__int.constructor_2 > @
+        prim__int.new
+        6
+    [] > initializerArray_4
+      * > @
+        initializerSimple_7
+        initializerSimple_8
+        initializerSimple_9
+    [] > initializerSimple_7
+      literal_7 > @
+    [] > literal_7
+      prim__int.constructor_2 > @
+        prim__int.new
+        7
+    [] > initializerSimple_8
+      literal_8 > @
+    [] > literal_8
+      prim__int.constructor_2 > @
+        prim__int.new
+        8
+    [] > initializerSimple_9
+      literal_9 > @
+    [] > literal_9
+      prim__int.constructor_2 > @
+        prim__int.new
+        9
+    prim__int.constructor_1 > sum
+      prim__int.new
+    [] > variableDeclaration_2
+      sum.write > @
+        initializerSimple_10
+    [] > initializerSimple_10
+      methodInvocation_1 > @
+    [] > methodInvocation_1
+      this.matrixSum > @
+        this
+        simpleReference_1
+    [] > simpleReference_1
+      a > @
+    [] > statementExpression_1
+      class__System.out.println > @
+        class__System.out
+        binary_1
+    [] > binary_1
+      literal_10.add > @
+        simpleReference_2
+    [] > literal_10
+      class__String.constructor_2 > @
+        class__String.new
+        "The sum of matrix elements = "
+    [] > simpleReference_2
+      sum > @
+    [] > statementExpression_2
+      class__System.out.println > @
+        class__System.out
+        literal_11
+    [] > literal_11
+      class__String.constructor_2 > @
+        class__String.new
+        "passed"
+  # matrixSum :: int[][] -> int
+  [a] > matrixSum
+    seq > @
+      variableDeclaration_3
+      statementExpression_3
+      return_1
+    prim__int.constructor_1 > sum
+      prim__int.new
+    [] > variableDeclaration_3
+      sum.write > @
+        initializerSimple_11
+    [] > initializerSimple_11
+      literal_12 > @
+    [] > literal_12
+      prim__int.constructor_2 > @
+        prim__int.new
+        0
+    [] > statementExpression_3
+      for_loop_placeholder > @
+    [] > return_1
+      simpleReference_3 > @
+    [] > simpleReference_3
+      sum > @
+  # null :: null -> void
+  [this] > constructor
+    seq > @
+      initialization
+      statementExpression_4
+      this
+    [] > initialization
+      this.init > @
+        this
+    [] > statementExpression_4
+      this.super.constructor > @
+        this.super
+
+[args...] > main
+  class__MatrixSum.main > @
+    *

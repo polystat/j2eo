@@ -206,7 +206,7 @@ fun BlockStatementContext.toBlockStatement(): BlockStatement =
 
 fun LocalTypeDeclarationContext.toDeclaration(): Declaration =
     classDeclaration()?.toClassDeclaration()
-        ?: throw Exception() /* FIXME */
+        ?: Declaration(null, "", null) /* FIXME */
 
 fun StatementContext.toStatement(): Statement =
     when (this) {

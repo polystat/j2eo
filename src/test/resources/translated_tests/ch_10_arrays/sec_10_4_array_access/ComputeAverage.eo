@@ -1,0 +1,155 @@
+# 2022-07-13T17:59:01.237347900
+# j2eo team
++package ch_10_arrays.sec_10_4_array_access
++alias stdlib.lang.class__System
++alias stdlib.primitives.prim__double
++alias stdlib.lang.class__Object
++alias stdlib.primitives.prim__int
++alias stdlib.lang.class__String
+
+[] > class__ComputeAverage
+  class__Object > super
+  super > @
+  [] > new
+    class__Object.new > super
+    super > @
+    "class__ComputeAverage" > className
+    [this] > init
+      seq > @
+        TRUE
+  # main :: String[] -> void
+  [args] > main
+    seq > @
+      variableDeclaration_1
+      variableDeclaration_2
+      statementExpression_1
+      variableDeclaration_3
+      statementExpression_2
+      statementExpression_3
+      statementExpression_4
+      statementExpression_5
+    prim__int.constructor_1 > n
+      prim__int.new
+    [] > variableDeclaration_1
+      n.write > @
+        initializerSimple_1
+    [] > initializerSimple_1
+      literal_1 > @
+    [] > literal_1
+      prim__int.constructor_2 > @
+        prim__int.new
+        10
+    prim__int.constructor_1 > numbers
+      prim__int.new
+    [] > variableDeclaration_2
+      numbers.write > @
+        initializerSimple_2
+    [] > initializerSimple_2
+      arrayCreation_1 > @
+    [] > arrayCreation_1
+      FALSE > @
+    [] > statementExpression_1
+      for_loop_placeholder > @
+    prim__double.constructor_1 > avg
+      prim__double.new
+    [] > variableDeclaration_3
+      avg.write > @
+        initializerSimple_3
+    [] > initializerSimple_3
+      methodInvocation_1 > @
+    [] > methodInvocation_1
+      this.average > @
+        this
+        simpleReference_1
+    [] > simpleReference_1
+      numbers > @
+    [] > statementExpression_2
+      class__System.out.println > @
+        class__System.out
+        binary_1
+    [] > binary_1
+      literal_2.add > @
+        simpleReference_2
+    [] > literal_2
+      class__String.constructor_2 > @
+        class__String.new
+        "Average = "
+    [] > simpleReference_2
+      avg > @
+    [] > statementExpression_3
+      class__System.out.println > @
+        class__System.out
+        literal_3
+    [] > literal_3
+      class__String.constructor_2 > @
+        class__String.new
+        "Numbers greater then average = "
+    [] > statementExpression_4
+      this.display > @
+        this
+        simpleReference_3
+        simpleReference_4
+    [] > simpleReference_3
+      numbers > @
+    [] > simpleReference_4
+      avg > @
+    [] > statementExpression_5
+      class__System.out.println > @
+        class__System.out
+        literal_4
+    [] > literal_4
+      class__String.constructor_2 > @
+        class__String.new
+        "passed"
+  # display :: int[] -> double -> void
+  [numbers avg] > display
+    seq > @
+      statementExpression_6
+    [] > statementExpression_6
+      for_loop_placeholder > @
+  # average :: int[] -> double
+  [numbers] > average
+    seq > @
+      variableDeclaration_4
+      statementExpression_7
+      return_1
+    prim__int.constructor_1 > sum
+      prim__int.new
+    [] > variableDeclaration_4
+      sum.write > @
+        initializerSimple_4
+    [] > initializerSimple_4
+      literal_5 > @
+    [] > literal_5
+      prim__int.constructor_2 > @
+        prim__int.new
+        0
+    [] > statementExpression_7
+      for_loop_placeholder > @
+    [] > return_1
+      binary_2 > @
+    [] > binary_2
+      simpleReference_5.div > @
+        fieldAccess_4
+    [] > simpleReference_5
+      sum > @
+    [] > fieldAccess_4
+      simpleReference_6.length > @
+    [] > simpleReference_6
+      numbers > @
+  # null :: null -> void
+  [this] > constructor
+    seq > @
+      initialization
+      statementExpression_8
+      this
+    [] > initialization
+      this.init > @
+        this
+    [] > statementExpression_8
+      this.super.constructor > @
+        this.super
+
+[args...] > main
+  class__ComputeAverage.main > @
+    *

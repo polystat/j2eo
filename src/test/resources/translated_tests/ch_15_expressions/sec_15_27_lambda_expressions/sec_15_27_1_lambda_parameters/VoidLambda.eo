@@ -1,0 +1,47 @@
+# 2022-07-13T17:59:02.225731200
+# j2eo team
++package ch_15_expressions.sec_15_27_lambda_expressions.sec_15_27_1_lambda_parameters
++alias stdlib.lang.class__Object
+
+[] > class__VoidLambda
+  class__Object > super
+  super > @
+  [] > new
+    class__Object.new > super
+    super > @
+    "class__VoidLambda" > className
+    [this] > init
+      seq > @
+        TRUE
+  # main :: String[] -> void
+  [args] > main
+    seq > @
+      variableDeclaration_1
+      statementExpression_1
+    cage > f
+    [] > variableDeclaration_1
+      f.write > @
+        initializerSimple_1
+    [] > initializerSimple_1
+      simpleReference_1 > @
+    [] > simpleReference_1
+      expression_placeholder > @
+    [] > statementExpression_1
+      f.process > @
+        f
+  # null :: null -> void
+  [this] > constructor
+    seq > @
+      initialization
+      statementExpression_2
+      this
+    [] > initialization
+      this.init > @
+        this
+    [] > statementExpression_2
+      this.super.constructor > @
+        this.super
+
+[args...] > main
+  class__VoidLambda.main > @
+    *

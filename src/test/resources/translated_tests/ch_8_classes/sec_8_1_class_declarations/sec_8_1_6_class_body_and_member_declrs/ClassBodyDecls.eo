@@ -1,0 +1,168 @@
+# 2022-07-13T17:59:03.374937200
+# j2eo team
++package ch_8_classes.sec_8_1_class_declarations.sec_8_1_6_class_body_and_member_declrs
++alias stdlib.lang.class__System
++alias stdlib.lang.class__Object
++alias stdlib.primitives.prim__int
++alias stdlib.lang.class__String
+
+[] > class__ClassBodyDecls
+  class__Object > super
+  super > @
+  [] > new
+    class__Object.new > super
+    super > @
+    "class__ClassBodyDecls" > className
+    [this] > init
+      seq > @
+        variableDeclaration_1
+      [] > variableDeclaration_1
+        this.a.write > @
+          initializerSimple_1
+      [] > initializerSimple_1
+        literal_1 > @
+      [] > literal_1
+        prim__int.constructor_2 > @
+          prim__int.new
+          10
+    prim__int.constructor_1 > a
+      prim__int.new
+    # m :: int -> int
+    [this p] > m
+      seq > @
+        return_1
+      [] > return_1
+        binary_1 > @
+      [] > binary_1
+        fieldAccess_1.add > @
+          simpleReference_1
+      [] > fieldAccess_1
+        this_1.a > @
+      [] > this_1
+        this > @
+      [] > simpleReference_1
+        p > @
+  # null :: int -> void
+  [this k] > constructor
+    seq > @
+      initialization
+      statementExpression_1
+      statementExpression_2
+      this
+    [] > initialization
+      this.init > @
+        this
+    [] > statementExpression_1
+      this.this.super.constructor > @
+        this.this.super
+    [] > statementExpression_2
+      fieldAccess_2.write > @
+        simpleReference_2
+    [] > fieldAccess_2
+      this_3.a > @
+    [] > this_3
+      this > @
+    [] > simpleReference_2
+      k > @
+  [] > class__Local
+    class__Object > super
+    super > @
+    [] > new
+      class__Object.new > super
+      super > @
+      "class__Local" > className
+      [this] > init
+        seq > @
+          TRUE
+      # p :: null -> int
+      [this] > p
+        seq > @
+          return_2
+        [] > return_2
+          unaryPrefix_1 > @
+        [] > unaryPrefix_1
+          simpleReference_3.neg > @
+        [] > simpleReference_3
+          a > @
+    # null :: null -> void
+    [this] > constructor
+      seq > @
+        initialization
+        statementExpression_3
+        this
+      [] > initialization
+        this.init > @
+          this
+      [] > statementExpression_3
+        this.super.constructor > @
+          this.super
+  # main :: String[] -> void
+  [args] > main
+    seq > @
+      variableDeclaration_2
+      variableDeclaration_3
+      statementExpression_4
+      statementExpression_5
+      statementExpression_6
+      statementExpression_7
+    cage > o
+    [] > variableDeclaration_2
+      o.write > @
+        initializerSimple_3
+    [] > initializerSimple_3
+      instanceCreation_1 > @
+    [] > instanceCreation_1
+      class__ClassBodyDecls.constructor > @
+        class__ClassBodyDecls.new
+        literal_2
+    [] > literal_2
+      prim__int.constructor_2 > @
+        prim__int.new
+        1
+    cage > l
+    [] > variableDeclaration_3
+      l.write > @
+        initializerSimple_4
+    [] > initializerSimple_4
+      instanceCreationQualified_1 > @
+    [] > instanceCreationQualified_1
+      instance_creation_q_placeholder > @
+    [] > statementExpression_4
+      class__System.out.println > @
+        class__System.out
+        fieldAccess_4
+    [] > fieldAccess_4
+      simpleReference_4.a > @
+    [] > simpleReference_4
+      o > @
+    [] > statementExpression_5
+      class__System.out.println > @
+        class__System.out
+        methodInvocation_1
+    [] > methodInvocation_1
+      o.m > @
+        o
+        literal_3
+    [] > literal_3
+      prim__int.constructor_2 > @
+        prim__int.new
+        1
+    [] > statementExpression_6
+      class__System.out.println > @
+        class__System.out
+        methodInvocation_2
+    [] > methodInvocation_2
+      l.p > @
+        l
+    [] > statementExpression_7
+      class__System.out.println > @
+        class__System.out
+        literal_4
+    [] > literal_4
+      class__String.constructor_2 > @
+        class__String.new
+        "passed"
+
+[args...] > main
+  class__ClassBodyDecls.main > @
+    *

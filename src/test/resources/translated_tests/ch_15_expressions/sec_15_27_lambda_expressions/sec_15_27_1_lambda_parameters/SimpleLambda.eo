@@ -1,0 +1,89 @@
+# 2022-07-13T17:59:02.223730500
+# j2eo team
++package ch_15_expressions.sec_15_27_lambda_expressions.sec_15_27_1_lambda_parameters
++alias stdlib.lang.class__Object
++alias stdlib.lang.class__System
++alias stdlib.lang.class__String
+
+[] > class__SimpleLambda
+  class__Object > super
+  super > @
+  [] > new
+    class__Object.new > super
+    super > @
+    "class__SimpleLambda" > className
+    [this] > init
+      seq > @
+        TRUE
+  # main :: String[] -> void
+  [args] > main
+    seq > @
+      variableDeclaration_1
+      variableDeclaration_2
+      statementExpression_1
+      statementExpression_2
+      statementExpression_3
+    cage > lionRoar
+    [] > variableDeclaration_1
+      lionRoar.write > @
+        initializerSimple_1
+    [] > initializerSimple_1
+      simpleReference_1 > @
+    [] > simpleReference_1
+      expression_placeholder > @
+    cage > catMrrr
+    [] > variableDeclaration_2
+      catMrrr.write > @
+        initializerSimple_2
+    [] > initializerSimple_2
+      simpleReference_2 > @
+    [] > simpleReference_2
+      expression_placeholder > @
+    [] > statementExpression_1
+      class__System.out.println > @
+        class__System.out
+        methodInvocation_1
+    [] > methodInvocation_1
+      lionRoar.say > @
+        lionRoar
+        literal_1
+    [] > literal_1
+      class__String.constructor_2 > @
+        class__String.new
+        "Arrr"
+    [] > statementExpression_2
+      class__System.out.println > @
+        class__System.out
+        methodInvocation_2
+    [] > methodInvocation_2
+      catMrrr.say > @
+        catMrrr
+        literal_2
+    [] > literal_2
+      class__String.constructor_2 > @
+        class__String.new
+        "Mrrr"
+    [] > statementExpression_3
+      class__System.out.println > @
+        class__System.out
+        literal_3
+    [] > literal_3
+      class__String.constructor_2 > @
+        class__String.new
+        "passed"
+  # null :: null -> void
+  [this] > constructor
+    seq > @
+      initialization
+      statementExpression_4
+      this
+    [] > initialization
+      this.init > @
+        this
+    [] > statementExpression_4
+      this.super.constructor > @
+        this.super
+
+[args...] > main
+  class__SimpleLambda.main > @
+    *

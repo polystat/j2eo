@@ -1,0 +1,50 @@
+# 2022-07-13T17:59:01.780182800
+# j2eo team
++package ch_14_blocks_statements_and_patterns.sec_14_11_the_switch_statement.sec_14_11_1_switch_blocks
++alias stdlib.lang.class__Object
++alias stdlib.primitives.prim__int
+
+[] > class__MultipleVarsSwitch
+  class__Object > super
+  super > @
+  [] > new
+    class__Object.new > super
+    super > @
+    "class__MultipleVarsSwitch" > className
+    [this] > init
+      seq > @
+        TRUE
+  # main :: String[] -> void
+  [args] > main
+    seq > @
+      variableDeclaration_1
+      statementExpression_1
+    prim__int.constructor_1 > a
+      prim__int.new
+    [] > variableDeclaration_1
+      a.write > @
+        initializerSimple_1
+    [] > initializerSimple_1
+      literal_1 > @
+    [] > literal_1
+      prim__int.constructor_2 > @
+        prim__int.new
+        5
+    [] > statementExpression_1
+      switch_statement_placeholder > @
+  # null :: null -> void
+  [this] > constructor
+    seq > @
+      initialization
+      statementExpression_2
+      this
+    [] > initialization
+      this.init > @
+        this
+    [] > statementExpression_2
+      this.super.constructor > @
+        this.super
+
+[args...] > main
+  class__MultipleVarsSwitch.main > @
+    *

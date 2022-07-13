@@ -1,0 +1,229 @@
+# 2022-07-13T17:59:03.198935400
+# j2eo team
++package ch_5_conversions_and_contexts.sec_5_2_assignment_contexts
++alias stdlib.lang.class__System
++alias stdlib.lang.class__Object
++alias stdlib.primitives.prim__int
++alias stdlib.primitives.prim__byte
++alias stdlib.lang.class__String
+
+[] > class__AssignmentForReferenceTypes
+  class__Object > super
+  super > @
+  [] > new
+    class__Object.new > super
+    super > @
+    "class__AssignmentForReferenceTypes" > className
+    [this] > init
+      seq > @
+        TRUE
+  # main :: String[] -> void
+  [args] > main
+    seq > @
+      variableDeclaration_1
+      statementExpression_1
+      variableDeclaration_2
+      variableDeclaration_3
+      variableDeclaration_4
+      variableDeclaration_5
+      variableDeclaration_6
+      variableDeclaration_7
+      variableDeclaration_8
+      variableDeclaration_9
+      statementExpression_2
+    cage > p
+    [] > variableDeclaration_1
+      p.write > @
+        initializerSimple_1
+    [] > initializerSimple_1
+      instanceCreation_1 > @
+    [] > instanceCreation_1
+      class__Point.constructor > @
+        class__Point.new
+    [] > statementExpression_1
+      simpleReference_1.write > @
+        instanceCreation_2
+    [] > simpleReference_1
+      p > @
+    [] > instanceCreation_2
+      class__Point3D.constructor > @
+        class__Point3D.new
+    cage > o
+    [] > variableDeclaration_2
+      o.write > @
+        initializerSimple_2
+    [] > initializerSimple_2
+      simpleReference_2 > @
+    [] > simpleReference_2
+      p > @
+    cage > a
+    [] > variableDeclaration_3
+      a.write > @
+        initializerSimple_3
+    [] > initializerSimple_3
+      arrayCreation_1 > @
+    [] > arrayCreation_1
+      FALSE > @
+    cage > o2
+    [] > variableDeclaration_4
+      o2.write > @
+        initializerSimple_4
+    [] > initializerSimple_4
+      simpleReference_3 > @
+    [] > simpleReference_3
+      a > @
+    cage > cp
+    [] > variableDeclaration_5
+      cp.write > @
+        initializerSimple_5
+    [] > initializerSimple_5
+      instanceCreation_3 > @
+    [] > instanceCreation_3
+      class__ColoredPoint.constructor > @
+        class__ColoredPoint.new
+    cage > c
+    [] > variableDeclaration_6
+      c.write > @
+        initializerSimple_6
+    [] > initializerSimple_6
+      simpleReference_4 > @
+    [] > simpleReference_4
+      cp > @
+    cage > b
+    [] > variableDeclaration_7
+      b.write > @
+        initializerSimple_7
+    [] > initializerSimple_7
+      arrayCreation_2 > @
+    [] > arrayCreation_2
+      FALSE > @
+    cage > p3da
+    [] > variableDeclaration_8
+      p3da.write > @
+        initializerSimple_8
+    [] > initializerSimple_8
+      arrayCreation_3 > @
+    [] > arrayCreation_3
+      FALSE > @
+    cage > pa
+    [] > variableDeclaration_9
+      pa.write > @
+        initializerSimple_9
+    [] > initializerSimple_9
+      simpleReference_5 > @
+    [] > simpleReference_5
+      p3da > @
+    [] > statementExpression_2
+      class__System.out.println > @
+        class__System.out
+        literal_1
+    [] > literal_1
+      class__String.constructor_2 > @
+        class__String.new
+        "passed"
+  # null :: null -> void
+  [this] > constructor
+    seq > @
+      initialization
+      statementExpression_3
+      this
+    [] > initialization
+      this.init > @
+        this
+    [] > statementExpression_3
+      this.super.constructor > @
+        this.super
+
+[] > class__Point
+  class__Object > super
+  super > @
+  [] > new
+    class__Object.new > super
+    super > @
+    "class__Point" > className
+    [this] > init
+      seq > @
+        TRUE
+    prim__int.constructor_1 > x
+      prim__int.new
+    prim__int.constructor_1 > y
+      prim__int.new
+  # null :: null -> void
+  [this] > constructor
+    seq > @
+      initialization
+      statementExpression_4
+      this
+    [] > initialization
+      this.init > @
+        this
+    [] > statementExpression_4
+      this.super.constructor > @
+        this.super
+
+[] > class__Point3D
+  class__Point > super
+  super > @
+  [] > new
+    class__Point.new > super
+    super > @
+    "class__Point3D" > className
+    [this] > init
+      seq > @
+        TRUE
+    prim__int.constructor_1 > z
+      prim__int.new
+  # null :: null -> void
+  [this] > constructor
+    seq > @
+      initialization
+      statementExpression_5
+      this
+    [] > initialization
+      this.init > @
+        this
+    [] > statementExpression_5
+      this.super.constructor > @
+        this.super
+
+[] > class__ColoredPoint
+  class__Point > super
+  super > @
+  [] > new
+    class__Point.new > super
+    super > @
+    "class__ColoredPoint" > className
+    [this] > init
+      seq > @
+        TRUE
+    prim__int.constructor_1 > color
+      prim__int.new
+    # setColor :: int -> void
+    [this color] > setColor
+      seq > @
+        statementExpression_6
+      [] > statementExpression_6
+        fieldAccess_2.write > @
+          simpleReference_6
+      [] > fieldAccess_2
+        this_1.color > @
+      [] > this_1
+        this > @
+      [] > simpleReference_6
+        color > @
+  # null :: null -> void
+  [this] > constructor
+    seq > @
+      initialization
+      statementExpression_7
+      this
+    [] > initialization
+      this.init > @
+        this
+    [] > statementExpression_7
+      this.super.constructor > @
+        this.super
+
+[args...] > main
+  class__AssignmentForReferenceTypes.main > @
+    *

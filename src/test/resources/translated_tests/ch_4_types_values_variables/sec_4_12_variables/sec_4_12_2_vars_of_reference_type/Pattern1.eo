@@ -1,0 +1,71 @@
+# 2022-07-13T17:59:02.846214900
+# j2eo team
++package ch_4_types_values_variables.sec_4_12_variables.sec_4_12_2_vars_of_reference_type
++alias stdlib.lang.class__System
++alias stdlib.lang.class__Object
++alias stdlib.primitives.prim__int
++alias stdlib.lang.class__String
+
+[] > class__Pattern1
+  class__Object > super
+  super > @
+  [] > new
+    class__Object.new > super
+    super > @
+    "class__Pattern1" > className
+    [this] > init
+      seq > @
+        TRUE
+  # main :: String[] -> void
+  [args] > main
+    seq > @
+      variableDeclaration_1
+      variableDeclaration_2
+      variableDeclaration_3
+      statementExpression_1
+      statementExpression_2
+    prim__int.constructor_1 > lines
+      prim__int.new
+    [] > variableDeclaration_1
+      lines.write > @
+        initializerSimple_1
+    [] > initializerSimple_1
+      literal_1 > @
+    [] > literal_1
+      prim__int.constructor_2 > @
+        prim__int.new
+        8
+    prim__int.constructor_1 > i
+      prim__int.new
+    [] > variableDeclaration_2
+      TRUE > @
+    prim__int.constructor_1 > j
+      prim__int.new
+    [] > variableDeclaration_3
+      TRUE > @
+    [] > statementExpression_1
+      for_loop_placeholder > @
+    [] > statementExpression_2
+      class__System.out.println > @
+        class__System.out
+        literal_2
+    [] > literal_2
+      class__String.constructor_2 > @
+        class__String.new
+        "passed"
+  # null :: null -> void
+  [this] > constructor
+    seq > @
+      initialization
+      statementExpression_3
+      this
+    [] > initialization
+      this.init > @
+        this
+    [] > statementExpression_3
+      this.super.constructor > @
+        this.super
+
+[args...] > main
+  class__Pattern1.main > @
+    *

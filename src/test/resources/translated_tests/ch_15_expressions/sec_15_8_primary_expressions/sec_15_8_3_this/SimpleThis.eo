@@ -1,0 +1,181 @@
+# 2022-07-13T17:59:02.302840500
+# j2eo team
++package ch_15_expressions.sec_15_8_primary_expressions.sec_15_8_3_this
++alias stdlib.lang.class__System
++alias stdlib.lang.class__Object
++alias stdlib.primitives.prim__boolean
++alias stdlib.lang.class__String
++alias stdlib.primitives.prim__int
+
+[] > class__SimpleThis
+  class__Object > super
+  super > @
+  [] > new
+    class__Object.new > super
+    super > @
+    "class__SimpleThis" > className
+    [this] > init
+      seq > @
+        TRUE
+  # main :: String[] -> void
+  [args] > main
+    seq > @
+      variableDeclaration_1
+      variableDeclaration_2
+      statementExpression_1
+      statementExpression_2
+    cage > v1
+    [] > variableDeclaration_1
+      v1.write > @
+        initializerSimple_1
+    [] > initializerSimple_1
+      instanceCreation_1 > @
+    [] > instanceCreation_1
+      class__IntVector.constructor > @
+        class__IntVector.new
+        literal_1
+    [] > literal_1
+      prim__int.constructor_2 > @
+        prim__int.new
+        5
+    cage > v2
+    [] > variableDeclaration_2
+      v2.write > @
+        initializerSimple_2
+    [] > initializerSimple_2
+      instanceCreation_2 > @
+    [] > instanceCreation_2
+      class__IntVector.constructor > @
+        class__IntVector.new
+        literal_2
+    [] > literal_2
+      prim__int.constructor_2 > @
+        prim__int.new
+        6
+    [] > statementExpression_1
+      class__System.out.println > @
+        class__System.out
+        methodInvocation_1
+    [] > methodInvocation_1
+      v1.equals > @
+        v1
+        simpleReference_2
+    [] > simpleReference_2
+      v2 > @
+    [] > statementExpression_2
+      class__System.out.println > @
+        class__System.out
+        literal_3
+    [] > literal_3
+      class__String.constructor_2 > @
+        class__String.new
+        "passed"
+  # null :: null -> void
+  [this] > constructor
+    seq > @
+      initialization
+      statementExpression_3
+      this
+    [] > initialization
+      this.init > @
+        this
+    [] > statementExpression_3
+      this.super.constructor > @
+        this.super
+
+[] > class__IntVector
+  class__Object > super
+  super > @
+  [] > new
+    class__Object.new > super
+    super > @
+    "class__IntVector" > className
+    [this] > init
+      seq > @
+        TRUE
+    cage > v
+    # equals :: IntVector -> boolean
+    [this other] > equals
+      seq > @
+        ifThenElse_1
+        ifThenElse_2
+        statementExpression_4
+        return_1
+      [] > ifThenElse_1
+        binary_1.if > @
+          block_1
+          empty_1
+      [] > binary_1
+        this_1.eq > @
+          simpleReference_3
+      [] > this_1
+        this > @
+      [] > simpleReference_3
+        other > @
+      [] > block_1
+        seq > @
+          return_2
+        [] > return_2
+          literal_4 > @
+        [] > literal_4
+          prim__boolean.constructor_2 > @
+            prim__boolean.new
+            TRUE
+      [] > empty_1
+        TRUE > @
+      [] > ifThenElse_2
+        binary_2.if > @
+          block_2
+          empty_2
+      [] > binary_2
+        fieldAccess_3.not_eq > @
+          fieldAccess_4
+      [] > fieldAccess_3
+        simpleReference_4.length > @
+      [] > simpleReference_4
+        v > @
+      [] > fieldAccess_4
+        fieldAccess_5.length > @
+      [] > fieldAccess_5
+        simpleReference_5.v > @
+      [] > simpleReference_5
+        other > @
+      [] > block_2
+        seq > @
+          return_3
+        [] > return_3
+          literal_5 > @
+        [] > literal_5
+          prim__boolean.constructor_2 > @
+            prim__boolean.new
+            FALSE
+      [] > empty_2
+        TRUE > @
+      [] > statementExpression_4
+        for_loop_placeholder > @
+      [] > return_1
+        literal_6 > @
+      [] > literal_6
+        prim__boolean.constructor_2 > @
+          prim__boolean.new
+          TRUE
+  # null :: int -> void
+  [this size] > constructor
+    seq > @
+      initialization
+      statementExpression_5
+      this
+    [] > initialization
+      this.init > @
+        this
+    [] > statementExpression_5
+      simpleReference_6.write > @
+        arrayCreation_1
+    [] > simpleReference_6
+      v > @
+    [] > arrayCreation_1
+      FALSE > @
+
+[args...] > main
+  class__SimpleThis.main > @
+    *

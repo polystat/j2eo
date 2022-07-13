@@ -158,7 +158,7 @@ private fun findPrimitivesInDeclaration(primitives: HashSet<String>, dec: Declar
 
 fun collectPrimitivePackages(primitives: HashSet<String>, unit: SimpleCompilationUnit) {
     unit.components.components
-        .mapNotNull { component: TopLevelComponent -> component.classDecl }
+        .mapNotNull { component: TopLevelComponent? -> component?.classDecl }
         .filterIsInstance<NormalClassDeclaration>()
         .map { findPrimitivesInDeclaration(primitives, it) }
 }

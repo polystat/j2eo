@@ -1,0 +1,77 @@
+# 2022-07-13T17:59:02.436565700
+# j2eo team
++package ch_4_types_values_variables.sec_4_10_subtyping.sec_4_10_1_subtyping_among_primitive_types
++alias stdlib.lang.class__System
++alias stdlib.primitives.prim__short
++alias stdlib.lang.class__Object
++alias stdlib.primitives.prim__byte
++alias stdlib.primitives.prim__int
++alias stdlib.lang.class__String
+
+[] > class__SubtypingShortByte
+  class__Object > super
+  super > @
+  [] > new
+    class__Object.new > super
+    super > @
+    "class__SubtypingShortByte" > className
+    [this] > init
+      seq > @
+        TRUE
+  # main :: String[] -> void
+  [args] > main
+    seq > @
+      variableDeclaration_1
+      variableDeclaration_2
+      statementExpression_1
+      statementExpression_2
+    prim__byte.constructor_1 > b
+      prim__byte.new
+    [] > variableDeclaration_1
+      b.write > @
+        initializerSimple_1
+    [] > initializerSimple_1
+      literal_1 > @
+    [] > literal_1
+      prim__int.constructor_2 > @
+        prim__int.new
+        127
+    prim__short.constructor_1 > s
+      prim__short.new
+    [] > variableDeclaration_2
+      s.write > @
+        initializerSimple_2
+    [] > initializerSimple_2
+      simpleReference_1 > @
+    [] > simpleReference_1
+      b > @
+    [] > statementExpression_1
+      class__System.out.println > @
+        class__System.out
+        simpleReference_2
+    [] > simpleReference_2
+      s > @
+    [] > statementExpression_2
+      class__System.out.println > @
+        class__System.out
+        literal_2
+    [] > literal_2
+      class__String.constructor_2 > @
+        class__String.new
+        "passed"
+  # null :: null -> void
+  [this] > constructor
+    seq > @
+      initialization
+      statementExpression_3
+      this
+    [] > initialization
+      this.init > @
+        this
+    [] > statementExpression_3
+      this.super.constructor > @
+        this.super
+
+[args...] > main
+  class__SubtypingShortByte.main > @
+    *

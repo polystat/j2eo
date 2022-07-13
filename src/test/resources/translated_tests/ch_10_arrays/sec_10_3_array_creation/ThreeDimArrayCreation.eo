@@ -1,0 +1,103 @@
+# 2022-07-13T17:59:01.051165300
+# j2eo team
++package ch_10_arrays.sec_10_3_array_creation
++alias stdlib.lang.class__System
++alias stdlib.lang.class__Object
++alias stdlib.primitives.prim__int
++alias stdlib.lang.class__String
+
+[] > class__ThreeDimArrayCreation
+  class__Object > super
+  super > @
+  [] > new
+    class__Object.new > super
+    super > @
+    "class__ThreeDimArrayCreation" > className
+    [this] > init
+      seq > @
+        TRUE
+  # main :: String[] -> void
+  [args] > main
+    seq > @
+      variableDeclaration_1
+      statementExpression_1
+      statementExpression_2
+      statementExpression_3
+      statementExpression_4
+    cage > arr3
+    [] > variableDeclaration_1
+      arr3.write > @
+        initializerSimple_1
+    [] > initializerSimple_1
+      arrayCreation_1 > @
+    [] > arrayCreation_1
+      FALSE > @
+    [] > statementExpression_1
+      class__System.out.println > @
+        class__System.out
+        fieldAccess_2
+    [] > fieldAccess_2
+      simpleReference_1.length > @
+    [] > simpleReference_1
+      arr3 > @
+    [] > statementExpression_2
+      class__System.out.println > @
+        class__System.out
+        fieldAccess_4
+    [] > fieldAccess_4
+      arrayAccess_1.length > @
+    [] > arrayAccess_1
+      simpleReference_2.get > @
+        literal_1.v
+    [] > simpleReference_2
+      arr3 > @
+    [] > literal_1
+      prim__int.constructor_2 > @
+        prim__int.new
+        0
+    [] > statementExpression_3
+      class__System.out.println > @
+        class__System.out
+        fieldAccess_6
+    [] > fieldAccess_6
+      arrayAccess_2.length > @
+    [] > arrayAccess_2
+      arrayAccess_3.get > @
+        literal_2.v
+    [] > arrayAccess_3
+      simpleReference_3.get > @
+        literal_3.v
+    [] > simpleReference_3
+      arr3 > @
+    [] > literal_3
+      prim__int.constructor_2 > @
+        prim__int.new
+        0
+    [] > literal_2
+      prim__int.constructor_2 > @
+        prim__int.new
+        0
+    [] > statementExpression_4
+      class__System.out.println > @
+        class__System.out
+        literal_4
+    [] > literal_4
+      class__String.constructor_2 > @
+        class__String.new
+        "passed"
+  # null :: null -> void
+  [this] > constructor
+    seq > @
+      initialization
+      statementExpression_5
+      this
+    [] > initialization
+      this.init > @
+        this
+    [] > statementExpression_5
+      this.super.constructor > @
+        this.super
+
+[args...] > main
+  class__ThreeDimArrayCreation.main > @
+    *

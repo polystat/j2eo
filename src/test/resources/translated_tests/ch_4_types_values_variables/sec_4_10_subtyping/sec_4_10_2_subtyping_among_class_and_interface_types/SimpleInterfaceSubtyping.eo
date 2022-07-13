@@ -1,0 +1,86 @@
+# 2022-07-13T17:59:02.439568
+# j2eo team
++package ch_4_types_values_variables.sec_4_10_subtyping.sec_4_10_2_subtyping_among_class_and_interface_types
++alias stdlib.lang.class__Object
++alias stdlib.lang.class__System
++alias stdlib.lang.class__String
++alias javax.swing.text.html.HTMLDocument.HTMLReader.class__IsindexAction
+
+[] > class__SimpleInterfaceSubtyping
+  class__Object > super
+  super > @
+  [] > new
+    class__Object.new > super
+    super > @
+    "class__SimpleInterfaceSubtyping" > className
+    [this] > init
+      seq > @
+        TRUE
+  # main :: String[] -> void
+  [args] > main
+    seq > @
+      variableDeclaration_1
+      statementExpression_1
+      statementExpression_2
+    cage > some
+    [] > variableDeclaration_1
+      some.write > @
+        initializerSimple_1
+    [] > initializerSimple_1
+      instanceCreation_1 > @
+    [] > instanceCreation_1
+      class__Some.constructor > @
+        class__Some.new
+    [] > statementExpression_1
+      class__System.out.println > @
+        class__System.out
+        instanceOf_1
+    [] > instanceOf_1
+      instance_of_placeholder > @
+    [] > statementExpression_2
+      class__System.out.println > @
+        class__System.out
+        literal_1
+    [] > literal_1
+      class__String.constructor_2 > @
+        class__String.new
+        "passed"
+  # null :: null -> void
+  [this] > constructor
+    seq > @
+      initialization
+      statementExpression_3
+      this
+    [] > initialization
+      this.init > @
+        this
+    [] > statementExpression_3
+      this.super.constructor > @
+        this.super
+
+[] > class__Some
+  class__Object > super
+  super > @
+  [] > new
+    class__Object.new > super
+    super > @
+    "class__Some" > className
+    [this] > init
+      seq > @
+        TRUE
+  # null :: null -> void
+  [this] > constructor
+    seq > @
+      initialization
+      statementExpression_4
+      this
+    [] > initialization
+      this.init > @
+        this
+    [] > statementExpression_4
+      this.super.constructor > @
+        this.super
+
+[args...] > main
+  class__SimpleInterfaceSubtyping.main > @
+    *

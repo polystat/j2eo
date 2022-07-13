@@ -1,0 +1,277 @@
+# 2022-07-13T17:59:03.093797
+# j2eo team
++package ch_4_types_values_variables.sec_4_5_parametrized_types.sec_4_5_1_type_arguments_of_parameterized_types
++alias stdlib.lang.class__Object
++alias stdlib.lang.class__System
++alias stdlib.lang.class__String
++alias eo/org/polystat/stdlib.util.class__Collection
++alias eo/org/polystat/stdlib.util.class__ArrayList
+
+[] > class__UpperBoundWildcard
+  class__Object > super
+  super > @
+  [] > new
+    class__Object.new > super
+    super > @
+    "class__UpperBoundWildcard" > className
+    [this] > init
+      seq > @
+        TRUE
+  # main :: String[] -> void
+  [args] > main
+    seq > @
+      variableDeclaration_1
+      statementExpression_1
+      statementExpression_2
+      variableDeclaration_2
+      statementExpression_3
+      statementExpression_4
+      variableDeclaration_3
+      statementExpression_5
+      statementExpression_6
+      statementExpression_7
+      statementExpression_8
+      statementExpression_9
+    cage > cs
+    [] > variableDeclaration_1
+      cs.write > @
+        initializerSimple_1
+    [] > initializerSimple_1
+      instanceCreation_1 > @
+    [] > instanceCreation_1
+      class__ArrayList.constructor > @
+        class__ArrayList.new
+    [] > statementExpression_1
+      cs.add > @
+        cs
+        instanceCreation_2
+    [] > instanceCreation_2
+      class__SomeSub1.constructor > @
+        class__SomeSub1.new
+    [] > statementExpression_2
+      cs.add > @
+        cs
+        instanceCreation_3
+    [] > instanceCreation_3
+      class__SomeSub1.constructor > @
+        class__SomeSub1.new
+    cage > cs2
+    [] > variableDeclaration_2
+      cs2.write > @
+        initializerSimple_2
+    [] > initializerSimple_2
+      instanceCreation_4 > @
+    [] > instanceCreation_4
+      class__ArrayList.constructor > @
+        class__ArrayList.new
+    [] > statementExpression_3
+      cs2.add > @
+        cs2
+        instanceCreation_5
+    [] > instanceCreation_5
+      class__SomeSub2.constructor > @
+        class__SomeSub2.new
+    [] > statementExpression_4
+      cs2.add > @
+        cs2
+        instanceCreation_6
+    [] > instanceCreation_6
+      class__SomeSub2.constructor > @
+        class__SomeSub2.new
+    cage > cs3
+    [] > variableDeclaration_3
+      cs3.write > @
+        initializerSimple_3
+    [] > initializerSimple_3
+      instanceCreation_7 > @
+    [] > instanceCreation_7
+      class__ArrayList.constructor > @
+        class__ArrayList.new
+    [] > statementExpression_5
+      cs3.add > @
+        cs3
+        instanceCreation_8
+    [] > instanceCreation_8
+      class__SomeSubSub.constructor > @
+        class__SomeSubSub.new
+    [] > statementExpression_6
+      cs3.add > @
+        cs3
+        instanceCreation_9
+    [] > instanceCreation_9
+      class__SomeSubSub.constructor > @
+        class__SomeSubSub.new
+    [] > statementExpression_7
+      this.print > @
+        this
+        simpleReference_7
+    [] > simpleReference_7
+      cs2 > @
+    [] > statementExpression_8
+      this.print > @
+        this
+        simpleReference_8
+    [] > simpleReference_8
+      cs3 > @
+    [] > statementExpression_9
+      class__System.out.println > @
+        class__System.out
+        literal_1
+    [] > literal_1
+      class__String.constructor_2 > @
+        class__String.new
+        "passed"
+  # print :: Collection -> void
+  [list] > print
+    seq > @
+      statementExpression_10
+    [] > statementExpression_10
+      for_loop_placeholder > @
+  # null :: null -> void
+  [this] > constructor
+    seq > @
+      initialization
+      statementExpression_11
+      this
+    [] > initialization
+      this.init > @
+        this
+    [] > statementExpression_11
+      this.super.constructor > @
+        this.super
+
+[] > class__SomeBase
+  class__Object > super
+  super > @
+  [] > new
+    class__Object.new > super
+    super > @
+    "class__SomeBase" > className
+    [this] > init
+      seq > @
+        TRUE
+    # print :: null -> String
+    [this] > print
+      seq > @
+        return_1
+      [] > return_1
+        literal_2 > @
+      [] > literal_2
+        class__String.constructor_2 > @
+          class__String.new
+          "someBase"
+  # null :: null -> void
+  [this] > constructor
+    seq > @
+      initialization
+      statementExpression_12
+      this
+    [] > initialization
+      this.init > @
+        this
+    [] > statementExpression_12
+      this.super.constructor > @
+        this.super
+
+[] > class__SomeSub1
+  class__SomeBase > super
+  super > @
+  [] > new
+    class__SomeBase.new > super
+    super > @
+    "class__SomeSub1" > className
+    [this] > init
+      seq > @
+        TRUE
+    # print :: null -> String
+    [this] > print
+      seq > @
+        return_2
+      [] > return_2
+        literal_3 > @
+      [] > literal_3
+        class__String.constructor_2 > @
+          class__String.new
+          "someSub1"
+  # null :: null -> void
+  [this] > constructor
+    seq > @
+      initialization
+      statementExpression_13
+      this
+    [] > initialization
+      this.init > @
+        this
+    [] > statementExpression_13
+      this.super.constructor > @
+        this.super
+
+[] > class__SomeSub2
+  class__SomeBase > super
+  super > @
+  [] > new
+    class__SomeBase.new > super
+    super > @
+    "class__SomeSub2" > className
+    [this] > init
+      seq > @
+        TRUE
+    # print :: null -> String
+    [this] > print
+      seq > @
+        return_3
+      [] > return_3
+        literal_4 > @
+      [] > literal_4
+        class__String.constructor_2 > @
+          class__String.new
+          "someSub2"
+  # null :: null -> void
+  [this] > constructor
+    seq > @
+      initialization
+      statementExpression_14
+      this
+    [] > initialization
+      this.init > @
+        this
+    [] > statementExpression_14
+      this.super.constructor > @
+        this.super
+
+[] > class__SomeSubSub
+  class__SomeSub2 > super
+  super > @
+  [] > new
+    class__SomeSub2.new > super
+    super > @
+    "class__SomeSubSub" > className
+    [this] > init
+      seq > @
+        TRUE
+    # print :: null -> String
+    [this] > print
+      seq > @
+        return_4
+      [] > return_4
+        literal_5 > @
+      [] > literal_5
+        class__String.constructor_2 > @
+          class__String.new
+          "someSubSub"
+  # null :: null -> void
+  [this] > constructor
+    seq > @
+      initialization
+      statementExpression_15
+      this
+    [] > initialization
+      this.init > @
+        this
+    [] > statementExpression_15
+      this.super.constructor > @
+        this.super
+
+[args...] > main
+  class__UpperBoundWildcard.main > @
+    *

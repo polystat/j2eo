@@ -1,0 +1,144 @@
+# 2022-07-13T17:59:03.529645800
+# j2eo team
++package ch_8_classes.sec_8_8_constructor_declarations.sec_8_8_2_constructor_signature
++alias stdlib.lang.class__Object
++alias stdlib.lang.class__System
++alias stdlib.lang.class__String
+
+[] > class__MultipleConstructorDecl
+  class__Object > super
+  super > @
+  [] > new
+    class__Object.new > super
+    super > @
+    "class__MultipleConstructorDecl" > className
+    [this] > init
+      seq > @
+        TRUE
+  # null :: null -> void
+  [this] > constructor
+    seq > @
+      initialization
+      statementExpression_1
+      statementExpression_2
+      this
+    [] > initialization
+      this.init > @
+        this
+    [] > statementExpression_1
+      this.this.super.constructor > @
+        this.this.super
+    [] > statementExpression_2
+      class__System.out.println > @
+        class__System.out
+        literal_1
+    [] > literal_1
+      class__String.constructor_2 > @
+        class__String.new
+        "Constructor 1"
+  # null :: int -> void
+  [this a] > constructor
+    seq > @
+      initialization
+      statementExpression_3
+      statementExpression_4
+      statementExpression_5
+      this
+    [] > initialization
+      this.init > @
+        this
+    [] > statementExpression_3
+      this.this.super.constructor > @
+        this.this.super
+    [] > statementExpression_4
+      class__System.out.println > @
+        class__System.out
+        simpleReference_1
+    [] > simpleReference_1
+      a > @
+    [] > statementExpression_5
+      class__System.out.println > @
+        class__System.out
+        literal_2
+    [] > literal_2
+      class__String.constructor_2 > @
+        class__String.new
+        "Constructor 2"
+  # null :: int -> int -> void
+  [this a b] > constructor
+    seq > @
+      initialization
+      statementExpression_6
+      statementExpression_7
+      statementExpression_8
+      statementExpression_9
+      this
+    [] > initialization
+      this.init > @
+        this
+    [] > statementExpression_6
+      this.this.super.constructor > @
+        this.this.super
+    [] > statementExpression_7
+      class__System.out.println > @
+        class__System.out
+        simpleReference_2
+    [] > simpleReference_2
+      a > @
+    [] > statementExpression_8
+      class__System.out.println > @
+        class__System.out
+        simpleReference_3
+    [] > simpleReference_3
+      b > @
+    [] > statementExpression_9
+      class__System.out.println > @
+        class__System.out
+        literal_3
+    [] > literal_3
+      class__String.constructor_2 > @
+        class__String.new
+        "Constructor 3"
+  # main :: String[] -> void
+  [args] > main
+    seq > @
+      statementExpression_10
+      statementExpression_11
+      statementExpression_12
+      statementExpression_13
+    [] > statementExpression_10
+      class__MultipleConstructorDecl.constructor > @
+        class__MultipleConstructorDecl.new
+    [] > statementExpression_11
+      class__MultipleConstructorDecl.constructor > @
+        class__MultipleConstructorDecl.new
+        literal_4
+    [] > literal_4
+      prim__int.constructor_2 > @
+        prim__int.new
+        1
+    [] > statementExpression_12
+      class__MultipleConstructorDecl.constructor > @
+        class__MultipleConstructorDecl.new
+        literal_5
+        literal_6
+    [] > literal_5
+      prim__int.constructor_2 > @
+        prim__int.new
+        1
+    [] > literal_6
+      prim__int.constructor_2 > @
+        prim__int.new
+        2
+    [] > statementExpression_13
+      class__System.out.println > @
+        class__System.out
+        literal_7
+    [] > literal_7
+      class__String.constructor_2 > @
+        class__String.new
+        "passed"
+
+[args...] > main
+  class__MultipleConstructorDecl.main > @
+    *

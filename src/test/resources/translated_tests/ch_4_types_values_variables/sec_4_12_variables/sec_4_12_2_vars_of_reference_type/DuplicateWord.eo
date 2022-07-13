@@ -1,0 +1,98 @@
+# 2022-07-13T17:59:02.790289400
+# j2eo team
++package ch_4_types_values_variables.sec_4_12_variables.sec_4_12_2_vars_of_reference_type
++alias stdlib.lang.class__System
++alias stdlib.lang.class__Object
++alias stdlib.lang.class__String
++alias stdlib.primitives.prim__int
+
+[] > class__DuplicateWord
+  class__Object > super
+  super > @
+  [] > new
+    class__Object.new > super
+    super > @
+    "class__DuplicateWord" > className
+    [this] > init
+      seq > @
+        TRUE
+  # main :: String[] -> void
+  [args] > main
+    seq > @
+      variableDeclaration_1
+      variableDeclaration_2
+      statementExpression_1
+      variableDeclaration_3
+      statementExpression_2
+      statementExpression_3
+      statementExpression_4
+    cage > string
+    [] > variableDeclaration_1
+      string.write > @
+        initializerSimple_1
+    [] > initializerSimple_1
+      literal_1 > @
+    [] > literal_1
+      class__String.constructor_2 > @
+        class__String.new
+        "Big black bug bit a big black dog on his big black nose"
+    prim__int.constructor_1 > count
+      prim__int.new
+    [] > variableDeclaration_2
+      TRUE > @
+    [] > statementExpression_1
+      simpleReference_1.write > @
+        methodInvocation_1
+    [] > simpleReference_1
+      string > @
+    [] > methodInvocation_1
+      string.toLowerCase > @
+        string
+    cage > words
+    [] > variableDeclaration_3
+      words.write > @
+        initializerSimple_2
+    [] > initializerSimple_2
+      methodInvocation_2 > @
+    [] > methodInvocation_2
+      string.split > @
+        string
+        literal_2
+    [] > literal_2
+      class__String.constructor_2 > @
+        class__String.new
+        " "
+    [] > statementExpression_2
+      class__System.out.println > @
+        class__System.out
+        literal_3
+    [] > literal_3
+      class__String.constructor_2 > @
+        class__String.new
+        "Duplicate words in a given string : "
+    [] > statementExpression_3
+      for_loop_placeholder > @
+    [] > statementExpression_4
+      class__System.out.println > @
+        class__System.out
+        literal_4
+    [] > literal_4
+      class__String.constructor_2 > @
+        class__String.new
+        "passed"
+  # null :: null -> void
+  [this] > constructor
+    seq > @
+      initialization
+      statementExpression_5
+      this
+    [] > initialization
+      this.init > @
+        this
+    [] > statementExpression_5
+      this.super.constructor > @
+        this.super
+
+[args...] > main
+  class__DuplicateWord.main > @
+    *

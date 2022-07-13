@@ -1,5 +1,6 @@
-# 2022-05-25T15:02:54.603191200
+# 2022-07-13T17:59:03.313939300
 # j2eo team
++package ch_8_classes.sec_8_1_class_declarations.sec_8_1_1_class_modifiers.sec_8_1_1_3_strictfp_classes
 +alias stdlib.lang.class__Object
 +alias stdlib.lang.class__System
 +alias stdlib.lang.class__String
@@ -8,49 +9,43 @@
   class__Object > super
   super > @
   [] > new
-    [] > this
-      class__Object.new > super
-      super > @
-      "class__SimplestPublicStrictfpClass" > className
-      [this] > init
-        seq > @
-          TRUE
-    seq > @
-      this
+    class__Object.new > super
+    super > @
+    "class__SimplestPublicStrictfpClass" > className
+    [this] > init
+      seq > @
+        TRUE
   [] > class__PublicStrictfpTest
     class__Object > super
     super > @
     [] > new
-      [] > this
-        class__Object.new > super
-        super > @
-        "class__PublicStrictfpTest" > className
-        [this] > init
-          seq > @
-            TRUE
-      seq > @
-        this
+      class__Object.new > super
+      super > @
+      "class__PublicStrictfpTest" > className
+      [this] > init
+        seq > @
+          TRUE
     # null :: null -> void
     [this] > constructor
       seq > @
         initialization
-        s1245065720
+        statementExpression_1
         this
       [] > initialization
         this.init > @
           this
-      [] > s1245065720
-        super.constructor > @
+      [] > statementExpression_1
+        this.super.constructor > @
           this.super
   # main :: String[] -> void
   [args] > main
     seq > @
-      s1800976873
-    [] > s1800976873
+      statementExpression_2
+    [] > statementExpression_2
       class__System.out.println > @
         class__System.out
-        l253011924
-    [] > l253011924
+        literal_1
+    [] > literal_1
       class__String.constructor_2 > @
         class__String.new
         "passed"
@@ -58,13 +53,13 @@
   [this] > constructor
     seq > @
       initialization
-      s1390913202
+      statementExpression_3
       this
     [] > initialization
       this.init > @
         this
-    [] > s1390913202
-      super.constructor > @
+    [] > statementExpression_3
+      this.super.constructor > @
         this.super
 
 [args...] > main

@@ -1,20 +1,18 @@
-# 2022-05-25T15:02:53.878100300
+# 2022-07-13T17:59:01.739239800
 # j2eo team
++package ch_11_exceptions.sec_11_2_compile_time_checking_of_exceptions.sec_11_2_1_execution_analysis_of_expressions
 +alias stdlib.lang.class__Object
 
 [] > class__SampleTest
   class__Object > super
   super > @
   [] > new
-    [] > this
-      class__Object.new > super
-      super > @
-      "class__SampleTest" > className
-      [this] > init
-        seq > @
-          TRUE
-    seq > @
-      this
+    class__Object.new > super
+    super > @
+    "class__SampleTest" > className
+    [this] > init
+      seq > @
+        TRUE
   # Main :: String[] -> void
   [args] > Main
     seq > @
@@ -23,11 +21,11 @@
   [this] > constructor
     seq > @
       initialization
-      s817348612
+      statementExpression_1
       this
     [] > initialization
       this.init > @
         this
-    [] > s817348612
-      super.constructor > @
+    [] > statementExpression_1
+      this.super.constructor > @
         this.super

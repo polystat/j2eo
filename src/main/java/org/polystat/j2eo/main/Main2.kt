@@ -1,14 +1,11 @@
 package org.polystat.j2eo.main
 
+import arrow.core.Some
 import org.antlr.v4.runtime.CharStreams
 import org.antlr.v4.runtime.CommonTokenStream
-import org.apache.commons.cli.CommandLine
-import org.apache.commons.cli.CommandLineParser
-import org.apache.commons.cli.DefaultParser
-import org.apache.commons.cli.HelpFormatter
-import org.apache.commons.cli.Option
-import org.apache.commons.cli.Options
-import org.apache.commons.cli.ParseException
+import org.apache.commons.cli.* // ktlint-disable no-wildcard-imports
+import org.polystat.j2eo.eotree.EOLicense
+import org.polystat.j2eo.eotree.EOMetas
 import org.polystat.j2eo.eotree.EOProgram
 import org.polystat.j2eo.parser.JavaLexer
 import org.polystat.j2eo.parser.JavaParser
@@ -17,12 +14,14 @@ import org.polystat.j2eo.translator.Context
 import org.polystat.j2eo.translator.Translator
 import org.polystat.j2eo.util.logger
 import tree.Compilation.CompilationUnit
+import tree.Compilation.SimpleCompilationUnit
+import tree.Compilation.TopLevelComponents
+import tree.Declaration.ImportDeclarations
 import tree.Entity
 import java.io.File
 import java.io.FileNotFoundException
 import java.nio.file.Files
 import java.nio.file.Paths
-import kotlin.collections.HashMap
 import kotlin.io.path.createDirectories
 import kotlin.system.exitProcess
 
@@ -96,10 +95,15 @@ object Main2 {
                 // Traverse the ANTLR AST
                 val tree = parser.compilationUnit()
                 val eval = Visitor()
-                val cu = eval.visit(tree) as CompilationUnit
+                var cu: CompilationUnit? = null
+                try {
+                    cu = eval.visit(tree) as CompilationUnit
+                } catch (e: Exception) {
+                    e.printStackTrace()
+                }
 
                 if (Entity.debug) {
-                    cu.report(0)
+                    cu?.report(0)
                     logger.debug("[${i + 1}/${filesToProcess.size}] Translating ${f.absolutePath}")
                 }
 //                else {
@@ -109,8 +113,18 @@ object Main2 {
 //                    }
 //                }
 
+                val dummy = SimpleCompilationUnit(
+                    ImportDeclarations(null),
+                    TopLevelComponents(null)
+                )
                 val translator = Translator(f.relativeTo(sourceFile).toPath())
-                Pair(f, translator.translate(cu, Context(HashMap())))
+                var translation: EOProgram? = null
+                try {
+                    translation = translator.translate(cu ?: dummy, Context(HashMap()))
+                } catch (e: Exception) {
+                    e.printStackTrace()
+                }
+                Pair(f, translation ?: EOProgram(EOLicense(), EOMetas(Some("failed translation!"), listOf()), listOf()))
             }
         println()
 

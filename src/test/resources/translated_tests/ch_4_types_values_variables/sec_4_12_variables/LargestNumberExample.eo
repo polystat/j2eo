@@ -1,0 +1,131 @@
+# 2022-07-13T17:59:02.648376100
+# j2eo team
++package ch_4_types_values_variables.sec_4_12_variables
++alias stdlib.lang.class__System
++alias stdlib.lang.class__Object
++alias stdlib.primitives.prim__int
++alias stdlib.lang.class__String
+
+[] > class__LargestNumberExample
+  class__Object > super
+  super > @
+  [] > new
+    class__Object.new > super
+    super > @
+    "class__LargestNumberExample" > className
+    [this] > init
+      seq > @
+        TRUE
+  # main :: String[] -> void
+  [args] > main
+    seq > @
+      variableDeclaration_1
+      variableDeclaration_2
+      variableDeclaration_3
+      variableDeclaration_4
+      variableDeclaration_5
+      statementExpression_1
+      statementExpression_2
+      statementExpression_3
+      statementExpression_4
+      statementExpression_5
+      statementExpression_6
+      statementExpression_7
+    prim__int.constructor_1 > a
+      prim__int.new
+    [] > variableDeclaration_1
+      TRUE > @
+    prim__int.constructor_1 > b
+      prim__int.new
+    [] > variableDeclaration_2
+      TRUE > @
+    prim__int.constructor_1 > c
+      prim__int.new
+    [] > variableDeclaration_3
+      TRUE > @
+    prim__int.constructor_1 > largest
+      prim__int.new
+    [] > variableDeclaration_4
+      TRUE > @
+    prim__int.constructor_1 > temp
+      prim__int.new
+    [] > variableDeclaration_5
+      TRUE > @
+    [] > statementExpression_1
+      simpleReference_1.write > @
+        literal_1
+    [] > simpleReference_1
+      a > @
+    [] > literal_1
+      prim__int.constructor_2 > @
+        prim__int.new
+        23
+    [] > statementExpression_2
+      simpleReference_2.write > @
+        literal_2
+    [] > simpleReference_2
+      b > @
+    [] > literal_2
+      prim__int.constructor_2 > @
+        prim__int.new
+        2333
+    [] > statementExpression_3
+      simpleReference_3.write > @
+        literal_3
+    [] > simpleReference_3
+      c > @
+    [] > literal_3
+      prim__int.constructor_2 > @
+        prim__int.new
+        233
+    [] > statementExpression_4
+      simpleReference_4.write > @
+        simpleReference_5
+    [] > simpleReference_4
+      temp > @
+    [] > simpleReference_5
+      expression_placeholder > @
+    [] > statementExpression_5
+      simpleReference_6.write > @
+        simpleReference_7
+    [] > simpleReference_6
+      largest > @
+    [] > simpleReference_7
+      expression_placeholder > @
+    [] > statementExpression_6
+      class__System.out.println > @
+        class__System.out
+        binary_1
+    [] > binary_1
+      literal_4.add > @
+        simpleReference_8
+    [] > literal_4
+      class__String.constructor_2 > @
+        class__String.new
+        "The largest number is: "
+    [] > simpleReference_8
+      largest > @
+    [] > statementExpression_7
+      class__System.out.println > @
+        class__System.out
+        literal_5
+    [] > literal_5
+      class__String.constructor_2 > @
+        class__String.new
+        "passed"
+  # null :: null -> void
+  [this] > constructor
+    seq > @
+      initialization
+      statementExpression_8
+      this
+    [] > initialization
+      this.init > @
+        this
+    [] > statementExpression_8
+      this.super.constructor > @
+        this.super
+
+[args...] > main
+  class__LargestNumberExample.main > @
+    *

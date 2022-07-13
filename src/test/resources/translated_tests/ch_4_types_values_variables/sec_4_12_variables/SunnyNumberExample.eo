@@ -1,0 +1,148 @@
+# 2022-07-13T17:59:02.978391600
+# j2eo team
++package ch_4_types_values_variables.sec_4_12_variables
++alias stdlib.lang.class__System
++alias stdlib.primitives.prim__double
++alias stdlib.lang.class__Object
++alias stdlib.primitives.prim__boolean
++alias stdlib.primitives.prim__int
++alias stdlib.lang.class__String
+
+[] > class__SunnyNumberExample
+  class__Object > super
+  super > @
+  [] > new
+    class__Object.new > super
+    super > @
+    "class__SunnyNumberExample" > className
+    [this] > init
+      seq > @
+        TRUE
+  # main :: String -> void
+  [args[]] > main
+    seq > @
+      variableDeclaration_1
+      statementExpression_1
+      statementExpression_2
+    prim__int.constructor_1 > N
+      prim__int.new
+    [] > variableDeclaration_1
+      N.write > @
+        initializerSimple_1
+    [] > initializerSimple_1
+      literal_1 > @
+    [] > literal_1
+      prim__int.constructor_2 > @
+        prim__int.new
+        31
+    [] > statementExpression_1
+      this.isSunnyNumber > @
+        this
+        simpleReference_1
+    [] > simpleReference_1
+      N > @
+    [] > statementExpression_2
+      class__System.out.println > @
+        class__System.out
+        literal_2
+    [] > literal_2
+      class__String.constructor_2 > @
+        class__String.new
+        "passed"
+  # findPerfectSquare :: double -> boolean
+  [num] > findPerfectSquare
+    seq > @
+      variableDeclaration_2
+      return_1
+    prim__double.constructor_1 > square_root
+      prim__double.new
+    [] > variableDeclaration_2
+      square_root.write > @
+        initializerSimple_2
+    [] > initializerSimple_2
+      methodInvocation_1 > @
+    [] > methodInvocation_1
+      Math.sqrt > @
+        Math
+        simpleReference_3
+    [] > simpleReference_3
+      num > @
+    [] > return_1
+      parenthesized_1 > @
+    [] > parenthesized_1
+      binary_1 > @
+    [] > binary_1
+      parenthesized_2.eq > @
+        literal_3
+    [] > parenthesized_2
+      binary_2 > @
+    [] > binary_2
+      simpleReference_4.sub > @
+        methodInvocation_2
+    [] > simpleReference_4
+      square_root > @
+    [] > methodInvocation_2
+      Math.floor > @
+        Math
+        simpleReference_6
+    [] > simpleReference_6
+      square_root > @
+    [] > literal_3
+      prim__int.constructor_2 > @
+        prim__int.new
+        0
+  # isSunnyNumber :: int -> void
+  [N] > isSunnyNumber
+    seq > @
+      ifThenElse_1
+    [] > ifThenElse_1
+      methodInvocation_3.if > @
+        block_1
+        block_2
+    [] > methodInvocation_3
+      this.findPerfectSquare > @
+        this
+        binary_3
+    [] > binary_3
+      simpleReference_7.add > @
+        literal_4
+    [] > simpleReference_7
+      N > @
+    [] > literal_4
+      prim__int.constructor_2 > @
+        prim__int.new
+        1
+    [] > block_1
+      seq > @
+        statementExpression_3
+      [] > statementExpression_3
+        class__System.out.println > @
+          class__System.out
+          literal_5
+      [] > literal_5
+        class__String.constructor_2 > @
+          class__String.new
+          "The given number is a sunny number."
+    [] > block_2
+      seq > @
+        statementExpression_4
+      [] > statementExpression_4
+        class__System.out.println > @
+          class__System.out
+          literal_6
+      [] > literal_6
+        class__String.constructor_2 > @
+          class__String.new
+          "The given number is not a sunny number."
+  # null :: null -> void
+  [this] > constructor
+    seq > @
+      initialization
+      statementExpression_5
+      this
+    [] > initialization
+      this.init > @
+        this
+    [] > statementExpression_5
+      this.super.constructor > @
+        this.super

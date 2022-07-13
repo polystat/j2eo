@@ -1,0 +1,86 @@
+# 2022-07-13T17:59:02.085143200
+# j2eo team
++package ch_15_expressions.sec_15_10_array_creation_and_access_expressions.sec_15_10_3_array_access_expressions
++alias stdlib.primitives.prim__float
++alias stdlib.lang.class__System
++alias stdlib.lang.class__Object
++alias stdlib.lang.class__String
+
+[] > class__SimpleFloatArrayAccess
+  class__Object > super
+  super > @
+  [] > new
+    class__Object.new > super
+    super > @
+    "class__SimpleFloatArrayAccess" > className
+    [this] > init
+      seq > @
+        TRUE
+  # main :: String[] -> void
+  [args] > main
+    seq > @
+      variableDeclaration_1
+      statementExpression_1
+      statementExpression_2
+      statementExpression_3
+    cage > array
+    [] > variableDeclaration_1
+      array.write > @
+        initializerSimple_1
+    [] > initializerSimple_1
+      arrayCreation_1 > @
+    [] > arrayCreation_1
+      FALSE > @
+    [] > statementExpression_1
+      arrayAccess_1.write > @
+        literal_1
+    [] > arrayAccess_1
+      simpleReference_1.get > @
+        literal_2.v
+    [] > simpleReference_1
+      array > @
+    [] > literal_2
+      prim__int.constructor_2 > @
+        prim__int.new
+        0
+    [] > literal_1
+      prim__float.constructor_2 > @
+        prim__float.new
+        1.0
+    [] > statementExpression_2
+      class__System.out.println > @
+        class__System.out
+        arrayAccess_2
+    [] > arrayAccess_2
+      simpleReference_2.get > @
+        literal_3.v
+    [] > simpleReference_2
+      array > @
+    [] > literal_3
+      prim__int.constructor_2 > @
+        prim__int.new
+        0
+    [] > statementExpression_3
+      class__System.out.println > @
+        class__System.out
+        literal_4
+    [] > literal_4
+      class__String.constructor_2 > @
+        class__String.new
+        "passed"
+  # null :: null -> void
+  [this] > constructor
+    seq > @
+      initialization
+      statementExpression_4
+      this
+    [] > initialization
+      this.init > @
+        this
+    [] > statementExpression_4
+      this.super.constructor > @
+        this.super
+
+[args...] > main
+  class__SimpleFloatArrayAccess.main > @
+    *

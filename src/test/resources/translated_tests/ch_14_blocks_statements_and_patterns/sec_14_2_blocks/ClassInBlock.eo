@@ -1,0 +1,86 @@
+# 2022-07-13T17:59:01.946562900
+# j2eo team
++package ch_14_blocks_statements_and_patterns.sec_14_2_blocks
++alias stdlib.lang.class__Object
++alias stdlib.lang.class__System
+
+[] > class__ClassInBlock
+  class__Object > super
+  super > @
+  [] > new
+    class__Object.new > super
+    super > @
+    "class__ClassInBlock" > className
+    [this] > init
+      seq > @
+        TRUE
+  # main :: String[] -> void
+  [args] > main
+    seq > @
+      block_1
+    [] > block_1
+      seq > @
+        normalClassDeclaration_1
+        statementExpression_1
+        statementExpression_2
+      [] > A
+        class__Object > super
+        super > @
+        [] > new
+          class__Object.new > super
+          super > @
+          "A" > className
+          [this] > init
+            seq > @
+              TRUE
+          # a :: null -> void
+          [this] > a
+            seq > @
+              statementExpression_3
+            [] > statementExpression_3
+              class__System.out.println > @
+                class__System.out
+                literal_1
+            [] > literal_1
+              class__String.constructor_2 > @
+                class__String.new
+                "a.a()"
+        # null :: null -> void
+        [this] > constructor
+          seq > @
+            initialization
+            statementExpression_4
+            this
+          [] > initialization
+            this.init > @
+              this
+          [] > statementExpression_4
+            this.super.constructor > @
+              this.super
+      [] > statementExpression_1
+        unsupported_qualifier.a > @
+          unsupported_qualifier
+      [] > statementExpression_2
+        class__System.out.println > @
+          class__System.out
+          literal_2
+      [] > literal_2
+        class__String.constructor_2 > @
+          class__String.new
+          "passed"
+  # null :: null -> void
+  [this] > constructor
+    seq > @
+      initialization
+      statementExpression_5
+      this
+    [] > initialization
+      this.init > @
+        this
+    [] > statementExpression_5
+      this.super.constructor > @
+        this.super
+
+[args...] > main
+  class__ClassInBlock.main > @
+    *

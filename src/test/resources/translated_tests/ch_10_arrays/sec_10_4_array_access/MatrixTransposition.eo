@@ -1,0 +1,228 @@
+# 2022-07-13T17:59:01.535244400
+# j2eo team
++package ch_10_arrays.sec_10_4_array_access
++alias stdlib.lang.class__System
++alias stdlib.lang.class__Object
++alias stdlib.primitives.prim__int
++alias stdlib.lang.class__String
++alias eo/org/polystat/stdlib.util.class__Arrays
+
+[] > class__MatrixTransposition
+  class__Object > super
+  super > @
+  [] > new
+    class__Object.new > super
+    super > @
+    "class__MatrixTransposition" > className
+    [this] > init
+      seq > @
+        TRUE
+  # main :: String[] -> void
+  [args] > main
+    seq > @
+      variableDeclaration_1
+      variableDeclaration_2
+      variableDeclaration_3
+      variableDeclaration_4
+      statementExpression_1
+      statementExpression_2
+      statementExpression_3
+      statementExpression_4
+    prim__int.constructor_1 > a
+      prim__int.new
+    [] > variableDeclaration_1
+      a.write > @
+        initializerArray_1
+    [] > initializerArray_1
+      * > @
+        initializerArray_2
+        initializerArray_3
+    [] > initializerArray_2
+      * > @
+        initializerSimple_1
+        initializerSimple_2
+    [] > initializerSimple_1
+      literal_1 > @
+    [] > literal_1
+      prim__int.constructor_2 > @
+        prim__int.new
+        1
+    [] > initializerSimple_2
+      literal_2 > @
+    [] > literal_2
+      prim__int.constructor_2 > @
+        prim__int.new
+        2
+    [] > initializerArray_3
+      * > @
+        initializerSimple_3
+        initializerSimple_4
+    [] > initializerSimple_3
+      literal_3 > @
+    [] > literal_3
+      prim__int.constructor_2 > @
+        prim__int.new
+        8
+    [] > initializerSimple_4
+      literal_4 > @
+    [] > literal_4
+      prim__int.constructor_2 > @
+        prim__int.new
+        9
+    prim__int.constructor_1 > row
+      prim__int.new
+    [] > variableDeclaration_2
+      row.write > @
+        initializerSimple_5
+    [] > initializerSimple_5
+      fieldAccess_1 > @
+    [] > fieldAccess_1
+      simpleReference_1.length > @
+    [] > simpleReference_1
+      a > @
+    prim__int.constructor_1 > column
+      prim__int.new
+    [] > variableDeclaration_3
+      column.write > @
+        initializerSimple_6
+    [] > initializerSimple_6
+      fieldAccess_2 > @
+    [] > fieldAccess_2
+      arrayAccess_1.length > @
+    [] > arrayAccess_1
+      simpleReference_2.get > @
+        literal_5.v
+    [] > simpleReference_2
+      a > @
+    [] > literal_5
+      prim__int.constructor_2 > @
+        prim__int.new
+        0
+    prim__int.constructor_1 > transpose
+      prim__int.new
+    [] > variableDeclaration_4
+      transpose.write > @
+        initializerSimple_7
+    [] > initializerSimple_7
+      arrayCreation_1 > @
+    [] > arrayCreation_1
+      FALSE > @
+    [] > statementExpression_1
+      simpleReference_3.write > @
+        methodInvocation_1
+    [] > simpleReference_3
+      transpose > @
+    [] > methodInvocation_1
+      this.transposeMatrix > @
+        this
+        simpleReference_4
+    [] > simpleReference_4
+      a > @
+    [] > statementExpression_2
+      class__System.out.println > @
+        class__System.out
+        binary_1
+    [] > binary_1
+      literal_6.add > @
+        methodInvocation_2
+    [] > literal_6
+      class__String.constructor_2 > @
+        class__String.new
+        "A = "
+    [] > methodInvocation_2
+      class__Arrays.deepToString > @
+        simpleReference_6
+    [] > simpleReference_6
+      a > @
+    [] > statementExpression_3
+      class__System.out.println > @
+        class__System.out
+        binary_2
+    [] > binary_2
+      literal_7.add > @
+        methodInvocation_3
+    [] > literal_7
+      class__String.constructor_2 > @
+        class__String.new
+        "Transpose = "
+    [] > methodInvocation_3
+      class__Arrays.deepToString > @
+        simpleReference_8
+    [] > simpleReference_8
+      transpose > @
+    [] > statementExpression_4
+      class__System.out.println > @
+        class__System.out
+        literal_8
+    [] > literal_8
+      class__String.constructor_2 > @
+        class__String.new
+        "passed"
+  # transposeMatrix :: int[][] -> int[][]
+  [a] > transposeMatrix
+    seq > @
+      variableDeclaration_5
+      variableDeclaration_6
+      variableDeclaration_7
+      statementExpression_5
+      return_1
+    prim__int.constructor_1 > row
+      prim__int.new
+    [] > variableDeclaration_5
+      row.write > @
+        initializerSimple_8
+    [] > initializerSimple_8
+      fieldAccess_6 > @
+    [] > fieldAccess_6
+      simpleReference_9.length > @
+    [] > simpleReference_9
+      a > @
+    prim__int.constructor_1 > column
+      prim__int.new
+    [] > variableDeclaration_6
+      column.write > @
+        initializerSimple_9
+    [] > initializerSimple_9
+      fieldAccess_7 > @
+    [] > fieldAccess_7
+      arrayAccess_2.length > @
+    [] > arrayAccess_2
+      simpleReference_10.get > @
+        literal_9.v
+    [] > simpleReference_10
+      a > @
+    [] > literal_9
+      prim__int.constructor_2 > @
+        prim__int.new
+        0
+    prim__int.constructor_1 > temp
+      prim__int.new
+    [] > variableDeclaration_7
+      temp.write > @
+        initializerSimple_10
+    [] > initializerSimple_10
+      arrayCreation_2 > @
+    [] > arrayCreation_2
+      FALSE > @
+    [] > statementExpression_5
+      for_loop_placeholder > @
+    [] > return_1
+      simpleReference_11 > @
+    [] > simpleReference_11
+      temp > @
+  # null :: null -> void
+  [this] > constructor
+    seq > @
+      initialization
+      statementExpression_6
+      this
+    [] > initialization
+      this.init > @
+        this
+    [] > statementExpression_6
+      this.super.constructor > @
+        this.super
+
+[args...] > main
+  class__MatrixTransposition.main > @
+    *

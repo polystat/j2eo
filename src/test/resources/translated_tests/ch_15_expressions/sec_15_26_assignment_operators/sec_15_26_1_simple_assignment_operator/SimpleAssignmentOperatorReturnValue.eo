@@ -1,5 +1,6 @@
-# 2022-05-25T15:02:54.174531700
+# 2022-07-13T17:59:02.196172900
 # j2eo team
++package ch_15_expressions.sec_15_26_assignment_operators.sec_15_26_1_simple_assignment_operator
 +alias stdlib.lang.class__System
 +alias stdlib.lang.class__Object
 +alias stdlib.primitives.prim__int
@@ -9,60 +10,57 @@
   class__Object > super
   super > @
   [] > new
-    [] > this
-      class__Object.new > super
-      super > @
-      "class__SimpleAssignmentOperatorReturnValue" > className
-      [this] > init
-        seq > @
-          TRUE
-    seq > @
-      this
+    class__Object.new > super
+    super > @
+    "class__SimpleAssignmentOperatorReturnValue" > className
+    [this] > init
+      seq > @
+        TRUE
   # main :: String[] -> void
   [args] > main
     seq > @
-      d1626343059
-      d441001942
-      s159290353
-      s1795816257
+      variableDeclaration_1
+      variableDeclaration_2
+      statementExpression_1
+      statementExpression_2
     prim__int.constructor_1 > a
       prim__int.new
-    [] > d1626343059
+    [] > variableDeclaration_1
       a.write > @
-        i_s2032169857
-    [] > i_s2032169857
-      l76659128 > @
-    [] > l76659128
+        initializerSimple_1
+    [] > initializerSimple_1
+      literal_1 > @
+    [] > literal_1
       prim__int.constructor_2 > @
         prim__int.new
         1
     prim__int.constructor_1 > b
       prim__int.new
-    [] > d441001942
+    [] > variableDeclaration_2
       b.write > @
-        i_s2053996178
-    [] > i_s2053996178
-      l11249189 > @
-    [] > l11249189
+        initializerSimple_2
+    [] > initializerSimple_2
+      literal_2 > @
+    [] > literal_2
       prim__int.constructor_2 > @
         prim__int.new
         2
-    [] > s159290353
+    [] > statementExpression_1
       class__System.out.println > @
         class__System.out
-        b1515877023
-    [] > b1515877023
-      s_r1263668904.write > @
-        s_r370475881
-    [] > s_r1263668904
+        binary_1
+    [] > binary_1
+      simpleReference_1.write > @
+        simpleReference_2
+    [] > simpleReference_1
       a > @
-    [] > s_r370475881
+    [] > simpleReference_2
       b > @
-    [] > s1795816257
+    [] > statementExpression_2
       class__System.out.println > @
         class__System.out
-        l1649320501
-    [] > l1649320501
+        literal_3
+    [] > literal_3
       class__String.constructor_2 > @
         class__String.new
         "passed"
@@ -70,13 +68,13 @@
   [this] > constructor
     seq > @
       initialization
-      s959629210
+      statementExpression_3
       this
     [] > initialization
       this.init > @
         this
-    [] > s959629210
-      super.constructor > @
+    [] > statementExpression_3
+      this.super.constructor > @
         this.super
 
 [args...] > main

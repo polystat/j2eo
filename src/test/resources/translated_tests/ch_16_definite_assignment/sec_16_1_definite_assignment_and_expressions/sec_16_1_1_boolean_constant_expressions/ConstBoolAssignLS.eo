@@ -1,0 +1,99 @@
+# 2022-07-13T17:59:02.314843
+# j2eo team
++package ch_16_definite_assignment.sec_16_1_definite_assignment_and_expressions.sec_16_1_1_boolean_constant_expressions
++alias stdlib.lang.class__System
++alias stdlib.lang.class__Object
++alias stdlib.primitives.prim__boolean
++alias stdlib.primitives.prim__int
++alias stdlib.lang.class__String
+
+[] > class__ConstBoolAssignLS
+  class__Object > super
+  super > @
+  [] > new
+    class__Object.new > super
+    super > @
+    "class__ConstBoolAssignLS" > className
+    [this] > init
+      seq > @
+        TRUE
+  # main :: String[] -> void
+  [args] > main
+    seq > @
+      variableDeclaration_1
+      variableDeclaration_2
+      statementExpression_1
+      statementExpression_2
+      statementExpression_3
+    prim__int.constructor_1 > k
+      prim__int.new
+    [] > variableDeclaration_1
+      k.write > @
+        initializerSimple_1
+    [] > initializerSimple_1
+      literal_1 > @
+    [] > literal_1
+      prim__int.constructor_2 > @
+        prim__int.new
+        200
+    prim__boolean.constructor_1 > b
+      prim__boolean.new
+    [] > variableDeclaration_2
+      b.write > @
+        initializerSimple_2
+    [] > initializerSimple_2
+      binary_1 > @
+    [] > binary_1
+      parenthesized_1.greater > @
+        literal_2
+    [] > parenthesized_1
+      binary_2 > @
+    [] > binary_2
+      simpleReference_1.shift_l_equal > @
+        literal_3
+    [] > simpleReference_1
+      k > @
+    [] > literal_3
+      prim__int.constructor_2 > @
+        prim__int.new
+        3
+    [] > literal_2
+      prim__int.constructor_2 > @
+        prim__int.new
+        0
+    [] > statementExpression_1
+      class__System.out.println > @
+        class__System.out
+        simpleReference_2
+    [] > simpleReference_2
+      b > @
+    [] > statementExpression_2
+      class__System.out.println > @
+        class__System.out
+        simpleReference_3
+    [] > simpleReference_3
+      k > @
+    [] > statementExpression_3
+      class__System.out.println > @
+        class__System.out
+        literal_4
+    [] > literal_4
+      class__String.constructor_2 > @
+        class__String.new
+        "passed"
+  # null :: null -> void
+  [this] > constructor
+    seq > @
+      initialization
+      statementExpression_4
+      this
+    [] > initialization
+      this.init > @
+        this
+    [] > statementExpression_4
+      this.super.constructor > @
+        this.super
+
+[args...] > main
+  class__ConstBoolAssignLS.main > @
+    *

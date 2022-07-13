@@ -1,0 +1,107 @@
+# 2022-07-13T17:59:01.129136100
+# j2eo team
++package ch_10_arrays.sec_10_4_array_access
++alias stdlib.lang.class__System
++alias stdlib.lang.class__Object
++alias stdlib.primitives.prim__int
++alias stdlib.lang.class__String
+
+[] > class__ArrayLength
+  class__Object > super
+  super > @
+  [] > new
+    class__Object.new > super
+    super > @
+    "class__ArrayLength" > className
+    [this] > init
+      seq > @
+        TRUE
+  # main :: String[] -> void
+  [args] > main
+    seq > @
+      variableDeclaration_1
+      statementExpression_1
+      statementExpression_2
+      statementExpression_3
+    prim__int.constructor_1 > arr
+      prim__int.new
+    [] > variableDeclaration_1
+      arr.write > @
+        initializerArray_1
+    [] > initializerArray_1
+      * > @
+        initializerSimple_1
+        initializerSimple_2
+        initializerSimple_3
+        initializerSimple_4
+        initializerSimple_5
+    [] > initializerSimple_1
+      literal_1 > @
+    [] > literal_1
+      prim__int.constructor_2 > @
+        prim__int.new
+        10
+    [] > initializerSimple_2
+      literal_2 > @
+    [] > literal_2
+      prim__int.constructor_2 > @
+        prim__int.new
+        20
+    [] > initializerSimple_3
+      literal_3 > @
+    [] > literal_3
+      prim__int.constructor_2 > @
+        prim__int.new
+        30
+    [] > initializerSimple_4
+      literal_4 > @
+    [] > literal_4
+      prim__int.constructor_2 > @
+        prim__int.new
+        40
+    [] > initializerSimple_5
+      literal_5 > @
+    [] > literal_5
+      prim__int.constructor_2 > @
+        prim__int.new
+        50
+    [] > statementExpression_1
+      class__System.out.print > @
+        class__System.out
+        literal_6
+    [] > literal_6
+      class__String.constructor_2 > @
+        class__String.new
+        "The length of the given array = "
+    [] > statementExpression_2
+      class__System.out.println > @
+        class__System.out
+        fieldAccess_3
+    [] > fieldAccess_3
+      simpleReference_1.length > @
+    [] > simpleReference_1
+      arr > @
+    [] > statementExpression_3
+      class__System.out.println > @
+        class__System.out
+        literal_7
+    [] > literal_7
+      class__String.constructor_2 > @
+        class__String.new
+        "passed"
+  # null :: null -> void
+  [this] > constructor
+    seq > @
+      initialization
+      statementExpression_4
+      this
+    [] > initialization
+      this.init > @
+        this
+    [] > statementExpression_4
+      this.super.constructor > @
+        this.super
+
+[args...] > main
+  class__ArrayLength.main > @
+    *

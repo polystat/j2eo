@@ -1,0 +1,86 @@
+# 2022-07-13T17:59:02.692339900
+# j2eo team
++package ch_4_types_values_variables.sec_4_12_variables.sec_4_12_2_vars_of_reference_type
++alias stdlib.lang.class__Object
++alias stdlib.lang.class__System
++alias stdlib.lang.class__String
+
+[] > class__ChangeCase
+  class__Object > super
+  super > @
+  [] > new
+    class__Object.new > super
+    super > @
+    "class__ChangeCase" > className
+    [this] > init
+      seq > @
+        TRUE
+  # main :: String[] -> void
+  [args] > main
+    seq > @
+      variableDeclaration_1
+      variableDeclaration_2
+      statementExpression_1
+      statementExpression_2
+      statementExpression_3
+    cage > str1
+    [] > variableDeclaration_1
+      str1.write > @
+        initializerSimple_1
+    [] > initializerSimple_1
+      literal_1 > @
+    [] > literal_1
+      class__String.constructor_2 > @
+        class__String.new
+        "Great Power"
+    cage > newStr
+    [] > variableDeclaration_2
+      newStr.write > @
+        initializerSimple_2
+    [] > initializerSimple_2
+      instanceCreation_1 > @
+    [] > instanceCreation_1
+      class__StringBuffer.constructor > @
+        class__StringBuffer.new
+        simpleReference_1
+    [] > simpleReference_1
+      str1 > @
+    [] > statementExpression_1
+      for_loop_placeholder > @
+    [] > statementExpression_2
+      class__System.out.println > @
+        class__System.out
+        binary_1
+    [] > binary_1
+      literal_2.add > @
+        simpleReference_2
+    [] > literal_2
+      class__String.constructor_2 > @
+        class__String.new
+        "String after case conversion : "
+    [] > simpleReference_2
+      newStr > @
+    [] > statementExpression_3
+      class__System.out.println > @
+        class__System.out
+        literal_3
+    [] > literal_3
+      class__String.constructor_2 > @
+        class__String.new
+        "passed"
+  # null :: null -> void
+  [this] > constructor
+    seq > @
+      initialization
+      statementExpression_4
+      this
+    [] > initialization
+      this.init > @
+        this
+    [] > statementExpression_4
+      this.super.constructor > @
+        this.super
+
+[args...] > main
+  class__ChangeCase.main > @
+    *

@@ -1,0 +1,182 @@
+# 2022-07-13T17:59:03.274932
+# j2eo team
++package ch_6_names.sec_6_3_scope_of_a_declaration.sec_6_3_1_scope_for_pattern_vars_in_exprs.sec_6_3_1_7_parenthesized_expressions
++alias stdlib.lang.class__Object
++alias stdlib.lang.class__System
+
+[] > class__PatternParenthExpr
+  class__Object > super
+  super > @
+  [] > new
+    class__Object.new > super
+    super > @
+    "class__PatternParenthExpr" > className
+    [this] > init
+      seq > @
+        TRUE
+  # main :: String[] -> void
+  [args] > main
+    seq > @
+      variableDeclaration_1
+      variableDeclaration_2
+      ifThenElse_1
+      ifThenElse_2
+    cage > s1
+    [] > variableDeclaration_1
+      s1.write > @
+        initializerSimple_1
+    [] > initializerSimple_1
+      instanceCreation_1 > @
+    [] > instanceCreation_1
+      class__Some.constructor > @
+        class__Some.new
+    cage > s2
+    [] > variableDeclaration_2
+      s2.write > @
+        initializerSimple_2
+    [] > initializerSimple_2
+      instanceCreation_2 > @
+    [] > instanceCreation_2
+      class__SomeOther.constructor > @
+        class__SomeOther.new
+    [] > ifThenElse_1
+      instanceOf_1.if > @
+        block_1
+        empty_1
+    [] > instanceOf_1
+      instance_of_placeholder > @
+    [] > block_1
+      seq > @
+        statementExpression_1
+      [] > statementExpression_1
+        class__System.out.println > @
+          class__System.out
+          methodInvocation_1
+      [] > methodInvocation_1
+        some.getSome > @
+          some
+    [] > empty_1
+      TRUE > @
+    [] > ifThenElse_2
+      instanceOf_2.if > @
+        block_2
+        empty_2
+    [] > instanceOf_2
+      instance_of_placeholder > @
+    [] > block_2
+      seq > @
+        statementExpression_2
+      [] > statementExpression_2
+        class__System.out.println > @
+          class__System.out
+          methodInvocation_2
+      [] > methodInvocation_2
+        some.getSome > @
+          some
+    [] > empty_2
+      TRUE > @
+  # null :: null -> void
+  [this] > constructor
+    seq > @
+      initialization
+      statementExpression_3
+      this
+    [] > initialization
+      this.init > @
+        this
+    [] > statementExpression_3
+      this.super.constructor > @
+        this.super
+
+[] > class__Sup
+  class__Object > super
+  super > @
+  [] > new
+    class__Object.new > super
+    super > @
+    "class__Sup" > className
+    [this] > init
+      seq > @
+        TRUE
+  # null :: null -> void
+  [this] > constructor
+    seq > @
+      initialization
+      statementExpression_4
+      this
+    [] > initialization
+      this.init > @
+        this
+    [] > statementExpression_4
+      this.super.constructor > @
+        this.super
+
+[] > class__Some
+  class__Sup > super
+  super > @
+  [] > new
+    class__Sup.new > super
+    super > @
+    "class__Some" > className
+    [this] > init
+      seq > @
+        TRUE
+    # getSome :: null -> String
+    [this] > getSome
+      seq > @
+        return_1
+      [] > return_1
+        literal_1 > @
+      [] > literal_1
+        class__String.constructor_2 > @
+          class__String.new
+          "passed"
+  # null :: null -> void
+  [this] > constructor
+    seq > @
+      initialization
+      statementExpression_5
+      this
+    [] > initialization
+      this.init > @
+        this
+    [] > statementExpression_5
+      this.super.constructor > @
+        this.super
+
+[] > class__SomeOther
+  class__Sup > super
+  super > @
+  [] > new
+    class__Sup.new > super
+    super > @
+    "class__SomeOther" > className
+    [this] > init
+      seq > @
+        TRUE
+    # getSome :: null -> String
+    [this] > getSome
+      seq > @
+        return_2
+      [] > return_2
+        literal_2 > @
+      [] > literal_2
+        class__String.constructor_2 > @
+          class__String.new
+          "not passed"
+  # null :: null -> void
+  [this] > constructor
+    seq > @
+      initialization
+      statementExpression_6
+      this
+    [] > initialization
+      this.init > @
+        this
+    [] > statementExpression_6
+      this.super.constructor > @
+        this.super
+
+[args...] > main
+  class__PatternParenthExpr.main > @
+    *

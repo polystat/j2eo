@@ -1,0 +1,118 @@
+# 2022-07-13T17:59:03.540275800
+# j2eo team
++package ch_8_classes.sec_8_8_constructor_declarations.sec_8_8_8_constructor_overloading
++alias stdlib.lang.class__Object
++alias stdlib.lang.class__System
++alias stdlib.lang.class__String
+
+[] > class__SimpleConstructorOverloading
+  class__Object > super
+  super > @
+  [] > new
+    class__Object.new > super
+    super > @
+    "class__SimpleConstructorOverloading" > className
+    [this] > init
+      seq > @
+        TRUE
+  # main :: String[] -> void
+  [args] > main
+    seq > @
+      statementExpression_1
+      statementExpression_2
+      statementExpression_3
+    [] > statementExpression_1
+      class__Some.constructor > @
+        class__Some.new
+        literal_1
+    [] > literal_1
+      prim__int.constructor_2 > @
+        prim__int.new
+        1
+    [] > statementExpression_2
+      class__Some.constructor > @
+        class__Some.new
+        literal_2
+    [] > literal_2
+      class__String.constructor_2 > @
+        class__String.new
+        "some"
+    [] > statementExpression_3
+      class__System.out.println > @
+        class__System.out
+        literal_3
+    [] > literal_3
+      class__String.constructor_2 > @
+        class__String.new
+        "passed"
+  # null :: null -> void
+  [this] > constructor
+    seq > @
+      initialization
+      statementExpression_4
+      this
+    [] > initialization
+      this.init > @
+        this
+    [] > statementExpression_4
+      this.super.constructor > @
+        this.super
+
+[] > class__Some
+  class__Object > super
+  super > @
+  [] > new
+    class__Object.new > super
+    super > @
+    "class__Some" > className
+    [this] > init
+      seq > @
+        TRUE
+  # null :: int -> void
+  [this a] > constructor
+    seq > @
+      initialization
+      statementExpression_5
+      this
+    [] > initialization
+      this.init > @
+        this
+    [] > statementExpression_5
+      class__System.out.println > @
+        class__System.out
+        binary_1
+    [] > binary_1
+      literal_4.add > @
+        simpleReference_1
+    [] > literal_4
+      class__String.constructor_2 > @
+        class__String.new
+        "int: "
+    [] > simpleReference_1
+      a > @
+  # null :: String -> void
+  [this s] > constructor
+    seq > @
+      initialization
+      statementExpression_6
+      this
+    [] > initialization
+      this.init > @
+        this
+    [] > statementExpression_6
+      class__System.out.println > @
+        class__System.out
+        binary_2
+    [] > binary_2
+      literal_5.add > @
+        simpleReference_2
+    [] > literal_5
+      class__String.constructor_2 > @
+        class__String.new
+        "str: "
+    [] > simpleReference_2
+      s > @
+
+[args...] > main
+  class__SimpleConstructorOverloading.main > @
+    *

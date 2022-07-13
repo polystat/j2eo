@@ -1,0 +1,300 @@
+# 2022-07-13T17:59:02.636185500
+# j2eo team
++package ch_4_types_values_variables.sec_4_12_variables
++alias stdlib.lang.class__System
++alias stdlib.lang.class__Object
++alias stdlib.primitives.prim__boolean
++alias stdlib.primitives.prim__int
++alias stdlib.lang.class__String
++alias eo/org/polystat/stdlib.class__util
+
+[] > class__KeithNumberExample
+  class__Object > super
+  super > @
+  [] > new
+    class__Object.new > super
+    super > @
+    "class__KeithNumberExample" > className
+    [this] > init
+      seq > @
+        TRUE
+  # isKeith :: int -> boolean
+  [x] > isKeith
+    seq > @
+      variableDeclaration_1
+      variableDeclaration_2
+      variableDeclaration_3
+      while_1
+      statementExpression_1
+      variableDeclaration_4
+      variableDeclaration_5
+      while_2
+      return_1
+    cage > terms
+    [] > variableDeclaration_1
+      terms.write > @
+        initializerSimple_1
+    [] > initializerSimple_1
+      instanceCreation_1 > @
+    [] > instanceCreation_1
+      class__ArrayList.constructor > @
+        class__ArrayList.new
+    prim__int.constructor_1 > temp
+      prim__int.new
+    [] > variableDeclaration_2
+      temp.write > @
+        initializerSimple_2
+    [] > initializerSimple_2
+      simpleReference_1 > @
+    [] > simpleReference_1
+      x > @
+    prim__int.constructor_1 > n
+      prim__int.new
+    [] > variableDeclaration_3
+      n.write > @
+        initializerSimple_3
+    [] > initializerSimple_3
+      literal_1 > @
+    [] > literal_1
+      prim__int.constructor_2 > @
+        prim__int.new
+        0
+    [] > while_1
+      binary_1.while > @
+        [while_i]
+          block_1 > @
+    [] > binary_1
+      simpleReference_2.greater > @
+        literal_2
+    [] > simpleReference_2
+      temp > @
+    [] > literal_2
+      prim__int.constructor_2 > @
+        prim__int.new
+        0
+    [] > block_1
+      seq > @
+        statementExpression_2
+        statementExpression_3
+        statementExpression_4
+      [] > statementExpression_2
+        terms.add > @
+          terms
+          binary_2
+      [] > binary_2
+        simpleReference_4.binary_op_placeholder > @
+          literal_3
+      [] > simpleReference_4
+        temp > @
+      [] > literal_3
+        prim__int.constructor_2 > @
+          prim__int.new
+          10
+      [] > statementExpression_3
+        simpleReference_5.write > @
+          binary_3
+      [] > simpleReference_5
+        temp > @
+      [] > binary_3
+        simpleReference_6.div > @
+          literal_4
+      [] > simpleReference_6
+        temp > @
+      [] > literal_4
+        prim__int.constructor_2 > @
+          prim__int.new
+          10
+      [] > statementExpression_4
+        simpleReference_7.inc_post > @
+      [] > simpleReference_7
+        n > @
+    [] > statementExpression_1
+      Collections.reverse > @
+        Collections
+        simpleReference_9
+    [] > simpleReference_9
+      terms > @
+    prim__int.constructor_1 > next_term
+      prim__int.new
+    [] > variableDeclaration_4
+      next_term.write > @
+        initializerSimple_4
+    [] > initializerSimple_4
+      literal_5 > @
+    [] > literal_5
+      prim__int.constructor_2 > @
+        prim__int.new
+        0
+    prim__int.constructor_1 > i
+      prim__int.new
+    [] > variableDeclaration_5
+      i.write > @
+        initializerSimple_5
+    [] > initializerSimple_5
+      simpleReference_10 > @
+    [] > simpleReference_10
+      n > @
+    [] > while_2
+      binary_4.while > @
+        [while_i]
+          block_2 > @
+    [] > binary_4
+      simpleReference_11.less > @
+        simpleReference_12
+    [] > simpleReference_11
+      next_term > @
+    [] > simpleReference_12
+      x > @
+    [] > block_2
+      seq > @
+        statementExpression_5
+        statementExpression_6
+        statementExpression_7
+        statementExpression_8
+      [] > statementExpression_5
+        simpleReference_13.write > @
+          literal_6
+      [] > simpleReference_13
+        next_term > @
+      [] > literal_6
+        prim__int.constructor_2 > @
+          prim__int.new
+          0
+      [] > statementExpression_6
+        for_loop_placeholder > @
+      [] > statementExpression_7
+        terms.add > @
+          terms
+          simpleReference_15
+      [] > simpleReference_15
+        next_term > @
+      [] > statementExpression_8
+        simpleReference_16.inc_post > @
+      [] > simpleReference_16
+        i > @
+    [] > return_1
+      parenthesized_1 > @
+    [] > parenthesized_1
+      binary_5 > @
+    [] > binary_5
+      simpleReference_17.eq > @
+        simpleReference_18
+    [] > simpleReference_17
+      next_term > @
+    [] > simpleReference_18
+      x > @
+  # main :: String[] -> void
+  [args] > main
+    seq > @
+      ifThenElse_1
+      ifThenElse_2
+      ifThenElse_3
+      statementExpression_9
+    [] > ifThenElse_1
+      methodInvocation_1.if > @
+        statementExpression_10
+        statementExpression_11
+    [] > methodInvocation_1
+      this.isKeith > @
+        this
+        literal_7
+    [] > literal_7
+      prim__int.constructor_2 > @
+        prim__int.new
+        19
+    [] > statementExpression_10
+      class__System.out.println > @
+        class__System.out
+        literal_8
+    [] > literal_8
+      class__String.constructor_2 > @
+        class__String.new
+        "Yes, the given number is a Keith number."
+    [] > statementExpression_11
+      class__System.out.println > @
+        class__System.out
+        literal_9
+    [] > literal_9
+      class__String.constructor_2 > @
+        class__String.new
+        "No, the given number is not a Keith number."
+    [] > ifThenElse_2
+      methodInvocation_2.if > @
+        statementExpression_12
+        statementExpression_13
+    [] > methodInvocation_2
+      this.isKeith > @
+        this
+        literal_10
+    [] > literal_10
+      prim__int.constructor_2 > @
+        prim__int.new
+        742
+    [] > statementExpression_12
+      class__System.out.println > @
+        class__System.out
+        literal_11
+    [] > literal_11
+      class__String.constructor_2 > @
+        class__String.new
+        "Yes, the given number is a Keith number."
+    [] > statementExpression_13
+      class__System.out.println > @
+        class__System.out
+        literal_12
+    [] > literal_12
+      class__String.constructor_2 > @
+        class__String.new
+        "No, the given number is not a Keith number."
+    [] > ifThenElse_3
+      methodInvocation_3.if > @
+        statementExpression_14
+        statementExpression_15
+    [] > methodInvocation_3
+      this.isKeith > @
+        this
+        literal_13
+    [] > literal_13
+      prim__int.constructor_2 > @
+        prim__int.new
+        4578
+    [] > statementExpression_14
+      class__System.out.println > @
+        class__System.out
+        literal_14
+    [] > literal_14
+      class__String.constructor_2 > @
+        class__String.new
+        "Yes, the given number is a Keith number."
+    [] > statementExpression_15
+      class__System.out.println > @
+        class__System.out
+        literal_15
+    [] > literal_15
+      class__String.constructor_2 > @
+        class__String.new
+        "No, the given number is not a Keith number."
+    [] > statementExpression_9
+      class__System.out.println > @
+        class__System.out
+        literal_16
+    [] > literal_16
+      class__String.constructor_2 > @
+        class__String.new
+        "passed"
+  # null :: null -> void
+  [this] > constructor
+    seq > @
+      initialization
+      statementExpression_16
+      this
+    [] > initialization
+      this.init > @
+        this
+    [] > statementExpression_16
+      this.super.constructor > @
+        this.super
+
+[args...] > main
+  class__KeithNumberExample.main > @
+    *

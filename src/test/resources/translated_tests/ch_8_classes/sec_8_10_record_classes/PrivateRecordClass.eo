@@ -1,0 +1,85 @@
+# 2022-07-13T17:59:03.302938100
+# j2eo team
++package ch_8_classes.sec_8_10_record_classes
++alias stdlib.lang.class__Object
++alias stdlib.lang.class__System
++alias stdlib.lang.class__String
+
+[] > class__PrivateRecordClass
+  class__Object > super
+  super > @
+  [] > new
+    class__Object.new > super
+    super > @
+    "class__PrivateRecordClass" > className
+    [this] > init
+      seq > @
+        TRUE
+  # main :: String[] -> void
+  [args] > main
+    seq > @
+      variableDeclaration_1
+      statementExpression_1
+      statementExpression_2
+      statementExpression_3
+    cage > p
+    [] > variableDeclaration_1
+      p.write > @
+        initializerSimple_1
+    [] > initializerSimple_1
+      instanceCreation_1 > @
+    [] > instanceCreation_1
+      class__Person.constructor > @
+        class__Person.new
+        literal_1
+        literal_2
+    [] > literal_1
+      class__String.constructor_2 > @
+        class__String.new
+        "Mike"
+    [] > literal_2
+      class__String.constructor_2 > @
+        class__String.new
+        "Innopolis"
+    [] > statementExpression_1
+      class__System.out.println > @
+        class__System.out
+        methodInvocation_1
+    [] > methodInvocation_1
+      p.name > @
+        p
+    [] > statementExpression_2
+      class__System.out.println > @
+        class__System.out
+        methodInvocation_2
+    [] > methodInvocation_2
+      p.address > @
+        p
+    [] > statementExpression_3
+      class__System.out.println > @
+        class__System.out
+        literal_3
+    [] > literal_3
+      class__String.constructor_2 > @
+        class__String.new
+        "passed"
+  # Person :: String -> String -> record
+  [name address] > Person
+    seq > @
+      TRUE
+  # null :: null -> void
+  [this] > constructor
+    seq > @
+      initialization
+      statementExpression_4
+      this
+    [] > initialization
+      this.init > @
+        this
+    [] > statementExpression_4
+      this.super.constructor > @
+        this.super
+
+[args...] > main
+  class__PrivateRecordClass.main > @
+    *

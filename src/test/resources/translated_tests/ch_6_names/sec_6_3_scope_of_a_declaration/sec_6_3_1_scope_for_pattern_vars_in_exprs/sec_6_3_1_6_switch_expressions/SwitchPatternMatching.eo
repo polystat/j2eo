@@ -1,0 +1,138 @@
+# 2022-07-13T17:59:03.272932700
+# j2eo team
++package ch_6_names.sec_6_3_scope_of_a_declaration.sec_6_3_1_scope_for_pattern_vars_in_exprs.sec_6_3_1_6_switch_expressions
++alias stdlib.lang.class__Object
++alias stdlib.primitives.prim__int
+
+[] > class__SwitchPatternMatching
+  class__Object > super
+  super > @
+  [] > new
+    class__Object.new > super
+    super > @
+    "class__SwitchPatternMatching" > className
+    [this] > init
+      seq > @
+        TRUE
+  # main :: String[] -> void
+  [args] > main
+    seq > @
+      variableDeclaration_1
+      variableDeclaration_2
+      variableDeclaration_3
+      variableDeclaration_4
+      statementExpression_1
+    cage > io
+    [] > variableDeclaration_1
+      io.write > @
+        initializerSimple_1
+    [] > initializerSimple_1
+      instanceCreation_1 > @
+    [] > instanceCreation_1
+      class__IOController.constructor > @
+        class__IOController.new
+    cage > writerObj
+    [] > variableDeclaration_2
+      writerObj.write > @
+        initializerSimple_2
+    [] > initializerSimple_2
+      instanceCreation_2 > @
+    [] > instanceCreation_2
+      class__Writer.constructor > @
+        class__Writer.new
+    prim__int.constructor_1 > val1
+      prim__int.new
+    [] > variableDeclaration_3
+      val1.write > @
+        initializerSimple_3
+    [] > initializerSimple_3
+      literal_1 > @
+    [] > literal_1
+      prim__int.constructor_2 > @
+        prim__int.new
+        5
+    prim__int.constructor_1 > val2
+      prim__int.new
+    [] > variableDeclaration_4
+      val2.write > @
+        initializerSimple_4
+    [] > initializerSimple_4
+      literal_2 > @
+    [] > literal_2
+      prim__int.constructor_2 > @
+        prim__int.new
+        6
+    [] > statementExpression_1
+      switch_expression_placeholder > @
+  # null :: null -> void
+  [this] > constructor
+    seq > @
+      initialization
+      statementExpression_2
+      this
+    [] > initialization
+      this.init > @
+        this
+    [] > statementExpression_2
+      this.super.constructor > @
+        this.super
+
+[] > class__IOController
+  class__Object > super
+  super > @
+  [] > new
+    class__Object.new > super
+    super > @
+    "class__IOController" > className
+    [this] > init
+      seq > @
+        TRUE
+    # read :: null -> String
+    [this] > read
+      seq > @
+        return_1
+      [] > return_1
+        literal_3 > @
+      [] > literal_3
+        class__String.constructor_2 > @
+          class__String.new
+          "passed"
+  # null :: null -> void
+  [this] > constructor
+    seq > @
+      initialization
+      statementExpression_3
+      this
+    [] > initialization
+      this.init > @
+        this
+    [] > statementExpression_3
+      this.super.constructor > @
+        this.super
+
+[] > class__Writer
+  class__Object > super
+  super > @
+  [] > new
+    class__Object.new > super
+    super > @
+    "class__Writer" > className
+    [this] > init
+      seq > @
+        TRUE
+  # null :: null -> void
+  [this] > constructor
+    seq > @
+      initialization
+      statementExpression_4
+      this
+    [] > initialization
+      this.init > @
+        this
+    [] > statementExpression_4
+      this.super.constructor > @
+        this.super
+
+[args...] > main
+  class__SwitchPatternMatching.main > @
+    *

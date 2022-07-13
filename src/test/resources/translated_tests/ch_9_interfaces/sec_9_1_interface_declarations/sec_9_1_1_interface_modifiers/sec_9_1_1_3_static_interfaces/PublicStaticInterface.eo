@@ -1,0 +1,84 @@
+# 2022-07-13T17:59:03.586704500
+# j2eo team
++package ch_9_interfaces.sec_9_1_interface_declarations.sec_9_1_1_interface_modifiers.sec_9_1_1_3_static_interfaces
++alias stdlib.lang.class__Object
++alias stdlib.lang.class__System
++alias stdlib.lang.class__String
+
+[] > class__PublicStaticInterface
+  class__Object > super
+  super > @
+  [] > new
+    class__Object.new > super
+    super > @
+    "class__PublicStaticInterface" > className
+    [this] > init
+      seq > @
+        TRUE
+  # main :: String[] -> void
+  [args] > main
+    seq > @
+      statementExpression_1
+      statementExpression_2
+    [] > statementExpression_1
+      unsupported_qualifier.doNestedSomething > @
+        unsupported_qualifier
+    [] > statementExpression_2
+      class__System.out.println > @
+        class__System.out
+        literal_1
+    [] > literal_1
+      class__String.constructor_2 > @
+        class__String.new
+        "passed"
+  # null :: null -> void
+  [this] > constructor
+    seq > @
+      initialization
+      statementExpression_3
+      this
+    [] > initialization
+      this.init > @
+        this
+    [] > statementExpression_3
+      this.super.constructor > @
+        this.super
+
+[] > class__Work
+  class__Object > super
+  super > @
+  [] > new
+    class__Object.new > super
+    super > @
+    "class__Work" > className
+    [this] > init
+      seq > @
+        TRUE
+    # doNestedSomething :: null -> void
+    [this] > doNestedSomething
+      seq > @
+        statementExpression_4
+      [] > statementExpression_4
+        class__System.out.println > @
+          class__System.out
+          literal_2
+      [] > literal_2
+        class__String.constructor_2 > @
+          class__String.new
+          "doing nested work..."
+  # null :: null -> void
+  [this] > constructor
+    seq > @
+      initialization
+      statementExpression_5
+      this
+    [] > initialization
+      this.init > @
+        this
+    [] > statementExpression_5
+      this.super.constructor > @
+        this.super
+
+[args...] > main
+  class__PublicStaticInterface.main > @
+    *

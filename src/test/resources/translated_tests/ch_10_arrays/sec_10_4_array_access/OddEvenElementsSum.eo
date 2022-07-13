@@ -1,0 +1,136 @@
+# 2022-07-13T17:59:01.538246100
+# j2eo team
++package ch_10_arrays.sec_10_4_array_access
++alias stdlib.lang.class__System
++alias stdlib.lang.class__Object
++alias stdlib.primitives.prim__int
++alias stdlib.lang.class__String
+
+[] > class__OddEvenElementsSum
+  class__Object > super
+  super > @
+  [] > new
+    class__Object.new > super
+    super > @
+    "class__OddEvenElementsSum" > className
+    [this] > init
+      seq > @
+        TRUE
+  # main :: String[] -> void
+  [args] > main
+    seq > @
+      variableDeclaration_1
+      variableDeclaration_2
+      statementExpression_1
+      statementExpression_2
+      statementExpression_3
+    prim__int.constructor_1 > n
+      prim__int.new
+    [] > variableDeclaration_1
+      n.write > @
+        initializerSimple_1
+    [] > initializerSimple_1
+      literal_1 > @
+    [] > literal_1
+      prim__int.constructor_2 > @
+        prim__int.new
+        10
+    prim__int.constructor_1 > numbers
+      prim__int.new
+    [] > variableDeclaration_2
+      numbers.write > @
+        initializerSimple_2
+    [] > initializerSimple_2
+      arrayCreation_1 > @
+    [] > arrayCreation_1
+      FALSE > @
+    [] > statementExpression_1
+      for_loop_placeholder > @
+    [] > statementExpression_2
+      this.oddEvenSum > @
+        this
+        simpleReference_1
+    [] > simpleReference_1
+      numbers > @
+    [] > statementExpression_3
+      class__System.out.println > @
+        class__System.out
+        literal_2
+    [] > literal_2
+      class__String.constructor_2 > @
+        class__String.new
+        "passed"
+  # oddEvenSum :: int[] -> void
+  [numbers] > oddEvenSum
+    seq > @
+      variableDeclaration_3
+      variableDeclaration_4
+      statementExpression_4
+      statementExpression_5
+      statementExpression_6
+    prim__int.constructor_1 > oddSum
+      prim__int.new
+    [] > variableDeclaration_3
+      oddSum.write > @
+        initializerSimple_3
+    [] > initializerSimple_3
+      literal_3 > @
+    [] > literal_3
+      prim__int.constructor_2 > @
+        prim__int.new
+        0
+    prim__int.constructor_1 > evenSum
+      prim__int.new
+    [] > variableDeclaration_4
+      evenSum.write > @
+        initializerSimple_4
+    [] > initializerSimple_4
+      literal_4 > @
+    [] > literal_4
+      prim__int.constructor_2 > @
+        prim__int.new
+        0
+    [] > statementExpression_4
+      for_loop_placeholder > @
+    [] > statementExpression_5
+      class__System.out.println > @
+        class__System.out
+        binary_1
+    [] > binary_1
+      literal_5.add > @
+        simpleReference_2
+    [] > literal_5
+      class__String.constructor_2 > @
+        class__String.new
+        "Odd numbers sum = "
+    [] > simpleReference_2
+      oddSum > @
+    [] > statementExpression_6
+      class__System.out.println > @
+        class__System.out
+        binary_2
+    [] > binary_2
+      literal_6.add > @
+        simpleReference_3
+    [] > literal_6
+      class__String.constructor_2 > @
+        class__String.new
+        "Even numbers sum = "
+    [] > simpleReference_3
+      evenSum > @
+  # null :: null -> void
+  [this] > constructor
+    seq > @
+      initialization
+      statementExpression_7
+      this
+    [] > initialization
+      this.init > @
+        this
+    [] > statementExpression_7
+      this.super.constructor > @
+        this.super
+
+[args...] > main
+  class__OddEvenElementsSum.main > @
+    *

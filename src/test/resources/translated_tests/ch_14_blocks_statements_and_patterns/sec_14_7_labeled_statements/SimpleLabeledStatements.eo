@@ -1,0 +1,186 @@
+# 2022-07-13T17:59:02.037467500
+# j2eo team
++package ch_14_blocks_statements_and_patterns.sec_14_7_labeled_statements
++alias stdlib.primitives.prim__char
++alias stdlib.lang.class__System
++alias stdlib.lang.class__Object
++alias stdlib.primitives.prim__int
++alias stdlib.lang.class__String
+
+[] > class__SimpleLabeledStatements
+  class__Object > super
+  super > @
+  [] > new
+    class__Object.new > super
+    super > @
+    "class__SimpleLabeledStatements" > className
+    [this] > init
+      seq > @
+        TRUE
+  # main :: String[] -> void
+  [args] > main
+    seq > @
+      variableDeclaration_1
+      statementExpression_1
+      statementExpression_2
+    cage > s
+    [] > variableDeclaration_1
+      s.write > @
+        initializerSimple_1
+    [] > initializerSimple_1
+      instanceCreation_1 > @
+    [] > instanceCreation_1
+      class__TestString.constructor > @
+        class__TestString.new
+        arrayCreation_1
+    [] > arrayCreation_1
+      FALSE > @
+    [] > statementExpression_1
+      class__System.out.println > @
+        class__System.out
+        methodInvocation_1
+    [] > methodInvocation_1
+      unsupported_qualifier.indexOf > @
+        unsupported_qualifier
+        simpleReference_1
+        literal_1
+    [] > simpleReference_1
+      s > @
+    [] > literal_1
+      prim__int.constructor_2 > @
+        prim__int.new
+        0
+    [] > statementExpression_2
+      class__System.out.println > @
+        class__System.out
+        literal_2
+    [] > literal_2
+      class__String.constructor_2 > @
+        class__String.new
+        "passed"
+  # null :: null -> void
+  [this] > constructor
+    seq > @
+      initialization
+      statementExpression_3
+      this
+    [] > initialization
+      this.init > @
+        this
+    [] > statementExpression_3
+      this.super.constructor > @
+        this.super
+
+[] > class__TestString
+  class__Object > super
+  super > @
+  [] > new
+    class__Object.new > super
+    super > @
+    "class__TestString" > className
+    [this] > init
+      seq > @
+        TRUE
+    cage > value
+    prim__int.constructor_1 > offset
+      prim__int.new
+    prim__int.constructor_1 > count
+      prim__int.new
+    # indexOf :: TestString -> int -> int
+    [this str fromIndex] > indexOf
+      seq > @
+        variableDeclaration_2
+        variableDeclaration_3
+        variableDeclaration_4
+        variableDeclaration_5
+        statementExpression_4
+        return_1
+      cage > v1
+      [] > variableDeclaration_2
+        v1.write > @
+          initializerSimple_2
+      [] > initializerSimple_2
+        simpleReference_2 > @
+      [] > simpleReference_2
+        value > @
+      cage > v2
+      [] > variableDeclaration_3
+        v2.write > @
+          initializerSimple_3
+      [] > initializerSimple_3
+        fieldAccess_3 > @
+      [] > fieldAccess_3
+        simpleReference_3.value > @
+      [] > simpleReference_3
+        str > @
+      prim__int.constructor_1 > max
+        prim__int.new
+      [] > variableDeclaration_4
+        max.write > @
+          initializerSimple_4
+      [] > initializerSimple_4
+        binary_1 > @
+      [] > binary_1
+        simpleReference_4.add > @
+          parenthesized_1
+      [] > simpleReference_4
+        offset > @
+      [] > parenthesized_1
+        binary_2 > @
+      [] > binary_2
+        simpleReference_5.sub > @
+          fieldAccess_4
+      [] > simpleReference_5
+        count > @
+      [] > fieldAccess_4
+        simpleReference_6.count > @
+      [] > simpleReference_6
+        str > @
+      prim__int.constructor_1 > start
+        prim__int.new
+      [] > variableDeclaration_5
+        start.write > @
+          initializerSimple_5
+      [] > initializerSimple_5
+        binary_3 > @
+      [] > binary_3
+        simpleReference_7.add > @
+          parenthesized_2
+      [] > simpleReference_7
+        offset > @
+      [] > parenthesized_2
+        simpleReference_8 > @
+      [] > simpleReference_8
+        expression_placeholder > @
+      [] > statementExpression_4
+        identifier_label_placeholder > @
+      [] > return_1
+        unaryPrefix_1 > @
+      [] > unaryPrefix_1
+        literal_3.neg > @
+      [] > literal_3
+        prim__int.constructor_2 > @
+          prim__int.new
+          1
+  # null :: char[] -> void
+  [this value] > constructor
+    seq > @
+      initialization
+      statementExpression_5
+      this
+    [] > initialization
+      this.init > @
+        this
+    [] > statementExpression_5
+      fieldAccess_5.write > @
+        simpleReference_9
+    [] > fieldAccess_5
+      this_1.value > @
+    [] > this_1
+      this > @
+    [] > simpleReference_9
+      value > @
+
+[args...] > main
+  class__SimpleLabeledStatements.main > @
+    *

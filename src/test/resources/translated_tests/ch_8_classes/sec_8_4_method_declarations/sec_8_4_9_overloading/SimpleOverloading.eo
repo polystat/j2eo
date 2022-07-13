@@ -1,0 +1,203 @@
+# 2022-07-13T17:59:03.507534800
+# j2eo team
++package ch_8_classes.sec_8_4_method_declarations.sec_8_4_9_overloading
++alias stdlib.primitives.prim__float
++alias stdlib.lang.class__System
++alias stdlib.lang.class__Object
++alias stdlib.primitives.prim__int
++alias stdlib.lang.class__String
+
+[] > class__SimpleOverloading
+  class__Object > super
+  super > @
+  [] > new
+    class__Object.new > super
+    super > @
+    "class__SimpleOverloading" > className
+    [this] > init
+      seq > @
+        TRUE
+  # main :: String[] -> void
+  [args] > main
+    seq > @
+      variableDeclaration_1
+      statementExpression_1
+      statementExpression_2
+      statementExpression_3
+      statementExpression_4
+      statementExpression_5
+    cage > p
+    [] > variableDeclaration_1
+      p.write > @
+        initializerSimple_1
+    [] > initializerSimple_1
+      instanceCreation_1 > @
+    [] > instanceCreation_1
+      class__Point.constructor > @
+        class__Point.new
+    [] > statementExpression_1
+      fieldAccess_1.write > @
+        literal_1
+    [] > fieldAccess_1
+      simpleReference_1.x > @
+    [] > simpleReference_1
+      p > @
+    [] > literal_1
+      prim__int.constructor_2 > @
+        prim__int.new
+        0
+    [] > statementExpression_2
+      fieldAccess_2.write > @
+        literal_2
+    [] > fieldAccess_2
+      simpleReference_2.y > @
+    [] > simpleReference_2
+      p > @
+    [] > literal_2
+      prim__int.constructor_2 > @
+        prim__int.new
+        0
+    [] > statementExpression_3
+      p.move > @
+        p
+        literal_3
+        unaryPrefix_1
+    [] > literal_3
+      prim__int.constructor_2 > @
+        prim__int.new
+        10
+    [] > unaryPrefix_1
+      literal_4.neg > @
+    [] > literal_4
+      prim__int.constructor_2 > @
+        prim__int.new
+        10
+    [] > statementExpression_4
+      class__System.out.println > @
+        class__System.out
+        simpleReference_4
+    [] > simpleReference_4
+      p > @
+    [] > statementExpression_5
+      class__System.out.println > @
+        class__System.out
+        literal_5
+    [] > literal_5
+      class__String.constructor_2 > @
+        class__String.new
+        "passed"
+  # null :: null -> void
+  [this] > constructor
+    seq > @
+      initialization
+      statementExpression_6
+      this
+    [] > initialization
+      this.init > @
+        this
+    [] > statementExpression_6
+      this.super.constructor > @
+        this.super
+
+[] > class__Point
+  class__Object > super
+  super > @
+  [] > new
+    class__Object.new > super
+    super > @
+    "class__Point" > className
+    [this] > init
+      seq > @
+        TRUE
+    prim__float.constructor_1 > x
+      prim__float.new
+    prim__float.constructor_1 > y
+      prim__float.new
+    # move :: int -> int -> void
+    [this dx dy] > move
+      seq > @
+        statementExpression_7
+        statementExpression_8
+      [] > statementExpression_7
+        simpleReference_5.add_equal > @
+          simpleReference_6
+      [] > simpleReference_5
+        x > @
+      [] > simpleReference_6
+        dx > @
+      [] > statementExpression_8
+        simpleReference_7.add_equal > @
+          simpleReference_8
+      [] > simpleReference_7
+        y > @
+      [] > simpleReference_8
+        dy > @
+    # move :: float -> float -> void
+    [this dx dy] > move
+      seq > @
+        statementExpression_9
+        statementExpression_10
+      [] > statementExpression_9
+        simpleReference_9.add_equal > @
+          simpleReference_10
+      [] > simpleReference_9
+        x > @
+      [] > simpleReference_10
+        dx > @
+      [] > statementExpression_10
+        simpleReference_11.add_equal > @
+          simpleReference_12
+      [] > simpleReference_11
+        y > @
+      [] > simpleReference_12
+        dy > @
+    # toString :: null -> String
+    [this] > toString
+      seq > @
+        return_1
+      [] > return_1
+        binary_1 > @
+      [] > binary_1
+        binary_2.add > @
+          literal_6
+      [] > binary_2
+        binary_3.add > @
+          simpleReference_13
+      [] > binary_3
+        binary_4.add > @
+          literal_7
+      [] > binary_4
+        literal_8.add > @
+          simpleReference_14
+      [] > literal_8
+        class__String.constructor_2 > @
+          class__String.new
+          "("
+      [] > simpleReference_14
+        x > @
+      [] > literal_7
+        class__String.constructor_2 > @
+          class__String.new
+          ","
+      [] > simpleReference_13
+        y > @
+      [] > literal_6
+        class__String.constructor_2 > @
+          class__String.new
+          ")"
+  # null :: null -> void
+  [this] > constructor
+    seq > @
+      initialization
+      statementExpression_11
+      this
+    [] > initialization
+      this.init > @
+        this
+    [] > statementExpression_11
+      this.super.constructor > @
+        this.super
+
+[args...] > main
+  class__SimpleOverloading.main > @
+    *

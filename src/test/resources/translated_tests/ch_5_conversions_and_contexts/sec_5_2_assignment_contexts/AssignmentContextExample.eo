@@ -1,0 +1,166 @@
+# 2022-07-13T17:59:03.183932100
+# j2eo team
++package ch_5_conversions_and_contexts.sec_5_2_assignment_contexts
++alias stdlib.primitives.prim__float
++alias stdlib.primitives.prim__char
++alias stdlib.primitives.prim__short
++alias stdlib.primitives.prim__double
++alias stdlib.primitives.prim__int
++alias stdlib.lang.class__String
++alias stdlib.lang.class__System
++alias stdlib.lang.class__Object
++alias stdlib.primitives.prim__long
+
+[] > class__AssignmentContextExample
+  class__Object > super
+  super > @
+  [] > new
+    class__Object.new > super
+    super > @
+    "class__AssignmentContextExample" > className
+    [this] > init
+      seq > @
+        TRUE
+  # main :: String[] -> void
+  [args] > main
+    seq > @
+      variableDeclaration_1
+      variableDeclaration_2
+      statementExpression_1
+      variableDeclaration_3
+      variableDeclaration_4
+      statementExpression_2
+      statementExpression_3
+      variableDeclaration_5
+      statementExpression_4
+      statementExpression_5
+    prim__short.constructor_1 > s
+      prim__short.new
+    [] > variableDeclaration_1
+      s.write > @
+        initializerSimple_1
+    [] > initializerSimple_1
+      literal_1 > @
+    [] > literal_1
+      prim__int.constructor_2 > @
+        prim__int.new
+        12
+    prim__float.constructor_1 > f
+      prim__float.new
+    [] > variableDeclaration_2
+      f.write > @
+        initializerSimple_2
+    [] > initializerSimple_2
+      simpleReference_1 > @
+    [] > simpleReference_1
+      s > @
+    [] > statementExpression_1
+      class__System.out.println > @
+        class__System.out
+        binary_1
+    [] > binary_1
+      literal_2.add > @
+        simpleReference_2
+    [] > literal_2
+      class__String.constructor_2 > @
+        class__String.new
+        "f="
+    [] > simpleReference_2
+      f > @
+    prim__char.constructor_1 > c
+      prim__char.new
+    [] > variableDeclaration_3
+      c.write > @
+        initializerSimple_3
+    [] > initializerSimple_3
+      literal_3 > @
+    [] > literal_3
+      prim__int.constructor_2 > @
+        prim__int.new
+        123456
+    prim__long.constructor_1 > l
+      prim__long.new
+    [] > variableDeclaration_4
+      l.write > @
+        initializerSimple_4
+    [] > initializerSimple_4
+      simpleReference_3 > @
+    [] > simpleReference_3
+      c > @
+    [] > statementExpression_2
+      class__System.out.println > @
+        class__System.out
+        binary_2
+    [] > binary_2
+      literal_4.add > @
+        methodInvocation_1
+    [] > literal_4
+      class__String.constructor_2 > @
+        class__String.new
+        "l=0x"
+    [] > methodInvocation_1
+      Long.toString > @
+        Long
+        simpleReference_5
+        literal_5
+    [] > simpleReference_5
+      l > @
+    [] > literal_5
+      prim__int.constructor_2 > @
+        prim__int.new
+        16
+    [] > statementExpression_3
+      simpleReference_6.write > @
+        literal_6
+    [] > simpleReference_6
+      f > @
+    [] > literal_6
+      prim__float.constructor_2 > @
+        prim__float.new
+        1.23
+    prim__double.constructor_1 > d
+      prim__double.new
+    [] > variableDeclaration_5
+      d.write > @
+        initializerSimple_5
+    [] > initializerSimple_5
+      simpleReference_7 > @
+    [] > simpleReference_7
+      f > @
+    [] > statementExpression_4
+      class__System.out.println > @
+        class__System.out
+        binary_3
+    [] > binary_3
+      literal_7.add > @
+        simpleReference_8
+    [] > literal_7
+      class__String.constructor_2 > @
+        class__String.new
+        "d="
+    [] > simpleReference_8
+      d > @
+    [] > statementExpression_5
+      class__System.out.println > @
+        class__System.out
+        literal_8
+    [] > literal_8
+      class__String.constructor_2 > @
+        class__String.new
+        "passed"
+  # null :: null -> void
+  [this] > constructor
+    seq > @
+      initialization
+      statementExpression_6
+      this
+    [] > initialization
+      this.init > @
+        this
+    [] > statementExpression_6
+      this.super.constructor > @
+        this.super
+
+[args...] > main
+  class__AssignmentContextExample.main > @
+    *

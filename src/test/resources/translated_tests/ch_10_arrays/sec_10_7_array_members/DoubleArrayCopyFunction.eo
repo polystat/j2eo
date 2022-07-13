@@ -1,0 +1,110 @@
+# 2022-07-13T17:59:01.719200500
+# j2eo team
++package ch_10_arrays.sec_10_7_array_members
++alias stdlib.primitives.prim__float
++alias stdlib.lang.class__System
++alias stdlib.primitives.prim__double
++alias stdlib.lang.class__Object
++alias stdlib.lang.class__String
+
+[] > class__DoubleArrayCopyFunction
+  class__Object > super
+  super > @
+  [] > new
+    class__Object.new > super
+    super > @
+    "class__DoubleArrayCopyFunction" > className
+    [this] > init
+      seq > @
+        TRUE
+  # main :: String[] -> void
+  [args] > main
+    seq > @
+      variableDeclaration_1
+      variableDeclaration_2
+      statementExpression_1
+      statementExpression_2
+      statementExpression_3
+      statementExpression_4
+    cage > a1
+    [] > variableDeclaration_1
+      a1.write > @
+        initializerArray_1
+    [] > initializerArray_1
+      * > @
+        initializerSimple_1
+        initializerSimple_2
+        initializerSimple_3
+    [] > initializerSimple_1
+      literal_1 > @
+    [] > literal_1
+      prim__float.constructor_2 > @
+        prim__float.new
+        0.0
+    [] > initializerSimple_2
+      literal_2 > @
+    [] > literal_2
+      prim__float.constructor_2 > @
+        prim__float.new
+        1.0
+    [] > initializerSimple_3
+      literal_3 > @
+    [] > literal_3
+      prim__float.constructor_2 > @
+        prim__float.new
+        2.0
+    cage > a2
+    [] > variableDeclaration_2
+      a2.write > @
+        initializerSimple_4
+    [] > initializerSimple_4
+      methodInvocation_1 > @
+    [] > methodInvocation_1
+      a1.clone > @
+        a1
+    [] > statementExpression_1
+      arrayAccess_1.write > @
+        unaryPrefix_1
+    [] > arrayAccess_1
+      simpleReference_2.get > @
+        literal_4.v
+    [] > simpleReference_2
+      a1 > @
+    [] > literal_4
+      prim__int.constructor_2 > @
+        prim__int.new
+        0
+    [] > unaryPrefix_1
+      literal_5.neg > @
+    [] > literal_5
+      prim__float.constructor_2 > @
+        prim__float.new
+        1.0
+    [] > statementExpression_2
+      for_loop_placeholder > @
+    [] > statementExpression_3
+      for_loop_placeholder > @
+    [] > statementExpression_4
+      class__System.out.println > @
+        class__System.out
+        literal_6
+    [] > literal_6
+      class__String.constructor_2 > @
+        class__String.new
+        "passed"
+  # null :: null -> void
+  [this] > constructor
+    seq > @
+      initialization
+      statementExpression_5
+      this
+    [] > initialization
+      this.init > @
+        this
+    [] > statementExpression_5
+      this.super.constructor > @
+        this.super
+
+[args...] > main
+  class__DoubleArrayCopyFunction.main > @
+    *

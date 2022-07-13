@@ -1,0 +1,115 @@
+# 2022-07-13T17:59:03.163937200
+# j2eo team
++package ch_5_conversions_and_contexts.sec_5_1_kinds_of_conversions.sec_5_1_6_narrowing_reference_conversion.sec_5_1_6_1_allowed_narrow_ref_conv
++alias stdlib.lang.class__Object
++alias stdlib.lang.class__System
++alias stdlib.lang.class__String
+
+[] > class__S
+  class__Object > super
+  super > @
+  [] > new
+    class__Object.new > super
+    super > @
+    "class__S" > className
+    [this] > init
+      seq > @
+        TRUE
+    # f :: null -> String
+    [this] > f
+      seq > @
+        return_1
+      [] > return_1
+        literal_1 > @
+      [] > literal_1
+        class__String.constructor_2 > @
+          class__String.new
+          "s.f()"
+  # null :: null -> void
+  [this] > constructor
+    seq > @
+      initialization
+      statementExpression_1
+      this
+    [] > initialization
+      this.init > @
+        this
+    [] > statementExpression_1
+      this.super.constructor > @
+        this.super
+
+[] > class__T
+  class__S > super
+  super > @
+  [] > new
+    class__S.new > super
+    super > @
+    "class__T" > className
+    [this] > init
+      seq > @
+        TRUE
+    # f :: null -> String
+    [this] > f
+      seq > @
+        return_2
+      [] > return_2
+        literal_2 > @
+      [] > literal_2
+        class__String.constructor_2 > @
+          class__String.new
+          "t.f()"
+  # null :: null -> void
+  [this] > constructor
+    seq > @
+      initialization
+      statementExpression_2
+      this
+    [] > initialization
+      this.init > @
+        this
+    [] > statementExpression_2
+      this.super.constructor > @
+        this.super
+
+[] > class__TisTypeVariable
+  class__Object > super
+  super > @
+  [] > new
+    class__Object.new > super
+    super > @
+    "class__TisTypeVariable" > className
+    [this] > init
+      seq > @
+        TRUE
+  # main :: String[] -> void
+  [args] > main
+    seq > @
+      statementExpression_3
+      statementExpression_4
+    [] > statementExpression_3
+      this.foo > @
+        this
+    [] > statementExpression_4
+      class__System.out.println > @
+        class__System.out
+        literal_3
+    [] > literal_3
+      class__String.constructor_2 > @
+        class__String.new
+        "passed"
+  # null :: null -> void
+  [this] > constructor
+    seq > @
+      initialization
+      statementExpression_5
+      this
+    [] > initialization
+      this.init > @
+        this
+    [] > statementExpression_5
+      this.super.constructor > @
+        this.super
+
+[args...] > main
+  class__TisTypeVariable.main > @
+    *

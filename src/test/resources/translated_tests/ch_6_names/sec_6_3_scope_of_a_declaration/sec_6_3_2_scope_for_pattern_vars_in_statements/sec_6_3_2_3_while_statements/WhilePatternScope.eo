@@ -1,0 +1,119 @@
+# 2022-07-13T17:59:03.286941700
+# j2eo team
++package ch_6_names.sec_6_3_scope_of_a_declaration.sec_6_3_2_scope_for_pattern_vars_in_statements.sec_6_3_2_3_while_statements
++alias stdlib.lang.class__Object
++alias stdlib.lang.class__System
++alias stdlib.primitives.prim__int
+
+[] > class__WhilePatternScope
+  class__Object > super
+  super > @
+  [] > new
+    class__Object.new > super
+    super > @
+    "class__WhilePatternScope" > className
+    [this] > init
+      seq > @
+        TRUE
+  # main :: String[] -> void
+  [args] > main
+    seq > @
+      variableDeclaration_1
+      variableDeclaration_2
+      variableDeclaration_3
+      while_1
+      statementExpression_1
+    cage > objs
+    [] > variableDeclaration_1
+      objs.write > @
+        initializerSimple_1
+    [] > initializerSimple_1
+      arrayCreation_1 > @
+    [] > arrayCreation_1
+      FALSE > @
+    prim__int.constructor_1 > index
+      prim__int.new
+    [] > variableDeclaration_2
+      index.write > @
+        initializerSimple_2
+    [] > initializerSimple_2
+      literal_1 > @
+    [] > literal_1
+      prim__int.constructor_2 > @
+        prim__int.new
+        0
+    cage > obj
+    [] > variableDeclaration_3
+      obj.write > @
+        initializerSimple_3
+    [] > initializerSimple_3
+      arrayAccess_1 > @
+    [] > arrayAccess_1
+      simpleReference_1.get > @
+        simpleReference_2.v
+    [] > simpleReference_1
+      objs > @
+    [] > simpleReference_2
+      index > @
+    [] > while_1
+      instanceOf_1.while > @
+        [while_i]
+          block_1 > @
+    [] > instanceOf_1
+      instance_of_placeholder > @
+    [] > block_1
+      seq > @
+        statementExpression_2
+        statementExpression_3
+        statementExpression_4
+      [] > statementExpression_2
+        simpleReference_3.inc_post > @
+      [] > simpleReference_3
+        index > @
+      [] > statementExpression_3
+        simpleReference_4.write > @
+          arrayAccess_2
+      [] > simpleReference_4
+        obj > @
+      [] > arrayAccess_2
+        simpleReference_5.get > @
+          simpleReference_6.v
+      [] > simpleReference_5
+        objs > @
+      [] > simpleReference_6
+        index > @
+      [] > statementExpression_4
+        class__System.out.println > @
+          class__System.out
+          binary_1
+      [] > binary_1
+        literal_2.add > @
+          simpleReference_7
+      [] > literal_2
+        class__String.constructor_2 > @
+          class__String.new
+          "int: "
+      [] > simpleReference_7
+        i > @
+    [] > statementExpression_1
+      class__System.out.println > @
+        class__System.out
+        simpleReference_8
+    [] > simpleReference_8
+      obj > @
+  # null :: null -> void
+  [this] > constructor
+    seq > @
+      initialization
+      statementExpression_5
+      this
+    [] > initialization
+      this.init > @
+        this
+    [] > statementExpression_5
+      this.super.constructor > @
+        this.super
+
+[args...] > main
+  class__WhilePatternScope.main > @
+    *

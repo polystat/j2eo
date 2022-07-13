@@ -1,0 +1,72 @@
+# 2022-07-13T17:59:03.351933800
+# j2eo team
++package ch_8_classes.sec_8_1_class_declarations.sec_8_1_3_inner_classes_and_enclosing_instances
++alias stdlib.lang.class__Object
++alias stdlib.lang.class__System
++alias stdlib.lang.class__String
+
+[] > class__A
+  class__Object > super
+  super > @
+  [] > new
+    class__Object.new > super
+    super > @
+    "class__A" > className
+    [this] > init
+      seq > @
+        TRUE
+  # null :: null -> void
+  [this] > constructor
+    seq > @
+      initialization
+      statementExpression_1
+      this
+    [] > initialization
+      this.init > @
+        this
+    [] > statementExpression_1
+      this.super.constructor > @
+        this.super
+
+[] > class__NoInnerClassMemberOfInterface
+  class__Object > super
+  super > @
+  [] > new
+    class__Object.new > super
+    super > @
+    "class__NoInnerClassMemberOfInterface" > className
+    [this] > init
+      seq > @
+        TRUE
+  # main :: String[] -> void
+  [args] > main
+    seq > @
+      statementExpression_2
+      statementExpression_3
+    [] > statementExpression_2
+      unsupported_qualifier.m > @
+        unsupported_qualifier
+    [] > statementExpression_3
+      class__System.out.println > @
+        class__System.out
+        literal_1
+    [] > literal_1
+      class__String.constructor_2 > @
+        class__String.new
+        "passed"
+  # null :: null -> void
+  [this] > constructor
+    seq > @
+      initialization
+      statementExpression_4
+      this
+    [] > initialization
+      this.init > @
+        this
+    [] > statementExpression_4
+      this.super.constructor > @
+        this.super
+
+[args...] > main
+  class__NoInnerClassMemberOfInterface.main > @
+    *

@@ -1,0 +1,257 @@
+# 2022-07-13T17:59:02.646408200
+# j2eo team
++package ch_4_types_values_variables.sec_4_12_variables
++alias stdlib.lang.class__System
++alias stdlib.lang.class__Object
++alias stdlib.primitives.prim__boolean
++alias stdlib.primitives.prim__int
++alias stdlib.lang.class__String
+
+[] > class__KrishnamurthyNumber
+  class__Object > super
+  super > @
+  [] > new
+    class__Object.new > super
+    super > @
+    "class__KrishnamurthyNumber" > className
+    [this] > init
+      seq > @
+        TRUE
+  # fact :: int -> int
+  [number] > fact
+    seq > @
+      variableDeclaration_1
+      while_1
+      return_1
+    prim__int.constructor_1 > f
+      prim__int.new
+    [] > variableDeclaration_1
+      f.write > @
+        initializerSimple_1
+    [] > initializerSimple_1
+      literal_1 > @
+    [] > literal_1
+      prim__int.constructor_2 > @
+        prim__int.new
+        1
+    [] > while_1
+      binary_1.while > @
+        [while_i]
+          block_1 > @
+    [] > binary_1
+      simpleReference_1.not_eq > @
+        literal_2
+    [] > simpleReference_1
+      number > @
+    [] > literal_2
+      prim__int.constructor_2 > @
+        prim__int.new
+        0
+    [] > block_1
+      seq > @
+        statementExpression_1
+        statementExpression_2
+      [] > statementExpression_1
+        simpleReference_2.write > @
+          binary_2
+      [] > simpleReference_2
+        f > @
+      [] > binary_2
+        simpleReference_3.mul > @
+          simpleReference_4
+      [] > simpleReference_3
+        f > @
+      [] > simpleReference_4
+        number > @
+      [] > statementExpression_2
+        simpleReference_5.dec_post > @
+      [] > simpleReference_5
+        number > @
+    [] > return_1
+      simpleReference_6 > @
+    [] > simpleReference_6
+      f > @
+  # checkNumber :: int -> boolean
+  [number] > checkNumber
+    seq > @
+      variableDeclaration_2
+      variableDeclaration_3
+      while_2
+      ifThenElse_1
+    prim__int.constructor_1 > sum
+      prim__int.new
+    [] > variableDeclaration_2
+      sum.write > @
+        initializerSimple_2
+    [] > initializerSimple_2
+      literal_3 > @
+    [] > literal_3
+      prim__int.constructor_2 > @
+        prim__int.new
+        0
+    prim__int.constructor_1 > tempNumber
+      prim__int.new
+    [] > variableDeclaration_3
+      tempNumber.write > @
+        initializerSimple_3
+    [] > initializerSimple_3
+      simpleReference_7 > @
+    [] > simpleReference_7
+      number > @
+    [] > while_2
+      binary_3.while > @
+        [while_i]
+          block_2 > @
+    [] > binary_3
+      simpleReference_8.not_eq > @
+        literal_4
+    [] > simpleReference_8
+      tempNumber > @
+    [] > literal_4
+      prim__int.constructor_2 > @
+        prim__int.new
+        0
+    [] > block_2
+      seq > @
+        statementExpression_3
+        statementExpression_4
+      [] > statementExpression_3
+        simpleReference_9.write > @
+          binary_4
+      [] > simpleReference_9
+        sum > @
+      [] > binary_4
+        simpleReference_10.add > @
+          methodInvocation_1
+      [] > simpleReference_10
+        sum > @
+      [] > methodInvocation_1
+        this.fact > @
+          this
+          binary_5
+      [] > binary_5
+        simpleReference_11.binary_op_placeholder > @
+          literal_5
+      [] > simpleReference_11
+        tempNumber > @
+      [] > literal_5
+        prim__int.constructor_2 > @
+          prim__int.new
+          10
+      [] > statementExpression_4
+        simpleReference_12.write > @
+          binary_6
+      [] > simpleReference_12
+        tempNumber > @
+      [] > binary_6
+        simpleReference_13.div > @
+          literal_6
+      [] > simpleReference_13
+        tempNumber > @
+      [] > literal_6
+        prim__int.constructor_2 > @
+          prim__int.new
+          10
+    [] > ifThenElse_1
+      binary_7.if > @
+        return_2
+        return_3
+    [] > binary_7
+      simpleReference_14.eq > @
+        simpleReference_15
+    [] > simpleReference_14
+      sum > @
+    [] > simpleReference_15
+      number > @
+    [] > return_2
+      literal_7 > @
+    [] > literal_7
+      prim__boolean.constructor_2 > @
+        prim__boolean.new
+        TRUE
+    [] > return_3
+      literal_8 > @
+    [] > literal_8
+      prim__boolean.constructor_2 > @
+        prim__boolean.new
+        FALSE
+  # main :: String[] -> void
+  [args] > main
+    seq > @
+      variableDeclaration_4
+      statementExpression_5
+      ifThenElse_2
+      statementExpression_6
+    prim__int.constructor_1 > n
+      prim__int.new
+    [] > variableDeclaration_4
+      TRUE > @
+    [] > statementExpression_5
+      simpleReference_16.write > @
+        literal_9
+    [] > simpleReference_16
+      n > @
+    [] > literal_9
+      prim__int.constructor_2 > @
+        prim__int.new
+        127
+    [] > ifThenElse_2
+      methodInvocation_2.if > @
+        statementExpression_7
+        statementExpression_8
+    [] > methodInvocation_2
+      this.checkNumber > @
+        this
+        simpleReference_17
+    [] > simpleReference_17
+      n > @
+    [] > statementExpression_7
+      class__System.out.println > @
+        class__System.out
+        binary_8
+    [] > binary_8
+      simpleReference_18.add > @
+        literal_10
+    [] > simpleReference_18
+      n > @
+    [] > literal_10
+      class__String.constructor_2 > @
+        class__String.new
+        " is a krishnamurthy number"
+    [] > statementExpression_8
+      class__System.out.println > @
+        class__System.out
+        binary_9
+    [] > binary_9
+      simpleReference_19.add > @
+        literal_11
+    [] > simpleReference_19
+      n > @
+    [] > literal_11
+      class__String.constructor_2 > @
+        class__String.new
+        "is not a krishnamurthy number"
+    [] > statementExpression_6
+      class__System.out.println > @
+        class__System.out
+        literal_12
+    [] > literal_12
+      class__String.constructor_2 > @
+        class__String.new
+        "passed"
+  # null :: null -> void
+  [this] > constructor
+    seq > @
+      initialization
+      statementExpression_9
+      this
+    [] > initialization
+      this.init > @
+        this
+    [] > statementExpression_9
+      this.super.constructor > @
+        this.super
+
+[args...] > main
+  class__KrishnamurthyNumber.main > @
+    *

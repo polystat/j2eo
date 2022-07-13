@@ -1,5 +1,6 @@
-# 2022-05-25T15:02:54.084530100
+# 2022-07-13T17:59:02.142173600
 # j2eo team
++package ch_15_expressions.sec_15_17_multiplicative_operators.sec_15_17_2_division_operator
 +alias stdlib.lang.class__System
 +alias stdlib.lang.class__Object
 +alias stdlib.primitives.prim__int
@@ -9,53 +10,50 @@
   class__Object > super
   super > @
   [] > new
-    [] > this
-      class__Object.new > super
-      super > @
-      "class__DivisionAndAssign" > className
-      [this] > init
-        seq > @
-          TRUE
-    seq > @
-      this
+    class__Object.new > super
+    super > @
+    "class__DivisionAndAssign" > className
+    [this] > init
+      seq > @
+        TRUE
   # main :: String[] -> void
   [args] > main
     seq > @
-      d1648001170
-      s815320891
-      s565372776
-      s1443435931
+      variableDeclaration_1
+      statementExpression_1
+      statementExpression_2
+      statementExpression_3
     prim__int.constructor_1 > a
       prim__int.new
-    [] > d1648001170
+    [] > variableDeclaration_1
       a.write > @
-        i_s169663597
-    [] > i_s169663597
-      l391877669 > @
-    [] > l391877669
+        initializerSimple_1
+    [] > initializerSimple_1
+      literal_1 > @
+    [] > literal_1
       prim__int.constructor_2 > @
         prim__int.new
         25
-    [] > s815320891
-      s_r101775274.div_equal > @
-        l1778629809
-    [] > s_r101775274
+    [] > statementExpression_1
+      simpleReference_1.div_equal > @
+        literal_2
+    [] > simpleReference_1
       a > @
-    [] > l1778629809
+    [] > literal_2
       prim__int.constructor_2 > @
         prim__int.new
         2
-    [] > s565372776
+    [] > statementExpression_2
       class__System.out.println > @
         class__System.out
-        s_r1462044018
-    [] > s_r1462044018
+        simpleReference_2
+    [] > simpleReference_2
       a > @
-    [] > s1443435931
+    [] > statementExpression_3
       class__System.out.println > @
         class__System.out
-        l555273695
-    [] > l555273695
+        literal_3
+    [] > literal_3
       class__String.constructor_2 > @
         class__String.new
         "passed"
@@ -63,13 +61,13 @@
   [this] > constructor
     seq > @
       initialization
-      s396883763
+      statementExpression_4
       this
     [] > initialization
       this.init > @
         this
-    [] > s396883763
-      super.constructor > @
+    [] > statementExpression_4
+      this.super.constructor > @
         this.super
 
 [args...] > main

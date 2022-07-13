@@ -165,7 +165,7 @@ private fun findClassDeclInClass(state: PreprocessorState, clsDec: NormalClassDe
 
 private fun collectClassNames(state: PreprocessorState, unit: SimpleCompilationUnit) {
     unit.components?.components
-        ?.mapNotNull { component: TopLevelComponent -> component.classDecl }
+        ?.mapNotNull { component: TopLevelComponent? -> component?.classDecl }
         ?.map { findClassDecl(state, it) }
 }
 
@@ -177,40 +177,43 @@ private fun preprocessSimpleCompilationUnit(state: PreprocessorState, unit: Simp
         ?.map { preprocessImportDeclaration(state, it) }
 
     unit.components.components
-        .map { component: TopLevelComponent? -> preprocessTopLevelComponent(state, component!!) }
+        .map { component: TopLevelComponent? -> preprocessTopLevelComponent(state, component) }
 }
 
-private fun preprocessImportDeclaration(state: PreprocessorState, importDecl: ImportDeclaration) {
-    if (importDecl.compoundName.names.size == 0) {
-        return
-    }
+private fun preprocessImportDeclaration(state: PreprocessorState, importDecl: ImportDeclaration?) {
+    if (importDecl != null) {
 
-    if (importDecl.compoundName.names[0].equals("java")) {
-        importDecl.compoundName.names[0] = "eo/org/polystat/stdlib"
-    }
-
-    val checkEntity = if (!importDecl.signStatic) {
-        importDecl.compoundName.names.last()
-    } else {
-        importDecl.compoundName.names[importDecl.compoundName.names.size - 2] // Always works, no static without class
-    }
-
-    state.classNames[checkEntity] ?: run { state.classNames[checkEntity] = "class__$checkEntity" }
-
-    importDecl.compoundName.names
-        .replaceAll { str: String ->
-            state.classNames[str]?.let {
-                state.classNames[str]
-            } ?: run {
-                str
-            }
+        if (importDecl.compoundName.names.size == 0) {
+            return
         }
+
+        if (importDecl.compoundName.names[0].equals("java")) {
+            importDecl.compoundName.names[0] = "eo/org/polystat/stdlib"
+        }
+
+        val checkEntity = if (!importDecl.signStatic) {
+            importDecl.compoundName.names.last()
+        } else {
+            importDecl.compoundName.names[importDecl.compoundName.names.size - 2] // Always works, no static without class
+        }
+
+        state.classNames[checkEntity] ?: run { state.classNames[checkEntity] = "class__$checkEntity" }
+
+        importDecl.compoundName.names
+            .replaceAll { str: String ->
+                state.classNames[str]?.let {
+                    state.classNames[str]
+                } ?: run {
+                    str
+                }
+            }
+    }
 }
 
-private fun preprocessTopLevelComponent(state: PreprocessorState, component: TopLevelComponent) {
-    if (component.classDecl != null) {
+private fun preprocessTopLevelComponent(state: PreprocessorState, component: TopLevelComponent?) {
+    if (component?.classDecl != null) {
         preprocessClassDecl(state, component.classDecl)
-    } else component.interfaceDecl?.let {
+    } else component?.interfaceDecl?.let {
         /* To discuss */
     }
         ?: run {
@@ -376,7 +379,7 @@ private fun preprocessStmtExpr(state: PreprocessorState, stmExpr: StatementExpre
     preprocessExpr(state, stmExpr.expression)
 }
 
-private fun preprocessExpr(state: PreprocessorState, expr: Expression) {
+private fun preprocessExpr(state: PreprocessorState, expr: Expression?) {
     when (expr) {
         is SimpleReference -> preprocessSimpleReference(state, expr)
         is MethodInvocation -> preprocessMethodInvocation(state, expr)
@@ -428,7 +431,7 @@ private fun preprocessArrayCreation(state: PreprocessorState, arrayCreation: Arr
     /* FIXME: arrayCreation.type should be a public */
 }
 
-private fun preprocessType(state: PreprocessorState, type: Type) {
+private fun preprocessType(state: PreprocessorState, type: Type?) {
     when (type) {
         is TypeName -> {
             type.compoundName.names

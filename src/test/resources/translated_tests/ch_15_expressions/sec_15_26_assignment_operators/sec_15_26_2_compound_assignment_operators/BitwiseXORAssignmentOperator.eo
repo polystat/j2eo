@@ -1,0 +1,75 @@
+# 2022-07-13T17:59:02.199171700
+# j2eo team
++package ch_15_expressions.sec_15_26_assignment_operators.sec_15_26_2_compound_assignment_operators
++alias stdlib.lang.class__System
++alias stdlib.lang.class__Object
++alias stdlib.primitives.prim__int
++alias stdlib.lang.class__String
+
+[] > class__BitwiseXORAssignmentOperator
+  class__Object > super
+  super > @
+  [] > new
+    class__Object.new > super
+    super > @
+    "class__BitwiseXORAssignmentOperator" > className
+    [this] > init
+      seq > @
+        TRUE
+  # main :: String[] -> void
+  [args] > main
+    seq > @
+      variableDeclaration_1
+      statementExpression_1
+      statementExpression_2
+      statementExpression_3
+    prim__int.constructor_1 > a
+      prim__int.new
+    [] > variableDeclaration_1
+      a.write > @
+        initializerSimple_1
+    [] > initializerSimple_1
+      literal_1 > @
+    [] > literal_1
+      prim__int.constructor_2 > @
+        prim__int.new
+        1
+    [] > statementExpression_1
+      simpleReference_1.binary_op_placeholder > @
+        literal_2
+    [] > simpleReference_1
+      a > @
+    [] > literal_2
+      prim__int.constructor_2 > @
+        prim__int.new
+        1
+    [] > statementExpression_2
+      class__System.out.println > @
+        class__System.out
+        simpleReference_2
+    [] > simpleReference_2
+      a > @
+    [] > statementExpression_3
+      class__System.out.println > @
+        class__System.out
+        literal_3
+    [] > literal_3
+      class__String.constructor_2 > @
+        class__String.new
+        "passed"
+  # null :: null -> void
+  [this] > constructor
+    seq > @
+      initialization
+      statementExpression_4
+      this
+    [] > initialization
+      this.init > @
+        this
+    [] > statementExpression_4
+      this.super.constructor > @
+        this.super
+
+[args...] > main
+  class__BitwiseXORAssignmentOperator.main > @
+    *
