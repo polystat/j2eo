@@ -1,0 +1,63 @@
++package stdlib.lang
++alias stdlib.lang.class__Object
++alias org.eolang.txt.sprintf
+
+[] > class__String
+  class__Object > @
+
+  [] > new
+    class__Object.new > @
+    "class__String" > className
+
+    memory > str
+
+    [self] > toString
+      seq > @
+        class__String.constructor_3
+          class__String.new
+          self
+
+    [right] > write
+      seq > @
+        ^.str.write
+          right.str
+        class__String.constructor_3
+          class__String.new
+          ^
+
+    [right] > add
+      seq > @
+        class__String.constructor_2
+          class__String.new
+          sprintf
+            "%s%s"
+            ^.str
+            str.
+              right.toString
+                right
+
+  [right] > valueOf
+    seq > @
+      class__String.constructor_2
+        class__String.new
+        right.as-string
+
+  [self] > constructor_1
+    seq > @
+      class__String.@.constructor
+        self.@
+      self
+
+  [self var__str] > constructor_2
+    seq > @
+      class__String.@.constructor
+        self.@
+      self.str.write var__str
+      self
+
+  [self another__string] > constructor_3
+    seq > @
+      class__String.@.constructor
+        self.@
+      self.str.write (another__string.str)
+      self

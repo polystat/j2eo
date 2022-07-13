@@ -1,0 +1,199 @@
++package stdlib.primitives
++alias stdlib.primitives.prim__num
+
+[] > prim__char
+  prim__num > @
+  32767 > max_value
+  -32768 > min_value
+  16 > bits_len
+
+  [] > new
+    prim__num.new > @
+    "prim__char" > prim_name
+    16 > bits_len
+
+    [] > inc_pre
+      seq > @
+        ^.v.write
+          ^.v.plus
+            1
+        prim__char.constructor_3
+          prim__char.new
+          ^
+
+    [] > dec_pre
+      seq > @
+        ^.v.write
+          ^.v.minus
+            1
+        prim__char.constructor_3
+          prim__char.new
+          ^
+
+    [] > inc_post
+      prim__char.constructor_1 > old
+        prim__char.new
+      seq > @
+        old.v.write
+          ^.v
+        ^.v.write
+          ^.v.plus
+            1
+        old
+
+    [] > dec_post
+      prim__char.constructor_1 > old
+        prim__char.new
+      seq > @
+        old.v.write
+          ^.v
+        ^.v.write
+          ^.v.minus
+            1
+        old
+
+    [arg__right] > write
+      seq > @
+        ^.v.write
+          arg__right.v
+        prim__char.constructor_3
+          prim__char.new
+          ^
+
+    [arg__right] > plus
+      seq > @
+        prim__char.constructor_2
+          prim__char.new
+          ^.v.plus
+            arg__right.v
+
+    [arg__right] > minus
+      seq > @
+        prim__char.constructor_2
+          prim__char.new
+          ^.v.minus
+            arg__right.v
+
+    [arg__right] > times
+      seq > @
+        prim__char.constructor_2
+          prim__char.new
+          ^.v.times
+            arg__right.v
+
+    [arg__right] > div
+      seq > @
+        prim__char.constructor_2
+          prim__char.new
+          ^.v.div
+            arg__right.v
+
+    [arg__right] > mod
+      seq > @
+        prim__char.constructor_2
+          prim__char.new
+          ^.v.mod
+            arg__right.v
+
+    [arg__right] > left
+      seq > @
+        prim__char.constructor_2
+          prim__char.new
+          ^.v.left
+            arg__right.v
+
+    [arg__right] > right
+      seq > @
+        prim__char.constructor_2
+          prim__char.new
+          ^.v.arg__right
+            arg__right.v
+
+    [arg__right] > right_u
+      seq > @
+        prim__char.constructor_2
+          prim__char.new
+          if.
+            arg__right.v.gt 0
+            as-int.
+              and.
+                32767.as-bytes.right
+                  arg__right.v.minus 1
+                as-bytes.
+                  ^.v.right
+                    arg__right.v
+            ^.v.right
+              arg__right.v
+
+  [arg__right] > from
+    arg__right.integer_part > right_value
+    65535.as-bytes > mask
+    mask.not > inv_mask
+
+    [] > is_floating_point
+      or. > @
+        arg__right.prim_name.eq "prim__float"
+        arg__right.prim_name.eq "prim__double"
+
+    [] > integer_case
+      if. > @
+        arg__right.byte_len.gt (prim__char.byte_len)
+        downcast
+        upcast
+
+    [] > downcast
+      right_value.as-bytes.and mask > pseudo_res
+      if. > @
+        pseudo_res.as-int.gt prim__char.max_value
+        prim__char.constructor_2
+          prim__char.new
+          (inv_mask.or pseudo_res).as-int
+        prim__char.constructor_2
+          prim__char.new
+          pseudo_res.as-int
+
+    [] > upcast
+      prim__char.constructor_2 > @
+        prim__char.new
+        right_value
+
+    [] > floating_point_case
+      if. > @
+        right_value.gte (prim__char.max_value)
+        prim__char.constructor_2
+          prim__char.new
+          prim__char.max_value
+        if.
+          right_value.lte (prim__char.min_value)
+          prim__char.constructor_2
+            prim__char.new
+            prim__char.min_value
+          prim__char.constructor_2
+            prim__char.new
+            right_value
+
+    seq > @
+      if.
+        is_floating_point.not
+        integer_case
+        floating_point_case
+
+  [self] > constructor_1
+    seq > @
+      prim__char.@.constructor_1
+        self.@
+      self
+
+  [self var__num] > constructor_2
+    seq > @
+      prim__char.@.constructor_2
+        self.@
+        var__num
+      self
+
+  [self another__num] > constructor_3
+    seq > @
+      prim__char.@.constructor_3
+        self.@
+        another__num
+      self

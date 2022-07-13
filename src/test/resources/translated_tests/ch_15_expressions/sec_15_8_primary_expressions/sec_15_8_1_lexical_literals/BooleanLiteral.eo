@@ -1,0 +1,72 @@
+# 2022-05-25T15:02:54.205531400
+# j2eo team
++alias stdlib.lang.class__System
++alias stdlib.lang.class__Object
++alias stdlib.primitives.prim__boolean
++alias stdlib.lang.class__String
+
+[] > class__BooleanLiteral
+  class__Object > super
+  super > @
+  [] > new
+    [] > this
+      class__Object.new > super
+      super > @
+      "class__BooleanLiteral" > className
+      [this] > init
+        seq > @
+          TRUE
+    seq > @
+      this
+  # main :: String[] -> void
+  [args] > main
+    seq > @
+      d566113173
+      d343812839
+      s366252104
+    prim__boolean.constructor_1 > a
+      prim__boolean.new
+    [] > d566113173
+      a.write > @
+        i_s1330247343
+    [] > i_s1330247343
+      l2017797638 > @
+    [] > l2017797638
+      prim__boolean.constructor_2 > @
+        prim__boolean.new
+        TRUE
+    prim__boolean.constructor_1 > b
+      prim__boolean.new
+    [] > d343812839
+      b.write > @
+        i_s1150058854
+    [] > i_s1150058854
+      l1148255190 > @
+    [] > l1148255190
+      prim__boolean.constructor_2 > @
+        prim__boolean.new
+        FALSE
+    [] > s366252104
+      class__System.out.println > @
+        class__System.out
+        l1889057031
+    [] > l1889057031
+      class__String.constructor_2 > @
+        class__String.new
+        "passed"
+  # null :: null -> void
+  [this] > constructor
+    seq > @
+      initialization
+      s1346343363
+      this
+    [] > initialization
+      this.init > @
+        this
+    [] > s1346343363
+      super.constructor > @
+        this.super
+
+[args...] > main
+  class__BooleanLiteral.main > @
+    *

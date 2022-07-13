@@ -1,0 +1,121 @@
+# 2022-05-25T15:02:28.669791600
+# j2eo team
++alias stdlib.lang.class__Object
++alias stdlib.lang.class__System
++alias stdlib.primitives.prim__int
++alias org.eolang.gray.cage
+
+[] > class__A
+  class__Object > super
+  super > @
+  [] > new
+    [] > this
+      class__Object.new > super
+      super > @
+      "class__A" > className
+      [this] > init
+        seq > @
+          TRUE
+      prim__int.constructor_1 > value
+        prim__int.new
+      # getValue :: null -> int
+      [this] > getValue
+        seq > @
+          s1789110533
+        [] > s1789110533
+          s_r170052458 > @
+        [] > s_r170052458
+          value > @
+      # setValue :: int -> void
+      [this v] > setValue
+        seq > @
+          s1574029810
+        [] > s1574029810
+          s_r1504937617.write > @
+            s_r774895395
+        [] > s_r1504937617
+          value > @
+        [] > s_r774895395
+          v > @
+    seq > @
+      this
+  # null :: null -> void
+  [this] > constructor
+    seq > @
+      initialization
+      s843710487
+      this
+    [] > initialization
+      this.init > @
+        this
+    [] > s843710487
+      super.constructor > @
+        this.super
+
+[] > class__Test
+  class__Object > super
+  super > @
+  [] > new
+    [] > this
+      class__Object.new > super
+      super > @
+      "class__Test" > className
+      [this] > init
+        seq > @
+          TRUE
+    seq > @
+      this
+  # main :: String[] -> void
+  [args] > main
+    seq > @
+      d1636291061
+      d397071633
+      s1175631958
+    cage > a
+    [] > d1636291061
+      a.write > @
+        i_s608519258
+    [] > i_s608519258
+      inst1963075870 > @
+    [] > inst1963075870
+      class__A.constructor > @
+        class__A.new
+    prim__int.constructor_1 > result
+      prim__int.new
+    [] > d397071633
+      result.write > @
+        i_s1216198248
+    [] > i_s1216198248
+      b1184124073 > @
+    [] > b1184124073
+      l582666172.div > @
+        m_i1668910247
+    [] > l582666172
+      prim__int.constructor_2 > @
+        prim__int.new
+        10
+    [] > m_i1668910247
+      a.getValue > @
+        a
+    [] > s1175631958
+      class__System.out.println > @
+        class__System.out
+        s_r579294521
+    [] > s_r579294521
+      result > @
+  # null :: null -> void
+  [this] > constructor
+    seq > @
+      initialization
+      s1450500594
+      this
+    [] > initialization
+      this.init > @
+        this
+    [] > s1450500594
+      super.constructor > @
+        this.super
+
+[args...] > main
+  class__Test.main > @
+    *

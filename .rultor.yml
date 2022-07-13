@@ -1,0 +1,19 @@
+assets:
+  gradle.properties: yegor256/home#assets/polystat/gradle.properties
+  pubring.gpg: yegor256/home#assets/pubring.gpg
+  secring.gpg: yegor256/home#assets/secring.gpg
+docker:
+  image: "iammaxim/j2eo:latest"
+  as_root: true
+release:
+  script: |-
+    cp ../gradle.properties .
+    echo "Home dir: $HOME"
+    echo "Current path: $(pwd)"
+    echo "Contents of home dir:"
+    ls -lha /home/r
+    echo "Contents of current dir:"
+    ls -lha
+    echo "Building Gradle project (excluding tests)..."
+    ./gradlew build fatJar publish -x test --info -Dcandidates=false -PmvnPublicationVersion=${tag} -Dsigning.secretKeyRingFile=/home/r/secring.gpg
+    echo "Done."

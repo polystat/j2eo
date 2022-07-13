@@ -1,0 +1,13 @@
++package stdlib.lang
+
+[] > class__Object
+  [] > new
+    "class__Object" > className
+    "OBJECT" > @
+
+    [self] > toString
+      "OBJECT" > @
+
+  [self] > constructor
+    seq > @
+      self

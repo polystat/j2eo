@@ -1,0 +1,86 @@
+# inc_pre, dec_pre, inc_post, dec_post, add, sub, mul, div are not precise operators
++package stdlib.primitives
++alias stdlib.primitives.prim__num
+
+[] > prim__boolean
+  prim__num > @
+
+  [] > new
+    prim__num.new > @
+    "prim__boolean" > prim_name
+
+    [] > as-string
+      seq > @
+        if.
+          ^.v
+          "true"
+          "false"
+
+    [arg__right] > write
+      seq > @
+        ^.v.write
+          arg__right.v
+        prim__boolean.constructor_3
+          prim__boolean.new
+          ^
+
+    [arg__right] > and
+      seq > @
+        prim__boolean.constructor_2
+          prim__boolean.new
+          ^.v.and
+            arg__right.v
+
+    [arg__right] > or
+      seq > @
+        prim__boolean.constructor_2
+          prim__boolean.new
+          ^.v.or
+            arg__right.v
+
+    [] > not
+      seq > @
+        prim__boolean.constructor_2
+          prim__boolean.new
+          ^.v.not
+
+    [t_s f_s] > if
+      seq > @
+        if.
+          ^.v
+          t_s
+          f_s
+
+    [f] > while
+      seq > @
+        while.
+          ^.v
+          f
+
+  [arg__right] > from
+    prim__boolean.constructor_2 > @
+      prim__boolean.new
+      neq.
+        arg__right.integer_part
+          arg__right
+        0
+
+  [self] > constructor_1
+    seq > @
+      prim__boolean.@.constructor_1
+        self.@
+      self
+
+  [self var__num] > constructor_2
+    seq > @
+      prim__boolean.@.constructor_2
+        self.@
+        var__num
+      self
+
+  [self another__num] > constructor_3
+    seq > @
+      prim__boolean.@.constructor_3
+        self.@
+        another__num
+      self

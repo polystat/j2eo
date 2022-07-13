@@ -1,0 +1,87 @@
+# 2022-05-25T15:02:54.109529700
+# j2eo team
++alias stdlib.lang.class__System
++alias stdlib.lang.class__Object
++alias stdlib.primitives.prim__int
++alias stdlib.lang.class__String
+
+[] > class__VariableLeftShift
+  class__Object > super
+  super > @
+  [] > new
+    [] > this
+      class__Object.new > super
+      super > @
+      "class__VariableLeftShift" > className
+      [this] > init
+        seq > @
+          TRUE
+    seq > @
+      this
+  # main :: String[] -> void
+  [args] > main
+    seq > @
+      d1725165248
+      d416841088
+      s1412794598
+      s1567705314
+      s2082781203
+    prim__int.constructor_1 > a
+      prim__int.new
+    [] > d1725165248
+      a.write > @
+        i_s503642634
+    [] > i_s503642634
+      l452121674 > @
+    [] > l452121674
+      prim__int.constructor_2 > @
+        prim__int.new
+        128
+    prim__int.constructor_1 > b
+      prim__int.new
+    [] > d416841088
+      b.write > @
+        i_s1636050357
+    [] > i_s1636050357
+      l1483298597 > @
+    [] > l1483298597
+      prim__int.constructor_2 > @
+        prim__int.new
+        2
+    [] > s1412794598
+      s_r257608605.write > @
+        s_r1337192014
+    [] > s_r257608605
+      a > @
+    [] > s_r1337192014
+      a > @
+    [] > s1567705314
+      class__System.out.println > @
+        class__System.out
+        s_r637241618
+    [] > s_r637241618
+      a > @
+    [] > s2082781203
+      class__System.out.println > @
+        class__System.out
+        l741730375
+    [] > l741730375
+      class__String.constructor_2 > @
+        class__String.new
+        "passed"
+  # null :: null -> void
+  [this] > constructor
+    seq > @
+      initialization
+      s2077528955
+      this
+    [] > initialization
+      this.init > @
+        this
+    [] > s2077528955
+      super.constructor > @
+        this.super
+
+[args...] > main
+  class__VariableLeftShift.main > @
+    *

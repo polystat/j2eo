@@ -1,0 +1,25 @@
++package stdlib.io
++alias stdlib.lang.class__Object
++alias org.eolang.io.stdout
+
+[] > class__PrintStream
+  class__Object > @
+
+  [] > new
+    class__Object.new > @
+    "class__PrintStream" > className
+
+    [self output] > println
+      seq > @
+        stdout
+          str.
+            output.toString
+              output
+        stdout
+          "\n"
+
+  [self] > constructor
+    seq > @
+      class__PrintStream.@.constructor
+        self.@
+      self

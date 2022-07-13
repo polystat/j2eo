@@ -1,0 +1,14 @@
+cff-version: 1.2.0
+authors:
+- family-names: Zouev
+  given-names: Eugene
+- family-names: Stepanov
+  given-names: Maxim
+- family-names: Milyoshin
+  given-names: Ilya
+- family-names: Klementev
+  given-names: Egor
+title: "J2EO: Java to EO transpiler"
+version: 0.4.0
+url: "https://github.com/polystat/j2eo"
+message: "If you use this software, please consider citing the software."

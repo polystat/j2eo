@@ -1,0 +1,91 @@
+# 2022-05-25T15:02:53.992179200
+# j2eo team
++alias stdlib.lang.class__System
++alias stdlib.lang.class__Object
++alias stdlib.primitives.prim__int
++alias stdlib.lang.class__String
++alias org.eolang.gray.cage
+
+[] > class__IntegerArrayAlternativeDeclaration
+  class__Object > super
+  super > @
+  [] > new
+    [] > this
+      class__Object.new > super
+      super > @
+      "class__IntegerArrayAlternativeDeclaration" > className
+      [this] > init
+        seq > @
+          TRUE
+    seq > @
+      this
+  # main :: String[] -> void
+  [args] > main
+    seq > @
+      d283717519
+      s1990160809
+    cage > array
+    [] > d283717519
+      array.write > @
+        i_a2025221430
+    [] > i_a2025221430
+      * > @
+        i_s1378084334
+        i_s200224114
+        i_s1773283386
+        i_s581318631
+        i_s1877453512
+    [] > i_s1378084334
+      l487694075 > @
+    [] > l487694075
+      prim__int.constructor_2 > @
+        prim__int.new
+        0
+    [] > i_s200224114
+      l1989184704 > @
+    [] > l1989184704
+      prim__int.constructor_2 > @
+        prim__int.new
+        1
+    [] > i_s1773283386
+      l611572016 > @
+    [] > l611572016
+      prim__int.constructor_2 > @
+        prim__int.new
+        2
+    [] > i_s581318631
+      l889486595 > @
+    [] > l889486595
+      prim__int.constructor_2 > @
+        prim__int.new
+        3
+    [] > i_s1877453512
+      l77269878 > @
+    [] > l77269878
+      prim__int.constructor_2 > @
+        prim__int.new
+        4
+    [] > s1990160809
+      class__System.out.println > @
+        class__System.out
+        l1285524499
+    [] > l1285524499
+      class__String.constructor_2 > @
+        class__String.new
+        "passed"
+  # null :: null -> void
+  [this] > constructor
+    seq > @
+      initialization
+      s1524960486
+      this
+    [] > initialization
+      this.init > @
+        this
+    [] > s1524960486
+      super.constructor > @
+        this.super
+
+[args...] > main
+  class__IntegerArrayAlternativeDeclaration.main > @
+    *

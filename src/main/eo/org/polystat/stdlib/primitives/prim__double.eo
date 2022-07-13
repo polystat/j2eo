@@ -1,0 +1,117 @@
++package stdlib.primitives
++alias stdlib.primitives.prim__num
++alias org.eolang.txt.sprintf
+
+[] > prim__double
+  prim__num > @
+  64 > bits_len
+
+  [] > new
+    prim__num.new > @
+    "prim__double" > prim_name
+    64 > bits_len
+
+    [] > as-string
+      seq > @
+        sprintf "%f" (^.v)
+
+    [] > inc_pre
+      seq > @
+        ^.v.write
+          ^.v.plus
+            1
+        prim__double.constructor_3
+          prim__double.new
+          ^
+
+    [] > dec_pre
+      seq > @
+        ^.v.write
+          ^.v.minus
+            1
+        prim__double.constructor_3
+          prim__double.new
+          ^
+
+    [] > inc_post
+      prim__double.constructor_1 > old
+        prim__double.new
+      seq > @
+        old.v.write
+          ^.v
+        ^.v.write
+          ^.v.plus
+            1
+        old
+
+    [] > dec_post
+      prim__double.constructor_1 > old
+        prim__double.new
+      seq > @
+        old.v.write
+          ^.v
+        ^.v.write
+          ^.v.minus
+            1
+        old
+
+    [arg__right] > write
+      seq > @
+        ^.v.write
+          arg__right.v
+        prim__double.constructor_3
+          prim__double.new
+          ^
+
+    [arg__right] > plus
+      seq > @
+        prim__double.constructor_2
+          prim__double.new
+          ^.v.plus
+            arg__right.v
+
+    [arg__right] > minus
+      seq > @
+        prim__double.constructor_2
+          prim__double.new
+          ^.v.minus
+            arg__right.v
+
+    [arg__right] > times
+      seq > @
+        prim__double.constructor_2
+          prim__double.new
+          ^.v.times
+            arg__right.v
+
+    [arg__right] > div
+      seq > @
+        prim__double.constructor_2
+          prim__double.new
+          ^.v.div
+            arg__right.v
+
+  [arg__right] > from
+    prim__double.constructor_2
+      prim__double.new
+      arg__right.float_part
+
+  [self] > constructor_1
+    seq > @
+      prim__double.@.constructor_1
+        self.@
+      self
+
+  [self var__num] > constructor_2
+    seq > @
+      prim__double.@.constructor_2
+        self.@
+        var__num
+      self
+
+  [self another__num] > constructor_3
+    seq > @
+      prim__double.@.constructor_3
+        self.@
+        another__num
+      self

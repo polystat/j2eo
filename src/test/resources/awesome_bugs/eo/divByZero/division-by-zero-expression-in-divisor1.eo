@@ -1,0 +1,81 @@
+# 2022-05-25T15:02:28.693791600
+# j2eo team
++alias stdlib.lang.class__Object
++alias stdlib.lang.class__System
++alias stdlib.primitives.prim__int
+
+[] > class__Test
+  class__Object > super
+  super > @
+  [] > new
+    [] > this
+      class__Object.new > super
+      super > @
+      "class__Test" > className
+      [this] > init
+        seq > @
+          TRUE
+    seq > @
+      this
+  # test :: int -> int -> int -> int
+  [x y z] > test
+    seq > @
+      s1961595039
+    [] > s1961595039
+      b686560878 > @
+    [] > b686560878
+      s_r787361897.div > @
+        p765826899
+    [] > s_r787361897
+      x > @
+    [] > p765826899
+      b90346768 > @
+    [] > b90346768
+      s_r1307950260.add > @
+        s_r315072539
+    [] > s_r1307950260
+      y > @
+    [] > s_r315072539
+      z > @
+  # main :: String[] -> void
+  [args] > main
+    seq > @
+      s333034015
+    [] > s333034015
+      class__System.out.println > @
+        class__System.out
+        m_i42102625
+    [] > m_i42102625
+      test > @
+        this
+        l1651667865
+        l1301987508
+        l319670866
+    [] > l1651667865
+      prim__int.constructor_2 > @
+        prim__int.new
+        10
+    [] > l1301987508
+      prim__int.constructor_2 > @
+        prim__int.new
+        0
+    [] > l319670866
+      prim__int.constructor_2 > @
+        prim__int.new
+        0
+  # null :: null -> void
+  [this] > constructor
+    seq > @
+      initialization
+      s40191541
+      this
+    [] > initialization
+      this.init > @
+        this
+    [] > s40191541
+      super.constructor > @
+        this.super
+
+[args...] > main
+  class__Test.main > @
+    *
