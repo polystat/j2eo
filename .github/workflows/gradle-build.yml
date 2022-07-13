@@ -26,10 +26,8 @@ jobs:
         with:
           java-version: 16
 
-      - uses: gradle/gradle-build-action@v1
-        with:
-          arguments: build --info
-          distributions-cache-enabled: false
+      - name: Gradle Build
+        run: ./gradlew build --info
 
       - name: Upload Gradle test report
         uses: actions/upload-artifact@v2
@@ -64,10 +62,8 @@ jobs:
           sudo make install
           bison -V
 
-      - uses: gradle/gradle-build-action@v1
-        with:
-          arguments: build --info --no-build-cache
-          distributions-cache-enabled: false
+      - name: Gradle Build
+        run: ./gradlew build --info
 
       - name: Upload Gradle test report
         uses: actions/upload-artifact@v2
