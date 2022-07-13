@@ -66,6 +66,7 @@ jobs:
       - uses: gradle/gradle-build-action@v1
         with:
           arguments: build --info
+          wrapper-cache-enabled: false
 
       - name: Upload Gradle test report
         uses: actions/upload-artifact@v2
