@@ -14,5 +14,5 @@ enum class TokenCodes(val value: String, val importPath: String) {
     CLASS__STRING("class__String", "stdlib.lang.class__String"),
     CLASS__OBJECT("class__Object", "stdlib.lang.class__Object"),
     CLASS__RANDOM("class__Random", "stdlib.util.class__Random"),
-    // EO_CAGE("gray.cage", "org.eolang.gray.cage")
+    NULL("null", "stdlib.primitives.null"),
 }

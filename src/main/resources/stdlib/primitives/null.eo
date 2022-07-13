@@ -1,0 +1,5 @@
++package stdlib.primitives
+
+[] > null
+  0 > address
+  TRUE > @

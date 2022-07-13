@@ -86,6 +86,10 @@ fun generateNewBody(clsDec: NormalClassDeclaration, context: Context): List<EOBn
             EOStringData(clsDec.name),
             "className"
         ),
+        EOBndExpr(
+            "1".eoDot(),
+            "address"
+        ),
         generateInit(clsDec, context)
     ) + (
         clsDec.body?.declarations

@@ -38,6 +38,7 @@ private fun decodeLiteralCode(code: TokenCode): TokenCodes? {
         TokenCode.StringLiteral -> TokenCodes.CLASS__STRING
         TokenCode.False -> TokenCodes.PRIM__BOOLEAN
         TokenCode.True -> TokenCodes.PRIM__BOOLEAN
+        TokenCode.Null -> TokenCodes.NULL
         else -> null
     }
 }

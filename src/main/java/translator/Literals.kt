@@ -57,11 +57,17 @@ fun mapLiteral(literal: Literal, name: String, context: Context): EOBndExpr =
             name
         )
         TokenCode.Null -> {
-            logger.warn { "null value is not supported yet; falling back to 0" }
-            generateEOData( /* FIXME: use proper null */
-                listOf(TokenCodes.PRIM__INT.value, "constructor_2").eoDot(),
-                listOf(TokenCodes.PRIM__INT.value, "new").eoDot(),
-                EOIntData(0),
+            EOBndExpr(
+                EOObject(
+                    listOf(),
+                    None,
+                    listOf(
+                        EOBndExpr(
+                            "null".eoDot(),
+                            "@"
+                        )
+                    )
+                ),
                 name
             )
         }
