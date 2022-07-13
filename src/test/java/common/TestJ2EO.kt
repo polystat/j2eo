@@ -58,7 +58,7 @@ class TestJ2EO {
         // Copy all necessary files
         val pomClonePath = File(testFolderRoot.toString() + fileSep + "pom.xml").toPath()
         Files.copy(pomFilePath, pomClonePath)
-        val stdClonePath = File(testFolderRoot.toString() + fileSep + "eo/org/polystat/stdlib").toPath()
+        val stdClonePath = File(testFolderRoot.toString() + fileSep + "stdlib").toPath()
         stdlibFolderRoot.toFile().copyRecursively(stdClonePath.toFile())
 
         // Execute generated EO code
@@ -78,11 +78,11 @@ class TestJ2EO {
         var m: String?
         val mvnSb = StringBuilder()
         while (mvnStdInput.readLine().also { m = it } != null) {
-            mvnSb.append(m).append(fileSep)
+            mvnSb.append(m).append(lineSep)
         }
         compileProcess.waitFor()
         compileProcess.destroy()
-        logger.info(" -- EO compilation output --$fileSep$mvnSb")
+        logger.info(" -- EO compilation output --$lineSep$mvnSb")
 
         pomClonePath.toFile().delete()
         stdClonePath.toFile().deleteRecursively()
