@@ -1,6 +1,5 @@
-# 2022-07-13T17:59:03.016183400
+# 2022-07-14T15:53:35.012543600
 # j2eo team
-+package ch_4_types_values_variables.sec_4_2_primitive_types_and_values.sec_4_2_2_integer_operations
 +alias stdlib.lang.class__System
 +alias stdlib.lang.class__Object
 +alias stdlib.primitives.prim__int

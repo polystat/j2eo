@@ -157,9 +157,9 @@ object Main2 {
 //                Pair(file, translator.translate(ast))
 //            }
 
-        val outputDirectory = File(cmd.getOptionValue('o'))
-        logger.info("Cleaning up output directory \"$outputDirectory\" before printing")
-        outputDirectory.deleteRecursively()
+        // val outputDirectory = File(cmd.getOptionValue('o'))
+        // logger.info("Cleaning up output directory \"$outputDirectory\" before printing")
+        // outputDirectory.deleteRecursively()
 
         translatedFiles.forEach { (file, eoProgram) ->
             val targetText = eoProgram.generateEO(0)
@@ -179,7 +179,7 @@ object Main2 {
                 logger.debug("Printing output to file $outputFile")
             }
             outputPath.createDirectories()
-            Files.writeString(Files.createFile(outputFile), targetText)
+            Files.writeString(outputFile, targetText)
         }
 
         logger.info("Translation complete.")

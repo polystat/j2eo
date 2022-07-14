@@ -1,6 +1,5 @@
-# 2022-07-13T17:59:02.187175200
+# 2022-07-14T16:00:22.790266900
 # j2eo team
-+package ch_15_expressions.sec_15_25_ternary_operator.sec_15_25_1_boolean_conditional_expressions
 +alias stdlib.lang.class__System
 +alias stdlib.lang.class__Object
 +alias stdlib.primitives.prim__int

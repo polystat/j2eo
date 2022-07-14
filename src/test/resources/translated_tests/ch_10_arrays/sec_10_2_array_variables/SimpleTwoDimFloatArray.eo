@@ -1,6 +1,5 @@
-# 2022-07-13T17:59:01.024469300
+# 2022-07-14T16:08:02.125298600
 # j2eo team
-+package ch_10_arrays.sec_10_2_array_variables
 +alias stdlib.primitives.prim__float
 +alias stdlib.lang.class__System
 +alias stdlib.lang.class__Object

@@ -1,6 +1,5 @@
-# 2022-07-13T17:59:02.288839100
+# 2022-07-14T15:51:56.908542400
 # j2eo team
-+package ch_15_expressions.sec_15_8_primary_expressions.sec_15_8_1_lexical_literals
 +alias stdlib.primitives.prim__float
 +alias stdlib.primitives.prim__char
 +alias stdlib.primitives.prim__double

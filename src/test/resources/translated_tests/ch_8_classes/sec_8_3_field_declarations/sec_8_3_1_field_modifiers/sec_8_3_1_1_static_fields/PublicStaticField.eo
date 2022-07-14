@@ -1,6 +1,5 @@
-# 2022-07-13T17:59:03.383933900
+# 2022-07-14T16:08:22.455395800
 # j2eo team
-+package ch_8_classes.sec_8_3_field_declarations.sec_8_3_1_field_modifiers.sec_8_3_1_1_static_fields
 +alias stdlib.lang.class__System
 +alias stdlib.lang.class__Object
 +alias stdlib.primitives.prim__int

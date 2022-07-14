@@ -1,6 +1,5 @@
-# 2022-07-13T17:59:03.595701
+# 2022-07-14T16:06:31.723463600
 # j2eo team
-+package ch_9_interfaces.sec_9_1_interface_declarations.sec_9_1_2_generic_interfaces_and_type_parameters
 +alias stdlib.lang.class__Object
 +alias stdlib.lang.class__System
 +alias stdlib.lang.class__String

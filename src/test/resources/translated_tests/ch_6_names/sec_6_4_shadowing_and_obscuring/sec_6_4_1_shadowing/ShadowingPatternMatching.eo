@@ -1,6 +1,5 @@
-# 2022-07-13T17:59:03.296939400
+# 2022-07-14T15:56:48.919505900
 # j2eo team
-+package ch_6_names.sec_6_4_shadowing_and_obscuring.sec_6_4_1_shadowing
 +alias stdlib.lang.class__System
 +alias stdlib.lang.class__Object
 +alias stdlib.lang.class__String
