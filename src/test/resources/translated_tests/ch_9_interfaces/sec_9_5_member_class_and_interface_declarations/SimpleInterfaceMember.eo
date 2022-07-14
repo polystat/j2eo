@@ -1,6 +1,5 @@
-# 2022-07-13T17:59:03.642392500
+# 2022-07-14T15:50:55.208626500
 # j2eo team
-+package ch_9_interfaces.sec_9_5_member_class_and_interface_declarations
 +alias stdlib.lang.class__Object
 +alias stdlib.lang.class__System
 +alias stdlib.lang.class__String

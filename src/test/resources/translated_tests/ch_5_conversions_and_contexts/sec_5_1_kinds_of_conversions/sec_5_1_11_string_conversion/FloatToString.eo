@@ -1,6 +1,5 @@
-# 2022-07-13T17:59:03.134648300
+# 2022-07-14T15:59:44.591759700
 # j2eo team
-+package ch_5_conversions_and_contexts.sec_5_1_kinds_of_conversions.sec_5_1_11_string_conversion
 +alias stdlib.primitives.prim__float
 +alias stdlib.lang.class__System
 +alias stdlib.lang.class__Object

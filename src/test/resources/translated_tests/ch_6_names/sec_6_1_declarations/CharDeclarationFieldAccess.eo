@@ -1,6 +1,5 @@
-# 2022-07-13T17:59:03.216938200
+# 2022-07-14T15:54:43.722251400
 # j2eo team
-+package ch_6_names.sec_6_1_declarations
 +alias stdlib.primitives.prim__char
 +alias stdlib.lang.class__System
 +alias stdlib.lang.class__Object

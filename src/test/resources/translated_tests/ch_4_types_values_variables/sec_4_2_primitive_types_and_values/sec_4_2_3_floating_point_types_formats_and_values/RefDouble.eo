@@ -1,6 +1,5 @@
-# 2022-07-13T17:59:03.031433600
+# 2022-07-14T15:57:11.561431
 # j2eo team
-+package ch_4_types_values_variables.sec_4_2_primitive_types_and_values.sec_4_2_3_floating_point_types_formats_and_values
 +alias stdlib.primitives.prim__float
 +alias stdlib.lang.class__System
 +alias stdlib.lang.class__Object

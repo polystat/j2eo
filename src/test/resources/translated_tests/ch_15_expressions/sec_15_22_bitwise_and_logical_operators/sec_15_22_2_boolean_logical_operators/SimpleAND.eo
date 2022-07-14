@@ -1,6 +1,5 @@
-# 2022-07-13T17:59:02.181450100
+# 2022-07-14T15:52:26.203913600
 # j2eo team
-+package ch_15_expressions.sec_15_22_bitwise_and_logical_operators.sec_15_22_2_boolean_logical_operators
 +alias stdlib.lang.class__System
 +alias stdlib.lang.class__Object
 +alias stdlib.primitives.prim__boolean

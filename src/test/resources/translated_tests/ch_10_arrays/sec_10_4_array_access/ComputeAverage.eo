@@ -1,6 +1,5 @@
-# 2022-07-13T17:59:01.237347900
+# 2022-07-14T15:58:55.967629200
 # j2eo team
-+package ch_10_arrays.sec_10_4_array_access
 +alias stdlib.lang.class__System
 +alias stdlib.primitives.prim__double
 +alias stdlib.lang.class__Object

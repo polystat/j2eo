@@ -1,6 +1,5 @@
-# 2022-07-13T17:59:02.278840200
+# 2022-07-14T16:06:34.660045600
 # j2eo team
-+package ch_15_expressions.sec_15_7_evaluation_order.sec_15_7_4_argument_lists_are_evaluated_left_to_right
 +alias stdlib.lang.class__System
 +alias stdlib.lang.class__Object
 +alias stdlib.lang.class__String

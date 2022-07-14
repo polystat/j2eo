@@ -1,6 +1,5 @@
-# 2022-07-13T17:59:01.025440700
+# 2022-07-14T15:50:00.713023300
 # j2eo team
-+package ch_10_arrays.sec_10_2_array_variables
 +alias stdlib.lang.class__System
 +alias stdlib.lang.class__Object
 +alias stdlib.primitives.prim__int

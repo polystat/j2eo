@@ -1,6 +1,5 @@
-# 2022-07-13T17:59:03.608442
+# 2022-07-14T15:49:27.647081700
 # j2eo team
-+package ch_9_interfaces.sec_9_4_method_declarations.sec_9_4_1_inheritance_and_overriding
 +alias stdlib.lang.class__Object
 +alias stdlib.lang.class__System
 +alias stdlib.lang.class__String

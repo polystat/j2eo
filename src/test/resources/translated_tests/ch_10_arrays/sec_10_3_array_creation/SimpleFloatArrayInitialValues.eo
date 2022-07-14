@@ -1,6 +1,5 @@
-# 2022-07-13T17:59:01.039875
+# 2022-07-14T15:52:13.894111500
 # j2eo team
-+package ch_10_arrays.sec_10_3_array_creation
 +alias stdlib.primitives.prim__float
 +alias stdlib.lang.class__System
 +alias stdlib.lang.class__Object

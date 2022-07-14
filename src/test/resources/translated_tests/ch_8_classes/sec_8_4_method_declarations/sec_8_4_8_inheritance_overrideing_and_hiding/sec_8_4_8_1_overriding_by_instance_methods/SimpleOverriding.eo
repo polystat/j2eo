@@ -1,6 +1,5 @@
-# 2022-07-13T17:59:03.502533
+# 2022-07-14T16:04:49.228004900
 # j2eo team
-+package ch_8_classes.sec_8_4_method_declarations.sec_8_4_8_inheritance_overrideing_and_hiding.sec_8_4_8_1_overriding_by_instance_methods
 +alias stdlib.lang.class__System
 +alias stdlib.lang.class__Object
 +alias stdlib.primitives.prim__int
