@@ -1,42 +1,39 @@
-# 2022-05-25T15:02:54.018044900
+# 2022-07-13T17:59:02.082143300
 # j2eo team
++package ch_15_expressions.sec_15_10_array_creation_and_access_expressions.sec_15_10_1_array_creation_expressions
 +alias stdlib.lang.class__System
 +alias stdlib.lang.class__Object
 +alias stdlib.primitives.prim__int
 +alias stdlib.lang.class__String
-+alias org.eolang.gray.cage
 
 [] > class__SimpleTwoDimensionalArray
   class__Object > super
   super > @
   [] > new
-    [] > this
-      class__Object.new > super
-      super > @
-      "class__SimpleTwoDimensionalArray" > className
-      [this] > init
-        seq > @
-          TRUE
-    seq > @
-      this
+    class__Object.new > super
+    super > @
+    "class__SimpleTwoDimensionalArray" > className
+    [this] > init
+      seq > @
+        TRUE
   # main :: String[] -> void
   [args] > main
     seq > @
-      d452805835
-      s1125736023
+      variableDeclaration_1
+      statementExpression_1
     cage > a
-    [] > d452805835
+    [] > variableDeclaration_1
       a.write > @
-        i_s1769190683
-    [] > i_s1769190683
-      a_c447981768 > @
-    [] > a_c447981768
-      cannot_get_access_to_array_initializer > @
-    [] > s1125736023
+        initializerSimple_1
+    [] > initializerSimple_1
+      arrayCreation_1 > @
+    [] > arrayCreation_1
+      FALSE > @
+    [] > statementExpression_1
       class__System.out.println > @
         class__System.out
-        l858952163
-    [] > l858952163
+        literal_1
+    [] > literal_1
       class__String.constructor_2 > @
         class__String.new
         "passed"
@@ -44,13 +41,13 @@
   [this] > constructor
     seq > @
       initialization
-      s1201484275
+      statementExpression_2
       this
     [] > initialization
       this.init > @
         this
-    [] > s1201484275
-      super.constructor > @
+    [] > statementExpression_2
+      this.super.constructor > @
         this.super
 
 [args...] > main

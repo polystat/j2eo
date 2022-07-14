@@ -1,0 +1,145 @@
+# 2022-07-13T17:59:03.130635600
+# j2eo team
++package ch_4_types_values_variables.sec_4_9_intersection_types
++alias stdlib.lang.class__Object
++alias stdlib.lang.class__System
++alias stdlib.lang.class__String
+
+[] > class__SimpleIntersectionType
+  class__Object > super
+  super > @
+  [] > new
+    class__Object.new > super
+    super > @
+    "class__SimpleIntersectionType" > className
+    [this] > init
+      seq > @
+        TRUE
+  # main :: String[] -> void
+  [args] > main
+    seq > @
+      variableDeclaration_1
+      statementExpression_1
+      statementExpression_2
+      statementExpression_3
+      statementExpression_4
+    cage > io
+    [] > variableDeclaration_1
+      io.write > @
+        initializerSimple_1
+    [] > initializerSimple_1
+      instanceCreation_1 > @
+    [] > instanceCreation_1
+      class__IOController.constructor > @
+        class__IOController.new
+    [] > statementExpression_1
+      io.init > @
+        io
+    [] > statementExpression_2
+      this.processData > @
+        this
+        simpleReference_2
+    [] > simpleReference_2
+      io > @
+    [] > statementExpression_3
+      io.close > @
+        io
+    [] > statementExpression_4
+      class__System.out.println > @
+        class__System.out
+        literal_1
+    [] > literal_1
+      class__String.constructor_2 > @
+        class__String.new
+        "passed"
+  # null :: null -> void
+  [this] > constructor
+    seq > @
+      initialization
+      statementExpression_5
+      this
+    [] > initialization
+      this.init > @
+        this
+    [] > statementExpression_5
+      this.super.constructor > @
+        this.super
+
+[] > class__IOController
+  class__Object > super
+  super > @
+  [] > new
+    class__Object.new > super
+    super > @
+    "class__IOController" > className
+    [this] > init
+      seq > @
+        TRUE
+    # init :: null -> void
+    [this] > init
+      seq > @
+        statementExpression_6
+      [] > statementExpression_6
+        class__System.out.println > @
+          class__System.out
+          literal_2
+      [] > literal_2
+        class__String.constructor_2 > @
+          class__String.new
+          "Initialization..."
+    # close :: null -> void
+    [this] > close
+      seq > @
+        statementExpression_7
+      [] > statementExpression_7
+        class__System.out.println > @
+          class__System.out
+          literal_3
+      [] > literal_3
+        class__String.constructor_2 > @
+          class__String.new
+          "Closing..."
+    # read :: null -> Object
+    [this] > read
+      seq > @
+        return_1
+      [] > return_1
+        literal_4 > @
+      [] > literal_4
+        class__String.constructor_2 > @
+          class__String.new
+          "Reading [data]"
+    # write :: Object -> void
+    [this data] > write
+      seq > @
+        statementExpression_8
+      [] > statementExpression_8
+        class__System.out.println > @
+          class__System.out
+          binary_1
+      [] > binary_1
+        literal_5.add > @
+          methodInvocation_1
+      [] > literal_5
+        class__String.constructor_2 > @
+          class__String.new
+          "Writing "
+      [] > methodInvocation_1
+        data.toString > @
+          data
+  # null :: null -> void
+  [this] > constructor
+    seq > @
+      initialization
+      statementExpression_9
+      this
+    [] > initialization
+      this.init > @
+        this
+    [] > statementExpression_9
+      this.super.constructor > @
+        this.super
+
+[args...] > main
+  class__SimpleIntersectionType.main > @
+    *

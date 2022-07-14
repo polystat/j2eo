@@ -1,0 +1,102 @@
+# 2022-07-13T17:59:01.373112300
+# j2eo team
++package ch_10_arrays.sec_10_4_array_access
++alias stdlib.lang.class__System
++alias stdlib.lang.class__Object
++alias stdlib.primitives.prim__int
++alias stdlib.lang.class__String
+
+[] > class__GetArrayFromFunction
+  class__Object > super
+  super > @
+  [] > new
+    class__Object.new > super
+    super > @
+    "class__GetArrayFromFunction" > className
+    [this] > init
+      seq > @
+        TRUE
+  # main :: String[] -> void
+  [args] > main
+    seq > @
+      variableDeclaration_1
+      statementExpression_1
+      statementExpression_2
+    cage > a
+    [] > variableDeclaration_1
+      a.write > @
+        initializerSimple_1
+    [] > initializerSimple_1
+      methodInvocation_1 > @
+    [] > methodInvocation_1
+      this.readArray > @
+        this
+    [] > statementExpression_1
+      for_loop_placeholder > @
+    [] > statementExpression_2
+      class__System.out.println > @
+        class__System.out
+        literal_1
+    [] > literal_1
+      class__String.constructor_2 > @
+        class__String.new
+        "passed"
+  # readArray :: null -> int[]
+  [] > readArray
+    seq > @
+      variableDeclaration_2
+      return_1
+    cage > arr
+    [] > variableDeclaration_2
+      arr.write > @
+        initializerArray_1
+    [] > initializerArray_1
+      * > @
+        initializerSimple_2
+        initializerSimple_3
+        initializerSimple_4
+        initializerSimple_5
+    [] > initializerSimple_2
+      literal_2 > @
+    [] > literal_2
+      prim__int.constructor_2 > @
+        prim__int.new
+        10
+    [] > initializerSimple_3
+      literal_3 > @
+    [] > literal_3
+      prim__int.constructor_2 > @
+        prim__int.new
+        20
+    [] > initializerSimple_4
+      literal_4 > @
+    [] > literal_4
+      prim__int.constructor_2 > @
+        prim__int.new
+        30
+    [] > initializerSimple_5
+      literal_5 > @
+    [] > literal_5
+      prim__int.constructor_2 > @
+        prim__int.new
+        40
+    [] > return_1
+      simpleReference_1 > @
+    [] > simpleReference_1
+      arr > @
+  # null :: null -> void
+  [this] > constructor
+    seq > @
+      initialization
+      statementExpression_3
+      this
+    [] > initialization
+      this.init > @
+        this
+    [] > statementExpression_3
+      this.super.constructor > @
+        this.super
+
+[args...] > main
+  class__GetArrayFromFunction.main > @
+    *

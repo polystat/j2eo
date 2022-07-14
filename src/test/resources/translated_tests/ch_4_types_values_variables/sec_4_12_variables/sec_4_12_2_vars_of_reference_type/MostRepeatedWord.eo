@@ -1,0 +1,148 @@
+# 2022-07-13T17:59:02.823970700
+# j2eo team
++package ch_4_types_values_variables.sec_4_12_variables.sec_4_12_2_vars_of_reference_type
++alias stdlib.lang.class__System
++alias stdlib.lang.class__Object
++alias stdlib.lang.class__String
++alias stdlib.primitives.prim__int
++alias eo/org/polystat/stdlib.util.class__ArrayList
+
+[] > class__MostRepeatedWord
+  class__Object > super
+  super > @
+  [] > new
+    class__Object.new > super
+    super > @
+    "class__MostRepeatedWord" > className
+    [this] > init
+      seq > @
+        TRUE
+  # main :: String[] -> void
+  [args] > main
+    seq > @
+      variableDeclaration_1
+      variableDeclaration_2
+      variableDeclaration_3
+      variableDeclaration_4
+      statementExpression_1
+      statementExpression_2
+      statementExpression_3
+    cage > word
+    [] > variableDeclaration_1
+      word.write > @
+        initializerSimple_1
+    [] > initializerSimple_1
+      literal_1 > @
+    [] > literal_1
+      class__String.constructor_2 > @
+        class__String.new
+        ""
+    prim__int.constructor_1 > count
+      prim__int.new
+    [] > variableDeclaration_2
+      count.write > @
+        initializerSimple_2
+    [] > initializerSimple_2
+      literal_2 > @
+    [] > literal_2
+      prim__int.constructor_2 > @
+        prim__int.new
+        0
+    prim__int.constructor_1 > maxCount
+      prim__int.new
+    [] > variableDeclaration_3
+      maxCount.write > @
+        initializerSimple_3
+    [] > initializerSimple_3
+      literal_3 > @
+    [] > literal_3
+      prim__int.constructor_2 > @
+        prim__int.new
+        0
+    cage > words
+    [] > variableDeclaration_4
+      words.write > @
+        initializerArray_1
+    [] > initializerArray_1
+      * > @
+        initializerSimple_4
+        initializerSimple_5
+        initializerSimple_6
+        initializerSimple_7
+        initializerSimple_8
+        initializerSimple_9
+    [] > initializerSimple_4
+      literal_4 > @
+    [] > literal_4
+      class__String.constructor_2 > @
+        class__String.new
+        "A"
+    [] > initializerSimple_5
+      literal_5 > @
+    [] > literal_5
+      class__String.constructor_2 > @
+        class__String.new
+        "B"
+    [] > initializerSimple_6
+      literal_6 > @
+    [] > literal_6
+      class__String.constructor_2 > @
+        class__String.new
+        "A"
+    [] > initializerSimple_7
+      literal_7 > @
+    [] > literal_7
+      class__String.constructor_2 > @
+        class__String.new
+        "B"
+    [] > initializerSimple_8
+      literal_8 > @
+    [] > literal_8
+      class__String.constructor_2 > @
+        class__String.new
+        "A"
+    [] > initializerSimple_9
+      literal_9 > @
+    [] > literal_9
+      class__String.constructor_2 > @
+        class__String.new
+        "C"
+    [] > statementExpression_1
+      for_loop_placeholder > @
+    [] > statementExpression_2
+      class__System.out.println > @
+        class__System.out
+        binary_1
+    [] > binary_1
+      literal_10.add > @
+        simpleReference_1
+    [] > literal_10
+      class__String.constructor_2 > @
+        class__String.new
+        "Most repeated word: "
+    [] > simpleReference_1
+      word > @
+    [] > statementExpression_3
+      class__System.out.println > @
+        class__System.out
+        literal_11
+    [] > literal_11
+      class__String.constructor_2 > @
+        class__String.new
+        "passed"
+  # null :: null -> void
+  [this] > constructor
+    seq > @
+      initialization
+      statementExpression_4
+      this
+    [] > initialization
+      this.init > @
+        this
+    [] > statementExpression_4
+      this.super.constructor > @
+        this.super
+
+[args...] > main
+  class__MostRepeatedWord.main > @
+    *

@@ -14,13 +14,13 @@ import org.junit.jupiter.api.TestMethodOrder
 import org.junit.jupiter.api.assertTimeoutPreemptively
 import org.junit.jupiter.api.parallel.Execution
 import org.junit.jupiter.api.parallel.ExecutionMode
-import parser.JavaLexer
-import parser.JavaParser
-import parser.Visitor
-import translator.Context
-import translator.Translator
+import org.polystat.j2eo.parser.JavaLexer
+import org.polystat.j2eo.parser.JavaParser
+import org.polystat.j2eo.parser.Visitor
+import org.polystat.j2eo.translator.Context
+import org.polystat.j2eo.translator.Translator
+import org.polystat.j2eo.util.logger
 import tree.Compilation.CompilationUnit
-import util.logger
 import java.io.BufferedReader
 import java.io.File
 import java.io.InputStreamReader
@@ -78,11 +78,11 @@ class TestJ2EO {
         var m: String?
         val mvnSb = StringBuilder()
         while (mvnStdInput.readLine().also { m = it } != null) {
-            mvnSb.append(m).append(fileSep)
+            mvnSb.append(m).append(lineSep)
         }
         compileProcess.waitFor()
         compileProcess.destroy()
-        logger.info(" -- EO compilation output --$fileSep$mvnSb")
+        logger.info(" -- EO compilation output --$lineSep$mvnSb")
 
         pomClonePath.toFile().delete()
         stdClonePath.toFile().deleteRecursively()
@@ -118,7 +118,7 @@ class TestJ2EO {
                 logger.info("-- Executing candidate tests --")
             var testFolderPath = listOf("src", "test", "resources").joinToString(fileSep)
             testFolderPath += fileSep + if (testCandidates) "test_candidates" else "test_ready"
-            val stdlibFolderPath = listOf("src", "main", "resources", "stdlib").joinToString(fileSep)
+            val stdlibFolderPath = listOf("src", "main", "eo", "org", "polystat", "stdlib").joinToString(fileSep)
             val fileStd = File(stdlibFolderPath)
             stdlibFolderRoot = fileStd.toPath().toAbsolutePath()
             val fileTest = File(testFolderPath)

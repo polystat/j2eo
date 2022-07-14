@@ -1,0 +1,47 @@
+# 2022-07-13T17:59:01.939537100
+# j2eo team
++package ch_14_blocks_statements_and_patterns.sec_14_19_the_synchronized_statement
++alias stdlib.lang.class__Object
+
+[] > class__SimpleSynchronizedBlock
+  class__Object > super
+  super > @
+  [] > new
+    class__Object.new > super
+    super > @
+    "class__SimpleSynchronizedBlock" > className
+    [this] > init
+      seq > @
+        TRUE
+  # main :: String[] -> void
+  [args] > main
+    seq > @
+      variableDeclaration_1
+      statementExpression_1
+    cage > obj
+    [] > variableDeclaration_1
+      obj.write > @
+        initializerSimple_1
+    [] > initializerSimple_1
+      instanceCreation_1 > @
+    [] > instanceCreation_1
+      class__Object.constructor > @
+        class__Object.new
+    [] > statementExpression_1
+      statement_placeholder > @
+  # null :: null -> void
+  [this] > constructor
+    seq > @
+      initialization
+      statementExpression_2
+      this
+    [] > initialization
+      this.init > @
+        this
+    [] > statementExpression_2
+      this.super.constructor > @
+        this.super
+
+[args...] > main
+  class__SimpleSynchronizedBlock.main > @
+    *

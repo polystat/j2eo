@@ -1,0 +1,98 @@
+# 2022-07-13T17:59:02.900032700
+# j2eo team
++package ch_4_types_values_variables.sec_4_12_variables.sec_4_12_2_vars_of_reference_type
++alias stdlib.lang.class__Object
++alias stdlib.lang.class__System
++alias stdlib.lang.class__String
+
+[] > class__Reverse
+  class__Object > super
+  super > @
+  [] > new
+    class__Object.new > super
+    super > @
+    "class__Reverse" > className
+    [this] > init
+      seq > @
+        TRUE
+  # main :: String[] -> void
+  [args] > main
+    seq > @
+      variableDeclaration_1
+      variableDeclaration_2
+      statementExpression_1
+      statementExpression_2
+      statementExpression_3
+      statementExpression_4
+    cage > string
+    [] > variableDeclaration_1
+      string.write > @
+        initializerSimple_1
+    [] > initializerSimple_1
+      literal_1 > @
+    [] > literal_1
+      class__String.constructor_2 > @
+        class__String.new
+        "Dream big"
+    cage > reversedStr
+    [] > variableDeclaration_2
+      reversedStr.write > @
+        initializerSimple_2
+    [] > initializerSimple_2
+      literal_2 > @
+    [] > literal_2
+      class__String.constructor_2 > @
+        class__String.new
+        ""
+    [] > statementExpression_1
+      for_loop_placeholder > @
+    [] > statementExpression_2
+      class__System.out.println > @
+        class__System.out
+        binary_1
+    [] > binary_1
+      literal_3.add > @
+        simpleReference_1
+    [] > literal_3
+      class__String.constructor_2 > @
+        class__String.new
+        "Original string: "
+    [] > simpleReference_1
+      string > @
+    [] > statementExpression_3
+      class__System.out.println > @
+        class__System.out
+        binary_2
+    [] > binary_2
+      literal_4.add > @
+        simpleReference_2
+    [] > literal_4
+      class__String.constructor_2 > @
+        class__String.new
+        "Reverse of given string: "
+    [] > simpleReference_2
+      reversedStr > @
+    [] > statementExpression_4
+      class__System.out.println > @
+        class__System.out
+        literal_5
+    [] > literal_5
+      class__String.constructor_2 > @
+        class__String.new
+        "passed"
+  # null :: null -> void
+  [this] > constructor
+    seq > @
+      initialization
+      statementExpression_5
+      this
+    [] > initialization
+      this.init > @
+        this
+    [] > statementExpression_5
+      this.super.constructor > @
+        this.super
+
+[args...] > main
+  class__Reverse.main > @
+    *

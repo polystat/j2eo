@@ -1,0 +1,91 @@
+# 2022-07-13T17:59:01.313111600
+# j2eo team
++package ch_10_arrays.sec_10_4_array_access
++alias stdlib.lang.class__System
++alias stdlib.lang.class__Object
++alias stdlib.primitives.prim__int
++alias stdlib.lang.class__String
+
+[] > class__DefaultAndInitializedValues
+  class__Object > super
+  super > @
+  [] > new
+    class__Object.new > super
+    super > @
+    "class__DefaultAndInitializedValues" > className
+    [this] > init
+      seq > @
+        TRUE
+  # main :: String[] -> void
+  [args] > main
+    seq > @
+      variableDeclaration_1
+      statementExpression_1
+      statementExpression_2
+      statementExpression_3
+      statementExpression_4
+      statementExpression_5
+      statementExpression_6
+      statementExpression_7
+    cage > arr
+    [] > variableDeclaration_1
+      arr.write > @
+        initializerSimple_1
+    [] > initializerSimple_1
+      arrayCreation_1 > @
+    [] > arrayCreation_1
+      FALSE > @
+    [] > statementExpression_1
+      class__System.out.println > @
+        class__System.out
+        literal_1
+    [] > literal_1
+      class__String.constructor_2 > @
+        class__String.new
+        "Default values of array:"
+    [] > statementExpression_2
+      for_loop_placeholder > @
+    [] > statementExpression_3
+      class__System.out.println > @
+        class__System.out
+        literal_2
+    [] > literal_2
+      class__String.constructor_2 > @
+        class__String.new
+        "\n\n***Initializing Array***"
+    [] > statementExpression_4
+      for_loop_placeholder > @
+    [] > statementExpression_5
+      class__System.out.println > @
+        class__System.out
+        literal_3
+    [] > literal_3
+      class__String.constructor_2 > @
+        class__String.new
+        "Array elements are:"
+    [] > statementExpression_6
+      for_loop_placeholder > @
+    [] > statementExpression_7
+      class__System.out.println > @
+        class__System.out
+        literal_4
+    [] > literal_4
+      class__String.constructor_2 > @
+        class__String.new
+        "passed"
+  # null :: null -> void
+  [this] > constructor
+    seq > @
+      initialization
+      statementExpression_8
+      this
+    [] > initialization
+      this.init > @
+        this
+    [] > statementExpression_8
+      this.super.constructor > @
+        this.super
+
+[args...] > main
+  class__DefaultAndInitializedValues.main > @
+    *

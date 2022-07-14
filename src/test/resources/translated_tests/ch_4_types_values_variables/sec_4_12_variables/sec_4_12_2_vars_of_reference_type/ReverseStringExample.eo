@@ -1,0 +1,129 @@
+# 2022-07-13T17:59:02.901032500
+# j2eo team
++package ch_4_types_values_variables.sec_4_12_variables.sec_4_12_2_vars_of_reference_type
++alias stdlib.lang.class__Object
++alias stdlib.lang.class__System
++alias stdlib.lang.class__String
+
+[] > class__ReverseStringExample
+  class__Object > super
+  super > @
+  [] > new
+    class__Object.new > super
+    super > @
+    "class__ReverseStringExample" > className
+    [this] > init
+      seq > @
+        TRUE
+  # main :: String[] -> void
+  [args] > main
+    seq > @
+      variableDeclaration_1
+      statementExpression_1
+      variableDeclaration_2
+      statementExpression_2
+      statementExpression_3
+    cage > str
+    [] > variableDeclaration_1
+      TRUE > @
+    [] > statementExpression_1
+      simpleReference_1.write > @
+        literal_1
+    [] > simpleReference_1
+      str > @
+    [] > literal_1
+      class__String.constructor_2 > @
+        class__String.new
+        "dXsgTrQ pndHSslyP"
+    cage > reversed
+    [] > variableDeclaration_2
+      reversed.write > @
+        initializerSimple_1
+    [] > initializerSimple_1
+      methodInvocation_1 > @
+    [] > methodInvocation_1
+      this.reverseString > @
+        this
+        simpleReference_2
+    [] > simpleReference_2
+      str > @
+    [] > statementExpression_2
+      class__System.out.println > @
+        class__System.out
+        binary_1
+    [] > binary_1
+      literal_2.add > @
+        simpleReference_3
+    [] > literal_2
+      class__String.constructor_2 > @
+        class__String.new
+        "The reversed string is: "
+    [] > simpleReference_3
+      reversed > @
+    [] > statementExpression_3
+      class__System.out.println > @
+        class__System.out
+        literal_3
+    [] > literal_3
+      class__String.constructor_2 > @
+        class__String.new
+        "passed"
+  # reverseString :: String -> String
+  [s] > reverseString
+    seq > @
+      ifThenElse_1
+      return_1
+    [] > ifThenElse_1
+      methodInvocation_2.if > @
+        return_2
+        empty_1
+    [] > methodInvocation_2
+      s.isEmpty > @
+        s
+    [] > return_2
+      simpleReference_5 > @
+    [] > simpleReference_5
+      s > @
+    [] > empty_1
+      TRUE > @
+    [] > return_1
+      binary_2 > @
+    [] > binary_2
+      methodInvocation_3.add > @
+        methodInvocation_4
+    [] > methodInvocation_3
+      this.reverseString > @
+        this
+        methodInvocation_5
+    [] > methodInvocation_5
+      s.substring > @
+        s
+        literal_4
+    [] > literal_4
+      prim__int.constructor_2 > @
+        prim__int.new
+        1
+    [] > methodInvocation_4
+      s.charAt > @
+        s
+        literal_5
+    [] > literal_5
+      prim__int.constructor_2 > @
+        prim__int.new
+        0
+  # null :: null -> void
+  [this] > constructor
+    seq > @
+      initialization
+      statementExpression_4
+      this
+    [] > initialization
+      this.init > @
+        this
+    [] > statementExpression_4
+      this.super.constructor > @
+        this.super
+
+[args...] > main
+  class__ReverseStringExample.main > @
+    *

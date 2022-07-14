@@ -1,0 +1,117 @@
+# 2022-07-13T17:59:02.075486900
+# j2eo team
++package ch_14_blocks_statements_and_patterns.sec_14_9_the_if_statement.sec_14_9_2_the_if_then_else_statement
++alias stdlib.lang.class__Object
++alias stdlib.primitives.prim__boolean
++alias stdlib.lang.class__System
+
+[] > class__VeryNestedIfElse
+  class__Object > super
+  super > @
+  [] > new
+    class__Object.new > super
+    super > @
+    "class__VeryNestedIfElse" > className
+    [this] > init
+      seq > @
+        TRUE
+  # main :: String[] -> void
+  [args] > main
+    seq > @
+      variableDeclaration_1
+      ifThenElse_1
+    prim__boolean.constructor_1 > lie
+      prim__boolean.new
+    [] > variableDeclaration_1
+      lie.write > @
+        initializerSimple_1
+    [] > initializerSimple_1
+      literal_1 > @
+    [] > literal_1
+      prim__boolean.constructor_2 > @
+        prim__boolean.new
+        FALSE
+    [] > ifThenElse_1
+      simpleReference_1.if > @
+        block_1
+        block_2
+    [] > simpleReference_1
+      lie > @
+    [] > block_1
+      seq > @
+        statementExpression_1
+      [] > statementExpression_1
+        class__System.out.println > @
+          class__System.out
+          literal_2
+      [] > literal_2
+        class__String.constructor_2 > @
+          class__String.new
+          "not passed"
+    [] > block_2
+      seq > @
+        ifThenElse_2
+      [] > ifThenElse_2
+        simpleReference_2.if > @
+          block_3
+          block_4
+      [] > simpleReference_2
+        lie > @
+      [] > block_3
+        seq > @
+          statementExpression_2
+        [] > statementExpression_2
+          class__System.out.println > @
+            class__System.out
+            literal_3
+        [] > literal_3
+          class__String.constructor_2 > @
+            class__String.new
+            "not passed"
+      [] > block_4
+        seq > @
+          ifThenElse_3
+        [] > ifThenElse_3
+          simpleReference_3.if > @
+            block_5
+            block_6
+        [] > simpleReference_3
+          lie > @
+        [] > block_5
+          seq > @
+            statementExpression_3
+          [] > statementExpression_3
+            class__System.out.println > @
+              class__System.out
+              literal_4
+          [] > literal_4
+            class__String.constructor_2 > @
+              class__String.new
+              "not passed"
+        [] > block_6
+          seq > @
+            statementExpression_4
+          [] > statementExpression_4
+            class__System.out.println > @
+              class__System.out
+              literal_5
+          [] > literal_5
+            class__String.constructor_2 > @
+              class__String.new
+              "passed"
+  # null :: null -> void
+  [this] > constructor
+    seq > @
+      initialization
+      statementExpression_5
+      this
+    [] > initialization
+      this.init > @
+        this
+    [] > statementExpression_5
+      this.super.constructor > @
+        this.super
+
+[args...] > main
+  class__VeryNestedIfElse.main > @
+    *

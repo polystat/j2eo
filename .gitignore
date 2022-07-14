@@ -1,11 +1,9 @@
 out
 input
 .gradle
-./gradle/wrapper/gradle-wrapper.jar
 .idea
 build
 compile_and_run_tests.bat
-*.jar
 output.eo
 output_eo
 polystat_check

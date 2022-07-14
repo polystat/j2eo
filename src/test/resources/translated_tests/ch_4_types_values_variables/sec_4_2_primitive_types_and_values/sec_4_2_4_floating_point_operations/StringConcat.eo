@@ -1,0 +1,88 @@
+# 2022-07-13T17:59:03.042823400
+# j2eo team
++package ch_4_types_values_variables.sec_4_2_primitive_types_and_values.sec_4_2_4_floating_point_operations
++alias stdlib.primitives.prim__float
++alias stdlib.lang.class__System
++alias stdlib.lang.class__Object
++alias stdlib.lang.class__String
+
+[] > class__StringConcat
+  class__Object > super
+  super > @
+  [] > new
+    class__Object.new > super
+    super > @
+    "class__StringConcat" > className
+    [this] > init
+      seq > @
+        TRUE
+  # main :: String[] -> void
+  [args] > main
+    seq > @
+      variableDeclaration_1
+      variableDeclaration_2
+      statementExpression_1
+      statementExpression_2
+    prim__float.constructor_1 > a
+      prim__float.new
+    [] > variableDeclaration_1
+      a.write > @
+        initializerSimple_1
+    [] > initializerSimple_1
+      literal_1 > @
+    [] > literal_1
+      prim__float.constructor_2 > @
+        prim__float.new
+        1.5
+    cage > line
+    [] > variableDeclaration_2
+      line.write > @
+        initializerSimple_2
+    [] > initializerSimple_2
+      binary_1 > @
+    [] > binary_1
+      binary_2.add > @
+        literal_2
+    [] > binary_2
+      literal_3.add > @
+        simpleReference_1
+    [] > literal_3
+      class__String.constructor_2 > @
+        class__String.new
+        "We have "
+    [] > simpleReference_1
+      a > @
+    [] > literal_2
+      class__String.constructor_2 > @
+        class__String.new
+        " zemlekopa."
+    [] > statementExpression_1
+      class__System.out.println > @
+        class__System.out
+        simpleReference_2
+    [] > simpleReference_2
+      line > @
+    [] > statementExpression_2
+      class__System.out.println > @
+        class__System.out
+        literal_4
+    [] > literal_4
+      class__String.constructor_2 > @
+        class__String.new
+        "passed"
+  # null :: null -> void
+  [this] > constructor
+    seq > @
+      initialization
+      statementExpression_3
+      this
+    [] > initialization
+      this.init > @
+        this
+    [] > statementExpression_3
+      this.super.constructor > @
+        this.super
+
+[args...] > main
+  class__StringConcat.main > @
+    *

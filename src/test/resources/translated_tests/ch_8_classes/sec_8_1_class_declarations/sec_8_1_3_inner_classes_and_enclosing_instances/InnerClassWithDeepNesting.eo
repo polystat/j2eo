@@ -1,0 +1,186 @@
+# 2022-07-13T17:59:03.341935700
+# j2eo team
++package ch_8_classes.sec_8_1_class_declarations.sec_8_1_3_inner_classes_and_enclosing_instances
++alias stdlib.lang.class__System
++alias stdlib.lang.class__Object
++alias stdlib.primitives.prim__boolean
++alias stdlib.lang.class__String
+
+[] > class__WithDeepNesting
+  class__Object > super
+  super > @
+  [] > new
+    class__Object.new > super
+    super > @
+    "class__WithDeepNesting" > className
+    [this] > init
+      seq > @
+        TRUE
+    prim__boolean.constructor_1 > toBe
+      prim__boolean.new
+  # null :: boolean -> void
+  [this b] > constructor
+    seq > @
+      initialization
+      statementExpression_1
+      this
+    [] > initialization
+      this.init > @
+        this
+    [] > statementExpression_1
+      simpleReference_1.write > @
+        simpleReference_2
+    [] > simpleReference_1
+      toBe > @
+    [] > simpleReference_2
+      b > @
+  [] > class__Nested
+    class__Object > super
+    super > @
+    [] > new
+      class__Object.new > super
+      super > @
+      "class__Nested" > className
+      [this] > init
+        seq > @
+          TRUE
+      prim__boolean.constructor_1 > theQuestion
+        prim__boolean.new
+    [] > class__DeeplyNested
+      class__Object > super
+      super > @
+      [] > new
+        class__Object.new > super
+        super > @
+        "class__DeeplyNested" > className
+        [this] > init
+          seq > @
+            TRUE
+      # null :: null -> void
+      [this] > constructor
+        seq > @
+          initialization
+          statementExpression_2
+          this
+        [] > initialization
+          this.init > @
+            this
+        [] > statementExpression_2
+          simpleReference_3.write > @
+            binary_1
+        [] > simpleReference_3
+          theQuestion > @
+        [] > binary_1
+          simpleReference_4.or > @
+            unaryPrefix_1
+        [] > simpleReference_4
+          toBe > @
+        [] > unaryPrefix_1
+          simpleReference_5.unary_placeholder > @
+        [] > simpleReference_5
+          toBe > @
+    # null :: null -> void
+    [this] > constructor
+      seq > @
+        initialization
+        statementExpression_3
+        this
+      [] > initialization
+        this.init > @
+          this
+      [] > statementExpression_3
+        this.super.constructor > @
+          this.super
+
+[] > class__InnerClassWithDeepNesting
+  class__Object > super
+  super > @
+  [] > new
+    class__Object.new > super
+    super > @
+    "class__InnerClassWithDeepNesting" > className
+    [this] > init
+      seq > @
+        TRUE
+  # main :: String[] -> void
+  [args] > main
+    seq > @
+      variableDeclaration_1
+      variableDeclaration_2
+      statementExpression_4
+      variableDeclaration_3
+      statementExpression_5
+      statementExpression_6
+    cage > wdn
+    [] > variableDeclaration_1
+      wdn.write > @
+        initializerSimple_1
+    [] > initializerSimple_1
+      instanceCreation_1 > @
+    [] > instanceCreation_1
+      class__WithDeepNesting.constructor > @
+        class__WithDeepNesting.new
+        literal_1
+    [] > literal_1
+      prim__boolean.constructor_2 > @
+        prim__boolean.new
+        TRUE
+    cage > wdnn
+    [] > variableDeclaration_2
+      wdnn.write > @
+        initializerSimple_2
+    [] > initializerSimple_2
+      instanceCreationQualified_1 > @
+    [] > instanceCreationQualified_1
+      instance_creation_q_placeholder > @
+    [] > statementExpression_4
+      fieldAccess_1.write > @
+        literal_2
+    [] > fieldAccess_1
+      simpleReference_6.theQuestion > @
+    [] > simpleReference_6
+      wdnn > @
+    [] > literal_2
+      prim__boolean.constructor_2 > @
+        prim__boolean.new
+        FALSE
+    cage > wdnndn
+    [] > variableDeclaration_3
+      wdnndn.write > @
+        initializerSimple_3
+    [] > initializerSimple_3
+      instanceCreationQualified_2 > @
+    [] > instanceCreationQualified_2
+      instance_creation_q_placeholder > @
+    [] > statementExpression_5
+      class__System.out.println > @
+        class__System.out
+        fieldAccess_3
+    [] > fieldAccess_3
+      simpleReference_7.theQuestion > @
+    [] > simpleReference_7
+      wdnn > @
+    [] > statementExpression_6
+      class__System.out.println > @
+        class__System.out
+        literal_3
+    [] > literal_3
+      class__String.constructor_2 > @
+        class__String.new
+        "passed"
+  # null :: null -> void
+  [this] > constructor
+    seq > @
+      initialization
+      statementExpression_7
+      this
+    [] > initialization
+      this.init > @
+        this
+    [] > statementExpression_7
+      this.super.constructor > @
+        this.super
+
+[args...] > main
+  class__InnerClassWithDeepNesting.main > @
+    *

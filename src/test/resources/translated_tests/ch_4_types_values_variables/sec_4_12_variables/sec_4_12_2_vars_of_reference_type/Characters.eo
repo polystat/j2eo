@@ -1,0 +1,184 @@
+# 2022-07-13T17:59:02.718515
+# j2eo team
++package ch_4_types_values_variables.sec_4_12_variables.sec_4_12_2_vars_of_reference_type
++alias stdlib.primitives.prim__char
++alias stdlib.lang.class__System
++alias stdlib.lang.class__Object
++alias stdlib.lang.class__String
++alias stdlib.primitives.prim__int
+
+[] > class__Characters
+  class__Object > super
+  super > @
+  [] > new
+    class__Object.new > super
+    super > @
+    "class__Characters" > className
+    [this] > init
+      seq > @
+        TRUE
+  # main :: String[] -> void
+  [args] > main
+    seq > @
+      variableDeclaration_1
+      variableDeclaration_2
+      variableDeclaration_3
+      variableDeclaration_4
+      variableDeclaration_5
+      variableDeclaration_6
+      variableDeclaration_7
+      variableDeclaration_8
+      variableDeclaration_9
+      statementExpression_1
+      statementExpression_2
+      statementExpression_3
+      statementExpression_4
+      statementExpression_5
+      statementExpression_6
+    cage > str
+    [] > variableDeclaration_1
+      str.write > @
+        initializerSimple_1
+    [] > initializerSimple_1
+      literal_1 > @
+    [] > literal_1
+      class__String.constructor_2 > @
+        class__String.new
+        "grass is greener on the other side"
+    cage > freq
+    [] > variableDeclaration_2
+      freq.write > @
+        initializerSimple_2
+    [] > initializerSimple_2
+      arrayCreation_1 > @
+    [] > arrayCreation_1
+      FALSE > @
+    prim__char.constructor_1 > minChar
+      prim__char.new
+    [] > variableDeclaration_3
+      minChar.write > @
+        initializerSimple_3
+    [] > initializerSimple_3
+      methodInvocation_1 > @
+    [] > methodInvocation_1
+      str.charAt > @
+        str
+        literal_2
+    [] > literal_2
+      prim__int.constructor_2 > @
+        prim__int.new
+        0
+    prim__char.constructor_1 > maxChar
+      prim__char.new
+    [] > variableDeclaration_4
+      maxChar.write > @
+        initializerSimple_4
+    [] > initializerSimple_4
+      methodInvocation_2 > @
+    [] > methodInvocation_2
+      str.charAt > @
+        str
+        literal_3
+    [] > literal_3
+      prim__int.constructor_2 > @
+        prim__int.new
+        0
+    prim__int.constructor_1 > i
+      prim__int.new
+    [] > variableDeclaration_5
+      TRUE > @
+    prim__int.constructor_1 > j
+      prim__int.new
+    [] > variableDeclaration_6
+      TRUE > @
+    prim__int.constructor_1 > min
+      prim__int.new
+    [] > variableDeclaration_7
+      TRUE > @
+    prim__int.constructor_1 > max
+      prim__int.new
+    [] > variableDeclaration_8
+      TRUE > @
+    prim__char.constructor_1 > string
+      prim__char.new
+    [] > variableDeclaration_9
+      string.write > @
+        initializerSimple_5
+    [] > initializerSimple_5
+      methodInvocation_3 > @
+    [] > methodInvocation_3
+      str.toCharArray > @
+        str
+    [] > statementExpression_1
+      for_loop_placeholder > @
+    [] > statementExpression_2
+      simpleReference_4.write > @
+        binary_1
+    [] > simpleReference_4
+      min > @
+    [] > binary_1
+      simpleReference_5.write > @
+        arrayAccess_1
+    [] > simpleReference_5
+      max > @
+    [] > arrayAccess_1
+      simpleReference_6.get > @
+        literal_4.v
+    [] > simpleReference_6
+      freq > @
+    [] > literal_4
+      prim__int.constructor_2 > @
+        prim__int.new
+        0
+    [] > statementExpression_3
+      for_loop_placeholder > @
+    [] > statementExpression_4
+      class__System.out.println > @
+        class__System.out
+        binary_2
+    [] > binary_2
+      literal_5.add > @
+        simpleReference_7
+    [] > literal_5
+      class__String.constructor_2 > @
+        class__String.new
+        "Minimum occurring character: "
+    [] > simpleReference_7
+      minChar > @
+    [] > statementExpression_5
+      class__System.out.println > @
+        class__System.out
+        binary_3
+    [] > binary_3
+      literal_6.add > @
+        simpleReference_8
+    [] > literal_6
+      class__String.constructor_2 > @
+        class__String.new
+        "Maximum occurring character: "
+    [] > simpleReference_8
+      maxChar > @
+    [] > statementExpression_6
+      class__System.out.println > @
+        class__System.out
+        literal_7
+    [] > literal_7
+      class__String.constructor_2 > @
+        class__String.new
+        "passed"
+  # null :: null -> void
+  [this] > constructor
+    seq > @
+      initialization
+      statementExpression_7
+      this
+    [] > initialization
+      this.init > @
+        this
+    [] > statementExpression_7
+      this.super.constructor > @
+        this.super
+
+[args...] > main
+  class__Characters.main > @
+    *

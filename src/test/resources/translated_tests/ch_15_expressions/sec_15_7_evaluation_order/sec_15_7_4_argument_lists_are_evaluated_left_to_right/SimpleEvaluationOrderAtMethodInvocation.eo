@@ -1,0 +1,96 @@
+# 2022-07-13T17:59:02.279839400
+# j2eo team
++package ch_15_expressions.sec_15_7_evaluation_order.sec_15_7_4_argument_lists_are_evaluated_left_to_right
++alias stdlib.lang.class__Object
++alias stdlib.lang.class__System
++alias stdlib.lang.class__String
+
+[] > class__SimpleEvaluationOrderAtMethodInvocation
+  class__Object > super
+  super > @
+  [] > new
+    class__Object.new > super
+    super > @
+    "class__SimpleEvaluationOrderAtMethodInvocation" > className
+    [this] > init
+      seq > @
+        TRUE
+  # print3 :: String -> String -> String -> void
+  [a b c] > print3
+    seq > @
+      statementExpression_1
+    [] > statementExpression_1
+      class__System.out.println > @
+        class__System.out
+        binary_1
+    [] > binary_1
+      binary_2.add > @
+        simpleReference_1
+    [] > binary_2
+      simpleReference_2.add > @
+        simpleReference_3
+    [] > simpleReference_2
+      a > @
+    [] > simpleReference_3
+      b > @
+    [] > simpleReference_1
+      c > @
+  # main :: String[] -> void
+  [args] > main
+    seq > @
+      variableDeclaration_1
+      statementExpression_2
+      statementExpression_3
+    cage > s
+    [] > variableDeclaration_1
+      s.write > @
+        initializerSimple_1
+    [] > initializerSimple_1
+      literal_1 > @
+    [] > literal_1
+      class__String.constructor_2 > @
+        class__String.new
+        "A"
+    [] > statementExpression_2
+      this.print3 > @
+        this
+        simpleReference_4
+        binary_3
+        simpleReference_5
+    [] > simpleReference_4
+      s > @
+    [] > binary_3
+      simpleReference_6.write > @
+        literal_2
+    [] > simpleReference_6
+      s > @
+    [] > literal_2
+      class__String.constructor_2 > @
+        class__String.new
+        "B"
+    [] > simpleReference_5
+      s > @
+    [] > statementExpression_3
+      class__System.out.println > @
+        class__System.out
+        literal_3
+    [] > literal_3
+      class__String.constructor_2 > @
+        class__String.new
+        "passed"
+  # null :: null -> void
+  [this] > constructor
+    seq > @
+      initialization
+      statementExpression_4
+      this
+    [] > initialization
+      this.init > @
+        this
+    [] > statementExpression_4
+      this.super.constructor > @
+        this.super
+
+[args...] > main
+  class__SimpleEvaluationOrderAtMethodInvocation.main > @
+    *

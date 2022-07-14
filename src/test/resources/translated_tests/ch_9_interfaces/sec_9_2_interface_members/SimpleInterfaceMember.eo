@@ -1,0 +1,53 @@
+# 2022-07-13T17:59:03.603446100
+# j2eo team
++package ch_9_interfaces.sec_9_2_interface_members
++alias stdlib.lang.class__Object
++alias stdlib.lang.class__System
+
+[] > class__SimpleInterfaceMember
+  class__Object > super
+  super > @
+  [] > new
+    class__Object.new > super
+    super > @
+    "class__SimpleInterfaceMember" > className
+    [this] > init
+      seq > @
+        TRUE
+  # main :: String[] -> void
+  [args] > main
+    seq > @
+      statementExpression_1
+      statementExpression_2
+    [] > statementExpression_1
+      class__System.out.println > @
+        class__System.out
+        fieldAccess_2
+    [] > fieldAccess_2
+      simpleReference_1.a > @
+    [] > simpleReference_1
+      ISome > @
+    [] > statementExpression_2
+      class__System.out.println > @
+        class__System.out
+        fieldAccess_4
+    [] > fieldAccess_4
+      simpleReference_2.line > @
+    [] > simpleReference_2
+      ISome > @
+  # null :: null -> void
+  [this] > constructor
+    seq > @
+      initialization
+      statementExpression_3
+      this
+    [] > initialization
+      this.init > @
+        this
+    [] > statementExpression_3
+      this.super.constructor > @
+        this.super
+
+[args...] > main
+  class__SimpleInterfaceMember.main > @
+    *

@@ -1,0 +1,149 @@
+# 2022-07-13T17:59:03.321967500
+# j2eo team
++package ch_8_classes.sec_8_1_class_declarations.sec_8_1_2_generic_classes_and_type_params
++alias stdlib.lang.class__System
++alias stdlib.lang.class__Object
++alias stdlib.lang.class__String
++alias stdlib.primitives.prim__int
+
+[] > class__C
+  class__Object > super
+  super > @
+  [] > new
+    class__Object.new > super
+    super > @
+    "class__C" > className
+    [this] > init
+      seq > @
+        TRUE
+    # add :: int -> int -> int
+    [this a b] > add
+      seq > @
+        return_1
+      [] > return_1
+        binary_1 > @
+      [] > binary_1
+        simpleReference_1.add > @
+          simpleReference_2
+      [] > simpleReference_1
+        a > @
+      [] > simpleReference_2
+        b > @
+    # printInt :: int -> void
+    [this v] > printInt
+      seq > @
+        statementExpression_1
+      [] > statementExpression_1
+        class__System.out.println > @
+          class__System.out
+          simpleReference_3
+      [] > simpleReference_3
+        v > @
+  # null :: null -> void
+  [this] > constructor
+    seq > @
+      initialization
+      statementExpression_2
+      this
+    [] > initialization
+      this.init > @
+        this
+    [] > statementExpression_2
+      this.super.constructor > @
+        this.super
+
+[] > class__D
+  class__Object > super
+  super > @
+  [] > new
+    class__Object.new > super
+    super > @
+    "class__D" > className
+    [this] > init
+      seq > @
+        TRUE
+  # null :: T -> int -> int -> void
+  [this t a b] > constructor
+    seq > @
+      initialization
+      statementExpression_3
+      this
+    [] > initialization
+      this.init > @
+        this
+    [] > statementExpression_3
+      t.printInt > @
+        t
+        methodInvocation_1
+    [] > methodInvocation_1
+      t.add > @
+        t
+        simpleReference_6
+        simpleReference_7
+    [] > simpleReference_6
+      a > @
+    [] > simpleReference_7
+      b > @
+
+[] > class__GenericClassBoundByIntersection
+  class__Object > super
+  super > @
+  [] > new
+    class__Object.new > super
+    super > @
+    "class__GenericClassBoundByIntersection" > className
+    [this] > init
+      seq > @
+        TRUE
+  # main :: String[] -> void
+  [args] > main
+    seq > @
+      variableDeclaration_1
+      statementExpression_4
+    cage > d
+    [] > variableDeclaration_1
+      d.write > @
+        initializerSimple_1
+    [] > initializerSimple_1
+      instanceCreation_1 > @
+    [] > instanceCreation_1
+      class__D.constructor > @
+        class__D.new
+        instanceCreation_2
+        literal_1
+        literal_2
+    [] > instanceCreation_2
+      class__C.constructor > @
+        class__C.new
+    [] > literal_1
+      prim__int.constructor_2 > @
+        prim__int.new
+        1
+    [] > literal_2
+      prim__int.constructor_2 > @
+        prim__int.new
+        2
+    [] > statementExpression_4
+      class__System.out.println > @
+        class__System.out
+        literal_3
+    [] > literal_3
+      class__String.constructor_2 > @
+        class__String.new
+        "passed"
+  # null :: null -> void
+  [this] > constructor
+    seq > @
+      initialization
+      statementExpression_5
+      this
+    [] > initialization
+      this.init > @
+        this
+    [] > statementExpression_5
+      this.super.constructor > @
+        this.super
+
+[args...] > main
+  class__GenericClassBoundByIntersection.main > @
+    *

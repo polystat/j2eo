@@ -1,10 +1,13 @@
 package eotree;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static util.ListUtils.listOf;
+import static org.polystat.j2eo.util.ListUtils.listOf;
 
 import arrow.core.Some;
 import org.junit.jupiter.api.Test;
+import org.polystat.j2eo.eotree.EOBndExpr;
+import org.polystat.j2eo.eotree.EODot;
+import org.polystat.j2eo.eotree.EOObject;
 
 /**
  * EO object tests.

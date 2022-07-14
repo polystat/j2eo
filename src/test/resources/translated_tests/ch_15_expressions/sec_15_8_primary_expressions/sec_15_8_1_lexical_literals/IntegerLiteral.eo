@@ -1,5 +1,6 @@
-# 2022-05-25T15:02:54.210536100
+# 2022-07-13T17:59:02.290839500
 # j2eo team
++package ch_15_expressions.sec_15_8_primary_expressions.sec_15_8_1_lexical_literals
 +alias stdlib.lang.class__System
 +alias stdlib.lang.class__Object
 +alias stdlib.primitives.prim__int
@@ -9,36 +10,33 @@
   class__Object > super
   super > @
   [] > new
-    [] > this
-      class__Object.new > super
-      super > @
-      "class__IntegerLiteral" > className
-      [this] > init
-        seq > @
-          TRUE
-    seq > @
-      this
+    class__Object.new > super
+    super > @
+    "class__IntegerLiteral" > className
+    [this] > init
+      seq > @
+        TRUE
   # main :: String[] -> void
   [args] > main
     seq > @
-      d549293029
-      s271095942
+      variableDeclaration_1
+      statementExpression_1
     prim__int.constructor_1 > a
       prim__int.new
-    [] > d549293029
+    [] > variableDeclaration_1
       a.write > @
-        i_s1930240356
-    [] > i_s1930240356
-      l613784740 > @
-    [] > l613784740
+        initializerSimple_1
+    [] > initializerSimple_1
+      literal_1 > @
+    [] > literal_1
       prim__int.constructor_2 > @
         prim__int.new
         1
-    [] > s271095942
+    [] > statementExpression_1
       class__System.out.println > @
         class__System.out
-        l1552341957
-    [] > l1552341957
+        literal_2
+    [] > literal_2
       class__String.constructor_2 > @
         class__String.new
         "passed"
@@ -46,13 +44,13 @@
   [this] > constructor
     seq > @
       initialization
-      s1176164144
+      statementExpression_2
       this
     [] > initialization
       this.init > @
         this
-    [] > s1176164144
-      super.constructor > @
+    [] > statementExpression_2
+      this.super.constructor > @
         this.super
 
 [args...] > main

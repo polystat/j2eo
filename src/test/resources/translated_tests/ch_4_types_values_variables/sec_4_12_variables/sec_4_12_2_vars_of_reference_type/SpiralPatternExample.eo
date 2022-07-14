@@ -1,0 +1,171 @@
+# 2022-07-13T17:59:02.929179900
+# j2eo team
++package ch_4_types_values_variables.sec_4_12_variables.sec_4_12_2_vars_of_reference_type
++alias stdlib.primitives.prim__char
++alias stdlib.lang.class__System
++alias stdlib.lang.class__Object
++alias stdlib.primitives.prim__int
++alias stdlib.lang.class__String
+
+[] > class__SpiralPatternExample
+  class__Object > super
+  super > @
+  [] > new
+    class__Object.new > super
+    super > @
+    "class__SpiralPatternExample" > className
+    [this] > init
+      seq > @
+        TRUE
+  # printSpiralPattern :: int -> void
+  [size] > printSpiralPattern
+    seq > @
+      variableDeclaration_1
+      variableDeclaration_2
+      variableDeclaration_3
+      variableDeclaration_4
+      variableDeclaration_5
+      variableDeclaration_6
+      variableDeclaration_7
+      statementExpression_1
+      statementExpression_2
+    prim__int.constructor_1 > row
+      prim__int.new
+    [] > variableDeclaration_1
+      row.write > @
+        initializerSimple_1
+    [] > initializerSimple_1
+      literal_1 > @
+    [] > literal_1
+      prim__int.constructor_2 > @
+        prim__int.new
+        0
+    prim__int.constructor_1 > col
+      prim__int.new
+    [] > variableDeclaration_2
+      col.write > @
+        initializerSimple_2
+    [] > initializerSimple_2
+      literal_2 > @
+    [] > literal_2
+      prim__int.constructor_2 > @
+        prim__int.new
+        0
+    prim__int.constructor_1 > boundary
+      prim__int.new
+    [] > variableDeclaration_3
+      boundary.write > @
+        initializerSimple_3
+    [] > initializerSimple_3
+      binary_1 > @
+    [] > binary_1
+      simpleReference_1.sub > @
+        literal_3
+    [] > simpleReference_1
+      size > @
+    [] > literal_3
+      prim__int.constructor_2 > @
+        prim__int.new
+        1
+    prim__int.constructor_1 > sizeLeft
+      prim__int.new
+    [] > variableDeclaration_4
+      sizeLeft.write > @
+        initializerSimple_4
+    [] > initializerSimple_4
+      binary_2 > @
+    [] > binary_2
+      simpleReference_2.sub > @
+        literal_4
+    [] > simpleReference_2
+      size > @
+    [] > literal_4
+      prim__int.constructor_2 > @
+        prim__int.new
+        1
+    prim__int.constructor_1 > flag
+      prim__int.new
+    [] > variableDeclaration_5
+      flag.write > @
+        initializerSimple_5
+    [] > initializerSimple_5
+      literal_5 > @
+    [] > literal_5
+      prim__int.constructor_2 > @
+        prim__int.new
+        1
+    prim__char.constructor_1 > move
+      prim__char.new
+    [] > variableDeclaration_6
+      move.write > @
+        initializerSimple_6
+    [] > initializerSimple_6
+      literal_6 > @
+    [] > literal_6
+      prim__int.constructor_2 > @
+        prim__int.new
+        123456
+    cage > matrix
+    [] > variableDeclaration_7
+      matrix.write > @
+        initializerSimple_7
+    [] > initializerSimple_7
+      arrayCreation_1 > @
+    [] > arrayCreation_1
+      FALSE > @
+    [] > statementExpression_1
+      for_loop_placeholder > @
+    [] > statementExpression_2
+      for_loop_placeholder > @
+  # main :: String -> void
+  [args[]] > main
+    seq > @
+      variableDeclaration_8
+      statementExpression_3
+      statementExpression_4
+      statementExpression_5
+    prim__int.constructor_1 > size
+      prim__int.new
+    [] > variableDeclaration_8
+      size.write > @
+        initializerSimple_8
+    [] > initializerSimple_8
+      literal_7 > @
+    [] > literal_7
+      prim__int.constructor_2 > @
+        prim__int.new
+        5
+    [] > statementExpression_3
+      class__System.out.println > @
+        class__System.out
+        literal_8
+    [] > literal_8
+      class__String.constructor_2 > @
+        class__String.new
+        "Spiral Matrix or Pattern is: \n"
+    [] > statementExpression_4
+      this.printSpiralPattern > @
+        this
+        simpleReference_3
+    [] > simpleReference_3
+      size > @
+    [] > statementExpression_5
+      class__System.out.println > @
+        class__System.out
+        literal_9
+    [] > literal_9
+      class__String.constructor_2 > @
+        class__String.new
+        "passed"
+  # null :: null -> void
+  [this] > constructor
+    seq > @
+      initialization
+      statementExpression_6
+      this
+    [] > initialization
+      this.init > @
+        this
+    [] > statementExpression_6
+      this.super.constructor > @
+        this.super

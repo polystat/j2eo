@@ -1,0 +1,37 @@
+# 2022-07-13T17:59:01.950573500
+# j2eo team
++package ch_14_blocks_statements_and_patterns.sec_14_2_blocks
++alias stdlib.lang.class__Object
+
+[] > class__SimpleBlock
+  class__Object > super
+  super > @
+  [] > new
+    class__Object.new > super
+    super > @
+    "class__SimpleBlock" > className
+    [this] > init
+      seq > @
+        TRUE
+  # main :: String[] -> void
+  [args] > main
+    seq > @
+      statementExpression_1
+    [] > statementExpression_1
+      identifier_label_placeholder > @
+  # null :: null -> void
+  [this] > constructor
+    seq > @
+      initialization
+      statementExpression_2
+      this
+    [] > initialization
+      this.init > @
+        this
+    [] > statementExpression_2
+      this.super.constructor > @
+        this.super
+
+[args...] > main
+  class__SimpleBlock.main > @
+    *

@@ -1,0 +1,322 @@
+# 2022-07-13T17:59:02.987422300
+# j2eo team
++package ch_4_types_values_variables.sec_4_12_variables
++alias stdlib.lang.class__System
++alias stdlib.lang.class__Object
++alias stdlib.primitives.prim__int
++alias stdlib.lang.class__String
+
+[] > class__TechNumberExample
+  class__Object > super
+  super > @
+  [] > new
+    class__Object.new > super
+    super > @
+    "class__TechNumberExample" > className
+    [this] > init
+      seq > @
+        TRUE
+  # main :: String -> void
+  [args[]] > main
+    seq > @
+      variableDeclaration_1
+      variableDeclaration_2
+      variableDeclaration_3
+      variableDeclaration_4
+      variableDeclaration_5
+      variableDeclaration_6
+      statementExpression_1
+      statementExpression_2
+      while_1
+      ifThenElse_1
+      statementExpression_3
+    prim__int.constructor_1 > n
+      prim__int.new
+    [] > variableDeclaration_1
+      TRUE > @
+    prim__int.constructor_1 > num
+      prim__int.new
+    [] > variableDeclaration_2
+      TRUE > @
+    prim__int.constructor_1 > firstHalf
+      prim__int.new
+    [] > variableDeclaration_3
+      TRUE > @
+    prim__int.constructor_1 > secondHalf
+      prim__int.new
+    [] > variableDeclaration_4
+      TRUE > @
+    prim__int.constructor_1 > digits
+      prim__int.new
+    [] > variableDeclaration_5
+      digits.write > @
+        initializerSimple_1
+    [] > initializerSimple_1
+      literal_1 > @
+    [] > literal_1
+      prim__int.constructor_2 > @
+        prim__int.new
+        0
+    prim__int.constructor_1 > squareOfSum
+      prim__int.new
+    [] > variableDeclaration_6
+      squareOfSum.write > @
+        initializerSimple_2
+    [] > initializerSimple_2
+      literal_2 > @
+    [] > literal_2
+      prim__int.constructor_2 > @
+        prim__int.new
+        0
+    [] > statementExpression_1
+      simpleReference_1.write > @
+        literal_3
+    [] > simpleReference_1
+      n > @
+    [] > literal_3
+      prim__int.constructor_2 > @
+        prim__int.new
+        9
+    [] > statementExpression_2
+      simpleReference_2.write > @
+        simpleReference_3
+    [] > simpleReference_2
+      num > @
+    [] > simpleReference_3
+      n > @
+    [] > while_1
+      binary_1.while > @
+        [while_i]
+          block_1 > @
+    [] > binary_1
+      simpleReference_4.greater > @
+        literal_4
+    [] > simpleReference_4
+      num > @
+    [] > literal_4
+      prim__int.constructor_2 > @
+        prim__int.new
+        0
+    [] > block_1
+      seq > @
+        statementExpression_4
+        statementExpression_5
+      [] > statementExpression_4
+        simpleReference_5.inc_post > @
+      [] > simpleReference_5
+        digits > @
+      [] > statementExpression_5
+        simpleReference_6.write > @
+          binary_2
+      [] > simpleReference_6
+        num > @
+      [] > binary_2
+        simpleReference_7.div > @
+          literal_5
+      [] > simpleReference_7
+        num > @
+      [] > literal_5
+        prim__int.constructor_2 > @
+          prim__int.new
+          10
+    [] > ifThenElse_1
+      binary_3.if > @
+        block_2
+        block_3
+    [] > binary_3
+      binary_4.eq > @
+        literal_6
+    [] > binary_4
+      simpleReference_8.binary_op_placeholder > @
+        literal_7
+    [] > simpleReference_8
+      digits > @
+    [] > literal_7
+      prim__int.constructor_2 > @
+        prim__int.new
+        2
+    [] > literal_6
+      prim__int.constructor_2 > @
+        prim__int.new
+        0
+    [] > block_2
+      seq > @
+        statementExpression_6
+        statementExpression_7
+        statementExpression_8
+        statementExpression_9
+        ifThenElse_2
+      [] > statementExpression_6
+        simpleReference_9.write > @
+          simpleReference_10
+      [] > simpleReference_9
+        num > @
+      [] > simpleReference_10
+        n > @
+      [] > statementExpression_7
+        simpleReference_11.write > @
+          binary_5
+      [] > simpleReference_11
+        firstHalf > @
+      [] > binary_5
+        simpleReference_12.binary_op_placeholder > @
+          cast_1
+      [] > simpleReference_12
+        num > @
+      [] > cast_1
+        prim__int.from > @
+          methodInvocation_1
+      [] > methodInvocation_1
+        Math.pow > @
+          Math
+          literal_8
+          binary_6
+      [] > literal_8
+        prim__int.constructor_2 > @
+          prim__int.new
+          10
+      [] > binary_6
+        simpleReference_14.div > @
+          literal_9
+      [] > simpleReference_14
+        digits > @
+      [] > literal_9
+        prim__int.constructor_2 > @
+          prim__int.new
+          2
+      [] > statementExpression_8
+        simpleReference_15.write > @
+          binary_7
+      [] > simpleReference_15
+        secondHalf > @
+      [] > binary_7
+        simpleReference_16.div > @
+          cast_2
+      [] > simpleReference_16
+        num > @
+      [] > cast_2
+        prim__int.from > @
+          methodInvocation_2
+      [] > methodInvocation_2
+        Math.pow > @
+          Math
+          literal_10
+          binary_8
+      [] > literal_10
+        prim__int.constructor_2 > @
+          prim__int.new
+          10
+      [] > binary_8
+        simpleReference_18.div > @
+          literal_11
+      [] > simpleReference_18
+        digits > @
+      [] > literal_11
+        prim__int.constructor_2 > @
+          prim__int.new
+          2
+      [] > statementExpression_9
+        simpleReference_19.write > @
+          binary_9
+      [] > simpleReference_19
+        squareOfSum > @
+      [] > binary_9
+        parenthesized_1.mul > @
+          parenthesized_2
+      [] > parenthesized_1
+        binary_10 > @
+      [] > binary_10
+        simpleReference_20.add > @
+          simpleReference_21
+      [] > simpleReference_20
+        firstHalf > @
+      [] > simpleReference_21
+        secondHalf > @
+      [] > parenthesized_2
+        binary_11 > @
+      [] > binary_11
+        simpleReference_22.add > @
+          simpleReference_23
+      [] > simpleReference_22
+        firstHalf > @
+      [] > simpleReference_23
+        secondHalf > @
+      [] > ifThenElse_2
+        binary_12.if > @
+          block_4
+          block_5
+      [] > binary_12
+        simpleReference_24.eq > @
+          simpleReference_25
+      [] > simpleReference_24
+        n > @
+      [] > simpleReference_25
+        squareOfSum > @
+      [] > block_4
+        seq > @
+          statementExpression_10
+        [] > statementExpression_10
+          class__System.out.println > @
+            class__System.out
+            binary_13
+        [] > binary_13
+          simpleReference_26.add > @
+            literal_12
+        [] > simpleReference_26
+          n > @
+        [] > literal_12
+          class__String.constructor_2 > @
+            class__String.new
+            " is a tech number."
+      [] > block_5
+        seq > @
+          statementExpression_11
+        [] > statementExpression_11
+          class__System.out.println > @
+            class__System.out
+            binary_14
+        [] > binary_14
+          simpleReference_27.add > @
+            literal_13
+        [] > simpleReference_27
+          n > @
+        [] > literal_13
+          class__String.constructor_2 > @
+            class__String.new
+            " is not a tech number."
+    [] > block_3
+      seq > @
+        statementExpression_12
+      [] > statementExpression_12
+        class__System.out.println > @
+          class__System.out
+          binary_15
+      [] > binary_15
+        simpleReference_28.add > @
+          literal_14
+      [] > simpleReference_28
+        n > @
+      [] > literal_14
+        class__String.constructor_2 > @
+          class__String.new
+          " is not a tech number."
+    [] > statementExpression_3
+      class__System.out.println > @
+        class__System.out
+        literal_15
+    [] > literal_15
+      class__String.constructor_2 > @
+        class__String.new
+        "passed"
+  # null :: null -> void
+  [this] > constructor
+    seq > @
+      initialization
+      statementExpression_13
+      this
+    [] > initialization
+      this.init > @
+        this
+    [] > statementExpression_13
+      this.super.constructor > @
+        this.super

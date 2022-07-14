@@ -1,0 +1,63 @@
+# 2022-07-13T17:59:01.765482300
+# j2eo team
++package ch_14_blocks_statements_and_patterns.sec_14_10_the_assert_statement
++alias stdlib.lang.class__Object
++alias stdlib.lang.class__System
++alias stdlib.lang.class__String
+
+[] > class__AssertWithIdentityRefExpression
+  class__Object > super
+  super > @
+  [] > new
+    class__Object.new > super
+    super > @
+    "class__AssertWithIdentityRefExpression" > className
+    [this] > init
+      seq > @
+        TRUE
+  # main :: String[] -> void
+  [args] > main
+    seq > @
+      assert_1
+      statementExpression_1
+    [] > assert_1
+      methodInvocation_1.if > @
+        TRUE
+        []
+          literal_1 > msg
+    [] > methodInvocation_1
+      unsupported_qualifier.equals > @
+        unsupported_qualifier
+        literal_3
+    [] > literal_3
+      class__String.constructor_2 > @
+        class__String.new
+        "String"
+    [] > literal_1
+      class__String.constructor_2 > @
+        class__String.new
+        "Never printed"
+    [] > statementExpression_1
+      class__System.out.println > @
+        class__System.out
+        literal_4
+    [] > literal_4
+      class__String.constructor_2 > @
+        class__String.new
+        "passed"
+  # null :: null -> void
+  [this] > constructor
+    seq > @
+      initialization
+      statementExpression_2
+      this
+    [] > initialization
+      this.init > @
+        this
+    [] > statementExpression_2
+      this.super.constructor > @
+        this.super
+
+[args...] > main
+  class__AssertWithIdentityRefExpression.main > @
+    *

@@ -1,0 +1,148 @@
+# 2022-07-13T17:59:03.267934600
+# j2eo team
++package ch_6_names.sec_6_3_scope_of_a_declaration.sec_6_3_1_scope_for_pattern_vars_in_exprs.sec_6_3_1_4_ternary_operator
++alias stdlib.lang.class__Object
++alias stdlib.lang.class__System
++alias stdlib.lang.class__String
++alias eo/org/polystat/stdlib.util.function.class__Consumer
+
+[] > class__TernaryOperator
+  class__Object > super
+  super > @
+  [] > new
+    class__Object.new > super
+    super > @
+    "class__TernaryOperator" > className
+    [this] > init
+      seq > @
+        TRUE
+  # main :: String[] -> void
+  [args] > main
+    seq > @
+      variableDeclaration_1
+      variableDeclaration_2
+      statementExpression_1
+      variableDeclaration_3
+      statementExpression_2
+    cage > readerObj
+    [] > variableDeclaration_1
+      readerObj.write > @
+        initializerSimple_1
+    [] > initializerSimple_1
+      instanceCreation_1 > @
+    [] > instanceCreation_1
+      class__Reader.constructor > @
+        class__Reader.new
+    cage > ioObj
+    [] > variableDeclaration_2
+      ioObj.write > @
+        initializerSimple_2
+    [] > initializerSimple_2
+      instanceCreation_2 > @
+    [] > instanceCreation_2
+      class__IOController.constructor > @
+        class__IOController.new
+    [] > statementExpression_1
+      class__System.out.println > @
+        class__System.out
+        simpleReference_1
+    [] > simpleReference_1
+      expression_placeholder > @
+    cage > cons
+    [] > variableDeclaration_3
+      cons.write > @
+        initializerSimple_3
+    [] > initializerSimple_3
+      simpleReference_2 > @
+    [] > simpleReference_2
+      expression_placeholder > @
+    [] > statementExpression_2
+      cons.accept > @
+        cons
+        literal_1
+    [] > literal_1
+      class__String.constructor_2 > @
+        class__String.new
+        "pa"
+  # null :: null -> void
+  [this] > constructor
+    seq > @
+      initialization
+      statementExpression_3
+      this
+    [] > initialization
+      this.init > @
+        this
+    [] > statementExpression_3
+      this.super.constructor > @
+        this.super
+
+[] > class__IOController
+  class__Object > super
+  super > @
+  [] > new
+    class__Object.new > super
+    super > @
+    "class__IOController" > className
+    [this] > init
+      seq > @
+        TRUE
+    # read :: null -> String
+    [this] > read
+      seq > @
+        return_1
+      [] > return_1
+        literal_2 > @
+      [] > literal_2
+        class__String.constructor_2 > @
+          class__String.new
+          "not passed"
+  # null :: null -> void
+  [this] > constructor
+    seq > @
+      initialization
+      statementExpression_4
+      this
+    [] > initialization
+      this.init > @
+        this
+    [] > statementExpression_4
+      this.super.constructor > @
+        this.super
+
+[] > class__Reader
+  class__Object > super
+  super > @
+  [] > new
+    class__Object.new > super
+    super > @
+    "class__Reader" > className
+    [this] > init
+      seq > @
+        TRUE
+    # read :: null -> String
+    [this] > read
+      seq > @
+        return_2
+      [] > return_2
+        literal_3 > @
+      [] > literal_3
+        class__String.constructor_2 > @
+          class__String.new
+          "ssed"
+  # null :: null -> void
+  [this] > constructor
+    seq > @
+      initialization
+      statementExpression_5
+      this
+    [] > initialization
+      this.init > @
+        this
+    [] > statementExpression_5
+      this.super.constructor > @
+        this.super
+
+[args...] > main
+  class__TernaryOperator.main > @
+    *

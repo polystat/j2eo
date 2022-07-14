@@ -1,0 +1,194 @@
+# 2022-07-13T17:59:03.106796500
+# j2eo team
++package ch_4_types_values_variables.sec_4_5_parametrized_types.sec_4_5_1_type_arguments_of_parameterized_types
++alias stdlib.lang.class__Object
++alias stdlib.lang.class__System
++alias stdlib.lang.class__String
++alias eo/org/polystat/stdlib.util.class__Collection
++alias eo/org/polystat/stdlib.util.class__ArrayList
+
+[] > class__MultipleTypeArguments
+  class__Object > super
+  super > @
+  [] > new
+    class__Object.new > super
+    super > @
+    "class__MultipleTypeArguments" > className
+    [this] > init
+      seq > @
+        TRUE
+  # main :: String[] -> void
+  [args] > main
+    seq > @
+      variableDeclaration_1
+      statementExpression_1
+      statementExpression_2
+      statementExpression_3
+      statementExpression_4
+      statementExpression_5
+    cage > some
+    [] > variableDeclaration_1
+      some.write > @
+        initializerSimple_1
+    [] > initializerSimple_1
+      instanceCreation_1 > @
+    [] > instanceCreation_1
+      class__Some.constructor > @
+        class__Some.new
+        literal_1
+        literal_2
+        literal_3
+        methodInvocation_1
+    [] > literal_1
+      prim__int.constructor_2 > @
+        prim__int.new
+        20
+    [] > literal_2
+      class__String.constructor_2 > @
+        class__String.new
+        "wOw"
+    [] > literal_3
+      prim__float.constructor_2 > @
+        prim__float.new
+        3.14
+    [] > methodInvocation_1
+      methodInvocation_2.getName > @
+        methodInvocation_2
+    [] > methodInvocation_2
+      unsupported_qualifier.getClass > @
+        unsupported_qualifier
+    [] > statementExpression_1
+      some.printX > @
+        some
+    [] > statementExpression_2
+      some.printY > @
+        some
+    [] > statementExpression_3
+      some.printZ > @
+        some
+    [] > statementExpression_4
+      some.printW > @
+        some
+    [] > statementExpression_5
+      class__System.out.println > @
+        class__System.out
+        literal_4
+    [] > literal_4
+      class__String.constructor_2 > @
+        class__String.new
+        "passed"
+  # null :: null -> void
+  [this] > constructor
+    seq > @
+      initialization
+      statementExpression_6
+      this
+    [] > initialization
+      this.init > @
+        this
+    [] > statementExpression_6
+      this.super.constructor > @
+        this.super
+
+[] > class__Some
+  class__Object > super
+  super > @
+  [] > new
+    class__Object.new > super
+    super > @
+    "class__Some" > className
+    [this] > init
+      seq > @
+        TRUE
+    cage > valueX
+    cage > valueY
+    cage > valueZ
+    cage > valueW
+    # printX :: null -> void
+    [this] > printX
+      seq > @
+        statementExpression_7
+      [] > statementExpression_7
+        class__System.out.println > @
+          class__System.out
+          methodInvocation_3
+      [] > methodInvocation_3
+        valueX.toString > @
+          valueX
+    # printY :: null -> void
+    [this] > printY
+      seq > @
+        statementExpression_8
+      [] > statementExpression_8
+        class__System.out.println > @
+          class__System.out
+          methodInvocation_4
+      [] > methodInvocation_4
+        valueY.toString > @
+          valueY
+    # printZ :: null -> void
+    [this] > printZ
+      seq > @
+        statementExpression_9
+      [] > statementExpression_9
+        class__System.out.println > @
+          class__System.out
+          methodInvocation_5
+      [] > methodInvocation_5
+        valueZ.toString > @
+          valueZ
+    # printW :: null -> void
+    [this] > printW
+      seq > @
+        statementExpression_10
+      [] > statementExpression_10
+        class__System.out.println > @
+          class__System.out
+          methodInvocation_6
+      [] > methodInvocation_6
+        valueW.toString > @
+          valueW
+  # null :: X -> Y -> Z -> W -> void
+  [this x y z w] > constructor
+    seq > @
+      initialization
+      statementExpression_11
+      statementExpression_12
+      statementExpression_13
+      statementExpression_14
+      this
+    [] > initialization
+      this.init > @
+        this
+    [] > statementExpression_11
+      simpleReference_9.write > @
+        simpleReference_10
+    [] > simpleReference_9
+      valueX > @
+    [] > simpleReference_10
+      x > @
+    [] > statementExpression_12
+      simpleReference_11.write > @
+        simpleReference_12
+    [] > simpleReference_11
+      valueY > @
+    [] > simpleReference_12
+      y > @
+    [] > statementExpression_13
+      simpleReference_13.write > @
+        simpleReference_14
+    [] > simpleReference_13
+      valueZ > @
+    [] > simpleReference_14
+      z > @
+    [] > statementExpression_14
+      simpleReference_15.write > @
+        simpleReference_16
+    [] > simpleReference_15
+      valueW > @
+    [] > simpleReference_16
+      w > @
+
+[args...] > main
+  class__MultipleTypeArguments.main > @
+    *

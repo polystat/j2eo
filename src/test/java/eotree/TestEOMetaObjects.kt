@@ -1,9 +1,10 @@
 package eotree
 
 import arrow.core.Some
-import eotree.data.EOIntData
 import org.junit.jupiter.api.Assertions.assertEquals
 import org.junit.jupiter.api.Test
+import org.polystat.j2eo.eotree.* // ktlint-disable no-wildcard-imports
+import org.polystat.j2eo.eotree.data.EOIntData
 
 /**
  * Tests for EO Meta Objects (i.e. high-level abstractions on top of EO)

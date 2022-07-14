@@ -1,0 +1,124 @@
+# 2022-07-13T17:59:03.165936
+# j2eo team
++package ch_5_conversions_and_contexts.sec_5_1_kinds_of_conversions.sec_5_1_6_narrowing_reference_conversion.sec_5_1_6_3_narrow_ref_conv_at_runtime
++alias stdlib.lang.class__System
++alias stdlib.lang.class__Object
++alias stdlib.lang.class__String
++alias stdlib.primitives.prim__int
++alias eo/org/polystat/stdlib.util.class__ArrayList
++alias eo/org/polystat/stdlib.util.class__List
+
+[] > class__CheckedConversion
+  class__Object > super
+  super > @
+  [] > new
+    class__Object.new > super
+    super > @
+    "class__CheckedConversion" > className
+    [this] > init
+      seq > @
+        TRUE
+  # main :: String[] -> void
+  [args] > main
+    seq > @
+      variableDeclaration_1
+      statementExpression_1
+      statementExpression_2
+      statementExpression_3
+      statementExpression_4
+      statementExpression_5
+      statementExpression_6
+      statementExpression_7
+    cage > result
+    [] > variableDeclaration_1
+      result.write > @
+        initializerSimple_1
+    [] > initializerSimple_1
+      instanceCreation_1 > @
+    [] > instanceCreation_1
+      class__ArrayList.constructor > @
+        class__ArrayList.new
+    [] > statementExpression_1
+      result.add > @
+        result
+        literal_1
+    [] > literal_1
+      class__String.constructor_2 > @
+        class__String.new
+        "I am the 1st String."
+    [] > statementExpression_2
+      result.add > @
+        result
+        literal_2
+    [] > literal_2
+      class__String.constructor_2 > @
+        class__String.new
+        "I am the 2nd String."
+    [] > statementExpression_3
+      result.add > @
+        result
+        literal_3
+    [] > literal_3
+      class__String.constructor_2 > @
+        class__String.new
+        "I am the 3rd String."
+    [] > statementExpression_4
+      class__System.out.println > @
+        class__System.out
+        methodInvocation_1
+    [] > methodInvocation_1
+      result.get > @
+        result
+        literal_4
+    [] > literal_4
+      prim__int.constructor_2 > @
+        prim__int.new
+        0
+    [] > statementExpression_5
+      class__System.out.println > @
+        class__System.out
+        methodInvocation_2
+    [] > methodInvocation_2
+      result.get > @
+        result
+        literal_5
+    [] > literal_5
+      prim__int.constructor_2 > @
+        prim__int.new
+        1
+    [] > statementExpression_6
+      class__System.out.println > @
+        class__System.out
+        methodInvocation_3
+    [] > methodInvocation_3
+      result.get > @
+        result
+        literal_6
+    [] > literal_6
+      prim__int.constructor_2 > @
+        prim__int.new
+        2
+    [] > statementExpression_7
+      class__System.out.println > @
+        class__System.out
+        literal_7
+    [] > literal_7
+      class__String.constructor_2 > @
+        class__String.new
+        "passed"
+  # null :: null -> void
+  [this] > constructor
+    seq > @
+      initialization
+      statementExpression_8
+      this
+    [] > initialization
+      this.init > @
+        this
+    [] > statementExpression_8
+      this.super.constructor > @
+        this.super
+
+[args...] > main
+  class__CheckedConversion.main > @
+    *

@@ -1,0 +1,148 @@
+# 2022-07-13T17:59:03.628301300
+# j2eo team
++package ch_9_interfaces.sec_9_4_method_declarations.sec_9_4_2_overloading
++alias stdlib.primitives.prim__float
++alias stdlib.lang.class__System
++alias stdlib.lang.class__Object
++alias stdlib.primitives.prim__int
++alias stdlib.lang.class__String
+
+[] > class__SimpleInterfaceOverloading
+  class__Object > super
+  super > @
+  [] > new
+    class__Object.new > super
+    super > @
+    "class__SimpleInterfaceOverloading" > className
+    [this] > init
+      seq > @
+        TRUE
+  # main :: String[] -> void
+  [args] > main
+    seq > @
+      statementExpression_1
+      statementExpression_2
+      statementExpression_3
+      statementExpression_4
+    [] > statementExpression_1
+      unsupported_qualifier.move > @
+        unsupported_qualifier
+        literal_1
+        literal_2
+    [] > literal_1
+      prim__int.constructor_2 > @
+        prim__int.new
+        5
+    [] > literal_2
+      prim__int.constructor_2 > @
+        prim__int.new
+        6
+    [] > statementExpression_2
+      unsupported_qualifier.move > @
+        unsupported_qualifier
+        literal_3
+        literal_4
+    [] > literal_3
+      prim__float.constructor_2 > @
+        prim__float.new
+        4.0
+    [] > literal_4
+      prim__float.constructor_2 > @
+        prim__float.new
+        4.0
+    [] > statementExpression_3
+      unsupported_qualifier.move > @
+        unsupported_qualifier
+        literal_5
+        literal_6
+    [] > literal_5
+      prim__float.constructor_2 > @
+        prim__float.new
+        4.0
+    [] > literal_6
+      prim__float.constructor_2 > @
+        prim__float.new
+        4.0
+    [] > statementExpression_4
+      class__System.out.println > @
+        class__System.out
+        literal_7
+    [] > literal_7
+      class__String.constructor_2 > @
+        class__String.new
+        "passed"
+  # null :: null -> void
+  [this] > constructor
+    seq > @
+      initialization
+      statementExpression_5
+      this
+    [] > initialization
+      this.init > @
+        this
+    [] > statementExpression_5
+      this.super.constructor > @
+        this.super
+
+[] > class__Point
+  class__Object > super
+  super > @
+  [] > new
+    class__Object.new > super
+    super > @
+    "class__Point" > className
+    [this] > init
+      seq > @
+        TRUE
+    # move :: int -> int -> void
+    [this dx dy] > move
+      seq > @
+        statementExpression_6
+      [] > statementExpression_6
+        class__System.out.println > @
+          class__System.out
+          literal_8
+      [] > literal_8
+        class__String.constructor_2 > @
+          class__String.new
+          "int move"
+    # move :: float -> float -> void
+    [this dx dy] > move
+      seq > @
+        statementExpression_7
+      [] > statementExpression_7
+        class__System.out.println > @
+          class__System.out
+          literal_9
+      [] > literal_9
+        class__String.constructor_2 > @
+          class__String.new
+          "float move"
+    # move :: double -> double -> void
+    [this dx dy] > move
+      seq > @
+        statementExpression_8
+      [] > statementExpression_8
+        class__System.out.println > @
+          class__System.out
+          literal_10
+      [] > literal_10
+        class__String.constructor_2 > @
+          class__String.new
+          "double move"
+  # null :: null -> void
+  [this] > constructor
+    seq > @
+      initialization
+      statementExpression_9
+      this
+    [] > initialization
+      this.init > @
+        this
+    [] > statementExpression_9
+      this.super.constructor > @
+        this.super
+
+[args...] > main
+  class__SimpleInterfaceOverloading.main > @
+    *

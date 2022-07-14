@@ -1,0 +1,86 @@
+# 2022-07-13T17:59:03.064828600
+# j2eo team
++package ch_4_types_values_variables.sec_4_3_reference_types_and_values.sec_4_3_2_class_object
++alias stdlib.lang.class__Object
++alias stdlib.lang.class__System
++alias stdlib.lang.class__String
+
+[] > class__ObjectToString
+  class__Object > super
+  super > @
+  [] > new
+    class__Object.new > super
+    super > @
+    "class__ObjectToString" > className
+    [this] > init
+      seq > @
+        TRUE
+  # main :: String[] -> void
+  [args] > main
+    seq > @
+      statementExpression_1
+      statementExpression_2
+    [] > statementExpression_1
+      class__System.out.println > @
+        class__System.out
+        methodInvocation_1
+    [] > methodInvocation_1
+      unsupported_qualifier.toString > @
+        unsupported_qualifier
+    [] > statementExpression_2
+      class__System.out.println > @
+        class__System.out
+        literal_1
+    [] > literal_1
+      class__String.constructor_2 > @
+        class__String.new
+        "passed"
+  # null :: null -> void
+  [this] > constructor
+    seq > @
+      initialization
+      statementExpression_3
+      this
+    [] > initialization
+      this.init > @
+        this
+    [] > statementExpression_3
+      this.super.constructor > @
+        this.super
+
+[] > class__Some
+  class__Object > super
+  super > @
+  [] > new
+    class__Object.new > super
+    super > @
+    "class__Some" > className
+    [this] > init
+      seq > @
+        TRUE
+    # toString :: null -> String
+    [this] > toString
+      seq > @
+        return_1
+      [] > return_1
+        literal_2 > @
+      [] > literal_2
+        class__String.constructor_2 > @
+          class__String.new
+          "to stringed"
+  # null :: null -> void
+  [this] > constructor
+    seq > @
+      initialization
+      statementExpression_4
+      this
+    [] > initialization
+      this.init > @
+        this
+    [] > statementExpression_4
+      this.super.constructor > @
+        this.super
+
+[args...] > main
+  class__ObjectToString.main > @
+    *

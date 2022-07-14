@@ -1,0 +1,114 @@
+# 2022-07-13T17:59:03.291272300
+# j2eo team
++package ch_6_names.sec_6_3_scope_of_a_declaration.sec_6_3_2_scope_for_pattern_vars_in_statements.sec_6_3_2_4_do_statements
++alias stdlib.lang.class__Object
++alias stdlib.lang.class__System
++alias stdlib.primitives.prim__int
++alias eo/org/polystat/stdlib.util.function.class__Function
+
+[] > class__DoPatternScope
+  class__Object > super
+  super > @
+  [] > new
+    class__Object.new > super
+    super > @
+    "class__DoPatternScope" > className
+    [this] > init
+      seq > @
+        TRUE
+  # main :: String[] -> void
+  [args] > main
+    seq > @
+      variableDeclaration_1
+      variableDeclaration_2
+      variableDeclaration_3
+      variableDeclaration_4
+      do_1
+      statementExpression_1
+    cage > printer
+    [] > variableDeclaration_1
+      printer.write > @
+        initializerSimple_1
+    [] > initializerSimple_1
+      simpleReference_1 > @
+    [] > simpleReference_1
+      expression_placeholder > @
+    cage > objs
+    [] > variableDeclaration_2
+      objs.write > @
+        initializerSimple_2
+    [] > initializerSimple_2
+      arrayCreation_1 > @
+    [] > arrayCreation_1
+      FALSE > @
+    prim__int.constructor_1 > index
+      prim__int.new
+    [] > variableDeclaration_3
+      index.write > @
+        initializerSimple_3
+    [] > initializerSimple_3
+      literal_1 > @
+    [] > literal_1
+      prim__int.constructor_2 > @
+        prim__int.new
+        0
+    cage > obj
+    [] > variableDeclaration_4
+      TRUE > @
+    [] > do_1
+      binary_1.do > @
+        [do_i]
+          block_1 > @
+    [] > binary_1
+      instanceOf_1.and > @
+        methodInvocation_1
+    [] > instanceOf_1
+      instance_of_placeholder > @
+    [] > methodInvocation_1
+      printer.apply > @
+        printer
+        simpleReference_3
+    [] > simpleReference_3
+      i > @
+    [] > block_1
+      seq > @
+        statementExpression_2
+        statementExpression_3
+      [] > statementExpression_2
+        simpleReference_4.inc_post > @
+      [] > simpleReference_4
+        index > @
+      [] > statementExpression_3
+        simpleReference_5.write > @
+          arrayAccess_1
+      [] > simpleReference_5
+        obj > @
+      [] > arrayAccess_1
+        simpleReference_6.get > @
+          simpleReference_7.v
+      [] > simpleReference_6
+        objs > @
+      [] > simpleReference_7
+        index > @
+    [] > statementExpression_1
+      class__System.out.println > @
+        class__System.out
+        simpleReference_8
+    [] > simpleReference_8
+      obj > @
+  # null :: null -> void
+  [this] > constructor
+    seq > @
+      initialization
+      statementExpression_4
+      this
+    [] > initialization
+      this.init > @
+        this
+    [] > statementExpression_4
+      this.super.constructor > @
+        this.super
+
+[args...] > main
+  class__DoPatternScope.main > @
+    *

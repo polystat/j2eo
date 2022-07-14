@@ -1,0 +1,623 @@
+# 2022-07-13T17:59:01.455482200
+# j2eo team
++package ch_10_arrays.sec_10_4_array_access
++alias stdlib.lang.class__System
++alias stdlib.lang.class__Object
++alias stdlib.primitives.prim__int
++alias stdlib.lang.class__String
++alias eo/org/polystat/stdlib.util.class__Arrays
+
+[] > class__MatrixMultiActions
+  class__Object > super
+  super > @
+  [] > new
+    class__Object.new > super
+    super > @
+    "class__MatrixMultiActions" > className
+    [this] > init
+      seq > @
+        TRUE
+  # main :: String[] -> void
+  [args] > main
+    seq > @
+      variableDeclaration_1
+      variableDeclaration_2
+      variableDeclaration_3
+      statementExpression_1
+      statementExpression_2
+      statementExpression_3
+      statementExpression_4
+      statementExpression_5
+      statementExpression_6
+      statementExpression_7
+      statementExpression_8
+      statementExpression_9
+      statementExpression_10
+      statementExpression_11
+      statementExpression_12
+      statementExpression_13
+      statementExpression_14
+      statementExpression_15
+      statementExpression_16
+      statementExpression_17
+      statementExpression_18
+    prim__int.constructor_1 > a
+      prim__int.new
+    [] > variableDeclaration_1
+      a.write > @
+        initializerArray_1
+    [] > initializerArray_1
+      * > @
+        initializerArray_2
+        initializerArray_3
+        initializerArray_4
+    [] > initializerArray_2
+      * > @
+        initializerSimple_1
+        initializerSimple_2
+        initializerSimple_3
+    [] > initializerSimple_1
+      literal_1 > @
+    [] > literal_1
+      prim__int.constructor_2 > @
+        prim__int.new
+        5
+    [] > initializerSimple_2
+      literal_2 > @
+    [] > literal_2
+      prim__int.constructor_2 > @
+        prim__int.new
+        6
+    [] > initializerSimple_3
+      literal_3 > @
+    [] > literal_3
+      prim__int.constructor_2 > @
+        prim__int.new
+        7
+    [] > initializerArray_3
+      * > @
+        initializerSimple_4
+        initializerSimple_5
+        initializerSimple_6
+    [] > initializerSimple_4
+      literal_4 > @
+    [] > literal_4
+      prim__int.constructor_2 > @
+        prim__int.new
+        8
+    [] > initializerSimple_5
+      literal_5 > @
+    [] > literal_5
+      prim__int.constructor_2 > @
+        prim__int.new
+        9
+    [] > initializerSimple_6
+      literal_6 > @
+    [] > literal_6
+      prim__int.constructor_2 > @
+        prim__int.new
+        10
+    [] > initializerArray_4
+      * > @
+        initializerSimple_7
+        initializerSimple_8
+        initializerSimple_9
+    [] > initializerSimple_7
+      literal_7 > @
+    [] > literal_7
+      prim__int.constructor_2 > @
+        prim__int.new
+        3
+    [] > initializerSimple_8
+      literal_8 > @
+    [] > literal_8
+      prim__int.constructor_2 > @
+        prim__int.new
+        1
+    [] > initializerSimple_9
+      literal_9 > @
+    [] > literal_9
+      prim__int.constructor_2 > @
+        prim__int.new
+        2
+    prim__int.constructor_1 > b
+      prim__int.new
+    [] > variableDeclaration_2
+      b.write > @
+        initializerArray_5
+    [] > initializerArray_5
+      * > @
+        initializerArray_6
+        initializerArray_7
+        initializerArray_8
+    [] > initializerArray_6
+      * > @
+        initializerSimple_10
+        initializerSimple_11
+        initializerSimple_12
+    [] > initializerSimple_10
+      literal_10 > @
+    [] > literal_10
+      prim__int.constructor_2 > @
+        prim__int.new
+        1
+    [] > initializerSimple_11
+      literal_11 > @
+    [] > literal_11
+      prim__int.constructor_2 > @
+        prim__int.new
+        2
+    [] > initializerSimple_12
+      literal_12 > @
+    [] > literal_12
+      prim__int.constructor_2 > @
+        prim__int.new
+        3
+    [] > initializerArray_7
+      * > @
+        initializerSimple_13
+        initializerSimple_14
+        initializerSimple_15
+    [] > initializerSimple_13
+      literal_13 > @
+    [] > literal_13
+      prim__int.constructor_2 > @
+        prim__int.new
+        4
+    [] > initializerSimple_14
+      literal_14 > @
+    [] > literal_14
+      prim__int.constructor_2 > @
+        prim__int.new
+        5
+    [] > initializerSimple_15
+      literal_15 > @
+    [] > literal_15
+      prim__int.constructor_2 > @
+        prim__int.new
+        6
+    [] > initializerArray_8
+      * > @
+        initializerSimple_16
+        initializerSimple_17
+        initializerSimple_18
+    [] > initializerSimple_16
+      literal_16 > @
+    [] > literal_16
+      prim__int.constructor_2 > @
+        prim__int.new
+        7
+    [] > initializerSimple_17
+      literal_17 > @
+    [] > literal_17
+      prim__int.constructor_2 > @
+        prim__int.new
+        8
+    [] > initializerSimple_18
+      literal_18 > @
+    [] > literal_18
+      prim__int.constructor_2 > @
+        prim__int.new
+        9
+    prim__int.constructor_1 > c
+      prim__int.new
+    [] > variableDeclaration_3
+      c.write > @
+        initializerSimple_19
+    [] > initializerSimple_19
+      arrayCreation_1 > @
+    [] > arrayCreation_1
+      FALSE > @
+    [] > statementExpression_1
+      class__System.out.println > @
+        class__System.out
+        binary_1
+    [] > binary_1
+      literal_19.add > @
+        methodInvocation_1
+    [] > literal_19
+      class__String.constructor_2 > @
+        class__String.new
+        "A = "
+    [] > methodInvocation_1
+      class__Arrays.deepToString > @
+        simpleReference_2
+    [] > simpleReference_2
+      a > @
+    [] > statementExpression_2
+      class__System.out.println > @
+        class__System.out
+        binary_2
+    [] > binary_2
+      literal_20.add > @
+        methodInvocation_2
+    [] > literal_20
+      class__String.constructor_2 > @
+        class__String.new
+        "B = "
+    [] > methodInvocation_2
+      class__Arrays.deepToString > @
+        simpleReference_4
+    [] > simpleReference_4
+      b > @
+    [] > statementExpression_3
+      simpleReference_5.write > @
+        methodInvocation_3
+    [] > simpleReference_5
+      c > @
+    [] > methodInvocation_3
+      this.add > @
+        this
+        simpleReference_6
+        simpleReference_7
+    [] > simpleReference_6
+      a > @
+    [] > simpleReference_7
+      b > @
+    [] > statementExpression_4
+      class__System.out.println > @
+        class__System.out
+        literal_21
+    [] > literal_21
+      class__String.constructor_2 > @
+        class__String.new
+        "Sum of matrix: "
+    [] > statementExpression_5
+      class__System.out.println > @
+        class__System.out
+        methodInvocation_4
+    [] > methodInvocation_4
+      class__Arrays.deepToString > @
+        simpleReference_9
+    [] > simpleReference_9
+      c > @
+    [] > statementExpression_6
+      simpleReference_10.write > @
+        methodInvocation_5
+    [] > simpleReference_10
+      c > @
+    [] > methodInvocation_5
+      this.subtract > @
+        this
+        simpleReference_11
+        simpleReference_12
+    [] > simpleReference_11
+      a > @
+    [] > simpleReference_12
+      b > @
+    [] > statementExpression_7
+      class__System.out.println > @
+        class__System.out
+        literal_22
+    [] > literal_22
+      class__String.constructor_2 > @
+        class__String.new
+        "Subtraction of matrix: "
+    [] > statementExpression_8
+      class__System.out.println > @
+        class__System.out
+        methodInvocation_6
+    [] > methodInvocation_6
+      class__Arrays.deepToString > @
+        simpleReference_14
+    [] > simpleReference_14
+      c > @
+    [] > statementExpression_9
+      simpleReference_15.write > @
+        methodInvocation_7
+    [] > simpleReference_15
+      c > @
+    [] > methodInvocation_7
+      this.multiply > @
+        this
+        simpleReference_16
+        simpleReference_17
+    [] > simpleReference_16
+      a > @
+    [] > simpleReference_17
+      b > @
+    [] > statementExpression_10
+      class__System.out.println > @
+        class__System.out
+        literal_23
+    [] > literal_23
+      class__String.constructor_2 > @
+        class__String.new
+        "Multiplication of matrix: "
+    [] > statementExpression_11
+      class__System.out.println > @
+        class__System.out
+        methodInvocation_8
+    [] > methodInvocation_8
+      class__Arrays.deepToString > @
+        simpleReference_19
+    [] > simpleReference_19
+      c > @
+    [] > statementExpression_12
+      class__System.out.println > @
+        class__System.out
+        literal_24
+    [] > literal_24
+      class__String.constructor_2 > @
+        class__String.new
+        "Transpose of the first matrix: "
+    [] > statementExpression_13
+      simpleReference_20.write > @
+        methodInvocation_9
+    [] > simpleReference_20
+      c > @
+    [] > methodInvocation_9
+      this.transpose > @
+        this
+        simpleReference_21
+    [] > simpleReference_21
+      a > @
+    [] > statementExpression_14
+      class__System.out.println > @
+        class__System.out
+        methodInvocation_10
+    [] > methodInvocation_10
+      class__Arrays.deepToString > @
+        simpleReference_23
+    [] > simpleReference_23
+      c > @
+    [] > statementExpression_15
+      class__System.out.println > @
+        class__System.out
+        literal_25
+    [] > literal_25
+      class__String.constructor_2 > @
+        class__String.new
+        "Transpose of the second matrix: "
+    [] > statementExpression_16
+      simpleReference_24.write > @
+        methodInvocation_11
+    [] > simpleReference_24
+      c > @
+    [] > methodInvocation_11
+      this.transpose > @
+        this
+        simpleReference_25
+    [] > simpleReference_25
+      b > @
+    [] > statementExpression_17
+      class__System.out.println > @
+        class__System.out
+        methodInvocation_12
+    [] > methodInvocation_12
+      class__Arrays.deepToString > @
+        simpleReference_27
+    [] > simpleReference_27
+      c > @
+    [] > statementExpression_18
+      class__System.out.println > @
+        class__System.out
+        literal_26
+    [] > literal_26
+      class__String.constructor_2 > @
+        class__String.new
+        "passed"
+  # add :: int[][] -> int[][] -> int[][]
+  [a b] > add
+    seq > @
+      variableDeclaration_4
+      variableDeclaration_5
+      variableDeclaration_6
+      statementExpression_19
+      return_1
+    prim__int.constructor_1 > row
+      prim__int.new
+    [] > variableDeclaration_4
+      row.write > @
+        initializerSimple_20
+    [] > initializerSimple_20
+      fieldAccess_14 > @
+    [] > fieldAccess_14
+      simpleReference_28.length > @
+    [] > simpleReference_28
+      a > @
+    prim__int.constructor_1 > column
+      prim__int.new
+    [] > variableDeclaration_5
+      column.write > @
+        initializerSimple_21
+    [] > initializerSimple_21
+      fieldAccess_15 > @
+    [] > fieldAccess_15
+      arrayAccess_1.length > @
+    [] > arrayAccess_1
+      simpleReference_29.get > @
+        literal_27.v
+    [] > simpleReference_29
+      a > @
+    [] > literal_27
+      prim__int.constructor_2 > @
+        prim__int.new
+        0
+    prim__int.constructor_1 > sum
+      prim__int.new
+    [] > variableDeclaration_6
+      sum.write > @
+        initializerSimple_22
+    [] > initializerSimple_22
+      arrayCreation_2 > @
+    [] > arrayCreation_2
+      FALSE > @
+    [] > statementExpression_19
+      for_loop_placeholder > @
+    [] > return_1
+      simpleReference_30 > @
+    [] > simpleReference_30
+      sum > @
+  # subtract :: int[][] -> int[][] -> int[][]
+  [a b] > subtract
+    seq > @
+      variableDeclaration_7
+      variableDeclaration_8
+      variableDeclaration_9
+      statementExpression_20
+      return_2
+    prim__int.constructor_1 > row
+      prim__int.new
+    [] > variableDeclaration_7
+      row.write > @
+        initializerSimple_23
+    [] > initializerSimple_23
+      fieldAccess_16 > @
+    [] > fieldAccess_16
+      simpleReference_31.length > @
+    [] > simpleReference_31
+      a > @
+    prim__int.constructor_1 > column
+      prim__int.new
+    [] > variableDeclaration_8
+      column.write > @
+        initializerSimple_24
+    [] > initializerSimple_24
+      fieldAccess_17 > @
+    [] > fieldAccess_17
+      arrayAccess_2.length > @
+    [] > arrayAccess_2
+      simpleReference_32.get > @
+        literal_28.v
+    [] > simpleReference_32
+      a > @
+    [] > literal_28
+      prim__int.constructor_2 > @
+        prim__int.new
+        0
+    prim__int.constructor_1 > sub
+      prim__int.new
+    [] > variableDeclaration_9
+      sub.write > @
+        initializerSimple_25
+    [] > initializerSimple_25
+      arrayCreation_3 > @
+    [] > arrayCreation_3
+      FALSE > @
+    [] > statementExpression_20
+      for_loop_placeholder > @
+    [] > return_2
+      simpleReference_33 > @
+    [] > simpleReference_33
+      sub > @
+  # multiply :: int[][] -> int[][] -> int[][]
+  [a b] > multiply
+    seq > @
+      variableDeclaration_10
+      variableDeclaration_11
+      variableDeclaration_12
+      statementExpression_21
+      return_3
+    prim__int.constructor_1 > row
+      prim__int.new
+    [] > variableDeclaration_10
+      row.write > @
+        initializerSimple_26
+    [] > initializerSimple_26
+      fieldAccess_18 > @
+    [] > fieldAccess_18
+      simpleReference_34.length > @
+    [] > simpleReference_34
+      a > @
+    prim__int.constructor_1 > column
+      prim__int.new
+    [] > variableDeclaration_11
+      column.write > @
+        initializerSimple_27
+    [] > initializerSimple_27
+      fieldAccess_19 > @
+    [] > fieldAccess_19
+      arrayAccess_3.length > @
+    [] > arrayAccess_3
+      simpleReference_35.get > @
+        literal_29.v
+    [] > simpleReference_35
+      b > @
+    [] > literal_29
+      prim__int.constructor_2 > @
+        prim__int.new
+        0
+    prim__int.constructor_1 > product
+      prim__int.new
+    [] > variableDeclaration_12
+      product.write > @
+        initializerSimple_28
+    [] > initializerSimple_28
+      arrayCreation_4 > @
+    [] > arrayCreation_4
+      FALSE > @
+    [] > statementExpression_21
+      for_loop_placeholder > @
+    [] > return_3
+      simpleReference_36 > @
+    [] > simpleReference_36
+      product > @
+  # transpose :: int[][] -> int[][]
+  [a] > transpose
+    seq > @
+      variableDeclaration_13
+      variableDeclaration_14
+      variableDeclaration_15
+      statementExpression_22
+      return_4
+    prim__int.constructor_1 > row
+      prim__int.new
+    [] > variableDeclaration_13
+      row.write > @
+        initializerSimple_29
+    [] > initializerSimple_29
+      fieldAccess_20 > @
+    [] > fieldAccess_20
+      simpleReference_37.length > @
+    [] > simpleReference_37
+      a > @
+    prim__int.constructor_1 > column
+      prim__int.new
+    [] > variableDeclaration_14
+      column.write > @
+        initializerSimple_30
+    [] > initializerSimple_30
+      fieldAccess_21 > @
+    [] > fieldAccess_21
+      arrayAccess_4.length > @
+    [] > arrayAccess_4
+      simpleReference_38.get > @
+        literal_30.v
+    [] > simpleReference_38
+      a > @
+    [] > literal_30
+      prim__int.constructor_2 > @
+        prim__int.new
+        0
+    prim__int.constructor_1 > temp
+      prim__int.new
+    [] > variableDeclaration_15
+      temp.write > @
+        initializerSimple_31
+    [] > initializerSimple_31
+      arrayCreation_5 > @
+    [] > arrayCreation_5
+      FALSE > @
+    [] > statementExpression_22
+      for_loop_placeholder > @
+    [] > return_4
+      simpleReference_39 > @
+    [] > simpleReference_39
+      temp > @
+  # null :: null -> void
+  [this] > constructor
+    seq > @
+      initialization
+      statementExpression_23
+      this
+    [] > initialization
+      this.init > @
+        this
+    [] > statementExpression_23
+      this.super.constructor > @
+        this.super
+
+[args...] > main
+  class__MatrixMultiActions.main > @
+    *

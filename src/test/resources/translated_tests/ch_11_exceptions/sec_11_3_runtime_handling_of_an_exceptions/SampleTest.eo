@@ -1,20 +1,18 @@
-# 2022-05-25T15:02:53.882098
+# 2022-07-13T17:59:01.743257100
 # j2eo team
++package ch_11_exceptions.sec_11_3_runtime_handling_of_an_exceptions
 +alias stdlib.lang.class__Object
 
 [] > class__SampleTest
   class__Object > super
   super > @
   [] > new
-    [] > this
-      class__Object.new > super
-      super > @
-      "class__SampleTest" > className
-      [this] > init
-        seq > @
-          TRUE
-    seq > @
-      this
+    class__Object.new > super
+    super > @
+    "class__SampleTest" > className
+    [this] > init
+      seq > @
+        TRUE
   # Main :: String[] -> void
   [args] > Main
     seq > @
@@ -23,11 +21,11 @@
   [this] > constructor
     seq > @
       initialization
-      s665726928
+      statementExpression_1
       this
     [] > initialization
       this.init > @
         this
-    [] > s665726928
-      super.constructor > @
+    [] > statementExpression_1
+      this.super.constructor > @
         this.super

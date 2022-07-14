@@ -1,0 +1,123 @@
+# 2022-07-13T17:59:02.267845400
+# j2eo team
++package ch_15_expressions.sec_15_7_evaluation_order.sec_15_7_1_evaluate_left_hand_operand_first
++alias stdlib.lang.class__System
++alias stdlib.lang.class__Object
++alias stdlib.primitives.prim__int
++alias stdlib.lang.class__String
+
+[] > class__SimpleImplicitLeftHandOperand
+  class__Object > super
+  super > @
+  [] > new
+    class__Object.new > super
+    super > @
+    "class__SimpleImplicitLeftHandOperand" > className
+    [this] > init
+      seq > @
+        TRUE
+  # main :: String[] -> void
+  [args] > main
+    seq > @
+      variableDeclaration_1
+      statementExpression_1
+      statementExpression_2
+      variableDeclaration_2
+      statementExpression_3
+      statementExpression_4
+      statementExpression_5
+    prim__int.constructor_1 > a
+      prim__int.new
+    [] > variableDeclaration_1
+      a.write > @
+        initializerSimple_1
+    [] > initializerSimple_1
+      literal_1 > @
+    [] > literal_1
+      prim__int.constructor_2 > @
+        prim__int.new
+        9
+    [] > statementExpression_1
+      simpleReference_1.add_equal > @
+        parenthesized_1
+    [] > simpleReference_1
+      a > @
+    [] > parenthesized_1
+      binary_1 > @
+    [] > binary_1
+      simpleReference_2.write > @
+        literal_2
+    [] > simpleReference_2
+      a > @
+    [] > literal_2
+      prim__int.constructor_2 > @
+        prim__int.new
+        3
+    [] > statementExpression_2
+      class__System.out.println > @
+        class__System.out
+        simpleReference_3
+    [] > simpleReference_3
+      a > @
+    prim__int.constructor_1 > b
+      prim__int.new
+    [] > variableDeclaration_2
+      b.write > @
+        initializerSimple_2
+    [] > initializerSimple_2
+      literal_3 > @
+    [] > literal_3
+      prim__int.constructor_2 > @
+        prim__int.new
+        9
+    [] > statementExpression_3
+      simpleReference_4.write > @
+        binary_2
+    [] > simpleReference_4
+      b > @
+    [] > binary_2
+      simpleReference_5.add > @
+        parenthesized_2
+    [] > simpleReference_5
+      b > @
+    [] > parenthesized_2
+      binary_3 > @
+    [] > binary_3
+      simpleReference_6.write > @
+        literal_4
+    [] > simpleReference_6
+      b > @
+    [] > literal_4
+      prim__int.constructor_2 > @
+        prim__int.new
+        3
+    [] > statementExpression_4
+      class__System.out.println > @
+        class__System.out
+        simpleReference_7
+    [] > simpleReference_7
+      b > @
+    [] > statementExpression_5
+      class__System.out.println > @
+        class__System.out
+        literal_5
+    [] > literal_5
+      class__String.constructor_2 > @
+        class__String.new
+        "passed"
+  # null :: null -> void
+  [this] > constructor
+    seq > @
+      initialization
+      statementExpression_6
+      this
+    [] > initialization
+      this.init > @
+        this
+    [] > statementExpression_6
+      this.super.constructor > @
+        this.super
+
+[args...] > main
+  class__SimpleImplicitLeftHandOperand.main > @
+    *

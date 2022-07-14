@@ -1,0 +1,147 @@
+# 2022-07-13T17:59:01.127136200
+# j2eo team
++package ch_10_arrays.sec_10_4_array_access
++alias stdlib.primitives.prim__float
++alias stdlib.lang.class__System
++alias stdlib.primitives.prim__double
++alias stdlib.lang.class__Object
++alias stdlib.primitives.prim__int
++alias stdlib.lang.class__String
+
+[] > class__ArrayAverage
+  class__Object > super
+  super > @
+  [] > new
+    class__Object.new > super
+    super > @
+    "class__ArrayAverage" > className
+    [this] > init
+      seq > @
+        TRUE
+  # main :: String[] -> void
+  [args] > main
+    seq > @
+      variableDeclaration_1
+      variableDeclaration_2
+      variableDeclaration_3
+      statementExpression_1
+      statementExpression_2
+      statementExpression_3
+      statementExpression_4
+    prim__double.constructor_1 > array
+      prim__double.new
+    [] > variableDeclaration_1
+      array.write > @
+        initializerArray_1
+    [] > initializerArray_1
+      * > @
+        initializerSimple_1
+        initializerSimple_2
+        initializerSimple_3
+        initializerSimple_4
+        initializerSimple_5
+    [] > initializerSimple_1
+      literal_1 > @
+    [] > literal_1
+      prim__int.constructor_2 > @
+        prim__int.new
+        10
+    [] > initializerSimple_2
+      literal_2 > @
+    [] > literal_2
+      prim__int.constructor_2 > @
+        prim__int.new
+        20
+    [] > initializerSimple_3
+      literal_3 > @
+    [] > literal_3
+      prim__int.constructor_2 > @
+        prim__int.new
+        30
+    [] > initializerSimple_4
+      literal_4 > @
+    [] > literal_4
+      prim__int.constructor_2 > @
+        prim__int.new
+        40
+    [] > initializerSimple_5
+      literal_5 > @
+    [] > literal_5
+      prim__int.constructor_2 > @
+        prim__int.new
+        50
+    prim__double.constructor_1 > sum
+      prim__double.new
+    [] > variableDeclaration_2
+      sum.write > @
+        initializerSimple_6
+    [] > initializerSimple_6
+      literal_6 > @
+    [] > literal_6
+      prim__float.constructor_2 > @
+        prim__float.new
+        0.0
+    prim__double.constructor_1 > avg
+      prim__double.new
+    [] > variableDeclaration_3
+      avg.write > @
+        initializerSimple_7
+    [] > initializerSimple_7
+      literal_7 > @
+    [] > literal_7
+      prim__float.constructor_2 > @
+        prim__float.new
+        0.0
+    [] > statementExpression_1
+      for_loop_placeholder > @
+    [] > statementExpression_2
+      simpleReference_1.write > @
+        binary_1
+    [] > simpleReference_1
+      avg > @
+    [] > binary_1
+      simpleReference_2.div > @
+        fieldAccess_1
+    [] > simpleReference_2
+      sum > @
+    [] > fieldAccess_1
+      simpleReference_3.length > @
+    [] > simpleReference_3
+      array > @
+    [] > statementExpression_3
+      class__System.out.println > @
+        class__System.out
+        binary_2
+    [] > binary_2
+      literal_8.add > @
+        simpleReference_4
+    [] > literal_8
+      class__String.constructor_2 > @
+        class__String.new
+        "Average: "
+    [] > simpleReference_4
+      avg > @
+    [] > statementExpression_4
+      class__System.out.println > @
+        class__System.out
+        literal_9
+    [] > literal_9
+      class__String.constructor_2 > @
+        class__String.new
+        "passed"
+  # null :: null -> void
+  [this] > constructor
+    seq > @
+      initialization
+      statementExpression_5
+      this
+    [] > initialization
+      this.init > @
+        this
+    [] > statementExpression_5
+      this.super.constructor > @
+        this.super
+
+[args...] > main
+  class__ArrayAverage.main > @
+    *

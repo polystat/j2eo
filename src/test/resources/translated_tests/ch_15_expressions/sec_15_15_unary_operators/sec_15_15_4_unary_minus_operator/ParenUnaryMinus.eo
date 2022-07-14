@@ -1,5 +1,6 @@
-# 2022-05-25T15:02:54.063530400
+# 2022-07-13T17:59:02.135173800
 # j2eo team
++package ch_15_expressions.sec_15_15_unary_operators.sec_15_15_4_unary_minus_operator
 +alias stdlib.lang.class__System
 +alias stdlib.lang.class__Object
 +alias stdlib.primitives.prim__int
@@ -9,59 +10,56 @@
   class__Object > super
   super > @
   [] > new
-    [] > this
-      class__Object.new > super
-      super > @
-      "class__ParenUnaryMinus" > className
-      [this] > init
-        seq > @
-          TRUE
-    seq > @
-      this
+    class__Object.new > super
+    super > @
+    "class__ParenUnaryMinus" > className
+    [this] > init
+      seq > @
+        TRUE
   # main :: String[] -> void
   [args] > main
     seq > @
-      d823723302
-      d1199262943
-      s1541049864
-      s25536233
+      variableDeclaration_1
+      variableDeclaration_2
+      statementExpression_1
+      statementExpression_2
     prim__int.constructor_1 > a
       prim__int.new
-    [] > d823723302
+    [] > variableDeclaration_1
       a.write > @
-        i_s1714078840
-    [] > i_s1714078840
-      u_pre1732502545 > @
-    [] > u_pre1732502545
-      l1051876890.neg > @
-    [] > l1051876890
+        initializerSimple_1
+    [] > initializerSimple_1
+      unaryPrefix_1 > @
+    [] > unaryPrefix_1
+      literal_1.neg > @
+    [] > literal_1
       prim__int.constructor_2 > @
         prim__int.new
         5
     prim__int.constructor_1 > b
       prim__int.new
-    [] > d1199262943
+    [] > variableDeclaration_2
       b.write > @
-        i_s2009221452
-    [] > i_s2009221452
-      p257513673 > @
-    [] > p257513673
-      u_pre590845366 > @
-    [] > u_pre590845366
-      s_r1052195003.neg > @
-    [] > s_r1052195003
+        initializerSimple_2
+    [] > initializerSimple_2
+      parenthesized_1 > @
+    [] > parenthesized_1
+      unaryPrefix_2 > @
+    [] > unaryPrefix_2
+      simpleReference_1.neg > @
+    [] > simpleReference_1
       a > @
-    [] > s1541049864
+    [] > statementExpression_1
       class__System.out.println > @
         class__System.out
-        s_r511707818
-    [] > s_r511707818
+        simpleReference_2
+    [] > simpleReference_2
       b > @
-    [] > s25536233
+    [] > statementExpression_2
       class__System.out.println > @
         class__System.out
-        l116405378
-    [] > l116405378
+        literal_2
+    [] > literal_2
       class__String.constructor_2 > @
         class__String.new
         "passed"
@@ -69,13 +67,13 @@
   [this] > constructor
     seq > @
       initialization
-      s164974746
+      statementExpression_3
       this
     [] > initialization
       this.init > @
         this
-    [] > s164974746
-      super.constructor > @
+    [] > statementExpression_3
+      this.super.constructor > @
         this.super
 
 [args...] > main

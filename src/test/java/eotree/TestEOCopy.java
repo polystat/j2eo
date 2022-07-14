@@ -1,9 +1,11 @@
 package eotree;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static util.ListUtils.listOf;
+import static org.polystat.j2eo.util.ListUtils.listOf;
 
 import org.junit.jupiter.api.Test;
+import org.polystat.j2eo.eotree.EOCopy;
+import org.polystat.j2eo.eotree.EODot;
 
 /**
  * EO copying feature tests.

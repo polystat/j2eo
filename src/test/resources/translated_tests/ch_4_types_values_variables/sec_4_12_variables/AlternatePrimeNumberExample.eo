@@ -1,0 +1,157 @@
+# 2022-07-13T17:59:02.497981100
+# j2eo team
++package ch_4_types_values_variables.sec_4_12_variables
++alias stdlib.lang.class__System
++alias stdlib.lang.class__Object
++alias stdlib.primitives.prim__int
++alias stdlib.lang.class__String
+
+[] > class__AlternatePrimeNumberExample
+  class__Object > super
+  super > @
+  [] > new
+    class__Object.new > super
+    super > @
+    "class__AlternatePrimeNumberExample" > className
+    [this] > init
+      seq > @
+        TRUE
+  # main :: String[] -> void
+  [args] > main
+    seq > @
+      variableDeclaration_1
+      statementExpression_1
+      statementExpression_2
+      statementExpression_3
+    prim__int.constructor_1 > num
+      prim__int.new
+    [] > variableDeclaration_1
+      num.write > @
+        initializerSimple_1
+    [] > initializerSimple_1
+      literal_1 > @
+    [] > literal_1
+      prim__int.constructor_2 > @
+        prim__int.new
+        20
+    [] > statementExpression_1
+      class__System.out.print > @
+        class__System.out
+        binary_1
+    [] > binary_1
+      binary_2.add > @
+        literal_2
+    [] > binary_2
+      literal_3.add > @
+        simpleReference_1
+    [] > literal_3
+      class__String.constructor_2 > @
+        class__String.new
+        "Alternate prime numbers up to "
+    [] > simpleReference_1
+      num > @
+    [] > literal_2
+      class__String.constructor_2 > @
+        class__String.new
+        " are: "
+    [] > statementExpression_2
+      this.printAlternatePrimeNumber > @
+        this
+        simpleReference_2
+    [] > simpleReference_2
+      num > @
+    [] > statementExpression_3
+      class__System.out.println > @
+        class__System.out
+        literal_4
+    [] > literal_4
+      class__String.constructor_2 > @
+        class__String.new
+        "passed"
+  # checkPrime :: int -> int
+  [num] > checkPrime
+    seq > @
+      variableDeclaration_2
+      variableDeclaration_3
+      statementExpression_4
+      ifThenElse_1
+    prim__int.constructor_1 > i
+      prim__int.new
+    [] > variableDeclaration_2
+      TRUE > @
+    prim__int.constructor_1 > flag
+      prim__int.new
+    [] > variableDeclaration_3
+      flag.write > @
+        initializerSimple_2
+    [] > initializerSimple_2
+      literal_5 > @
+    [] > literal_5
+      prim__int.constructor_2 > @
+        prim__int.new
+        0
+    [] > statementExpression_4
+      for_loop_placeholder > @
+    [] > ifThenElse_1
+      binary_3.if > @
+        return_1
+        return_2
+    [] > binary_3
+      simpleReference_3.eq > @
+        literal_6
+    [] > simpleReference_3
+      flag > @
+    [] > literal_6
+      prim__int.constructor_2 > @
+        prim__int.new
+        0
+    [] > return_1
+      literal_7 > @
+    [] > literal_7
+      prim__int.constructor_2 > @
+        prim__int.new
+        1
+    [] > return_2
+      literal_8 > @
+    [] > literal_8
+      prim__int.constructor_2 > @
+        prim__int.new
+        0
+  # printAlternatePrimeNumber :: int -> void
+  [n] > printAlternatePrimeNumber
+    seq > @
+      variableDeclaration_4
+      statementExpression_5
+      statementExpression_6
+    prim__int.constructor_1 > temp
+      prim__int.new
+    [] > variableDeclaration_4
+      temp.write > @
+        initializerSimple_3
+    [] > initializerSimple_3
+      literal_9 > @
+    [] > literal_9
+      prim__int.constructor_2 > @
+        prim__int.new
+        2
+    [] > statementExpression_5
+      for_loop_placeholder > @
+    [] > statementExpression_6
+      class__System.out.println > @
+        class__System.out
+  # null :: null -> void
+  [this] > constructor
+    seq > @
+      initialization
+      statementExpression_7
+      this
+    [] > initialization
+      this.init > @
+        this
+    [] > statementExpression_7
+      this.super.constructor > @
+        this.super
+
+[args...] > main
+  class__AlternatePrimeNumberExample.main > @
+    *

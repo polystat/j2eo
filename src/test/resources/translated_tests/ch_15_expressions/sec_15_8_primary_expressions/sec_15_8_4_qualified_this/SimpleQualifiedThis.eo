@@ -1,0 +1,104 @@
+# 2022-07-13T17:59:02.304840900
+# j2eo team
++package ch_15_expressions.sec_15_8_primary_expressions.sec_15_8_4_qualified_this
++alias stdlib.lang.class__Object
++alias stdlib.lang.class__System
++alias stdlib.lang.class__String
+
+[] > class__SimpleQualifiedThis
+  class__Object > super
+  super > @
+  [] > new
+    class__Object.new > super
+    super > @
+    "class__SimpleQualifiedThis" > className
+    [this] > init
+      seq > @
+        TRUE
+  # main :: String[] -> void
+  [args] > main
+    seq > @
+      statementExpression_1
+    [] > statementExpression_1
+      unsupported_qualifier.method > @
+        unsupported_qualifier
+  # null :: null -> void
+  [this] > constructor
+    seq > @
+      initialization
+      statementExpression_2
+      this
+    [] > initialization
+      this.init > @
+        this
+    [] > statementExpression_2
+      this.super.constructor > @
+        this.super
+
+[] > class__SomeClass
+  class__Object > super
+  super > @
+  [] > new
+    class__Object.new > super
+    super > @
+    "class__SomeClass" > className
+    [this] > init
+      seq > @
+        TRUE
+    # method :: null -> void
+    [this] > method
+      seq > @
+        statementExpression_3
+      [] > statementExpression_3
+        class__System.out.println > @
+          class__System.out
+          literal_1
+      [] > literal_1
+        class__String.constructor_2 > @
+          class__String.new
+          "passed"
+  [] > class__SomeOtherClass
+    class__Object > super
+    super > @
+    [] > new
+      class__Object.new > super
+      super > @
+      "class__SomeOtherClass" > className
+      [this] > init
+        seq > @
+          TRUE
+      # method :: null -> void
+      [this] > method
+        seq > @
+          statementExpression_4
+        [] > statementExpression_4
+          class__SomeClass.this.method > @
+            class__SomeClass.this
+    # null :: null -> void
+    [this] > constructor
+      seq > @
+        initialization
+        statementExpression_5
+        this
+      [] > initialization
+        this.init > @
+          this
+      [] > statementExpression_5
+        this.super.constructor > @
+          this.super
+  # null :: null -> void
+  [this] > constructor
+    seq > @
+      initialization
+      statementExpression_6
+      this
+    [] > initialization
+      this.init > @
+        this
+    [] > statementExpression_6
+      this.super.constructor > @
+        this.super
+
+[args...] > main
+  class__SimpleQualifiedThis.main > @
+    *

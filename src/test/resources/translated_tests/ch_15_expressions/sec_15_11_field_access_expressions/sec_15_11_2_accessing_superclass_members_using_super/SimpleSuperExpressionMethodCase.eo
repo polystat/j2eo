@@ -1,0 +1,225 @@
+# 2022-07-13T17:59:02.105175500
+# j2eo team
++package ch_15_expressions.sec_15_11_field_access_expressions.sec_15_11_2_accessing_superclass_members_using_super
++alias stdlib.lang.class__System
++alias stdlib.lang.class__Object
++alias stdlib.lang.class__String
++alias stdlib.primitives.prim__int
+
+[] > class__SimpleSuperExpressionMethodCase
+  class__Object > super
+  super > @
+  [] > new
+    class__Object.new > super
+    super > @
+    "class__SimpleSuperExpressionMethodCase" > className
+    [this] > init
+      seq > @
+        TRUE
+  # main :: String[] -> void
+  [args] > main
+    seq > @
+      statementExpression_1
+      statementExpression_2
+    [] > statementExpression_1
+      unsupported_qualifier.test > @
+        unsupported_qualifier
+    [] > statementExpression_2
+      class__System.out.println > @
+        class__System.out
+        literal_1
+    [] > literal_1
+      class__String.constructor_2 > @
+        class__String.new
+        "passed"
+  # null :: null -> void
+  [this] > constructor
+    seq > @
+      initialization
+      statementExpression_3
+      this
+    [] > initialization
+      this.init > @
+        this
+    [] > statementExpression_3
+      this.super.constructor > @
+        this.super
+
+[] > class__T0
+  class__Object > super
+  super > @
+  [] > new
+    class__Object.new > super
+    super > @
+    "class__T0" > className
+    [this] > init
+      seq > @
+        TRUE
+    # x :: null -> int
+    [this] > x
+      seq > @
+        return_1
+      [] > return_1
+        literal_2 > @
+      [] > literal_2
+        prim__int.constructor_2 > @
+          prim__int.new
+          0
+  # null :: null -> void
+  [this] > constructor
+    seq > @
+      initialization
+      statementExpression_4
+      this
+    [] > initialization
+      this.init > @
+        this
+    [] > statementExpression_4
+      this.super.constructor > @
+        this.super
+
+[] > class__T1
+  class__T0 > super
+  super > @
+  [] > new
+    class__T0.new > super
+    super > @
+    "class__T1" > className
+    [this] > init
+      seq > @
+        TRUE
+    # x :: null -> int
+    [this] > x
+      seq > @
+        return_2
+      [] > return_2
+        literal_3 > @
+      [] > literal_3
+        prim__int.constructor_2 > @
+          prim__int.new
+          1
+  # null :: null -> void
+  [this] > constructor
+    seq > @
+      initialization
+      statementExpression_5
+      this
+    [] > initialization
+      this.init > @
+        this
+    [] > statementExpression_5
+      this.super.constructor > @
+        this.super
+
+[] > class__T2
+  class__T1 > super
+  super > @
+  [] > new
+    class__T1.new > super
+    super > @
+    "class__T2" > className
+    [this] > init
+      seq > @
+        TRUE
+    # x :: null -> int
+    [this] > x
+      seq > @
+        return_3
+      [] > return_3
+        literal_4 > @
+      [] > literal_4
+        prim__int.constructor_2 > @
+          prim__int.new
+          2
+  # null :: null -> void
+  [this] > constructor
+    seq > @
+      initialization
+      statementExpression_6
+      this
+    [] > initialization
+      this.init > @
+        this
+    [] > statementExpression_6
+      this.super.constructor > @
+        this.super
+
+[] > class__T3
+  class__T2 > super
+  super > @
+  [] > new
+    class__T2.new > super
+    super > @
+    "class__T3" > className
+    [this] > init
+      seq > @
+        TRUE
+    # x :: null -> int
+    [this] > x
+      seq > @
+        return_4
+      [] > return_4
+        literal_5 > @
+      [] > literal_5
+        prim__int.constructor_2 > @
+          prim__int.new
+          3
+    # test :: null -> void
+    [this] > test
+      seq > @
+        statementExpression_7
+        statementExpression_8
+        statementExpression_9
+        statementExpression_10
+        statementExpression_11
+      [] > statementExpression_7
+        class__System.out.println > @
+          class__System.out
+          methodInvocation_1
+      [] > methodInvocation_1
+        this.x > @
+          this
+      [] > statementExpression_8
+        class__System.out.println > @
+          class__System.out
+          methodInvocation_2
+      [] > methodInvocation_2
+        super.x > @
+          super
+      [] > statementExpression_9
+        class__System.out.println > @
+          class__System.out
+          methodInvocation_3
+      [] > methodInvocation_3
+        unsupported_qualifier.x > @
+          unsupported_qualifier
+      [] > statementExpression_10
+        class__System.out.println > @
+          class__System.out
+          methodInvocation_4
+      [] > methodInvocation_4
+        unsupported_qualifier.x > @
+          unsupported_qualifier
+      [] > statementExpression_11
+        class__System.out.println > @
+          class__System.out
+          methodInvocation_5
+      [] > methodInvocation_5
+        unsupported_qualifier.x > @
+          unsupported_qualifier
+  # null :: null -> void
+  [this] > constructor
+    seq > @
+      initialization
+      statementExpression_12
+      this
+    [] > initialization
+      this.init > @
+        this
+    [] > statementExpression_12
+      this.super.constructor > @
+        this.super
+
+[args...] > main
+  class__SimpleSuperExpressionMethodCase.main > @
+    *

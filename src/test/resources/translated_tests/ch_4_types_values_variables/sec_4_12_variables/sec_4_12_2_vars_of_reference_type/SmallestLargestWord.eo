@@ -1,0 +1,180 @@
+# 2022-07-13T17:59:02.913987400
+# j2eo team
++package ch_4_types_values_variables.sec_4_12_variables.sec_4_12_2_vars_of_reference_type
++alias stdlib.lang.class__System
++alias stdlib.lang.class__Object
++alias stdlib.lang.class__String
++alias stdlib.primitives.prim__int
+
+[] > class__SmallestLargestWord
+  class__Object > super
+  super > @
+  [] > new
+    class__Object.new > super
+    super > @
+    "class__SmallestLargestWord" > className
+    [this] > init
+      seq > @
+        TRUE
+  # main :: String[] -> void
+  [args] > main
+    seq > @
+      variableDeclaration_1
+      variableDeclaration_2
+      variableDeclaration_3
+      variableDeclaration_4
+      variableDeclaration_5
+      variableDeclaration_6
+      statementExpression_1
+      statementExpression_2
+      statementExpression_3
+      statementExpression_4
+      statementExpression_5
+      statementExpression_6
+      statementExpression_7
+    cage > string
+    [] > variableDeclaration_1
+      string.write > @
+        initializerSimple_1
+    [] > initializerSimple_1
+      literal_1 > @
+    [] > literal_1
+      class__String.constructor_2 > @
+        class__String.new
+        "Hardships often prepare ordinary people for an extraordinary destiny"
+    cage > word
+    [] > variableDeclaration_2
+      word.write > @
+        initializerSimple_2
+    [] > initializerSimple_2
+      literal_2 > @
+    [] > literal_2
+      class__String.constructor_2 > @
+        class__String.new
+        ""
+    cage > small
+    [] > variableDeclaration_3
+      small.write > @
+        initializerSimple_3
+    [] > initializerSimple_3
+      literal_3 > @
+    [] > literal_3
+      class__String.constructor_2 > @
+        class__String.new
+        ""
+    cage > large
+    [] > variableDeclaration_4
+      large.write > @
+        initializerSimple_4
+    [] > initializerSimple_4
+      literal_4 > @
+    [] > literal_4
+      class__String.constructor_2 > @
+        class__String.new
+        ""
+    cage > words
+    [] > variableDeclaration_5
+      words.write > @
+        initializerSimple_5
+    [] > initializerSimple_5
+      arrayCreation_1 > @
+    [] > arrayCreation_1
+      FALSE > @
+    prim__int.constructor_1 > length
+      prim__int.new
+    [] > variableDeclaration_6
+      length.write > @
+        initializerSimple_6
+    [] > initializerSimple_6
+      literal_5 > @
+    [] > literal_5
+      prim__int.constructor_2 > @
+        prim__int.new
+        0
+    [] > statementExpression_1
+      simpleReference_1.write > @
+        binary_1
+    [] > simpleReference_1
+      string > @
+    [] > binary_1
+      simpleReference_2.add > @
+        literal_6
+    [] > simpleReference_2
+      string > @
+    [] > literal_6
+      class__String.constructor_2 > @
+        class__String.new
+        " "
+    [] > statementExpression_2
+      for_loop_placeholder > @
+    [] > statementExpression_3
+      simpleReference_3.write > @
+        binary_2
+    [] > simpleReference_3
+      small > @
+    [] > binary_2
+      simpleReference_4.write > @
+        arrayAccess_1
+    [] > simpleReference_4
+      large > @
+    [] > arrayAccess_1
+      simpleReference_5.get > @
+        literal_7.v
+    [] > simpleReference_5
+      words > @
+    [] > literal_7
+      prim__int.constructor_2 > @
+        prim__int.new
+        0
+    [] > statementExpression_4
+      for_loop_placeholder > @
+    [] > statementExpression_5
+      class__System.out.println > @
+        class__System.out
+        binary_3
+    [] > binary_3
+      literal_8.add > @
+        simpleReference_6
+    [] > literal_8
+      class__String.constructor_2 > @
+        class__String.new
+        "Smallest word: "
+    [] > simpleReference_6
+      small > @
+    [] > statementExpression_6
+      class__System.out.println > @
+        class__System.out
+        binary_4
+    [] > binary_4
+      literal_9.add > @
+        simpleReference_7
+    [] > literal_9
+      class__String.constructor_2 > @
+        class__String.new
+        "Largest word: "
+    [] > simpleReference_7
+      large > @
+    [] > statementExpression_7
+      class__System.out.println > @
+        class__System.out
+        literal_10
+    [] > literal_10
+      class__String.constructor_2 > @
+        class__String.new
+        "passed"
+  # null :: null -> void
+  [this] > constructor
+    seq > @
+      initialization
+      statementExpression_8
+      this
+    [] > initialization
+      this.init > @
+        this
+    [] > statementExpression_8
+      this.super.constructor > @
+        this.super
+
+[args...] > main
+  class__SmallestLargestWord.main > @
+    *

@@ -1,20 +1,18 @@
-# 2022-05-25T15:02:54.300530100
+# 2022-07-13T17:59:02.430403600
 # j2eo team
++package ch_18_type_inference.sec_18_3_incorporation.sec_18_3_2_bounds_involving_capture_conversion
 +alias stdlib.lang.class__Object
 
 [] > class__SampleTest
   class__Object > super
   super > @
   [] > new
-    [] > this
-      class__Object.new > super
-      super > @
-      "class__SampleTest" > className
-      [this] > init
-        seq > @
-          TRUE
-    seq > @
-      this
+    class__Object.new > super
+    super > @
+    "class__SampleTest" > className
+    [this] > init
+      seq > @
+        TRUE
   # Main :: String[] -> void
   [args] > Main
     seq > @
@@ -23,11 +21,11 @@
   [this] > constructor
     seq > @
       initialization
-      s896982466
+      statementExpression_1
       this
     [] > initialization
       this.init > @
         this
-    [] > s896982466
-      super.constructor > @
+    [] > statementExpression_1
+      this.super.constructor > @
         this.super

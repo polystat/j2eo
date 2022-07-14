@@ -1,0 +1,121 @@
+# 2022-07-13T17:59:03.046798
+# j2eo team
++package ch_4_types_values_variables.sec_4_3_reference_types_and_values.sec_4_3_1_objects
++alias stdlib.lang.class__System
++alias stdlib.lang.class__Object
++alias stdlib.lang.class__String
++alias stdlib.primitives.prim__int
+
+[] > class__ExplicitInstancing
+  class__Object > super
+  super > @
+  [] > new
+    class__Object.new > super
+    super > @
+    "class__ExplicitInstancing" > className
+    [this] > init
+      seq > @
+        TRUE
+  # main :: String[] -> void
+  [args] > main
+    seq > @
+      variableDeclaration_1
+      statementExpression_1
+      statementExpression_2
+    cage > p
+    [] > variableDeclaration_1
+      p.write > @
+        initializerSimple_1
+    [] > initializerSimple_1
+      literal_1 > @
+    [] > literal_1
+      prim__int.constructor_2 > @
+        prim__int.new
+        0
+    [] > statementExpression_1
+      try_block_placeholder > @
+    [] > statementExpression_2
+      class__System.out.println > @
+        class__System.out
+        literal_2
+    [] > literal_2
+      class__String.constructor_2 > @
+        class__String.new
+        "passed"
+  # null :: null -> void
+  [this] > constructor
+    seq > @
+      initialization
+      statementExpression_3
+      this
+    [] > initialization
+      this.init > @
+        this
+    [] > statementExpression_3
+      this.super.constructor > @
+        this.super
+
+[] > class__Point
+  class__Object > super
+  super > @
+  [] > new
+    class__Object.new > super
+    super > @
+    "class__Point" > className
+    [this] > init
+      seq > @
+        TRUE
+    prim__int.constructor_1 > x
+      prim__int.new
+    prim__int.constructor_1 > y
+      prim__int.new
+  # null :: null -> void
+  [this] > constructor
+    seq > @
+      initialization
+      statementExpression_4
+      this
+    [] > initialization
+      this.init > @
+        this
+    [] > statementExpression_4
+      class__System.out.println > @
+        class__System.out
+        literal_3
+    [] > literal_3
+      class__String.constructor_2 > @
+        class__String.new
+        "default"
+  # null :: int -> int -> void
+  [this x y] > constructor
+    seq > @
+      initialization
+      statementExpression_5
+      statementExpression_6
+      this
+    [] > initialization
+      this.init > @
+        this
+    [] > statementExpression_5
+      fieldAccess_3.write > @
+        simpleReference_1
+    [] > fieldAccess_3
+      this_1.x > @
+    [] > this_1
+      this > @
+    [] > simpleReference_1
+      x > @
+    [] > statementExpression_6
+      fieldAccess_4.write > @
+        simpleReference_2
+    [] > fieldAccess_4
+      this_2.y > @
+    [] > this_2
+      this > @
+    [] > simpleReference_2
+      y > @
+  cage > origin
+
+[args...] > main
+  class__ExplicitInstancing.main > @
+    *

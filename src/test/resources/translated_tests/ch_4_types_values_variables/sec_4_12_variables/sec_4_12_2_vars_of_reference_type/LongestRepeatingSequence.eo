@@ -1,0 +1,135 @@
+# 2022-07-13T17:59:02.812676300
+# j2eo team
++package ch_4_types_values_variables.sec_4_12_variables.sec_4_12_2_vars_of_reference_type
++alias stdlib.lang.class__System
++alias stdlib.lang.class__Object
++alias stdlib.primitives.prim__int
++alias stdlib.lang.class__String
+
+[] > class__LongestRepeatingSequence
+  class__Object > super
+  super > @
+  [] > new
+    class__Object.new > super
+    super > @
+    "class__LongestRepeatingSequence" > className
+    [this] > init
+      seq > @
+        TRUE
+  # lcp :: String -> String -> String
+  [s t] > lcp
+    seq > @
+      variableDeclaration_1
+      statementExpression_1
+      return_1
+    prim__int.constructor_1 > n
+      prim__int.new
+    [] > variableDeclaration_1
+      n.write > @
+        initializerSimple_1
+    [] > initializerSimple_1
+      methodInvocation_1 > @
+    [] > methodInvocation_1
+      Math.min > @
+        Math
+        methodInvocation_2
+        methodInvocation_3
+    [] > methodInvocation_2
+      s.length > @
+        s
+    [] > methodInvocation_3
+      t.length > @
+        t
+    [] > statementExpression_1
+      for_loop_placeholder > @
+    [] > return_1
+      methodInvocation_4 > @
+    [] > methodInvocation_4
+      s.substring > @
+        s
+        literal_1
+        simpleReference_5
+    [] > literal_1
+      prim__int.constructor_2 > @
+        prim__int.new
+        0
+    [] > simpleReference_5
+      n > @
+  # main :: String[] -> void
+  [args] > main
+    seq > @
+      variableDeclaration_2
+      variableDeclaration_3
+      variableDeclaration_4
+      statementExpression_2
+      statementExpression_3
+      statementExpression_4
+    cage > str
+    [] > variableDeclaration_2
+      str.write > @
+        initializerSimple_2
+    [] > initializerSimple_2
+      literal_2 > @
+    [] > literal_2
+      class__String.constructor_2 > @
+        class__String.new
+        "acbdfghybdf"
+    cage > lrs
+    [] > variableDeclaration_3
+      lrs.write > @
+        initializerSimple_3
+    [] > initializerSimple_3
+      literal_3 > @
+    [] > literal_3
+      class__String.constructor_2 > @
+        class__String.new
+        ""
+    prim__int.constructor_1 > n
+      prim__int.new
+    [] > variableDeclaration_4
+      n.write > @
+        initializerSimple_4
+    [] > initializerSimple_4
+      methodInvocation_5 > @
+    [] > methodInvocation_5
+      str.length > @
+        str
+    [] > statementExpression_2
+      for_loop_placeholder > @
+    [] > statementExpression_3
+      class__System.out.println > @
+        class__System.out
+        binary_1
+    [] > binary_1
+      literal_4.add > @
+        simpleReference_7
+    [] > literal_4
+      class__String.constructor_2 > @
+        class__String.new
+        "Longest repeating sequence: "
+    [] > simpleReference_7
+      lrs > @
+    [] > statementExpression_4
+      class__System.out.println > @
+        class__System.out
+        literal_5
+    [] > literal_5
+      class__String.constructor_2 > @
+        class__String.new
+        "passed"
+  # null :: null -> void
+  [this] > constructor
+    seq > @
+      initialization
+      statementExpression_5
+      this
+    [] > initialization
+      this.init > @
+        this
+    [] > statementExpression_5
+      this.super.constructor > @
+        this.super
+
+[args...] > main
+  class__LongestRepeatingSequence.main > @
+    *

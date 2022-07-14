@@ -1,0 +1,94 @@
+# 2022-07-13T17:59:03.021152500
+# j2eo team
++package ch_4_types_values_variables.sec_4_2_primitive_types_and_values.sec_4_2_2_integer_operations
++alias stdlib.lang.class__System
++alias stdlib.lang.class__Object
++alias stdlib.lang.class__String
++alias stdlib.primitives.prim__int
+
+[] > class__MethodAdditive
+  class__Object > super
+  super > @
+  [] > new
+    class__Object.new > super
+    super > @
+    "class__MethodAdditive" > className
+    [this] > init
+      seq > @
+        TRUE
+  # main :: String[] -> void
+  [args] > main
+    seq > @
+      statementExpression_1
+      statementExpression_2
+      statementExpression_3
+    [] > statementExpression_1
+      class__System.out.println > @
+        class__System.out
+        binary_1
+    [] > binary_1
+      methodInvocation_1.add > @
+        methodInvocation_2
+    [] > methodInvocation_1
+      this.method1 > @
+        this
+    [] > methodInvocation_2
+      this.method2 > @
+        this
+    [] > statementExpression_2
+      class__System.out.println > @
+        class__System.out
+        binary_2
+    [] > binary_2
+      methodInvocation_3.sub > @
+        methodInvocation_4
+    [] > methodInvocation_3
+      this.method2 > @
+        this
+    [] > methodInvocation_4
+      this.method1 > @
+        this
+    [] > statementExpression_3
+      class__System.out.println > @
+        class__System.out
+        literal_1
+    [] > literal_1
+      class__String.constructor_2 > @
+        class__String.new
+        "passed"
+  # method1 :: null -> int
+  [] > method1
+    seq > @
+      return_1
+    [] > return_1
+      literal_2 > @
+    [] > literal_2
+      prim__int.constructor_2 > @
+        prim__int.new
+        20
+  # method2 :: null -> int
+  [] > method2
+    seq > @
+      return_2
+    [] > return_2
+      literal_3 > @
+    [] > literal_3
+      prim__int.constructor_2 > @
+        prim__int.new
+        66
+  # null :: null -> void
+  [this] > constructor
+    seq > @
+      initialization
+      statementExpression_4
+      this
+    [] > initialization
+      this.init > @
+        this
+    [] > statementExpression_4
+      this.super.constructor > @
+        this.super
+
+[args...] > main
+  class__MethodAdditive.main > @
+    *

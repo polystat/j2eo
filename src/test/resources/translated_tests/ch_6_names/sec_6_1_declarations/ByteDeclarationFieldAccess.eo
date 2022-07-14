@@ -1,0 +1,71 @@
+# 2022-07-13T17:59:03.215938200
+# j2eo team
++package ch_6_names.sec_6_1_declarations
++alias stdlib.lang.class__System
++alias stdlib.lang.class__Object
++alias stdlib.primitives.prim__byte
++alias stdlib.primitives.prim__int
++alias stdlib.lang.class__String
+
+[] > class__ByteDeclarationFieldAccess
+  class__Object > super
+  super > @
+  [] > new
+    class__Object.new > super
+    super > @
+    "class__ByteDeclarationFieldAccess" > className
+    [this] > init
+      seq > @
+        variableDeclaration_1
+      [] > variableDeclaration_1
+        this.i.write > @
+          initializerSimple_1
+      [] > initializerSimple_1
+        cast_1 > @
+      [] > cast_1
+        prim__byte.from > @
+          literal_1
+      [] > literal_1
+        prim__int.constructor_2 > @
+          prim__int.new
+          127
+    prim__byte.constructor_1 > i
+      prim__byte.new
+  # main :: String[] -> void
+  [args] > main
+    seq > @
+      statementExpression_1
+      statementExpression_2
+    [] > statementExpression_1
+      class__System.out.println > @
+        class__System.out
+        fieldAccess_2
+    [] > fieldAccess_2
+      instanceCreation_1.i > @
+    [] > instanceCreation_1
+      class__ByteDeclarationFieldAccess.constructor > @
+        class__ByteDeclarationFieldAccess.new
+    [] > statementExpression_2
+      class__System.out.println > @
+        class__System.out
+        literal_2
+    [] > literal_2
+      class__String.constructor_2 > @
+        class__String.new
+        "passed"
+  # null :: null -> void
+  [this] > constructor
+    seq > @
+      initialization
+      statementExpression_3
+      this
+    [] > initialization
+      this.init > @
+        this
+    [] > statementExpression_3
+      this.super.constructor > @
+        this.super
+
+[args...] > main
+  class__ByteDeclarationFieldAccess.main > @
+    *

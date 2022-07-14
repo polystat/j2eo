@@ -1,0 +1,91 @@
+# 2022-07-13T17:59:03.325971500
+# j2eo team
++package ch_8_classes.sec_8_1_class_declarations.sec_8_1_2_generic_classes_and_type_params
++alias stdlib.lang.class__Object
++alias stdlib.lang.class__System
++alias stdlib.lang.class__String
+
+[] > class__SimpleGenericClass
+  class__Object > super
+  super > @
+  [] > new
+    class__Object.new > super
+    super > @
+    "class__SimpleGenericClass" > className
+    [this] > init
+      seq > @
+        TRUE
+  # main :: String[] -> void
+  [args] > main
+    seq > @
+      variableDeclaration_1
+      statementExpression_1
+    cage > g
+    [] > variableDeclaration_1
+      g.write > @
+        initializerSimple_1
+    [] > initializerSimple_1
+      instanceCreation_1 > @
+    [] > instanceCreation_1
+      class__Generic.constructor > @
+        class__Generic.new
+    [] > statementExpression_1
+      g.method > @
+        g
+        literal_1
+    [] > literal_1
+      class__String.constructor_2 > @
+        class__String.new
+        "passed"
+  # null :: null -> void
+  [this] > constructor
+    seq > @
+      initialization
+      statementExpression_2
+      this
+    [] > initialization
+      this.init > @
+        this
+    [] > statementExpression_2
+      this.super.constructor > @
+        this.super
+
+[] > class__Generic
+  class__Object > super
+  super > @
+  [] > new
+    class__Object.new > super
+    super > @
+    "class__Generic" > className
+    [this] > init
+      seq > @
+        TRUE
+    # method :: T -> void
+    [this arg] > method
+      seq > @
+        statementExpression_3
+      [] > statementExpression_3
+        class__System.out.println > @
+          class__System.out
+          cast_1
+      [] > cast_1
+        class__String.from > @
+          simpleReference_2
+      [] > simpleReference_2
+        arg > @
+  # null :: null -> void
+  [this] > constructor
+    seq > @
+      initialization
+      statementExpression_4
+      this
+    [] > initialization
+      this.init > @
+        this
+    [] > statementExpression_4
+      this.super.constructor > @
+        this.super
+
+[args...] > main
+  class__SimpleGenericClass.main > @
+    *

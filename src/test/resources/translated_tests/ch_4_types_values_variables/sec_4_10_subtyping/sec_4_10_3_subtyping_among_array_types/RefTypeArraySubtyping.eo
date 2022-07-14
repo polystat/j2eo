@@ -1,0 +1,116 @@
+# 2022-07-13T17:59:02.444585600
+# j2eo team
++package ch_4_types_values_variables.sec_4_10_subtyping.sec_4_10_3_subtyping_among_array_types
++alias stdlib.lang.class__Object
++alias stdlib.lang.class__System
++alias stdlib.lang.class__String
+
+[] > class__RefTypeArraySubtyping
+  class__Object > super
+  super > @
+  [] > new
+    class__Object.new > super
+    super > @
+    "class__RefTypeArraySubtyping" > className
+    [this] > init
+      seq > @
+        TRUE
+  # main :: String[] -> void
+  [args] > main
+    seq > @
+      variableDeclaration_1
+      variableDeclaration_2
+      statementExpression_1
+      statementExpression_2
+    cage > subs
+    [] > variableDeclaration_1
+      subs.write > @
+        initializerSimple_1
+    [] > initializerSimple_1
+      arrayCreation_1 > @
+    [] > arrayCreation_1
+      FALSE > @
+    cage > supers
+    [] > variableDeclaration_2
+      supers.write > @
+        initializerSimple_2
+    [] > initializerSimple_2
+      simpleReference_1 > @
+    [] > simpleReference_1
+      subs > @
+    [] > statementExpression_1
+      class__System.out.println > @
+        class__System.out
+        simpleReference_2
+    [] > simpleReference_2
+      supers > @
+    [] > statementExpression_2
+      class__System.out.println > @
+        class__System.out
+        literal_1
+    [] > literal_1
+      class__String.constructor_2 > @
+        class__String.new
+        "passed"
+  # null :: null -> void
+  [this] > constructor
+    seq > @
+      initialization
+      statementExpression_3
+      this
+    [] > initialization
+      this.init > @
+        this
+    [] > statementExpression_3
+      this.super.constructor > @
+        this.super
+
+[] > class__Super
+  class__Object > super
+  super > @
+  [] > new
+    class__Object.new > super
+    super > @
+    "class__Super" > className
+    [this] > init
+      seq > @
+        TRUE
+  # null :: null -> void
+  [this] > constructor
+    seq > @
+      initialization
+      statementExpression_4
+      this
+    [] > initialization
+      this.init > @
+        this
+    [] > statementExpression_4
+      this.super.constructor > @
+        this.super
+
+[] > class__Sub
+  class__Super > super
+  super > @
+  [] > new
+    class__Super.new > super
+    super > @
+    "class__Sub" > className
+    [this] > init
+      seq > @
+        TRUE
+  # null :: null -> void
+  [this] > constructor
+    seq > @
+      initialization
+      statementExpression_5
+      this
+    [] > initialization
+      this.init > @
+        this
+    [] > statementExpression_5
+      this.super.constructor > @
+        this.super
+
+[args...] > main
+  class__RefTypeArraySubtyping.main > @
+    *

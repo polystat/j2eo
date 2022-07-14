@@ -1,0 +1,201 @@
+# 2022-07-13T17:59:03.362937800
+# j2eo team
++package ch_8_classes.sec_8_1_class_declarations.sec_8_1_3_inner_classes_and_enclosing_instances
++alias stdlib.lang.class__System
++alias stdlib.lang.class__Object
++alias stdlib.lang.class__String
++alias stdlib.primitives.prim__int
+
+[] > class__SimpleInnerClass
+  class__Object > super
+  super > @
+  [] > new
+    class__Object.new > super
+    super > @
+    "class__SimpleInnerClass" > className
+    [this] > init
+      seq > @
+        TRUE
+  # main :: String[] -> void
+  [args] > main
+    seq > @
+      variableDeclaration_1
+      statementExpression_1
+      statementExpression_2
+    cage > o
+    [] > variableDeclaration_1
+      o.write > @
+        initializerSimple_1
+    [] > initializerSimple_1
+      instanceCreation_1 > @
+    [] > instanceCreation_1
+      class__Outer.constructor > @
+        class__Outer.new
+    [] > statementExpression_1
+      class__Outer.class__Inner.hello > @
+        class__Outer.class__Inner
+    [] > statementExpression_2
+      class__System.out.println > @
+        class__System.out
+        literal_1
+    [] > literal_1
+      class__String.constructor_2 > @
+        class__String.new
+        "passed"
+  # null :: null -> void
+  [this] > constructor
+    seq > @
+      initialization
+      statementExpression_3
+      this
+    [] > initialization
+      this.init > @
+        this
+    [] > statementExpression_3
+      this.super.constructor > @
+        this.super
+
+[] > class__HasStatic
+  class__Object > super
+  super > @
+  [] > new
+    class__Object.new > super
+    super > @
+    "class__HasStatic" > className
+    [this] > init
+      seq > @
+        TRUE
+  prim__int.constructor_1 > j
+    prim__int.new
+  # null :: null -> void
+  [this] > constructor
+    seq > @
+      initialization
+      statementExpression_4
+      this
+    [] > initialization
+      this.init > @
+        this
+    [] > statementExpression_4
+      this.super.constructor > @
+        this.super
+
+[] > class__Outer
+  class__Object > super
+  super > @
+  [] > new
+    class__Object.new > super
+    super > @
+    "class__Outer" > className
+    [this] > init
+      seq > @
+        TRUE
+  [] > class__Inner
+    class__HasStatic > super
+    super > @
+    [] > new
+      class__HasStatic.new > super
+      super > @
+      "class__Inner" > className
+      [this] > init
+        seq > @
+          TRUE
+    prim__int.constructor_1 > x
+      prim__int.new
+    prim__int.constructor_1 > y
+      prim__int.new
+    # hello :: null -> void
+    [] > hello
+      seq > @
+        statementExpression_5
+      [] > statementExpression_5
+        class__System.out.println > @
+          class__System.out
+          literal_2
+      [] > literal_2
+        class__String.constructor_2 > @
+          class__String.new
+          "Hello from Outer.Inner.hello"
+    [] > class__VeryNestedButNotInner
+      class__NestedButNotInner > super
+      super > @
+      [] > new
+        class__NestedButNotInner.new > super
+        super > @
+        "class__VeryNestedButNotInner" > className
+        [this] > init
+          seq > @
+            TRUE
+      # null :: null -> void
+      [this] > constructor
+        seq > @
+          initialization
+          statementExpression_6
+          this
+        [] > initialization
+          this.init > @
+            this
+        [] > statementExpression_6
+          this.super.constructor > @
+            this.super
+    # null :: null -> void
+    [this] > constructor
+      seq > @
+        initialization
+        statementExpression_7
+        this
+      [] > initialization
+        this.init > @
+          this
+      [] > statementExpression_7
+        this.super.constructor > @
+          this.super
+  [] > class__NestedButNotInner
+    class__Object > super
+    super > @
+    [] > new
+      class__Object.new > super
+      super > @
+      "class__NestedButNotInner" > className
+      [this] > init
+        seq > @
+          variableDeclaration_2
+        [] > variableDeclaration_2
+          this.z.write > @
+            initializerSimple_5
+        [] > initializerSimple_5
+          fieldAccess_4 > @
+        [] > fieldAccess_4
+          simpleReference_1.x > @
+        [] > simpleReference_1
+          class__Inner > @
+      prim__int.constructor_1 > z
+        prim__int.new
+    # null :: null -> void
+    [this] > constructor
+      seq > @
+        initialization
+        statementExpression_8
+        this
+      [] > initialization
+        this.init > @
+          this
+      [] > statementExpression_8
+        this.super.constructor > @
+          this.super
+  # null :: null -> void
+  [this] > constructor
+    seq > @
+      initialization
+      statementExpression_9
+      this
+    [] > initialization
+      this.init > @
+        this
+    [] > statementExpression_9
+      this.super.constructor > @
+        this.super
+
+[args...] > main
+  class__SimpleInnerClass.main > @
+    *

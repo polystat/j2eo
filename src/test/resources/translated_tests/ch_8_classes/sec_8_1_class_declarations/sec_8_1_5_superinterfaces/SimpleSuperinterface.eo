@@ -1,0 +1,85 @@
+# 2022-07-13T17:59:03.372937
+# j2eo team
++package ch_8_classes.sec_8_1_class_declarations.sec_8_1_5_superinterfaces
++alias stdlib.lang.class__Object
++alias stdlib.lang.class__System
++alias stdlib.lang.class__String
+
+[] > class__SimpleSuperinterface
+  class__Object > super
+  super > @
+  [] > new
+    class__Object.new > super
+    super > @
+    "class__SimpleSuperinterface" > className
+    [this] > init
+      seq > @
+        TRUE
+  # main :: String[] -> void
+  [args] > main
+    seq > @
+      variableDeclaration_1
+      statementExpression_1
+    cage > l
+    [] > variableDeclaration_1
+      l.write > @
+        initializerSimple_1
+    [] > initializerSimple_1
+      instanceCreation_1 > @
+    [] > instanceCreation_1
+      class__Lion.constructor > @
+        class__Lion.new
+    [] > statementExpression_1
+      l.say > @
+        l
+  # null :: null -> void
+  [this] > constructor
+    seq > @
+      initialization
+      statementExpression_2
+      this
+    [] > initialization
+      this.init > @
+        this
+    [] > statementExpression_2
+      this.super.constructor > @
+        this.super
+
+[] > class__Lion
+  class__Object > super
+  super > @
+  [] > new
+    class__Object.new > super
+    super > @
+    "class__Lion" > className
+    [this] > init
+      seq > @
+        TRUE
+    # say :: null -> void
+    [this] > say
+      seq > @
+        statementExpression_3
+      [] > statementExpression_3
+        class__System.out.println > @
+          class__System.out
+          literal_1
+      [] > literal_1
+        class__String.constructor_2 > @
+          class__String.new
+          "passed"
+  # null :: null -> void
+  [this] > constructor
+    seq > @
+      initialization
+      statementExpression_4
+      this
+    [] > initialization
+      this.init > @
+        this
+    [] > statementExpression_4
+      this.super.constructor > @
+        this.super
+
+[args...] > main
+  class__SimpleSuperinterface.main > @
+    *
