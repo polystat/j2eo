@@ -231,10 +231,9 @@ private fun preprocessClassDecl(state: PreprocessorState, clsDec: ClassDeclarati
     }
 
     clsDec.name = state.classNames[clsDec.name] ?: clsDec.name
+    tryToAddConstructor(clsDec)
     clsDec.body?.declarations
         ?.map { decl: Declaration -> preprocessDecl(state, decl) }
-
-    tryToAddConstructor(clsDec)
 }
 
 private fun tryToAddConstructor(clsDec: NormalClassDeclaration) {

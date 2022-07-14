@@ -64,8 +64,8 @@ private fun getFullIdentifier(
 
 fun trueMethodInvocationName(name: String): List<String> {
     return when (name) {
-        "this" -> listOf("this", "constructor") /* FIXME (IT'S NOT ALWAYS TRUE) */
-        "super" -> listOf("this", "super", "constructor") /* FIXME (IT'S NOT ALWAYS TRUE) */
+        "this" -> listOf("constructor") /* FIXME (IT'S NOT ALWAYS TRUE) */
+        "super" -> listOf("super", "constructor") /* FIXME (IT'S NOT ALWAYS TRUE) */
         else -> listOf(name)
     }
 }
