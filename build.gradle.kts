@@ -2,7 +2,6 @@ import org.apache.tools.ant.taskdefs.condition.Os
 import org.gradle.jvm.tasks.Jar
 import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 import org.jlleitschuh.gradle.ktlint.reporter.ReporterType
-import java.security.MessageDigest
 
 plugins {
     java
@@ -43,9 +42,6 @@ val javaLexerG4FilePath = "grammar/JavaLexer.g4"
 
 // Where to put generated parser
 val javaParserSavePath = "src/main/kotlin/org/polystat/j2eo/antlrParser"
-
-// MD5 of the latest generated grammar file is stored here
-val latestGrammarMD5FilePath = "out/latestGrammarMD5"
 
 repositories {
     mavenCentral()
@@ -109,7 +105,13 @@ tasks {
         dependsOn(generateGrammarSource)
     }
     compileTestKotlin {
+        dependsOn(generateTestGrammarSource)
+    }
+    runKtlintFormatOverMainSourceSet {
         dependsOn(generateGrammarSource)
+    }
+    runKtlintFormatOverTestSourceSet {
+        dependsOn(generateTestGrammarSource)
     }
     classes {
         dependsOn(ktlintFormat)
@@ -193,12 +195,8 @@ ktlint {
 // }
 
 tasks.getByName("build") {
-    // createOutDirs()
-
     println("Building parser with ANTLR...")
     runAntlr()
-
-    // writeMD5ToFile(grammarFileMD5(), latestGrammarMD5FilePath)
 }
 
 checkstyle {
@@ -339,19 +337,6 @@ tasks.getByName("signMavenJavaPublication") {
 }
 
 /**
- * Creates directories for all ANTLR output files.
- */
-fun createOutDirs() {
-    // Create out directory if it doesn't exist, so latest grammar hashsum may be placed inside
-    val outPath = latestGrammarMD5FilePath.substring(0, latestGrammarMD5FilePath.lastIndexOf("/"))
-    file(outPath).mkdirs()
-
-    // Create parser directory if it doesn't exist, so parser may be placed inside
-//    val parserPath = javaParserFilePath.substring(0, javaParserFilePath.lastIndexOf("/"))
-//    file(parserPath).mkdirs()
-}
-
-/**
  * Runs ANTLR using OS-specific shell command.
  */
 fun runAntlr() {
@@ -393,40 +378,3 @@ fun runAntlr() {
         println("Couldn't run ANTLR; $e")
     }
 }
-
-/**
- * Returns MD5 string for a given file.
- */
-fun generateMD5(filepath: String): String {
-    val digest: MessageDigest = MessageDigest.getInstance("MD5")
-
-    println("Working Directory = " + System.getProperty("user.dir"))
-
-    File(filepath).inputStream().use { inputStream ->
-        val buffer = ByteArray(8192)
-        var read = 0
-        do {
-            digest.update(buffer, 0, read)
-            read = inputStream.read(buffer)
-        } while (read > 0)
-    }
-
-    val md5sum: ByteArray = digest.digest()
-    val bigInt = BigInteger(1, md5sum)
-
-    return bigInt.toString(16).padStart(32, '0')
-}
-
-fun grammarFileMD5(): String =
-    generateMD5(javaLexerG4FilePath)
-
-fun readMD5FromFile(filepath: String): String =
-    File(filepath).let { f ->
-        if (f.exists())
-            File(filepath).readText()
-        else
-            ""
-    }
-
-fun writeMD5ToFile(md5: String, filepath: String) =
-    File(filepath).writeText(md5)

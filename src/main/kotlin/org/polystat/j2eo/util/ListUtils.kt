@@ -1,6 +1,6 @@
 package org.polystat.j2eo.util
 
-import java.util.*
+import java.util.Optional
 import java.util.stream.Collectors
 import java.util.stream.Stream
 

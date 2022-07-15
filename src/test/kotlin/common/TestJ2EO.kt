@@ -14,8 +14,8 @@ import org.junit.jupiter.api.TestMethodOrder
 import org.junit.jupiter.api.assertTimeoutPreemptively
 import org.junit.jupiter.api.parallel.Execution
 import org.junit.jupiter.api.parallel.ExecutionMode
-import org.polystat.j2eo.parser.JavaLexer
-import org.polystat.j2eo.parser.JavaParser
+import org.polystat.j2eo.antlrParser.JavaLexer
+import org.polystat.j2eo.antlrParser.JavaParser
 import org.polystat.j2eo.parser.Visitor
 import org.polystat.j2eo.translator.Context
 import org.polystat.j2eo.translator.Translator
