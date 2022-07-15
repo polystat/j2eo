@@ -42,7 +42,7 @@ val javaParserG4FilePath = "grammar/JavaParser.g4"
 val javaLexerG4FilePath = "grammar/JavaLexer.g4"
 
 // Where to put generated parser
-val javaParserSavePath = "src/main/java/org/polystat/j2eo/parser"
+val javaParserSavePath = "src/main/kotlin/org/polystat/j2eo/antlrParser"
 
 // MD5 of the latest generated grammar file is stored here
 val latestGrammarMD5FilePath = "out/latestGrammarMD5"
@@ -105,6 +105,12 @@ val fatJar = task("fatJar", type = Jar::class) {
 }
 
 tasks {
+    compileKotlin {
+        dependsOn(generateGrammarSource)
+    }
+    compileTestKotlin {
+        dependsOn(generateGrammarSource)
+    }
     classes {
         dependsOn(ktlintFormat)
     }

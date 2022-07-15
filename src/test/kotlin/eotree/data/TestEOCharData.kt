@@ -1,26 +1,22 @@
-package eotree.data;
+package eotree.data
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-
-import org.junit.jupiter.api.Test;
-import org.polystat.j2eo.eotree.data.EOCharData;
+import org.junit.jupiter.api.Assertions
+import org.junit.jupiter.api.Test
+import org.polystat.j2eo.eotree.data.EOCharData
 
 /**
  * EO char data tests.
  */
-public class TestEOCharData {
-
+class TestEOCharData {
     @Test
-    public void testGenerateEOZeroIndent() {
-        var c = new EOCharData('a');
-
-        assertEquals(c.generateEO(0), "'a'");
+    fun testGenerateEOZeroIndent() {
+        val c = EOCharData('a')
+        Assertions.assertEquals(c.generateEO(0), "'a'")
     }
 
     @Test
-    public void testGenerateEONonZeroIndent() {
-        var c = new EOCharData('a');
-
-        assertEquals(c.generateEO(1), "'a'");
+    fun testGenerateEONonZeroIndent() {
+        val c = EOCharData('a')
+        Assertions.assertEquals(c.generateEO(1), "'a'")
     }
 }

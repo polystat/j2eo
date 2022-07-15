@@ -1,58 +1,73 @@
-package eotree;
+package eotree
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-
-import java.util.Arrays;
-import java.util.stream.Collectors;
-import org.junit.jupiter.api.Test;
-import org.polystat.j2eo.eotree.EOComment;
-import org.polystat.j2eo.eotree.EOLicense;
+import org.junit.jupiter.api.Assertions
+import org.junit.jupiter.api.Test
+import org.polystat.j2eo.eotree.EOComment
+import org.polystat.j2eo.eotree.EOLicense
+import java.util.Arrays
+import java.util.stream.Collectors
 
 /**
  * EO license tests.
  */
-public class TestEOLicense {
+class TestEOLicense {
     @Test
-    public void testGenerateEOZeroIndent() {
-        var license = new EOLicense(
-                new EOComment("test comment 1"),
-                new EOComment("test comment 2")
-        );
-        assertEquals(license.generateEO(0),
-                "# test comment 1\n"
-                        + "# test comment 2");
-
-
-        license = new EOLicense(
-                Arrays.stream(new EOComment[]{
-                        new EOComment("test comment 3"),
-                        new EOComment("test comment 4")
-                }).collect(Collectors.toList())
-        );
-        assertEquals(license.generateEO(0),
-                "# test comment 3\n"
-                        + "# test comment 4");
+    fun testGenerateEOZeroIndent() {
+        var license = EOLicense(
+            EOComment("test comment 1"),
+            EOComment("test comment 2")
+        )
+        Assertions.assertEquals(
+            license.generateEO(0),
+            """
+     # test comment 1
+     # test comment 2
+            """.trimIndent()
+        )
+        license = EOLicense(
+            Arrays.stream(
+                arrayOf(
+                    EOComment("test comment 3"),
+                    EOComment("test comment 4")
+                )
+            ).collect(Collectors.toList())
+        )
+        Assertions.assertEquals(
+            license.generateEO(0),
+            """
+     # test comment 3
+     # test comment 4
+            """.trimIndent()
+        )
     }
 
     @Test
-    public void testGenerateEONonZeroIndent() {
-        var license = new EOLicense(
-                new EOComment("test comment 5"),
-                new EOComment("test comment 6")
-        );
-        assertEquals(license.generateEO(1),
-                "# test comment 5\n"
-                        + "# test comment 6");
-
-
-        license = new EOLicense(
-                Arrays.stream(new EOComment[]{
-                        new EOComment("test comment 7"),
-                        new EOComment("test comment 8")
-                }).collect(Collectors.toList())
-        );
-        assertEquals(license.generateEO(1),
-                "# test comment 7\n"
-                        + "# test comment 8");
+    fun testGenerateEONonZeroIndent() {
+        var license = EOLicense(
+            EOComment("test comment 5"),
+            EOComment("test comment 6")
+        )
+        Assertions.assertEquals(
+            license.generateEO(1),
+            """
+     # test comment 5
+     # test comment 6
+            """.trimIndent()
+        )
+        license = EOLicense(
+            Arrays.stream(
+                arrayOf(
+                    EOComment("test comment 7"),
+                    EOComment("test comment 8")
+                )
+            ).collect(Collectors.toList())
+        )
+        Assertions.assertEquals(
+            license.generateEO(1),
+            """
+     # test comment 7
+     # test comment 8
+            """.trimIndent()
+        )
     }
 }

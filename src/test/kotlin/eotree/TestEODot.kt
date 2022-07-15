@@ -1,8 +1,6 @@
-package eotree;
+package eotree
 
 /**
  * EO dot-notation tests.
  */
-public class TestEODot {
-
-}
+class TestEODot 

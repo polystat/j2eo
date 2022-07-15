@@ -1,33 +1,31 @@
-package eotree.data;
+package eotree.data
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-
-import org.junit.jupiter.api.Test;
-import org.polystat.j2eo.eotree.data.EOByte;
+import org.junit.jupiter.api.Assertions
+import org.junit.jupiter.api.Test
+import org.polystat.j2eo.eotree.data.EOByte
 
 /**
  * EO byte tests.
  */
-public class TestEOByte {
-
+class TestEOByte {
     @Test
-    public void testGenerateEOZeroIndent() {
+    fun testGenerateEOZeroIndent() {
         // Single-digit byte
-        var b = new EOByte((byte) 1);
-        assertEquals(b.generateEO(0), "01");
+        var b = EOByte(1.toByte())
+        Assertions.assertEquals(b.generateEO(0), "01")
 
         // Double-digit byte
-        b = new EOByte((byte) 255);
-        assertEquals(b.generateEO(0), "FF");
+        b = EOByte(255.toByte())
+        Assertions.assertEquals(b.generateEO(0), "FF")
     }
 
     @Test
-    public void testGenerateEONonZeroIndent() {
-        var b = new EOByte((byte) 1);
-        assertEquals(b.generateEO(1), "01");
+    fun testGenerateEONonZeroIndent() {
+        var b = EOByte(1.toByte())
+        Assertions.assertEquals(b.generateEO(1), "01")
 
         // Double-digit byte
-        b = new EOByte((byte) 255);
-        assertEquals(b.generateEO(1), "FF");
+        b = EOByte(255.toByte())
+        Assertions.assertEquals(b.generateEO(1), "FF")
     }
 }

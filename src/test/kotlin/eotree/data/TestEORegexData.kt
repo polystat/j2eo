@@ -1,28 +1,26 @@
-package eotree.data;
+package eotree.data
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-
-import org.junit.jupiter.api.Test;
-import org.polystat.j2eo.eotree.data.EORegexData;
+import org.junit.jupiter.api.Assertions
+import org.junit.jupiter.api.Test
+import org.polystat.j2eo.eotree.data.EORegexData
 
 /**
  * EO regex data tests.
  */
-public class TestEORegexData {
-
-    private static final String regexSample = "/[a-z]+.+/m";
-
+class TestEORegexData {
     @Test
-    public void testGenerateEOZeroIndent() {
-        var f = new EORegexData(regexSample);
-
-        assertEquals(f.generateEO(0), regexSample);
+    fun testGenerateEOZeroIndent() {
+        val f = EORegexData(regexSample)
+        Assertions.assertEquals(f.generateEO(0), regexSample)
     }
 
     @Test
-    public void testGenerateEONonZeroIndent() {
-        var f = new EORegexData(regexSample);
+    fun testGenerateEONonZeroIndent() {
+        val f = EORegexData(regexSample)
+        Assertions.assertEquals(f.generateEO(1), regexSample)
+    }
 
-        assertEquals(f.generateEO(1), regexSample);
+    companion object {
+        private const val regexSample = "/[a-z]+.+/m"
     }
 }

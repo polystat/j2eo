@@ -1,24 +1,22 @@
-package eotree;
+package eotree
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-
-import org.junit.jupiter.api.Test;
-import org.polystat.j2eo.eotree.EOComment;
+import org.junit.jupiter.api.Assertions
+import org.junit.jupiter.api.Test
+import org.polystat.j2eo.eotree.EOComment
 
 /**
  * EO comments tests.
  */
-public class TestEOComment {
-
+class TestEOComment {
     @Test
-    public void testGenerateEOZeroIndent() {
-        var comment = new EOComment("test comment");
-        assertEquals(comment.generateEO(0), "# test comment");
+    fun testGenerateEOZeroIndent() {
+        val comment = EOComment("test comment")
+        Assertions.assertEquals(comment.generateEO(0), "# test comment")
     }
 
     @Test
-    public void testGenerateEONonZeroIndent() {
-        var comment = new EOComment("test comment");
-        assertEquals(comment.generateEO(2), "# test comment");
+    fun testGenerateEONonZeroIndent() {
+        val comment = EOComment("test comment")
+        Assertions.assertEquals(comment.generateEO(2), "# test comment")
     }
 }

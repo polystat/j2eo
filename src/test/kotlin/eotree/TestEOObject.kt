@@ -1,75 +1,74 @@
-package eotree;
+package eotree
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.polystat.j2eo.util.ListUtils.listOf;
-
-import arrow.core.Some;
-import org.junit.jupiter.api.Test;
-import org.polystat.j2eo.eotree.EOBndExpr;
-import org.polystat.j2eo.eotree.EODot;
-import org.polystat.j2eo.eotree.EOObject;
+import arrow.core.Some
+import org.junit.jupiter.api.Assertions
+import org.junit.jupiter.api.Test
+import org.polystat.j2eo.eotree.EOBndExpr
+import org.polystat.j2eo.eotree.EODot
+import org.polystat.j2eo.eotree.EOObject
+import org.polystat.j2eo.util.ListUtils.listOf
 
 /**
  * EO object tests.
  */
-public class TestEOObject {
-
-    private static final String memAtom = "memory";
-
+class TestEOObject {
     @Test
-    public void testGenerateEOZeroIndent() {
-        var object = new EOObject(
-                listOf(
-                        "free1",
-                        "free2"
+    fun testGenerateEOZeroIndent() {
+        val eoObject = EOObject(
+            listOf(
+                "free1",
+                "free2"
+            ),
+            Some("vararg"),
+            listOf(
+                EOBndExpr(
+                    EODot(memAtom),
+                    "bnd1"
                 ),
-                new Some<>("vararg"),
-                listOf(
-                        new EOBndExpr(
-                                new EODot(memAtom),
-                                "bnd1"
-                        ),
-                        new EOBndExpr(
-                                new EODot(memAtom),
-                                "bnd2"
-                        )
-                ),
-                "comment"
-        );
-        assertEquals(
-                """
+                EOBndExpr(
+                    EODot(memAtom),
+                    "bnd2"
+                )
+            ),
+            "comment"
+        )
+        Assertions.assertEquals(
+            """
                         # comment
                         [free1 free2 vararg...]
                           memory > bnd1
                           memory > bnd2""",
-                object.generateEO(0)
-        );
+            eoObject.generateEO(0)
+        )
     }
 
     @Test
-    public void testGenerateEONonZeroIndent() {
-        var object = new EOObject(
-                listOf("free1", "free2"),
-                new Some<>("vararg"),
-                listOf(
-                        new EOBndExpr(
-                                new EODot(memAtom),
-                                "bnd1"
-                        ),
-                        new EOBndExpr(
-                                new EODot(memAtom),
-                                "bnd2"
-                        )
+    fun testGenerateEONonZeroIndent() {
+        val eoObject = EOObject(
+            listOf("free1", "free2"),
+            Some("vararg"),
+            listOf(
+                EOBndExpr(
+                    EODot(memAtom),
+                    "bnd1"
                 ),
-                "comment"
-        );
-        //noinspection TextBlockMigration
-        assertEquals(
-                "  # comment\n"
-                + "  [free1 free2 vararg...]\n"
-                + "    memory > bnd1\n"
-                + "    memory > bnd2",
-                object.generateEO(1)
-        );
+                EOBndExpr(
+                    EODot(memAtom),
+                    "bnd2"
+                )
+            ),
+            "comment"
+        )
+        Assertions.assertEquals(
+            """  # comment
+  [free1 free2 vararg...]
+    memory > bnd1
+    memory > bnd2""",
+            eoObject.generateEO(1)
+        )
+    }
+
+    companion object {
+        private const val memAtom = "memory"
     }
 }

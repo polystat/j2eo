@@ -1,24 +1,22 @@
-package eotree;
+package eotree
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-
-import org.junit.jupiter.api.Test;
-import org.polystat.j2eo.eotree.EOMeta;
+import org.junit.jupiter.api.Assertions
+import org.junit.jupiter.api.Test
+import org.polystat.j2eo.eotree.EOMeta
 
 /**
  * EO meta tests.
  */
-public class TestEOMeta {
-
+class TestEOMeta {
     @Test
-    public void testGenerateEOZeroIndent() {
-        var f = new EOMeta("key", "value");
-        assertEquals("+key value", f.generateEO(0));
+    fun testGenerateEOZeroIndent() {
+        val f = EOMeta("key", "value")
+        Assertions.assertEquals("+key value", f.generateEO(0))
     }
 
     @Test
-    public void testGenerateEONonZeroIndent() {
-        var f = new EOMeta("key", "value");
-        assertEquals("+key value", f.generateEO(1));
+    fun testGenerateEONonZeroIndent() {
+        val f = EOMeta("key", "value")
+        Assertions.assertEquals("+key value", f.generateEO(1))
     }
 }
