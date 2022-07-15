@@ -32,7 +32,7 @@
 parser grammar JavaParser;
 
 @header {
-package parser;
+package org.polystat.j2eo.parser;
 }
 
 options { tokenVocab=JavaLexer; }
