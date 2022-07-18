@@ -1,4 +1,4 @@
-package org.polystat.j2eo.parser
+package org.polystat.j2eo.treeMapper
 
 import org.polystat.j2eo.antlrParser.JavaParser
 import org.polystat.j2eo.antlrParser.JavaParser.CompilationUnitContext

@@ -1,4 +1,4 @@
-package org.polystat.j2eo.parser
+package org.polystat.j2eo.treeMapper
 
 /* ktlint-disable no-wildcard-imports */
 import lexer.Token

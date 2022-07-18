@@ -9,9 +9,9 @@ import org.polystat.j2eo.antlrParser.JavaParser
 import org.polystat.j2eo.eotree.EOLicense
 import org.polystat.j2eo.eotree.EOMetas
 import org.polystat.j2eo.eotree.EOProgram
-import org.polystat.j2eo.parser.Visitor
 import org.polystat.j2eo.translator.Context
 import org.polystat.j2eo.translator.Translator
+import org.polystat.j2eo.treeMapper.Visitor
 import org.polystat.j2eo.util.logger
 import tree.Compilation.CompilationUnit
 import tree.Compilation.SimpleCompilationUnit

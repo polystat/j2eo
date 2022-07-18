@@ -16,9 +16,9 @@ import org.junit.jupiter.api.parallel.Execution
 import org.junit.jupiter.api.parallel.ExecutionMode
 import org.polystat.j2eo.antlrParser.JavaLexer
 import org.polystat.j2eo.antlrParser.JavaParser
-import org.polystat.j2eo.parser.Visitor
 import org.polystat.j2eo.translator.Context
 import org.polystat.j2eo.translator.Translator
+import org.polystat.j2eo.treeMapper.Visitor
 import org.polystat.j2eo.util.logger
 import tree.Compilation.CompilationUnit
 import java.io.BufferedReader
