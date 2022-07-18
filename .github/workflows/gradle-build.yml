@@ -88,11 +88,15 @@ jobs:
           pwd
           rm -r ./bison-3.8
 
-      - name: Upload JaCoCo coverage report
-        uses: actions/upload-artifact@v2
+      - name: Upload coverage to Codecov
+        uses: codecov/codecov-action@v3
         with:
-          name: jacoco-report
-          path: target/site/jacoco/
+          directory: ./build/reports/jacoco/test/
+          fail_ci_if_error: false
+          flags: unittests
+          name: codecov-umbrella
+          path_to_write_report: ./build/reports/codecov_report.txt
+          verbose: true
 
       - name: Print J2EO test report
         run: |
