@@ -21,7 +21,7 @@ jobs:
 
       - uses: actions/setup-java@v1
         with:
-          java-version: 16
+          java-version: 11
 
       - uses: gradle/gradle-build-action@v1
         with:
@@ -46,16 +46,10 @@ jobs:
 
       - uses: actions/setup-java@v1
         with:
-          java-version: 16
+          java-version: 1
 
       - run: |
-          wget http://ftp.gnu.org/gnu/bison/bison-3.8.tar.gz
-          tar -zxvf bison-3.8.tar.gz
-          cd bison-3.8
-          ./configure
-          make
-          sudo make install
-          bison -V
+          wget https://www.antlr.org/download/antlr-4.10.1-complete.jar
 
       - uses: gradle/gradle-build-action@v1
         with:
@@ -72,11 +66,6 @@ jobs:
         run: |
           echo "coverage = ${{ steps.jacoco.outputs.coverage }}"
           echo "branch coverage = ${{ steps.jacoco.outputs.branches }}"
-
-      - name: Clean Bison directory
-        run: |
-          pwd
-          rm -r ./bison-3.8
 
       - name: Upload JaCoCo coverage report
         uses: actions/upload-artifact@v2
