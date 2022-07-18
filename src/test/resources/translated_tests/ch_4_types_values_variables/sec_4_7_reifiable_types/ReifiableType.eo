@@ -1,4 +1,4 @@
-# 2022-07-14T15:59:35.191395500
+# 2022-07-18T16:12:08.125211420
 # j2eo team
 +alias stdlib.lang.class__Object
 +alias stdlib.lang.class__System
@@ -13,6 +13,7 @@
     class__Object.new > super
     super > @
     "class__ReifableType" > className
+    1 > address
     [this] > init
       seq > @
         TRUE
@@ -102,6 +103,7 @@
     class__Object.new > super
     super > @
     "class__Pair" > className
+    1 > address
     [this] > init
       seq > @
         TRUE
@@ -143,8 +145,8 @@
       fieldAccess_2.write > @
         simpleReference_3
     [] > fieldAccess_2
-      this_3.valT > @
-    [] > this_3
+      this_4.valT > @
+    [] > this_4
       this > @
     [] > simpleReference_3
       valT > @
@@ -152,8 +154,8 @@
       fieldAccess_3.write > @
         simpleReference_4
     [] > fieldAccess_3
-      this_4.valK > @
-    [] > this_4
+      this_5.valK > @
+    [] > this_5
       this > @
     [] > simpleReference_4
       valK > @

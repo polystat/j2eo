@@ -1,4 +1,4 @@
-# 2022-07-14T16:01:40.791963300
+# 2022-07-18T16:08:36.938311794
 # j2eo team
 +alias stdlib.lang.class__Object
 +alias stdlib.lang.class__System
@@ -11,6 +11,7 @@
     class__Object.new > super
     super > @
     "class__ComplexWideningRef" > className
+    1 > address
     [this] > init
       seq > @
         TRUE
@@ -72,6 +73,7 @@
     class__Object.new > super
     super > @
     "class__Base" > className
+    1 > address
     [this] > init
       seq > @
         TRUE
@@ -107,6 +109,7 @@
     class__Base.new > super
     super > @
     "class__Sub" > className
+    1 > address
     [this] > init
       seq > @
         TRUE
@@ -142,6 +145,7 @@
     class__Sub.new > super
     super > @
     "class__SubSub" > className
+    1 > address
     [this] > init
       seq > @
         TRUE

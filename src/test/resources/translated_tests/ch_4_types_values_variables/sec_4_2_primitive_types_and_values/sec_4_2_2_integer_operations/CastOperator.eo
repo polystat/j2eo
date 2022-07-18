@@ -1,4 +1,4 @@
-# 2022-07-14T15:51:14.830678500
+# 2022-07-18T16:10:48.121133187
 # j2eo team
 +alias stdlib.primitives.prim__float
 +alias stdlib.lang.class__System
@@ -13,6 +13,7 @@
     class__Object.new > super
     super > @
     "class__CastOperator" > className
+    1 > address
     [this] > init
       seq > @
         TRUE

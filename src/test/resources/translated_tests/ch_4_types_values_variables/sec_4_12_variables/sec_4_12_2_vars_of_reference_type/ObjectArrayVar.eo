@@ -1,4 +1,4 @@
-# 2022-07-14T16:08:16.320835300
+# 2022-07-18T16:12:39.171654639
 # j2eo team
 +alias stdlib.lang.class__Object
 +alias stdlib.lang.class__System
@@ -11,6 +11,7 @@
     class__Object.new > super
     super > @
     "class__A" > className
+    1 > address
     [this] > init
       seq > @
         TRUE
@@ -34,6 +35,7 @@
     class__Object.new > super
     super > @
     "class__B" > className
+    1 > address
     [this] > init
       seq > @
         TRUE
@@ -57,6 +59,7 @@
     class__Object.new > super
     super > @
     "class__ObjectArrayVar" > className
+    1 > address
     [this] > init
       seq > @
         TRUE

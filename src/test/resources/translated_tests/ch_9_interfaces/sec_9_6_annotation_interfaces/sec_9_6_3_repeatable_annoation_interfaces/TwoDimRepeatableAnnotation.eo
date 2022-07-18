@@ -1,4 +1,4 @@
-# 2022-07-14T15:50:39.241367300
+# 2022-07-18T16:13:00.368510467
 # j2eo team
 +alias stdlib.lang.class__Object
 +alias stdlib.lang.class__System
@@ -12,6 +12,7 @@
     class__Object.new > super
     super > @
     "class__TwoDimRepeatableAnnotation" > className
+    1 > address
     [this] > init
       seq > @
         TRUE

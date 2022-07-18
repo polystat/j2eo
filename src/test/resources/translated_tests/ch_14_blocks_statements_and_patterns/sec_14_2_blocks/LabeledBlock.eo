@@ -1,4 +1,4 @@
-# 2022-07-14T15:56:27.891730800
+# 2022-07-18T16:09:52.917806985
 # j2eo team
 +alias stdlib.lang.class__Object
 
@@ -9,6 +9,7 @@
     class__Object.new > super
     super > @
     "class__SimpleBlock" > className
+    1 > address
     [this] > init
       seq > @
         TRUE

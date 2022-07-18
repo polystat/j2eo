@@ -1,4 +1,4 @@
-# 2022-07-14T15:55:38.778568100
+# 2022-07-18T16:13:39.050596729
 # j2eo team
 +alias stdlib.primitives.prim__float
 +alias stdlib.lang.class__System
@@ -12,6 +12,7 @@
     class__Object.new > super
     super > @
     "class__DoubleVar" > className
+    1 > address
     [this] > init
       seq > @
         TRUE

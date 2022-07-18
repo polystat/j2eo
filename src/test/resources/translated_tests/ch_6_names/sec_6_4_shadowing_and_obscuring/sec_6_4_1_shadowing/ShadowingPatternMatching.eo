@@ -1,4 +1,4 @@
-# 2022-07-14T15:56:48.919505900
+# 2022-07-18T16:13:34.134255384
 # j2eo team
 +alias stdlib.lang.class__System
 +alias stdlib.lang.class__Object
@@ -12,6 +12,7 @@
     class__Object.new > super
     super > @
     "class__ShadowingPatternMatching" > className
+    1 > address
     [this] > init
       seq > @
         TRUE
@@ -267,6 +268,7 @@
     class__Object.new > super
     super > @
     "class__Point" > className
+    1 > address
     [this] > init
       seq > @
         TRUE
@@ -288,8 +290,8 @@
       fieldAccess_11.write > @
         simpleReference_10
     [] > fieldAccess_11
-      this_2.x > @
-    [] > this_2
+      this_3.x > @
+    [] > this_3
       this > @
     [] > simpleReference_10
       x > @
@@ -297,8 +299,8 @@
       fieldAccess_12.write > @
         simpleReference_11
     [] > fieldAccess_12
-      this_3.y > @
-    [] > this_3
+      this_4.y > @
+    [] > this_4
       this > @
     [] > simpleReference_11
       y > @

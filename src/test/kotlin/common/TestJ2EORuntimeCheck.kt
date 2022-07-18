@@ -37,7 +37,7 @@ import kotlin.io.path.relativeTo
 
 @Execution(ExecutionMode.SAME_THREAD)
 @TestMethodOrder(MethodOrderer.OrderAnnotation::class)
-class TestJ2EO {
+class TestJ2EORuntimeCheck {
 
     @TestFactory
     @Order(1)

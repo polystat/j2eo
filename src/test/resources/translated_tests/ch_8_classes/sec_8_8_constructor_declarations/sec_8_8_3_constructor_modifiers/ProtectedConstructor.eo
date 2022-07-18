@@ -1,4 +1,4 @@
-# 2022-07-14T15:56:33.498566300
+# 2022-07-18T16:12:24.676189826
 # j2eo team
 +alias stdlib.lang.class__System
 +alias stdlib.lang.class__Object
@@ -12,6 +12,7 @@
     class__Object.new > super
     super > @
     "class__ProtectedConstructor" > className
+    1 > address
     [this] > init
       seq > @
         TRUE
@@ -51,6 +52,7 @@
     class__Object.new > super
     super > @
     "class__Some" > className
+    1 > address
     [this] > init
       seq > @
         TRUE
@@ -70,6 +72,7 @@
     class__Some.new > super
     super > @
     "class__SubSome" > className
+    1 > address
     [this] > init
       seq > @
         TRUE
@@ -83,8 +86,8 @@
       this.init > @
         this
     [] > statementExpression_4
-      this.this.super.constructor > @
-        this.this.super
+      this.super.constructor > @
+        this.super
         literal_2
     [] > literal_2
       prim__int.constructor_2 > @

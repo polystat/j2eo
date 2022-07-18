@@ -1,4 +1,4 @@
-# 2022-07-14T16:05:25.380018200
+# 2022-07-18T16:08:48.267093247
 # j2eo team
 +alias stdlib.lang.class__System
 +alias stdlib.lang.class__Object
@@ -13,6 +13,7 @@
     class__Object.new > super
     super > @
     "class__TwoArraySum" > className
+    1 > address
     [this] > init
       seq > @
         TRUE

@@ -1,4 +1,4 @@
-# 2022-07-14T15:59:53.116490700
+# 2022-07-18T16:11:53.065938776
 # j2eo team
 +alias stdlib.lang.class__System
 +alias stdlib.lang.class__Object
@@ -12,6 +12,7 @@
     class__Object.new > super
     super > @
     "class__StandaloneIfElseIfElse" > className
+    1 > address
     [this] > init
       seq > @
         TRUE

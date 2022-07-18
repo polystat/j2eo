@@ -1,4 +1,4 @@
-# 2022-07-14T16:00:46.428772100
+# 2022-07-18T16:11:54.612567069
 # j2eo team
 +alias stdlib.primitives.prim__char
 +alias stdlib.lang.class__System
@@ -12,6 +12,7 @@
     class__Object.new > super
     super > @
     "class__SimpleCharArray" > className
+    1 > address
     [this] > init
       seq > @
         TRUE

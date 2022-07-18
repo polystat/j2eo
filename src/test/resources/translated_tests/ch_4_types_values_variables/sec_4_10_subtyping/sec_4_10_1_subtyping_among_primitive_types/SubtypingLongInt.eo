@@ -1,4 +1,4 @@
-# 2022-07-14T15:58:08.873465800
+# 2022-07-18T16:08:29.603989990
 # j2eo team
 +alias stdlib.lang.class__System
 +alias stdlib.lang.class__Object
@@ -13,6 +13,7 @@
     class__Object.new > super
     super > @
     "class__SubtypingLongInt" > className
+    1 > address
     [this] > init
       seq > @
         TRUE

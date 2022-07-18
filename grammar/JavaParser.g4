@@ -479,7 +479,7 @@ identifier
 
 localTypeDeclaration
     : classOrInterfaceModifier*
-      (classDeclaration | interfaceDeclaration | recordDeclaration)
+      (classDeclaration | enumDeclaration | interfaceDeclaration | recordDeclaration)
     | ';'
     ;
 

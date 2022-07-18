@@ -1,4 +1,4 @@
-# 2022-07-14T15:52:35.348888200
+# 2022-07-18T16:09:48.418911238
 # j2eo team
 +alias stdlib.lang.class__Object
 +alias stdlib.lang.class__System
@@ -11,6 +11,7 @@
     class__Object.new > super
     super > @
     "class__EndlessFor" > className
+    1 > address
     [this] > init
       seq > @
         TRUE

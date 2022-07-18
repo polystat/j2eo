@@ -1,4 +1,4 @@
-# 2022-07-14T16:00:19.547029400
+# 2022-07-18T16:09:51.282273098
 # j2eo team
 +alias stdlib.primitives.prim__float
 +alias stdlib.lang.class__System
@@ -12,6 +12,7 @@
     class__Object.new > super
     super > @
     "class__IncrementOperator" > className
+    1 > address
     [this] > init
       seq > @
         TRUE

@@ -1,4 +1,4 @@
-# 2022-07-14T15:52:38.504599500
+# 2022-07-18T16:09:36.277829794
 # j2eo team
 +alias stdlib.lang.class__System
 +alias stdlib.lang.class__Object
@@ -12,6 +12,7 @@
     class__Object.new > super
     super > @
     "class__SimpleBitwiseXOR" > className
+    1 > address
     [this] > init
       seq > @
         TRUE

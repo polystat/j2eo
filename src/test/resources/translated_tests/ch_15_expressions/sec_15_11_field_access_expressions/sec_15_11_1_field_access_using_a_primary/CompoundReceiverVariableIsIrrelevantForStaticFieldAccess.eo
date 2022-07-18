@@ -1,6 +1,7 @@
-# 2022-07-14T16:07:54.065316800
+# 2022-07-18T16:11:22.880263940
 # j2eo team
 +alias stdlib.lang.class__System
++alias stdlib.primitives.null
 +alias stdlib.lang.class__Object
 +alias stdlib.lang.class__String
 +alias stdlib.primitives.prim__int
@@ -12,6 +13,7 @@
     class__Object.new > super
     super > @
     "class__CompoundReceiverVariableIsIrrelevantForStaticFieldAccess" > className
+    1 > address
     [this] > init
       seq > @
         TRUE
@@ -58,6 +60,7 @@
     class__Object.new > super
     super > @
     "class__T" > className
+    1 > address
     [this] > init
       seq > @
         TRUE
@@ -83,6 +86,7 @@
     class__Object.new > super
     super > @
     "class__S" > className
+    1 > address
     [this] > init
       seq > @
         TRUE
@@ -94,9 +98,7 @@
     [] > return_1
       literal_2 > @
     [] > literal_2
-      prim__int.constructor_2 > @
-        prim__int.new
-        0
+      null > @
   # null :: null -> void
   [this] > constructor
     seq > @
