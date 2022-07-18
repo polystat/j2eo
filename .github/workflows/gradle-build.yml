@@ -32,6 +32,7 @@ jobs:
       - uses: gradle/gradle-build-action@v1
         with:
           arguments: build --info
+          gradle-version: 7.2
 
       - name: Upload Gradle test report
         uses: actions/upload-artifact@v2
@@ -60,6 +61,7 @@ jobs:
       - uses: gradle/gradle-build-action@v1
         with:
           arguments: build --info
+          gradle-version: 7.2
 
       - name: Upload Gradle test report
         uses: actions/upload-artifact@v2
