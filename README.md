@@ -140,6 +140,18 @@ Translations:
 
 ---
 
+## Test Translations
+
+You can find all the `.java` tests translated to `.eo` files [here.](src/test/resources/translated_tests)  
+To translate `.java` tests into `.eo` files manually, you have to perform the following steps:
+1. Build the project
+2. Locate `J2EO-xxx.jar` file in the `./build/libs/` folder
+3. Copy this `J2EO-xxx.jar` file into the [`./src/test/resources/test_candidates/`](src/test/resources/test_candidates) folder
+4. Run [`generate_eo_from_tests.py`](src/test/resources/test_candidates/generate_eo_from_tests.py) script in that folder  
+
+The script takes some time while performing translation. In the end, you will get updated translated files in the [`./src/test/resources/translated_tests/`](src/test/resources/translated_tests) folder.
+
+
 ## Examples of Java to EOLang translation
 
 We use Java language specification document as a foundation for Java feature hierarchy.  

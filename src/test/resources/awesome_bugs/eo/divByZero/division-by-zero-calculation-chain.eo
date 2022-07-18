@@ -1,5 +1,6 @@
-# 2022-05-25T15:02:28.654794800
+# 2022-07-18T12:42:28.234423
 # j2eo team
++package divByZero
 +alias stdlib.lang.class__Object
 +alias stdlib.lang.class__System
 +alias stdlib.primitives.prim__int
@@ -8,70 +9,67 @@
   class__Object > super
   super > @
   [] > new
-    [] > this
-      class__Object.new > super
-      super > @
-      "class__Test" > className
-      [this] > init
-        seq > @
-          TRUE
-    seq > @
-      this
+    class__Object.new > super
+    super > @
+    "class__Test" > className
+    [this] > init
+      seq > @
+        TRUE
   # test :: int -> int
   [x] > test
     seq > @
-      s979291363
-    [] > s979291363
-      b1444440224 > @
-    [] > b1444440224
-      l782689036.div > @
-        p1631119258
-    [] > l782689036
+      return_1
+    [] > return_1
+      binary_1 > @
+    [] > binary_1
+      literal_1.div > @
+        parenthesized_1
+    [] > literal_1
       prim__int.constructor_2 > @
         prim__int.new
         100
-    [] > p1631119258
-      b768415370 > @
-    [] > b768415370
-      l948250363.mul > @
-        p564272228
-    [] > l948250363
+    [] > parenthesized_1
+      binary_2 > @
+    [] > binary_2
+      literal_2.mul > @
+        parenthesized_2
+    [] > literal_2
       prim__int.constructor_2 > @
         prim__int.new
         100
-    [] > p564272228
-      b125844477 > @
-    [] > b125844477
-      l1119622337.add > @
-        p1394557075
-    [] > l1119622337
+    [] > parenthesized_2
+      binary_3 > @
+    [] > binary_3
+      literal_3.add > @
+        parenthesized_3
+    [] > literal_3
       prim__int.constructor_2 > @
         prim__int.new
         100
-    [] > p1394557075
-      b1659840424 > @
-    [] > b1659840424
-      l1681303515.sub > @
-        s_r1175371136
-    [] > l1681303515
+    [] > parenthesized_3
+      binary_4 > @
+    [] > binary_4
+      literal_4.sub > @
+        simpleReference_1
+    [] > literal_4
       prim__int.constructor_2 > @
         prim__int.new
         100
-    [] > s_r1175371136
+    [] > simpleReference_1
       x > @
   # main :: String[] -> void
   [args] > main
     seq > @
-      s1866229258
-    [] > s1866229258
+      statementExpression_1
+    [] > statementExpression_1
       class__System.out.println > @
         class__System.out
-        m_i1962266146
-    [] > m_i1962266146
-      test > @
+        methodInvocation_1
+    [] > methodInvocation_1
+      this.test > @
         this
-        l632071960
-    [] > l632071960
+        literal_5
+    [] > literal_5
       prim__int.constructor_2 > @
         prim__int.new
         200
@@ -79,13 +77,13 @@
   [this] > constructor
     seq > @
       initialization
-      s385739920
+      statementExpression_2
       this
     [] > initialization
       this.init > @
         this
-    [] > s385739920
-      super.constructor > @
+    [] > statementExpression_2
+      this.super.constructor > @
         this.super
 
 [args...] > main
