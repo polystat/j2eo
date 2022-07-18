@@ -21,10 +21,9 @@ class TestEOMetas {
             )
         )
         Assertions.assertEquals(
-            """
-                        +package org.eolang.package
-                        +key1 value1
-                        +key2 value2""",
+            "+package org.eolang.package\n" +
+                "+key1 value1\n" +
+                "+key2 value2",
             f.generateEO(0)
         )
     }
@@ -39,10 +38,9 @@ class TestEOMetas {
             )
         )
         Assertions.assertEquals(
-            """
-                        +package org.eolang.package
-                        +key1 value1
-                        +key2 value2""",
+            "+package org.eolang.package\n" +
+                "+key1 value1\n" +
+                "+key2 value2",
             f.generateEO(1)
         )
     }

@@ -41,7 +41,7 @@ val javaParserG4FilePath = "grammar/JavaParser.g4"
 val javaLexerG4FilePath = "grammar/JavaLexer.g4"
 
 // Where to put generated parser
-val javaParserSavePath = "src/main/kotlin/org/polystat/j2eo/antlrParser"
+val javaParserSavePath = "src/main/java/org/polystat/j2eo/antlrParser"
 
 repositories {
     mavenCentral()
@@ -68,7 +68,7 @@ dependencies {
     implementation(kotlin("stdlib-jdk8"))
 
     // Use ANTLR for parser generation
-    antlr("org.antlr:antlr4:4.9.3")
+    antlr("org.antlr:antlr4:4.7.2")
 
     implementation("org.polystat:j2ast:0.1.0")
 }

@@ -16,4 +16,4 @@ polystat_check
 hadoop*
 J2EO*.jar
 j2eo-data
-/src/main/kotlin/org/polystat/j2eo/antlrParser/
+/src/main/java/org/polystat/j2eo/antlrParser/*

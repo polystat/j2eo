@@ -3,4 +3,4 @@ package eotree
 /**
  * EO attributes tests.
  */
-class TestEOAttributes 
+class TestEOAttributes
