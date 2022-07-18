@@ -39,22 +39,33 @@ J2EO uses ANTLR to build its Java parser, so if you want to rebuild grammar file
 
 #### macOS
 
-To install JDK and ANTLR on macOS, install [Homebrew](https://brew.sh) (a package manager) and run:
+To install JDK on macOS, install [Homebrew](https://brew.sh) (a package manager) and run:
 
 ```shell
 brew install openjdk@11
-brew install antlr
+```
+
+To download ANTLR, use the following command from the repository root:
+
+```shell
+wget https://www.antlr.org/download/antlr-4.10.1-complete.jar
 ```
 
 #### Ubuntu 22.04 (latest LTS)
 
 Older versions of Ubuntu were not tested, but may be supported as well.
 
-To install JDK and ANTLR on Ubuntu, run:
+To install JDK on Ubuntu, run:
 
 ```shell
 sudo apt update
-sudo apt install -y openjdk-11-jdk-headless antlr4
+sudo apt install -y openjdk-11-jdk-headless
+```
+
+To download ANTLR, use the following command from the repository root:
+
+```shell
+wget https://www.antlr.org/download/antlr-4.10.1-complete.jar
 ```
 
 
