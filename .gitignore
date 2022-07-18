@@ -15,5 +15,8 @@ polystat_check
 .metals/
 .vscode
 hadoop*
-J2EO*.jar
 j2eo-data
+src/main/java/parser/
+!src/main/java/parser/ParseException.java
+!src/main/java/parser/TreeMappings.kt
+!src/main/java/parser/Visitor.kt

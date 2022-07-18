@@ -36,6 +36,7 @@ compileTestKotlin.kotlinOptions {
 }
 
 // The Java grammar source file for ANTLR
+val javaLexerFilePath = "grammar/JavaLexer.g4"
 val javaGrammarFilePath = "grammar/JavaParser.g4"
 
 // Where to put generated parser
@@ -43,6 +44,8 @@ val javaParserFilePath = "src/main/java/parser/JavaParser.java"
 
 // MD5 of the latest generated grammar file is stored here
 val latestGrammarMD5FilePath = "out/latestGrammarMD5"
+
+val ANTLR_JAR = "antlr-4.10.1-complete.jar"
 
 repositories {
     mavenCentral()
@@ -351,50 +354,54 @@ fun createOutDirs() {
  * Runs ANTLR using OS-specific shell command.
  */
 fun runAntlr() =
-    try {
-        when {
-            Os.isFamily(Os.FAMILY_WINDOWS) ->
-                exec {
-                    workingDir = File("grammar")
-                    executable = "antlr"
-                    args = mutableListOf(
-                        javaGrammarFilePath.replace("grammar/", ""),
-                        "-visitor",
-                        "-o",
-                        "../src/main/java/parser"
-                    )
-                }
-            Os.isFamily(Os.FAMILY_MAC) ->
-                exec {
-                    workingDir = File("grammar")
-                    executable = "antlr"
-                    args = mutableListOf(
-                        javaGrammarFilePath.replace("grammar/", ""),
-                        "-visitor",
-                        "-o",
-                        "../src/main/java/parser"
-                    )
-                }
-            Os.isFamily(Os.FAMILY_UNIX) ->
-                exec {
-                    workingDir = File("grammar")
-                    executable = "antlr4"
-                    args = mutableListOf(
-                        javaGrammarFilePath.replace("grammar/", ""),
-                        "-visitor",
-                        "-o",
-                        "../src/main/java/parser"
-                    )
-                }
-            else ->
-                throw UnsupportedOperationException(
-                    "Your OS is not yet supported. File a GitHub or issue or " +
-                            "provide a Pull Request with support for ANTLR execution for your OS."
+    when {
+        Os.isFamily(Os.FAMILY_WINDOWS) ->
+            exec {
+                workingDir = File("grammar")
+                executable = "java"
+                args = mutableListOf(
+                    "-jar",
+                    "../$ANTLR_JAR",
+                    javaGrammarFilePath.replace("grammar/", ""),
+                    javaLexerFilePath.replace("grammar/", ""),
+                    "-visitor",
+                    "-o",
+                    "../src/main/java/parser"
                 )
-        }
-    } catch (e: Exception) {
-        println("Couldn't run ANTLR; ${e}")
-//        e.printStackTrace()
+            }
+        Os.isFamily(Os.FAMILY_MAC) ->
+            exec {
+                workingDir = File("grammar")
+                executable = "java"
+                args = mutableListOf(
+                    "-jar",
+                    "../$ANTLR_JAR",
+                    javaGrammarFilePath.replace("grammar/", ""),
+                    javaLexerFilePath.replace("grammar/", ""),
+                    "-visitor",
+                    "-o",
+                    "../src/main/java/parser"
+                )
+            }
+        Os.isFamily(Os.FAMILY_UNIX) ->
+            exec {
+                workingDir = File("grammar")
+                executable = "java"
+                args = mutableListOf(
+                    "-jar",
+                    "../$ANTLR_JAR",
+                    javaGrammarFilePath.replace("grammar/", ""),
+                    javaLexerFilePath.replace("grammar/", ""),
+                    "-visitor",
+                    "-o",
+                    "../src/main/java/parser"
+                )
+            }
+        else ->
+            throw UnsupportedOperationException(
+                "Your OS is not yet supported. File a GitHub or issue or " +
+                        "provide a Pull Request with support for ANTLR execution for your OS."
+            )
     }
 
 
@@ -422,7 +429,8 @@ fun generateMD5(filepath: String): String {
 }
 
 fun grammarFileMD5(): String =
-    generateMD5(javaGrammarFilePath)
+    generateMD5(javaGrammarFilePath) +
+    generateMD5(javaLexerFilePath)
 
 fun readMD5FromFile(filepath: String): String =
     File(filepath).let { f ->
