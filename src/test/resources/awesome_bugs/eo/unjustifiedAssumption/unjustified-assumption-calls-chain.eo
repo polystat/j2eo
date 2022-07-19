@@ -1,263 +1,254 @@
-# 2022-05-25T15:02:29.088792700
+# 2022-07-18T12:42:28.597425
 # j2eo team
++package unjustifiedAssumption
 +alias stdlib.lang.class__Object
 +alias stdlib.primitives.prim__int
-+alias org.eolang.gray.cage
 
 [] > class__Parent
   class__Object > super
   super > @
   [] > new
-    [] > this
-      class__Object.new > super
-      super > @
-      "class__Parent" > className
-      [this] > init
-        seq > @
-          TRUE
-      # f :: int -> int
-      [this x] > f
-        seq > @
-          d1374217958
-          s767511741
-          s647149086
-        prim__int.constructor_1 > t
+    class__Object.new > super
+    super > @
+    "class__Parent" > className
+    [this] > init
+      seq > @
+        TRUE
+    # f :: int -> int
+    [this x] > f
+      seq > @
+        variableDeclaration_1
+        assert_1
+        return_1
+      prim__int.constructor_1 > t
+        prim__int.new
+      [] > variableDeclaration_1
+        t.write > @
+          initializerSimple_1
+      [] > initializerSimple_1
+        binary_1 > @
+      [] > binary_1
+        simpleReference_1.sub > @
+          literal_1
+      [] > simpleReference_1
+        x > @
+      [] > literal_1
+        prim__int.constructor_2 > @
           prim__int.new
-        [] > d1374217958
-          t.write > @
-            i_s1459016715
-        [] > i_s1459016715
-          b912747546 > @
-        [] > b912747546
-          s_r1530957251.sub > @
-            l1292472219
-        [] > s_r1530957251
-          x > @
-        [] > l1292472219
-          prim__int.constructor_2 > @
-            prim__int.new
-            5
-        [] > s767511741
-          p548795052.if > @
-            TRUE
-            []
-              "AssertionError" > msg
-        [] > p548795052
-          b2143571436 > @
-        [] > b2143571436
-          s_r2117099736.greater > @
-            l691863815
-        [] > s_r2117099736
-          t > @
-        [] > l691863815
-          prim__int.constructor_2 > @
-            prim__int.new
-            0
-        [] > s647149086
-          s_r2070160397 > @
-        [] > s_r2070160397
-          x > @
-      # g :: int -> int
-      [this y] > g
-        seq > @
-          s103787801
-        [] > s103787801
-          m_i1205580258 > @
-        [] > m_i1205580258
-          f > @
-            this
-            s_r1959451969
-        [] > s_r1959451969
-          y > @
-      # gg :: int -> int
-      [this y2] > gg
-        seq > @
-          s777313177
-        [] > s777313177
-          m_i1441328175 > @
-        [] > m_i1441328175
-          g > @
-            this
-            s_r1327895505
-        [] > s_r1327895505
-          y2 > @
-      # ggg :: int -> int
-      [this y3] > ggg
-        seq > @
-          s1831141281
-        [] > s1831141281
-          m_i1705277839 > @
-        [] > m_i1705277839
-          gg > @
-            this
-            s_r2000648320
-        [] > s_r2000648320
-          y3 > @
-      # h :: int -> int
-      [this z] > h
-        seq > @
-          s142099757
-        [] > s142099757
-          s_r1114335860 > @
-        [] > s_r1114335860
-          z > @
-    seq > @
-      this
+          5
+      [] > assert_1
+        parenthesized_1.if > @
+          TRUE
+          []
+            "AssertionError" > msg
+      [] > parenthesized_1
+        binary_2 > @
+      [] > binary_2
+        simpleReference_2.greater > @
+          literal_2
+      [] > simpleReference_2
+        t > @
+      [] > literal_2
+        prim__int.constructor_2 > @
+          prim__int.new
+          0
+      [] > return_1
+        simpleReference_3 > @
+      [] > simpleReference_3
+        x > @
+    # g :: int -> int
+    [this y] > g
+      seq > @
+        return_2
+      [] > return_2
+        methodInvocation_1 > @
+      [] > methodInvocation_1
+        this.f > @
+          this
+          simpleReference_4
+      [] > simpleReference_4
+        y > @
+    # gg :: int -> int
+    [this y2] > gg
+      seq > @
+        return_3
+      [] > return_3
+        methodInvocation_2 > @
+      [] > methodInvocation_2
+        this.g > @
+          this
+          simpleReference_5
+      [] > simpleReference_5
+        y2 > @
+    # ggg :: int -> int
+    [this y3] > ggg
+      seq > @
+        return_4
+      [] > return_4
+        methodInvocation_3 > @
+      [] > methodInvocation_3
+        this.gg > @
+          this
+          simpleReference_6
+      [] > simpleReference_6
+        y3 > @
+    # h :: int -> int
+    [this z] > h
+      seq > @
+        return_5
+      [] > return_5
+        simpleReference_7 > @
+      [] > simpleReference_7
+        z > @
   # null :: null -> void
   [this] > constructor
     seq > @
       initialization
-      s80026551
+      statementExpression_1
       this
     [] > initialization
       this.init > @
         this
-    [] > s80026551
-      super.constructor > @
+    [] > statementExpression_1
+      this.super.constructor > @
         this.super
 
 [] > class__Child
   class__Parent > super
   super > @
   [] > new
-    [] > this
-      class__Parent.new > super
-      super > @
-      "class__Child" > className
-      [this] > init
-        seq > @
-          TRUE
-      # f :: int -> int
-      [this y] > f
-        seq > @
-          s137533655
-        [] > s137533655
-          s_r1118430673 > @
-        [] > s_r1118430673
-          y > @
-      # h :: int -> int
-      [this z] > h
-        seq > @
-          s1527254842
-        [] > s1527254842
-          m_i2000469839 > @
-        [] > m_i2000469839
-          ggg > @
-            this
-            s_r1800693087
-        [] > s_r1800693087
-          z > @
-    seq > @
-      this
+    class__Parent.new > super
+    super > @
+    "class__Child" > className
+    [this] > init
+      seq > @
+        TRUE
+    # f :: int -> int
+    [this y] > f
+      seq > @
+        return_6
+      [] > return_6
+        simpleReference_8 > @
+      [] > simpleReference_8
+        y > @
+    # h :: int -> int
+    [this z] > h
+      seq > @
+        return_7
+      [] > return_7
+        methodInvocation_4 > @
+      [] > methodInvocation_4
+        this.ggg > @
+          this
+          simpleReference_9
+      [] > simpleReference_9
+        z > @
   # null :: null -> void
   [this] > constructor
     seq > @
       initialization
-      s1717473929
+      statementExpression_2
       this
     [] > initialization
       this.init > @
         this
-    [] > s1717473929
-      super.constructor > @
+    [] > statementExpression_2
+      this.super.constructor > @
         this.super
 
 [] > class__Test
   class__Object > super
   super > @
   [] > new
-    [] > this
-      class__Object.new > super
-      super > @
-      "class__Test" > className
-      [this] > init
-        seq > @
-          TRUE
-    seq > @
-      this
+    class__Object.new > super
+    super > @
+    "class__Test" > className
+    [this] > init
+      seq > @
+        TRUE
   # main :: String[] -> void
   [args] > main
     seq > @
-      d2100572327
-      d890160158
-      s375074687
-      s662666707
-      s1191864687
-      s690822257
-      s475394679
-      s1049590050
+      variableDeclaration_2
+      variableDeclaration_3
+      statementExpression_3
+      statementExpression_4
+      statementExpression_5
+      statementExpression_6
+      statementExpression_7
+      statementExpression_8
     prim__int.constructor_1 > x
       prim__int.new
-    [] > d2100572327
+    [] > variableDeclaration_2
       x.write > @
-        i_s1868578441
-    [] > i_s1868578441
-      l659996839 > @
-    [] > l659996839
+        initializerSimple_2
+    [] > initializerSimple_2
+      literal_3 > @
+    [] > literal_3
       prim__int.constructor_2 > @
         prim__int.new
         10
     cage > p
-    [] > d890160158
+    [] > variableDeclaration_3
       p.write > @
-        i_s1768127248
-    [] > i_s1768127248
-      inst119112899 > @
-    [] > inst119112899
+        initializerSimple_3
+    [] > initializerSimple_3
+      instanceCreation_1 > @
+    [] > instanceCreation_1
       class__Parent.constructor > @
         class__Parent.new
-    [] > s375074687
+    [] > statementExpression_3
       p.g > @
         p
-        s_r1429616542
-    [] > s_r1429616542
+        simpleReference_11
+    [] > simpleReference_11
       x > @
-    [] > s662666707
-      s_r1821100643.sub_equal > @
-        l593768538
-    [] > s_r1821100643
+    [] > statementExpression_4
+      simpleReference_12.sub_equal > @
+        literal_4
+    [] > simpleReference_12
       x > @
-    [] > l593768538
+    [] > literal_4
       prim__int.constructor_2 > @
         prim__int.new
         5
-    [] > s1191864687
+    [] > statementExpression_5
       p.h > @
         p
-        s_r466032056
-    [] > s_r466032056
+        simpleReference_14
+    [] > simpleReference_14
       x > @
-    [] > s690822257
-      s_r726212590.write > @
-        inst1058822905
-    [] > s_r726212590
+    [] > statementExpression_6
+      simpleReference_15.write > @
+        instanceCreation_2
+    [] > simpleReference_15
       p > @
-    [] > inst1058822905
-      Child.constructor > @
-        Child.new
-    [] > s475394679
+    [] > instanceCreation_2
+      class__Child.constructor > @
+        class__Child.new
+    [] > statementExpression_7
       p.g > @
         p
-        s_r1574615832
-    [] > s_r1574615832
+        simpleReference_17
+    [] > simpleReference_17
       x > @
-    [] > s1049590050
+    [] > statementExpression_8
       p.h > @
         p
-        s_r1662592920
-    [] > s_r1662592920
+        simpleReference_19
+    [] > simpleReference_19
       x > @
   # null :: null -> void
   [this] > constructor
     seq > @
       initialization
-      s1357686726
+      statementExpression_9
       this
     [] > initialization
       this.init > @
         this
-    [] > s1357686726
-      super.constructor > @
+    [] > statementExpression_9
+      this.super.constructor > @
         this.super
 
 [args...] > main

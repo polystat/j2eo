@@ -1,148 +1,136 @@
-# 2022-05-25T15:02:28.457791900
+# 2022-07-18T12:42:28.090954500
 # j2eo team
++package directStateAccess
 +alias stdlib.lang.class__Object
 +alias stdlib.lang.class__System
 +alias stdlib.primitives.prim__int
-+alias org.eolang.gray.cage
 
 [] > class__A
   class__Object > super
   super > @
   [] > new
-    [] > this
-      class__Object.new > super
-      super > @
-      "class__A" > className
-      [this] > init
-        seq > @
-          d1499867659
-        [] > d1499867659
-          this.state.write > @
-            i_s2012993836
-        [] > i_s2012993836
-          l1740797075 > @
-        [] > l1740797075
-          prim__int.constructor_2 > @
-            prim__int.new
-            0
-      prim__int.constructor_1 > state
-        prim__int.new
-    seq > @
-      this
+    class__Object.new > super
+    super > @
+    "class__A" > className
+    [this] > init
+      seq > @
+        variableDeclaration_1
+      [] > variableDeclaration_1
+        this.state.write > @
+          initializerSimple_1
+      [] > initializerSimple_1
+        literal_1 > @
+      [] > literal_1
+        prim__int.constructor_2 > @
+          prim__int.new
+          0
+    prim__int.constructor_1 > state
+      prim__int.new
   # null :: null -> void
   [this] > constructor
     seq > @
       initialization
-      s440938038
+      statementExpression_1
       this
     [] > initialization
       this.init > @
         this
-    [] > s440938038
-      super.constructor > @
+    [] > statementExpression_1
+      this.super.constructor > @
         this.super
 
 [] > class__B
   class__A > super
   super > @
   [] > new
-    [] > this
-      class__A.new > super
-      super > @
-      "class__B" > className
-      [this] > init
-        seq > @
-          TRUE
-    seq > @
-      this
+    class__A.new > super
+    super > @
+    "class__B" > className
+    [this] > init
+      seq > @
+        TRUE
   # null :: null -> void
   [this] > constructor
     seq > @
       initialization
-      s1922464006
+      statementExpression_2
       this
     [] > initialization
       this.init > @
         this
-    [] > s1922464006
-      super.constructor > @
+    [] > statementExpression_2
+      this.super.constructor > @
         this.super
 
 [] > class__C
   class__B > super
   super > @
   [] > new
-    [] > this
-      class__B.new > super
-      super > @
-      "class__C" > className
-      [this] > init
-        seq > @
-          TRUE
-      # n :: int -> int
-      [this x] > n
-        seq > @
-          s1536031937
-        [] > s1536031937
-          b798981583 > @
-        [] > b798981583
-          s_r1954406292.add > @
-            s_r904058452
-        [] > s_r1954406292
-          state > @
-        [] > s_r904058452
-          x > @
-    seq > @
-      this
+    class__B.new > super
+    super > @
+    "class__C" > className
+    [this] > init
+      seq > @
+        TRUE
+    # n :: int -> int
+    [this x] > n
+      seq > @
+        return_1
+      [] > return_1
+        binary_1 > @
+      [] > binary_1
+        simpleReference_1.add > @
+          simpleReference_2
+      [] > simpleReference_1
+        state > @
+      [] > simpleReference_2
+        x > @
   # null :: null -> void
   [this] > constructor
     seq > @
       initialization
-      s29183965
+      statementExpression_3
       this
     [] > initialization
       this.init > @
         this
-    [] > s29183965
-      super.constructor > @
+    [] > statementExpression_3
+      this.super.constructor > @
         this.super
 
 [] > class__Test
   class__Object > super
   super > @
   [] > new
-    [] > this
-      class__Object.new > super
-      super > @
-      "class__Test" > className
-      [this] > init
-        seq > @
-          TRUE
-    seq > @
-      this
+    class__Object.new > super
+    super > @
+    "class__Test" > className
+    [this] > init
+      seq > @
+        TRUE
   # main :: String[] -> void
   [args] > main
     seq > @
-      d1427651360
-      s131635550
+      variableDeclaration_2
+      statementExpression_4
     cage > c
-    [] > d1427651360
+    [] > variableDeclaration_2
       c.write > @
-        i_s1334042472
-    [] > i_s1334042472
-      inst1827725498 > @
-    [] > inst1827725498
+        initializerSimple_3
+    [] > initializerSimple_3
+      instanceCreation_1 > @
+    [] > instanceCreation_1
       class__C.constructor > @
         class__C.new
-    [] > s131635550
+    [] > statementExpression_4
       class__System.out.println > @
         class__System.out
-        m_i319644606
-    [] > m_i319644606
+        methodInvocation_1
+    [] > methodInvocation_1
       c.n > @
         c
-        l1118078504
-    [] > l1118078504
+        literal_2
+    [] > literal_2
       prim__int.constructor_2 > @
         prim__int.new
         3
@@ -150,13 +138,13 @@
   [this] > constructor
     seq > @
       initialization
-      s691690486
+      statementExpression_5
       this
     [] > initialization
       this.init > @
         this
-    [] > s691690486
-      super.constructor > @
+    [] > statementExpression_5
+      this.super.constructor > @
         this.super
 
 [args...] > main

@@ -26,7 +26,7 @@ val candidates: String? by project
 val amount: String? by project
 
 group = "org.polystat"
-version = mvnPublicationVersion ?: "0.4.0"
+version = mvnPublicationVersion ?: "0.6.0"
 
 val compileKotlin: KotlinCompile by tasks
 compileKotlin.kotlinOptions {
