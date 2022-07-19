@@ -6,6 +6,10 @@ assets:
 docker:
   image: "iammaxim/j2eo:latest"
   as_root: true
+merge:
+  script: |
+    wget https://www.antlr.org/download/antlr-4.10.1-complete.jar
+    gradle build --info
 release:
   script: |-
     [[ "${tag}" =~ ^[0-9]+\.[0-9]+\.[0-9]+$ ]] || exit -1
