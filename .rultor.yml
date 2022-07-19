@@ -5,6 +5,12 @@ assets:
 docker:
   image: "iammaxim/j2eo:latest"
   as_root: true
+merge:
+  script: |
+    sudo apt-get install -y wget
+    wget https://www.antlr.org/download/antlr-4.10.1-complete.jar
+    gradle build -x test --info
+    echo "Done."
 release:
   script: |-
     cp ../gradle.properties .
