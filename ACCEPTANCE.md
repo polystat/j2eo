@@ -140,14 +140,25 @@ Built-in unit tests may be executed using:
 
 #### Bundled test suite
 
-J2EO comes with 1000+ bundled tests. These tests are used with parallel execution:
+J2EO comes with 1000+ bundled tests. There are two testing scenarios:
+
+#### Static check execution:
+- Java source code is translated to EO using J2EO project
+- Obtained EO code are compared with saved one. If they match — test is passed. If not — test is failed.
+
+All saved EO programs are located in [translated_test](src/test/resources/translated_tests) directory.
+
+This scenario can be executed by the following command:
+
+`./gradlew test --tests "common.TestJ2EOStaticCheck"`
+
+#### Parallel execution:
 - original Java source code of the text is compiled with Java compiler and executed. Stdout output is saved.
 - Java source code is translated to EO using J2EO project, then compiled with EO compiler and executed. Stdout output is stored.
 - Stdout outputs are compared. If they match — test is passed. If not — test is failed.
 
-Test suite follows the Java Language Specification structure, covering applicable chapters and sections of the Java specifications.
+This scenario may be executed using `./test_candidates.sh` script.
 
-Bundled tests may be executed using `./test_candidates.sh` script.
 
 #### OpenJDK test suite
 
