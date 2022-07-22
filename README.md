@@ -3,9 +3,9 @@
 <img src="https://www.yegor256.com/images/books/elegant-objects/cactus.svg" height="100px"  alt="eolang icon"/>
 
 [![Gradle Build](https://github.com/polystat/j2eo/actions/workflows/gradle-build.yml/badge.svg)](https://github.com/polystat/j2eo/actions/workflows/gradle-build.yml)
-![LINE](https://img.shields.io/badge/line--coverage-41,67%25-orange.svg)
-![BRANCH](https://img.shields.io/badge/branch--coverage-33,81%25-red.svg)
-![COMPLEXITY](https://img.shields.io/badge/complexity-5,17-brightgreen.svg)
+![LINE](https://img.shields.io/badge/line--coverage-54.02%25-orange.svg)
+![BRANCH](https://img.shields.io/badge/branch--coverage-45.78%25-orange.svg)
+![COMPLEXITY](https://img.shields.io/badge/complexity-6.93-brightgreen.svg)
 
 [![Hits-of-Code](https://hitsofcode.com/github/polystat/j2eo)](https://hitsofcode.com/view/github/polystat/j2eo)
 ![Lines of code](https://img.shields.io/tokei/lines/github/polystat/j2eo)
@@ -74,14 +74,26 @@ Built-in unit tests may be executed using:
 
 ### Bundled test suite
 
-J2EO comes with 1000+ bundled tests. These tests are used with parallel execution:
+J2EO comes with 1000+ bundled tests. There are two testing scenarios:
+
+#### Static check execution:
+- Java source code is translated to EO using J2EO project
+- Obtained EO code are compared with saved one. If they match — test is passed. If not — test is failed.
+
+All saved EO programs are located in [translated_test](src/test/resources/translated_tests) directory.
+
+This scenario can be executed by the following command:
+
+`./gradlew test --tests "common.TestJ2EOStaticCheck"`
+
+#### Parallel execution:
 - original Java source code of the text is compiled with Java compiler and executed. Stdout output is saved.
 - Java source code is translated to EO using J2EO project, then compiled with EO compiler and executed. Stdout output is stored.
 - Stdout outputs are compared. If they match — test is passed. If not — test is failed.
 
-Test suite follows the Java Language Specification structure, covering applicable chapters and sections of the Java specifications.
+This scenario may be executed using `./test_candidates.sh` script.
 
-Bundled tests may be executed using `./test_candidates.sh` script.
+Test suite follows the **Java Language Specification** structure, covering applicable chapters and sections of the Java specifications.
 
 ### Running translator on Hadoop
 

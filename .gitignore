@@ -8,6 +8,7 @@ compile_and_run_tests.bat
 output.eo
 output_eo
 polystat_check
+*.jar
 /hadoop/
 /output_hadoop/
 /bin
