@@ -43,6 +43,8 @@ val javaLexerG4FilePath = "grammar/JavaLexer.g4"
 // Where to put generated parser
 val javaParserSavePath = "src/main/java/org/polystat/j2eo/antlrParser"
 
+val antlrJar = "antlr-4.10.1-complete.jar"
+
 repositories {
     mavenCentral()
 }
@@ -341,6 +343,8 @@ tasks.getByName("signMavenJavaPublication") {
  */
 fun runAntlr() {
     val antlrArgs = mutableListOf(
+        "-jar",
+        "../$antlrJar",
         javaParserG4FilePath.replace("grammar/", ""),
         javaLexerG4FilePath.replace("grammar/", ""),
         "-visitor",
@@ -353,19 +357,19 @@ fun runAntlr() {
             Os.isFamily(Os.FAMILY_WINDOWS) ->
                 exec {
                     workingDir = File("grammar")
-                    executable = "antlr"
+                    executable = "java"
                     args = antlrArgs
                 }
             Os.isFamily(Os.FAMILY_MAC) ->
                 exec {
                     workingDir = File("grammar")
-                    executable = "antlr"
+                    executable = "java"
                     args = antlrArgs
                 }
             Os.isFamily(Os.FAMILY_UNIX) ->
                 exec {
                     workingDir = File("grammar")
-                    executable = "antlr4"
+                    executable = "java"
                     args = antlrArgs
                 }
             else ->
