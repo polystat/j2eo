@@ -4,6 +4,7 @@ input
 .idea
 build
 compile_and_run_tests.bat
+*.jar
 output.eo
 output_eo
 polystat_check

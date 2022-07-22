@@ -3,9 +3,9 @@
 <img src="https://www.yegor256.com/images/books/elegant-objects/cactus.svg" height="100px"  alt="eolang icon"/>
 
 [![Gradle Build](https://github.com/polystat/j2eo/actions/workflows/gradle-build.yml/badge.svg)](https://github.com/polystat/j2eo/actions/workflows/gradle-build.yml)
-![LINE](https://img.shields.io/badge/line--coverage-54.02%25-orange.svg)
-![BRANCH](https://img.shields.io/badge/branch--coverage-45.78%25-orange.svg)
-![COMPLEXITY](https://img.shields.io/badge/complexity-6.93-brightgreen.svg)
+![LINE](https://img.shields.io/badge/line--coverage-41,67%25-orange.svg)
+![BRANCH](https://img.shields.io/badge/branch--coverage-33,81%25-red.svg)
+![COMPLEXITY](https://img.shields.io/badge/complexity-5,17-brightgreen.svg)
 
 [![Hits-of-Code](https://hitsofcode.com/github/polystat/j2eo)](https://hitsofcode.com/view/github/polystat/j2eo)
 ![Lines of code](https://img.shields.io/tokei/lines/github/polystat/j2eo)
@@ -15,11 +15,12 @@ This is a translator of **Java** programming language to [EOLANG](https://www.eo
 ## Usage
 
 1. Make sure you have installed:
-    - **Java 16+** (make sure command `java -version` shows 16+ version of Java in terminal if you have multiple Java
+    - **Java 11+** (make sure command `java -version` shows 11+ version of Java in terminal if you have multiple Java
       version installed)
     - **Maven 3.8+** to run tests (be aware of [possible conflicts](https://bugs.debian.org/cgi-bin/bugreport.cgi?bug=980467) of the
       latest versions of Maven and Java on some OSs)
     - **ANTLR4 4.9.3** (if you want to build the parser on your own. If you don't have ANTLR, you still can build project using bundled version of parser.)
+
 2. Clone the repo into your folder:
 
    HTTPS:
@@ -54,6 +55,33 @@ This is a translator of **Java** programming language to [EOLANG](https://www.eo
     ```shell
     java -jar j2eo.jar src/test/resources/polystat_tests/test1 -o output_eo
     ```
+
+You can also use [yegor256/j2eo](https://hub.docker.com/r/yegor256/j2eo) image for [Docker](https://docs.docker.com/get-docker/):
+
+```
+$ docker run -v $(pwd):/eo yegor256/j2eo hello.java --target output
+```
+
+This command will translate `hello.java` in the current directory, saving the output to `output/` subdirectory.
+
+### Unit tests
+
+Built-in unit tests may be executed using:
+
+```shell
+./gradlew test
+```
+
+### Bundled test suite
+
+J2EO comes with 1000+ bundled tests. These tests are used with parallel execution:
+- original Java source code of the text is compiled with Java compiler and executed. Stdout output is saved.
+- Java source code is translated to EO using J2EO project, then compiled with EO compiler and executed. Stdout output is stored.
+- Stdout outputs are compared. If they match — test is passed. If not — test is failed.
+
+Test suite follows the Java Language Specification structure, covering applicable chapters and sections of the Java specifications.
+
+Bundled tests may be executed using `./test_candidates.sh` script.
 
 ### Running translator on Hadoop
 
