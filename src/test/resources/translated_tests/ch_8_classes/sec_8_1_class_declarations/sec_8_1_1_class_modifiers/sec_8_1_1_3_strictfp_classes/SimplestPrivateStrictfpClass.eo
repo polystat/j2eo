@@ -1,4 +1,4 @@
-# 2022-07-14T16:05:06.364261
+# 2022-07-18T16:09:24.063657075
 # j2eo team
 +alias stdlib.lang.class__Object
 +alias stdlib.lang.class__System
@@ -11,6 +11,7 @@
     class__Object.new > super
     super > @
     "class__SimplestPrivateStrictfpClass" > className
+    1 > address
     [this] > init
       seq > @
         TRUE
@@ -21,6 +22,7 @@
       class__Object.new > super
       super > @
       "class__PrivateStrictfpTest" > className
+      1 > address
       [this] > init
         seq > @
           TRUE

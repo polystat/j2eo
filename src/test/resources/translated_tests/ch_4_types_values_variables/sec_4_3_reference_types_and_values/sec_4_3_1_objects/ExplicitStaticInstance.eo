@@ -1,4 +1,4 @@
-# 2022-07-14T16:08:32.822317400
+# 2022-07-18T16:08:55.382621026
 # j2eo team
 +alias stdlib.lang.class__System
 +alias stdlib.lang.class__Object
@@ -12,6 +12,7 @@
     class__Object.new > super
     super > @
     "class__ExplicitStaticInstance" > className
+    1 > address
     [this] > init
       seq > @
         TRUE
@@ -127,6 +128,7 @@
     class__Object.new > super
     super > @
     "class__Point" > className
+    1 > address
     [this] > init
       seq > @
         TRUE
@@ -165,8 +167,8 @@
       fieldAccess_10.write > @
         simpleReference_4
     [] > fieldAccess_10
-      this_1.x > @
-    [] > this_1
+      this_2.x > @
+    [] > this_2
       this > @
     [] > simpleReference_4
       x > @
@@ -174,8 +176,8 @@
       fieldAccess_11.write > @
         simpleReference_5
     [] > fieldAccess_11
-      this_2.y > @
-    [] > this_2
+      this_3.y > @
+    [] > this_3
       this > @
     [] > simpleReference_5
       y > @

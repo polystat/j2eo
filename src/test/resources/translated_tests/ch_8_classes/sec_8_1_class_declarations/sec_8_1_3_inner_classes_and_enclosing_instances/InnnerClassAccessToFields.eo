@@ -1,4 +1,4 @@
-# 2022-07-14T16:07:56.093418900
+# 2022-07-18T16:10:08.376739604
 # j2eo team
 +alias stdlib.lang.class__System
 +alias stdlib.lang.class__Object
@@ -12,6 +12,7 @@
     class__Object.new > super
     super > @
     "class__Outer" > className
+    1 > address
     [this] > init
       seq > @
         variableDeclaration_1
@@ -38,6 +39,7 @@
           class__Object.new > super
           super > @
           "class__Local" > className
+          1 > address
           [this] > init
             seq > @
               variableDeclaration_2
@@ -95,6 +97,7 @@
         class__Object.new > super
         super > @
         "class__LocalInStaticContext" > className
+        1 > address
         [this] > init
           seq > @
             variableDeclaration_4
@@ -148,6 +151,7 @@
     class__Object.new > super
     super > @
     "class__InnnerClassAccessToFields" > className
+    1 > address
     [this] > init
       seq > @
         TRUE

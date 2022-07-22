@@ -1,4 +1,4 @@
-# 2022-07-14T15:51:05.755226
+# 2022-07-18T16:10:44.341296195
 # j2eo team
 +alias stdlib.lang.class__Object
 +alias stdlib.lang.class__System
@@ -13,6 +13,7 @@
     class__Object.new > super
     super > @
     "class__UpperBoundWildcard" > className
+    1 > address
     [this] > init
       seq > @
         TRUE
@@ -120,6 +121,7 @@
     class__Object.new > super
     super > @
     "class__SomeBase" > className
+    1 > address
     [this] > init
       seq > @
         TRUE
@@ -153,6 +155,7 @@
     class__SomeBase.new > super
     super > @
     "class__SomeSub1" > className
+    1 > address
     [this] > init
       seq > @
         TRUE
@@ -186,6 +189,7 @@
     class__SomeBase.new > super
     super > @
     "class__SomeSub2" > className
+    1 > address
     [this] > init
       seq > @
         TRUE

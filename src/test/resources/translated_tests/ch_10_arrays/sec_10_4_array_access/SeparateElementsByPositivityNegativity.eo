@@ -1,6 +1,7 @@
-# 2022-07-14T15:57:21.969153
+# 2022-07-18T16:10:01.247477406
 # j2eo team
 +alias stdlib.lang.class__System
++alias stdlib.primitives.null
 +alias stdlib.lang.class__Object
 +alias stdlib.primitives.prim__int
 +alias stdlib.lang.class__String
@@ -13,6 +14,7 @@
     class__Object.new > super
     super > @
     "class__SeparateElementsByPositivityNegativity" > className
+    1 > address
     [this] > init
       seq > @
         TRUE
@@ -106,9 +108,7 @@
     [] > initializerSimple_5
       literal_5 > @
     [] > literal_5
-      prim__int.constructor_2 > @
-        prim__int.new
-        0
+      null > @
     prim__int.constructor_1 > negative
       prim__int.new
     [] > variableDeclaration_6
@@ -117,9 +117,7 @@
     [] > initializerSimple_6
       literal_6 > @
     [] > literal_6
-      prim__int.constructor_2 > @
-        prim__int.new
-        0
+      null > @
     [] > statementExpression_4
       for_loop_placeholder > @
     [] > ifThenElse_1

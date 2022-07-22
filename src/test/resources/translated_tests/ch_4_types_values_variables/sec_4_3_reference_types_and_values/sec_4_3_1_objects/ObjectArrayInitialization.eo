@@ -1,4 +1,4 @@
-# 2022-07-14T15:55:59.309622700
+# 2022-07-18T16:08:45.787311203
 # j2eo team
 +alias stdlib.lang.class__System
 +alias stdlib.lang.class__Object
@@ -12,6 +12,7 @@
     class__Object.new > super
     super > @
     "class__ObjectArrayInitialization" > className
+    1 > address
     [this] > init
       seq > @
         TRUE
@@ -109,6 +110,7 @@
     class__Object.new > super
     super > @
     "class__Point" > className
+    1 > address
     [this] > init
       seq > @
         TRUE
@@ -147,8 +149,8 @@
       fieldAccess_5.write > @
         simpleReference_2
     [] > fieldAccess_5
-      this_1.x > @
-    [] > this_1
+      this_2.x > @
+    [] > this_2
       this > @
     [] > simpleReference_2
       x > @
@@ -156,8 +158,8 @@
       fieldAccess_6.write > @
         simpleReference_3
     [] > fieldAccess_6
-      this_2.y > @
-    [] > this_2
+      this_3.y > @
+    [] > this_3
       this > @
     [] > simpleReference_3
       y > @

@@ -1,4 +1,4 @@
-# 2022-07-14T15:51:56.908542400
+# 2022-07-18T16:12:57.817834095
 # j2eo team
 +alias stdlib.primitives.prim__float
 +alias stdlib.primitives.prim__char
@@ -6,6 +6,7 @@
 +alias stdlib.primitives.prim__int
 +alias stdlib.lang.class__String
 +alias stdlib.lang.class__System
++alias stdlib.primitives.null
 +alias stdlib.lang.class__Object
 +alias stdlib.primitives.prim__boolean
 +alias stdlib.primitives.prim__long
@@ -17,6 +18,7 @@
     class__Object.new > super
     super > @
     "class__SimpleLexicalLiterals" > className
+    1 > address
     [this] > init
       seq > @
         TRUE
@@ -142,9 +144,7 @@
     [] > initializerSimple_10
       literal_9 > @
     [] > literal_9
-      prim__int.constructor_2 > @
-        prim__int.new
-        0
+      null > @
     [] > statementExpression_1
       class__System.out.println > @
         class__System.out

@@ -1,4 +1,4 @@
-# 2022-07-14T16:01:04.215188800
+# 2022-07-18T16:11:17.271854769
 # j2eo team
 +alias stdlib.lang.class__System
 +alias stdlib.primitives.prim__short
@@ -14,6 +14,7 @@
     class__Object.new > super
     super > @
     "class__NumericConditionExpressionWithDifferentTypes" > className
+    1 > address
     [this] > init
       seq > @
         TRUE

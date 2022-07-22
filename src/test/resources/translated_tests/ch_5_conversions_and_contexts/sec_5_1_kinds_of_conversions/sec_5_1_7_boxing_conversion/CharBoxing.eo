@@ -1,4 +1,4 @@
-# 2022-07-14T15:58:44.567845400
+# 2022-07-18T16:13:36.258686332
 # j2eo team
 +alias stdlib.primitives.prim__char
 +alias stdlib.lang.class__System
@@ -13,6 +13,7 @@
     class__Object.new > super
     super > @
     "class__CharBoxing" > className
+    1 > address
     [this] > init
       seq > @
         TRUE

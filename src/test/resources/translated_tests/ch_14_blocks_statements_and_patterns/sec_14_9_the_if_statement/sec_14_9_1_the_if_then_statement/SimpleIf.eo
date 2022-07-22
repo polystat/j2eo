@@ -1,4 +1,4 @@
-# 2022-07-14T16:08:33.842639400
+# 2022-07-18T16:12:24.938246118
 # j2eo team
 +alias stdlib.lang.class__Object
 +alias stdlib.primitives.prim__boolean
@@ -11,6 +11,7 @@
     class__Object.new > super
     super > @
     "class__SimpleIf" > className
+    1 > address
     [this] > init
       seq > @
         TRUE

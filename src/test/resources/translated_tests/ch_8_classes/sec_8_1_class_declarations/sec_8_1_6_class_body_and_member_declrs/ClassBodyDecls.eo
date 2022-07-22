@@ -1,4 +1,4 @@
-# 2022-07-14T16:01:13.445429700
+# 2022-07-18T16:13:11.602879956
 # j2eo team
 +alias stdlib.lang.class__System
 +alias stdlib.lang.class__Object
@@ -12,6 +12,7 @@
     class__Object.new > super
     super > @
     "class__ClassBodyDecls" > className
+    1 > address
     [this] > init
       seq > @
         variableDeclaration_1
@@ -52,8 +53,8 @@
       this.init > @
         this
     [] > statementExpression_1
-      this.this.super.constructor > @
-        this.this.super
+      this.super.constructor > @
+        this.super
     [] > statementExpression_2
       fieldAccess_2.write > @
         simpleReference_2
@@ -70,6 +71,7 @@
       class__Object.new > super
       super > @
       "class__Local" > className
+      1 > address
       [this] > init
         seq > @
           TRUE

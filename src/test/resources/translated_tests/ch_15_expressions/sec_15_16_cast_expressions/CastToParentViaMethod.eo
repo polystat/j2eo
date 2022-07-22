@@ -1,4 +1,4 @@
-# 2022-07-14T16:01:22.600965100
+# 2022-07-18T16:08:35.402637061
 # j2eo team
 +alias stdlib.lang.class__System
 +alias stdlib.lang.class__Object
@@ -12,6 +12,7 @@
     class__Object.new > super
     super > @
     "class__CastToParentViaMethod" > className
+    1 > address
     [this] > init
       seq > @
         TRUE
@@ -71,6 +72,7 @@
     class__Object.new > super
     super > @
     "class__S" > className
+    1 > address
     [this] > init
       seq > @
         variableDeclaration_1
@@ -105,6 +107,7 @@
     class__S.new > super
     super > @
     "class__T" > className
+    1 > address
     [this] > init
       seq > @
         variableDeclaration_2

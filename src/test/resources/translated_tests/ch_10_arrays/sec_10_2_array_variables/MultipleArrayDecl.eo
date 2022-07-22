@@ -1,4 +1,4 @@
-# 2022-07-14T15:51:08.800863700
+# 2022-07-18T16:13:14.042117125
 # j2eo team
 +alias stdlib.lang.class__System
 +alias stdlib.primitives.prim__short
@@ -12,6 +12,7 @@
     class__Object.new > super
     super > @
     "class__MultipleArrayDecl" > className
+    1 > address
     [this] > init
       seq > @
         TRUE

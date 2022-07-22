@@ -1,4 +1,4 @@
-# 2022-07-14T15:53:44.146046200
+# 2022-07-18T16:11:00.396321612
 # j2eo team
 +alias stdlib.primitives.prim__float
 +alias stdlib.lang.class__System
@@ -12,6 +12,7 @@
     class__Object.new > super
     super > @
     "class__DoStmtIterateOverFloat" > className
+    1 > address
     [this] > init
       seq > @
         TRUE

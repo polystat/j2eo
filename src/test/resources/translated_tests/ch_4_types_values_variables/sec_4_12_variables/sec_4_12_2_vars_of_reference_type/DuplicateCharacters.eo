@@ -1,4 +1,4 @@
-# 2022-07-14T16:05:48.167701900
+# 2022-07-18T16:12:46.278621679
 # j2eo team
 +alias stdlib.primitives.prim__char
 +alias stdlib.lang.class__System
@@ -13,6 +13,7 @@
     class__Object.new > super
     super > @
     "class__DuplicateCharacters" > className
+    1 > address
     [this] > init
       seq > @
         TRUE

@@ -1,6 +1,7 @@
-# 2022-07-14T15:53:24.124216700
+# 2022-07-18T16:08:34.568696244
 # j2eo team
 +alias stdlib.lang.class__System
++alias stdlib.primitives.null
 +alias stdlib.lang.class__Object
 +alias stdlib.primitives.prim__int
 +alias stdlib.lang.class__String
@@ -13,6 +14,7 @@
     class__Object.new > super
     super > @
     "class__CountEvenElements" > className
+    1 > address
     [this] > init
       seq > @
         TRUE
@@ -98,9 +100,7 @@
     [] > initializerSimple_5
       literal_4 > @
     [] > literal_4
-      prim__int.constructor_2 > @
-        prim__int.new
-        0
+      null > @
     prim__int.constructor_1 > odd
       prim__int.new
     [] > variableDeclaration_6
@@ -109,9 +109,7 @@
     [] > initializerSimple_6
       literal_5 > @
     [] > literal_5
-      prim__int.constructor_2 > @
-        prim__int.new
-        0
+      null > @
     [] > statementExpression_3
       for_loop_placeholder > @
     [] > statementExpression_4

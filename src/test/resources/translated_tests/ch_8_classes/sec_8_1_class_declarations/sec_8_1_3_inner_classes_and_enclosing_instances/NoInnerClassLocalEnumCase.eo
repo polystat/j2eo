@@ -1,4 +1,119 @@
+# 2022-07-18T16:29:59.276224294
+# j2eo team
++alias stdlib.lang.class__Object
++alias stdlib.lang.class__System
++alias stdlib.lang.class__String
 
-+package failed translation!
+[] > class__A
+  class__Object > super
+  super > @
+  [] > new
+    class__Object.new > super
+    super > @
+    "class__A" > className
+    1 > address
+    [this] > init
+      seq > @
+        TRUE
+    # m :: null -> void
+    [this] > m
+      seq > @
+        declaration_1
+        statementExpression_1
+        variableDeclaration_1
+        statementExpression_2
+        statementExpression_3
+      [] > statementExpression_1
+        FALSE > @
+      cage > e
+      [] > variableDeclaration_1
+        e.write > @
+          initializerSimple_1
+      [] > initializerSimple_1
+        fieldAccess_1 > @
+      [] > fieldAccess_1
+        simpleReference_1.C > @
+      [] > simpleReference_1
+        B > @
+      [] > statementExpression_2
+        class__System.out.println > @
+          class__System.out
+          binary_1
+      [] > binary_1
+        simpleReference_2.eq > @
+          fieldAccess_3
+      [] > simpleReference_2
+        e > @
+      [] > fieldAccess_3
+        simpleReference_3.C > @
+      [] > simpleReference_3
+        class__B > @
+      [] > statementExpression_3
+        class__System.out.println > @
+          class__System.out
+          binary_2
+      [] > binary_2
+        simpleReference_4.eq > @
+          fieldAccess_5
+      [] > simpleReference_4
+        e > @
+      [] > fieldAccess_5
+        simpleReference_5.D > @
+      [] > simpleReference_5
+        class__B > @
+  # null :: null -> void
+  [this] > constructor
+    seq > @
+      initialization
+      statementExpression_4
+      this
+    [] > initialization
+      this.init > @
+        this
+    [] > statementExpression_4
+      this.super.constructor > @
+        this.super
 
+[] > class__NoInnerClassLocalEnumCase
+  class__Object > super
+  super > @
+  [] > new
+    class__Object.new > super
+    super > @
+    "class__NoInnerClassLocalEnumCase" > className
+    1 > address
+    [this] > init
+      seq > @
+        TRUE
+  # main :: String[] -> void
+  [args] > main
+    seq > @
+      statementExpression_5
+      statementExpression_6
+    [] > statementExpression_5
+      unsupported_qualifier.m > @
+        unsupported_qualifier
+    [] > statementExpression_6
+      class__System.out.println > @
+        class__System.out
+        literal_1
+    [] > literal_1
+      class__String.constructor_2 > @
+        class__String.new
+        "passed"
+  # null :: null -> void
+  [this] > constructor
+    seq > @
+      initialization
+      statementExpression_7
+      this
+    [] > initialization
+      this.init > @
+        this
+    [] > statementExpression_7
+      this.super.constructor > @
+        this.super
 
+[args...] > main
+  class__NoInnerClassLocalEnumCase.main > @
+    *

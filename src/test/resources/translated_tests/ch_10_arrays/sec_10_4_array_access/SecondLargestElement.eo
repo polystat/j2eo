@@ -1,6 +1,7 @@
-# 2022-07-14T16:04:56.414894700
+# 2022-07-18T16:11:14.581300431
 # j2eo team
 +alias stdlib.lang.class__System
++alias stdlib.primitives.null
 +alias stdlib.lang.class__Object
 +alias stdlib.primitives.prim__int
 +alias stdlib.lang.class__String
@@ -12,6 +13,7 @@
     class__Object.new > super
     super > @
     "class__SecondLargestElement" > className
+    1 > address
     [this] > init
       seq > @
         TRUE
@@ -108,9 +110,7 @@
     [] > initializerSimple_4
       literal_6 > @
     [] > literal_6
-      prim__int.constructor_2 > @
-        prim__int.new
-        0
+      null > @
     [] > statementExpression_4
       simpleReference_6.write > @
         arrayCreation_1

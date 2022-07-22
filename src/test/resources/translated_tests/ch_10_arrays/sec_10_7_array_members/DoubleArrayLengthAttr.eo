@@ -1,4 +1,4 @@
-# 2022-07-14T16:05:32.296999400
+# 2022-07-18T16:08:29.899098090
 # j2eo team
 +alias stdlib.primitives.prim__float
 +alias stdlib.lang.class__System
@@ -13,6 +13,7 @@
     class__Object.new > super
     super > @
     "class__DoubleArrayLengthAttr" > className
+    1 > address
     [this] > init
       seq > @
         TRUE

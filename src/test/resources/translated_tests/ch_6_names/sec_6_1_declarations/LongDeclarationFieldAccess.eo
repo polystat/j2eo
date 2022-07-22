@@ -1,4 +1,4 @@
-# 2022-07-14T16:06:09.004346800
+# 2022-07-18T16:09:28.282827667
 # j2eo team
 +alias stdlib.lang.class__System
 +alias stdlib.lang.class__Object
@@ -13,6 +13,7 @@
     class__Object.new > super
     super > @
     "class__LongDeclarationFieldAccess" > className
+    1 > address
     [this] > init
       seq > @
         variableDeclaration_1

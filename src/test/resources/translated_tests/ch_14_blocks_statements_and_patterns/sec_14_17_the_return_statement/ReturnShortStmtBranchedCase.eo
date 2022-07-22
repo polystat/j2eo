@@ -1,4 +1,4 @@
-# 2022-07-14T15:55:47.861152700
+# 2022-07-18T16:10:16.084792427
 # j2eo team
 +alias stdlib.lang.class__System
 +alias stdlib.primitives.prim__short
@@ -13,6 +13,7 @@
     class__Object.new > super
     super > @
     "class__ReturnShortStmtBranchedCase" > className
+    1 > address
     [this] > init
       seq > @
         TRUE

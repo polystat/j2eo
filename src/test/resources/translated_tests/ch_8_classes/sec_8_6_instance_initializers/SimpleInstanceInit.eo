@@ -1,4 +1,4 @@
-# 2022-07-14T16:08:18.363976900
+# 2022-07-18T16:10:26.703208665
 # j2eo team
 +alias stdlib.lang.class__System
 +alias stdlib.lang.class__Object
@@ -12,6 +12,7 @@
     class__Object.new > super
     super > @
     "class__SimpleInstanceInit" > className
+    1 > address
     [this] > init
       seq > @
         variableDeclaration_1

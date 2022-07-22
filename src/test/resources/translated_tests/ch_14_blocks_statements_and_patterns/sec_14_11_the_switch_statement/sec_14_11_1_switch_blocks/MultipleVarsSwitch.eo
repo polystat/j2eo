@@ -1,4 +1,4 @@
-# 2022-07-14T16:05:24.298881800
+# 2022-07-18T16:10:17.770403433
 # j2eo team
 +alias stdlib.lang.class__Object
 +alias stdlib.primitives.prim__int
@@ -10,6 +10,7 @@
     class__Object.new > super
     super > @
     "class__MultipleVarsSwitch" > className
+    1 > address
     [this] > init
       seq > @
         TRUE

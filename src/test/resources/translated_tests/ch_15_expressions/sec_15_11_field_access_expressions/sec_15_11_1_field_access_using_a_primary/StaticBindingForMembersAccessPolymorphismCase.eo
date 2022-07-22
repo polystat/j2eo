@@ -1,4 +1,4 @@
-# 2022-07-14T15:55:51.677609400
+# 2022-07-18T16:13:26.899942758
 # j2eo team
 +alias stdlib.lang.class__System
 +alias stdlib.lang.class__Object
@@ -12,6 +12,7 @@
     class__Object.new > super
     super > @
     "class__StaticBindingForMembersAccessPolymorphismCase" > className
+    1 > address
     [this] > init
       seq > @
         TRUE
@@ -99,6 +100,7 @@
     class__Object.new > super
     super > @
     "class__S" > className
+    1 > address
     [this] > init
       seq > @
         TRUE
@@ -132,6 +134,7 @@
     class__S.new > super
     super > @
     "class__T" > className
+    1 > address
     [this] > init
       seq > @
         TRUE

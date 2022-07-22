@@ -1,4 +1,4 @@
-# 2022-07-14T16:01:31.558963300
+# 2022-07-18T16:09:43.221109481
 # j2eo team
 +alias stdlib.lang.class__System
 +alias stdlib.lang.class__Object
@@ -12,6 +12,7 @@
     class__Object.new > super
     super > @
     "class__EvaluatedTernaryOperator" > className
+    1 > address
     [this] > init
       seq > @
         TRUE

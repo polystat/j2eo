@@ -1,4 +1,4 @@
-# 2022-07-14T16:07:06.104710700
+# 2022-07-18T16:11:34.542598324
 # j2eo team
 +alias stdlib.lang.class__System
 +alias stdlib.lang.class__Object
@@ -12,6 +12,7 @@
     class__Object.new > super
     super > @
     "class__MethodLong" > className
+    1 > address
     [this] > init
       seq > @
         TRUE

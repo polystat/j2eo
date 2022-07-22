@@ -1,4 +1,4 @@
-# 2022-07-14T16:01:23.757964
+# 2022-07-18T16:11:37.575478452
 # j2eo team
 +alias stdlib.lang.class__System
 +alias stdlib.lang.class__Object
@@ -12,6 +12,7 @@
     class__Object.new > super
     super > @
     "class__SimpleInnerClass" > className
+    1 > address
     [this] > init
       seq > @
         TRUE
@@ -61,6 +62,7 @@
     class__Object.new > super
     super > @
     "class__HasStatic" > className
+    1 > address
     [this] > init
       seq > @
         TRUE
@@ -86,6 +88,7 @@
     class__Object.new > super
     super > @
     "class__Outer" > className
+    1 > address
     [this] > init
       seq > @
         TRUE
@@ -96,6 +99,7 @@
       class__HasStatic.new > super
       super > @
       "class__Inner" > className
+      1 > address
       [this] > init
         seq > @
           TRUE
@@ -122,6 +126,7 @@
         class__NestedButNotInner.new > super
         super > @
         "class__VeryNestedButNotInner" > className
+        1 > address
         [this] > init
           seq > @
             TRUE
@@ -156,6 +161,7 @@
       class__Object.new > super
       super > @
       "class__NestedButNotInner" > className
+      1 > address
       [this] > init
         seq > @
           variableDeclaration_2

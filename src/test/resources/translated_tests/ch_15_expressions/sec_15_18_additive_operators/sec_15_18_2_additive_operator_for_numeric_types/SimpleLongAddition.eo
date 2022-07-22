@@ -1,4 +1,4 @@
-# 2022-07-14T16:08:50.119336500
+# 2022-07-18T16:12:07.464021563
 # j2eo team
 +alias stdlib.lang.class__System
 +alias stdlib.lang.class__Object
@@ -13,6 +13,7 @@
     class__Object.new > super
     super > @
     "class__SimpleLongAddition" > className
+    1 > address
     [this] > init
       seq > @
         TRUE

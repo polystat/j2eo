@@ -1,4 +1,4 @@
-# 2022-07-14T15:50:46.678660700
+# 2022-07-18T16:12:42.868084354
 # j2eo team
 +alias stdlib.lang.class__System
 +alias stdlib.primitives.prim__short
@@ -13,6 +13,7 @@
     class__Object.new > super
     super > @
     "class__ShortMatrixContent" > className
+    1 > address
     [this] > init
       seq > @
         TRUE

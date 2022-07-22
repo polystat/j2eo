@@ -1,4 +1,4 @@
-# 2022-07-14T15:51:29.069957600
+# 2022-07-18T16:12:38.874852131
 # j2eo team
 +alias stdlib.lang.class__System
 +alias stdlib.lang.class__Object
@@ -12,6 +12,7 @@
     class__Object.new > super
     super > @
     "class__ReturnBooleanStmt" > className
+    1 > address
     [this] > init
       seq > @
         TRUE

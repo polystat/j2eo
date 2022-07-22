@@ -1,4 +1,4 @@
-# 2022-07-14T16:08:40.080075600
+# 2022-07-18T16:12:56.554074624
 # j2eo team
 +alias stdlib.lang.class__System
 +alias stdlib.lang.class__Object
@@ -12,6 +12,7 @@
     class__Object.new > super
     super > @
     "class__SimpleAssignmentOperatorReturnValue" > className
+    1 > address
     [this] > init
       seq > @
         TRUE

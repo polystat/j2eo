@@ -1,7 +1,8 @@
-# 2022-07-14T15:58:09.819738300
+# 2022-07-18T16:09:23.794529136
 # j2eo team
-+alias stdlib.lang.class__Object
 +alias stdlib.lang.class__System
++alias stdlib.primitives.null
++alias stdlib.lang.class__Object
 +alias stdlib.lang.class__String
 
 [] > class__InterfaceTypeVar
@@ -11,6 +12,7 @@
     class__Object.new > super
     super > @
     "class__InterfaceTypeVar" > className
+    1 > address
     [this] > init
       seq > @
         TRUE
@@ -27,9 +29,7 @@
     [] > initializerSimple_1
       literal_1 > @
     [] > literal_1
-      prim__int.constructor_2 > @
-        prim__int.new
-        0
+      null > @
     [] > statementExpression_1
       class__System.out.println > @
         class__System.out

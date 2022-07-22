@@ -1,4 +1,4 @@
-# 2022-07-14T16:01:25.981964700
+# 2022-07-18T16:13:41.251163976
 # j2eo team
 +alias stdlib.lang.class__System
 +alias stdlib.lang.class__Object
@@ -12,6 +12,7 @@
     class__Object.new > super
     super > @
     "class__VariableLeftShift" > className
+    1 > address
     [this] > init
       seq > @
         TRUE

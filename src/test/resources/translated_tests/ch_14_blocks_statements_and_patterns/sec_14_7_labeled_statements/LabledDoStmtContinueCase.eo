@@ -1,4 +1,4 @@
-# 2022-07-14T15:59:28.439106600
+# 2022-07-18T16:12:40.435839516
 # j2eo team
 +alias stdlib.lang.class__System
 +alias stdlib.lang.class__Object
@@ -12,6 +12,7 @@
     class__Object.new > super
     super > @
     "class__LabledDoStmtContinueCase" > className
+    1 > address
     [this] > init
       seq > @
         TRUE

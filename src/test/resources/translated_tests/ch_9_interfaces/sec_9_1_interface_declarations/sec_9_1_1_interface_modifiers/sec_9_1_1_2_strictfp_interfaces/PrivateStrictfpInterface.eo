@@ -1,4 +1,4 @@
-# 2022-07-14T15:59:54.057132900
+# 2022-07-18T16:11:53.390766428
 # j2eo team
 +alias stdlib.primitives.prim__float
 +alias stdlib.lang.class__System
@@ -13,6 +13,7 @@
     class__Object.new > super
     super > @
     "class__PrivateStrictfpInterface" > className
+    1 > address
     [this] > init
       seq > @
         TRUE
@@ -39,6 +40,7 @@
       class__Object.new > super
       super > @
       "class__Work" > className
+      1 > address
       [this] > init
         seq > @
           TRUE

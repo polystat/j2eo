@@ -1,4 +1,4 @@
-# 2022-07-14T16:04:58.537958700
+# 2022-07-18T16:11:13.852574500
 # j2eo team
 +alias stdlib.lang.class__System
 +alias stdlib.lang.class__Object
@@ -12,6 +12,7 @@
     class__Object.new > super
     super > @
     "class__MatrixDiagonalSum" > className
+    1 > address
     [this] > init
       seq > @
         TRUE

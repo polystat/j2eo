@@ -1,4 +1,4 @@
-# 2022-07-14T15:57:18.182153300
+# 2022-07-18T16:08:38.541177743
 # j2eo team
 +alias stdlib.lang.class__Object
 +alias stdlib.lang.class__System
@@ -11,6 +11,7 @@
     class__Object.new > super
     super > @
     "class__Point" > className
+    1 > address
     [this] > init
       seq > @
         TRUE
@@ -41,6 +42,7 @@
     class__Object.new > super
     super > @
     "class__ComplexDefValueTest" > className
+    1 > address
     [this] > init
       seq > @
         TRUE

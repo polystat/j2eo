@@ -1,4 +1,4 @@
-# 2022-07-14T16:06:13.903311
+# 2022-07-18T16:09:34.881899809
 # j2eo team
 +alias stdlib.primitives.prim__char
 +alias stdlib.lang.class__System
@@ -14,6 +14,7 @@
     class__Object.new > super
     super > @
     "class__ShiftPromotion" > className
+    1 > address
     [this] > init
       seq > @
         TRUE

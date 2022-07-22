@@ -1,4 +1,4 @@
-# 2022-07-14T16:00:17.473089900
+# 2022-07-18T16:13:09.229006463
 # j2eo team
 +alias stdlib.primitives.prim__float
 +alias stdlib.lang.class__System
@@ -12,6 +12,7 @@
     class__Object.new > super
     super > @
     "class__SimpleNonVoidStrictFpExpression" > className
+    1 > address
     [this] > init
       seq > @
         TRUE

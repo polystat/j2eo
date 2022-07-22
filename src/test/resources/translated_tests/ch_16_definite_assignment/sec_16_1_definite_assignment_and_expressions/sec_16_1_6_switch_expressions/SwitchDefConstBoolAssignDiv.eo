@@ -1,4 +1,4 @@
-# 2022-07-14T16:00:04.457607300
+# 2022-07-18T16:13:21.801520341
 # j2eo team
 +alias stdlib.lang.class__System
 +alias stdlib.lang.class__Object
@@ -12,6 +12,7 @@
     class__Object.new > super
     super > @
     "class__SwitchDefConstBoolAssignDiv" > className
+    1 > address
     [this] > init
       seq > @
         TRUE

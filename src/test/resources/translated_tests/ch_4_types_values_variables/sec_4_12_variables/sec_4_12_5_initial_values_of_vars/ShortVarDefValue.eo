@@ -1,4 +1,4 @@
-# 2022-07-14T15:54:10.842795
+# 2022-07-18T16:13:01.657917025
 # j2eo team
 +alias stdlib.lang.class__System
 +alias stdlib.primitives.prim__short
@@ -12,6 +12,7 @@
     class__Object.new > super
     super > @
     "class__ShortVarDefValue" > className
+    1 > address
     [this] > init
       seq > @
         TRUE

@@ -1,4 +1,4 @@
-# 2022-07-14T15:50:40.691884700
+# 2022-07-18T16:11:10.325541822
 # j2eo team
 +alias stdlib.primitives.prim__char
 +alias stdlib.lang.class__System
@@ -13,6 +13,7 @@
     class__Object.new > super
     super > @
     "class__SwitchWithCharDefaultUsed" > className
+    1 > address
     [this] > init
       seq > @
         TRUE

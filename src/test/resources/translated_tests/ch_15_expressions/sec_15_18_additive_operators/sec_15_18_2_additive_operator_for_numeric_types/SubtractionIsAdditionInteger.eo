@@ -1,4 +1,4 @@
-# 2022-07-14T16:07:11.193323900
+# 2022-07-18T16:08:26.795635480
 # j2eo team
 +alias stdlib.lang.class__System
 +alias stdlib.lang.class__Object
@@ -12,6 +12,7 @@
     class__Object.new > super
     super > @
     "class__SubtractionIsAdditionInteger" > className
+    1 > address
     [this] > init
       seq > @
         TRUE
