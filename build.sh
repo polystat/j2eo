@@ -6,6 +6,6 @@ set -e
 echo "Building J2EO..."
 # don't throw error if a dir doesn't exist
 rm -rf build/libs
-./gradlew fatJar -x test
+gradle fatJar -x test
 cp build/libs/* ./
 echo "Build completed"

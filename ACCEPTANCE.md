@@ -6,6 +6,7 @@
     - [Building](#building)
       - [macOS](#macos)
       - [Ubuntu 22.04 (latest LTS)](#ubuntu-2204-latest-lts)
+      - [Windows](#windows)
     - [Running](#running)
   - [Downloading J2EO](#downloading-j2eo)
   - [Installing J2EO](#installing-j2eo)
@@ -31,18 +32,16 @@ The J2EO source code is available on [GitHub](https://github.com/polystat/j2eo).
 
 ### Building
 
-J2EO project is implemented in Java/Kotlin and uses Gradle as a build system. You need to install JDK 11 to be able to build the project.
-
-Gradle wrapper is included in the project, so you don't need to install Gradle on your system.
+J2EO project is implemented in Java/Kotlin and uses Gradle as a build system. You need to install JDK 11 and Gradle to be able to build the project.
 
 J2EO uses ANTLR to build its Java parser, so if you want to rebuild grammar file (which is not necessary to successfully build the project), you need to install it as well.
 
 #### macOS
 
-To install JDK on macOS, install [Homebrew](https://brew.sh) (a package manager) and run:
+To install JDK and Gradle on macOS, install [Homebrew](https://brew.sh) (a package manager) and run:
 
 ```shell
-brew install openjdk@11
+brew install openjdk@11 gradle
 ```
 
 To download ANTLR, use the following command from the repository root:
@@ -62,11 +61,23 @@ sudo apt update
 sudo apt install -y openjdk-11-jdk-headless
 ```
 
+To install Gradle on Ubuntu, proceed with the [official instructions](https://gradle.org/install/).
+
 To download ANTLR, use the following command from the repository root:
 
 ```shell
 wget https://www.antlr.org/download/antlr-4.10.1-complete.jar
 ```
+
+#### Windows
+
+Windows does not have package manager.
+
+- To install Java on Windows, install Development Kit from the [Oracle webiste](https://www.oracle.com/java/technologies/javase/jdk11-archive-downloads.html).
+- To install Gradle on Windows, proceed with the [official instructions](https://gradle.org/install/).
+- To install ANTLR, download file from [this link](https://www.antlr.org/download/antlr-4.10.1-complete.jar) using your browser and put it in the project root.
+
+
 
 
 ### Running
@@ -84,6 +95,20 @@ If you want to build project on your own or work on the project, you can clone t
 ```shell
 git clone https://github.com/polystat/j2eo.git
 ```
+
+To build the project on UNIX systems, use the following command from the project root:
+
+```shell
+./build.sh
+```
+
+To build project on Windows, use command
+
+```shell
+gradle build
+```
+
+The built J2EO jar will be located at `build/libs`.
 
 ---
 

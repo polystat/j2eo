@@ -72,7 +72,7 @@ dependencies {
     implementation(kotlin("stdlib-jdk8"))
 
     // Use ANTLR for parser generation
-    antlr("org.antlr:antlr4:4.9.3")
+    antlr("org.antlr:antlr4:4.10.1")
 
     implementation("org.polystat:j2ast:0.2.0")
 }

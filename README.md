@@ -14,10 +14,13 @@ This is a translator of **Java** programming language to [EOLANG](https://www.eo
 
 1. Make sure you have installed:
     - **Java 11+** (make sure command `java -version` shows 11+ version of Java in terminal if you have multiple Java
-      version installed)
+      version installed).
+    - **Gradle 7.4+** to build the project.
     - **Maven 3.8+** to run tests (be aware of [possible conflicts](https://bugs.debian.org/cgi-bin/bugreport.cgi?bug=980467) of the
-      latest versions of Maven and Java on some OSs)
-    - **ANTLR4 4.9.3** (if you want to build the parser on your own. If you don't have ANTLR, you still can build project using bundled version of parser.)
+      latest versions of Maven and Java on some OSs).
+    - **ANTLR4 4.10.1** to build parser.
+
+   You can refer to ACCEPTANCE.md file for instructions on installing these components.
 
 2. Clone the repo into your folder:
 
@@ -67,7 +70,7 @@ This command will translate `hello.java` in the current directory, saving the ou
 Built-in unit tests may be executed using:
 
 ```shell
-./gradlew test
+gradle test
 ```
 
 ### Bundled test suite

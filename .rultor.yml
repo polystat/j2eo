@@ -15,14 +15,8 @@ release:
     [[ "${tag}" =~ ^[0-9]+\.[0-9]+\.[0-9]+$ ]] || exit -1
 
     cp ../gradle.properties .
-    echo "Home dir: $HOME"
-    echo "Current path: $(pwd)"
-    echo "Contents of home dir:"
-    ls -lha /home/r
-    echo "Contents of current dir:"
-    ls -lha
     echo "Building Gradle project (excluding tests)..."
-    ./gradlew build fatJar publish -x test --info -Dcandidates=false -PmvnPublicationVersion=${tag} -Dsigning.secretKeyRingFile=/home/r/secring.gpg
+    gradle build fatJar publish -x test --info -Dcandidates=false -PmvnPublicationVersion=${tag} -Dsigning.secretKeyRingFile=/home/r/secring.gpg
     echo "Done."
 
     mv "J2EO-${tag}.jar" j2eo.jar
