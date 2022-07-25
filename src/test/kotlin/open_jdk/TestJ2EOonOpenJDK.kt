@@ -5,10 +5,8 @@ import org.antlr.v4.runtime.CommonTokenStream
 import org.junit.jupiter.api.AfterAll
 import org.junit.jupiter.api.Assertions
 import org.junit.jupiter.api.BeforeAll
-import org.junit.jupiter.api.Disabled
 import org.junit.jupiter.api.DynamicTest
 import org.junit.jupiter.api.MethodOrderer
-import org.junit.jupiter.api.Order
 import org.junit.jupiter.api.TestFactory
 import org.junit.jupiter.api.TestMethodOrder
 import org.junit.jupiter.api.assertTimeoutPreemptively
@@ -42,10 +40,9 @@ import kotlin.io.path.relativeTo
 
 @Execution(ExecutionMode.SAME_THREAD)
 @TestMethodOrder(MethodOrderer.OrderAnnotation::class)
-@Disabled
+// @Disabled
 class TestJ2EOonOpenJDK {
     @TestFactory
-    @Order(1)
     fun executeAndCheckEO(): Collection<DynamicTest> {
         return translatedFiles
             .map { file -> executeTranslatedTest(file.first.toPath(), file.second) }

@@ -7,8 +7,6 @@ import org.junit.jupiter.api.Assertions
 import org.junit.jupiter.api.BeforeAll
 import org.junit.jupiter.api.DynamicTest
 import org.junit.jupiter.api.MethodOrderer
-import org.junit.jupiter.api.Order
-import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.TestFactory
 import org.junit.jupiter.api.TestMethodOrder
 import org.junit.jupiter.api.assertTimeoutPreemptively
@@ -38,67 +36,10 @@ import kotlin.io.path.relativeTo
 @Execution(ExecutionMode.SAME_THREAD)
 @TestMethodOrder(MethodOrderer.OrderAnnotation::class)
 class TestJ2EORuntimeCheck {
-
     @TestFactory
-    @Order(1)
-    fun checkTranslation(): Collection<DynamicTest> {
-        return testFolderRoot.toFile().walk()
-            .filter { file -> file.isFile }
-            .filter { file -> isReadyTest(file.toPath()) }
-            .filter { file -> isNotClassFile(file.toPath()) }
-            .filter { file -> isJavaFile(file.toPath()) }
-            // .filter { file -> isSimpleTest(file.toPath()) }
-            .map { file -> translateFile(file.toPath()) }
-            .toList()
-    }
-
-    @Test
-    @Order(2)
-    fun compileEOFiles() {
-        // Copy all necessary files
-        val pomClonePath = File(testFolderRoot.toString() + fileSep + "pom.xml").toPath()
-        Files.copy(pomFilePath, pomClonePath)
-        val stdClonePath = File(testFolderRoot.toString() + fileSep + "stdlib").toPath()
-        stdlibFolderRoot.toFile().copyRecursively(stdClonePath.toFile())
-
-        // Execute generated EO code
-        val isWindows = System.getProperty("os.name").lowercase(Locale.getDefault())
-            .contains("windows") // Matters a lot
-
-        // Compile EO file
-        val mvnCommands = if (isWindows) listOf("mvn.cmd", "clean", "compile")
-        else listOf("mvn", "clean", "compile")
-        val compileProcess = ProcessBuilder(mvnCommands)
-            .directory(testFolderRoot.toFile())
-            .redirectErrorStream(true)
-            .start()
-
-        // Receive compilation output (maybe useful)
-        val mvnStdInput = BufferedReader(InputStreamReader(compileProcess.inputStream))
-        var m: String?
-        val mvnSb = StringBuilder()
-        while (mvnStdInput.readLine().also { m = it } != null) {
-            mvnSb.append(m).append(lineSep)
-        }
-        compileProcess.waitFor()
-        compileProcess.destroy()
-        logger.info(" -- EO compilation output --$lineSep$mvnSb")
-
-        pomClonePath.toFile().delete()
-        stdClonePath.toFile().deleteRecursively()
-
-        assert(true)
-    }
-
-    @TestFactory
-    @Order(3)
     fun executeAndCheckEO(): Collection<DynamicTest> {
-        return testFolderRoot.toFile().walk()
-            .filter { file -> file.isFile }
-            .filter { file -> isReadyTest(file.toPath()) }
-            .filter { file -> isNotClassFile(file.toPath()) }
-            .filter { file -> isJavaFile(file.toPath()) }
-            .map { file -> executeTranslatedTest(file.toPath()) }
+        return translatedFiles
+            .map { file -> executeTranslatedTest(file.first.toPath(), file.second) }
             .toList()
     }
 
@@ -108,6 +49,9 @@ class TestJ2EORuntimeCheck {
         private var stdlibFolderRoot = Paths.get("")
         private val fileSep = File.separatorChar.toString()
         private val lineSep = System.lineSeparator() // New line character
+
+        private lateinit var traversedFiles: Sequence<File>
+        private lateinit var translatedFiles: Sequence<Pair<File, Boolean>>
 
         @BeforeAll
         @JvmStatic
@@ -135,6 +79,9 @@ class TestJ2EORuntimeCheck {
             testFolderRoot.toFile().walk()
                 .filter { file -> file.isFile }
                 .filter { file -> isEOFile(file.toPath()) }.forEach { it.delete() }
+
+            checkTranslation()
+            compileEOFiles()
         }
 
         @AfterAll
@@ -146,13 +93,21 @@ class TestJ2EORuntimeCheck {
                 .filter { file -> isEOFile(file.toPath()) }.forEach { it.delete() }
         }
 
-        private fun translateFile(path: Path): DynamicTest {
-            return DynamicTest.dynamicTest(
-                path.parent.fileName.toString() + fileSep +
-                    path.fileName.toString()
-            ) {
+        private fun checkTranslation() {
+            traversedFiles = testFolderRoot.toFile().walk()
+                .filter { file -> file.isFile }
+                .filter { file -> isReadyTest(file.toPath()) }
+                .filter { file -> isNotClassFile(file.toPath()) }
+                .filter { file -> isJavaFile(file.toPath()) }
+
+            translatedFiles = traversedFiles
+                .map { file -> file to translateFile(file.toPath()) }
+        }
+
+        private fun translateFile(path: Path): Boolean {
+            try {
                 assertTimeoutPreemptively(
-                    Duration.ofSeconds(10)
+                    Duration.ofSeconds(90)
                 ) {
                     val lexer = JavaLexer(CharStreams.fromFileName(path.absolutePathString()))
                     val parser = JavaParser(CommonTokenStream(lexer))
@@ -165,14 +120,55 @@ class TestJ2EORuntimeCheck {
                     Files.writeString(newPath, genEOLangText.generateEO(0))
                     assert(true)
                 }
+            } catch (e: Exception) {
+                return false
             }
+            return true
         }
 
-        private fun executeTranslatedTest(path: Path): DynamicTest {
+        private fun compileEOFiles() {
+            // Copy all necessary files
+            val pomClonePath = File(testFolderRoot.toString() + fileSep + "pom.xml").toPath()
+            Files.copy(pomFilePath, pomClonePath)
+            val stdClonePath = File(testFolderRoot.toString() + fileSep + "stdlib").toPath()
+            stdlibFolderRoot.toFile().copyRecursively(stdClonePath.toFile())
+
+            // Execute generated EO code
+            val isWindows = System.getProperty("os.name").lowercase(Locale.getDefault())
+                .contains("windows") // Matters a lot
+
+            // Compile EO file
+            val mvnCommands = if (isWindows) listOf("mvn.cmd", "clean", "compile")
+            else listOf("mvn", "clean", "compile")
+            val compileProcess = ProcessBuilder(mvnCommands)
+                .directory(testFolderRoot.toFile())
+                .redirectErrorStream(true)
+                .start()
+
+            // Receive compilation output (maybe useful)
+            val mvnStdInput = BufferedReader(InputStreamReader(compileProcess.inputStream))
+            var m: String?
+            val mvnSb = StringBuilder()
+            while (mvnStdInput.readLine().also { m = it } != null) {
+                mvnSb.append(m).append(lineSep)
+            }
+            compileProcess.waitFor()
+            compileProcess.destroy()
+            logger.info(" -- EO compilation output --$lineSep$mvnSb")
+
+            pomClonePath.toFile().delete()
+            stdClonePath.toFile().deleteRecursively()
+        }
+
+        private fun executeTranslatedTest(path: Path, isTranslated: Boolean): DynamicTest {
             return DynamicTest.dynamicTest(
                 path.parent.fileName.toString() + "/" +
                     path.fileName.toString()
             ) {
+                if (!isTranslated) {
+                    assert(false)
+                }
+
                 assertTimeoutPreemptively(Duration.ofSeconds(15)) {
                     val isWindows = System.getProperty("os.name").lowercase(Locale.getDefault())
                         .contains("windows") // Matters a lot
