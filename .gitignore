@@ -19,3 +19,6 @@ hadoop*
 J2EO*.jar
 j2eo-data
 /src/main/java/org/polystat/j2eo/antlrParser/*
+gradlew
+gradlew.bat
+gradle

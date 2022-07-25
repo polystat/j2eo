@@ -5,6 +5,7 @@ import org.antlr.v4.runtime.CommonTokenStream
 import org.junit.jupiter.api.AfterAll
 import org.junit.jupiter.api.Assertions
 import org.junit.jupiter.api.BeforeAll
+import org.junit.jupiter.api.Disabled
 import org.junit.jupiter.api.DynamicTest
 import org.junit.jupiter.api.MethodOrderer
 import org.junit.jupiter.api.TestFactory
@@ -40,7 +41,7 @@ import kotlin.io.path.relativeTo
 
 @Execution(ExecutionMode.SAME_THREAD)
 @TestMethodOrder(MethodOrderer.OrderAnnotation::class)
-// @Disabled
+@Disabled
 class TestJ2EOonOpenJDK {
     @TestFactory
     fun executeAndCheckEO(): Collection<DynamicTest> {
