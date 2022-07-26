@@ -1,4 +1,4 @@
-# 2022-07-14T15:55:16.235247300
+# 2022-07-18T16:12:27.391395190
 # j2eo team
 +alias stdlib.lang.class__System
 +alias stdlib.lang.class__Object
@@ -12,6 +12,7 @@
     class__Object.new > super
     super > @
     "class__SimpleSuperExpression" > className
+    1 > address
     [this] > init
       seq > @
         TRUE
@@ -51,6 +52,7 @@
     class__Object.new > super
     super > @
     "class__T0" > className
+    1 > address
     [this] > init
       seq > @
         variableDeclaration_1
@@ -85,6 +87,7 @@
     class__T0.new > super
     super > @
     "class__T1" > className
+    1 > address
     [this] > init
       seq > @
         variableDeclaration_2
@@ -119,6 +122,7 @@
     class__T1.new > super
     super > @
     "class__T2" > className
+    1 > address
     [this] > init
       seq > @
         variableDeclaration_3
@@ -153,6 +157,7 @@
     class__T2.new > super
     super > @
     "class__T3" > className
+    1 > address
     [this] > init
       seq > @
         variableDeclaration_4
@@ -199,8 +204,8 @@
         cast_1 > @
       [] > cast_1
         class__T2.from > @
-          this_1
-      [] > this_1
+          this_5
+      [] > this_5
         this > @
       [] > statementExpression_10
         class__System.out.println > @
@@ -212,8 +217,8 @@
         cast_2 > @
       [] > cast_2
         class__T1.from > @
-          this_2
-      [] > this_2
+          this_6
+      [] > this_6
         this > @
       [] > statementExpression_11
         class__System.out.println > @
@@ -225,8 +230,8 @@
         cast_3 > @
       [] > cast_3
         class__T0.from > @
-          this_3
-      [] > this_3
+          this_7
+      [] > this_7
         this > @
   # null :: null -> void
   [this] > constructor

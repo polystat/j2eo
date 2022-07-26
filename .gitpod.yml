@@ -1,0 +1,11 @@
+
+tasks:
+  - name: Main
+    init: |
+      sudo apt update
+      sudo apt install -y antlr4 openjdk-11-jdk-headless
+
+vscode:
+  extensions:
+    - fwcd.kotlin
+    - redhat.java

@@ -1,4 +1,4 @@
-# 2022-07-14T15:54:31.662131
+# 2022-07-18T16:12:03.998277997
 # j2eo team
 +alias stdlib.lang.class__Object
 +alias stdlib.lang.class__System
@@ -11,6 +11,7 @@
     class__Object.new > super
     super > @
     "class__IfVarScopeTrueBlock" > className
+    1 > address
     [this] > init
       seq > @
         TRUE

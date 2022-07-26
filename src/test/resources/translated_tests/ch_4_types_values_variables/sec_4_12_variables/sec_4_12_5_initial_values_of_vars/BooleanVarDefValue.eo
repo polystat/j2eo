@@ -1,4 +1,4 @@
-# 2022-07-14T15:58:26.602519100
+# 2022-07-18T16:12:10.482145997
 # j2eo team
 +alias stdlib.lang.class__System
 +alias stdlib.lang.class__Object
@@ -12,6 +12,7 @@
     class__Object.new > super
     super > @
     "class__BooleanVarDefValue" > className
+    1 > address
     [this] > init
       seq > @
         TRUE

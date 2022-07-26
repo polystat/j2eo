@@ -1,6 +1,7 @@
-# 2022-07-14T15:51:37.356099400
+# 2022-07-18T16:13:10.038327419
 # j2eo team
 +alias stdlib.lang.class__System
++alias stdlib.primitives.null
 +alias stdlib.lang.class__Object
 +alias stdlib.primitives.prim__int
 +alias stdlib.lang.class__String
@@ -12,6 +13,7 @@
     class__Object.new > super
     super > @
     "class__MatrixRowAndColumnSum" > className
+    1 > address
     [this] > init
       seq > @
         TRUE
@@ -59,9 +61,7 @@
     [] > initializerSimple_3
       literal_3 > @
     [] > literal_3
-      prim__int.constructor_2 > @
-        prim__int.new
-        0
+      null > @
     [] > statementExpression_1
       simpleReference_1.write > @
         literal_4

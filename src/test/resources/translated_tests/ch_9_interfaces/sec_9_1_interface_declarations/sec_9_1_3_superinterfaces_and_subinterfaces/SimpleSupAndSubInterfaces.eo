@@ -1,4 +1,4 @@
-# 2022-07-14T15:51:26.114595600
+# 2022-07-18T16:12:03.433496438
 # j2eo team
 +alias stdlib.lang.class__Object
 +alias stdlib.lang.class__System
@@ -11,6 +11,7 @@
     class__Object.new > super
     super > @
     "class__SimpleSupAndSubInterfaces" > className
+    1 > address
     [this] > init
       seq > @
         TRUE
@@ -50,6 +51,7 @@
     class__Object.new > super
     super > @
     "class__Work" > className
+    1 > address
     [this] > init
       seq > @
         TRUE

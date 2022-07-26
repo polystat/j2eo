@@ -3,9 +3,9 @@
 <img src="https://www.yegor256.com/images/books/elegant-objects/cactus.svg" height="100px"  alt="eolang icon"/>
 
 [![Gradle Build](https://github.com/polystat/j2eo/actions/workflows/gradle-build.yml/badge.svg)](https://github.com/polystat/j2eo/actions/workflows/gradle-build.yml)
-![LINE](https://img.shields.io/badge/line--coverage-25,99%25-red.svg)
-![BRANCH](https://img.shields.io/badge/branch--coverage-25,00%25-red.svg)
-![COMPLEXITY](https://img.shields.io/badge/complexity-10,69-yellow.svg)
+![LINE](https://img.shields.io/badge/line--coverage-54.02%25-orange.svg)
+![BRANCH](https://img.shields.io/badge/branch--coverage-45.78%25-orange.svg)
+![COMPLEXITY](https://img.shields.io/badge/complexity-6.93-brightgreen.svg)
 
 [![Hits-of-Code](https://hitsofcode.com/github/polystat/j2eo)](https://hitsofcode.com/view/github/polystat/j2eo)
 ![Lines of code](https://img.shields.io/tokei/lines/github/polystat/j2eo)
@@ -15,11 +15,12 @@ This is a translator of **Java** programming language to [EOLANG](https://www.eo
 ## Usage
 
 1. Make sure you have installed:
-    - **Java 16+** (make sure command `java -version` shows 16+ version of Java in terminal if you have multiple Java
+    - **Java 11+** (make sure command `java -version` shows 11+ version of Java in terminal if you have multiple Java
       version installed)
     - **Maven 3.8+** to run tests (be aware of [possible conflicts](https://bugs.debian.org/cgi-bin/bugreport.cgi?bug=980467) of the
       latest versions of Maven and Java on some OSs)
     - **ANTLR4 4.9.3** (if you want to build the parser on your own. If you don't have ANTLR, you still can build project using bundled version of parser.)
+
 2. Clone the repo into your folder:
 
    HTTPS:
@@ -54,6 +55,45 @@ This is a translator of **Java** programming language to [EOLANG](https://www.eo
     ```shell
     java -jar j2eo.jar src/test/resources/polystat_tests/test1 -o output_eo
     ```
+
+You can also use [yegor256/j2eo](https://hub.docker.com/r/yegor256/j2eo) image for [Docker](https://docs.docker.com/get-docker/):
+
+```
+$ docker run -v $(pwd):/eo yegor256/j2eo hello.java --target output
+```
+
+This command will translate `hello.java` in the current directory, saving the output to `output/` subdirectory.
+
+### Unit tests
+
+Built-in unit tests may be executed using:
+
+```shell
+./gradlew test
+```
+
+### Bundled test suite
+
+J2EO comes with 1000+ bundled tests. There are two testing scenarios:
+
+#### Static check execution:
+- Java source code is translated to EO using J2EO project
+- Obtained EO code are compared with saved one. If they match — test is passed. If not — test is failed.
+
+All saved EO programs are located in [translated_test](src/test/resources/translated_tests) directory.
+
+This scenario can be executed by the following command:
+
+`./gradlew test --tests "common.TestJ2EOStaticCheck"`
+
+#### Parallel execution:
+- original Java source code of the text is compiled with Java compiler and executed. Stdout output is saved.
+- Java source code is translated to EO using J2EO project, then compiled with EO compiler and executed. Stdout output is stored.
+- Stdout outputs are compared. If they match — test is passed. If not — test is failed.
+
+This scenario may be executed using `./test_candidates.sh` script.
+
+Test suite follows the **Java Language Specification** structure, covering applicable chapters and sections of the Java specifications.
 
 ### Running translator on Hadoop
 
@@ -672,6 +712,31 @@ public A() {
 `this` is created object itself.
 
 If no constructor is provided then translator generate default constructor.
+
+#### Class translation structure:
+
+```
+[] > class__<Name of class>
+  class__<Parent name> > super              # Inheritance simulation
+  super > @
+  [] > new                                  # new is representation 
+                                            # of object itself
+    class__<Parent name>.new > super
+    super > @                               # Inheritance simulation
+    "class__<Name of class>" > className    # Name of class is being saved
+
+    1 > address                             # Identify that it 
+                                            # isn't a null object
+
+    [this] > init                           # Initializes class members
+      ...                                   # default values
+
+    ...                                     # Class methods and variables
+  ...                                       # Static methods and variables
+  [this] > constructor                      # Constructor
+    ...
+```
+
 ### 10 Arrays
 
 ___

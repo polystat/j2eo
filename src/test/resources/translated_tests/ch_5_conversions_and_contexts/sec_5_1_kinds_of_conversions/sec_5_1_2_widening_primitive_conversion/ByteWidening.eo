@@ -1,4 +1,4 @@
-# 2022-07-14T16:07:18.151040300
+# 2022-07-18T16:09:26.456467831
 # j2eo team
 +alias stdlib.lang.class__System
 +alias stdlib.primitives.prim__short
@@ -14,6 +14,7 @@
     class__Object.new > super
     super > @
     "class__ByteWidening" > className
+    1 > address
     [this] > init
       seq > @
         TRUE

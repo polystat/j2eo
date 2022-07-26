@@ -32,7 +32,7 @@
 parser grammar JavaParser;
 
 @header {
-package parser;
+package org.polystat.j2eo.antlrParser;
 }
 
 options { tokenVocab=JavaLexer; }
@@ -479,7 +479,7 @@ identifier
 
 localTypeDeclaration
     : classOrInterfaceModifier*
-      (classDeclaration | interfaceDeclaration | recordDeclaration)
+      (classDeclaration | enumDeclaration | interfaceDeclaration | recordDeclaration)
     | ';'
     ;
 

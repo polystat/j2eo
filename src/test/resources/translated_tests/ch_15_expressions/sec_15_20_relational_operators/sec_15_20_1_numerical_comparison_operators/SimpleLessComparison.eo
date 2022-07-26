@@ -1,4 +1,4 @@
-# 2022-07-14T16:06:51.366637
+# 2022-07-18T16:11:08.485338292
 # j2eo team
 +alias stdlib.lang.class__System
 +alias stdlib.lang.class__Object
@@ -12,6 +12,7 @@
     class__Object.new > super
     super > @
     "class__SimpleLessComparison" > className
+    1 > address
     [this] > init
       seq > @
         TRUE

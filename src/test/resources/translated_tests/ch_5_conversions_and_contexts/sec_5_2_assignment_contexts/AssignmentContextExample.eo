@@ -1,4 +1,4 @@
-# 2022-07-14T16:00:58.879478200
+# 2022-07-18T16:10:14.239843765
 # j2eo team
 +alias stdlib.primitives.prim__float
 +alias stdlib.primitives.prim__char
@@ -17,6 +17,7 @@
     class__Object.new > super
     super > @
     "class__AssignmentContextExample" > className
+    1 > address
     [this] > init
       seq > @
         TRUE

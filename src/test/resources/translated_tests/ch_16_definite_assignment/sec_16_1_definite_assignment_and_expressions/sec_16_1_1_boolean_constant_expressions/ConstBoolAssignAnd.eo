@@ -1,4 +1,4 @@
-# 2022-07-14T16:01:45.433963500
+# 2022-07-18T16:11:01.623058446
 # j2eo team
 +alias stdlib.lang.class__System
 +alias stdlib.lang.class__Object
@@ -13,6 +13,7 @@
     class__Object.new > super
     super > @
     "class__ConstBoolAssignAnd" > className
+    1 > address
     [this] > init
       seq > @
         TRUE

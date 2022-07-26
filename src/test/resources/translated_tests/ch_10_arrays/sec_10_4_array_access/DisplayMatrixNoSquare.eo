@@ -1,4 +1,4 @@
-# 2022-07-14T15:50:12.155914500
+# 2022-07-18T16:09:59.252825902
 # j2eo team
 +alias stdlib.lang.class__System
 +alias stdlib.lang.class__Object
@@ -12,6 +12,7 @@
     class__Object.new > super
     super > @
     "class__DisplayMatrixNoSquare" > className
+    1 > address
     [this] > init
       seq > @
         TRUE

@@ -1,4 +1,4 @@
-# 2022-07-14T15:50:27.839587100
+# 2022-07-18T16:11:38.474451821
 # j2eo team
 +alias stdlib.lang.class__System
 +alias stdlib.lang.class__Object
@@ -12,6 +12,7 @@
     class__Object.new > super
     super > @
     "class__ClassLeftHandOperandIsEvaluatedFirst" > className
+    1 > address
     [this] > init
       seq > @
         TRUE
@@ -38,9 +39,7 @@
         prim__int.new
         0
     [] > literal_2
-      prim__int.constructor_2 > @
-        prim__int.new
-        0
+      null > @
     [] > statementExpression_1
       simpleReference_1.write > @
         parenthesized_1
@@ -100,6 +99,7 @@
     class__Object.new > super
     super > @
     "class__Test" > className
+    1 > address
     [this] > init
       seq > @
         TRUE
@@ -119,8 +119,8 @@
       fieldAccess_4.write > @
         simpleReference_5
     [] > fieldAccess_4
-      this_1.id > @
-    [] > this_1
+      this_2.id > @
+    [] > this_2
       this > @
     [] > simpleReference_5
       id > @
@@ -134,9 +134,7 @@
     [] > simpleReference_6
       t > @
     [] > literal_5
-      prim__int.constructor_2 > @
-        prim__int.new
-        0
+      null > @
     [] > block_1
       seq > @
         statementExpression_6

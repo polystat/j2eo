@@ -1,4 +1,4 @@
-# 2022-07-14T15:59:56.893948100
+# 2022-07-18T16:10:22.994571815
 # j2eo team
 +alias stdlib.lang.class__System
 +alias stdlib.lang.class__Object
@@ -12,6 +12,7 @@
     class__Object.new > super
     super > @
     "class__SimpleReferencedConditionalExpression" > className
+    1 > address
     [this] > init
       seq > @
         TRUE
@@ -95,6 +96,7 @@
     class__Object.new > super
     super > @
     "class__S" > className
+    1 > address
     [this] > init
       seq > @
         TRUE
@@ -113,8 +115,8 @@
       fieldAccess_4.write > @
         simpleReference_3
     [] > fieldAccess_4
-      this_1.id > @
-    [] > this_1
+      this_2.id > @
+    [] > this_2
       this > @
     [] > simpleReference_3
       id > @
@@ -126,6 +128,7 @@
     class__S.new > super
     super > @
     "class__T" > className
+    1 > address
     [this] > init
       seq > @
         TRUE
@@ -139,8 +142,8 @@
       this.init > @
         this
     [] > statementExpression_5
-      this.this.super.constructor > @
-        this.this.super
+      this.super.constructor > @
+        this.super
         simpleReference_4
     [] > simpleReference_4
       id > @

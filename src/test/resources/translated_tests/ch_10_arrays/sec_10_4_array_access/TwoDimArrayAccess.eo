@@ -1,4 +1,4 @@
-# 2022-07-14T16:06:40.617767
+# 2022-07-18T16:09:22.868678700
 # j2eo team
 +alias stdlib.lang.class__System
 +alias stdlib.lang.class__Object
@@ -12,6 +12,7 @@
     class__Object.new > super
     super > @
     "class__TwoDimArrayAccess" > className
+    1 > address
     [this] > init
       seq > @
         TRUE

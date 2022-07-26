@@ -1,4 +1,4 @@
-# 2022-07-14T15:56:39.124371900
+# 2022-07-18T16:11:20.657736473
 # j2eo team
 +alias stdlib.lang.class__Object
 +alias stdlib.primitives.prim__int
@@ -10,6 +10,7 @@
     class__Object.new > super
     super > @
     "class__SwitchPatternMatching" > className
+    1 > address
     [this] > init
       seq > @
         TRUE
@@ -83,6 +84,7 @@
     class__Object.new > super
     super > @
     "class__IOController" > className
+    1 > address
     [this] > init
       seq > @
         TRUE
@@ -116,6 +118,7 @@
     class__Object.new > super
     super > @
     "class__Writer" > className
+    1 > address
     [this] > init
       seq > @
         TRUE

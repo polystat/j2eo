@@ -1,4 +1,4 @@
-# 2022-07-14T15:54:53.485273200
+# 2022-07-18T16:08:29.293445835
 # j2eo team
 +alias stdlib.lang.class__Object
 +alias stdlib.lang.class__System
@@ -11,6 +11,7 @@
     class__Object.new > super
     super > @
     "class__S1" > className
+    1 > address
     [this] > init
       seq > @
         TRUE
@@ -46,6 +47,7 @@
     class__S1.new > super
     super > @
     "class__T" > className
+    1 > address
     [this] > init
       seq > @
         TRUE
@@ -93,6 +95,7 @@
     class__Object.new > super
     super > @
     "class__SisIntersectionType" > className
+    1 > address
     [this] > init
       seq > @
         TRUE

@@ -1,4 +1,4 @@
-# 2022-07-14T15:58:38.906304100
+# 2022-07-18T16:11:29.016688861
 # j2eo team
 +alias stdlib.primitives.prim__char
 +alias stdlib.lang.class__System
@@ -13,6 +13,7 @@
     class__Object.new > super
     super > @
     "class__SimpleLabeledStatements" > className
+    1 > address
     [this] > init
       seq > @
         TRUE
@@ -77,6 +78,7 @@
     class__Object.new > super
     super > @
     "class__TestString" > className
+    1 > address
     [this] > init
       seq > @
         TRUE
@@ -174,8 +176,8 @@
       fieldAccess_5.write > @
         simpleReference_9
     [] > fieldAccess_5
-      this_1.value > @
-    [] > this_1
+      this_2.value > @
+    [] > this_2
       this > @
     [] > simpleReference_9
       value > @

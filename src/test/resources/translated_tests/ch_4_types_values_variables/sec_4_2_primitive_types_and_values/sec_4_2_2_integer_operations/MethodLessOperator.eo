@@ -1,4 +1,4 @@
-# 2022-07-14T15:58:20.146309
+# 2022-07-18T16:09:31.570260231
 # j2eo team
 +alias stdlib.lang.class__System
 +alias stdlib.lang.class__Object
@@ -12,6 +12,7 @@
     class__Object.new > super
     super > @
     "class__MethodLessOperator" > className
+    1 > address
     [this] > init
       seq > @
         TRUE

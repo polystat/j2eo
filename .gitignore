@@ -4,9 +4,11 @@ input
 .idea
 build
 compile_and_run_tests.bat
+*.jar
 output.eo
 output_eo
 polystat_check
+*.jar
 /hadoop/
 /output_hadoop/
 /bin
@@ -16,3 +18,7 @@ polystat_check
 hadoop*
 J2EO*.jar
 j2eo-data
+/src/main/java/org/polystat/j2eo/antlrParser/*
+gradlew
+gradlew.bat
+gradle

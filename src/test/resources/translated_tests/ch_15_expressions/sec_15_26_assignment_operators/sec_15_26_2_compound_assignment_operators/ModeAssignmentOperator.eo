@@ -1,4 +1,4 @@
-# 2022-07-14T15:51:02.622389600
+# 2022-07-18T16:09:44.592366977
 # j2eo team
 +alias stdlib.lang.class__System
 +alias stdlib.lang.class__Object
@@ -12,6 +12,7 @@
     class__Object.new > super
     super > @
     "class__ModeAssignmentOperator" > className
+    1 > address
     [this] > init
       seq > @
         TRUE

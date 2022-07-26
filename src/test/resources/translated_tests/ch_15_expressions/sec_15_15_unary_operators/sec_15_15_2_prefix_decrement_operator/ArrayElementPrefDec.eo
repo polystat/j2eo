@@ -1,4 +1,4 @@
-# 2022-07-14T16:00:31.486759
+# 2022-07-18T16:11:52.773800050
 # j2eo team
 +alias stdlib.lang.class__System
 +alias stdlib.lang.class__Object
@@ -12,6 +12,7 @@
     class__Object.new > super
     super > @
     "class__ArrayElementPrefDec" > className
+    1 > address
     [this] > init
       seq > @
         TRUE
