@@ -75,11 +75,6 @@ jobs:
           echo "coverage = ${{ steps.jacoco.outputs.coverage }}"
           echo "branch coverage = ${{ steps.jacoco.outputs.branches }}"
 
-      - name: Clean Bison directory
-        run: |
-          pwd
-          rm -r ./bison-3.8
-
       - name: Upload coverage to Codecov
         uses: codecov/codecov-action@v3
         with:
