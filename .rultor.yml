@@ -8,7 +8,7 @@ docker:
   as_root: true
 merge:
   script: |
-    wget https://www.antlr.org/download/antlr-4.10.1-complete.jar
+    wget https://www.antlr.org/download/antlr-4.9.2-complete.jar
     gradle build --info
 release:
   script: |-
@@ -16,6 +16,7 @@ release:
 
     cp ../gradle.properties .
     echo "Building Gradle project (excluding tests)..."
+    wget https://www.antlr.org/download/antlr-4.9.2-complete.jar
     gradle build fatJar publish -x test --info -Dcandidates=false -PmvnPublicationVersion=${tag} -Dsigning.secretKeyRingFile=/home/r/secring.gpg
     echo "Done."
 
