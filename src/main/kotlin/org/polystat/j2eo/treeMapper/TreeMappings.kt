@@ -516,8 +516,7 @@ fun LiteralContext.toLiteral(): Literal =
         ?: floatLiteral()?.let { x -> Literal(Token(TokenCode.FloatingLiteral, x.text)) }
         ?: STRING_LITERAL()?.let { s -> Literal(Token(TokenCode.StringLiteral, s.text.drop(1).dropLast(1))) } ?: Literal(
         Token(TokenCode.IntegerLiteral, "123456")
-    ) ?: /* FIXME: support other literals */
-        throw Exception("unsupported literal $text") /* FIXME */
+    )
 
 fun LocalVariableDeclarationContext.toDeclaration(): Declaration =
     TypeAndDeclarators(

@@ -48,7 +48,7 @@ class TestJ2EOStaticCheck {
         @BeforeAll
         @JvmStatic
         fun setup() {
-            val t = testFolderRoot.toFile().walk()
+            testFolderRoot.toFile().walk()
                 .filter { file -> file.isFile }
                 .filter { file -> isReadyTest(file.toPath()) }
                 .filter { file -> isNotClassFile(file.toPath()) }
