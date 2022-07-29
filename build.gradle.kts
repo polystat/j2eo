@@ -45,7 +45,7 @@ val javaParserFilePath = "src/main/java/parser/JavaParser.java"
 // MD5 of the latest generated grammar file is stored here
 val latestGrammarMD5FilePath = "out/latestGrammarMD5"
 
-val ANTLR_JAR = "antlr-4.10.1-complete.jar"
+val ANTLR_JAR = "antlr-4.9.2-complete.jar"
 
 repositories {
     mavenCentral()
@@ -72,7 +72,7 @@ dependencies {
     implementation(kotlin("stdlib-jdk8"))
 
     // Use ANTLR for parser generation
-    antlr("org.antlr:antlr4:4.10.1")
+    antlr("org.antlr:antlr4:4.9.2")
 
     implementation("org.polystat:j2ast:0.2.0")
 }
