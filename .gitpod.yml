@@ -3,7 +3,8 @@ tasks:
   - name: Main
     init: |
       sudo apt update
-      sudo apt install -y antlr4 openjdk-11-jdk-headless
+      sudo apt install -y openjdk-11-jdk-headless
+      wget https://www.antlr.org/download/antlr-4.9.2-complete.jar
 
 vscode:
   extensions:

@@ -1,3 +1,3 @@
 #/bin/sh
 
-./gradlew test -Pcandidates=true
+gradle test -Dcandidates=true

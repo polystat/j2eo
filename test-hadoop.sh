@@ -4,7 +4,7 @@
 set -e
 
 echo "Building J2EO..."
-./gradlew build -x test jar
+gradle build -x test jar
 cp build/libs/J2EO-0.6.0.jar .
 
 if [ ! -e "./j2eo-data/hadoop-3.2.3-src" ]; then
