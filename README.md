@@ -18,7 +18,7 @@ This is a translator of **Java** programming language to [EOLANG](https://www.eo
     - **Gradle 7.4+** to build the project.
     - **Maven 3.8+** to run tests (be aware of [possible conflicts](https://bugs.debian.org/cgi-bin/bugreport.cgi?bug=980467) of the
       latest versions of Maven and Java on some OSs).
-    - **ANTLR4 4.10.1** to build parser.
+    - **ANTLR4 4.9.2** to build parser.
 
    You can refer to ACCEPTANCE.md file for instructions on installing these components.
 

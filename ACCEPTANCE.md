@@ -47,7 +47,7 @@ brew install openjdk@11 gradle
 To download ANTLR, use the following command from the repository root:
 
 ```shell
-wget https://www.antlr.org/download/antlr-4.10.1-complete.jar
+wget https://www.antlr.org/download/antlr-4.9.2-complete.jar
 ```
 
 #### Ubuntu 22.04 (latest LTS)
@@ -66,7 +66,7 @@ To install Gradle on Ubuntu, proceed with the [official instructions](https://gr
 To download ANTLR, use the following command from the repository root:
 
 ```shell
-wget https://www.antlr.org/download/antlr-4.10.1-complete.jar
+wget https://www.antlr.org/download/antlr-4.9.2-complete.jar
 ```
 
 #### Windows
@@ -75,7 +75,7 @@ Windows does not have package manager.
 
 - To install Java on Windows, install Development Kit from the [Oracle webiste](https://www.oracle.com/java/technologies/javase/jdk11-archive-downloads.html).
 - To install Gradle on Windows, proceed with the [official instructions](https://gradle.org/install/).
-- To install ANTLR, download file from [this link](https://www.antlr.org/download/antlr-4.10.1-complete.jar) using your browser and put it in the project root.
+- To install ANTLR, download file from [this link](https://www.antlr.org/download/antlr-4.9.2-complete.jar) using your browser and put it in the project root.
 
 
 
