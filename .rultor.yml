@@ -1,11 +1,14 @@
+docker:
+  image: "iammaxim/j2eo:latest"
+  as_root: true
+architect:
+  - yegor256
 assets:
   gradle.properties: yegor256/polystat-secrets#gradle.properties
   pubring.gpg: yegor256/polystat-secrets#pubring.gpg
   secring.gpg: yegor256/polystat-secrets#secring.gpg
   docker-password: yegor256/polystat-secrets#docker-password
 docker:
-  image: "iammaxim/j2eo:latest"
-  as_root: true
 merge:
   script: |
     wget https://www.antlr.org/download/antlr-4.9.2-complete.jar
