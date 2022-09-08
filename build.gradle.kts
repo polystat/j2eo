@@ -193,7 +193,6 @@ ktlint {
 
 diktat {
     inputs { include("src/**/*.kt") }
-    diktatConfigFile = file(rootDir.path + "/diktat-analysis.yml")
 }
 
 tasks.getByName("build") {
