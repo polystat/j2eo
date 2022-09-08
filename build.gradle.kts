@@ -13,7 +13,7 @@ plugins {
     signing
     id("io.spring.dependency-management") version "1.0.11.RELEASE"
     id("org.jlleitschuh.gradle.ktlint") version "10.2.1"
-    // id("org.cqfn.diktat.diktat-gradle-plugin") version "1.0.2"
+    id("org.cqfn.diktat.diktat-gradle-plugin") version "1.2.3"
     kotlin("jvm") version "1.6.0"
     id("com.github.dawnwords.jacoco.badge") version "0.2.4"
 }
@@ -121,9 +121,9 @@ tasks {
     ktlintFormat {
         finalizedBy(ktlintCheck)
     }
-    //  diktatFix {
-    //      finalizedBy(diktatCheck)
-    //  }
+    diktatFix {
+        finalizedBy(diktatCheck)
+    }
     pmdMain {
         dependsOn(classes)
     }
@@ -191,10 +191,10 @@ ktlint {
     }
 }
 
-// diktat {
-//    reporterType = "sarif"
-//    ignoreFailures = true
-// }
+diktat {
+    inputs { include("src/**/*.kt") }
+    diktatConfigFile = file(rootDir.path + "/diktat-analysis.yml")
+}
 
 tasks.getByName("build") {
     println("Building parser with ANTLR...")
@@ -215,14 +215,6 @@ tasks.withType<Checkstyle>().configureEach {
     }
 }
 tasks.withType<JacocoCoverageVerification> {
-    /*violationRules {
-        rule {
-            limit {
-                minimum = BigDecimal(0.62)
-            }
-        }
-    }*/
-
     afterEvaluate {
         classDirectories.setFrom(
             files(
@@ -273,10 +265,6 @@ publishing {
                 name.set("j2eo")
                 description.set("Java to EO transpiler.")
                 url.set("https://github.com/polystat/j2eo")
-                // properties.set(mapOf(
-                //     "myProp" to "value",
-                //     "prop.with.dots" to "anotherValue"
-                // ))
                 licenses {
                     license {
                         name.set("MIT")
@@ -354,19 +342,9 @@ fun runAntlr() {
 
     try {
         when {
-            Os.isFamily(Os.FAMILY_WINDOWS) ->
-                exec {
-                    workingDir = File("grammar")
-                    executable = "java"
-                    args = antlrArgs
-                }
-            Os.isFamily(Os.FAMILY_MAC) ->
-                exec {
-                    workingDir = File("grammar")
-                    executable = "java"
-                    args = antlrArgs
-                }
-            Os.isFamily(Os.FAMILY_UNIX) ->
+            Os.isFamily(Os.FAMILY_WINDOWS) ||
+                Os.isFamily(Os.FAMILY_MAC) ||
+                Os.isFamily(Os.FAMILY_UNIX) ->
                 exec {
                     workingDir = File("grammar")
                     executable = "java"

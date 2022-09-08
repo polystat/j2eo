@@ -17,10 +17,9 @@ class Example
     }
 
     public static void main(String[] args)
-    {
+    {   
         message(world/3);
         message(+qqq);
- //       message(world);
     }
 
     public enum D
