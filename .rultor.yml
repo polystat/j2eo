@@ -8,21 +8,16 @@ assets:
   pubring.gpg: yegor256/polystat-secrets#pubring.gpg
   secring.gpg: yegor256/polystat-secrets#secring.gpg
   docker-password: yegor256/polystat-secrets#docker-password
-docker:
+install: |
+  cp ../gradle.properties .
+  wget https://www.antlr.org/download/antlr-4.9.2-complete.jar
 merge:
   script: |
-    wget https://www.antlr.org/download/antlr-4.9.2-complete.jar
     gradle build --info
 release:
   script: |-
     [[ "${tag}" =~ ^[0-9]+\.[0-9]+\.[0-9]+$ ]] || exit -1
-
-    cp ../gradle.properties .
-    echo "Building Gradle project (excluding tests)..."
-    wget https://www.antlr.org/download/antlr-4.9.2-complete.jar
     gradle build fatJar publish -x test --info -Dcandidates=false -PmvnPublicationVersion=${tag} -Dsigning.secretKeyRingFile=/home/r/secring.gpg
-    echo "Done."
-
     mv "J2EO-${tag}.jar" j2eo.jar
     image=yegor256/j2eo
     sudo docker build "$(pwd)" --tag "${image}:${tag}"
