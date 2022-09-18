@@ -20,18 +20,15 @@ SOFTWARE.
 -->
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
-
     <groupId>org.j2eo</groupId>
     <artifactId>j2eo-parent</artifactId>
     <version>1.0-SNAPSHOT</version>
     <packaging>pom</packaging>
     <name>j2eo</name>
-
     <!--
     @todo #162:90m Add modules for runtime and plugins here.
      The location of files in src/main and in src/test should be rewatched.
     -->
-
     <description>Java to EO Translator</description>
     <url>https://github.com/polystat/j2eo</url>
     <inceptionYear>2021</inceptionYear>
@@ -39,7 +36,6 @@ SOFTWARE.
       <name>J2EO</name>
       <url>https://github.com/polystat/j2eo</url>
     </organization>
-
     <licenses>
         <license>
           <name>MIT</name>
@@ -47,7 +43,6 @@ SOFTWARE.
           <distribution>site</distribution>
         </license>
     </licenses>
-
     <!--
     @todo #162:15m Add developers who were mentioned in build.gradle.kts
     -->
@@ -74,31 +69,25 @@ SOFTWARE.
         <timezone>+3</timezone>
       </developer>
     </developers>
-
     <issueManagement>
       <system>GitHub</system>
       <url>https://github.com/polystat/j2eo/issues</url>
     </issueManagement>
-
     <scm>
       <connection>scm:git:git@github.com:polystat/j2eo.git</connection>
       <developerConnection>scm:git:git@github.com:polystat/j2eo.git</developerConnection>
       <url>https://github.com/polystat/j2eo</url>
     </scm>
-
     <!--
     @todo #162:30m Add CI management with bot rultor.
     -->
-
     <distributionManagement>
       <site>
         <id>github-pages</id>
         <url>https://github.com/polystat/j2eo</url>
       </site>
     </distributionManagement>
-
     <!--
     @todo #162:90m Add dependencies from build.gradle.kts
     -->
-
 </project>
