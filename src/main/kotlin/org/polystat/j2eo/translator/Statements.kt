@@ -185,7 +185,7 @@ fun mapIfThenElseStatement(rn: IfThenElse, name: String, context: Context): List
  *
  * conditionExpr and statement are mapped into separate objects.
  *
- * TODO: check if we can use iterator inside of statement.
+ * We should check if we can use iterator inside of statement.
  */
 fun mapWhileStatement(wh: While, name: String, context: Context): List<EOBndExpr> {
     val emptyName = context.genUniqueEntityName("empty")

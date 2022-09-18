@@ -19,7 +19,7 @@ fun generateStatic(clsDec: NormalClassDeclaration, context: Context): List<EOBnd
             dec.modifiers?.modifiers?.modifiers?.find { it == TokenCode.Static } != null ||
                 dec is ConstructorDeclaration ||
                 dec is ClassDeclaration /* FIXME (IT'S NOT ALWAYS TRUE) */
-        } // TODO
+        }
         .map { mapClassDeclaration(it, context) }
         .flatten()
 }

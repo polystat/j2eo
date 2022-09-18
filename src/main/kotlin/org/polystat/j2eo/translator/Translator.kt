@@ -32,7 +32,7 @@ class Translator(val relativePath: Path) {
 
     fun mapPackage(pkg: Package, context: Context): EOProgram {
         return EOProgram(
-            EOLicense(), // TODO: add license?
+            EOLicense(), // is license added?
             EOMetas(
                 Some(pkg.compoundName.names.joinToString(".")),
                 ArrayList()

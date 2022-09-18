@@ -192,7 +192,7 @@ fun BlockContext.toBlock(): Block {
     val blockStmnts = BlockStatements(blockStmntsLst.removeFirstOrNull())
     blockStmntsLst.forEach { blockStmnts.add(it) }
     blockStmnts.blockStatements.removeIf { it == null }
-    return Block(null /* TODO: always null? */, blockStmnts)
+    return Block(null /*not always null? */, blockStmnts)
 }
 
 fun Declaration.toBlockStatement(): BlockStatement = BlockStatement(this)

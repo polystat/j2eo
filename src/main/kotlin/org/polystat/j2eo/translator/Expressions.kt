@@ -181,7 +181,7 @@ fun mapParenthesized(expr: Parenthesized, name: String, context: Context): List<
     ) + mapExpression(expr.expression, parExprName, context)
 }
 
-// TODO: add support for type
+// addition of support for type
 fun mapThis(expr: This, name: String, context: Context): EOBndExpr {
     return EOBndExpr(
         EOObject(
@@ -290,8 +290,8 @@ fun mapUnaryPostfix(expr: UnaryPostfix, name: String, context: Context): List<EO
     ) + mapExpression(expr.operand, operandName, context)
 }
 
-// TODO: add automatic casting for primitive types
-// TODO: populate with all Java binary operators
+// Addition of automatic casting for primitive types is needed
+// population with all Java binary operators is needed
 fun mapBinary(expr: Binary, name: String, context: Context): List<EOBndExpr> {
     val function = when (expr.operator) {
         TokenCode.Plus -> "add"
