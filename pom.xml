@@ -19,75 +19,75 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 -->
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
-    <modelVersion>4.0.0</modelVersion>
-    <groupId>org.j2eo</groupId>
-    <artifactId>j2eo-parent</artifactId>
-    <version>1.0-SNAPSHOT</version>
-    <packaging>pom</packaging>
-    <name>j2eo</name>
-    <!--
+  <modelVersion>4.0.0</modelVersion>
+  <groupId>org.j2eo</groupId>
+  <artifactId>j2eo-parent</artifactId>
+  <version>1.0-SNAPSHOT</version>
+  <packaging>pom</packaging>
+  <name>j2eo</name>
+  <!--
     @todo #162:90m Add modules for runtime and plugins here.
      The location of files in src/main and in src/test should be rewatched.
     -->
-    <description>Java to EO Translator</description>
+  <description>Java to EO Translator</description>
+  <url>https://github.com/polystat/j2eo</url>
+  <inceptionYear>2021</inceptionYear>
+  <organization>
+    <name>J2EO</name>
     <url>https://github.com/polystat/j2eo</url>
-    <inceptionYear>2021</inceptionYear>
-    <organization>
-      <name>J2EO</name>
-      <url>https://github.com/polystat/j2eo</url>
-    </organization>
-    <licenses>
-        <license>
-          <name>MIT</name>
-          <url>https://www.eolang.org/LICENSE.txt</url>
-          <distribution>site</distribution>
-        </license>
-    </licenses>
-    <!--
+  </organization>
+  <licenses>
+    <license>
+      <name>MIT</name>
+      <url>https://www.eolang.org/LICENSE.txt</url>
+      <distribution>site</distribution>
+    </license>
+  </licenses>
+  <!--
     @todo #162:15m Add developers who were mentioned in build.gradle.kts
     -->
-    <developers>
-      <developer>
-        <id>1</id>
-        <name>Yegor Bugayenko</name>
-        <email>yegor256@gmail.com</email>
-        <organization>yegor256.com</organization>
-        <organizationUrl>https://www.yegor256.com</organizationUrl>
-        <roles>
-          <role>Architect</role>
-          <role>Developer</role>
-        </roles>
-        <timezone>+3</timezone>
-      </developer>
-      <developer>
-        <id>2</id>
-        <name>Aleksandr Mishin</name>
-        <email>mishin.aa@phystech.edu</email>
-        <roles>
-          <role>Developer</role>
-        </roles>
-        <timezone>+3</timezone>
-      </developer>
-    </developers>
-    <issueManagement>
-      <system>GitHub</system>
-      <url>https://github.com/polystat/j2eo/issues</url>
-    </issueManagement>
-    <scm>
-      <connection>scm:git:git@github.com:polystat/j2eo.git</connection>
-      <developerConnection>scm:git:git@github.com:polystat/j2eo.git</developerConnection>
-      <url>https://github.com/polystat/j2eo</url>
-    </scm>
-    <!--
+  <developers>
+    <developer>
+      <id>1</id>
+      <name>Yegor Bugayenko</name>
+      <email>yegor256@gmail.com</email>
+      <organization>yegor256.com</organization>
+      <organizationUrl>https://www.yegor256.com</organizationUrl>
+      <roles>
+        <role>Architect</role>
+        <role>Developer</role>
+      </roles>
+      <timezone>+3</timezone>
+    </developer>
+    <developer>
+      <id>2</id>
+      <name>Aleksandr Mishin</name>
+      <email>mishin.aa@phystech.edu</email>
+      <roles>
+        <role>Developer</role>
+      </roles>
+      <timezone>+3</timezone>
+    </developer>
+  </developers>
+  <issueManagement>
+    <system>GitHub</system>
+    <url>https://github.com/polystat/j2eo/issues</url>
+  </issueManagement>
+  <scm>
+    <connection>scm:git:git@github.com:polystat/j2eo.git</connection>
+    <developerConnection>scm:git:git@github.com:polystat/j2eo.git</developerConnection>
+    <url>https://github.com/polystat/j2eo</url>
+  </scm>
+  <!--
     @todo #162:30m Add CI management with bot rultor.
     -->
-    <distributionManagement>
-      <site>
-        <id>github-pages</id>
-        <url>https://github.com/polystat/j2eo</url>
-      </site>
-    </distributionManagement>
-    <!--
+  <distributionManagement>
+    <site>
+      <id>github-pages</id>
+      <url>https://github.com/polystat/j2eo</url>
+    </site>
+  </distributionManagement>
+  <!--
     @todo #162:90m Add dependencies from build.gradle.kts
     -->
 </project>
