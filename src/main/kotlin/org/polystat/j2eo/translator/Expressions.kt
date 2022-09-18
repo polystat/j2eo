@@ -315,14 +315,14 @@ fun mapBinary(expr: Binary, name: String, context: Context): List<EOBndExpr> {
         TokenCode.LeftShiftAssign -> "shift_l_equal"
         TokenCode.ArithmRightShift -> "shift_u"
         TokenCode.ArithmRightShiftAssign -> "shift_u_equal"
-        TokenCode.NonEqual -> "not_eq" /* TODO: double check */
-        TokenCode.DoubleVertical -> "or" /* TODO: double check */
-        TokenCode.DoubleAmpersand -> "and" /* TODO: double check */
-        TokenCode.Ampersand -> "bit_and" /* TODO: double check */
-        TokenCode.Vertical -> "bit_or" /* TODO: double check */
+        TokenCode.NonEqual -> "not_eq" /* double check is needed */
+        TokenCode.DoubleVertical -> "or" /* double check is needed */
+        TokenCode.DoubleAmpersand -> "and" /* double check is needed */
+        TokenCode.Ampersand -> "bit_and" /* double check is needed */
+        TokenCode.Vertical -> "bit_or" /* double check is needed */
         TokenCode.VerticalAssign -> "or_write" /* FIXME */
         TokenCode.AmpersandAssign -> "and_write" /* FIXME */
-        TokenCode.Caret -> "bit_xor" /* TODO: double check */
+        TokenCode.Caret -> "bit_xor" /* double check is needed */
         else ->
             "binary_op_placeholder" // FIXME
         // throw IllegalArgumentException("Binary operation ${expr.operator} is not supported")
