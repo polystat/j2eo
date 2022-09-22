@@ -29,6 +29,42 @@ SOFTWARE.
   <version>1.0-SNAPSHOT</version>
   <packaging>pom</packaging>
   <name>j2eo</name>
+  <parent>
+    <groupId>org.cqfn.diktat</groupId>
+    <artifactId>diktat-parent</artifactId>
+    <version>0.4.2</version>
+  </parent>
+  <build>
+    <plugins>
+      <plugin>
+        <artifactId>maven-antrun-plugin</artifactId>
+        <version>1.8</version>
+        <executions>
+          <execution>
+            <phase>verify</phase>
+            <configuration>
+              <target>
+                <apply executable="xcop" failonerror="true">
+                  <arg value="--license"/>
+                  <arg value="LICENSE.txt"/>
+                  <fileset dir=".">
+                    <include name="**/*.xml"/>
+                    <include name="**/*.xsd"/>
+                    <exclude name="target/**/*"/>
+                    <exclude name=".idea/**/*"/>
+                    <exclude name="build/**/*"/>
+                  </fileset>
+                </apply>
+              </target>
+            </configuration>
+            <goals>
+              <goal>run</goal>
+            </goals>
+          </execution>
+        </executions>
+      </plugin>
+    </plugins>
+  </build>
   <!--
     @todo #162:90m Add modules for runtime and plugins here.
      The location of files in src/main and in src/test should be rewatched.
@@ -94,4 +130,11 @@ SOFTWARE.
   <!--
     @todo #162:90m Add dependencies from build.gradle.kts
     -->
+  <dependencies>
+    <dependency>
+      <groupId>org.cqfn.diktat</groupId>
+      <artifactId>diktat-common</artifactId>
+      <version>1.2.3</version>
+    </dependency>
+  </dependencies>
 </project>

@@ -106,12 +106,6 @@ object Main2 {
                     cu?.report(0)
                     logger.debug("[${i + 1}/${filesToProcess.size}] Translating ${f.absolutePath}")
                 }
-//                else {
-//                    if (i % 100 == 0) {
-//                        val percent = (1f * i / filesToProcess.size) * 100f
-//                        print("Progress: %.2f".format(percent) + "% / 100.0%. --- Files left: ${filesToProcess.size - i}\r")
-//                    }
-//                }
 
                 val dummy = SimpleCompilationUnit(
                     ImportDeclarations(null),
@@ -127,39 +121,6 @@ object Main2 {
                 Pair(f, translation ?: EOProgram(EOLicense(), EOMetas(Some("failed translation!"), listOf()), listOf()))
             }
         println()
-
-//        val parsedFiles: List<Pair<File, CompilationUnit>> = filesToProcess
-//            .mapNotNull { f ->
-//                val scanner = Scanner()
-//                scanner.readFile(f.absolutePath)
-//                val parser = JavaParser(scanner)
-//
-//                try {
-//                    val result: Boolean = parser.parse()
-//
-//                    if (!result)
-//                        throw ParseException("Parsing of file \"${f.absolutePath}\" failed")
-//
-//                    if (Entity.debug)
-//                        parser.ast.report(0)
-//
-//                    Pair(f, parser.ast)
-//                } catch (exc: Exception) {
-//                    exc.printStackTrace()
-//                    null
-//                }
-//            }
-
-//        val translatedFiles: List<Pair<File, EOProgram>> = parsedFiles
-//            .mapIndexed { i, (file, ast) ->
-//                println("[$i/${parsedFiles.size}] Translating ${file.absolutePath}")
-//                val translator = Translator()
-//                Pair(file, translator.translate(ast))
-//            }
-
-        // val outputDirectory = File(cmd.getOptionValue('o'))
-        // logger.info("Cleaning up output directory \"$outputDirectory\" before printing")
-        // outputDirectory.deleteRecursively()
 
         translatedFiles.forEach { (file, eoProgram) ->
             val targetText = eoProgram.generateEO(0)
@@ -183,8 +144,6 @@ object Main2 {
         }
 
         logger.info("Translation complete.")
-//        Resource
-//        InputStream = javaClass.getResourceAsStream()
     }
 
     private fun printUsage(formatter: HelpFormatter, options: Options) {
