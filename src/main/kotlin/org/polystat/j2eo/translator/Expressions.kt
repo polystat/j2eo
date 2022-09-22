@@ -181,7 +181,7 @@ fun mapParenthesized(expr: Parenthesized, name: String, context: Context): List<
     ) + mapExpression(expr.expression, parExprName, context)
 }
 
-// TODO: add support for type
+// @todo #165:90m Support for type should be added
 fun mapThis(expr: This, name: String, context: Context): EOBndExpr {
     return EOBndExpr(
         EOObject(
@@ -290,8 +290,12 @@ fun mapUnaryPostfix(expr: UnaryPostfix, name: String, context: Context): List<EO
     ) + mapExpression(expr.operand, operandName, context)
 }
 
-// TODO: add automatic casting for primitive types
-// TODO: populate with all Java binary operators
+// @todo #165:90m Add automatic casting for primitive types
+
+// @todo #165:90m Populate with all Java binary operators
+
+// @todo #165:90m in val function double check is needed for some TokenCodes:
+// NonEqual, DoubleVertical, DoubleAmpersand, Ampersand, Vertical, Caret
 fun mapBinary(expr: Binary, name: String, context: Context): List<EOBndExpr> {
     val function = when (expr.operator) {
         TokenCode.Plus -> "add"
@@ -315,14 +319,14 @@ fun mapBinary(expr: Binary, name: String, context: Context): List<EOBndExpr> {
         TokenCode.LeftShiftAssign -> "shift_l_equal"
         TokenCode.ArithmRightShift -> "shift_u"
         TokenCode.ArithmRightShiftAssign -> "shift_u_equal"
-        TokenCode.NonEqual -> "not_eq" /* TODO: double check */
-        TokenCode.DoubleVertical -> "or" /* TODO: double check */
-        TokenCode.DoubleAmpersand -> "and" /* TODO: double check */
-        TokenCode.Ampersand -> "bit_and" /* TODO: double check */
-        TokenCode.Vertical -> "bit_or" /* TODO: double check */
+        TokenCode.NonEqual -> "not_eq"
+        TokenCode.DoubleVertical -> "or"
+        TokenCode.DoubleAmpersand -> "and"
+        TokenCode.Ampersand -> "bit_and"
+        TokenCode.Vertical -> "bit_or"
         TokenCode.VerticalAssign -> "or_write" /* FIXME */
         TokenCode.AmpersandAssign -> "and_write" /* FIXME */
-        TokenCode.Caret -> "bit_xor" /* TODO: double check */
+        TokenCode.Caret -> "bit_xor"
         else ->
             "binary_op_placeholder" // FIXME
         // throw IllegalArgumentException("Binary operation ${expr.operator} is not supported")

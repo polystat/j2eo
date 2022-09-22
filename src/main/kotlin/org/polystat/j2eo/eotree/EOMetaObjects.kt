@@ -12,7 +12,7 @@ import arrow.core.Option
  */
 fun EOSeqCall(vararg statements: EOCopy): EOBndExpr = EOSeqCall(statements.toList())
 
-// TODO: maybe expand list type from List<EOCopy> to List<EOExpr>?
+// @todo #165:90m maybe we should expand list type from List<EOCopy> to List<EOExpr>?
 /**
  * Generator of seq > @ blocks.
  */

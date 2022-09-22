@@ -29,10 +29,10 @@ class Translator(val relativePath: Path) {
                     " is not supported"
             )
     }
-
+    // @todo #165:30m We should add license to EOLicense()
     fun mapPackage(pkg: Package, context: Context): EOProgram {
         return EOProgram(
-            EOLicense(), // TODO: add license?
+            EOLicense(),
             EOMetas(
                 Some(pkg.compoundName.names.joinToString(".")),
                 ArrayList()
