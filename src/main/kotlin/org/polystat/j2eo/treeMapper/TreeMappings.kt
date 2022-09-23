@@ -194,11 +194,7 @@ fun BlockContext.toBlock(): Block {
     val blockStmnts = BlockStatements(blockStmntsLst.removeFirstOrNull())
     blockStmntsLst.forEach { blockStmnts.add(it) }
     blockStmnts.blockStatements.removeIf { it == null }
-<<<<<<< HEAD
-    return Block(null /*not always null? */, blockStmnts)
-=======
     return Block(null, blockStmnts)
->>>>>>> master
 }
 
 fun Declaration.toBlockStatement(): BlockStatement = BlockStatement(this)
