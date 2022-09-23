@@ -38,12 +38,13 @@ fun TypeDeclarationContext.toTopLevelComponent(): TopLevelComponent? =
         null // throw java.lang.Exception("Cannot translate") // FIXME
     }
 
+// @todo #165:90m We should implement this.typeList(1) for PERMITS (Java 17)
 fun ClassDeclarationContext.toClassDeclaration(): ClassDeclaration =
     NormalClassDeclaration(
         identifier().toToken(),
         typeParameters()?.toTypeParameters(),
         typeType()?.toType(),
-        typeList(0)?.toTypeList(), // TODO: use this.typeList(1) for PERMITS (Java 17)
+        typeList(0)?.toTypeList(),
         classBody().toDeclarations()
     )
 
@@ -187,12 +188,17 @@ fun TypeTypeOrVoidContext.toType(): Type? = typeType()?.toType()
 fun BlockContext.toDeclaration(isStatic: TerminalNode?): List<Declaration> =
     listOf(ClassInitializer(this.toBlock(), isStatic != null))
 
+// @todo #165:90m return Block(null, ...). Is it always null?
 fun BlockContext.toBlock(): Block {
     val blockStmntsLst = ArrayList(this.blockStatement().map { it.toBlockStatement() })
     val blockStmnts = BlockStatements(blockStmntsLst.removeFirstOrNull())
     blockStmntsLst.forEach { blockStmnts.add(it) }
     blockStmnts.blockStatements.removeIf { it == null }
+<<<<<<< HEAD
     return Block(null /*not always null? */, blockStmnts)
+=======
+    return Block(null, blockStmnts)
+>>>>>>> master
 }
 
 fun Declaration.toBlockStatement(): BlockStatement = BlockStatement(this)
@@ -465,6 +471,7 @@ fun ArgumentsContext.toArgList(): ArgumentList {
     }
 }
 
+// @todo #165:60m Maybe type arguments are somewhere else?
 fun MethodCallContext.toExpression(expr: Expression?): Expression {
     val exprLst = if (expressionList() == null)
         listOf()
@@ -476,7 +483,7 @@ fun MethodCallContext.toExpression(expr: Expression?): Expression {
     return MethodInvocation(
         expr,
         SUPER() != null,
-        null, // TODO: type arguments are somewhere else
+        null,
         identifier()?.toToken()
             ?: if (SUPER() != null) { Token(TokenCode.Super, "super") } else { null }
             ?: if (THIS() != null) { Token(TokenCode.This, "this") } else { null },
