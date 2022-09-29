@@ -23,3 +23,7 @@ gradlew
 gradlew.bat
 gradle
 target
+.classpath
+.project
+.settings/
+ktlint

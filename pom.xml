@@ -24,47 +24,221 @@ SOFTWARE.
 -->
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
   <modelVersion>4.0.0</modelVersion>
-  <groupId>org.j2eo</groupId>
+  <groupId>org.polystat</groupId>
   <artifactId>j2eo-parent</artifactId>
   <version>1.0-SNAPSHOT</version>
   <packaging>pom</packaging>
   <name>j2eo</name>
-  <parent>
-    <groupId>org.cqfn.diktat</groupId>
-    <artifactId>diktat-parent</artifactId>
-    <version>0.4.2</version>
-  </parent>
+  <properties>
+    <antlr.version>4.11.1</antlr.version>
+    <antrun.version>1.8</antrun.version>
+    <checkstyle.version>3.0.0</checkstyle.version>
+    <diktat.version>1.2.2</diktat.version>
+    <enforcer.version>3.1.0</enforcer.version>
+    <jacoco.version>0.8.8</jacoco.version>
+    <java.version>[11,)</java.version>
+    <kotlin.version>1.7.20</kotlin.version>
+    <mvn.version>3.8.1</mvn.version>
+    <pmd.version>3.13.0</pmd.version>
+  </properties>
   <build>
+    <!-- <sourceDirectory>${project.basedir}/src/main/kotlin</sourceDirectory>
+    <testSourceDirectory>${project.basedir}/src/test/kotlin</testSourceDirectory> -->
+    <pluginManagement>
+      <plugins>
+        <plugin>
+          <groupId>org.apache.maven.plugins</groupId>
+          <artifactId>maven-enforcer-plugin</artifactId>
+          <version>${enforcer.version}</version>
+          <executions>
+            <execution>
+              <id>enforce-java</id>
+              <goals>
+                <goal>enforce</goal>
+              </goals>
+              <configuration>
+                <rules>
+                  <requireJavaVersion>
+                    <version>${java.version}</version>
+                  </requireJavaVersion>
+                </rules>
+              </configuration>
+            </execution>
+          </executions>
+        </plugin>
+        <plugin>
+          <artifactId>maven-compiler-plugin</artifactId>
+          <version>${mvn.version}</version>
+          <configuration>
+            <properties combine.self="override">
+            </properties>
+          </configuration>
+        </plugin>
+        <plugin>
+          <artifactId>maven-antrun-plugin</artifactId>
+          <version>${antrun.version}</version>
+          <executions>
+            <execution>
+              <phase>verify</phase>
+              <configuration>
+                <target>
+                  <apply executable="xcop" failonerror="true">
+                    <arg value="--license"/>
+                    <arg value="LICENSE.txt"/>
+                    <fileset dir=".">
+                      <include name="**/*.xml"/>
+                      <include name="**/*.xsd"/>
+                      <exclude name="target/**/*"/>
+                      <exclude name=".idea/**/*"/>
+                      <exclude name="build/**/*"/>
+                      <exclude name="j2eo-data/**/*"/>
+                    </fileset>
+                  </apply>
+                </target>
+              </configuration>
+              <goals>
+                <goal>run</goal>
+              </goals>
+            </execution>
+          </executions>
+        </plugin>
+        <plugin>
+          <groupId>org.cqfn.diktat</groupId>
+          <artifactId>diktat-maven-plugin</artifactId>
+          <version>${diktat.version}</version>
+          <executions>
+            <execution>
+              <id>diktat-basic</id>
+              <phase>none</phase>
+              <goals>
+                <goal>check</goal>
+                <goal>fix</goal>
+              </goals>
+              <configuration>
+                <inputs>
+                  <input>${project.basedir}/src/main/kotlin</input>
+                  <input>${project.basedir}/src/test/kotlin</input>
+                </inputs>
+                <diktatConfigFile>diktat-analysis.yml</diktatConfigFile>
+                <excludes>
+                  <exclude>${project.basedir}/src/test/kotlin/excluded</exclude>
+                </excludes>
+              </configuration>
+            </execution>
+          </executions>
+        </plugin>
+        <plugin>
+          <groupId>org.jacoco</groupId>
+          <artifactId>jacoco-maven-plugin</artifactId>
+          <version>${jacoco.version}</version>
+        </plugin>
+        <plugin>
+          <groupId>org.antlr</groupId>
+          <artifactId>antlr4-maven-plugin</artifactId>
+          <version>${antlr.version}</version>
+          <configuration>
+            <treatWarningsAsErrors>true</treatWarningsAsErrors>
+          </configuration>
+          <executions>
+            <execution>
+              <id>antlr</id>
+              <goals>
+                <goal>antlr4</goal>
+              </goals>
+            </execution>
+          </executions>
+        </plugin>
+        <plugin>
+          <groupId>org.apache.maven.plugins</groupId>
+          <artifactId>maven-pmd-plugin</artifactId>
+          <version>${pmd.version}</version>
+        </plugin>
+      </plugins>
+    </pluginManagement>
     <plugins>
       <plugin>
-        <artifactId>maven-antrun-plugin</artifactId>
-        <version>1.8</version>
+        <groupId>org.jacoco</groupId>
+        <artifactId>jacoco-maven-plugin</artifactId>
+        <configuration>
+          <excludes>
+            <exclude>**/generation/**</exclude>
+          </excludes>
+        </configuration>
         <executions>
           <execution>
-            <phase>verify</phase>
-            <configuration>
-              <target>
-                <apply executable="xcop" failonerror="true">
-                  <arg value="--license"/>
-                  <arg value="LICENSE.txt"/>
-                  <fileset dir=".">
-                    <include name="**/*.xml"/>
-                    <include name="**/*.xsd"/>
-                    <exclude name="target/**/*"/>
-                    <exclude name=".idea/**/*"/>
-                    <exclude name="build/**/*"/>
-                  </fileset>
-                </apply>
-              </target>
-            </configuration>
             <goals>
-              <goal>run</goal>
+              <goal>prepare-agent</goal>
+            </goals>
+          </execution>
+          <execution>
+            <id>report</id>
+            <phase>test</phase>
+            <goals>
+              <goal>report</goal>
             </goals>
           </execution>
         </executions>
       </plugin>
+      <plugin>
+        <groupId>org.cqfn.diktat</groupId>
+        <artifactId>diktat-maven-plugin</artifactId>
+        <version>${diktat.version}</version>
+        <executions>
+          <execution>
+            <id>diktat</id>
+            <phase>none</phase>
+            <goals>
+              <goal>check</goal>
+              <goal>fix</goal>
+            </goals>
+            <configuration>
+              <inputs>
+                <input>${project.basedir}/src/main/kotlin</input>
+                <input>${project.basedir}/src/test/kotlin</input>
+              </inputs>
+              <excludes>
+                <exclude>${project.basedir}/src/main/kotlin/generated</exclude>
+              </excludes>
+              <diktatConfigFile>diktat-analysis.yml</diktatConfigFile>
+            </configuration>
+          </execution>
+        </executions>
+      </plugin>
+      <plugin>
+        <groupId>org.jetbrains.kotlin</groupId>
+        <artifactId>kotlin-maven-plugin</artifactId>
+        <version>${kotlin.version}</version>
+
+        <executions>
+            <execution>
+                <id>compile</id>
+                <goals>
+                    <goal>compile</goal>
+                </goals>
+            </execution>
+
+            <execution>
+                <id>test-compile</id>
+                <goals>
+                    <goal>test-compile</goal>
+                </goals>
+            </execution>
+        </executions>
+    </plugin>
     </plugins>
   </build>
+  <reporting>
+    <plugins>
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-checkstyle-plugin</artifactId>
+        <version>${checkstyle.version}</version>
+        <configuration>
+          <configLocation>checkstyle.xml</configLocation>
+        </configuration>
+      </plugin>
+    </plugins>
+  </reporting>
   <!--
     @todo #162:90m Add modules for runtime and plugins here.
      The location of files in src/main and in src/test should be rewatched.
@@ -126,15 +300,19 @@ SOFTWARE.
       <id>github-pages</id>
       <url>https://github.com/polystat/j2eo</url>
     </site>
+    <snapshotRepository>
+      <id>ossrh</id>
+      <url>https://oss.sonatype.org/content/repositories/snapshots</url>
+    </snapshotRepository>
   </distributionManagement>
   <!--
     @todo #162:90m Add dependencies from build.gradle.kts
     -->
   <dependencies>
     <dependency>
-      <groupId>org.cqfn.diktat</groupId>
-      <artifactId>diktat-common</artifactId>
-      <version>1.2.3</version>
+      <groupId>org.jetbrains.kotlin</groupId>
+      <artifactId>kotlin-stdlib</artifactId>
+      <version>${kotlin.version}</version>
     </dependency>
   </dependencies>
 </project>
