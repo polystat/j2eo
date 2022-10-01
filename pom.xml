@@ -255,9 +255,6 @@ SOFTWARE.
       <distribution>site</distribution>
     </license>
   </licenses>
-  <!--
-    @todo #162:15m Add developers who were mentioned in build.gradle.kts
-    -->
   <developers>
     <developer>
       <id>1</id>
@@ -275,6 +272,42 @@ SOFTWARE.
       <id>2</id>
       <name>Aleksandr Mishin</name>
       <email>mishin.aa@phystech.edu</email>
+      <roles>
+        <role>Developer</role>
+      </roles>
+      <timezone>+3</timezone>
+    </developer>
+    <developer>
+      <id>3</id>
+      <name>Eugene Zouev</name>
+      <email>e.zuev@innopolis.ru</email>
+      <roles>
+        <role>Developer</role>
+      </roles>
+      <timezone>+3</timezone>
+    </developer>
+    <developer>
+      <id>4</id>
+      <name>Maxim Stepanov</name>
+      <email>m.stepanov@innopolis.university</email>
+      <roles>
+        <role>Developer</role>
+      </roles>
+      <timezone>+3</timezone>
+    </developer>
+    <developer>
+      <id>5</id>
+      <name>Ilya Milyoshin</name>
+      <email>i.mileshin@innopolis.university</email>
+      <roles>
+        <role>Developer</role>
+      </roles>
+      <timezone>+3</timezone>
+    </developer>
+    <developer>
+      <id>6</id>
+      <name>Egor Klementev</name>
+      <email>e.klementev@innopolis.ru</email>
       <roles>
         <role>Developer</role>
       </roles>
