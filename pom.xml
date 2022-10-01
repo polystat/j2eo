@@ -32,14 +32,21 @@ SOFTWARE.
   <properties>
     <antlr.version>4.11.1</antlr.version>
     <antrun.version>1.8</antrun.version>
+    <arrow-core.version>1.0.1</arrow-core.version>
     <checkstyle.version>3.0.0</checkstyle.version>
+    <cli.version>1.5.0</cli.version>
     <diktat.version>1.2.2</diktat.version>
     <enforcer.version>3.1.0</enforcer.version>
     <jacoco.version>0.8.8</jacoco.version>
     <java.version>[11,)</java.version>
+    <junit-jupiter-api.version>5.8.2</junit-jupiter-api.version>
+    <junit-jupiter-engine.version>5.8.2</junit-jupiter-engine.version>
+    <junit-platform.version>1.9.1</junit-platform.version>
     <kotlin.version>1.7.20</kotlin.version>
+    <kotlin-loggin.version>3.0.0</kotlin-loggin.version>
     <mvn.version>3.8.1</mvn.version>
     <pmd.version>3.13.0</pmd.version>
+    <slf4j.vesion>1.7.33</slf4j.vesion>
   </properties>
   <build>
     <!-- <sourceDirectory>${project.basedir}/src/main/kotlin</sourceDirectory>
@@ -336,14 +343,52 @@ SOFTWARE.
       <url>https://oss.sonatype.org/content/repositories/snapshots</url>
     </snapshotRepository>
   </distributionManagement>
-  <!--
-    @todo #162:90m Add dependencies from build.gradle.kts
-    -->
   <dependencies>
     <dependency>
       <groupId>org.jetbrains.kotlin</groupId>
       <artifactId>kotlin-stdlib</artifactId>
       <version>${kotlin.version}</version>
     </dependency>
+    <dependency>
+      <groupId>commons-cli</groupId>
+      <artifactId>commons-cli</artifactId>
+      <version>${cli.version}</version>
+    </dependency>
+    <dependency>
+      <groupId>io.arrow-kt</groupId>
+      <artifactId>arrow-core</artifactId>
+      <version>${arrow-core.version}</version>
+    </dependency>
+    <dependency>
+      <groupId>org.slf4j</groupId>
+      <artifactId>slf4j-simple</artifactId>
+      <version>${slf4j.vesion}</version>
+      <!-- <scope>test</scope> -->
+    </dependency>
+    <dependency>
+      <groupId>io.github.microutils</groupId>
+      <artifactId>kotlin-logging-jvm</artifactId>
+      <version>${kotlin-loggin.version}</version>
+    </dependency>
+    <dependency>
+      <groupId>org.junit.platform</groupId>
+      <artifactId>junit-platform-commons</artifactId>
+      <version>${junit-platform.version}</version>
+    </dependency>
+    <dependency>
+      <groupId>org.junit.jupiter</groupId>
+      <artifactId>junit-jupiter-api</artifactId>
+      <version>${junit-jupiter-api.version}</version>
+      <scope>test</scope>
+    </dependency>
+    <dependency>
+      <groupId>org.junit.jupiter</groupId>
+      <artifactId>junit-jupiter-engine</artifactId>
+      <version>${junit-jupiter-engine.version}</version>
+      <scope>test</scope>
+    </dependency>
   </dependencies>
+  <!--
+    @todo #181:90m Add dependency from j2ast repo.
+    -->
 </project>
