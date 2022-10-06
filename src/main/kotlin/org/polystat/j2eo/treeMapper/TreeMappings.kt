@@ -72,11 +72,13 @@ fun MemberDeclarationContext.toDeclaration(modifiers: List<ModifierContext>?): L
 fun ConstructorDeclarationContext.toDeclaration(modifiers: List<ModifierContext>?): Declaration {
     val excsTypes = qualifiedNameList()?.qualifiedName()?.map { TypeName(it.toCompoundName(), null) }
 
-    var excsTypeList: TypeList? = null
-    if (excsTypes != null) {
-        excsTypeList = TypeList(null)
-        excsTypeList.types = ArrayList(excsTypes)
+    val excsTypeList: TypeList? = if (excsTypes != null) {
+        TypeList(null)
+    } else {
+        null
     }
+
+    excsTypeList?.types = ArrayList(excsTypes)
 
     return ConstructorDeclaration(
         modifiers.getModifiers(),
