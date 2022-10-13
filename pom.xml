@@ -29,17 +29,18 @@ SOFTWARE.
   <version>1.0-SNAPSHOT</version>
   <packaging>pom</packaging>
   <name>j2eo</name>
-  <modules>
-    <module>src</module>
-  </modules>
+  <!--<modules>
+     <module>src</module>
+  </modules>-->
   <properties>
     <antlr.version>4.11.1</antlr.version>
     <antrun.version>1.8</antrun.version>
-    <arrow-core.version>1.0.1</arrow-core.version>
+    <arrow-core.version>1.0.0</arrow-core.version>
     <checkstyle.version>3.0.0</checkstyle.version>
     <cli.version>1.5.0</cli.version>
     <diktat.version>1.2.2</diktat.version>
     <enforcer.version>3.1.0</enforcer.version>
+    <j2ast.version>0.2.0</j2ast.version>
     <jacoco.version>0.8.8</jacoco.version>
     <java.version>[11,)</java.version>
     <junit-jupiter-api.version>5.8.2</junit-jupiter-api.version>
@@ -52,10 +53,29 @@ SOFTWARE.
     <slf4j.vesion>1.7.33</slf4j.vesion>
   </properties>
   <build>
-    <sourceDirectory>${project.basedir}/src/main/kotlin</sourceDirectory>
+    <sourceDirectory>${project.basedir}/src/main/</sourceDirectory>
     <testSourceDirectory>${project.basedir}/src/test/kotlin</testSourceDirectory>
     <pluginManagement>
       <plugins>
+        <!-- <plugin>
+          <groupId>org.codehaus.mojo</groupId>
+          <artifactId>build-helper-maven-plugin</artifactId>
+          <version>3.2.0</version>
+          <executions>
+            <execution>
+              <id>add-source</id>
+              <phase>generate-sources</phase>
+              <goals>
+                <goal>add-source</goal>
+              </goals>
+              <configuration>
+                <sources>
+                  <source>src/main/antlr4/</source>
+                </sources>
+              </configuration>
+            </execution>
+          </executions>
+        </plugin> -->
         <plugin>
           <groupId>org.apache.maven.plugins</groupId>
           <artifactId>maven-enforcer-plugin</artifactId>
@@ -148,6 +168,7 @@ SOFTWARE.
           <version>${antlr.version}</version>
           <configuration>
             <treatWarningsAsErrors>true</treatWarningsAsErrors>
+            <visitor>true</visitor>
           </configuration>
           <executions>
             <execution>
@@ -347,6 +368,11 @@ SOFTWARE.
     </snapshotRepository>
   </distributionManagement>
   <dependencies>
+    <dependency>
+      <groupId>org.polystat</groupId>
+      <artifactId>j2ast</artifactId>
+      <version>${j2ast.version}</version>
+    </dependency>
     <dependency>
       <groupId>org.jetbrains.kotlin</groupId>
       <artifactId>kotlin-stdlib</artifactId>
