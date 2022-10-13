@@ -32,7 +32,7 @@
 lexer grammar JavaLexer;
 
 @header {
-package org.polystat.j2eo.antlrParser;
+package src.main.antlr4.imports;
 }
 
 // Keywords

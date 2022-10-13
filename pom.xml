@@ -57,25 +57,23 @@ SOFTWARE.
     <testSourceDirectory>${project.basedir}/src/test/kotlin</testSourceDirectory>
     <pluginManagement>
       <plugins>
-        <!-- <plugin>
+        <plugin>
           <groupId>org.codehaus.mojo</groupId>
           <artifactId>build-helper-maven-plugin</artifactId>
-          <version>3.2.0</version>
           <executions>
             <execution>
-              <id>add-source</id>
               <phase>generate-sources</phase>
               <goals>
                 <goal>add-source</goal>
               </goals>
               <configuration>
                 <sources>
-                  <source>src/main/antlr4/</source>
+                  <source>${project.build.directory}/generated-sources/antlr4</source>
                 </sources>
               </configuration>
             </execution>
           </executions>
-        </plugin> -->
+        </plugin>
         <plugin>
           <groupId>org.apache.maven.plugins</groupId>
           <artifactId>maven-enforcer-plugin</artifactId>
@@ -163,23 +161,6 @@ SOFTWARE.
           <version>${jacoco.version}</version>
         </plugin>
         <plugin>
-          <groupId>org.antlr</groupId>
-          <artifactId>antlr4-maven-plugin</artifactId>
-          <version>${antlr.version}</version>
-          <configuration>
-            <treatWarningsAsErrors>true</treatWarningsAsErrors>
-            <visitor>true</visitor>
-          </configuration>
-          <executions>
-            <execution>
-              <id>antlr</id>
-              <goals>
-                <goal>antlr4</goal>
-              </goals>
-            </execution>
-          </executions>
-        </plugin>
-        <plugin>
           <groupId>org.apache.maven.plugins</groupId>
           <artifactId>maven-pmd-plugin</artifactId>
           <version>${pmd.version}</version>
@@ -187,6 +168,24 @@ SOFTWARE.
       </plugins>
     </pluginManagement>
     <plugins>
+      <plugin>
+        <groupId>org.antlr</groupId>
+        <artifactId>antlr4-maven-plugin</artifactId>
+        <version>${antlr.version}</version>
+        <configuration>
+          <treatWarningsAsErrors>true</treatWarningsAsErrors>
+          <visitor>true</visitor>
+          <!-- <outputDirectory>src/main/antlr4/generated-sources</outputDirectory> -->
+        </configuration>
+        <executions>
+          <execution>
+            <id>antlr</id>
+            <goals>
+              <goal>antlr4</goal>
+            </goals>
+          </execution>
+        </executions>
+      </plugin>
       <plugin>
         <groupId>org.jacoco</groupId>
         <artifactId>jacoco-maven-plugin</artifactId>
@@ -368,6 +367,13 @@ SOFTWARE.
     </snapshotRepository>
   </distributionManagement>
   <dependencies>
+    <!-- Should it really be here??? -->
+    <dependency>
+      <groupId>org.antlr</groupId>
+      <artifactId>antlr4-runtime</artifactId>
+      <version>${antlr.version}</version>
+    </dependency>
+    <!-- Or not??? -->
     <dependency>
       <groupId>org.polystat</groupId>
       <artifactId>j2ast</artifactId>
@@ -417,7 +423,4 @@ SOFTWARE.
       <scope>test</scope>
     </dependency>
   </dependencies>
-  <!--
-    @todo #181:90m Add dependency from j2ast repo.
-    -->
 </project>
