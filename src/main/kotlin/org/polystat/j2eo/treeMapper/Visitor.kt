@@ -5,7 +5,7 @@ import JavaParser
 import JavaParserBaseVisitor
 import tree.Entity
 
-class Visitor : JavaParserBaseVisitor<Entity> {
+class Visitor : JavaParserBaseVisitor<Entity>() {
     override fun visitCompilationUnit(ctx: JavaParser.CompilationUnitContext?): Entity = ctx!!.toCompilationUnit()
 
     override fun visitPackageDeclaration(ctx: JavaParser.PackageDeclarationContext?): Entity = ctx!!.toPackage()
