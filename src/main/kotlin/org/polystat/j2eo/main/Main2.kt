@@ -4,8 +4,8 @@ import arrow.core.Some
 import org.antlr.v4.runtime.CharStreams
 import org.antlr.v4.runtime.CommonTokenStream
 import org.apache.commons.cli.* // ktlint-disable no-wildcard-imports
-import org.polystat.j2eo.antlrParser.JavaLexer
-import org.polystat.j2eo.antlrParser.JavaParser
+import JavaLexer
+import JavaParser
 import org.polystat.j2eo.eotree.EOLicense
 import org.polystat.j2eo.eotree.EOMetas
 import org.polystat.j2eo.eotree.EOProgram
