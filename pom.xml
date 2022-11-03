@@ -27,7 +27,7 @@ SOFTWARE.
   <groupId>org.polystat</groupId>
   <artifactId>j2eo-parent</artifactId>
   <version>1.0-SNAPSHOT</version>
-  <packaging>pom</packaging>
+  <packaging>jar</packaging>
   <name>j2eo</name>
   <properties>
     <antlr.version>4.11.1</antlr.version>
@@ -40,19 +40,18 @@ SOFTWARE.
     <j2ast.version>0.2.0</j2ast.version>
     <jacoco.version>0.8.8</jacoco.version>
     <java.version>[11,)</java.version>
-    <junit-jupiter-api.version>5.8.2</junit-jupiter-api.version>
-    <junit-jupiter-engine.version>5.8.2</junit-jupiter-engine.version>
-    <junit-platform.version>1.9.1</junit-platform.version>
+    <junit-jupiter-api.version>5.8.1</junit-jupiter-api.version>
+    <junit-jupiter-engine.version>5.8.1</junit-jupiter-engine.version>
+    <junit-platform.version>1.8.2</junit-platform.version>
     <kotlin.version>1.7.20</kotlin.version>
     <kotlin-loggin.version>3.0.0</kotlin-loggin.version>
     <mvn.version>3.8.1</mvn.version>
     <pmd.version>3.13.0</pmd.version>
-    <slf4j.vesion>1.7.33</slf4j.vesion>
+    <slf4j.vesion>2.0.1</slf4j.vesion>
   </properties>
   <build>
     <sourceDirectory>${project.basedir}/src/main/</sourceDirectory>
     <testSourceDirectory>${project.basedir}/src/test/kotlin</testSourceDirectory>
-    <!-- Why is there only testing of /kotlin/ directory?? -->
     <pluginManagement>
       <plugins>
         <plugin>
@@ -71,6 +70,11 @@ SOFTWARE.
               </configuration>
             </execution>
           </executions>
+        </plugin>
+        <plugin>
+          <groupId>org.apache.maven.plugins</groupId>
+          <artifactId>maven-surefire-plugin</artifactId>
+          <version>3.0.0-M7</version>
         </plugin>
         <plugin>
           <groupId>org.apache.maven.plugins</groupId>
@@ -96,6 +100,8 @@ SOFTWARE.
           <artifactId>maven-compiler-plugin</artifactId>
           <version>${mvn.version}</version>
           <configuration>
+            <source>1.8</source>
+            <target>1.8</target>
             <properties combine.self="override">
             </properties>
           </configuration>
@@ -204,28 +210,6 @@ SOFTWARE.
         </executions>
       </plugin>
       <plugin>
-        <groupId>org.cqfn.diktat</groupId>
-        <artifactId>diktat-maven-plugin</artifactId>
-        <version>${diktat.version}</version>
-        <executions>
-          <execution>
-            <id>diktat</id>
-            <phase>none</phase>
-            <goals>
-              <goal>check</goal>
-              <goal>fix</goal>
-            </goals>
-            <configuration>
-              <inputs>
-                <input>${project.basedir}/src/main/kotlin</input>
-                <input>${project.basedir}/src/test/kotlin</input>
-              </inputs>
-              <diktatConfigFile>diktat-analysis.yml</diktatConfigFile>
-            </configuration>
-          </execution>
-        </executions>
-      </plugin>
-      <plugin>
         <groupId>org.jetbrains.kotlin</groupId>
         <artifactId>kotlin-maven-plugin</artifactId>
         <version>${kotlin.version}</version>
@@ -237,7 +221,7 @@ SOFTWARE.
             </goals>
           </execution>
           <execution>
-            <id>test-compile</id>
+            <id>kotlin-test-compile</id>
             <goals>
               <goal>test-compile</goal>
             </goals>
@@ -253,7 +237,7 @@ SOFTWARE.
         <artifactId>maven-checkstyle-plugin</artifactId>
         <version>${checkstyle.version}</version>
         <configuration>
-          <configLocation>checkstyle.xml</configLocation>
+          <configLocation>${project.basedir}/config/checkstyle/checkstyle.xml</configLocation>
         </configuration>
       </plugin>
     </plugins>
@@ -356,6 +340,12 @@ SOFTWARE.
   </distributionManagement>
   <dependencies>
     <dependency>
+      <groupId>com.h2database</groupId>
+      <artifactId>h2</artifactId>
+      <scope>runtime</scope>
+      <version>2.1.214</version>
+    </dependency>
+    <dependency>
       <groupId>org.antlr</groupId>
       <artifactId>antlr4-runtime</artifactId>
       <version>${antlr.version}</version>
@@ -368,7 +358,12 @@ SOFTWARE.
     <dependency>
       <groupId>org.jetbrains.kotlin</groupId>
       <artifactId>kotlin-stdlib</artifactId>
+    </dependency>
+    <dependency>
+      <groupId>org.jetbrains.kotlin</groupId>
+      <artifactId>kotlin-test</artifactId>
       <version>${kotlin.version}</version>
+      <scope>test</scope>
     </dependency>
     <dependency>
       <groupId>commons-cli</groupId>
@@ -395,6 +390,7 @@ SOFTWARE.
       <groupId>org.junit.platform</groupId>
       <artifactId>junit-platform-commons</artifactId>
       <version>${junit-platform.version}</version>
+      <scope>test</scope>
     </dependency>
     <dependency>
       <groupId>org.junit.jupiter</groupId>
@@ -408,5 +404,64 @@ SOFTWARE.
       <version>${junit-jupiter-engine.version}</version>
       <scope>test</scope>
     </dependency>
+    <dependency>
+      <groupId>org.jetbrains.kotlin</groupId>
+      <artifactId>kotlin-test-junit</artifactId>
+      <version>${kotlin.version}</version>
+      <scope>test</scope>
+    </dependency>
+    <dependency>
+      <groupId>org.assertj</groupId>
+      <artifactId>assertj-core</artifactId>
+      <version>3.12.2</version>
+      <scope>test</scope>
+    </dependency>   
+    <dependency>
+      <groupId>org.springframework.boot</groupId>
+      <artifactId>spring-boot-starter-web</artifactId>
+      <version>2.7.3</version>
+    </dependency>
+    <dependency>
+      <groupId>org.springframework.boot</groupId>
+      <artifactId>spring-boot-starter-data-jpa</artifactId>
+      <version>2.7.3</version>
+    </dependency>
+    <dependency>
+      <groupId>org.springframework.boot</groupId>
+      <artifactId>spring-boot-starter-test</artifactId>
+      <version>2.7.3</version>
+      <scope>test</scope>
+      <exclusions>
+        <exclusion>
+          <groupId>org.mockito</groupId>
+          <artifactId>mockito-core</artifactId>
+        </exclusion>
+      </exclusions>
+    </dependency>
+    <dependency>
+      <groupId>com.ninja-squad</groupId>
+      <artifactId>springmockk</artifactId>
+      <version>3.0.1</version>
+      <scope>test</scope>
+    </dependency>
   </dependencies>
+  <dependencyManagement>
+    <dependencies>
+      <dependency>
+        <groupId>org.jetbrains.kotlin</groupId>
+        <artifactId>kotlin-stdlib-common</artifactId>
+        <version>${kotlin.version}</version>
+      </dependency>
+      <dependency>
+        <groupId>org.jetbrains.kotlin</groupId>
+        <artifactId>kotlin-stdlib</artifactId>
+        <version>${kotlin.version}</version>
+      </dependency>
+      <dependency>
+        <groupId>org.jetbrains.kotlin</groupId>
+        <artifactId>kotlin-stdlib-jdk8</artifactId>
+        <version>1.5.30</version>
+      </dependency>
+    </dependencies>
+  </dependencyManagement>
 </project>
