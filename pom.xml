@@ -33,6 +33,7 @@ SOFTWARE.
     <antlr.version>4.11.1</antlr.version>
     <antrun.version>1.8</antrun.version>
     <arrow-core.version>1.0.0</arrow-core.version>
+    <assertj-core.version>3.12.2</assertj-core.version>
     <checkstyle.version>3.0.0</checkstyle.version>
     <cli.version>1.5.0</cli.version>
     <diktat.version>1.2.2</diktat.version>
@@ -46,8 +47,10 @@ SOFTWARE.
     <kotlin.version>1.7.20</kotlin.version>
     <kotlin-loggin.version>3.0.0</kotlin-loggin.version>
     <mvn.version>3.8.1</mvn.version>
+    <ninja-squad.version>3.0.1</ninja-squad.version>
     <pmd.version>3.13.0</pmd.version>
     <slf4j.vesion>2.0.1</slf4j.vesion>
+    <spring-framework.version>2.7.3</spring-framework.version>
   </properties>
   <build>
     <sourceDirectory>${project.basedir}/src/main/</sourceDirectory>
@@ -413,23 +416,23 @@ SOFTWARE.
     <dependency>
       <groupId>org.assertj</groupId>
       <artifactId>assertj-core</artifactId>
-      <version>3.12.2</version>
+      <version>${assertj-core.version}</version>
       <scope>test</scope>
-    </dependency>   
+    </dependency>
     <dependency>
       <groupId>org.springframework.boot</groupId>
       <artifactId>spring-boot-starter-web</artifactId>
-      <version>2.7.3</version>
+      <version>${spring-framework.version}</version>
     </dependency>
     <dependency>
       <groupId>org.springframework.boot</groupId>
       <artifactId>spring-boot-starter-data-jpa</artifactId>
-      <version>2.7.3</version>
+      <version>${spring-framework.version}</version>
     </dependency>
     <dependency>
       <groupId>org.springframework.boot</groupId>
       <artifactId>spring-boot-starter-test</artifactId>
-      <version>2.7.3</version>
+      <version>${spring-framework.version}</version>
       <scope>test</scope>
       <exclusions>
         <exclusion>
@@ -441,7 +444,7 @@ SOFTWARE.
     <dependency>
       <groupId>com.ninja-squad</groupId>
       <artifactId>springmockk</artifactId>
-      <version>3.0.1</version>
+      <version>${ninja-squad.version}</version>
       <scope>test</scope>
     </dependency>
   </dependencies>
