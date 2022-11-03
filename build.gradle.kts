@@ -62,7 +62,7 @@ dependencies {
     implementation("io.arrow-kt:arrow-core:1.0.1")
     // Kotlin logger
     implementation("org.slf4j:slf4j-simple:1.7.33")
-    implementation("io.github.microutils:kotlin-logging-jvm:2.1.21")
+    implementation("io.github.microutils:kotlin-logging-jvm:2.1.23")
 
     implementation("org.junit.platform:junit-platform-commons:1.8.2")
     testImplementation("org.junit.jupiter:junit-jupiter-api:5.8.2")
