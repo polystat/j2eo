@@ -45,7 +45,7 @@ SOFTWARE.
     <kotlin.version>1.7.20</kotlin.version>
     <kotlin-loggin.version>3.0.0</kotlin-loggin.version>
     <mvn.version>3.8.1</mvn.version>
-    <pmd.version>3.13.0</pmd.version>
+    <pmd.version>3.19.0</pmd.version>
     <slf4j.vesion>1.7.33</slf4j.vesion>
   </properties>
   <build>
