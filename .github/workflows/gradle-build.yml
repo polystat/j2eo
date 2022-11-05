@@ -29,7 +29,7 @@ jobs:
           url: "https://www.antlr.org/download/antlr-4.9.2-complete.jar"
           target: .
 
-      - uses: gradle/gradle-build-action@v1
+      - uses: gradle/gradle-build-action@v2
         with:
           arguments: build --info
           gradle-version: 7.2
@@ -58,7 +58,7 @@ jobs:
       - run: |
           wget https://www.antlr.org/download/antlr-4.9.2-complete.jar
 
-      - uses: gradle/gradle-build-action@v1
+      - uses: gradle/gradle-build-action@v2
         with:
           arguments: build --info
           gradle-version: 7.2
