@@ -12,7 +12,7 @@ plugins {
     `maven-publish`
     signing
     id("io.spring.dependency-management") version "1.1.0"
-    id("org.jlleitschuh.gradle.ktlint") version "10.3.0"
+    id("org.jlleitschuh.gradle.ktlint") version "11.0.0"
     // id("org.cqfn.diktat.diktat-gradle-plugin") version "1.0.2"
     kotlin("jvm") version "1.7.20"
     id("com.github.dawnwords.jacoco.badge") version "0.2.4"
