@@ -39,8 +39,8 @@ SOFTWARE.
     <enforcer.version>3.1.0</enforcer.version>
     <jacoco.version>0.8.8</jacoco.version>
     <java.version>[11,)</java.version>
-    <junit-jupiter-api.version>5.8.2</junit-jupiter-api.version>
-    <junit-jupiter-engine.version>5.8.2</junit-jupiter-engine.version>
+    <junit-jupiter-api.version>5.9.1</junit-jupiter-api.version>
+    <junit-jupiter-engine.version>5.9.1</junit-jupiter-engine.version>
     <junit-platform.version>1.9.1</junit-platform.version>
     <kotlin.version>1.7.20</kotlin.version>
     <kotlin-loggin.version>3.0.0</kotlin-loggin.version>
