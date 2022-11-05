@@ -11,7 +11,7 @@ plugins {
     checkstyle
     `maven-publish`
     signing
-    id("io.spring.dependency-management") version "1.0.11.RELEASE"
+    id("io.spring.dependency-management") version "1.1.0"
     id("org.jlleitschuh.gradle.ktlint") version "10.3.0"
     // id("org.cqfn.diktat.diktat-gradle-plugin") version "1.0.2"
     kotlin("jvm") version "1.7.20"
