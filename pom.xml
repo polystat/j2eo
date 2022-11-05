@@ -46,7 +46,7 @@ SOFTWARE.
     <kotlin-loggin.version>3.0.0</kotlin-loggin.version>
     <mvn.version>3.10.1</mvn.version>
     <pmd.version>3.19.0</pmd.version>
-    <slf4j.vesion>1.7.33</slf4j.vesion>
+    <slf4j.vesion>1.7.36</slf4j.vesion>
   </properties>
   <build>
     <!-- <sourceDirectory>${project.basedir}/src/main/kotlin</sourceDirectory>
