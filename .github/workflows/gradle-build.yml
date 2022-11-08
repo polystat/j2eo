@@ -23,7 +23,7 @@ jobs:
         with:
           java-version: 11
 
-      - uses: suisei-cn/actions-download-file@v1.0.1
+      - uses: suisei-cn/actions-download-file@v1.3.0
         name: Download ANTLR
         with:
           url: "https://www.antlr.org/download/antlr-4.9.2-complete.jar"
