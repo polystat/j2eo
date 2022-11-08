@@ -30,6 +30,7 @@ SOFTWARE.
   <packaging>jar</packaging>
   <name>j2eo</name>
   <properties>
+    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     <antlr.version>4.11.1</antlr.version>
     <antrun.version>1.8</antrun.version>
     <arrow-core.version>1.0.0</arrow-core.version>
