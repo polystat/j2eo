@@ -53,11 +53,11 @@ class Translator(val relativePath: Path) {
 
         // FIXME: assuming there is only one top-level component and it is a class
         val mainClassName = findMainClass(unit)
-        var entrypointBnds = listOf<EOBndExpr>()
-        if (mainClassName != null) {
-            entrypointBnds = generateEntryPoint(mainClassName)
+        val entrypointBnds = if (mainClassName != null) {
+            generateEntryPoint(mainClassName)
         } else {
             logger.info { "No entry point here!" }
+            listOf()
         }
 
         // FIXME: assuming there is only one top-level component and it is a class

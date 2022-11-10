@@ -13,7 +13,7 @@ import java.util.stream.Collectors
 class TestEOLicense {
     @Test
     fun testGenerateEOZeroIndent() {
-        var license = EOLicense(
+        val license = EOLicense(
             EOComment("test comment 1"),
             EOComment("test comment 2")
         )
@@ -24,7 +24,7 @@ class TestEOLicense {
      # test comment 2
             """.trimIndent()
         )
-        license = EOLicense(
+        val licenseFromStream = EOLicense(
             Arrays.stream(
                 arrayOf(
                     EOComment("test comment 3"),
@@ -33,7 +33,7 @@ class TestEOLicense {
             ).collect(Collectors.toList())
         )
         Assertions.assertEquals(
-            license.generateEO(0),
+            licenseFromStream.generateEO(0),
             """
      # test comment 3
      # test comment 4
@@ -43,7 +43,7 @@ class TestEOLicense {
 
     @Test
     fun testGenerateEONonZeroIndent() {
-        var license = EOLicense(
+        val license = EOLicense(
             EOComment("test comment 5"),
             EOComment("test comment 6")
         )
@@ -54,7 +54,7 @@ class TestEOLicense {
      # test comment 6
             """.trimIndent()
         )
-        license = EOLicense(
+        val licenseFromStream = EOLicense(
             Arrays.stream(
                 arrayOf(
                     EOComment("test comment 7"),
@@ -63,7 +63,7 @@ class TestEOLicense {
             ).collect(Collectors.toList())
         )
         Assertions.assertEquals(
-            license.generateEO(1),
+            licenseFromStream.generateEO(1),
             """
      # test comment 7
      # test comment 8

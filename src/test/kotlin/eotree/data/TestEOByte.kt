@@ -11,21 +11,21 @@ class TestEOByte {
     @Test
     fun testGenerateEOZeroIndent() {
         // Single-digit byte
-        var b = EOByte(1.toByte())
-        Assertions.assertEquals(b.generateEO(0), "01")
+        val oneByte = EOByte(1.toByte())
+        Assertions.assertEquals(oneByte.generateEO(0), "01")
 
         // Double-digit byte
-        b = EOByte(255.toByte())
-        Assertions.assertEquals(b.generateEO(0), "FF")
+        val maxByte = EOByte(255.toByte())
+        Assertions.assertEquals(maxByte.generateEO(0), "FF")
     }
 
     @Test
     fun testGenerateEONonZeroIndent() {
-        var b = EOByte(1.toByte())
-        Assertions.assertEquals(b.generateEO(1), "01")
+        val oneByte = EOByte(1.toByte())
+        Assertions.assertEquals(oneByte.generateEO(1), "01")
 
         // Double-digit byte
-        b = EOByte(255.toByte())
-        Assertions.assertEquals(b.generateEO(1), "FF")
+        val maxByte = EOByte(255.toByte())
+        Assertions.assertEquals(maxByte.generateEO(1), "FF")
     }
 }

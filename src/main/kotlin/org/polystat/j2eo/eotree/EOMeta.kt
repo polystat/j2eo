@@ -24,9 +24,6 @@ class EOMeta(var name: String, var value: String) : EONode() {
         return true
     }
 
-    override fun hashCode(): Int {
-        var result = name.hashCode()
-        result = 31 * result + value.hashCode()
-        return result
-    }
+    override fun hashCode(): Int =
+        31 * name.hashCode() + value.hashCode()
 }
