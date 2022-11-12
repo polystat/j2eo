@@ -1,6 +1,5 @@
 package org.polystat.j2eo.treeMapper
 
-import java.util.*
 import JavaParser
 import JavaParser.CompilationUnitContext
 import JavaParserBaseVisitor
