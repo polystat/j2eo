@@ -35,4 +35,3 @@ release:
     git add polystat.lst
     git commit -am "polystat ${tag}"
     git checkout "${branch}"
-
