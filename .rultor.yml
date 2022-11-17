@@ -15,10 +15,6 @@ merge:
 release:
   script: |-
     [[ "${tag}" =~ ^[0-9]+\.[0-9]+\.[0-9]+$ ]] || exit -1
-    image=yegor256/j2eo
-    sudo docker build "$(pwd)" --tag "${image}:${tag}"
-    cat ../docker-password | sudo docker login --password-stdin --username yegor256
-    sudo docker push "${image}:${tag}"
     mvn versions:set "-DnewVersion=${tag}" -Dstyle.color=never
     git commit -am "${tag}"
     mvn clean install -Dinvoker.skip
@@ -39,3 +35,7 @@ release:
     git add polystat.lst
     git commit -am "polystat ${tag}"
     git checkout "${branch}"
+    image=yegor256/j2eo
+    sudo docker build "$(pwd)" --tag "${image}:${tag}"
+    cat ../docker-password | sudo docker login --password-stdin --username yegor256
+    sudo docker push "${image}:${tag}"
