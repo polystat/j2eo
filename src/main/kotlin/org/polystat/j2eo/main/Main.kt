@@ -31,9 +31,8 @@ import tree.Compilation.TopLevelComponents
 import tree.Declaration.ImportDeclarations
 import tree.Entity
 
-object Main2 {
+class Main {
     @Throws(FileNotFoundException::class)
-    @JvmStatic
     fun main(args: Array<String>) {
         // Setup command line argument parser
         val options = Options()
