@@ -100,12 +100,28 @@ SOFTWARE.
             <archive>
               <manifest>
                 <addClasspath>true</addClasspath>
-                <classpathPrefix>libs/</classpathPrefix>
+                <!-- <classpathPrefix>target/classes/</classpathPrefix> -->
                 <mainClass>
-                  com.baeldung.executable.Main
+                  org.polystat.j2eo.main
                 </mainClass>
               </manifest>
             </archive>
+          </configuration>
+        </plugin>
+        <plugin>
+          <artifactId>maven-assembly-plugin</artifactId>
+          <executions>
+            <execution>
+              <phase>package</phase>
+              <goals>
+                <goal>single</goal>
+              </goals>
+            </execution>
+          </executions>
+          <configuration>
+            <descriptorRefs>
+              <descriptorRef>jar-with-dependencies</descriptorRef>
+            </descriptorRefs>
           </configuration>
         </plugin>
         <plugin>
