@@ -1,8 +1,8 @@
 package org.polystat.j2eo.treeMapper
 
-import org.polystat.j2eo.antlrParser.JavaParser
-import org.polystat.j2eo.antlrParser.JavaParser.CompilationUnitContext
-import org.polystat.j2eo.antlrParser.JavaParserBaseVisitor
+import JavaParser
+import JavaParser.CompilationUnitContext
+import JavaParserBaseVisitor
 import tree.Entity
 
 class Visitor : JavaParserBaseVisitor<Entity>() {

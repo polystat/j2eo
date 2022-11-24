@@ -31,10 +31,6 @@
 
 lexer grammar JavaLexer;
 
-@header {
-package org.polystat.j2eo.antlrParser;
-}
-
 // Keywords
 
 ABSTRACT:           'abstract';

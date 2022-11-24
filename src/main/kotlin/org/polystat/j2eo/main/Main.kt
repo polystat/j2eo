@@ -1,11 +1,23 @@
 package org.polystat.j2eo.main
 
+import JavaLexer
+import JavaParser
 import arrow.core.Some
+import java.io.File
+import java.io.FileNotFoundException
+import java.nio.file.Files
+import java.nio.file.Paths
+import kotlin.io.path.createDirectories
+import kotlin.system.exitProcess
 import org.antlr.v4.runtime.CharStreams
 import org.antlr.v4.runtime.CommonTokenStream
-import org.apache.commons.cli.* // ktlint-disable no-wildcard-imports
-import org.polystat.j2eo.antlrParser.JavaLexer
-import org.polystat.j2eo.antlrParser.JavaParser
+import org.apache.commons.cli.CommandLine
+import org.apache.commons.cli.CommandLineParser
+import org.apache.commons.cli.DefaultParser
+import org.apache.commons.cli.HelpFormatter
+import org.apache.commons.cli.Option
+import org.apache.commons.cli.Options
+import org.apache.commons.cli.ParseException
 import org.polystat.j2eo.eotree.EOLicense
 import org.polystat.j2eo.eotree.EOMetas
 import org.polystat.j2eo.eotree.EOProgram
@@ -18,14 +30,8 @@ import tree.Compilation.SimpleCompilationUnit
 import tree.Compilation.TopLevelComponents
 import tree.Declaration.ImportDeclarations
 import tree.Entity
-import java.io.File
-import java.io.FileNotFoundException
-import java.nio.file.Files
-import java.nio.file.Paths
-import kotlin.io.path.createDirectories
-import kotlin.system.exitProcess
 
-object Main2 {
+object Main {
     @Throws(FileNotFoundException::class)
     @JvmStatic
     fun main(args: Array<String>) {
