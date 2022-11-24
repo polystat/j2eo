@@ -39,4 +39,3 @@ release:
     sudo docker build "$(pwd)" --tag "${image}:${tag}"
     cat ../docker-password | sudo docker login --password-stdin --username yegor256
     sudo docker push "${image}:${tag}"
-
