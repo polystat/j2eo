@@ -202,7 +202,7 @@ tasks.getByName("build") {
 }
 
 checkstyle {
-    toolVersion = "9.1"
+    toolVersion = "9.3"
     isShowViolations = false
     isIgnoreFailures = false
 }
