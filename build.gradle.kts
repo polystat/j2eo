@@ -171,7 +171,7 @@ tasks.test {
 pmd {
     isIgnoreFailures = true
     isConsoleOutput = false
-    toolVersion = "6.52.0"
+    toolVersion = "6.53.0"
     rulesMinimumPriority.set(5)
     ruleSets = listOf("category/java/codestyle.xml")
 }
