@@ -64,9 +64,9 @@ dependencies {
     implementation("org.slf4j:slf4j-simple:2.0.6")
     implementation("io.github.microutils:kotlin-logging-jvm:3.0.4")
 
-    implementation("org.junit.platform:junit-platform-commons:1.9.1")
-    testImplementation("org.junit.jupiter:junit-jupiter-api:5.9.1")
-    testRuntimeOnly("org.junit.jupiter:junit-jupiter-engine:5.9.1")
+    implementation("org.junit.platform:junit-platform-commons:1.9.2")
+    testImplementation("org.junit.jupiter:junit-jupiter-api:5.9.2")
+    testRuntimeOnly("org.junit.jupiter:junit-jupiter-engine:5.9.2")
     implementation(kotlin("stdlib-jdk8"))
 
     // Use ANTLR for parser generation
