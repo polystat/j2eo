@@ -59,7 +59,7 @@ dependencies {
     // Library for command-line arguments support
     implementation("commons-cli:commons-cli:1.5.0")
     // Functional stuff
-    implementation("io.arrow-kt:arrow-core:1.1.3")
+    implementation("io.arrow-kt:arrow-core:1.1.5")
     // Kotlin logger
     implementation("org.slf4j:slf4j-simple:2.0.6")
     implementation("io.github.microutils:kotlin-logging-jvm:3.0.4")
