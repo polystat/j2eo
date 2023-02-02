@@ -14,7 +14,7 @@ plugins {
     id("io.spring.dependency-management") version "1.1.0"
     id("org.jlleitschuh.gradle.ktlint") version "11.1.0"
     // id("org.cqfn.diktat.diktat-gradle-plugin") version "1.0.2"
-    kotlin("jvm") version "1.8.0"
+    kotlin("jvm") version "1.8.10"
     id("com.github.dawnwords.jacoco.badge") version "0.2.4"
 }
 
