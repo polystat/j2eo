@@ -61,7 +61,7 @@ dependencies {
     // Functional stuff
     implementation("io.arrow-kt:arrow-core:1.1.5")
     // Kotlin logger
-    implementation("org.slf4j:slf4j-simple:2.0.6")
+    implementation("org.slf4j:slf4j-simple:2.0.7")
     implementation("io.github.microutils:kotlin-logging-jvm:3.0.5")
 
     implementation("org.junit.platform:junit-platform-commons:1.9.2")
