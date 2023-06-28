@@ -386,7 +386,7 @@ Wrappers are more convenient way to simulate primitives types. For,
 example `memory.write` returns `bool` object instead itself, so for handling `=`
 operator we should do something like this:
 
-```
+```eo
 [a b] > write
   seq > @
     a.write b
@@ -418,13 +418,13 @@ values. Supported ones:
 
 Common translation scheme:
 
-```Java
+```java
 expr_1 op expr_2 
 ```
 
 -->
 
-```
+```eo
 [] > binary
   expr_1.translated_op > @
     expr_2
@@ -432,7 +432,7 @@ expr_1 op expr_2
 
 Unary case:
 
-```Java
+```java
 expr op
 // OR
     op expr
@@ -447,13 +447,13 @@ expr op
 
 Cast case:
 
-```Java
+```java
 (primitive_type)expr
 ```
 
 -->
 
-```
+```eo
 [] > cast
   translated_primitive_type.from expr
 ```
@@ -512,13 +512,13 @@ object, `long` in `prim__long` and so on.
 
 Example:
 
-```Java
+```java
 float a;
 ```
 
 -->
 
-```
+```eo
 prim__float.constructor_1 > a
   prim__float.new
 ```
@@ -529,7 +529,7 @@ Any reference type variable is being stored on `cage`.
 
 Example:
 
-```Java
+```java
 Ref a;
 ```
 
@@ -564,13 +564,13 @@ All of them has runtime support.
 
 Example:
 
-```Java
+```java
 (primitive_type)expr
 ```
 
 -->
 
-```
+```eo
 [] > cast
   translated_type.from > @
     expr
@@ -605,19 +605,19 @@ The same situation as [4.4](#4.4-type-variables)
 Currently, there is no support for this type of conversion. User should manually
 resolve them. For example:
 
-```Java
+```java
 "1"+1
 ```
 
 it should be manually rewritten to:
 
-```Java
+```java
 "1"+String.valueOf(1)
 ```
 
 In this case the translator would convert it to:
 
-```
+```eo
 [] > binary_1
   literal_1.add > @
     methodInvocation_1
@@ -668,15 +668,15 @@ Supported declared entity is one of the following:
 Any declaration is translated into EO object or EO copy of specific object.
 Example:
 
-```Java
+```java
 class A {
-    body
+    // body
 }
 ```
 
 ->
 
-```
+```eo
 [] > class__A
   ...
   body
@@ -685,7 +685,7 @@ class A {
 
 Or,
 
-```Java
+```java
 int a;
 ```
 
@@ -707,13 +707,13 @@ mangling for variables.
 A *qualified name* consists of a name, a "." token, and an identifier. Qualified
 names are separated to several objects during translation. Example:
 
-```Java
+```java
 a.b.c;
 ```
 
 -->
 
-```
+```eo
 [] > fieldAcces_1
   fieldAcess_2.c > @
 [] > fieldAcces_2
@@ -746,14 +746,14 @@ static support declarations.
 
 Example:
 
-```Java
+```java
 import a.b.c;
 import static d.e.f;
 ```
 
 -->
 
-```
+```eo
 +alias a.b.class__c
 +alias d.class_e.f
 ```
@@ -764,7 +764,7 @@ Identifier `java` will be replaced with `stdlib`.
 
 Example:
 
-```Java
+```java
 import java.lang.Random;
 ```
 
@@ -793,7 +793,7 @@ Any method would be translated into EO object. Name in this case would be saved.
 
 Example:
 
-```Java
+```java
 static String m(int p_int,String p_str){
     return p_int+p_str;
     }
@@ -801,7 +801,7 @@ static String m(int p_int,String p_str){
 
 -->
 
-```
+```eo
 [p_int p_str] > m
   seq > @
     return_1
@@ -824,7 +824,7 @@ itself. It is necessary to implement overriding methods in EO correctly.
 Now only `static` nested classes are supported. Nested interfaces are
 unsupported. Example:
 
-```Java
+```java
 class Outer {
     class Inner {
     }
@@ -833,7 +833,7 @@ class Outer {
 
 -->
 
-```
+```eo
 [] > class__Outer
   ...
   [] > class Inner
@@ -850,13 +850,13 @@ Example:
 ```java
 public A(){
     super();
-    ...
-    }
+    //...
+}
 ```
 
 -->
 
-```
+```eo
 [this] > constructor
   seq > @
     initialization
@@ -881,7 +881,7 @@ If no constructor is provided then translator generate default constructor.
 
 #### Class translation structure:
 
-```
+```eo
 [] > class__<Name of class>
   class__<Parent name> > super              # Inheritance simulation
   super > @
@@ -939,7 +939,7 @@ Example:
 
 -->
 
-```
+```eo
 [] > initializerArray_1
   * > @
     initializerSimple_1
@@ -979,16 +979,16 @@ unchanged.
 By Java grammar, blocks are sequence of declarations and statements separated by
 curly braces. Translator creates new EO object for each block. Example:
 
-```Java
+```java
 {
     declaration;
     statement;
-    }
+}
 ``` 
 
 -->
 
-```
+```eo
 [] > block_1
   seq > @
     declaration_1
@@ -1001,16 +1001,16 @@ internal structure of itself. Inside a `seq` object they are just dataizing.
 
 Now let's look to real Java code:
 
-```Java
+```java
 void foo(){
     int a=1;
     println(a);
-    }
+}
 ```
 
 ->
 
-```
+```eo
 1  [this] > foo
 2    seq > @
 3      variableDeclaration_1
@@ -1069,7 +1069,7 @@ class A {
 
 -->
 
-```
+```eo
 [] > class__A
   ...
   [] > new
@@ -1089,7 +1089,7 @@ class A {
 
 -->
 
-```
+```eo
 [] > class__A
   ...
   [] > new
@@ -1124,7 +1124,7 @@ void m(){
 
 -->
 
-```
+```eo
 [this] > m
   seq > @
     variableDeclaration_1
@@ -1159,12 +1159,12 @@ Example:
 {
     int a=1;
     method();
-    }
+}
 ```
 
 -->
 
-```
+```eo
 [] > block_1
   seq > @
     variableDeclaration_1       # int a = 1;
@@ -1202,7 +1202,7 @@ if(cond)
 
 -->
 
-```
+```eo
 [] > ifThenElse_1
   translated_cond.if > @
     block_1
@@ -1216,7 +1216,7 @@ if(cond)
 
 If no else part is provided then translator generate empty block (`empty`):
 
-```
+```eo
 [] > empty_1
   TRUE > @
 ```
@@ -1231,7 +1231,7 @@ assert cond:expr;
 
 -->
 
-```
+```eo
 [] > assert_1
   translated_cond.if > @
     TRUE
@@ -1252,7 +1252,7 @@ while(cond)
 
 -->
 
-```
+```eo
 [] > while_1
   translated_cond.while > @
     [while_i]
@@ -1274,7 +1274,7 @@ do
 
 -->
 
-```
+```eo
 [] > do_1
   translated_cond.do > @
     [do_i]
@@ -1302,7 +1302,7 @@ Examples:
 
 `1` ->
 
-```
+```eo
 [] > literal_1
   prim__int.constructor_2 > @
     prim__int.new
@@ -1311,7 +1311,7 @@ Examples:
 
 `1.0` ->
 
-```
+```eo
 [] > literal_1
   prim__float.constructor_2 > @
     prim__float.new
@@ -1320,7 +1320,7 @@ Examples:
 
 `"string"` ->
 
-```
+```eo
 [] > literal_1
   class__String.constructor_2 > @
     class__String.new
@@ -1335,7 +1335,7 @@ It's remaining unchanged.
 
 `(expresion)` ->
 
-```
+```eo
 [] > parenthesized_1
   expresion > @
 ```
@@ -1347,7 +1347,7 @@ cases.
 
 `new A(arg)` ->
 
-```
+```eo
 [] > statementExpression_1
   class__A.constructor > @
     class__A.new
@@ -1369,7 +1369,7 @@ initializers translator uses `array` aka `*` object from EO.
 
 `int[] array = {1}` ->
 
-```
+```eo
 [] > variableDeclaration_1
   array.write > @
     initializerArray_1
@@ -1388,7 +1388,7 @@ initializers translator uses `array` aka `*` object from EO.
 
 `array[idx]` ->
 
-```
+```eo
 [] > statementExpression_1
   simpleReference_1.get > @
     simpleReference_2.v
@@ -1404,7 +1404,7 @@ initializers translator uses `array` aka `*` object from EO.
 
 `a.b` ->
 
-```
+```eo
 [] > statementExpression_1
   simpleReference_1.b > @
 [] > simpleReference_1
@@ -1417,7 +1417,7 @@ It can be simplified, but we keep such translation for generalization.
 
 `a.super.b` ->
 
-```
+```eo
 [] > statementExpression_1
   simpleReference_1.super.b > @
 [] > simpleReference_1
@@ -1428,7 +1428,7 @@ It can be simplified, but we keep such translation for generalization.
 
 `a.b(arg)` ->
 
-```
+```eo
 [] > statementExpression_1
   a.b > @                   # call of b
     a                       # a should be passed
@@ -1441,7 +1441,7 @@ It can be simplified, but we keep such translation for generalization.
 
 `expr++` ->
 
-```
+```eo
 [] > statementExpression_1
   simpleReference_1.inc_post > @    # increment itself
 [] > simpleReference_1
@@ -1452,7 +1452,7 @@ It can be simplified, but we keep such translation for generalization.
 
 `expr--` ->
 
-```
+```eo
 [] > statementExpression_1
   simpleReference_1.dec_post > @    # decrement itself
 [] > simpleReference_1
@@ -1498,7 +1498,7 @@ It can be simplified, but we keep such translation for generalization.
 
 `-expr` ->
 
-```
+```eo
 [] > statementExpression_1
   simpleReference_1.neg > @    # negation itself
 [] > simpleReference_1
@@ -1509,7 +1509,7 @@ It can be simplified, but we keep such translation for generalization.
 
 `(int) 1.0` ->
 
-```
+```eo
 [] > statementExpression_1
   prim__int.from > @               # cast itself
     literal_1
@@ -1523,7 +1523,7 @@ It can be simplified, but we keep such translation for generalization.
 
 `left operand right` ->
 
-```
+```eo
 [] > statementExpression_1
   simpleReference_1.t_operand > @
     simpleReference_2
