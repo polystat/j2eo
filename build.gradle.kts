@@ -51,7 +51,7 @@ repositories {
 
 dependencyManagement {
     imports {
-        mavenBom("com.jcabi:parent:0.57.0")
+        mavenBom("com.jcabi:parent:0.67.0")
     }
 }
 
