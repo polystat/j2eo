@@ -37,7 +37,7 @@ SOFTWARE.
     <cli.version>1.5.0</cli.version>
     <diktat.version>1.2.5</diktat.version>
     <enforcer.version>3.2.1</enforcer.version>
-    <jacoco.version>0.8.8</jacoco.version>
+    <jacoco.version>0.8.12</jacoco.version>
     <java.version>[11,)</java.version>
     <junit-jupiter-api.version>5.9.2</junit-jupiter-api.version>
     <junit-jupiter-engine.version>5.9.2</junit-jupiter-engine.version>
