@@ -33,7 +33,7 @@ SOFTWARE.
     <antlr.version>4.12.0</antlr.version>
     <antrun.version>3.1.0</antrun.version>
     <arrow-core.version>1.1.5</arrow-core.version>
-    <checkstyle.version>3.0.0</checkstyle.version>
+    <checkstyle.version>3.6.0</checkstyle.version>
     <cli.version>1.5.0</cli.version>
     <diktat.version>1.2.5</diktat.version>
     <enforcer.version>3.2.1</enforcer.version>
