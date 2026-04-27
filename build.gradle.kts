@@ -57,7 +57,7 @@ dependencyManagement {
 
 dependencies {
     // Library for command-line arguments support
-    implementation("commons-cli:commons-cli:1.5.0")
+    implementation("commons-cli:commons-cli:1.11.0")
     // Functional stuff
     implementation("io.arrow-kt:arrow-core:1.1.5")
     // Kotlin logger
