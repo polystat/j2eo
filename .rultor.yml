@@ -1,6 +1,5 @@
 docker:
-  image: "iammaxim/j2eo:latest"
-  as_root: true
+  image: "yegor256/rultor-image:1.9.1"
 architect:
   - yegor256
 assets:
@@ -9,16 +8,33 @@ assets:
   secring.gpg: yegor256/polystat-secrets#secring.gpg
   docker-password: yegor256/polystat-secrets#docker-password
 install: |
-  cp ../gradle.properties .
-  wget https://www.antlr.org/download/antlr-4.9.2-complete.jar
+  pdd --file=/dev/null
 merge:
   script: |
-    gradle build --info
+    mvn clean install --errors -Dstyle.color=never
 release:
   script: |-
     [[ "${tag}" =~ ^[0-9]+\.[0-9]+\.[0-9]+$ ]] || exit -1
-    gradle build fatJar publish -x test --info -Dcandidates=false -PmvnPublicationVersion=${tag} -Dsigning.secretKeyRingFile=/home/r/secring.gpg
-    mv "J2EO-${tag}.jar" j2eo.jar
+    mvn versions:set "-DnewVersion=${tag}" -Dstyle.color=never
+    git commit -am "${tag}"
+    mvn clean install -Dinvoker.skip
+    mvn clean deploy -Ppolystat -Psonatype --errors --settings ../settings.xml -Dstyle.color=never
+    mkdir /tmp/polystat
+    cp -R src/main/eo /tmp/polystat/objects
+    cp -R src/test/eo /tmp/polystat/tests
+    branch=$(git rev-parse --abbrev-ref HEAD)
+    git checkout gh-pages
+    git reset --hard
+    sudo git config --global --add safe.directory "$(pwd)"
+    sudo /bin/bash -c "cd '$(pwd)'; git clean -fd"
+    rm -rf polystat
+    cp -R /tmp/polystat .
+    find polystat -name '*.eo' | xargs sed -i "s/0\.0\.0/${tag}/g"
+    git add polystat
+    find polystat -name '*.eo' > polystat.lst
+    git add polystat.lst
+    git commit -am "polystat ${tag}"
+    git checkout "${branch}"
     image=yegor256/j2eo
     sudo docker build "$(pwd)" --tag "${image}:${tag}"
     cat ../docker-password | sudo docker login --password-stdin --username yegor256

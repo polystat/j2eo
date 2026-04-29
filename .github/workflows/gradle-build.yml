@@ -21,7 +21,8 @@ jobs:
 
       - uses: actions/setup-java@v3
         with:
-          java-version: 11
+          distribution: 'temurin'
+          java-version: '11'
 
       - uses: suisei-cn/actions-download-file@v1.3.0
         name: Download ANTLR
@@ -53,7 +54,8 @@ jobs:
 
       - uses: actions/setup-java@v3
         with:
-          java-version: 11
+          distribution: 'temurin'
+          java-version: '11'
 
       - run: |
           wget https://www.antlr.org/download/antlr-4.9.2-complete.jar
