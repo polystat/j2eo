@@ -42,7 +42,7 @@ SOFTWARE.
     <junit-jupiter-api.version>5.9.2</junit-jupiter-api.version>
     <junit-jupiter-engine.version>5.9.2</junit-jupiter-engine.version>
     <junit-platform.version>1.9.2</junit-platform.version>
-    <kotlin.version>1.8.10</kotlin.version>
+    <kotlin.version>1.9.25</kotlin.version>
     <kotlin-loggin.version>3.0.5</kotlin-loggin.version>
     <mvn.version>3.11.0</mvn.version>
     <pmd.version>3.20.0</pmd.version>
