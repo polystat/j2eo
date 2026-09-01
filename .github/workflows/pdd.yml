@@ -1,15 +1,19 @@
 ---
 name: pdd
-on:
+'on':
   push:
     branches:
       - master
   pull_request:
     branches:
       - master
+concurrency:
+  group: pdd-${{ github.ref }}
+  cancel-in-progress: true
 jobs:
   pdd:
-    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    runs-on: ubuntu-24.04
     steps:
-      - uses: actions/checkout@v4
-      - uses: g4s8/pdd-action@master
+      - uses: actions/checkout@v7
+      - uses: volodya-lombrozo/pdd-action@master
