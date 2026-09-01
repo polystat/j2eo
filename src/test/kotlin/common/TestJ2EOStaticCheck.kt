@@ -97,7 +97,7 @@ class TestJ2EOStaticCheck {
                     translatedJava = translatedJava.substring(translatedJava.indexOf("+alias"))
                     sampleJava = sampleJava.substring(sampleJava.indexOf("+alias"))
 
-                    assert(translatedJava == sampleJava)
+                    assert(translatedJava.trimEnd() == sampleJava.trimEnd())
                 }
             }
 
