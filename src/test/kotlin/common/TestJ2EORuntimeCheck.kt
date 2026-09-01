@@ -27,6 +27,7 @@ import java.nio.file.Path
 import java.nio.file.Paths
 import java.time.Duration
 import java.util.Locale
+import java.util.concurrent.CopyOnWriteArrayList
 import java.util.concurrent.TimeUnit
 import kotlin.collections.HashMap
 import kotlin.io.path.absolutePathString
@@ -192,80 +193,97 @@ class TestJ2EORuntimeCheck {
                     assert(false)
                 }
 
-                assertTimeoutPreemptively(Duration.ofSeconds(15)) {
-                    val isWindows =
-                        System
-                            .getProperty("os.name")
-                            .lowercase(Locale.getDefault())
-                            .contains("windows") // Matters a lot
-
-                    // Execute Java
-                    val execPbJava =
-                        ProcessBuilder(
-                            "java",
-                            path.toAbsolutePath().toString(),
-                        )
-                    execPbJava.directory(testFolderRoot.toFile())
-                    execPbJava.redirectErrorStream(false)
-                    val execProcessJava = execPbJava.start()
-                    logger.info("-- Executing Java... --")
-
-                    // Receive output
-                    val outputJava = StringBuilder()
-                    val stdInputJava = BufferedReader(InputStreamReader(execProcessJava.inputStream))
-                    var s: String?
-                    while (stdInputJava.readLine().also { s = it } != null) {
-                        outputJava.append(s).append(lineSep)
-                    }
-                    execProcessJava.waitFor()
-                    execProcessJava.destroy()
-                    logger.info("-- Java execution output --$lineSep$outputJava")
-
-                    // Execute EO
-                    val relPath = path.relativeTo(testFolderRoot)
-                    val pkg = relPath.toList().dropLast(1).joinToString(".")
-                    val execPb =
-                        ProcessBuilder(
-                            "java",
-                            "-cp",
-                            if (isWindows) {
-                                "\"target/classes;target/eo-runtime.jar\""
-                            } else {
-                                "target/classes:target/eo-runtime.jar"
-                            },
-                            "org.eolang.Main",
-                            "$pkg.main",
-                            if (isWindows) {
-                                "%*"
-                            } else {
-                                "\"$@\"1"
-                            },
-                        )
-                    execPb.directory(testFolderRoot.toFile())
-                    execPb.redirectErrorStream(true)
-                    val execProcess = execPb.start()
-                    logger.info("-- Executing EO... --")
-
-                    // Receive EO execution output
-                    val outputEO = StringBuilder()
-                    val stdInputEO = BufferedReader(InputStreamReader(execProcess.inputStream))
-                    var sEO: String?
-                    while (stdInputEO.readLine().also { sEO = it } != null) {
-                        outputEO.append(sEO).append(lineSep)
-                    }
-                    if (execProcess.waitFor(5, TimeUnit.SECONDS)) {
-                        logger.warn("-- EO process has finished. ---")
-                        execProcess.destroy()
-                    } else {
-                        logger.warn("-- EO process is stuck!!! ---")
-                        execProcess.destroyForcibly()
-                    }
-
-                    logger.info("-- EO execution output --$lineSep$outputEO")
-
-                    Assertions.assertEquals(outputJava.toString(), outputEO.toString())
+                // Processes started by the timed block below; the preemptive
+                // timeout abandons its worker thread on a non-interruptible
+                // pipe read, so they must be killed from this outer thread
+                val spawned = CopyOnWriteArrayList<Process>()
+                try {
+                    executeBothVersions(path, spawned)
+                } finally {
+                    spawned.forEach { it.destroyForcibly() }
                 }
             }
+
+        private fun executeBothVersions(
+            path: Path,
+            spawned: MutableList<Process>,
+        ) {
+            assertTimeoutPreemptively(Duration.ofSeconds(15)) {
+                val isWindows =
+                    System
+                        .getProperty("os.name")
+                        .lowercase(Locale.getDefault())
+                        .contains("windows") // Matters a lot
+
+                // Execute Java
+                val execPbJava =
+                    ProcessBuilder(
+                        "java",
+                        path.toAbsolutePath().toString(),
+                    )
+                execPbJava.directory(testFolderRoot.toFile())
+                execPbJava.redirectErrorStream(false)
+                val execProcessJava = execPbJava.start()
+                spawned.add(execProcessJava)
+                logger.info("-- Executing Java... --")
+
+                // Receive output
+                val outputJava = StringBuilder()
+                val stdInputJava = BufferedReader(InputStreamReader(execProcessJava.inputStream))
+                var s: String?
+                while (stdInputJava.readLine().also { s = it } != null) {
+                    outputJava.append(s).append(lineSep)
+                }
+                execProcessJava.waitFor()
+                execProcessJava.destroy()
+                logger.info("-- Java execution output --$lineSep$outputJava")
+
+                // Execute EO
+                val relPath = path.relativeTo(testFolderRoot)
+                val pkg = relPath.toList().dropLast(1).joinToString(".")
+                val execPb =
+                    ProcessBuilder(
+                        "java",
+                        "-cp",
+                        if (isWindows) {
+                            "\"target/classes;target/eo-runtime.jar\""
+                        } else {
+                            "target/classes:target/eo-runtime.jar"
+                        },
+                        "org.eolang.Main",
+                        "$pkg.main",
+                        if (isWindows) {
+                            "%*"
+                        } else {
+                            "\"$@\"1"
+                        },
+                    )
+                execPb.directory(testFolderRoot.toFile())
+                execPb.redirectErrorStream(true)
+                val execProcess = execPb.start()
+                spawned.add(execProcess)
+                logger.info("-- Executing EO... --")
+
+                // Receive EO execution output
+                val outputEO = StringBuilder()
+                val stdInputEO = BufferedReader(InputStreamReader(execProcess.inputStream))
+                var sEO: String?
+                while (stdInputEO.readLine().also { sEO = it } != null) {
+                    outputEO.append(sEO).append(lineSep)
+                }
+                if (execProcess.waitFor(5, TimeUnit.SECONDS)) {
+                    logger.warn("-- EO process has finished. ---")
+                    execProcess.destroy()
+                } else {
+                    logger.warn("-- EO process is stuck!!! ---")
+                    execProcess.destroyForcibly()
+                }
+
+                logger.info("-- EO execution output --$lineSep$outputEO")
+
+                Assertions.assertEquals(outputJava.toString(), outputEO.toString())
+            }
+        }
 
         private fun isReadyTest(path: Path): Boolean = !path.endsWith("SampleTest.java") && !path.contains(Paths.get("target"))
 
