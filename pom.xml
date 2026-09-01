@@ -44,6 +44,7 @@ SOFTWARE.
     <kotlin.version>1.8.10</kotlin.version>
     <kotlin-loggin.version>3.0.5</kotlin-loggin.version>
     <mvn.version>3.11.0</mvn.version>
+    <qulice.version>0.35.1</qulice.version>
     <slf4j.vesion>2.0.7</slf4j.vesion>
   </properties>
   <build>
@@ -217,6 +218,25 @@ SOFTWARE.
             <id>test-compile</id>
             <goals>
               <goal>test-compile</goal>
+            </goals>
+          </execution>
+        </executions>
+      </plugin>
+      <plugin>
+        <groupId>com.qulice</groupId>
+        <artifactId>qulice-maven-plugin</artifactId>
+        <version>${qulice.version}</version>
+        <configuration>
+          <excludes>
+            <exclude>checkstyle:/src/main/java/org/polystat/j2eo/antlrParser/.*</exclude>
+            <exclude>pmd:/src/main/java/org/polystat/j2eo/antlrParser/.*</exclude>
+            <exclude>errorprone:/src/main/java/org/polystat/j2eo/antlrParser/.*</exclude>
+          </excludes>
+        </configuration>
+        <executions>
+          <execution>
+            <goals>
+              <goal>check</goal>
             </goals>
           </execution>
         </executions>
