@@ -4,5 +4,5 @@ public class SubtypingShortByte {
         short s = b;
         System.out.println(s);
         System.out.println("passed");
-    }    
+    }
 }

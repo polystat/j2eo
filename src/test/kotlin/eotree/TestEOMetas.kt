@@ -13,35 +13,37 @@ import org.polystat.j2eo.util.ListUtils.listOf
 class TestEOMetas {
     @Test
     fun testGenerateEOZeroIndent() {
-        val f = EOMetas(
-            Some("org.eolang.package"),
-            listOf(
-                EOMeta("key1", "value1"),
-                EOMeta("key2", "value2")
+        val f =
+            EOMetas(
+                Some("org.eolang.package"),
+                listOf(
+                    EOMeta("key1", "value1"),
+                    EOMeta("key2", "value2"),
+                ),
             )
-        )
         Assertions.assertEquals(
             "+package org.eolang.package\n" +
                 "+key1 value1\n" +
                 "+key2 value2",
-            f.generateEO(0)
+            f.generateEO(0),
         )
     }
 
     @Test
     fun testGenerateEONonZeroIndent() {
-        val f = EOMetas(
-            Some("org.eolang.package"),
-            listOf(
-                EOMeta("key1", "value1"),
-                EOMeta("key2", "value2")
+        val f =
+            EOMetas(
+                Some("org.eolang.package"),
+                listOf(
+                    EOMeta("key1", "value1"),
+                    EOMeta("key2", "value2"),
+                ),
             )
-        )
         Assertions.assertEquals(
             "+package org.eolang.package\n" +
                 "+key1 value1\n" +
                 "+key2 value2",
-            f.generateEO(1)
+            f.generateEO(1),
         )
     }
 }

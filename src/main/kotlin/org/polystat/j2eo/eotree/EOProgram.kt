@@ -6,7 +6,11 @@ package org.polystat.j2eo.eotree
  * [ license ] [ metas ] { object eol }
 ` *
  */
-class EOProgram(var license: EOLicense, var metas: EOMetas, var bnds: List<EOBnd>) : EONode() {
+class EOProgram(
+    var license: EOLicense,
+    var metas: EOMetas,
+    var bnds: List<EOBnd>,
+) : EONode() {
     override fun generateEO(indent: Int): String =
         """${license.generateEO(indent)}
 ${metas.generateEO(indent)}

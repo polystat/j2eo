@@ -6,8 +6,8 @@ import org.polystat.j2eo.eotree.EOCopy
 import org.polystat.j2eo.eotree.EOObject
 import org.polystat.j2eo.eotree.eoDot
 
-fun generateEntryPoint(mainClassName: String): List<EOBndExpr> {
-    return listOf(
+fun generateEntryPoint(mainClassName: String): List<EOBndExpr> =
+    listOf(
         EOBndExpr(
             EOObject(
                 listOf(),
@@ -16,13 +16,12 @@ fun generateEntryPoint(mainClassName: String): List<EOBndExpr> {
                     EOBndExpr(
                         EOCopy(
                             "$mainClassName.main".eoDot(),
-                            listOf("*".eoDot())
+                            listOf("*".eoDot()),
                         ),
-                        "@"
-                    )
-                )
+                        "@",
+                    ),
+                ),
             ),
-            "main"
-        )
+            "main",
+        ),
     )
-}

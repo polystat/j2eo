@@ -4,7 +4,7 @@ public class MethodStringConcat {
         String line = method1() + a + method2();
         System.out.println(line);
         System.out.println("passed");
-    }    
+    }
 	static String method1() {
 		return "We had ";
 	}

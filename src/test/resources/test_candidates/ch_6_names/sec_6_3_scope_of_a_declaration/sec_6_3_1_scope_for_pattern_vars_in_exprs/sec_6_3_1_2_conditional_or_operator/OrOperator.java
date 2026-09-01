@@ -14,10 +14,10 @@ public class OrOperator {
         if (ioObj instanceof IReader reader && ioObj instanceof IWriter writer) {
             System.out.println(reader.read());
         }
-    }    
+    }
 }
 
-interface IReader { 
+interface IReader {
     String read();
  }
 interface IWriter {}

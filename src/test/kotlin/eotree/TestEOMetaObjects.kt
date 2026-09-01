@@ -1,22 +1,24 @@
+@file:Suppress("ktlint:standard:no-wildcard-imports")
+
 package eotree
 
 import arrow.core.Some
 import org.junit.jupiter.api.Assertions.assertEquals
 import org.junit.jupiter.api.Test
-import org.polystat.j2eo.eotree.* // ktlint-disable no-wildcard-imports
+import org.polystat.j2eo.eotree.*
 import org.polystat.j2eo.eotree.data.EOIntData
 
 /**
  * Tests for EO Meta Objects (i.e. high-level abstractions on top of EO)
  */
 class TestEOMetaObjects {
-
     @Test
     fun testEOSeqCall() {
-        val expr = EOSeqCall(
-            EOCopy("function1", "arg1".eoDot(), "arg2".eoDot()),
-            EOCopy("function2", "arg1".eoDot(), "arg2".eoDot()),
-        )
+        val expr =
+            eoSeqCall(
+                EOCopy("function1", "arg1".eoDot(), "arg2".eoDot()),
+                EOCopy("function2", "arg1".eoDot(), "arg2".eoDot()),
+            )
         assertEquals(
             """
             seq > @
@@ -27,26 +29,27 @@ class TestEOMetaObjects {
                 arg1
                 arg2
             """.trimIndent(),
-            expr.generateEO(0)
+            expr.generateEO(0),
         )
     }
 
     @Test
     fun testEOFunctionDeclaration() {
-        val expr = EOFunctionDeclaration(
-            "function",
-            listOf("arg1", "arg2"),
-            Some("vararg"),
-            listOf(
-                EOBndExpr(EOIntData(1), "bnd1"),
-                EOBndExpr(EOIntData(2), "bnd2"),
-            ),
-            listOf(
-                EOCopy("call1", "arg1".eoDot(), "arg2".eoDot()),
-                EOCopy("call2", "arg1".eoDot(), "arg2".eoDot()),
-            ),
-            "comment",
-        )
+        val expr =
+            eoFunctionDeclaration(
+                "function",
+                listOf("arg1", "arg2"),
+                Some("vararg"),
+                listOf(
+                    EOBndExpr(EOIntData(1), "bnd1"),
+                    EOBndExpr(EOIntData(2), "bnd2"),
+                ),
+                listOf(
+                    EOCopy("call1", "arg1".eoDot(), "arg2".eoDot()),
+                    EOCopy("call2", "arg1".eoDot(), "arg2".eoDot()),
+                ),
+                "comment",
+            )
 
         assertEquals(
             """
@@ -62,7 +65,7 @@ class TestEOMetaObjects {
                   arg1
                   arg2
             """.trimIndent(),
-            expr.generateEO(0)
+            expr.generateEO(0),
         )
     }
 }

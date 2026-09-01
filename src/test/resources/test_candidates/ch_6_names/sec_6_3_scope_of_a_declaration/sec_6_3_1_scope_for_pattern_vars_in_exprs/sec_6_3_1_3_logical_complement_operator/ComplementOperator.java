@@ -13,10 +13,10 @@ public class ComplementOperator {
         }
         System.out.println(ioReader.read());
         System.out.println(reader.read());
-    }    
+    }
 }
 
-interface IReader { 
+interface IReader {
     String read();
  }
 interface IWriter {}

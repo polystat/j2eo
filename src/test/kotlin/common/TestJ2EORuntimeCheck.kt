@@ -37,11 +37,10 @@ import kotlin.io.path.relativeTo
 @TestMethodOrder(MethodOrderer.OrderAnnotation::class)
 class TestJ2EORuntimeCheck {
     @TestFactory
-    fun executeAndCheckEO(): Collection<DynamicTest> {
-        return translatedFiles
+    fun executeAndCheckEO(): Collection<DynamicTest> =
+        translatedFiles
             .map { file -> executeTranslatedTest(file.first.toPath(), file.second) }
             .toList()
-    }
 
     companion object {
         private var testFolderRoot = Paths.get("")
@@ -58,8 +57,9 @@ class TestJ2EORuntimeCheck {
         fun setup() {
             val candidatesProp = System.getProperty("candidates")
             val testCandidates = candidatesProp == "true"
-            if (testCandidates)
+            if (testCandidates) {
                 logger.info("-- Executing candidate tests --")
+            }
             var testFolderPath = listOf("src", "test", "resources").joinToString(fileSep)
             testFolderPath += fileSep + if (testCandidates) "test_candidates" else "test_ready"
             val stdlibFolderPath = listOf("src", "main", "eo", "org", "polystat", "stdlib").joinToString(fileSep)
@@ -76,9 +76,12 @@ class TestJ2EORuntimeCheck {
             if (targetFolder.exists()) {
                 targetFolder.deleteRecursively()
             }
-            testFolderRoot.toFile().walk()
+            testFolderRoot
+                .toFile()
+                .walk()
                 .filter { file -> file.isFile }
-                .filter { file -> isEOFile(file.toPath()) }.forEach { it.delete() }
+                .filter { file -> isEOFile(file.toPath()) }
+                .forEach { it.delete() }
 
             checkTranslation()
             compileEOFiles()
@@ -88,26 +91,35 @@ class TestJ2EORuntimeCheck {
         @JvmStatic
         fun cleanup() {
             File(testFolderRoot.toString() + fileSep + "target").deleteRecursively()
-            testFolderRoot.toFile().walk()
+            testFolderRoot
+                .toFile()
+                .walk()
                 .filter { file -> file.isFile }
-                .filter { file -> isEOFile(file.toPath()) }.forEach { it.delete() }
+                .filter { file -> isEOFile(file.toPath()) }
+                .forEach { it.delete() }
         }
 
         private fun checkTranslation() {
-            traversedFiles = testFolderRoot.toFile().walk()
-                .filter { file -> file.isFile }
-                .filter { file -> isReadyTest(file.toPath()) }
-                .filter { file -> isNotClassFile(file.toPath()) }
-                .filter { file -> isJavaFile(file.toPath()) }
+            traversedFiles =
+                testFolderRoot
+                    .toFile()
+                    .walk()
+                    .filter { file -> file.isFile }
+                    .filter { file -> isReadyTest(file.toPath()) }
+                    .filter { file -> isNotClassFile(file.toPath()) }
+                    .filter { file -> isJavaFile(file.toPath()) }
 
-            translatedFiles = traversedFiles
-                .map { file -> file to translateFile(file.toPath()) }
+            translatedFiles =
+                traversedFiles
+                    .map { file -> file to translateFile(file.toPath()) }
+                    .toList()
+                    .asSequence()
         }
 
         private fun translateFile(path: Path): Boolean {
             try {
                 assertTimeoutPreemptively(
-                    Duration.ofSeconds(90)
+                    Duration.ofSeconds(90),
                 ) {
                     val lexer = JavaLexer(CharStreams.fromFileName(path.absolutePathString()))
                     val parser = JavaParser(CommonTokenStream(lexer))
@@ -134,16 +146,24 @@ class TestJ2EORuntimeCheck {
             stdlibFolderRoot.toFile().copyRecursively(stdClonePath.toFile())
 
             // Execute generated EO code
-            val isWindows = System.getProperty("os.name").lowercase(Locale.getDefault())
-                .contains("windows") // Matters a lot
+            val isWindows =
+                System
+                    .getProperty("os.name")
+                    .lowercase(Locale.getDefault())
+                    .contains("windows") // Matters a lot
 
             // Compile EO file
-            val mvnCommands = if (isWindows) listOf("mvn.cmd", "clean", "compile")
-            else listOf("mvn", "clean", "compile")
-            val compileProcess = ProcessBuilder(mvnCommands)
-                .directory(testFolderRoot.toFile())
-                .redirectErrorStream(true)
-                .start()
+            val mvnCommands =
+                if (isWindows) {
+                    listOf("mvn.cmd", "clean", "compile")
+                } else {
+                    listOf("mvn", "clean", "compile")
+                }
+            val compileProcess =
+                ProcessBuilder(mvnCommands)
+                    .directory(testFolderRoot.toFile())
+                    .redirectErrorStream(true)
+                    .start()
 
             // Receive compilation output (maybe useful)
             val mvnStdInput = BufferedReader(InputStreamReader(compileProcess.inputStream))
@@ -160,25 +180,33 @@ class TestJ2EORuntimeCheck {
             stdClonePath.toFile().deleteRecursively()
         }
 
-        private fun executeTranslatedTest(path: Path, isTranslated: Boolean): DynamicTest {
-            return DynamicTest.dynamicTest(
+        private fun executeTranslatedTest(
+            path: Path,
+            isTranslated: Boolean,
+        ): DynamicTest =
+            DynamicTest.dynamicTest(
                 path.parent.fileName.toString() + "/" +
-                    path.fileName.toString()
+                    path.fileName.toString(),
             ) {
                 if (!isTranslated) {
                     assert(false)
                 }
 
                 assertTimeoutPreemptively(Duration.ofSeconds(15)) {
-                    val isWindows = System.getProperty("os.name").lowercase(Locale.getDefault())
-                        .contains("windows") // Matters a lot
+                    val isWindows =
+                        System
+                            .getProperty("os.name")
+                            .lowercase(Locale.getDefault())
+                            .contains("windows") // Matters a lot
 
                     // Execute Java
-                    val execPbJava = ProcessBuilder(
-                        "java", path.toAbsolutePath().toString()
-                    )
+                    val execPbJava =
+                        ProcessBuilder(
+                            "java",
+                            path.toAbsolutePath().toString(),
+                        )
                     execPbJava.directory(testFolderRoot.toFile())
-                    execPbJava.redirectErrorStream(true)
+                    execPbJava.redirectErrorStream(false)
                     val execProcessJava = execPbJava.start()
                     logger.info("-- Executing Java... --")
 
@@ -196,19 +224,23 @@ class TestJ2EORuntimeCheck {
                     // Execute EO
                     val relPath = path.relativeTo(testFolderRoot)
                     val pkg = relPath.toList().dropLast(1).joinToString(".")
-                    val execPb = ProcessBuilder(
-                        "java", "-cp",
-                        if (isWindows)
-                            "\"target/classes;target/eo-runtime.jar\""
-                        else
-                            "target/classes:target/eo-runtime.jar",
-                        "org.eolang.Main",
-                        "$pkg.main",
-                        if (isWindows)
-                            "%*"
-                        else
-                            "\"$@\"1"
-                    )
+                    val execPb =
+                        ProcessBuilder(
+                            "java",
+                            "-cp",
+                            if (isWindows) {
+                                "\"target/classes;target/eo-runtime.jar\""
+                            } else {
+                                "target/classes:target/eo-runtime.jar"
+                            },
+                            "org.eolang.Main",
+                            "$pkg.main",
+                            if (isWindows) {
+                                "%*"
+                            } else {
+                                "\"$@\"1"
+                            },
+                        )
                     execPb.directory(testFolderRoot.toFile())
                     execPb.redirectErrorStream(true)
                     val execProcess = execPb.start()
@@ -234,26 +266,15 @@ class TestJ2EORuntimeCheck {
                     Assertions.assertEquals(outputJava.toString(), outputEO.toString())
                 }
             }
-        }
 
-        private fun isReadyTest(path: Path): Boolean {
-            return !path.endsWith("SampleTest.java") && !path.contains(Paths.get("target"))
-        }
+        private fun isReadyTest(path: Path): Boolean = !path.endsWith("SampleTest.java") && !path.contains(Paths.get("target"))
 
-        private fun isClassFile(path: Path): Boolean {
-            return path.toString().endsWith(".class")
-        }
+        private fun isClassFile(path: Path): Boolean = path.toString().endsWith(".class")
 
-        private fun isJavaFile(path: Path): Boolean {
-            return path.toString().endsWith(".java")
-        }
+        private fun isJavaFile(path: Path): Boolean = path.toString().endsWith(".java")
 
-        private fun isNotClassFile(path: Path): Boolean {
-            return !isClassFile(path)
-        }
+        private fun isNotClassFile(path: Path): Boolean = !isClassFile(path)
 
-        private fun isEOFile(path: Path): Boolean {
-            return path.toString().endsWith(".eo")
-        }
+        private fun isEOFile(path: Path): Boolean = path.toString().endsWith(".eo")
     }
 }

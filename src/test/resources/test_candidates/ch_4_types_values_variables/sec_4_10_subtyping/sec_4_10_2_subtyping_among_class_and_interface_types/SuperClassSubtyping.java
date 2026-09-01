@@ -2,7 +2,7 @@ public class SuperClassSubtyping {
     public static void main(String[] args) {
         new SubClass().check();
         System.out.println("passed");
-    }    
+    }
 }
 
 class SuperClass {}

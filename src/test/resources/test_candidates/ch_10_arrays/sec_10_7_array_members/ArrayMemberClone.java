@@ -6,5 +6,5 @@ public class ArrayMemberClone {
             System.out.println(i);
         }
         System.out.println("passed");
-    }    
+    }
 }

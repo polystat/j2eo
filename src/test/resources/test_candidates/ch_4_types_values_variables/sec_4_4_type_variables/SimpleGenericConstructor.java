@@ -9,7 +9,7 @@ public class SimpleGenericConstructor {
 }
 
 class Generic {
-	private Object some; 
+	private Object some;
 	public <T> Generic(T some) {
 		this.some = some;
 	}

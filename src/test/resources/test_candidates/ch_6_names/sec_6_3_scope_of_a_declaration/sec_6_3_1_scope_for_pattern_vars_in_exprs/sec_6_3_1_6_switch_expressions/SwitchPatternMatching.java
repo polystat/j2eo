@@ -9,7 +9,7 @@ public class SwitchPatternMatching {
             case 5 -> System.out.println(io instanceof IReader reader ? reader.read() : "?");
             default -> System.out.println("not passed");
         }
-    }    
+    }
 }
 
 interface IReader {

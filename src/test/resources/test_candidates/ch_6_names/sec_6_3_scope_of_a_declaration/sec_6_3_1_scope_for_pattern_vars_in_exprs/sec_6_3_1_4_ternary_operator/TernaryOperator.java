@@ -6,14 +6,14 @@ public class TernaryOperator {
         Object ioObj = new IOController();
         System.out.println((ioObj instanceof IReader rdr) ? rdr.read() : "?");
         Consumer<String> cons =
-            (readerObj instanceof IReader reader) ? 
-            s -> System.out.println(s + reader.read()) : 
+            (readerObj instanceof IReader reader) ?
+            s -> System.out.println(s + reader.read()) :
             s -> System.out.println(s + "not passed");
         cons.accept("pa");
-    }    
+    }
 }
 
-interface IReader { 
+interface IReader {
     String read();
  }
 interface IWriter {}

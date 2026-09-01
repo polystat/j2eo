@@ -9,4 +9,3 @@ public class InterfaceBooleanDeclarationStaticAccess {
 		System.out.println("passed");
 	}
 }
-

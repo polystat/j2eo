@@ -6,4 +6,3 @@ public class FloatDeclarationFieldAccess {
 		System.out.println("passed");
 	}
 }
-

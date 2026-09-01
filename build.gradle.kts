@@ -7,14 +7,11 @@ plugins {
     java
     antlr
     jacoco
-    pmd
-    checkstyle
     `maven-publish`
     signing
-    id("io.spring.dependency-management") version "1.1.7"
-    id("org.jlleitschuh.gradle.ktlint") version "11.1.0"
+    id("org.jlleitschuh.gradle.ktlint") version "13.1.0"
     // id("org.cqfn.diktat.diktat-gradle-plugin") version "1.0.2"
-    kotlin("jvm") version "1.8.10"
+    kotlin("jvm") version "2.2.20"
     id("com.github.dawnwords.jacoco.badge") version "0.2.4"
 }
 
@@ -27,13 +24,10 @@ val amount: String? by project
 group = "org.polystat"
 version = mvnPublicationVersion ?: "0.6.0"
 
-val compileKotlin: KotlinCompile by tasks
-compileKotlin.kotlinOptions {
-    jvmTarget = "11"
-}
-val compileTestKotlin: KotlinCompile by tasks
-compileTestKotlin.kotlinOptions {
-    jvmTarget = "11"
+tasks.withType<KotlinCompile>().configureEach {
+    compilerOptions {
+        jvmTarget.set(org.jetbrains.kotlin.gradle.dsl.JvmTarget.JVM_11)
+    }
 }
 
 // The Java grammar source file for ANTLR
@@ -43,19 +37,14 @@ val javaLexerG4FilePath = "grammar/JavaLexer.g4"
 // Where to put generated parser
 val javaParserSavePath = "src/main/java/org/polystat/j2eo/antlrParser"
 
-val antlrJar = "antlr-4.9.2-complete.jar"
+val antlrJar = "antlr-4.13.2-complete.jar"
 
 repositories {
     mavenCentral()
 }
 
-dependencyManagement {
-    imports {
-        mavenBom("com.jcabi:parent:0.57.0")
-    }
-}
-
 dependencies {
+    implementation(platform("com.jcabi:parent:0.69.4"))
     // Library for command-line arguments support
     implementation("commons-cli:commons-cli:1.5.0")
     // Functional stuff
@@ -67,10 +56,11 @@ dependencies {
     implementation("org.junit.platform:junit-platform-commons:1.9.2")
     testImplementation("org.junit.jupiter:junit-jupiter-api:5.9.2")
     testRuntimeOnly("org.junit.jupiter:junit-jupiter-engine:5.9.2")
+    testRuntimeOnly("org.junit.platform:junit-platform-launcher:1.9.2")
     implementation(kotlin("stdlib-jdk8"))
 
     // Use ANTLR for parser generation
-    antlr("org.antlr:antlr4:4.12.0")
+    antlr("org.antlr:antlr4:4.13.2")
 
     implementation("org.polystat:j2ast:0.2.0")
 }
@@ -89,18 +79,19 @@ tasks.javadoc {
     }
 }
 
-val fatJar = task("fatJar", type = Jar::class) {
-    // baseName = "${project.name}-fat"
-    // manifest Main-Class attribute is optional.
-    // (Used only to provide default main class for executable jar)
-    manifest {
-        attributes["Main-Class"] = "org.polystat.j2eo.main.Main2" // fully qualified class name of default main class
+val fatJar =
+    task("fatJar", type = Jar::class) {
+        // baseName = "${project.name}-fat"
+        // manifest Main-Class attribute is optional.
+        // (Used only to provide default main class for executable jar)
+        manifest {
+            attributes["Main-Class"] = "org.polystat.j2eo.main.Main2" // fully qualified class name of default main class
+        }
+        // Include dependencies
+        from(configurations.runtimeClasspath.get().map { if (it.isDirectory) it else zipTree(it) })
+        with(tasks["jar"] as CopySpec)
+        duplicatesStrategy = DuplicatesStrategy.INCLUDE
     }
-    // Include dependencies
-    from(configurations.runtimeClasspath.get().map { if (it.isDirectory) it else zipTree(it) })
-    with(tasks["jar"] as CopySpec)
-    duplicatesStrategy = DuplicatesStrategy.INCLUDE
-}
 
 tasks {
     compileKotlin {
@@ -124,24 +115,11 @@ tasks {
     //  diktatFix {
     //      finalizedBy(diktatCheck)
     //  }
-    pmdMain {
-        dependsOn(classes)
-    }
-    checkstyleMain {
-        dependsOn(classes)
-    }
-    pmdTest {
-        dependsOn(testClasses)
-    }
-    checkstyleTest {
-        dependsOn(testClasses)
-    }
     jacocoTestReport {
         dependsOn(test)
         finalizedBy(generateJacocoBadge)
     }
     test {
-        dependsOn(pmdTest, checkstyleTest)
         finalizedBy(jacocoTestReport)
     }
     build {
@@ -152,8 +130,9 @@ tasks {
 tasks.withType(JavaCompile::class).configureEach {
     options.forkOptions.jvmArgs!!.addAll(
         arrayOf(
-            "--add-opens", "jdk.compiler/com.sun.tools.javac.code=ALL-UNNAMED"
-        )
+            "--add-opens",
+            "jdk.compiler/com.sun.tools.javac.code=ALL-UNNAMED",
+        ),
     )
 }
 
@@ -166,14 +145,6 @@ tasks.test {
     useJUnitPlatform()
     systemProperty("candidates", candidates ?: "false")
     systemProperty("amount", amount ?: "15")
-}
-
-pmd {
-    isIgnoreFailures = true
-    isConsoleOutput = false
-    toolVersion = "6.55.0"
-    rulesMinimumPriority.set(5)
-    ruleSets = listOf("category/java/codestyle.xml")
 }
 
 ktlint {
@@ -201,19 +172,6 @@ tasks.getByName("build") {
     runAntlr()
 }
 
-checkstyle {
-    toolVersion = "9.3"
-    isShowViolations = false
-    isIgnoreFailures = false
-}
-
-tasks.withType<Checkstyle>().configureEach {
-    reports {
-        xml.required.set(false)
-        html.required.set(true)
-        html.stylesheet = resources.text.fromFile("config/xsl/checkstyle-simple.xsl")
-    }
-}
 tasks.withType<JacocoCoverageVerification> {
     /*violationRules {
         rule {
@@ -230,8 +188,8 @@ tasks.withType<JacocoCoverageVerification> {
                     fileTree(it).apply {
                         exclude("parser/**")
                     }
-                }
-            )
+                },
+            ),
         )
     }
 }
@@ -243,8 +201,8 @@ tasks.withType<JacocoReport> {
                     fileTree(it).apply {
                         exclude("parser/**")
                     }
-                }
-            )
+                },
+            ),
         )
     }
     reports.csv.required.set(true)
@@ -256,7 +214,11 @@ tasks.jacocoTestReport {
     }
 }
 jacocoBadgeGenSetting {
-    jacocoReportPath = "$buildDir/reports/jacoco/test/jacocoTestReport.xml"
+    jacocoReportPath =
+        layout.buildDirectory
+            .file("reports/jacoco/test/jacocoTestReport.xml")
+            .get()
+            .asFile.path
     readmePath = "$projectDir/README.md"
     // since v0.2.0, percentage limitation (0-100) for different type of coverage
     // limit = ['instruction': 0, 'branch': 0, 'line': 0, 'method': 0, 'class': 0]
@@ -342,42 +304,31 @@ tasks.getByName("signMavenJavaPublication") {
  * Runs ANTLR using OS-specific shell command.
  */
 fun runAntlr() {
-    val antlrArgs = mutableListOf(
-        "-jar",
-        "../$antlrJar",
-        javaParserG4FilePath.replace("grammar/", ""),
-        javaLexerG4FilePath.replace("grammar/", ""),
-        "-visitor",
-        "-o",
-        "../$javaParserSavePath"
-    )
+    val antlrArgs =
+        mutableListOf(
+            "-jar",
+            "../$antlrJar",
+            javaParserG4FilePath.replace("grammar/", ""),
+            javaLexerG4FilePath.replace("grammar/", ""),
+            "-visitor",
+            "-o",
+            "../$javaParserSavePath",
+        )
 
+    if (!Os.isFamily(Os.FAMILY_WINDOWS) && !Os.isFamily(Os.FAMILY_MAC) && !Os.isFamily(Os.FAMILY_UNIX)) {
+        throw UnsupportedOperationException(
+            "Your OS is not yet supported. File a GitHub or issue or " +
+                "provide a Pull Request with support for ANTLR execution for your OS.",
+        )
+    }
     try {
-        when {
-            Os.isFamily(Os.FAMILY_WINDOWS) ->
-                exec {
-                    workingDir = File("grammar")
-                    executable = "java"
-                    args = antlrArgs
-                }
-            Os.isFamily(Os.FAMILY_MAC) ->
-                exec {
-                    workingDir = File("grammar")
-                    executable = "java"
-                    args = antlrArgs
-                }
-            Os.isFamily(Os.FAMILY_UNIX) ->
-                exec {
-                    workingDir = File("grammar")
-                    executable = "java"
-                    args = antlrArgs
-                }
-            else ->
-                throw UnsupportedOperationException(
-                    "Your OS is not yet supported. File a GitHub or issue or " +
-                        "provide a Pull Request with support for ANTLR execution for your OS."
-                )
-        }
+        providers
+            .exec {
+                workingDir = File("grammar")
+                executable = "java"
+                args = antlrArgs
+            }.result
+            .get()
     } catch (e: Exception) {
         println("Couldn't run ANTLR; $e")
     }

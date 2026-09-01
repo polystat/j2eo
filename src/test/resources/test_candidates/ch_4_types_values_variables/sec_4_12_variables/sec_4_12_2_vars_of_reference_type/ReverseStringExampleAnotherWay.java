@@ -11,4 +11,3 @@ public class ReverseStringExampleAnotherWay {
         System.out.println("passed");
     }
 }
-

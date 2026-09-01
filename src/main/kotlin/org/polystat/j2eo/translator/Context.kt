@@ -2,9 +2,11 @@ package org.polystat.j2eo.translator
 
 import tree.Entity
 
-class Context(var uniqueObjectIds: HashMap<String, Int>) {
-    fun genUniqueEntityName(e: Entity?): String {
-        return if (e != null) {
+class Context(
+    var uniqueObjectIds: HashMap<String, Int>,
+) {
+    fun genUniqueEntityName(e: Entity?): String =
+        if (e != null) {
             var simpleName = e.javaClass.simpleName
             simpleName = simpleName[0].lowercase() + simpleName.substring(1)
 
@@ -15,7 +17,7 @@ class Context(var uniqueObjectIds: HashMap<String, Int>) {
         } else {
             "no_name_for_null_entity"
         }
-    }
+
     fun genUniqueEntityName(name: String): String {
         uniqueObjectIds[name] ?: run { uniqueObjectIds[name] = 0 }
         uniqueObjectIds[name] = uniqueObjectIds[name]!! + 1

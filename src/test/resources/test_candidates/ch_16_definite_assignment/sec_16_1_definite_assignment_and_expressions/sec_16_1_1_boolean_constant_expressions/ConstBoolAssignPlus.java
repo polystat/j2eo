@@ -5,5 +5,5 @@ public class ConstBoolAssignPlus {
 		System.out.println(b);
 		System.out.println(k);
         System.out.println("passed");
-    }    
+    }
 }

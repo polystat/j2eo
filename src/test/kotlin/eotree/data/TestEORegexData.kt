@@ -10,17 +10,17 @@ import org.polystat.j2eo.eotree.data.EORegexData
 class TestEORegexData {
     @Test
     fun testGenerateEOZeroIndent() {
-        val f = EORegexData(regexSample)
-        Assertions.assertEquals(f.generateEO(0), regexSample)
+        val f = EORegexData(REGEX_SAMPLE)
+        Assertions.assertEquals(f.generateEO(0), REGEX_SAMPLE)
     }
 
     @Test
     fun testGenerateEONonZeroIndent() {
-        val f = EORegexData(regexSample)
-        Assertions.assertEquals(f.generateEO(1), regexSample)
+        val f = EORegexData(REGEX_SAMPLE)
+        Assertions.assertEquals(f.generateEO(1), REGEX_SAMPLE)
     }
 
     companion object {
-        private const val regexSample = "/[a-z]+.+/m"
+        private const val REGEX_SAMPLE = "/[a-z]+.+/m"
     }
 }

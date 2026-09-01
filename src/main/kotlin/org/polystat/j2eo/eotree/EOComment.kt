@@ -6,10 +6,10 @@ package org.polystat.j2eo.eotree
  * '#' ANY EOL
 ` *
  */
-class EOComment(var comment: String) : EONode() {
-    override fun generateEO(indent: Int): String =
-        "# $comment"
+class EOComment(
+    var comment: String,
+) : EONode() {
+    override fun generateEO(indent: Int): String = "# $comment"
 
-    override fun toString(): String =
-        "# $comment"
+    override fun toString(): String = "# $comment"
 }

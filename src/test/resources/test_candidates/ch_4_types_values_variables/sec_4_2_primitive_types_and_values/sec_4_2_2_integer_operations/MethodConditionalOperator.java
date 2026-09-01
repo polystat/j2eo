@@ -3,7 +3,7 @@ public class MethodConditionalOperator {
         int b = methodBool() ? method1() : method2();
         System.out.println(b);
         System.out.println("passed");
-    }    
+    }
 	static boolean methodBool() {
 		return false;
 	}

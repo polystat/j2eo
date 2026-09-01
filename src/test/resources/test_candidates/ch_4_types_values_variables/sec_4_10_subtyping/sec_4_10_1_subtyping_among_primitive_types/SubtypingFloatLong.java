@@ -4,5 +4,5 @@ public class SubtypingFloatLong {
         float f = l;
         System.out.println(f);
         System.out.println("passed");
-    }    
+    }
 }

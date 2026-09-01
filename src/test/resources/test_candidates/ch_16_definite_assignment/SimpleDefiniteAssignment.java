@@ -5,5 +5,5 @@ public class SimpleDefiniteAssignment {
             System.out.println(k);
         }
         System.out.println("passed");
-    }    
+    }
 }

@@ -9,17 +9,18 @@ open class EOObject(
     var bndAttrs: List<EOBndExpr>,
     var comment: String = "",
 ) : EOExpr() {
-    override fun generateEO(indent: Int): String {
-        return listOfNotNull(
+    override fun generateEO(indent: Int): String =
+        listOfNotNull(
             comment.let {
-                if (it.isNotEmpty())
+                if (it.isNotEmpty()) {
                     it
                         .split("\n")
                         .joinToString("") { line ->
                             "${indent(indent)}# $line\n"
                         }
-                else
+                } else {
                     null
+                }
             },
             indent(indent),
             "[",
@@ -30,9 +31,8 @@ open class EOObject(
             "]",
             bndAttrs
                 .map { attr: EOBndExpr -> "\n" + attr.generateEO(indent + 1) }
-                .joinToString("")
+                .joinToString(""),
         ).joinToString("")
-    }
 
     override fun toString(): String = "[Object]"
 }

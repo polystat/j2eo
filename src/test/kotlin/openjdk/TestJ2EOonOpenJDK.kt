@@ -1,4 +1,4 @@
-package open_jdk
+package openjdk
 
 import org.antlr.v4.runtime.CharStreams
 import org.antlr.v4.runtime.CommonTokenStream
@@ -44,18 +44,19 @@ import kotlin.io.path.relativeTo
 @Disabled
 class TestJ2EOonOpenJDK {
     @TestFactory
-    fun executeAndCheckEO(): Collection<DynamicTest> {
-        return translatedFiles
+    fun executeAndCheckEO(): Collection<DynamicTest> =
+        translatedFiles
             .map { file -> executeTranslatedTest(file.first.toPath(), file.second) }
             .toList()
-    }
 
     companion object {
         private lateinit var openJdkUrl: URL
         private lateinit var unzipCommand: List<String>
         private val sep = File.separatorChar.toString()
-        private val pomFilePath = Paths.get("src", "test", "resources", "eo_execution_pom", "pom.xml")
-            .toAbsolutePath()
+        private val pomFilePath =
+            Paths
+                .get("src", "test", "resources", "eo_execution_pom", "pom.xml")
+                .toAbsolutePath()
         private val stdlibFolderRoot = Paths.get("src", "main", "eo", "org", "polystat", "stdlib").toAbsolutePath()
         private val workingDir = Paths.get("src", "test", "resources", "open_jdk").toAbsolutePath()
         private val openjdkZipSavePath = Paths.get("jdk.tar.gz").toAbsolutePath()
@@ -69,11 +70,12 @@ class TestJ2EOonOpenJDK {
             unzipCommand = listOf("tar", "-xf", openjdkZipSavePath.toString())
             openJdkUrl = URL("https://github.com/openjdk/jdk/archive/refs/tags/jdk-16+36.tar.gz")
 
-            amountOfFiles = try {
-                System.getProperty("amount")?.toInt()
-            } catch (e: NumberFormatException) {
-                null
-            }
+            amountOfFiles =
+                try {
+                    System.getProperty("amount")?.toInt()
+                } catch (e: NumberFormatException) {
+                    null
+                }
         }
 
         @BeforeAll
@@ -82,8 +84,9 @@ class TestJ2EOonOpenJDK {
             setupVars()
 
             workingDir.createDirectories()
-            if (openjdkZipSavePath.notExists())
+            if (openjdkZipSavePath.notExists()) {
                 openJdkUrl.openStream().use { Files.copy(it, Paths.get(openjdkZipSavePath.toString())) }
+            }
 
             ProcessBuilder()
                 .command(unzipCommand)
@@ -95,8 +98,9 @@ class TestJ2EOonOpenJDK {
             val sources = Files.walk(openJdkTestPath)
             for (source in sources) {
                 Files.copy(
-                    source, workingDir.resolve(openJdkTestPath.relativize(source)),
-                    StandardCopyOption.REPLACE_EXISTING
+                    source,
+                    workingDir.resolve(openJdkTestPath.relativize(source)),
+                    StandardCopyOption.REPLACE_EXISTING,
                 )
             }
 
@@ -121,24 +125,28 @@ class TestJ2EOonOpenJDK {
         }
 
         private fun checkTranslation() {
-            traversedFiles = workingDir.toFile().walk()
-                .filter { file -> file.isFile }
-                .filter { file -> isTest(file.toPath()) }
-                .filter { file -> isNotClassFile(file.toPath()) }
-                .filter { file -> isJavaFile(file.toPath()) }
+            traversedFiles =
+                workingDir
+                    .toFile()
+                    .walk()
+                    .filter { file -> file.isFile }
+                    .filter { file -> isTest(file.toPath()) }
+                    .filter { file -> isNotClassFile(file.toPath()) }
+                    .filter { file -> isJavaFile(file.toPath()) }
 
             if (amountOfFiles != null) {
                 traversedFiles = traversedFiles.take(amountOfFiles!!)
             }
 
-            translatedFiles = traversedFiles
-                .map { file -> file to translateFile(file.toPath()) }
+            translatedFiles =
+                traversedFiles
+                    .map { file -> file to translateFile(file.toPath()) }
         }
 
         private fun translateFile(path: Path): Boolean {
             try {
                 assertTimeoutPreemptively(
-                    Duration.ofSeconds(90)
+                    Duration.ofSeconds(90),
                 ) {
                     val lexer = JavaLexer(CharStreams.fromFileName(path.absolutePathString()))
                     val parser = JavaParser(CommonTokenStream(lexer))
@@ -164,18 +172,24 @@ class TestJ2EOonOpenJDK {
             stdlibFolderRoot.toFile().copyRecursively(stdClonePath.toFile())
 
             // Execute generated EO code
-            val isWindows = System.getProperty("os.name").lowercase(Locale.getDefault())
-                .contains("windows") // Matters a lot
+            val isWindows =
+                System
+                    .getProperty("os.name")
+                    .lowercase(Locale.getDefault())
+                    .contains("windows") // Matters a lot
 
             // Compile EO file
-            val mvnCommands = if (isWindows)
-                listOf("mvn.cmd", "clean", "compile")
-            else
-                listOf("mvn", "clean", "compile")
-            val compileProcess = ProcessBuilder(mvnCommands)
-                .directory(workingDir.toFile())
-                .redirectErrorStream(true)
-                .start()
+            val mvnCommands =
+                if (isWindows) {
+                    listOf("mvn.cmd", "clean", "compile")
+                } else {
+                    listOf("mvn", "clean", "compile")
+                }
+            val compileProcess =
+                ProcessBuilder(mvnCommands)
+                    .directory(workingDir.toFile())
+                    .redirectErrorStream(true)
+                    .start()
 
             // Receive compilation output (maybe useful)
             val mvnStdInput = BufferedReader(InputStreamReader(compileProcess.inputStream))
@@ -192,22 +206,30 @@ class TestJ2EOonOpenJDK {
             stdClonePath.toFile().deleteRecursively()
         }
 
-        private fun executeTranslatedTest(path: Path, isTranslated: Boolean): DynamicTest {
-            return DynamicTest.dynamicTest(
+        private fun executeTranslatedTest(
+            path: Path,
+            isTranslated: Boolean,
+        ): DynamicTest =
+            DynamicTest.dynamicTest(
                 path.parent.fileName.toString() + "/" +
-                    path.fileName.toString()
+                    path.fileName.toString(),
             ) {
                 if (!isTranslated) {
                     assert(false)
                 }
 
-                val isWindows = System.getProperty("os.name").lowercase(Locale.getDefault())
-                    .contains("windows") // Matters a lot
+                val isWindows =
+                    System
+                        .getProperty("os.name")
+                        .lowercase(Locale.getDefault())
+                        .contains("windows") // Matters a lot
 
                 // Execute Java
-                val execPbJava = ProcessBuilder(
-                    "java", path.toAbsolutePath().toString()
-                )
+                val execPbJava =
+                    ProcessBuilder(
+                        "java",
+                        path.toAbsolutePath().toString(),
+                    )
                 execPbJava.directory(workingDir.toFile())
                 execPbJava.redirectErrorStream(true)
                 val execProcessJava = execPbJava.start()
@@ -226,19 +248,23 @@ class TestJ2EOonOpenJDK {
                 // Execute EO
                 val relPath = path.relativeTo(workingDir)
                 val pkg = relPath.toList().dropLast(1).joinToString(".")
-                val execPb = ProcessBuilder(
-                    "java", "-cp",
-                    if (isWindows)
-                        "\"target/classes;target/eo-runtime.jar\""
-                    else
-                        "target/classes:target/eo-runtime.jar",
-                    "org.eolang.Main",
-                    "$pkg.main",
-                    if (isWindows)
-                        "%*"
-                    else
-                        "\"$@\"1"
-                )
+                val execPb =
+                    ProcessBuilder(
+                        "java",
+                        "-cp",
+                        if (isWindows) {
+                            "\"target/classes;target/eo-runtime.jar\""
+                        } else {
+                            "target/classes:target/eo-runtime.jar"
+                        },
+                        "org.eolang.Main",
+                        "$pkg.main",
+                        if (isWindows) {
+                            "%*"
+                        } else {
+                            "\"$@\"1"
+                        },
+                    )
                 execPb.directory(workingDir.toFile())
                 execPb.redirectErrorStream(true)
                 val execProcess = execPb.start()
@@ -256,22 +282,13 @@ class TestJ2EOonOpenJDK {
 
                 Assertions.assertEquals(outputJava.toString(), outputEO.toString())
             }
-        }
 
-        private fun isTest(path: Path): Boolean {
-            return !path.contains(Paths.get("target"))
-        }
+        private fun isTest(path: Path): Boolean = !path.contains(Paths.get("target"))
 
-        private fun isClassFile(path: Path): Boolean {
-            return path.toString().endsWith(".class")
-        }
+        private fun isClassFile(path: Path): Boolean = path.toString().endsWith(".class")
 
-        private fun isJavaFile(path: Path): Boolean {
-            return path.toString().endsWith(".java")
-        }
+        private fun isJavaFile(path: Path): Boolean = path.toString().endsWith(".java")
 
-        private fun isNotClassFile(path: Path): Boolean {
-            return !isClassFile(path)
-        }
+        private fun isNotClassFile(path: Path): Boolean = !isClassFile(path)
     }
 }

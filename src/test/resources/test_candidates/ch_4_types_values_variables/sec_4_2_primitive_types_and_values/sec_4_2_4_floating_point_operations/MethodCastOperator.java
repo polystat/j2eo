@@ -3,7 +3,7 @@ public class MethodCastOperator {
         long b = (long) method();
         System.out.println(b);
         System.out.println("passed");
-    }    
+    }
 	static float method() {
 		return 33.225f;
 	}

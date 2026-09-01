@@ -11,5 +11,5 @@ public class TwoDimArrayInitializer {
             }
         }
         System.out.println("passed");
-    }    
+    }
 }

@@ -11,19 +11,21 @@ import org.polystat.j2eo.eotree.EODot
 class TestEOBndExpr {
     @Test
     fun testGenerateEOZeroIndent() {
-        val f = EOBndExpr(
-            EODot("memory"),
-            "bnd1"
-        )
+        val f =
+            EOBndExpr(
+                EODot("memory"),
+                "bnd1",
+            )
         Assertions.assertEquals("memory > bnd1", f.generateEO(0))
     }
 
     @Test
     fun testGenerateEONonZeroIndent() {
-        val f = EOBndExpr(
-            EODot("memory"),
-            "bnd1"
-        )
+        val f =
+            EOBndExpr(
+                EODot("memory"),
+                "bnd1",
+            )
         Assertions.assertEquals("  memory > bnd1", f.generateEO(1))
     }
 }

@@ -5,5 +5,5 @@ public class AndDefConstBoolAssignDiv {
             System.out.println(k);
         }
         System.out.println("passed");
-    }    
+    }
 }

@@ -4,5 +4,5 @@ public class SubtypingLongInt {
         long l = i;
         System.out.println(l);
         System.out.println("passed");
-    }    
+    }
 }

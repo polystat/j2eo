@@ -1,9 +1,11 @@
+@file:Suppress("ktlint:standard:no-wildcard-imports")
+
 package org.polystat.j2eo.main
 
 import arrow.core.Some
 import org.antlr.v4.runtime.CharStreams
 import org.antlr.v4.runtime.CommonTokenStream
-import org.apache.commons.cli.* // ktlint-disable no-wildcard-imports
+import org.apache.commons.cli.*
 import org.polystat.j2eo.antlrParser.JavaLexer
 import org.polystat.j2eo.antlrParser.JavaParser
 import org.polystat.j2eo.eotree.EOLicense
@@ -44,14 +46,15 @@ object Main2 {
         val formatter = HelpFormatter()
 
         // Parse command line arguments and exit if parsing failed.
-        val cmd: CommandLine = try {
-            cmdLineParser.parse(options, args)
-        } catch (e: ParseException) {
-            e.printStackTrace()
-            logger.error("Failed parsing command-line arguments")
-            printUsage(formatter, options)
-            exitProcess(1)
-        }
+        val cmd: CommandLine =
+            try {
+                cmdLineParser.parse(options, args)
+            } catch (e: ParseException) {
+                e.printStackTrace()
+                logger.error("Failed parsing command-line arguments")
+                printUsage(formatter, options)
+                exitProcess(1)
+            }
 
         // Check argv for all required data
         if (cmd.argList.size != 1) {
@@ -71,70 +74,80 @@ object Main2 {
 
         logger.info("Parsing files in directory \"${sourceFile.absolutePath}\"")
 
-        val filesToProcess: List<File> = if (sourceFile.isDirectory)
-            sourceFile.walk()
-                .filter { it.isFile }
-                .filter { it.toString().endsWith(".java") }
-                .toList()
-        else
-            listOf(sourceFile)
+        val filesToProcess: List<File> =
+            if (sourceFile.isDirectory) {
+                sourceFile
+                    .walk()
+                    .filter { it.isFile }
+                    .filter { it.toString().endsWith(".java") }
+                    .toList()
+            } else {
+                listOf(sourceFile)
+            }
 
         if (cmd.hasOption("d")) {
             logger.debug("List of files to translate:" + filesToProcess.joinToString("") { "\n  ${it.path}" })
         }
 
-        val translatedFiles: List<Pair<File, EOProgram>> = filesToProcess
-            .mapIndexed { i, f ->
-                val percent = (1f * i / filesToProcess.size) * 100f
-                logger.info("Progress: %.2f".format(percent) + "% / 100.0%. --- Files left: ${filesToProcess.size - i}; file: ${f.path}")
+        val translatedFiles: List<Pair<File, EOProgram>> =
+            filesToProcess
+                .mapIndexed { i, f ->
+                    val percent = (1f * i / filesToProcess.size) * 100f
+                    logger.info(
+                        "Progress: %.2f".format(percent) + "% / 100.0%. --- Files left: ${filesToProcess.size - i}; file: ${f.path}",
+                    )
 
-                // Parse Java file using ANTLR parser
-                val lexer = JavaLexer(CharStreams.fromFileName(f.absolutePath))
-                val parser = JavaParser(CommonTokenStream(lexer))
+                    // Parse Java file using ANTLR parser
+                    val lexer = JavaLexer(CharStreams.fromFileName(f.absolutePath))
+                    val parser = JavaParser(CommonTokenStream(lexer))
 
-                // Traverse the ANTLR AST
-                val tree = parser.compilationUnit()
-                val eval = Visitor()
-                var cu: CompilationUnit? = null
-                try {
-                    cu = eval.visit(tree) as CompilationUnit
-                } catch (e: Exception) {
-                    e.printStackTrace()
+                    // Traverse the ANTLR AST
+                    val tree = parser.compilationUnit()
+                    val eval = Visitor()
+                    var cu: CompilationUnit? = null
+                    try {
+                        cu = eval.visit(tree) as CompilationUnit
+                    } catch (e: Exception) {
+                        e.printStackTrace()
+                    }
+
+                    if (Entity.debug) {
+                        cu?.report(0)
+                        logger.debug("[${i + 1}/${filesToProcess.size}] Translating ${f.absolutePath}")
+                    }
+
+                    val dummy =
+                        SimpleCompilationUnit(
+                            ImportDeclarations(null),
+                            TopLevelComponents(null),
+                        )
+                    val translator = Translator(f.relativeTo(sourceFile).toPath())
+                    var translation: EOProgram? = null
+                    try {
+                        translation = translator.translate(cu ?: dummy, Context(HashMap()))
+                    } catch (e: Exception) {
+                        e.printStackTrace()
+                    }
+                    Pair(f, translation ?: EOProgram(EOLicense(), EOMetas(Some("failed translation!"), listOf()), listOf()))
                 }
-
-                if (Entity.debug) {
-                    cu?.report(0)
-                    logger.debug("[${i + 1}/${filesToProcess.size}] Translating ${f.absolutePath}")
-                }
-
-                val dummy = SimpleCompilationUnit(
-                    ImportDeclarations(null),
-                    TopLevelComponents(null)
-                )
-                val translator = Translator(f.relativeTo(sourceFile).toPath())
-                var translation: EOProgram? = null
-                try {
-                    translation = translator.translate(cu ?: dummy, Context(HashMap()))
-                } catch (e: Exception) {
-                    e.printStackTrace()
-                }
-                Pair(f, translation ?: EOProgram(EOLicense(), EOMetas(Some("failed translation!"), listOf()), listOf()))
-            }
         println()
 
         translatedFiles.forEach { (file, eoProgram) ->
             val targetText = eoProgram.generateEO(0)
-            val outputPath = Paths.get(
-                cmd.getOptionValue('o'),
-                if (sourceFile.isDirectory)
-                    file.parentFile.toRelativeString(File(cmd.args[0]))
-                else
-                    file.toRelativeString(File(cmd.args[0]))
-            )
-            val outputFile = Paths.get(
-                outputPath.toString(),
-                file.name.replace(".java", ".eo")
-            )
+            val outputPath =
+                Paths.get(
+                    cmd.getOptionValue('o'),
+                    if (sourceFile.isDirectory) {
+                        file.parentFile.toRelativeString(File(cmd.args[0]))
+                    } else {
+                        file.toRelativeString(File(cmd.args[0]))
+                    },
+                )
+            val outputFile =
+                Paths.get(
+                    outputPath.toString(),
+                    file.name.replace(".java", ".eo"),
+                )
 
             if (cmd.hasOption("d")) {
                 logger.debug("Printing output to file $outputFile")
@@ -146,7 +159,10 @@ object Main2 {
         logger.info("Translation complete.")
     }
 
-    private fun printUsage(formatter: HelpFormatter, options: Options) {
+    private fun printUsage(
+        formatter: HelpFormatter,
+        options: Options,
+    ) {
         formatter.printHelp("java -jar J2EO.jar [OPTIONS...] <input file>", options)
     }
 }

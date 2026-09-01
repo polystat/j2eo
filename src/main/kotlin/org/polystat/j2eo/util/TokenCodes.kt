@@ -1,6 +1,9 @@
 package org.polystat.j2eo.util
 
-enum class TokenCodes(val value: String, val importPath: String) {
+enum class TokenCodes(
+    val value: String,
+    val importPath: String,
+) {
     PRIM__BYTE("prim__byte", "stdlib.primitives.prim__byte"),
     PRIM__SHORT("prim__short", "stdlib.primitives.prim__short"),
     PRIM__CHAR("prim__char", "stdlib.primitives.prim__char"),

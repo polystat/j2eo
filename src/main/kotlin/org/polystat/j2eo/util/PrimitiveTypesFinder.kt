@@ -1,3 +1,5 @@
+@file:Suppress("ktlint:standard:no-wildcard-imports")
+
 package org.polystat.j2eo.util
 
 import lexer.TokenCode
@@ -8,7 +10,7 @@ import tree.Declaration.Declaration
 import tree.Declaration.MethodDeclaration
 import tree.Declaration.NormalClassDeclaration
 import tree.Declaration.VariableDeclaration
-import tree.Expression.* // ktlint-disable no-wildcard-imports
+import tree.Expression.*
 import tree.Expression.Primary.Literal
 import tree.Expression.Primary.MethodInvocation
 import tree.Expression.Primary.Parenthesized
@@ -23,16 +25,20 @@ import tree.Type.PrimitiveType
 import tree.Type.Type
 import tree.Type.TypeName
 
-private fun findPrimitivesInMethodInvocation(primitives: HashSet<String>, methodInvocation: MethodInvocation) {
-    methodInvocation.arguments?.arguments
+private fun findPrimitivesInMethodInvocation(
+    primitives: HashSet<String>,
+    methodInvocation: MethodInvocation,
+) {
+    methodInvocation.arguments
+        ?.arguments
         ?.map { findPrimitivesInExpression(primitives, it) }
     if (methodInvocation.qualifier != null) {
         findPrimitivesInExpression(primitives, methodInvocation.qualifier)
     }
 }
 
-private fun decodeLiteralCode(code: TokenCode): TokenCodes? {
-    return when (code) {
+private fun decodeLiteralCode(code: TokenCode): TokenCodes? =
+    when (code) {
         TokenCode.IntegerLiteral -> TokenCodes.PRIM__INT
         TokenCode.FloatingLiteral -> TokenCodes.PRIM__FLOAT
         TokenCode.StringLiteral -> TokenCodes.CLASS__STRING
@@ -41,16 +47,21 @@ private fun decodeLiteralCode(code: TokenCode): TokenCodes? {
         TokenCode.Null -> TokenCodes.NULL
         else -> null
     }
-}
 
-private fun findPrimitivesInLiteral(primitives: HashSet<String>, literal: Literal) {
+private fun findPrimitivesInLiteral(
+    primitives: HashSet<String>,
+    literal: Literal,
+) {
     val primitiveType = decodeLiteralCode(literal.code)
     if (primitiveType != null) {
         primitives.add(primitiveType.importPath)
     }
 }
 
-private fun findPrimitivesInSimpleReference(primitives: HashSet<String>, simpleReference: SimpleReference) {
+private fun findPrimitivesInSimpleReference(
+    primitives: HashSet<String>,
+    simpleReference: SimpleReference,
+) {
     simpleReference.compoundName.names
         .map {
             run {
@@ -61,12 +72,17 @@ private fun findPrimitivesInSimpleReference(primitives: HashSet<String>, simpleR
         }
 }
 
-private fun findPrimitivesInType(primitives: HashSet<String>, type: Type) {
+private fun findPrimitivesInType(
+    primitives: HashSet<String>,
+    type: Type,
+) {
     when (type) {
         is PrimitiveType -> primitives.add(decodePrimitiveType(type).importPath)
         is TypeName -> {
             if (type.compoundName.names.size == 1 &&
-                type.compoundName.names.last().equals("String")
+                type.compoundName.names
+                    .last()
+                    .equals("String")
             ) {
                 primitives.add(TokenCodes.CLASS__STRING.importPath)
             }
@@ -74,13 +90,19 @@ private fun findPrimitivesInType(primitives: HashSet<String>, type: Type) {
     }
 }
 
-private fun findPrimitivesInCastExpr(primitives: HashSet<String>, cast: Cast) {
+private fun findPrimitivesInCastExpr(
+    primitives: HashSet<String>,
+    cast: Cast,
+) {
     cast.types.types
         .map { findPrimitivesInType(primitives, it) }
     findPrimitivesInExpression(primitives, cast.expression)
 }
 
-private fun findPrimitivesInExpression(primitives: HashSet<String>, expr: Expression) {
+private fun findPrimitivesInExpression(
+    primitives: HashSet<String>,
+    expr: Expression,
+) {
     when (expr) {
         is MethodInvocation -> findPrimitivesInMethodInvocation(primitives, expr)
         is Literal -> findPrimitivesInLiteral(primitives, expr)
@@ -93,7 +115,10 @@ private fun findPrimitivesInExpression(primitives: HashSet<String>, expr: Expres
     }
 }
 
-private fun findPrimitivesInStatement(primitives: HashSet<String>, stmt: Statement) {
+private fun findPrimitivesInStatement(
+    primitives: HashSet<String>,
+    stmt: Statement,
+) {
     when (stmt) {
         is StatementExpression -> findPrimitivesInExpression(primitives, stmt.expression)
         is Assert -> {
@@ -105,7 +130,10 @@ private fun findPrimitivesInStatement(primitives: HashSet<String>, stmt: Stateme
     }
 }
 
-private fun findPrimitivesInBlockStmt(primitives: HashSet<String>, stmt: BlockStatement) {
+private fun findPrimitivesInBlockStmt(
+    primitives: HashSet<String>,
+    stmt: BlockStatement,
+) {
     if (stmt.declaration != null) {
         findPrimitivesInDeclaration(primitives, stmt.declaration)
     } else if (stmt.expression != null) {
@@ -115,12 +143,20 @@ private fun findPrimitivesInBlockStmt(primitives: HashSet<String>, stmt: BlockSt
     }
 }
 
-private fun findPrimitivesInMethod(primitives: HashSet<String>, methodDecl: MethodDeclaration) {
-    methodDecl.methodBody?.block?.blockStatements
+private fun findPrimitivesInMethod(
+    primitives: HashSet<String>,
+    methodDecl: MethodDeclaration,
+) {
+    methodDecl.methodBody
+        ?.block
+        ?.blockStatements
         ?.map { findPrimitivesInBlockStmt(primitives, it) }
 }
 
-private fun findPrimitivesInInitializer(primitives: HashSet<String>, initializer: Initializer) {
+private fun findPrimitivesInInitializer(
+    primitives: HashSet<String>,
+    initializer: Initializer,
+) {
     when (initializer) {
         is InitializerSimple -> findPrimitivesInExpression(primitives, initializer.expression)
         is InitializerArray ->
@@ -129,27 +165,41 @@ private fun findPrimitivesInInitializer(primitives: HashSet<String>, initializer
     }
 }
 
-private fun findPrimitivesInVarDeclaration(primitives: HashSet<String>, dec: VariableDeclaration) {
+private fun findPrimitivesInVarDeclaration(
+    primitives: HashSet<String>,
+    dec: VariableDeclaration,
+) {
     if (dec.type is PrimitiveType) {
         primitives.add(decodePrimitiveType(dec.type as PrimitiveType).importPath)
     } else if (dec.type is TypeName &&
         (dec.type as TypeName).compoundName.names.size == 1 &&
-        (dec.type as TypeName).compoundName.names.last().equals("String")
+        (dec.type as TypeName)
+            .compoundName.names
+            .last()
+            .equals("String")
     ) {
         primitives.add(TokenCodes.CLASS__STRING.importPath)
     }
     if (dec.initializer != null) {
         findPrimitivesInInitializer(primitives, dec.initializer)
-    } else
+    } else {
         logger.warn { "findPrimitivesInVarDeclaration: dec.initializer must not be null" }
+    }
 }
 
-private fun findPrimitivesInClass(primitives: HashSet<String>, clsDec: NormalClassDeclaration) {
-    clsDec.body?.declarations
+private fun findPrimitivesInClass(
+    primitives: HashSet<String>,
+    clsDec: NormalClassDeclaration,
+) {
+    clsDec.body
+        ?.declarations
         ?.map { findPrimitivesInDeclaration(primitives, it) }
 }
 
-private fun findPrimitivesInDeclaration(primitives: HashSet<String>, dec: Declaration) {
+private fun findPrimitivesInDeclaration(
+    primitives: HashSet<String>,
+    dec: Declaration,
+) {
     when (dec) {
         is NormalClassDeclaration -> findPrimitivesInClass(primitives, dec)
         is VariableDeclaration -> findPrimitivesInVarDeclaration(primitives, dec)
@@ -157,7 +207,10 @@ private fun findPrimitivesInDeclaration(primitives: HashSet<String>, dec: Declar
     }
 }
 
-fun collectPrimitivePackages(primitives: HashSet<String>, unit: SimpleCompilationUnit) {
+fun collectPrimitivePackages(
+    primitives: HashSet<String>,
+    unit: SimpleCompilationUnit,
+) {
     unit.components.components
         .mapNotNull { component: TopLevelComponent? -> component?.classDecl }
         .filterIsInstance<NormalClassDeclaration>()

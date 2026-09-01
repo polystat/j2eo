@@ -22,4 +22,3 @@ for t in tests:
     file = t.rsplit(os.sep, 1)[1]
     print('Translating ' + file + ' file...')
     os.system('java -jar ./J2EO-0.4.0.jar ' + t + ' -o ' + translatedPath + os.sep + path)
-

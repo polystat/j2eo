@@ -8,8 +8,8 @@ import java.util.Locale
  * TRUE | FALSE
 ` *
  */
-class EOBoolData(var b: Boolean) : EOData() {
-    override fun generateEO(indent: Int): String {
-        return indent(indent) + b.toString().uppercase(Locale.getDefault())
-    }
+class EOBoolData(
+    var b: Boolean,
+) : EOData() {
+    override fun generateEO(indent: Int): String = indent(indent) + b.toString().uppercase(Locale.getDefault())
 }

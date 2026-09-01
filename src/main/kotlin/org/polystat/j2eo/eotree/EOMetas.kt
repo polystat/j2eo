@@ -9,7 +9,10 @@ import arrow.core.getOrElse
  * { meta EOL } EOL
 ` *
  */
-class EOMetas(var packageName: Option<String>, var metas: List<EOMeta>) : EONode() {
+class EOMetas(
+    var packageName: Option<String>,
+    var metas: List<EOMeta>,
+) : EONode() {
     override fun generateEO(indent: Int): String =
         packageName
             .map { name -> "+package $name\n" }

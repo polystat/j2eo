@@ -1,8 +1,8 @@
 public class ParametrizedInheritance {
     public static void main(String[] args) {
-        SuperParametrizedInheritance<Integer, Float, String> obj = 
+        SuperParametrizedInheritance<Integer, Float, String> obj =
             new SubParametrizedInheritance<Integer, Float, String>(10, .588f, "some line");
-        
+
         System.out.println(obj.mem1);
         System.out.println(obj.mem2);
         System.out.println(obj.mem3);
@@ -10,7 +10,7 @@ public class ParametrizedInheritance {
         System.out.println(((SubParametrizedInheritance)obj).mem2);
         System.out.println(((SubParametrizedInheritance)obj).mem3);
         System.out.println("passed");
-    }    
+    }
 }
 
 class SuperParametrizedInheritance<A, B, C> {

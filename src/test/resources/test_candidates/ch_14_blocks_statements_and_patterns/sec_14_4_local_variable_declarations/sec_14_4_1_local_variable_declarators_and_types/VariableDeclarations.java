@@ -3,7 +3,7 @@ public class VariableDeclarations {
         var a = 1;
         System.out.println(a);
 
-        var b = java.util.List.of(1, 2); 
+        var b = java.util.List.of(1, 2);
         System.out.println(b);
 
         var c = "x".getClass();
@@ -11,7 +11,7 @@ public class VariableDeclarations {
 
         // var d = new Object() {};
         // System.out.println(d);
-        
+
         var e = (CharSequence & Comparable<String>) "x";
         System.out.println(e);
 

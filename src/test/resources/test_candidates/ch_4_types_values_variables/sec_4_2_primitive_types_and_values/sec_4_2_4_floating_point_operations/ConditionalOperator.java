@@ -4,5 +4,5 @@ public class ConditionalOperator {
         float b = a < .888f ? .12f : 1.23f;
         System.out.println(b);
         System.out.println("passed");
-    }    
+    }
 }

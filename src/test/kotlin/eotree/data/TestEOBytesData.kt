@@ -13,23 +13,26 @@ import java.util.stream.Collectors
 class TestEOBytesData {
     @Test
     fun testGenerateEOZeroIndent() {
-        val bytes = EOBytesData(
-            EOByte(1.toByte()),
-            EOByte(255.toByte())
-        )
+        val bytes =
+            EOBytesData(
+                EOByte(1.toByte()),
+                EOByte(255.toByte()),
+            )
         Assertions.assertEquals(bytes.generateEO(0), "01-FF")
     }
 
     @Test
     fun testGenerateEONonZeroIndent() {
-        val bytes = EOBytesData(
-            Arrays.stream(
-                arrayOf(
-                    EOByte(1.toByte()),
-                    EOByte(255.toByte())
-                )
-            ).collect(Collectors.toList())
-        )
+        val bytes =
+            EOBytesData(
+                Arrays
+                    .stream(
+                        arrayOf(
+                            EOByte(1.toByte()),
+                            EOByte(255.toByte()),
+                        ),
+                    ).collect(Collectors.toList()),
+            )
         Assertions.assertEquals(bytes.generateEO(1), "01-FF")
     }
 }

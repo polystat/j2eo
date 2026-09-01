@@ -1,8 +1,10 @@
+@file:Suppress("ktlint:standard:no-wildcard-imports")
+
 package org.polystat.j2eo.translator
 
 import arrow.core.None
 import lexer.TokenCode
-import org.polystat.j2eo.eotree.* // ktlint-disable no-wildcard-imports
+import org.polystat.j2eo.eotree.*
 import org.polystat.j2eo.util.TokenCodes
 import org.polystat.j2eo.util.logger
 import tree.Declaration.ClassDeclaration
@@ -18,8 +20,11 @@ import tree.Type.TypeName
  * Maps a declaration that resides inside of class.
  * The name may be confusing, but this DOES NOT map the class declaration itself.
  */
-fun mapClassDeclaration(dec: Declaration, context: Context): List<EOBndExpr> {
-    return when (dec) {
+fun mapClassDeclaration(
+    dec: Declaration,
+    context: Context,
+): List<EOBndExpr> =
+    when (dec) {
         is MethodDeclaration -> {
             listOf(mapMethodDeclaration(dec, context))
         }
@@ -35,10 +40,13 @@ fun mapClassDeclaration(dec: Declaration, context: Context): List<EOBndExpr> {
             listOf()
         }
     }
-}
 
-fun mapDeclaration(dec: Declaration, name: String, context: Context): List<EOBndExpr> {
-    return when (dec) {
+fun mapDeclaration(
+    dec: Declaration,
+    name: String,
+    context: Context,
+): List<EOBndExpr> =
+    when (dec) {
         is MethodDeclaration -> {
             listOf(mapMethodDeclaration(dec, context))
         }
@@ -53,9 +61,13 @@ fun mapDeclaration(dec: Declaration, name: String, context: Context): List<EOBnd
             listOf()
         }
     }
-}
 
-fun mapVariableDeclaration(dec: VariableDeclaration, name: String, context: Context, mapInitializer: Boolean = true): List<EOBndExpr> {
+fun mapVariableDeclaration(
+    dec: VariableDeclaration,
+    name: String,
+    context: Context,
+    mapInitializer: Boolean = true,
+): List<EOBndExpr> {
     val initName = context.genUniqueEntityName(dec.initializer)
 
     return when (dec.type) {
@@ -65,8 +77,8 @@ fun mapVariableDeclaration(dec: VariableDeclaration, name: String, context: Cont
                     EOCopy(
                         EODot("cage"),
                     ),
-                    dec.name
-                )
+                    dec.name,
+                ),
             )
         }
         is PrimitiveType -> {
@@ -76,12 +88,12 @@ fun mapVariableDeclaration(dec: VariableDeclaration, name: String, context: Cont
                         EOCopy(
                             listOf(
                                 decodePrimitiveType(dec.type as PrimitiveType).value,
-                                decodeInitializer(dec.initializer)
+                                decodeInitializer(dec.initializer),
                             ).eoDot(),
-                            listOf(decodePrimitiveType(dec.type as PrimitiveType).value, "new").eoDot()
+                            listOf(decodePrimitiveType(dec.type as PrimitiveType).value, "new").eoDot(),
                         ),
-                        dec.name
-                    )
+                        dec.name,
+                    ),
                 )
             } else {
                 listOf(
@@ -89,8 +101,8 @@ fun mapVariableDeclaration(dec: VariableDeclaration, name: String, context: Cont
                         EOCopy(
                             EODot("cage"),
                         ),
-                        dec.name
-                    )
+                        dec.name,
+                    ),
                 )
             }
         }
@@ -98,53 +110,54 @@ fun mapVariableDeclaration(dec: VariableDeclaration, name: String, context: Cont
             throw IllegalArgumentException("\"var\" declarations are not supported yet")
         else ->
             throw IllegalArgumentException("Type of type " + dec.type.javaClass.name + " is not supported")
-    } + if (mapInitializer) {
-        if (dec.initializer != null) {
-            listOf(
-                EOBndExpr(
-                    EOObject(
-                        listOf(),
-                        None,
-                        listOf(
-                            EOBndExpr(
-                                EOCopy(
-                                    listOf(dec.name, "write").eoDot(),
-                                    initName.eoDot()
+    } +
+        if (mapInitializer) {
+            if (dec.initializer != null) {
+                listOf(
+                    EOBndExpr(
+                        EOObject(
+                            listOf(),
+                            None,
+                            listOf(
+                                EOBndExpr(
+                                    EOCopy(
+                                        listOf(dec.name, "write").eoDot(),
+                                        initName.eoDot(),
+                                    ),
+                                    "@",
                                 ),
-                                "@"
-                            )
-                        )
+                            ),
+                        ),
+                        name,
                     ),
-                    name
+                ) +
+                    mapInitializer(dec.initializer, initName, context)
+            } else {
+                listOf(
+                    EOBndExpr(
+                        EOObject(
+                            listOf(),
+                            None,
+                            listOf(
+                                EOBndExpr(
+                                    EOCopy(
+                                        "TRUE",
+                                    ),
+                                    "@",
+                                ),
+                            ),
+                        ),
+                        name,
+                    ),
                 )
-            ) +
-                mapInitializer(dec.initializer, initName, context)
+            }
         } else {
-            listOf(
-                EOBndExpr(
-                    EOObject(
-                        listOf(),
-                        None,
-                        listOf(
-                            EOBndExpr(
-                                EOCopy(
-                                    "TRUE"
-                                ),
-                                "@"
-                            )
-                        )
-                    ),
-                    name
-                )
-            )
+            listOf()
         }
-    } else {
-        listOf()
-    }
 }
 
-fun decodePrimitiveType(type: PrimitiveType): TokenCodes {
-    return when (type.typeCode) {
+fun decodePrimitiveType(type: PrimitiveType): TokenCodes =
+    when (type.typeCode) {
         TokenCode.Char -> TokenCodes.PRIM__CHAR
         TokenCode.Int -> TokenCodes.PRIM__INT
         TokenCode.Float -> TokenCodes.PRIM__FLOAT
@@ -155,8 +168,5 @@ fun decodePrimitiveType(type: PrimitiveType): TokenCodes {
         TokenCode.Short -> TokenCodes.PRIM__SHORT
         else -> throw IllegalArgumentException("Type code " + type.typeCode + " is not supported")
     }
-}
 
-fun decodeInitializer(initializer: Initializer?): String {
-    return "constructor_1"
-}
+fun decodeInitializer(initializer: Initializer?): String = "constructor_1"

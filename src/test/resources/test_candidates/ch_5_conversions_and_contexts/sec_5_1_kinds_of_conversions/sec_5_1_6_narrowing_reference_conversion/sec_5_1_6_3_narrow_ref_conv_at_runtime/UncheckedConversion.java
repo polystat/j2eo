@@ -14,4 +14,3 @@ public class UncheckedConversion {
         System.out.println("passed");
     }
 }
-

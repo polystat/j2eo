@@ -4,6 +4,6 @@ public class SimpleNativeMethod {
 
 	public static void main(String[] args) {
 		//method();
-		System.out.println("passed");	
+		System.out.println("passed");
 	}
 }

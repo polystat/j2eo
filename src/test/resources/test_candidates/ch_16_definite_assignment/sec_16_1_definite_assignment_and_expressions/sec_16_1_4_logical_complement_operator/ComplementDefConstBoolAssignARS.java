@@ -6,5 +6,5 @@ public class ComplementDefConstBoolAssignASR {
             System.out.println(k);
         }
         System.out.println("passed");
-    }    
+    }
 }

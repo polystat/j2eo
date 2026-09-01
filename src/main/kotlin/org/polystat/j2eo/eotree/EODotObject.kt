@@ -1,14 +1,13 @@
+@file:Suppress("ktlint")
+
 package org.polystat.j2eo.eotree
 
-/* ktlint-disable */
 import arrow.core.None
 import arrow.core.Option
 import arrow.core.Some
 import arrow.core.getOrElse
 import arrow.core.some
 import tree.CompoundName
-/* ktlint-disable */
-
 class EODotObject : EOObject {
     var src: Option<EOExpr>
     var name: String

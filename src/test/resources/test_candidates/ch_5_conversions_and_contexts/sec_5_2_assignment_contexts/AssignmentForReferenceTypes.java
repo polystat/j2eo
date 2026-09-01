@@ -24,4 +24,3 @@ class ColoredPoint extends Point implements Colorable {
 	int color;
 	public void setColor(int color) { this.color = color; }
 }
-

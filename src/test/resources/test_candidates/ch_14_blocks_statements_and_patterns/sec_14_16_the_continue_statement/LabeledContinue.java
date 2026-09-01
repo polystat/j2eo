@@ -10,5 +10,5 @@ public class LabeledContinue {
             }
         }
         System.out.println("passed");
-    }    
+    }
 }

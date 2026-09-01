@@ -9,7 +9,10 @@ import tree.Expression.Primary.MethodInvocation
 import tree.Expression.SimpleReference
 import tree.Statement.StatementExpression
 
-fun preprocessCompoundName(compoundName: CompoundName, classNames: HashMap<String, String>) {
+fun preprocessCompoundName(
+    compoundName: CompoundName,
+    classNames: HashMap<String, String>,
+) {
     if (compoundName.names.size == 1 &&
         classNames[compoundName.names.first()] == null
     ) {
@@ -19,23 +22,31 @@ fun preprocessCompoundName(compoundName: CompoundName, classNames: HashMap<Strin
         .replaceAll { if (classNames[it] != null) classNames[it] else it }
 }
 
-fun preprocessMethodDeclaration(methodDeclaration: MethodDeclaration, classNames: HashMap<String, String>) {
+fun preprocessMethodDeclaration(
+    methodDeclaration: MethodDeclaration,
+    classNames: HashMap<String, String>,
+) {
     try {
         methodDeclaration.methodBody.block.blockStatements
             .mapNotNull { it.statement }
             .mapNotNull { if (it is StatementExpression) it else null }
             .mapNotNull { if (it.expression is MethodInvocation) it.expression as MethodInvocation else null }
             .map {
-                if (it.qualifier != null && it.qualifier is SimpleReference)
+                if (it.qualifier != null && it.qualifier is SimpleReference) {
                     preprocessCompoundName((it.qualifier as SimpleReference).compoundName, classNames)
-                else
+                } else {
                     null
+                }
             }
-    } catch (e: NullPointerException) { /* Do nothing */
+    } catch (e: NullPointerException) {
+        // Do nothing
     }
 }
 
-fun preprocessClsDec(clsDec: NormalClassDeclaration, classNames: HashMap<String, String>) {
+fun preprocessClsDec(
+    clsDec: NormalClassDeclaration,
+    classNames: HashMap<String, String>,
+) {
     if (classNames[clsDec.name] == null) {
         classNames[clsDec.name] = "class__${clsDec.name}"
     }
@@ -48,14 +59,16 @@ fun preprocessClsDec(clsDec: NormalClassDeclaration, classNames: HashMap<String,
         clsDec.body.declarations
             .filterIsInstance<MethodDeclaration>()
             .map { methodDeclaration: MethodDeclaration -> preprocessMethodDeclaration(methodDeclaration, classNames) }
-    } catch (e: NullPointerException) { /* Ignore it */
+    } catch (e: NullPointerException) {
+        // Ignore it
     }
 }
 
 fun preprocessUnit(unit: SimpleCompilationUnit) {
-    var classNames = HashMap<String, String>().also {
-        it["System"] = "class__System"
-    }
+    var classNames =
+        HashMap<String, String>().also {
+            it["System"] = "class__System"
+        }
 
     unit.components.components
         .mapNotNull { component: TopLevelComponent -> component.classDecl }

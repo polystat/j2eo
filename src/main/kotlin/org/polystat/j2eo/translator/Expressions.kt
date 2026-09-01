@@ -1,16 +1,22 @@
+@file:Suppress("ktlint:standard:no-wildcard-imports")
+
 package org.polystat.j2eo.translator
 
 import arrow.core.None
 import arrow.core.flatten
 import lexer.TokenCode
-import org.polystat.j2eo.eotree.* // ktlint-disable no-wildcard-imports
+import org.polystat.j2eo.eotree.*
 import tree.CompoundName
-import tree.Expression.* // ktlint-disable no-wildcard-imports
-import tree.Expression.Primary.* // ktlint-disable no-wildcard-imports
+import tree.Expression.*
+import tree.Expression.Primary.*
 import tree.Type.PrimitiveType
 import tree.Type.TypeName
 
-fun mapExpression(expr: Expression, name: String, context: Context): List<EOBndExpr> =
+fun mapExpression(
+    expr: Expression,
+    name: String,
+    context: Context,
+): List<EOBndExpr> =
     when (expr) {
         is MethodInvocation ->
             mapMethodInvocation(expr, name, context)
@@ -38,17 +44,23 @@ fun mapExpression(expr: Expression, name: String, context: Context): List<EOBndE
             mapArrayAccess(expr, name, context)
         is Cast ->
             mapCastExpr(expr, name, context)
-        is InstanceOf -> listOf(
-            mapSimpleReference(SimpleReference(CompoundName("instance_of_placeholder")), name, context) /* FIXME */
-        )
-        is InstanceCreationQualified -> listOf(
-            mapSimpleReference(SimpleReference(CompoundName("instance_creation_q_placeholder")), name, context) /* FIXME */
-        )
+        is InstanceOf ->
+            listOf(
+                mapSimpleReference(SimpleReference(CompoundName("instance_of_placeholder")), name, context), // FIXME
+            )
+        is InstanceCreationQualified ->
+            listOf(
+                mapSimpleReference(SimpleReference(CompoundName("instance_creation_q_placeholder")), name, context), // FIXME
+            )
         else ->
             throw IllegalArgumentException("Expression of type ${expr.javaClass.simpleName} is not supported")
     }
 
-fun mapCastExpr(cast: Cast, name: String, context: Context): List<EOBndExpr> {
+fun mapCastExpr(
+    cast: Cast,
+    name: String,
+    context: Context,
+): List<EOBndExpr> {
     val castExprName = context.genUniqueEntityName(cast.expression)
 
     val castType = cast.types.types[0]
@@ -67,19 +79,23 @@ fun mapCastExpr(cast: Cast, name: String, context: Context): List<EOBndExpr> {
                                     else -> listOf("unknown_type_${castType.javaClass.simpleName}")
                                 } +
                                     listOf("from")
-                                ).eoDot(),
-                            castExprName.eoDot()
+                            ).eoDot(),
+                            castExprName.eoDot(),
                         ),
-                        "@"
-                    )
-                )
+                        "@",
+                    ),
+                ),
             ),
-            name
-        )
+            name,
+        ),
     ) + mapExpression(cast.expression, castExprName, context)
 }
 
-fun mapArrayAccess(access: ArrayAccess, name: String, context: Context): List<EOBndExpr> {
+fun mapArrayAccess(
+    access: ArrayAccess,
+    name: String,
+    context: Context,
+): List<EOBndExpr> {
     val accessExprName = context.genUniqueEntityName(access.expression)
     val accessSizeName = context.genUniqueEntityName(access.size)
 
@@ -92,20 +108,24 @@ fun mapArrayAccess(access: ArrayAccess, name: String, context: Context): List<EO
                     EOBndExpr(
                         EOCopy(
                             listOf(accessExprName, "get").eoDot(),
-                            listOf(accessSizeName, "v").eoDot()
+                            listOf(accessSizeName, "v").eoDot(),
                         ),
-                        "@"
-                    )
-                )
+                        "@",
+                    ),
+                ),
             ),
-            name
-        )
+            name,
+        ),
     ) + mapExpression(access.expression, accessExprName, context) +
         mapExpression(access.size, accessSizeName, context)
 }
 
-fun mapArrayCreation(arrayCreation: ArrayCreation, name: String, context: Context): List<EOBndExpr> {
-    return listOf(
+fun mapArrayCreation(
+    arrayCreation: ArrayCreation,
+    name: String,
+    context: Context,
+): List<EOBndExpr> =
+    listOf(
         EOBndExpr(
             EOObject(
                 listOf(),
@@ -114,16 +134,15 @@ fun mapArrayCreation(arrayCreation: ArrayCreation, name: String, context: Contex
                     EOBndExpr(
                         EOCopy(
                             // "cannot_get_access_to_array_initializer" // FIXME
-                            "FALSE"
+                            "FALSE",
                         ),
-                        "@"
-                    )
-                )
+                        "@",
+                    ),
+                ),
             ),
-            name
-        )
+            name,
+        ),
     )
-}
 
 /**
  * Maps Java instance creation using "new" operator to EO binding.
@@ -134,7 +153,11 @@ fun mapArrayCreation(arrayCreation: ArrayCreation, name: String, context: Contex
  *                 class.new
  *                 "value"
  */
-fun mapInstanceCreation(expr: InstanceCreation, name: String, context: Context): List<EOBndExpr> {
+fun mapInstanceCreation(
+    expr: InstanceCreation,
+    name: String,
+    context: Context,
+): List<EOBndExpr> {
     val argNames = expr.args.arguments.map { context.genUniqueEntityName(it) }
 
     return listOf(
@@ -147,19 +170,26 @@ fun mapInstanceCreation(expr: InstanceCreation, name: String, context: Context):
                         EOCopy(
                             listOf(expr.ctorType.getTypeName(), "constructor").eoDot(),
                             listOf(listOf(expr.ctorType.getTypeName(), "new").eoDot()) +
-                                argNames.map { it.eoDot() }
+                                argNames.map { it.eoDot() },
                         ),
-                        "@"
-                    )
-                )
+                        "@",
+                    ),
+                ),
             ),
-            name
-        )
-    ) + expr.args.arguments
-        .mapIndexed { idx, it -> mapExpression(it, argNames[idx], context) }.toList().flatten()
+            name,
+        ),
+    ) +
+        expr.args.arguments
+            .mapIndexed { idx, it -> mapExpression(it, argNames[idx], context) }
+            .toList()
+            .flatten()
 }
 
-fun mapParenthesized(expr: Parenthesized, name: String, context: Context): List<EOBndExpr> {
+fun mapParenthesized(
+    expr: Parenthesized,
+    name: String,
+    context: Context,
+): List<EOBndExpr> {
     val parExprName = context.genUniqueEntityName(expr.expression)
 
     return listOf(
@@ -170,37 +200,44 @@ fun mapParenthesized(expr: Parenthesized, name: String, context: Context): List<
                 listOf(
                     EOBndExpr(
                         EOCopy(
-                            parExprName
+                            parExprName,
                         ),
-                        "@"
-                    )
-                )
+                        "@",
+                    ),
+                ),
             ),
-            name
-        )
+            name,
+        ),
     ) + mapExpression(expr.expression, parExprName, context)
 }
 
 // @todo #165:90m Support for type should be added
-fun mapThis(expr: This, name: String, context: Context): EOBndExpr {
-    return EOBndExpr(
+fun mapThis(
+    expr: This,
+    name: String,
+    context: Context,
+): EOBndExpr =
+    EOBndExpr(
         EOObject(
             listOf(),
             None,
             listOf(
                 EOBndExpr(
                     EOCopy(
-                        "this"
+                        "this",
                     ),
-                    "@"
-                )
-            )
+                    "@",
+                ),
+            ),
         ),
-        name
+        name,
     )
-}
 
-fun mapFieldAccess(expr: FieldAccess, name: String, context: Context): List<EOBndExpr> {
+fun mapFieldAccess(
+    expr: FieldAccess,
+    name: String,
+    context: Context,
+): List<EOBndExpr> {
     val fieldExprName = context.genUniqueEntityName(expr.expression)
 
     return listOf(
@@ -215,26 +252,31 @@ fun mapFieldAccess(expr: FieldAccess, name: String, context: Context): List<EOBn
                                 listOf(fieldExprName, expr.identifier).eoDot()
                             } else {
                                 listOf(fieldExprName, "super", expr.identifier).eoDot()
-                            }
+                            },
                         ),
-                        "@"
-                    )
-                )
+                        "@",
+                    ),
+                ),
             ),
-            name
-        )
+            name,
+        ),
     ) + mapExpression(expr.expression, fieldExprName, context)
 }
 
-fun mapUnaryPrefix(expr: UnaryPrefix, name: String, context: Context): List<EOBndExpr> {
-    val function = when (expr.operator) {
-        TokenCode.PlusPlus -> "inc_pre"
-        TokenCode.MinusMinus -> "dec_pre"
-        TokenCode.Minus -> "neg"
-        TokenCode.Plus -> null
-        else ->
-            "unary_placeholder" // FIXME
-    }
+fun mapUnaryPrefix(
+    expr: UnaryPrefix,
+    name: String,
+    context: Context,
+): List<EOBndExpr> {
+    val function =
+        when (expr.operator) {
+            TokenCode.PlusPlus -> "inc_pre"
+            TokenCode.MinusMinus -> "dec_pre"
+            TokenCode.Minus -> "neg"
+            TokenCode.Plus -> null
+            else ->
+                "unary_placeholder" // FIXME
+        }
 
     val operandName = context.genUniqueEntityName(expr.operand)
 
@@ -250,24 +292,29 @@ fun mapUnaryPrefix(expr: UnaryPrefix, name: String, context: Context): List<EOBn
                                 listOf(operandName, function).eoDot()
                             } else {
                                 operandName.eoDot()
-                            }
+                            },
                         ),
-                        "@"
-                    )
-                )
+                        "@",
+                    ),
+                ),
             ),
-            name
-        )
+            name,
+        ),
     ) + mapExpression(expr.operand, operandName, context)
 }
 
-fun mapUnaryPostfix(expr: UnaryPostfix, name: String, context: Context): List<EOBndExpr> {
-    val function = when (expr.operator) {
-        TokenCode.PlusPlus -> "inc_post"
-        TokenCode.MinusMinus -> "dec_post"
-        else ->
-            "unary_placeholder" // FIXME
-    }
+fun mapUnaryPostfix(
+    expr: UnaryPostfix,
+    name: String,
+    context: Context,
+): List<EOBndExpr> {
+    val function =
+        when (expr.operator) {
+            TokenCode.PlusPlus -> "inc_post"
+            TokenCode.MinusMinus -> "dec_post"
+            else ->
+                "unary_placeholder" // FIXME
+        }
 
     val operandName = context.genUniqueEntityName(expr.operand)
 
@@ -279,14 +326,14 @@ fun mapUnaryPostfix(expr: UnaryPostfix, name: String, context: Context): List<EO
                 listOf(
                     EOBndExpr(
                         EOCopy(
-                            listOf(operandName, function).eoDot()
+                            listOf(operandName, function).eoDot(),
                         ),
-                        "@"
-                    )
-                )
+                        "@",
+                    ),
+                ),
             ),
-            name
-        )
+            name,
+        ),
     ) + mapExpression(expr.operand, operandName, context)
 }
 
@@ -297,41 +344,46 @@ fun mapUnaryPostfix(expr: UnaryPostfix, name: String, context: Context): List<EO
 // @todo #165:90m in val function double check is needed for some TokenCodes:
 // NonEqual, DoubleVertical, DoubleAmpersand, Ampersand, Vertical, Caret
 
-fun mapBinary(expr: Binary, name: String, context: Context): List<EOBndExpr> {
-    val function = when (expr.operator) {
-        TokenCode.Plus -> "add"
-        TokenCode.Minus -> "sub"
-        TokenCode.Greater -> "greater"
-        TokenCode.GreaterEqual -> "geq"
-        TokenCode.Equal -> "eq"
-        TokenCode.Less -> "less"
-        TokenCode.LessEqual -> "leq"
-        TokenCode.Assign -> "write"
-        TokenCode.Star -> "mul"
-        TokenCode.Slash -> "div"
-        TokenCode.PlusAssign -> "add_equal"
-        TokenCode.MinusAssign -> "sub_equal"
-        TokenCode.StarAssign -> "mul_equal"
-        TokenCode.SlashAssign -> "div_equal"
-        TokenCode.PercentAssign -> "mod_equal"
-        TokenCode.RightShift -> "shift_r"
-        TokenCode.LeftShift -> "shift_l"
-        TokenCode.RightShiftAssign -> "shift_r_equal"
-        TokenCode.LeftShiftAssign -> "shift_l_equal"
-        TokenCode.ArithmRightShift -> "shift_u"
-        TokenCode.ArithmRightShiftAssign -> "shift_u_equal"
-        TokenCode.NonEqual -> "not_eq"
-        TokenCode.DoubleVertical -> "or"
-        TokenCode.DoubleAmpersand -> "and"
-        TokenCode.Ampersand -> "bit_and"
-        TokenCode.Vertical -> "bit_or"
-        TokenCode.VerticalAssign -> "or_write" /* FIXME */
-        TokenCode.AmpersandAssign -> "and_write" /* FIXME */
-        TokenCode.Caret -> "bit_xor"
-        else ->
-            "binary_op_placeholder" // FIXME
-        // throw IllegalArgumentException("Binary operation ${expr.operator} is not supported")
-    }
+fun mapBinary(
+    expr: Binary,
+    name: String,
+    context: Context,
+): List<EOBndExpr> {
+    val function =
+        when (expr.operator) {
+            TokenCode.Plus -> "add"
+            TokenCode.Minus -> "sub"
+            TokenCode.Greater -> "greater"
+            TokenCode.GreaterEqual -> "geq"
+            TokenCode.Equal -> "eq"
+            TokenCode.Less -> "less"
+            TokenCode.LessEqual -> "leq"
+            TokenCode.Assign -> "write"
+            TokenCode.Star -> "mul"
+            TokenCode.Slash -> "div"
+            TokenCode.PlusAssign -> "add_equal"
+            TokenCode.MinusAssign -> "sub_equal"
+            TokenCode.StarAssign -> "mul_equal"
+            TokenCode.SlashAssign -> "div_equal"
+            TokenCode.PercentAssign -> "mod_equal"
+            TokenCode.RightShift -> "shift_r"
+            TokenCode.LeftShift -> "shift_l"
+            TokenCode.RightShiftAssign -> "shift_r_equal"
+            TokenCode.LeftShiftAssign -> "shift_l_equal"
+            TokenCode.ArithmRightShift -> "shift_u"
+            TokenCode.ArithmRightShiftAssign -> "shift_u_equal"
+            TokenCode.NonEqual -> "not_eq"
+            TokenCode.DoubleVertical -> "or"
+            TokenCode.DoubleAmpersand -> "and"
+            TokenCode.Ampersand -> "bit_and"
+            TokenCode.Vertical -> "bit_or"
+            TokenCode.VerticalAssign -> "or_write" // FIXME
+            TokenCode.AmpersandAssign -> "and_write" // FIXME
+            TokenCode.Caret -> "bit_xor"
+            else ->
+                "binary_op_placeholder" // FIXME
+            // throw IllegalArgumentException("Binary operation ${expr.operator} is not supported")
+        }
 
     val leftName = context.genUniqueEntityName(expr.left)
     val rightName = context.genUniqueEntityName(expr.right)
@@ -345,19 +397,23 @@ fun mapBinary(expr: Binary, name: String, context: Context): List<EOBndExpr> {
                     EOBndExpr(
                         EOCopy(
                             listOf(leftName, function).eoDot(),
-                            rightName.eoDot()
+                            rightName.eoDot(),
                         ),
-                        "@"
-                    )
-                )
+                        "@",
+                    ),
+                ),
             ),
-            name
-        )
+            name,
+        ),
     ) + mapExpression(expr.left, leftName, context) +
         mapExpression(expr.right, rightName, context)
 }
 
-fun mapSimpleReference(expr: SimpleReference, name: String, context: Context): EOBndExpr =
+fun mapSimpleReference(
+    expr: SimpleReference,
+    name: String,
+    context: Context,
+): EOBndExpr =
     EOBndExpr(
         EOObject(
             listOf(),
@@ -365,11 +421,11 @@ fun mapSimpleReference(expr: SimpleReference, name: String, context: Context): E
             listOf(
                 EOBndExpr(
                     EOCopy(
-                        expr.compoundName.eoDot()
+                        expr.compoundName.eoDot(),
                     ),
-                    "@"
-                )
-            )
+                    "@",
+                ),
+            ),
         ),
-        name
+        name,
     )

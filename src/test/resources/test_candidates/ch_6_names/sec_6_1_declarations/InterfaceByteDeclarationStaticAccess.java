@@ -9,4 +9,3 @@ public class InterfaceByteDeclarationStaticAccess {
 		System.out.println("passed");
 	}
 }
-

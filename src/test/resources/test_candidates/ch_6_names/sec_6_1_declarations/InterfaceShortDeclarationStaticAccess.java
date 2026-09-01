@@ -9,4 +9,3 @@ public class InterfaceShortDeclarationStaticAccess {
 		System.out.println("passed");
 	}
 }
-

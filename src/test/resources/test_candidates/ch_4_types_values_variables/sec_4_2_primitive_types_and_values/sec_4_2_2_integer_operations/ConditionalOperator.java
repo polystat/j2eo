@@ -4,5 +4,5 @@ public class ConditionalOperator {
         int b = a > 2 ? 0 : 1;
         System.out.println(b);
         System.out.println("passed");
-    }    
+    }
 }

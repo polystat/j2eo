@@ -18,12 +18,11 @@ class EOCopy : EOExpr {
 
     constructor(trg: EODot, vararg args: EOExpr) : this(trg, args.toList())
 
-    override fun generateEO(indent: Int): String {
-        return trg.generateEO(indent) + args
-            .map { arg -> "\n${arg.generateEO(indent + 1)}" }
-            .joinToString("")
-    }
+    override fun generateEO(indent: Int): String =
+        trg.generateEO(indent) +
+            args
+                .map { arg -> "\n${arg.generateEO(indent + 1)}" }
+                .joinToString("")
 
-    override fun toString(): String =
-        "$trg(${args.joinToString()})"
+    override fun toString(): String = "$trg(${args.joinToString()})"
 }

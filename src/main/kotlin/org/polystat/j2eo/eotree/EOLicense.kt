@@ -9,10 +9,13 @@ import java.util.stream.Collectors
  * { comment EOL } EOL
 ` *
  */
-class EOLicense(var comments: List<EOComment>) : EONode() {
+class EOLicense(
+    var comments: List<EOComment>,
+) : EONode() {
     constructor(vararg comments: EOComment) : this(
-        Arrays.stream<EOComment>(comments)
-            .collect(Collectors.toList<EOComment>())
+        Arrays
+            .stream<EOComment>(comments)
+            .collect(Collectors.toList<EOComment>()),
     )
 
     override fun generateEO(indent: Int): String =

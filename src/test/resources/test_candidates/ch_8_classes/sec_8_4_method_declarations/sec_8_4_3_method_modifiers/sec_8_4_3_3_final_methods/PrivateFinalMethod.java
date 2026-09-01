@@ -10,6 +10,6 @@ public class PrivateFinalMethod {
 class OuterClass {
 	private final void method () {}
 	public final void methodPublic() {
-		method();	
+		method();
 	}
 }

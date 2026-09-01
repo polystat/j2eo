@@ -4,5 +4,5 @@ public class ArrayMemberLength {
         int[] arr = new int[size];
         System.out.println(arr.length);
         System.out.println("passed");
-    }    
+    }
 }

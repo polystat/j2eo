@@ -7,5 +7,5 @@ public class TwoDimArrayCreation {
         };
         System.out.println(arr2.length);
         System.out.println("passed");
-    }    
+    }
 }

@@ -6,4 +6,3 @@ public class ByteDeclarationFieldAccess {
 		System.out.println("passed");
 	}
 }
-

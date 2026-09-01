@@ -18,7 +18,7 @@ fun mapBlock(
     name: String? = null,
     firstStmts: List<Pair<String, List<EOBndExpr>>>? = null,
     lastStmts: List<Pair<String, List<EOBndExpr>>>? = null,
-    paramList: List<String>? = null
+    paramList: List<String>? = null,
 ): List<EOBndExpr> {
     if (name != null) {
         return listOf(
@@ -26,43 +26,47 @@ fun mapBlock(
                 EOObject(
                     paramList ?: listOf(),
                     None,
-                    mapBlock(block, context, firstStmts = firstStmts, lastStmts = lastStmts)
+                    mapBlock(block, context, firstStmts = firstStmts, lastStmts = lastStmts),
                 ),
-                name
-            )
+                name,
+            ),
         )
     }
 
     val statementsNames = block.block.blockStatements.associateWith { getBlockStmtName(it, context) }
 
-    val parsedStatements = block.block.blockStatements
-        .associate { statementsNames[it]!! to mapBlockStatement(it, statementsNames[it]!!, context) }
+    val parsedStatements =
+        block.block.blockStatements
+            .associate { statementsNames[it]!! to mapBlockStatement(it, statementsNames[it]!!, context) }
 
     return listOf(
         EOBndExpr(
             EOCopy(
                 "seq",
                 (firstStmts?.map { it.first.eoDot() } ?: listOf()) +
-                    if (parsedStatements.isNotEmpty())
+                    if (parsedStatements.isNotEmpty()) {
                         parsedStatements.keys.map { it.eoDot() }
-                    else {
+                    } else {
                         if (firstStmts == null && lastStmts == null) {
                             listOf("TRUE".eoDot())
                         } else {
                             listOf()
                         }
                     } +
-                    (lastStmts?.map { it.first.eoDot() } ?: listOf())
+                    (lastStmts?.map { it.first.eoDot() } ?: listOf()),
             ),
-            "@"
-        )
+            "@",
+        ),
     ) + (firstStmts?.map { it.second }?.flatten() ?: listOf()) +
         parsedStatements.values.toList().flatten() +
         (lastStmts?.map { it.second }?.flatten() ?: listOf())
 }
 
-fun getBlockStmtName(blockStatement: BlockStatement, context: Context): String {
-    return if (blockStatement.statement != null) {
+fun getBlockStmtName(
+    blockStatement: BlockStatement,
+    context: Context,
+): String =
+    if (blockStatement.statement != null) {
         context.genUniqueEntityName(blockStatement.statement)
     } else if (blockStatement.expression != null) {
         context.genUniqueEntityName(blockStatement.expression)
@@ -71,10 +75,13 @@ fun getBlockStmtName(blockStatement: BlockStatement, context: Context): String {
     } else {
         throw java.lang.IllegalArgumentException("Invalid block statement!")
     }
-}
 
-fun mapBlockStatement(blockStatement: BlockStatement, name: String, context: Context): List<EOBndExpr> {
-    return if (blockStatement.statement != null) {
+fun mapBlockStatement(
+    blockStatement: BlockStatement,
+    name: String,
+    context: Context,
+): List<EOBndExpr> =
+    if (blockStatement.statement != null) {
         mapStatement(blockStatement.statement, name, context)
     } else if (blockStatement.expression != null) {
         mapExpression(blockStatement.expression, name, context)
@@ -83,4 +90,3 @@ fun mapBlockStatement(blockStatement: BlockStatement, name: String, context: Con
     } else {
         throw java.lang.IllegalArgumentException("Invalid block statement!")
     }
-}

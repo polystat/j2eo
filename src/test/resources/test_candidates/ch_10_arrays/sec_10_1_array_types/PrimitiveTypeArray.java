@@ -3,5 +3,5 @@ public class PrimitiveTypeArray {
         int[] arr = new int[] { 1, 2, Integer.MIN_VALUE };
         System.out.println(arr.length);
         System.out.println("passed");
-    }    
+    }
 }

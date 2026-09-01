@@ -8,5 +8,5 @@ public class IfElseIfElse {
 		} else {
 			System.out.println("passed");
 		}
-	}	
+	}
 }

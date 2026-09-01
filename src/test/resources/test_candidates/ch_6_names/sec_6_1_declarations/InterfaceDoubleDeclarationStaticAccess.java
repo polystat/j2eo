@@ -9,4 +9,3 @@ public class InterfaceDoubleDeclarationStaticAccess {
 		System.out.println("passed");
 	}
 }
-

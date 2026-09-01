@@ -9,4 +9,3 @@ public class InterfaceFloatDeclarationStaticAccess {
 		System.out.println("passed");
 	}
 }
-

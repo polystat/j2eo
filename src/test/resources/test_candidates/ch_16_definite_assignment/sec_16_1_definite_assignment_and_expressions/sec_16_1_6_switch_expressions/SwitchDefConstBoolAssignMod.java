@@ -2,7 +2,7 @@ public class SwitchDefConstBoolAssignMod {
     public static void main(String[] args) {
         System.out.println(getSwitch(11));
         System.out.println("passed");
-    }    
+    }
 	static int getSwitch(int param) {
 		return switch (param) {
 			case 1 -> param;

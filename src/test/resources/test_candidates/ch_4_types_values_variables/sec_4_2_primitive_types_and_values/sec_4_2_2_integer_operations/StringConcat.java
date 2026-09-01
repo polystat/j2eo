@@ -4,5 +4,5 @@ public class StringConcat {
         String line = "We have " + a + " apples.";
         System.out.println(line);
         System.out.println("passed");
-    }    
+    }
 }

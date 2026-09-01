@@ -6,4 +6,3 @@ public class ShortDeclarationFieldAccess {
 		System.out.println("passed");
 	}
 }
-

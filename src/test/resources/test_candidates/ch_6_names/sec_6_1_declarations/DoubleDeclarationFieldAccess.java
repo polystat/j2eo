@@ -6,4 +6,3 @@ public class DoubleDeclarationFieldAccess {
 		System.out.println("passed");
 	}
 }
-

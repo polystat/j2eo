@@ -4,5 +4,5 @@ public class CastOperator {
         long b = (long) a;
         System.out.println(b);
         System.out.println("passed");
-    }    
+    }
 }

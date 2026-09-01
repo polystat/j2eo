@@ -13,17 +13,15 @@ import tree.Expression.Primary.MethodInvocation
 import tree.Expression.Primary.This
 import tree.Expression.SimpleReference
 
-private fun isStaticCall(fullIdentifier: List<String>): Boolean {
-    return fullIdentifier.size == 1 && fullIdentifier.first().startsWith("class__")
-}
+private fun isStaticCall(fullIdentifier: List<String>): Boolean = fullIdentifier.size == 1 && fullIdentifier.first().startsWith("class__")
 
 private fun getCalleeFullIdentifier(
     methodInvocation: MethodInvocation,
     context: Context,
     additionalBindings: ArrayList<Pair<Expression, String>>,
-    qualifierName: String
-): List<String> {
-    return when (val methodQualifier = methodInvocation.qualifier) {
+    qualifierName: String,
+): List<String> =
+    when (val methodQualifier = methodInvocation.qualifier) {
         is SimpleReference -> methodQualifier.compoundName.names
         is FieldAccess -> getFullIdentifier(methodQualifier, context, additionalBindings)
         is MethodInvocation -> {
@@ -40,14 +38,13 @@ private fun getCalleeFullIdentifier(
             listOf("unsupported_qualifier")
         }
     }
-}
 
 private fun getFullIdentifier(
     fieldAccess: FieldAccess,
     context: Context,
-    additionalBindings: ArrayList<Pair<Expression, String>>
-): List<String> {
-    return (
+    additionalBindings: ArrayList<Pair<Expression, String>>,
+): List<String> =
+    (
         when (val expr = fieldAccess.expression) {
             is FieldAccess -> getFullIdentifier(expr, context, additionalBindings)
             is SimpleReference -> expr.compoundName.names
@@ -59,30 +56,36 @@ private fun getFullIdentifier(
             }
             else -> listOf()
         }
-        ) + listOf(fieldAccess.identifier)
-}
+    ) + listOf(fieldAccess.identifier)
 
-fun trueMethodInvocationName(name: String): List<String> {
-    return when (name) {
-        "this" -> listOf("constructor") /* FIXME (IT'S NOT ALWAYS TRUE) */
-        "super" -> listOf("super", "constructor") /* FIXME (IT'S NOT ALWAYS TRUE) */
+fun trueMethodInvocationName(name: String): List<String> =
+    when (name) {
+        "this" -> listOf("constructor") // FIXME (IT'S NOT ALWAYS TRUE)
+        "super" -> listOf("super", "constructor") // FIXME (IT'S NOT ALWAYS TRUE)
         else -> listOf(name)
     }
-}
 
 // @todo #165:90m Create state object to store binding of expression
-fun mapMethodInvocation(methodInvocation: MethodInvocation, name: String, context: Context): List<EOBndExpr> {
+fun mapMethodInvocation(
+    methodInvocation: MethodInvocation,
+    name: String,
+    context: Context,
+): List<EOBndExpr> {
     // require(!methodInvocation.superSign) { "Super sign isn't supported yet" }
-    /* FIXME (NOW PARTIALLY SUPPORTED) */
+    // FIXME (NOW PARTIALLY SUPPORTED)
     require(methodInvocation.typeArguments == null) { "Type arguments aren't supported yet" }
 
     val additionalBindings = ArrayList<Pair<Expression, String>>()
     val qualifierName = context.genUniqueEntityName(methodInvocation.qualifier)
     val trueName = trueMethodInvocationName(methodInvocation.name)
 
-    val fullIdentifier = getCalleeFullIdentifier(
-        methodInvocation, context, additionalBindings, qualifierName
-    ) + trueName
+    val fullIdentifier =
+        getCalleeFullIdentifier(
+            methodInvocation,
+            context,
+            additionalBindings,
+            qualifierName,
+        ) + trueName
     val isStaticCall = isStaticCall(fullIdentifier.dropLast(1))
 
     val src = fullIdentifier.eoDot()
@@ -99,16 +102,18 @@ fun mapMethodInvocation(methodInvocation: MethodInvocation, name: String, contex
                         EOCopy(
                             src,
                             (if (!isStaticCall) listOf(callee) else ArrayList<EOExpr>()) +
-                                (argNames?.map { it.eoDot() } ?: listOf())
+                                (argNames?.map { it.eoDot() } ?: listOf()),
                         ),
-                        "@"
-                    )
-                )
+                        "@",
+                    ),
+                ),
             ),
-            name
-        )
+            name,
+        ),
     ) + (
-        methodInvocation.arguments?.arguments
-            ?.mapIndexed { idx, it -> mapExpression(it, argNames!![idx], context) }?.flatten() ?: listOf()
-        ) + additionalBindings.map { mapExpression(it.first, it.second, context) }.flatten()
+        methodInvocation.arguments
+            ?.arguments
+            ?.mapIndexed { idx, it -> mapExpression(it, argNames!![idx], context) }
+            ?.flatten() ?: listOf()
+    ) + additionalBindings.map { mapExpression(it.first, it.second, context) }.flatten()
 }

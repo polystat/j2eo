@@ -12,45 +12,50 @@ import tree.Declaration.InterfaceDeclaration
 import tree.Declaration.NormalClassDeclaration
 import tree.Type.TypeName
 
-fun mapClass(clsDec: ClassDeclaration, context: Context): EOBndExpr {
+fun mapClass(
+    clsDec: ClassDeclaration,
+    context: Context,
+): EOBndExpr {
     require(clsDec is NormalClassDeclaration) {
         (
             "Only NormalClassDeclaration is supported, but " +
                 clsDec.javaClass.simpleName +
                 " was passed"
-            )
+        )
     }
     return EOBndExpr(
         EOObject(
             ArrayList(),
             None,
             listOf(
-                /* Super class extension */
+                // Super class extension
                 (
-                    if (clsDec.extendedType is TypeName)
+                    if (clsDec.extendedType is TypeName) {
                         EOBndExpr(
                             (clsDec.extendedType as TypeName).compoundName.eoDot(),
-                            "super"
+                            "super",
                         )
-                    else
-                    // Derive classes without "extends" specification from Object class.
+                    } else {
+                        // Derive classes without "extends" specification from Object class.
                         EOBndExpr(
                             "class__Object".eoDot(),
-                            "super"
+                            "super",
                         )
-                    ),
+                    }
+                ),
                 EOBndExpr(
                     "super".eoDot(),
-                    "@"
-                )
+                    "@",
+                ),
             ) +
                 (generateNew(clsDec, context)) +
-                generateStatic(clsDec, context)
+                generateStatic(clsDec, context),
         ),
-        clsDec.name
+        clsDec.name,
     )
 }
 
-fun mapInterface(interfaceDeclaration: InterfaceDeclaration?, context: Context): org.polystat.j2eo.eotree.EOBnd {
-    throw IllegalArgumentException("Interface declarations are not yet implemented")
-}
+fun mapInterface(
+    interfaceDeclaration: InterfaceDeclaration?,
+    context: Context,
+): org.polystat.j2eo.eotree.EOBnd = throw IllegalArgumentException("Interface declarations are not yet implemented")

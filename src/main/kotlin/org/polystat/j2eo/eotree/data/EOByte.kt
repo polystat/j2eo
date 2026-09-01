@@ -9,8 +9,8 @@ import java.util.Locale
  * /[\dA-F][\dA-F]/
 ` *
  */
-class EOByte(var b: Byte) : EONode() {
-    override fun generateEO(indent: Int): String {
-        return String.format("%02x", b).uppercase(Locale.getDefault())
-    }
+class EOByte(
+    var b: Byte,
+) : EONode() {
+    override fun generateEO(indent: Int): String = String.format("%02x", b).uppercase(Locale.getDefault())
 }

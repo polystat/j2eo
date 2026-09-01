@@ -10,18 +10,22 @@ import tree.Declaration.ConstructorDeclaration
 import tree.Declaration.Declaration
 import tree.Declaration.NormalClassDeclaration
 
+// @todo #165:90m dec is ClassDeclaration is not always true
+
 /**
  * Maps all static class members to EO bindings, skipping non-static ones.
  */
-// @todo #165:90m dec is ClassDeclaration is not always true
-fun generateStatic(clsDec: NormalClassDeclaration, context: Context): List<EOBndExpr> {
-    return clsDec.body.declarations
+fun generateStatic(
+    clsDec: NormalClassDeclaration,
+    context: Context,
+): List<EOBndExpr> =
+    clsDec.body.declarations
         .filter { dec: Declaration ->
-            dec.modifiers?.modifiers?.modifiers?.find { it == TokenCode.Static } != null ||
+            dec.modifiers
+                ?.modifiers
+                ?.modifiers
+                ?.find { it == TokenCode.Static } != null ||
                 dec is ConstructorDeclaration ||
-                dec is ClassDeclaration /* FIXME (IT'S NOT ALWAYS TRUE) */
-            dec is ClassDeclaration
-        }
-        .map { mapClassDeclaration(it, context) }
+                dec is ClassDeclaration // FIXME (IT'S NOT ALWAYS TRUE)
+        }.map { mapClassDeclaration(it, context) }
         .flatten()
-}

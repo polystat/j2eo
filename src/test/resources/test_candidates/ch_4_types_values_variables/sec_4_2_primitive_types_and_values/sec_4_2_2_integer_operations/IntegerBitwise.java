@@ -7,5 +7,5 @@ public class IntegerBitwise {
         int c = 9 | 4;
         System.out.println(c);
         System.out.println("passed");
-    }    
+    }
 }

@@ -5,5 +5,5 @@ public class AndDefConstBoolAssignMod {
             System.out.println(k);
         }
         System.out.println("passed");
-    }    
+    }
 }

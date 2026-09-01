@@ -8,5 +8,5 @@ public class TwoDimArrayAccess {
             }
         }
         System.out.println("passed");
-    }    
+    }
 }

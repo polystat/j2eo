@@ -5,5 +5,5 @@ public class OrDefConstBoolAssignDiv {
             System.out.println(k);
         }
         System.out.println("passed");
-    }    
+    }
 }

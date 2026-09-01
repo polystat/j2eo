@@ -4,5 +4,5 @@ public class SimpleFor {
             System.out.println("[#" + (i + 1) + "]: uWu");
         }
         System.out.println("passed");
-    }    
+    }
 }

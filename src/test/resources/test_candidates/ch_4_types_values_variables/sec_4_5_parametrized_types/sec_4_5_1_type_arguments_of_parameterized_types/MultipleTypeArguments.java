@@ -4,7 +4,7 @@ import java.util.ArrayList;
 public class MultipleTypeArguments {
 
 	public static void main(String[] args) {
-		Some<Integer, String, Float, Object> some = 
+		Some<Integer, String, Float, Object> some =
 			new Some<>(20, "wOw", 3.14f, new Object().getClass().getName());
 		some.printX();
 		some.printY();

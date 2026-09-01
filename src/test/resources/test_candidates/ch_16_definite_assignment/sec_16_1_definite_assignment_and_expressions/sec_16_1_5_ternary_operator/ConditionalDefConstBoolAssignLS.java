@@ -4,5 +4,5 @@ public class ConditionalDefConstBoolAssignLS {
 		int some = !false ? k <<= 3 : 20;
 		System.out.println(k);
         System.out.println("passed");
-    }    
+    }
 }

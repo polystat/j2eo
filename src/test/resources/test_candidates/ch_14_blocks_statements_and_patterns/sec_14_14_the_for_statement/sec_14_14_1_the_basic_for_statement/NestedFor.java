@@ -6,5 +6,5 @@ public class NestedFor {
 			}
         }
         System.out.println("passed");
-    }    
+    }
 }

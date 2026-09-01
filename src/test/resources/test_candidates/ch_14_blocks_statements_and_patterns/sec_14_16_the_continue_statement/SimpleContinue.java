@@ -9,5 +9,5 @@ public class SimpleContinue {
             System.out.println("i: " + i);
         }
         System.out.println("passed");
-    }    
+    }
 }

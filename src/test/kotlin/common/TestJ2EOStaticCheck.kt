@@ -29,26 +29,33 @@ import kotlin.io.path.relativeTo
 class TestJ2EOStaticCheck {
     @TestFactory
     fun test(): Collection<DynamicTest> {
-        val t = testFolderRoot.toFile().walk()
-            .filter { file -> file.isFile }
-            .filter { file -> isReadyTest(file.toPath()) }
-            .filter { file -> isNotClassFile(file.toPath()) }
-            .filter { file -> isJavaFile(file.toPath()) }
+        val t =
+            testFolderRoot
+                .toFile()
+                .walk()
+                .filter { file -> file.isFile }
+                .filter { file -> isReadyTest(file.toPath()) }
+                .filter { file -> isNotClassFile(file.toPath()) }
+                .filter { file -> isJavaFile(file.toPath()) }
 
         return t.map { translateFile(it.toPath()) }.toList()
     }
 
     companion object {
-        private const val translatedTestsFolderName = "translated_tests"
-        private const val testsFolderName = "test_candidates"
-        private val testFolderRoot = Paths.get("src", "test", "resources", testsFolderName)
-            .toAbsolutePath()
+        private const val TRANSLATED_TESTS_FOLDER_NAME = "translated_tests"
+        private const val TESTS_FOLDER_NAME = "test_candidates"
+        private val testFolderRoot =
+            Paths
+                .get("src", "test", "resources", TESTS_FOLDER_NAME)
+                .toAbsolutePath()
         private val sep = File.separatorChar.toString()
 
         @BeforeAll
         @JvmStatic
         fun setup() {
-            testFolderRoot.toFile().walk()
+            testFolderRoot
+                .toFile()
+                .walk()
                 .filter { file -> file.isFile }
                 .filter { file -> isReadyTest(file.toPath()) }
                 .filter { file -> isNotClassFile(file.toPath()) }
@@ -67,19 +74,21 @@ class TestJ2EOStaticCheck {
         }
 
         private fun getEOSample(path: Path): String {
-            val eoPathStr = path.absolutePathString()
-                .replace(testsFolderName, translatedTestsFolderName)
-                .replace(".java", ".eo")
+            val eoPathStr =
+                path
+                    .absolutePathString()
+                    .replace(TESTS_FOLDER_NAME, TRANSLATED_TESTS_FOLDER_NAME)
+                    .replace(".java", ".eo")
             return CharStreams.fromFileName(eoPathStr).toString()
         }
 
-        private fun translateFile(path: Path): DynamicTest {
-            return DynamicTest.dynamicTest(
+        private fun translateFile(path: Path): DynamicTest =
+            DynamicTest.dynamicTest(
                 path.parent.fileName.toString() + sep +
-                    path.fileName.toString()
+                    path.fileName.toString(),
             ) {
                 assertTimeoutPreemptively(
-                    Duration.ofSeconds(10)
+                    Duration.ofSeconds(10),
                 ) {
                     var translatedJava = translateJavaFile(path)
                     var sampleJava = getEOSample(path)
@@ -91,31 +100,20 @@ class TestJ2EOStaticCheck {
                     assert(translatedJava == sampleJava)
                 }
             }
-        }
 
         @AfterAll
         @JvmStatic
         fun cleanup() {
         }
 
-        private fun isReadyTest(path: Path): Boolean {
-            return !path.endsWith("SampleTest.java") && !path.contains(Paths.get("target"))
-        }
+        private fun isReadyTest(path: Path): Boolean = !path.endsWith("SampleTest.java") && !path.contains(Paths.get("target"))
 
-        private fun isTest(path: Path): Boolean {
-            return !path.contains(Paths.get("target"))
-        }
+        private fun isTest(path: Path): Boolean = !path.contains(Paths.get("target"))
 
-        private fun isClassFile(path: Path): Boolean {
-            return path.toString().endsWith(".class")
-        }
+        private fun isClassFile(path: Path): Boolean = path.toString().endsWith(".class")
 
-        private fun isJavaFile(path: Path): Boolean {
-            return path.toString().endsWith(".java")
-        }
+        private fun isJavaFile(path: Path): Boolean = path.toString().endsWith(".java")
 
-        private fun isNotClassFile(path: Path): Boolean {
-            return !isClassFile(path)
-        }
+        private fun isNotClassFile(path: Path): Boolean = !isClassFile(path)
     }
 }

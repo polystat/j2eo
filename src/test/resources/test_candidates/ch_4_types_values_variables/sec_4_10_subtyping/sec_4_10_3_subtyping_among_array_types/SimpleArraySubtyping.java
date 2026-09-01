@@ -4,5 +4,5 @@ public class SimpleArraySubtyping {
         Object obj = objs;
         System.out.println(obj);
         System.out.println("passed");
-    }    
+    }
 }

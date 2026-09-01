@@ -6,5 +6,5 @@ public class SimpleIfElse {
 		} else {
 			System.out.println("passed");
 		}
-	}	
+	}
 }

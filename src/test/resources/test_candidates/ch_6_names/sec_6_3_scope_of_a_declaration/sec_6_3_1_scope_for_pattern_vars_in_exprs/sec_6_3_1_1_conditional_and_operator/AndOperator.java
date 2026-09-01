@@ -9,10 +9,10 @@ public class AndOperator {
         if (writerObj instanceof IReader reader && writerObj instanceof IWriter writer) {
             System.out.println("not passed");
         }
-    }    
+    }
 }
 
-interface IReader { 
+interface IReader {
     String read();
  }
 interface IWriter {}

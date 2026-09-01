@@ -6,9 +6,11 @@ package org.polystat.j2eo.eotree
  * '+' name ' ' ANY EOL
 ` *
  */
-class EOMeta(var name: String, var value: String) : EONode() {
-    override fun generateEO(indent: Int): String =
-        "+$name $value"
+class EOMeta(
+    var name: String,
+    var value: String,
+) : EONode() {
+    override fun generateEO(indent: Int): String = "+$name $value"
 
     override fun toString(): String = "+$name $value"
 
@@ -24,6 +26,5 @@ class EOMeta(var name: String, var value: String) : EONode() {
         return true
     }
 
-    override fun hashCode(): Int =
-        31 * name.hashCode() + value.hashCode()
+    override fun hashCode(): Int = 31 * name.hashCode() + value.hashCode()
 }

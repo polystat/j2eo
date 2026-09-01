@@ -5,7 +5,5 @@ abstract class EONode {
 
     abstract fun generateEO(indent: Int): String
 
-    fun indent(indent: Int): String {
-        return " ".repeat(indent * indentSize)
-    }
+    fun indent(indent: Int): String = " ".repeat(indent * indentSize)
 }

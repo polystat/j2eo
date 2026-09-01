@@ -4,5 +4,5 @@ public class SubtypingDoubleFloat {
         double d = f;
         System.out.println(d);
         System.out.println("passed");
-    }    
+    }
 }

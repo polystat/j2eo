@@ -7,5 +7,5 @@ public class SimpleAndDefAssign {
             System.out.println(k);
         }
         System.out.println("passed");
-    }    
+    }
 }

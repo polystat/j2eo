@@ -7,5 +7,5 @@ public class ForPatternVarScope {
             System.out.println("int: " + integer);
         }
         System.out.println(obj);
-    }    
+    }
 }

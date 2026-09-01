@@ -5,5 +5,5 @@ public class AndDefConstBoolAssignOr {
             System.out.println(k);
         }
         System.out.println("passed");
-    }    
+    }
 }

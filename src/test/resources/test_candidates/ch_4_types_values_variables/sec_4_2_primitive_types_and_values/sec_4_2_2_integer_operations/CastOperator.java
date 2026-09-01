@@ -4,5 +4,5 @@ public class CastOperator {
         float b = (float) a;
         System.out.println(b);
         System.out.println("passed");
-    }    
+    }
 }

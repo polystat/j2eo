@@ -5,5 +5,5 @@ public class SimpleArrayInitializer {
             System.out.println(i);
         }
         System.out.println("passed");
-    }    
+    }
 }

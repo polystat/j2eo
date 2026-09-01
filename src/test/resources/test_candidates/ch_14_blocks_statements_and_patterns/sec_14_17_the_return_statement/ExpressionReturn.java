@@ -6,5 +6,5 @@ public class ExpressionReturn {
     public static void main(String[] args) {
         System.out.println(func());
         System.out.println("passed");
-    }    
+    }
 }

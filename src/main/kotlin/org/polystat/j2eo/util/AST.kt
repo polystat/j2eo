@@ -4,8 +4,11 @@ import tree.Compilation.TopLevelComponent
 import tree.Declaration.ClassDeclaration
 import tree.Declaration.NormalClassDeclaration
 
-fun findNameAsClass(objName: String, clsDec: NormalClassDeclaration): Boolean {
-    return if (objName != clsDec.name) {
+fun findNameAsClass(
+    objName: String,
+    clsDec: NormalClassDeclaration,
+): Boolean =
+    if (objName != clsDec.name) {
         try {
             clsDec.body.declarations
                 .filterIsInstance<NormalClassDeclaration>()
@@ -16,10 +19,12 @@ fun findNameAsClass(objName: String, clsDec: NormalClassDeclaration): Boolean {
     } else {
         true
     }
-}
 
-fun isItClass(objName: String, components: ArrayList<TopLevelComponent>): Boolean {
-    return if (objName != "System") {
+fun isItClass(
+    objName: String,
+    components: ArrayList<TopLevelComponent>,
+): Boolean =
+    if (objName != "System") {
         components
             .mapNotNull { component: TopLevelComponent -> component.classDecl }
             .filterIsInstance<NormalClassDeclaration>()
@@ -27,4 +32,3 @@ fun isItClass(objName: String, components: ArrayList<TopLevelComponent>): Boolea
     } else {
         true
     }
-}

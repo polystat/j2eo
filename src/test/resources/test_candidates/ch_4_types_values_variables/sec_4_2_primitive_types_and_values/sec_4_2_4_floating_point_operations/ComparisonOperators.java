@@ -6,5 +6,5 @@ public class ComparisonOperators {
         System.out.println(a < b);
         System.out.println(a <= b);
         System.out.println("passed");
-    }    
+    }
 }

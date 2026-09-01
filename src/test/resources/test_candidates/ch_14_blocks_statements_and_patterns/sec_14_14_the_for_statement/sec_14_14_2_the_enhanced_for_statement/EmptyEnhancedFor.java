@@ -5,5 +5,5 @@ public class EmptyEnhancedFor {
             System.out.println(a / 2);
         }
         System.out.println("passed");
-    }    
+    }
 }

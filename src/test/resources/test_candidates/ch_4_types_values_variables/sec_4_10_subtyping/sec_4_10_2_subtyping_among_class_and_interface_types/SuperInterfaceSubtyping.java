@@ -2,7 +2,7 @@ public class SuperInterfaceSubtyping {
     public static void main(String[] args) {
         new SomeClass().check();
         System.out.println("passed");
-    }   
+    }
 }
 
 interface ISuper {}

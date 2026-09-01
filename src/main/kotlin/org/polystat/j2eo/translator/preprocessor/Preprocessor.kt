@@ -1,3 +1,5 @@
+@file:Suppress("ktlint:standard:no-wildcard-imports")
+
 package org.polystat.j2eo.translator.preprocessor
 
 import lexer.Token
@@ -8,7 +10,7 @@ import tree.Compilation.CompilationUnit
 import tree.Compilation.SimpleCompilationUnit
 import tree.Compilation.TopLevelComponent
 import tree.CompoundName
-import tree.Declaration.* // ktlint-disable no-wildcard-imports
+import tree.Declaration.*
 import tree.Expression.ArgumentList
 import tree.Expression.Binary
 import tree.Expression.Cast
@@ -27,11 +29,11 @@ import tree.Expression.UnaryPrefix
 import tree.Initializer
 import tree.InitializerArray
 import tree.InitializerSimple
-import tree.Statement.* // ktlint-disable no-wildcard-imports
+import tree.Statement.*
 import tree.Type.PrimitiveType
 import tree.Type.Type
 import tree.Type.TypeName
-import java.util.* // ktlint-disable no-wildcard-imports
+import java.util.*
 import kotlin.collections.HashMap
 import kotlin.collections.HashSet
 
@@ -41,33 +43,38 @@ import kotlin.collections.HashSet
  * @property stdTokensForCurrentAlias
  */
 data class PreprocessorState(
-    val classNames: HashMap<String, String> = hashMapOf(
-        "Object" to TokenCodes.CLASS__OBJECT.value,
-        "System" to TokenCodes.CLASS__SYSTEM.value,
-        "String" to TokenCodes.CLASS__STRING.value,
-        "Random" to TokenCodes.CLASS__RANDOM.value
-    ),
-    val tokensNeededForAlias: HashSet<String> = hashSetOf(
-        TokenCodes.CLASS__OBJECT.value,
-        TokenCodes.CLASS__SYSTEM.value,
-        TokenCodes.CLASS__RANDOM.value,
-        TokenCodes.PRIM__INT.value,
-        TokenCodes.PRIM__FLOAT.value,
-        TokenCodes.PRIM__BOOLEAN.value,
-        TokenCodes.CLASS__STRING.value,
-        // TokenCodes.EO_CAGE.value,
-        TokenCodes.PRIM__LONG.value,
-        TokenCodes.PRIM__BYTE.value,
-        TokenCodes.PRIM__CHAR.value,
-        TokenCodes.PRIM__DOUBLE.value,
-        TokenCodes.PRIM__SHORT.value
-    ),
-    val tokensToImportPath: Map<String, String> = TokenCodes.values()
-        .associate { it.value to it.importPath },
-    val stdTokensForCurrentAlias: HashSet<String> = hashSetOf(
-        TokenCodes.CLASS__OBJECT.importPath // We need it always
-    ),
-    val eoClassesForCurrentAlias: HashSet<String> = hashSetOf()
+    val classNames: HashMap<String, String> =
+        hashMapOf(
+            "Object" to TokenCodes.CLASS__OBJECT.value,
+            "System" to TokenCodes.CLASS__SYSTEM.value,
+            "String" to TokenCodes.CLASS__STRING.value,
+            "Random" to TokenCodes.CLASS__RANDOM.value,
+        ),
+    val tokensNeededForAlias: HashSet<String> =
+        hashSetOf(
+            TokenCodes.CLASS__OBJECT.value,
+            TokenCodes.CLASS__SYSTEM.value,
+            TokenCodes.CLASS__RANDOM.value,
+            TokenCodes.PRIM__INT.value,
+            TokenCodes.PRIM__FLOAT.value,
+            TokenCodes.PRIM__BOOLEAN.value,
+            TokenCodes.CLASS__STRING.value,
+            // TokenCodes.EO_CAGE.value,
+            TokenCodes.PRIM__LONG.value,
+            TokenCodes.PRIM__BYTE.value,
+            TokenCodes.PRIM__CHAR.value,
+            TokenCodes.PRIM__DOUBLE.value,
+            TokenCodes.PRIM__SHORT.value,
+        ),
+    val tokensToImportPath: Map<String, String> =
+        TokenCodes
+            .values()
+            .associate { it.value to it.importPath },
+    val stdTokensForCurrentAlias: HashSet<String> =
+        hashSetOf(
+            TokenCodes.CLASS__OBJECT.importPath, // We need it always
+        ),
+    val eoClassesForCurrentAlias: HashSet<String> = hashSetOf(),
 )
 
 /**
@@ -75,19 +82,25 @@ data class PreprocessorState(
  * @param unit
  * @throws IllegalArgumentException
  */
-fun preprocess(state: PreprocessorState, unit: CompilationUnit) {
+fun preprocess(
+    state: PreprocessorState,
+    unit: CompilationUnit,
+) {
     if (unit is SimpleCompilationUnit) {
         preprocessSimpleCompilationUnit(state, unit)
     } else {
         throw IllegalArgumentException(
             "CompilationUnit of type " +
                 unit.javaClass.simpleName +
-                " cannot be preprocessed"
+                " cannot be preprocessed",
         )
     }
 }
 
-private fun findClassDecl(state: PreprocessorState, decl: Declaration) {
+private fun findClassDecl(
+    state: PreprocessorState,
+    decl: Declaration,
+) {
     when (decl) {
         is NormalClassDeclaration -> findClassDeclInClass(state, decl)
         is MethodDeclaration -> findClassDeclInMethod(state, decl)
@@ -95,13 +108,21 @@ private fun findClassDecl(state: PreprocessorState, decl: Declaration) {
     }
 }
 
-private fun findClassDeclInMethod(state: PreprocessorState, decl: MethodDeclaration) {
-    decl.methodBody?.block?.blockStatements
+private fun findClassDeclInMethod(
+    state: PreprocessorState,
+    decl: MethodDeclaration,
+) {
+    decl.methodBody
+        ?.block
+        ?.blockStatements
         ?.mapNotNull { it.declaration }
         ?.map { findClassDecl(state, it) }
 }
 
-private fun findClassDeclInVar(state: PreprocessorState, decl: VariableDeclaration) {
+private fun findClassDeclInVar(
+    state: PreprocessorState,
+    decl: VariableDeclaration,
+) {
     val initializer = decl.initializer
 
     if (initializer is InitializerSimple) {
@@ -115,7 +136,10 @@ private fun findClassDeclInVar(state: PreprocessorState, decl: VariableDeclarati
     }
 }
 
-private fun findClassDeclInInit(state: PreprocessorState, initializer: InitializerSimple) {
+private fun findClassDeclInInit(
+    state: PreprocessorState,
+    initializer: InitializerSimple,
+) {
     val expr = initializer.expression
     if (expr is InstanceCreation) {
         val ctorType = expr.ctorType
@@ -130,26 +154,32 @@ private fun findClassDeclInInit(state: PreprocessorState, initializer: Initializ
                 }
         }
 
-        expr.classBody?.declarations
+        expr.classBody
+            ?.declarations
             ?.map { findClassDecl(state, it) }
     }
 }
 
-private fun findClassDeclInClass(state: PreprocessorState, clsDec: NormalClassDeclaration) {
+private fun findClassDeclInClass(
+    state: PreprocessorState,
+    clsDec: NormalClassDeclaration,
+) {
     state.classNames[clsDec.name] ?: run {
         state.classNames[clsDec.name] = "class__${clsDec.name}"
         tryAddClassForAliases(state, "class__${clsDec.name}")
     }
 
     if (clsDec.extendedType is TypeName) {
-        (clsDec.extendedType as TypeName).compoundName.names
+        (clsDec.extendedType as TypeName)
+            .compoundName.names
             .map {
                 state.classNames[it] ?: run {
                     state.classNames[it] = "class__$it"
                     tryAddClassForAliases(state, "class__$it")
                 }
             }
-        (clsDec.extendedType as TypeName).compoundName.names
+        (clsDec.extendedType as TypeName)
+            .compoundName.names
             .replaceAll { str: String ->
                 state.classNames[str]?.let {
                     state.classNames[str]
@@ -159,30 +189,41 @@ private fun findClassDeclInClass(state: PreprocessorState, clsDec: NormalClassDe
             }
     }
 
-    clsDec.body?.declarations
+    clsDec.body
+        ?.declarations
         ?.map { findClassDecl(state, it) }
 }
 
-private fun collectClassNames(state: PreprocessorState, unit: SimpleCompilationUnit) {
-    unit.components?.components
+private fun collectClassNames(
+    state: PreprocessorState,
+    unit: SimpleCompilationUnit,
+) {
+    unit.components
+        ?.components
         ?.mapNotNull { component: TopLevelComponent? -> component?.classDecl }
         ?.map { findClassDecl(state, it) }
 }
 
-private fun preprocessSimpleCompilationUnit(state: PreprocessorState, unit: SimpleCompilationUnit) {
+private fun preprocessSimpleCompilationUnit(
+    state: PreprocessorState,
+    unit: SimpleCompilationUnit,
+) {
     collectClassNames(state, unit)
     collectPrimitivePackages(state.stdTokensForCurrentAlias, unit)
 
-    unit.imports?.imports
+    unit.imports
+        ?.imports
         ?.map { preprocessImportDeclaration(state, it) }
 
     unit.components.components
         .map { component: TopLevelComponent? -> preprocessTopLevelComponent(state, component) }
 }
 
-private fun preprocessImportDeclaration(state: PreprocessorState, importDecl: ImportDeclaration?) {
+private fun preprocessImportDeclaration(
+    state: PreprocessorState,
+    importDecl: ImportDeclaration?,
+) {
     if (importDecl != null) {
-
         if (importDecl.compoundName.names.size == 0) {
             return
         }
@@ -191,11 +232,12 @@ private fun preprocessImportDeclaration(state: PreprocessorState, importDecl: Im
             importDecl.compoundName.names[0] = "eo/org/polystat/stdlib"
         }
 
-        val checkEntity = if (!importDecl.signStatic) {
-            importDecl.compoundName.names.last()
-        } else {
-            importDecl.compoundName.names[importDecl.compoundName.names.size - 2] // Always works, no static without class
-        }
+        val checkEntity =
+            if (!importDecl.signStatic) {
+                importDecl.compoundName.names.last()
+            } else {
+                importDecl.compoundName.names[importDecl.compoundName.names.size - 2] // Always works, no static without class
+            }
 
         state.classNames[checkEntity] ?: run { state.classNames[checkEntity] = "class__$checkEntity" }
 
@@ -210,29 +252,38 @@ private fun preprocessImportDeclaration(state: PreprocessorState, importDecl: Im
     }
 }
 
-private fun preprocessTopLevelComponent(state: PreprocessorState, component: TopLevelComponent?) {
+private fun preprocessTopLevelComponent(
+    state: PreprocessorState,
+    component: TopLevelComponent?,
+) {
     if (component?.classDecl != null) {
         preprocessClassDecl(state, component.classDecl)
-    } else component?.interfaceDecl?.let {
-        /* To discuss */
-    }
-        ?: run {
-            throw IllegalArgumentException("Preprocessor: Supplied TopLevelComponent does not have neither class nor interface")
+    } else {
+        component?.interfaceDecl?.let {
+            // To discuss
         }
+            ?: run {
+                throw IllegalArgumentException("Preprocessor: Supplied TopLevelComponent does not have neither class nor interface")
+            }
+    }
 }
 
-private fun preprocessClassDecl(state: PreprocessorState, clsDec: ClassDeclaration) {
+private fun preprocessClassDecl(
+    state: PreprocessorState,
+    clsDec: ClassDeclaration,
+) {
     require(clsDec is NormalClassDeclaration) {
         (
             "Preprocessor: Only NormalClassDeclaration is supported, but " +
                 clsDec.javaClass.simpleName +
                 " was passed"
-            )
+        )
     }
 
     clsDec.name = state.classNames[clsDec.name] ?: clsDec.name
     tryToAddConstructor(clsDec)
-    clsDec.body?.declarations
+    clsDec.body
+        ?.declarations
         ?.map { decl: Declaration -> preprocessDecl(state, decl) }
 }
 
@@ -240,22 +291,31 @@ private fun tryToAddConstructor(clsDec: NormalClassDeclaration) {
     if (clsDec.body?.declarations?.find { it is ConstructorDeclaration } == null) {
         val argList = ArgumentList(null)
         argList.arguments = ArrayList()
-        val genConstDecl = ConstructorDeclaration(
-            null, null, null, null, null,
-            Block(
-                ArrayList(),
-                BlockStatements(
-                    BlockStatement(
-                        StatementExpression(
-                            ArrayList(),
-                            MethodInvocation(
-                                null, true, null, Token(TokenCode.Super, "super"), argList
-                            )
-                        )
-                    )
-                )
+        val genConstDecl =
+            ConstructorDeclaration(
+                null,
+                null,
+                null,
+                null,
+                null,
+                Block(
+                    ArrayList(),
+                    BlockStatements(
+                        BlockStatement(
+                            StatementExpression(
+                                ArrayList(),
+                                MethodInvocation(
+                                    null,
+                                    true,
+                                    null,
+                                    Token(TokenCode.Super, "super"),
+                                    argList,
+                                ),
+                            ),
+                        ),
+                    ),
+                ),
             )
-        )
         if (clsDec.body != null) {
             clsDec.body.add(genConstDecl)
         } else {
@@ -264,19 +324,29 @@ private fun tryToAddConstructor(clsDec: NormalClassDeclaration) {
     }
 }
 
-private fun preprocessMethodDecl(state: PreprocessorState, methodDecl: MethodDeclaration) {
+private fun preprocessMethodDecl(
+    state: PreprocessorState,
+    methodDecl: MethodDeclaration,
+) {
     preprocessBlock(state, methodDecl.methodBody)
     when (val methodType = methodDecl.type) {
         is PrimitiveType -> tryAddClassForAliases(state, convertPrimTokenCode(methodType.typeCode))
     }
 }
 
-private fun preprocessBlock(state: PreprocessorState, block: Block) {
-    block.block?.blockStatements
+private fun preprocessBlock(
+    state: PreprocessorState,
+    block: Block,
+) {
+    block.block
+        ?.blockStatements
         ?.map { blockStmt: BlockStatement -> preprocessBlockStmt(state, blockStmt) }
 }
 
-private fun preprocessBlockStmt(state: PreprocessorState, blockStmt: BlockStatement) {
+private fun preprocessBlockStmt(
+    state: PreprocessorState,
+    blockStmt: BlockStatement,
+) {
     blockStmt.declaration?.let {
         preprocessDecl(state, blockStmt.declaration)
     }
@@ -288,7 +358,10 @@ private fun preprocessBlockStmt(state: PreprocessorState, blockStmt: BlockStatem
     }
 }
 
-private fun preprocessDecl(state: PreprocessorState, decl: Declaration) {
+private fun preprocessDecl(
+    state: PreprocessorState,
+    decl: Declaration,
+) {
     when (decl) {
         is ClassDeclaration -> preprocessClassDecl(state, decl)
         is VariableDeclaration -> preprocessVarDecl(state, decl)
@@ -299,7 +372,10 @@ private fun preprocessDecl(state: PreprocessorState, decl: Declaration) {
     }
 }
 
-private fun preprocessStmt(state: PreprocessorState, stmt: Statement) {
+private fun preprocessStmt(
+    state: PreprocessorState,
+    stmt: Statement,
+) {
     when (stmt) {
         is Block -> preprocessBlock(state, stmt)
         is BlockStatement -> preprocessBlockStmt(state, stmt)
@@ -340,7 +416,10 @@ private fun preprocessStmt(state: PreprocessorState, stmt: Statement) {
     }
 }
 
-private fun preprocessVarDecl(state: PreprocessorState, varDecl: VariableDeclaration) {
+private fun preprocessVarDecl(
+    state: PreprocessorState,
+    varDecl: VariableDeclaration,
+) {
     if (varDecl.initializer != null) {
         preprocessInitializer(state, varDecl.initializer)
     }
@@ -358,7 +437,10 @@ private fun preprocessVarDecl(state: PreprocessorState, varDecl: VariableDeclara
     }
 }
 
-private fun preprocessInitializer(state: PreprocessorState, initializer: Initializer) {
+private fun preprocessInitializer(
+    state: PreprocessorState,
+    initializer: Initializer,
+) {
     when (initializer) {
         is InitializerSimple -> preprocessSimpleInitializer(state, initializer)
         is InitializerArray ->
@@ -370,15 +452,24 @@ private fun preprocessInitializer(state: PreprocessorState, initializer: Initial
     }
 }
 
-private fun preprocessSimpleInitializer(state: PreprocessorState, initializer: InitializerSimple) {
+private fun preprocessSimpleInitializer(
+    state: PreprocessorState,
+    initializer: InitializerSimple,
+) {
     preprocessExpr(state, initializer.expression)
 }
 
-private fun preprocessStmtExpr(state: PreprocessorState, stmExpr: StatementExpression) {
+private fun preprocessStmtExpr(
+    state: PreprocessorState,
+    stmExpr: StatementExpression,
+) {
     preprocessExpr(state, stmExpr.expression)
 }
 
-private fun preprocessExpr(state: PreprocessorState, expr: Expression?) {
+private fun preprocessExpr(
+    state: PreprocessorState,
+    expr: Expression?,
+) {
     when (expr) {
         is SimpleReference -> preprocessSimpleReference(state, expr)
         is MethodInvocation -> preprocessMethodInvocation(state, expr)
@@ -414,23 +505,35 @@ private fun preprocessExpr(state: PreprocessorState, expr: Expression?) {
     }
 }
 
-private fun preprocessCastExpr(state: PreprocessorState, cast: Cast) {
+private fun preprocessCastExpr(
+    state: PreprocessorState,
+    cast: Cast,
+) {
     preprocessExpr(state, cast.expression)
     cast.types.types
         .map { preprocessType(state, it) }
 }
 
-private fun preprocessInstanceCreation(state: PreprocessorState, instanceCreation: InstanceCreation) {
+private fun preprocessInstanceCreation(
+    state: PreprocessorState,
+    instanceCreation: InstanceCreation,
+) {
     preprocessType(state, instanceCreation.ctorType)
     instanceCreation.args?.arguments?.forEach { preprocessExpr(state, it) }
     instanceCreation.classBody?.declarations?.forEach { preprocessDecl(state, it) }
 }
 
-private fun preprocessArrayCreation(state: PreprocessorState, arrayCreation: ArrayCreation) {
-    /* FIXME: arrayCreation.type should be a public */
+private fun preprocessArrayCreation(
+    state: PreprocessorState,
+    arrayCreation: ArrayCreation,
+) {
+    // FIXME: arrayCreation.type should be a public
 }
 
-private fun preprocessType(state: PreprocessorState, type: Type?) {
+private fun preprocessType(
+    state: PreprocessorState,
+    type: Type?,
+) {
     when (type) {
         is TypeName -> {
             type.compoundName.names
@@ -441,8 +544,11 @@ private fun preprocessType(state: PreprocessorState, type: Type?) {
     }
 }
 
-private fun preprocessMethodInvocation(state: PreprocessorState, methodInvocation: MethodInvocation) {
-    methodInvocation.qualifier = methodInvocation.qualifier ?: This(null) /* FIXME: TEMPORARY */
+private fun preprocessMethodInvocation(
+    state: PreprocessorState,
+    methodInvocation: MethodInvocation,
+) {
+    methodInvocation.qualifier = methodInvocation.qualifier ?: This(null) // FIXME: TEMPORARY
 
     when (val methodQualifier = methodInvocation.qualifier) {
         is SimpleReference -> preprocessSimpleReference(state, methodQualifier)
@@ -454,15 +560,22 @@ private fun preprocessMethodInvocation(state: PreprocessorState, methodInvocatio
         }
     }
 
-    methodInvocation.arguments?.arguments
+    methodInvocation.arguments
+        ?.arguments
         ?.map { preprocessExpr(state, it) }
 }
 
-private fun preprocessSimpleReference(state: PreprocessorState, ref: SimpleReference) {
+private fun preprocessSimpleReference(
+    state: PreprocessorState,
+    ref: SimpleReference,
+) {
     preprocessCompoundName(state, ref.compoundName)
 }
 
-private fun preprocessCompoundName(state: PreprocessorState, compoundName: CompoundName) {
+private fun preprocessCompoundName(
+    state: PreprocessorState,
+    compoundName: CompoundName,
+) {
     compoundName.names
         .replaceAll {
             state.classNames[it] ?: it
@@ -470,7 +583,11 @@ private fun preprocessCompoundName(state: PreprocessorState, compoundName: Compo
     tryAddClassForAliases(state, compoundName.names.first())
 }
 
-private fun tryAddClassForAliases(state: PreprocessorState, className: String, forStdLib: Boolean = true) {
+private fun tryAddClassForAliases(
+    state: PreprocessorState,
+    className: String,
+    forStdLib: Boolean = true,
+) {
     if (state.tokensNeededForAlias.contains(className)) {
         if (forStdLib) {
             state.tokensToImportPath[className]?.let { state.stdTokensForCurrentAlias.add(it) }
@@ -486,6 +603,4 @@ private fun tryAddClassForAliases(state: PreprocessorState, className: String, f
  *
  * @param tokenCode the token code of primitive type
  */
-private fun convertPrimTokenCode(tokenCode: TokenCode): String {
-    return "prim__${tokenCode.name.lowercase(Locale.getDefault())}"
-}
+private fun convertPrimTokenCode(tokenCode: TokenCode): String = "prim__${tokenCode.name.lowercase(Locale.getDefault())}"

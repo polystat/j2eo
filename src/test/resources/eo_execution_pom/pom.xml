@@ -35,8 +35,39 @@ SOFTWARE.
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
   </properties>
+  <dependencies>
+    <dependency>
+      <groupId>org.eolang</groupId>
+      <artifactId>eo-runtime</artifactId>
+      <version>${eolang.version}</version>
+    </dependency>
+  </dependencies>
   <build>
     <plugins>
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-dependency-plugin</artifactId>
+        <version>3.6.1</version>
+        <executions>
+          <execution>
+            <phase>process-resources</phase>
+            <goals>
+              <goal>copy</goal>
+            </goals>
+            <configuration>
+              <artifactItems>
+                <artifactItem>
+                  <groupId>org.eolang</groupId>
+                  <artifactId>eo-runtime</artifactId>
+                  <version>${eolang.version}</version>
+                  <outputDirectory>${project.basedir}/target</outputDirectory>
+                  <destFileName>eo-runtime.jar</destFileName>
+                </artifactItem>
+              </artifactItems>
+            </configuration>
+          </execution>
+        </executions>
+      </plugin>
       <plugin>
         <artifactId>maven-compiler-plugin</artifactId>
         <version>3.8.1</version>
@@ -50,7 +81,7 @@ SOFTWARE.
         <artifactId>eo-maven-plugin</artifactId>
         <version>${eolang.version}</version>
         <configuration>
-          <failOnError>false</failOnError>
+          <failOnError>true</failOnError>
         </configuration>
         <executions>
           <execution>
@@ -62,6 +93,7 @@ SOFTWARE.
             <configuration>
               <sourcesDir>${project.basedir}</sourcesDir>
               <targetDir>${project.basedir}/target</targetDir>
+              <hash>0.23.19</hash>
             </configuration>
           </execution>
         </executions>

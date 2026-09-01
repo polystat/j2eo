@@ -4,5 +4,5 @@ public class UnaryPlusAndMinus {
         System.out.println(+a);
         System.out.println(-b);
         System.out.println("passed");
-    }    
+    }
 }

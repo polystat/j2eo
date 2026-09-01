@@ -6,4 +6,3 @@ public class LongDeclarationFieldAccess {
 		System.out.println("passed");
 	}
 }
-

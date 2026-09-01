@@ -6,4 +6,3 @@ public class BooleanDeclarationFieldAccess {
 		System.out.println("passed");
 	}
 }
-

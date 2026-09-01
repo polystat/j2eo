@@ -4,8 +4,8 @@ import tree.Expression.Primary.FieldAccess
 import tree.Expression.Primary.MethodInvocation
 import tree.Expression.SimpleReference
 
-fun isSystemOutCall(methodInvocation: MethodInvocation): Boolean {
-    return methodInvocation.qualifier != null &&
+fun isSystemOutCall(methodInvocation: MethodInvocation): Boolean =
+    methodInvocation.qualifier != null &&
         when (val methodQualifier = methodInvocation.qualifier) {
             is SimpleReference ->
                 methodQualifier.compoundName.names.size == 3 &&
@@ -14,4 +14,3 @@ fun isSystemOutCall(methodInvocation: MethodInvocation): Boolean {
             is FieldAccess -> false
             else -> false
         }
-}

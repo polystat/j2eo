@@ -3,7 +3,7 @@ public class MethodCastOperator {
         float b = (float) method();
         System.out.println(b);
         System.out.println("passed");
-    }    
+    }
 	static int method() {
 		return 9;
 	}

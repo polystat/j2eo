@@ -17,4 +17,3 @@ class ColoredPoint extends Point {
 	int color;
 	ColoredPoint(int x, int y) { super(x, y); color = 0; }
 }
-

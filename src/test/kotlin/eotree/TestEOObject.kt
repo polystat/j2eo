@@ -14,60 +14,62 @@ import org.polystat.j2eo.util.ListUtils.listOf
 class TestEOObject {
     @Test
     fun testGenerateEOZeroIndent() {
-        val eoObject = EOObject(
-            listOf(
-                "free1",
-                "free2"
-            ),
-            Some("vararg"),
-            listOf(
-                EOBndExpr(
-                    EODot(memAtom),
-                    "bnd1"
+        val eoObject =
+            EOObject(
+                listOf(
+                    "free1",
+                    "free2",
                 ),
-                EOBndExpr(
-                    EODot(memAtom),
-                    "bnd2"
-                )
-            ),
-            "comment"
-        )
+                Some("vararg"),
+                listOf(
+                    EOBndExpr(
+                        EODot(MEM_ATOM),
+                        "bnd1",
+                    ),
+                    EOBndExpr(
+                        EODot(MEM_ATOM),
+                        "bnd2",
+                    ),
+                ),
+                "comment",
+            )
         Assertions.assertEquals(
             "# comment\n" +
                 "[free1 free2 vararg...]\n" +
                 "  memory > bnd1\n" +
                 "  memory > bnd2",
-            eoObject.generateEO(0)
+            eoObject.generateEO(0),
         )
     }
 
     @Test
     fun testGenerateEONonZeroIndent() {
-        val eoObject = EOObject(
-            listOf("free1", "free2"),
-            Some("vararg"),
-            listOf(
-                EOBndExpr(
-                    EODot(memAtom),
-                    "bnd1"
+        val eoObject =
+            EOObject(
+                listOf("free1", "free2"),
+                Some("vararg"),
+                listOf(
+                    EOBndExpr(
+                        EODot(MEM_ATOM),
+                        "bnd1",
+                    ),
+                    EOBndExpr(
+                        EODot(MEM_ATOM),
+                        "bnd2",
+                    ),
                 ),
-                EOBndExpr(
-                    EODot(memAtom),
-                    "bnd2"
-                )
-            ),
-            "comment"
-        )
+                "comment",
+            )
         Assertions.assertEquals(
             """  # comment
   [free1 free2 vararg...]
     memory > bnd1
     memory > bnd2""",
-            eoObject.generateEO(1)
+            eoObject.generateEO(1),
         )
     }
 
     companion object {
-        private const val memAtom = "memory"
+        private const val MEM_ATOM = "memory"
     }
 }

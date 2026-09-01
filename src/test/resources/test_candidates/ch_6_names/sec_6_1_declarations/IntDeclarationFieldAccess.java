@@ -6,4 +6,3 @@ public class IntDeclarationFieldAccess {
 		System.out.println("passed");
 	}
 }
-

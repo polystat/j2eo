@@ -10,5 +10,5 @@ public class SimpleIfElse {
 				System.out.println("passed");
 			}
 		}
-	}	
+	}
 }

@@ -9,4 +9,3 @@ public class InterfaceIntDeclarationStaticAccess {
 		System.out.println("passed");
 	}
 }
-

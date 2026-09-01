@@ -6,4 +6,3 @@ public class CharDeclarationFieldAccess {
 		System.out.println("passed");
 	}
 }
-

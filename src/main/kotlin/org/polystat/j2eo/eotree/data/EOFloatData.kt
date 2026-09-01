@@ -6,8 +6,8 @@ package org.polystat.j2eo.eotree.data
  * /[+-]?\d+(\.\d+)?/
 ` *
  */
-class EOFloatData(var f: Float) : EOData() {
-    override fun generateEO(indent: Int): String {
-        return indent(indent) + f.toString()
-    }
+class EOFloatData(
+    var f: Float,
+) : EOData() {
+    override fun generateEO(indent: Int): String = indent(indent) + f.toString()
 }

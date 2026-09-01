@@ -5,5 +5,5 @@ public class EndlessFor {
 			break;
         }
         System.out.println("passed");
-    }    
+    }
 }

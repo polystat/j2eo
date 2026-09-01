@@ -19,4 +19,3 @@ public class ImplementMethodsWithSimilarSignature {
         System.out.println("passed");
     }
 }
-

@@ -6,8 +6,8 @@ package org.polystat.j2eo.eotree.data
  * /'([^']|\\\d+)'/
 ` *
  */
-class EOCharData(var c: Char) : EOData() {
-    override fun generateEO(indent: Int): String {
-        return "'$c'"
-    }
+class EOCharData(
+    var c: Char,
+) : EOData() {
+    override fun generateEO(indent: Int): String = "'$c'"
 }

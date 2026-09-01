@@ -4,5 +4,5 @@ public class PrimitiveTypeSubtyping {
         Object obj = arr;
         System.out.println(obj);
         System.out.println("passed");
-    }    
+    }
 }

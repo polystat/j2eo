@@ -5,5 +5,5 @@ public class AndDefConstBoolAssignMinus {
             System.out.println(k);
         }
         System.out.println("passed");
-    }    
+    }
 }

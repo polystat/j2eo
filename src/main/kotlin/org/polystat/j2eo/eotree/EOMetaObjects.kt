@@ -10,14 +10,14 @@ import arrow.core.Option
 /**
  * Generator of seq > @ blocks.
  */
-fun EOSeqCall(vararg statements: EOCopy): EOBndExpr = EOSeqCall(statements.toList())
+fun eoSeqCall(vararg statements: EOCopy): EOBndExpr = eoSeqCall(statements.toList())
 
 // @todo #165:90m maybe we should expand list type from List<EOCopy> to List<EOExpr>?
+
 /**
  * Generator of seq > @ blocks.
  */
-fun EOSeqCall(statements: List<EOCopy>): EOBndExpr =
-    EOBndExpr(EOCopy("seq", statements), "@")
+fun eoSeqCall(statements: List<EOCopy>): EOBndExpr = EOBndExpr(EOCopy("seq", statements), "@")
 
 /**
  * Generator for EO functions.
@@ -28,7 +28,7 @@ fun EOSeqCall(statements: List<EOCopy>): EOBndExpr =
  * @param bnds bindings that go before seq (declarative bindings)
  * @param statements imperative calls that go inside seq block
  */
-fun EOFunctionDeclaration(
+fun eoFunctionDeclaration(
     name: String,
     args: List<String>,
     vararg: Option<String> = None,
@@ -40,8 +40,8 @@ fun EOFunctionDeclaration(
         EOObject(
             args,
             vararg,
-            bnds + EOSeqCall(statements),
+            bnds + eoSeqCall(statements),
             comment,
         ),
-        name
+        name,
     )

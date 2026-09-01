@@ -6,5 +6,5 @@ public class ComplementDefConstBoolAssignXor {
             System.out.println(k);
         }
         System.out.println("passed");
-    }    
+    }
 }

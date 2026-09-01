@@ -6,5 +6,5 @@ public class ComplementDefConstBoolAssignPlus {
             System.out.println(k);
         }
         System.out.println("passed");
-    }    
+    }
 }

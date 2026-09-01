@@ -3,7 +3,7 @@ public class MethodAdditiveOperators {
         System.out.println(method1() + method2());
         System.out.println(method2() - method1());
         System.out.println("passed");
-    }    
+    }
 	static float method1() {
 		return .225f;
 	}

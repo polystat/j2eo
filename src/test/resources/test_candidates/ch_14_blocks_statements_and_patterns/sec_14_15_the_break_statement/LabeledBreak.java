@@ -12,5 +12,5 @@ public class LabeledBreak {
             }
         }
         System.out.println("passed");
-    }     
+    }
 }

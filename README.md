@@ -23,7 +23,7 @@ to [EOLANG](https://www.eolang.org) programming language.
   of [possible conflicts](https://bugs.debian.org/cgi-bin/bugreport.cgi?bug=980467)
   of the
   latest versions of Maven and Java on some OSs).
-- **ANTLR4 4.9.2** to build parser.
+- **ANTLR4 4.13.2** to build parser.
 
 You can refer to [ACCEPTANCE.md](ACCEPTANCE.md) file for instructions on
 installing these components.
@@ -236,7 +236,7 @@ Translations:
 ## Test Translations
 
 You can find all the `.java` tests translated to `.eo`
-files [here.](src/test/resources/translated_tests)  
+files [here.](src/test/resources/translated_tests)
 To translate `.java` tests into `.eo` files manually, you have to perform the
 following steps:
 
@@ -258,7 +258,7 @@ folder.
 ## Examples of Java to EOLang translation
 
 We use Java language specification document as a foundation for Java feature
-hierarchy.  
+hierarchy.
 Java 16 language
 specification: [see .pdf file](https://docs.oracle.com/javase/specs/jls/se16/jls16.pdf)
 
@@ -419,7 +419,7 @@ values. Supported ones:
 Common translation scheme:
 
 ```java
-expr_1 op expr_2 
+expr_1 op expr_2
 ```
 
 -->
@@ -631,7 +631,7 @@ In this case the translator would convert it to:
 [] > literal_2
   prim__int.constructor_2
     prim__int.new
-    1 
+    1
 ```
 
 ### 6 Names
@@ -828,7 +828,7 @@ unsupported. Example:
 class Outer {
     class Inner {
     }
-} 
+}
 ```
 
 -->
@@ -885,13 +885,13 @@ If no constructor is provided then translator generate default constructor.
 [] > class__<Name of class>
   class__<Parent name> > super              # Inheritance simulation
   super > @
-  [] > new                                  # new is representation 
+  [] > new                                  # new is representation
                                             # of object itself
     class__<Parent name>.new > super
     super > @                               # Inheritance simulation
     "class__<Name of class>" > className    # Name of class is being saved
 
-    1 > address                             # Identify that it 
+    1 > address                             # Identify that it
                                             # isn't a null object
 
     [this] > init                           # Initializes class members
@@ -984,7 +984,7 @@ curly braces. Translator creates new EO object for each block. Example:
     declaration;
     statement;
 }
-``` 
+```
 
 -->
 

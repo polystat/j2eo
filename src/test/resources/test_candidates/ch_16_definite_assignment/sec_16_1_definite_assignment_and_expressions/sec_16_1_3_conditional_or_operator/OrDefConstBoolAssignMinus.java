@@ -5,5 +5,5 @@ public class OrDefConstBoolAssignMinus {
             System.out.println(k);
         }
         System.out.println("passed");
-    }    
+    }
 }

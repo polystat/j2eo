@@ -7,7 +7,7 @@ public class UpperBoundWildcard {
 		Collection<SomeSub1> cs = new ArrayList<SomeSub1>();
 		cs.add(new SomeSub1());
 		cs.add(new SomeSub1());
-		
+
 		Collection<SomeSub2> cs2 = new ArrayList<SomeSub2>();
 		cs2.add(new SomeSub2());
 		cs2.add(new SomeSub2());
@@ -19,7 +19,7 @@ public class UpperBoundWildcard {
 		// print(cs); // Not allowed
 		print(cs2);
 		print(cs3);
-		
+
 		System.out.println("passed");
 	}
 

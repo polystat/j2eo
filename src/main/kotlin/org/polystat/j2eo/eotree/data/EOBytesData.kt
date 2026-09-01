@@ -9,12 +9,14 @@ import java.util.stream.Collectors
  * byte { '-' byte }
 ` *
  */
-class EOBytesData(var bytes: List<EOByte>) : EOData() {
+class EOBytesData(
+    var bytes: List<EOByte>,
+) : EOData() {
     constructor(vararg bytes: EOByte) : this(Arrays.stream<EOByte>(bytes).collect(Collectors.toList<EOByte>())) {}
 
-    override fun generateEO(indent: Int): String {
-        return bytes.stream()
+    override fun generateEO(indent: Int): String =
+        bytes
+            .stream()
             .map { b: EOByte -> b.generateEO(indent) }
             .collect(Collectors.joining("-"))
-    }
 }

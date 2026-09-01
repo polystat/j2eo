@@ -4,5 +4,5 @@ public class DecrementOperator {
         System.out.println(a--);
         System.out.println(--a);
         System.out.println("passed");
-    }    
+    }
 }
