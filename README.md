@@ -1,6 +1,6 @@
 # J2EO: Java to EO Translator
 
-<img src="https://www.yegor256.com/images/books/elegant-objects/cactus.svg" height="100px"  alt="eolang icon"/>
+![eolang icon](https://www.yegor256.com/images/books/elegant-objects/cactus.svg)
 
 [![gradle](https://github.com/polystat/j2eo/actions/workflows/gradle.yml/badge.svg)](https://github.com/polystat/j2eo/actions/workflows/gradle.yml)
 [![codecov](https://codecov.io/gh/polystat/j2eo/branch/master/graph/badge.svg?token=M84CXKO5XB)](https://codecov.io/gh/polystat/j2eo)
@@ -35,21 +35,29 @@ In order to build `j2eo` transpiler from sources, you need to:
 1. Clone the repo. You have two options clone it by using `HTTPS` or `SSH`, just
    choose one of them which is suitable for you:
     1) HTTPS:
+
         ```shell
         git clone https://github.com/polystat/j2eo.git
         ```
+
     2) SSH:
+
         ```shell
         git clone git@github.com:polystat/j2eo.git
         ```
+
 2. Open the project root folder:
+
     ```shell
     cd j2eo
     ```
+
 3. Build the project:
+
     ```shell
     ./build.sh
     ```
+
    See the [troubleshooting section](./README.md#troubleshooting) in case of
    problems
 
@@ -61,8 +69,11 @@ or packages into **.eo** packages. In order to translate `java` sources
 into `eo` sources just run the next command:
 
 ```shell
-java -jar j2eo.jar <source of the .java file or the entire directory with Java source files> -o <output directory>
+java -jar j2eo.jar <input> -o <output directory>
 ```
+
+Here `<input>` is either a single `.java` file or a directory with Java
+sources.
 
 For example the following command will translate `SimpleTest.java` file
 into `output_eo` directory:
@@ -81,8 +92,8 @@ java -jar j2eo.jar src/test/resources/polystat_tests/test1 -o output_eo
 You can also use [yegor256/j2eo](https://hub.docker.com/r/yegor256/j2eo) image
 for [Docker](https://docs.docker.com/get-docker/):
 
-```
-$ docker run -v $(pwd):/eo yegor256/j2eo hello.java --target output
+```shell
+docker run -v $(pwd):/eo yegor256/j2eo hello.java --target output
 ```
 
 This command will translate `hello.java` in the current directory, saving the
@@ -100,7 +111,7 @@ gradle test
 
 J2EO comes with 1000+ bundled tests. There are two testing scenarios:
 
-#### Static check execution:
+#### Static check execution
 
 - Java source code is translated to EO using J2EO project
 - Obtained EO code are compared with saved one. If they match — test is passed.
@@ -113,7 +124,7 @@ This scenario can be executed by the following command:
 
 `./gradlew test --tests "common.TestJ2EOStaticCheck"`
 
-#### Parallel execution:
+#### Parallel execution
 
 - original Java source code of the text is compiled with Java compiler and
   executed. Stdout output is saved.
@@ -145,7 +156,7 @@ It will download zipped `hadoop` and unpack it (in a separate folder)
 into `../j2eo-data` relative to the project's root. Next, it will put the If you
 no more need that folder, run
 
-```sh
+```shell
 rm -rf ../j2eo-data
 ```
 
@@ -173,16 +184,12 @@ Also in recent versions, external Java grammar implemented in ANTLR was added as
 an alternative. It claims to support Java 17, and it does, as for our testing on
 big projects.
 
-<br>
-
 **Q**: Why do we implement EO AST?
 
 **A**: Working with AST instead of raw strings allows utilization of Java
 compiler's type checking to minimize amount of
 bugs in our code. It is also much easier to work with abstraction layer than
 with strings.
-
-<br>
 
 ---
 
@@ -204,11 +211,11 @@ directory)
 
 - `which java`
 - `which javac`
-    - configure alternatives in case of
+  - configure alternatives in case of
       mismatch ([link](https://stackoverflow.com/a/47432365))
 - `echo $JAVA_HOME`
-    - See how to set `$JAVA_HOME` ([link](https://stackoverflow.com/a/18972665))
-    - If it still points to a wrong directory, see where you might have set
+  - See how to set `$JAVA_HOME` ([link](https://stackoverflow.com/a/18972665))
+  - If it still points to a wrong directory, see where you might have set
       it ([link](https://unix.stackexchange.com/a/154957)) and edit that place
 
 ---
@@ -245,7 +252,6 @@ following steps:
 3. Copy this `J2EO-xxx.jar` file into
    the [`./src/test/resources/test_candidates/`](src/test/resources/test_candidates)
    folder
-
 
 Run [`generate_eo_from_tests.py`](src/test/resources/test_candidates/generate_eo_from_tests.py)
 script in that folder
@@ -374,7 +380,7 @@ Others are omitted due to lack of implementation of translation.
 
 ### 4 Types, Values, and Variables
 
-----
+---
 
 #### 4.2 Primitive Types and Values
 
@@ -404,16 +410,16 @@ The Java programming language provides a number of operators that act on
 integral
 values. Supported ones:
 
-* The comparison operators, which result in a value of type boolean:
-    - The numerical comparison operators <, <=, >, and >=
-    - The numerical equality operators == and !=
-* The unary plus and minus operators + and -
-* The multiplicative operators *, /, and %
-* The additive operators + and -
-* The increment operator ++, both prefix and postfix
-* The decrement operator --, both prefix and postfix
-* The signed and unsigned shift operators <<, >>, and >>>
-* The cast operator, which can convert from an integral value to a value
+- The comparison operators, which result in a value of type boolean:
+  - The numerical comparison operators <, <=, >, and >=
+  - The numerical equality operators == and !=
+- The unary plus and minus operators + and -
+- The multiplicative operators *, /, and %
+- The additive operators + and -
+- The increment operator ++, both prefix and postfix
+- The decrement operator --, both prefix and postfix
+- The signed and unsigned shift operators <<, >>, and >>>
+- The cast operator, which can convert from an integral value to a value
   of any specified numeric type
 
 Common translation scheme:
@@ -440,7 +446,7 @@ expr op
 
 -->
 
-```
+```eo
 [] > unary
   expr.translated_op > @
 ```
@@ -469,19 +475,19 @@ one during runtime.
 The Java programming language provides a number of operators that act on
 floating-point values. Supported operators:
 
-* The comparison operators, which result in a value of type boolean:
-    - The numerical comparison operators <, <=, >, and >=
-    - The numerical equality operators == and !=
-* The numerical operators, which result in a value of type float or double:
-    - The unary plus and minus operators + and -
-    - The multiplicative operators *, /, and %
-* The additive operators + and -
-* The increment operator ++, both prefix and postfix
-* The decrement operator --, both prefix and postfix
-* The cast operator, which can convert from a floating-point value to a
+- The comparison operators, which result in a value of type boolean:
+  - The numerical comparison operators <, <=, >, and >=
+  - The numerical equality operators == and !=
+- The numerical operators, which result in a value of type float or double:
+  - The unary plus and minus operators + and -
+  - The multiplicative operators *, /, and %
+- The additive operators + and -
+- The increment operator ++, both prefix and postfix
+- The decrement operator --, both prefix and postfix
+- The cast operator, which can convert from a floating-point value to a
   value of any specified numeric type
 
-Scheme of translation is the same as in [4.2.2](#4.2.2-integer-operations)
+Scheme of translation is the same as in [4.2.2](#422-integer-operations)
 
 #### 4.3 Reference Types and Values
 
@@ -494,15 +500,15 @@ Type variables are omitted due to lack of types in EO.
 
 #### 4.5 Parameterized Types
 
-The same situation as [4.4](#4.4-type-variables)
+The same situation as [4.4](#44-type-variables)
 
 #### 4.6 Type Erasure
 
-The same situation as [4.4](#4.4-type-variables)
+The same situation as [4.4](#44-type-variables)
 
 #### 4.9 Intersection Types
 
-The same situation as [4.4](#4.4-type-variables)
+The same situation as [4.4](#44-type-variables)
 
 #### 4.12.1 Variables of Primitive Type
 
@@ -535,7 +541,7 @@ Ref a;
 
 -->
 
-```
+```text
 cage > a
 ```
 
@@ -553,12 +559,12 @@ is `class_a_instance` in the translator perspective.
 19 specific conversions on primitive types are called the widening primitive
 conversions:
 
-* `byte` to `short`, `int`, `long`, `float` or `double`
-* `short` to `int`, `long`, `float` or `double`
-* `char` to `int`, `long`, `float` or `double`
-* `int` to `long`, `float` or `double`
-* `long` to `float` or `double`
-* `float` to `double` (runtime support is not precise)
+- `byte` to `short`, `int`, `long`, `float` or `double`
+- `short` to `int`, `long`, `float` or `double`
+- `char` to `int`, `long`, `float` or `double`
+- `int` to `long`, `float` or `double`
+- `long` to `float` or `double`
+- `float` to `double` (runtime support is not precise)
 
 All of them has runtime support.
 
@@ -584,21 +590,21 @@ to [4.12.1](#4.12.1-Variables of Primitive Type)
 22 specific conversions on primitive types are called the narrowing primitive
 conversions:
 
-* `short` to `byte` or `char`
-* `char` to `byte` or `short`
-* `int` to `byte`, `short` or `char`
-* `long` to `byte`, `short`, `char` or `int`
-* `float` to `byte`, `short`, `char`, `int` or `long`
-* `double` to `byte`, `short`, `char`, `int`, `long` or `float` (runtime support
+- `short` to `byte` or `char`
+- `char` to `byte` or `short`
+- `int` to `byte`, `short` or `char`
+- `long` to `byte`, `short`, `char` or `int`
+- `float` to `byte`, `short`, `char`, `int` or `long`
+- `double` to `byte`, `short`, `char`, `int`, `long` or `float` (runtime support
   is not precise)
 
 All of them has runtime support.
 
-Translation scheme is the same as [5.1.2](#5.1.2-widening-primitive-conversion)
+Translation scheme is the same as [5.1.2](#512-widening-primitive-conversion)
 
 #### 5.1.5 Widening Reference Conversion / 5.1.6 Narrowing Reference Conversion
 
-The same situation as [4.4](#4.4-type-variables)
+The same situation as [4.4](#44-type-variables)
 
 #### 5.1.11 String Conversion
 
@@ -643,27 +649,27 @@ In this case the translator would convert it to:
 A declaration introduces an entity into a program and includes an identifier.
 Supported declared entity is one of the following:
 
-* An imported class or interface, declared in a single-type-import declaration
+- An imported class or interface, declared in a single-type-import declaration
   or a
   type-import-on-demand declaration
-* An imported static member, declared in a single-static-import declaration or a
+- An imported static member, declared in a single-static-import declaration or a
   static-import-on-demand declaration
-* A class, declared by a normal class declaration
-* A member of a reference type, one of the following:
-    - A member class
-    - A field, one of the following:
-        - A field declared in a class
-        - The field length, which is implicitly a member of every array type
-    - A method, one of the following:
-        - A method (abstract or otherwise) declared in a class
-* A formal parameter, one of the following:
-    - A formal parameter of a method of a class
-    - A formal parameter of a constructor of a class
-* A local variable, one of the following:
-    - A local variable declared by a local variable declaration statement in a
+- A class, declared by a normal class declaration
+- A member of a reference type, one of the following:
+  - A member class
+  - A field, one of the following:
+    - A field declared in a class
+    - The field length, which is implicitly a member of every array type
+  - A method, one of the following:
+    - A method (abstract or otherwise) declared in a class
+- A formal parameter, one of the following:
+  - A formal parameter of a method of a class
+  - A formal parameter of a constructor of a class
+- A local variable, one of the following:
+  - A local variable declared by a local variable declaration statement in a
       block
-* A local class, one of the following:
-    - A local class declared by a normal class declaration
+- A local class, one of the following:
+  - A local class declared by a normal class declaration
 
 Any declaration is translated into EO object or EO copy of specific object.
 Example:
@@ -691,7 +697,7 @@ int a;
 
 -->
 
-```
+```text
 prim__int.constructor_1 > a
   prim__int.new
 ```
@@ -770,7 +776,7 @@ import java.lang.Random;
 
 -->
 
-```
+```eo
 +alias stdlib.lang.class__Random
 ```
 
@@ -879,7 +885,7 @@ public A(){
 
 If no constructor is provided then translator generate default constructor.
 
-#### Class translation structure:
+#### Class translation structure
 
 ```eo
 [] > class__<Name of class>
@@ -905,7 +911,7 @@ If no constructor is provided then translator generate default constructor.
 
 ### 10 Arrays
 
-___
+---
 
 #### 10.2 Array Variables
 
@@ -914,13 +920,13 @@ Examples: `int[]` and `String[]`
 
 #### 10.3 Array Creation
 
-Look at [15.10.1](#15.10.1-array-creation-expressions) section.
+Look at [15.10.1](#15101-array-creation-expressions) section.
 
 #### 10.4 Array Access
 
 For access to array elements translator uses `get` provided by EO `array`
 object. However, as indexes it uses primitive wrappers.
-Example is provided in [15.10.3](#15.10.3-array-access-expressions) section.
+Example is provided in [15.10.3](#15103-array-access-expressions) section.
 
 #### 10.6 Array Initializers
 
@@ -1045,10 +1051,9 @@ a declarations are described separately. In this case statement `println(a)` is
 declared on lines 16-19. By default, any method is considered as class method.
 So access to it is performed via `this` (line 17). Moreover, it is necessary to
 pass `this` as argument during method invocation (line 18). `println(a)` is call
-with single argument `a`. It is a simple reference that was mentioned at line
-
-19. Simple reference is itself a distinct object which translator declared on
-    lines 20-21.
+with single argument `a`. It is a simple reference that was mentioned at
+line 19. Simple reference is itself a distinct object which translator
+declared on lines 20-21.
 
 #### 14.4 Local Variable Declarations
 
@@ -1463,7 +1468,7 @@ It can be simplified, but we keep such translation for generalization.
 
 `++expr` ->
 
-```
+```eo
 [] > statementExpression_1
   simpleReference_1.inc_pre > @    # increment itself
 [] > simpleReference_1
@@ -1474,7 +1479,7 @@ It can be simplified, but we keep such translation for generalization.
 
 `--expr` ->
 
-```
+```eo
 [] > statementExpression_1
   simpleReference_1.dec_pre > @    # decrement itself
 [] > simpleReference_1
@@ -1485,7 +1490,7 @@ It can be simplified, but we keep such translation for generalization.
 
 `+expr` ->
 
-```
+```eo
 [] > statementExpression_1
   simpleReference_1 > @
 [] > simpleReference_1
