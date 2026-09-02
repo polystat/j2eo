@@ -2,7 +2,7 @@
 
 <img src="https://www.yegor256.com/images/books/elegant-objects/cactus.svg" height="100px"  alt="eolang icon"/>
 
-[![Gradle Build](https://github.com/polystat/j2eo/actions/workflows/gradle-build.yml/badge.svg)](https://github.com/polystat/j2eo/actions/workflows/gradle-build.yml)
+[![gradle](https://github.com/polystat/j2eo/actions/workflows/gradle.yml/badge.svg)](https://github.com/polystat/j2eo/actions/workflows/gradle.yml)
 [![codecov](https://codecov.io/gh/polystat/j2eo/branch/master/graph/badge.svg?token=M84CXKO5XB)](https://codecov.io/gh/polystat/j2eo)
 
 [![Hits-of-Code](https://hitsofcode.com/github/polystat/j2eo)](https://hitsofcode.com/view/github/polystat/j2eo)
