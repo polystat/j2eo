@@ -1,4 +1,7 @@
+# SPDX-FileCopyrightText: Copyright (c) 2016-2022 Objectionary.com
+# SPDX-License-Identifier: MIT
 ---
+# yamllint disable rule:line-length
 name: xcop
 'on':
   push:
@@ -7,18 +10,15 @@ name: xcop
   pull_request:
     branches:
       - master
-concurrency:
-  group: xcop-${{ github.ref }}
-  cancel-in-progress: true
 jobs:
   xcop:
     timeout-minutes: 15
     runs-on: ubuntu-24.04
     steps:
       - uses: actions/checkout@v7
-      - uses: g4s8/xcop-action@v1.3
+      - uses: g4s8/xcop-action@master
         with:
+          license: LICENSE.txt
           files: |
-            **/*.xsl
             **/*.xml
-            **/*.xsd
+            **/*.xsl
