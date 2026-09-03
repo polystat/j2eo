@@ -387,11 +387,11 @@ fun ExpressionContext.toExpression(): Expression =
         is PrefixExpressionContext -> UnaryPrefix(prefix.toToken(), expression().toExpression())
         is PostfixExpressionContext -> UnaryPostfix(postfix.toToken(), expression().toExpression())
         is ArrayAccessContext -> ArrayAccess(expression(0).toExpression(), expression(1).toExpression())
-        is CastExpresionContext -> Cast(TypeList(typeType(0).toType()), expression().toExpression())
+        is CastExpressionContext -> Cast(TypeList(typeType(0).toType()), expression().toExpression())
         is InstanceOfExpressionContext -> InstanceOf(expression().toExpression(), typeType()?.toType()) // FIXME
         is InstanceCreationContext -> creator().toExpression()
         is MethodInvocationContext -> methodCall().toExpression(null)
-        is PrimaryExpresionContext -> primary().toExpression()
+        is PrimaryExpressionContext -> primary().toExpression()
         is ReferenceContext -> toExpression()
         else -> SimpleReference(CompoundName("expression_placeholder"))
     }
@@ -543,8 +543,8 @@ fun PrimaryContext.toExpression(): Expression =
     when (this) {
         is ParenthesizedExpressionContext -> Parenthesized(expression().toExpression())
         is LiteralExpressionContext -> literal().toLiteral()
-        is IdentifierExpresionContext -> SimpleReference(CompoundName(identifier().text ?: "var"))
-        is ThisExpresionContext -> This(null)
+        is IdentifierExpressionContext -> SimpleReference(CompoundName(identifier().text ?: "var"))
+        is ThisExpressionContext -> This(null)
         is SuperExpressionContext -> SimpleReference(CompoundName("super"))
         else -> SimpleReference(CompoundName("primary_expression_placeholder_${this.javaClass.simpleName}"))
     }

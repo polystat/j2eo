@@ -1,6 +1,10 @@
+# SPDX-FileCopyrightText: Copyright (c) 2016-2022 Objectionary.com
+# SPDX-License-Identifier: MIT
+# yamllint disable rule:line-length
+---
 name: gradle
 
-on:
+'on':
   push:
     branches:
       - master
@@ -12,11 +16,10 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        os: [
-            ubuntu-latest,
-            macos-latest,
-            windows-latest
-        ]
+        os:
+          - ubuntu-latest
+          - macos-latest
+          - windows-latest
     runs-on: ${{ matrix.os }}
     steps:
       - uses: actions/checkout@v4

@@ -1,5 +1,8 @@
 #!/bin/sh
 
+# SPDX-FileCopyrightText: Copyright (c) 2016-2022 Objectionary.com
+# SPDX-License-Identifier: MIT
+
 # Fail on non-zero exit codes
 set -e
 

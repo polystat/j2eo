@@ -22,7 +22,8 @@
 
 ## Introduction
 
-The Guide describes the common procedure for installing J2EO software package and describes all steps, from downloading to testing and using software.
+The Guide describes the common procedure for installing J2EO software package
+and describes all steps, from downloading to testing and using software.
 
 ---
 
@@ -32,13 +33,17 @@ The J2EO source code is available on [GitHub](https://github.com/polystat/j2eo).
 
 ### Building
 
-J2EO project is implemented in Java/Kotlin and uses Gradle as a build system. You need to install JDK 11 and Gradle to be able to build the project.
+J2EO project is implemented in Java/Kotlin and uses Gradle as a build system.
+You need to install JDK 11 and Gradle to be able to build the project.
 
-J2EO uses ANTLR to build its Java parser, so if you want to rebuild grammar file (which is not necessary to successfully build the project), you need to install it as well.
+J2EO uses ANTLR to build its Java parser, so if you want to rebuild grammar file
+(which is not necessary to successfully build the project), you need to install
+it as well.
 
 #### macOS
 
-To install JDK and Gradle on macOS, install [Homebrew](https://brew.sh) (a package manager) and run:
+To install JDK and Gradle on macOS, install [Homebrew](https://brew.sh) (a
+package manager) and run:
 
 ```shell
 brew install openjdk@11 gradle
@@ -61,7 +66,8 @@ sudo apt update
 sudo apt install -y openjdk-11-jdk-headless
 ```
 
-To install Gradle on Ubuntu, proceed with the [official instructions](https://gradle.org/install/).
+To install Gradle on Ubuntu, proceed with the [official
+instructions](https://gradle.org/install/).
 
 To download ANTLR, use the following command from the repository root:
 
@@ -73,30 +79,36 @@ wget https://www.antlr.org/download/antlr-4.13.2-complete.jar
 
 Windows does not have package manager.
 
-- To install Java on Windows, install Development Kit from the [Oracle webiste](https://www.oracle.com/java/technologies/javase/jdk11-archive-downloads.html).
-- To install Gradle on Windows, proceed with the [official instructions](https://gradle.org/install/).
-- To install ANTLR, download file from [this link](https://www.antlr.org/download/antlr-4.13.2-complete.jar) using your browser and put it in the project root.
-
-
-
+- To install Java on Windows, install Development Kit from the [Oracle
+  website](https://www.oracle.com/java/technologies/javase/jdk11-archive-downloads.html).
+- To install Gradle on Windows, proceed with the [official
+  instructions](https://gradle.org/install/).
+- To install ANTLR, download file from [this
+  link](https://www.antlr.org/download/antlr-4.13.2-complete.jar) using your
+  browser and put it in the project root.
 
 ### Running
 
-To run a prebuilt version of J2EO, you only need JRE (or JDK, which comes with JRE as well). You may refer to above instructions for installation of JDK.
+To run a prebuilt version of J2EO, you only need JRE (or JDK, which comes with
+JRE as well). You may refer to above instructions for installation of JDK.
 
 ---
 
 ## Downloading J2EO
 
-J2EO prebuilt binaries are published on [Maven](https://search.maven.org/artifact/org.polystat/j2eo/0.5.3/jar). You can download .jar file there and use it directly. It packs all dependencies inside.
+J2EO prebuilt binaries are published on
+[Maven](https://search.maven.org/artifact/org.polystat/j2eo/0.5.3/jar). You can
+download .jar file there and use it directly. It packs all dependencies inside.
 
-If you want to build project on your own or work on the project, you can clone the GitHub repository:
+If you want to build project on your own or work on the project, you can clone
+the GitHub repository:
 
 ```shell
 git clone https://github.com/polystat/j2eo.git
 ```
 
-To build the project on UNIX systems, use the following command from the project root:
+To build the project on UNIX systems, use the following command from the project
+root:
 
 ```shell
 ./build.sh
@@ -114,24 +126,31 @@ The built J2EO jar will be located at `build/libs`.
 
 ## Installing J2EO
 
-J2EO produces a standalone JAR file, it does not have to be installed. You can use it from any location using commands provided in the "Working with J2EO" section below.
+J2EO produces a standalone JAR file, it does not have to be installed. You can
+use it from any location using commands provided in the "Working with J2EO"
+section below.
 
 ---
 
 ## Testing and assessing J2EO
 
 J2EO has two major acceptance criteria:
-- crash-less operation on large Java projects (even if translation results are not completely accurate, i.e. some semantic parts are missing)
+
+- crash-less operation on large Java projects (even if translation results are
+  not completely accurate, i.e. some semantic parts are missing)
 - Coverage of features requested by Polystat
 
-To assess the project maturity, we included bash scripts that download some popular open-source Java projects and runs J2EO on them:
+To assess the project maturity, we included bash scripts that download some
+popular open-source Java projects and runs J2EO on them:
 
 | Project | Script             |
 | ------- | ------------------ |
 | Hadoop  | `./test-hadoop.sh` |
 | Kafka   | `./test-kafka.sh`  |
 
-Keep in mind, as the development of J2EO progresses and 1.0 release is not out, performance problems may persist, and translation of large files may take longer than satisfactory.
+Keep in mind, as the development of J2EO progresses and 1.0 release is not out,
+performance problems may persist, and translation of large files may take longer
+than satisfactory.
 
 ### Performing the assessment
 
@@ -144,16 +163,19 @@ cd j2eo
 
 #### Benchmarks
 
-Now you can execute either of the benchmarks provided in the above table. For example:
+Now you can execute either of the benchmarks provided in the above table. For
+example:
 
 ```shell
 ./test-hadoop.sh
 ```
 
-The script will build J2EO from the current checked out source code, download target repo if it is missing, and start J2EO with arguments targeting the downloaded project.
+The script will build J2EO from the current checked out source code, download
+target repo if it is missing, and start J2EO with arguments targeting the
+downloaded project.
 
-All data is stored in the `j2eo-data` directory, including original source code and translation results.
-
+All data is stored in the `j2eo-data` directory, including original source code
+and translation results.
 
 #### Unit tests
 
@@ -167,39 +189,49 @@ Built-in unit tests may be executed using:
 
 J2EO comes with 1000+ bundled tests. There are two testing scenarios:
 
-#### Static check execution:
-- Java source code is translated to EO using J2EO project
-- Obtained EO code are compared with saved one. If they match — test is passed. If not — test is failed.
+#### Static check execution
 
-All saved EO programs are located in [translated_test](src/test/resources/translated_tests) directory.
+- Java source code is translated to EO using J2EO project
+- Obtained EO code are compared with saved one. If they match — test is passed.
+  If not — test is failed.
+
+All saved EO programs are located in
+[translated_test](src/test/resources/translated_tests) directory.
 
 This scenario can be executed by the following command:
 
 `./gradlew test --tests "common.TestJ2EOStaticCheck"`
 
-#### Parallel execution:
-- original Java source code of the text is compiled with Java compiler and executed. Stdout output is saved.
-- Java source code is translated to EO using J2EO project, then compiled with EO compiler and executed. Stdout output is stored.
-- Stdout outputs are compared. If they match — test is passed. If not — test is failed.
+#### Parallel execution
+
+- original Java source code of the text is compiled with Java compiler and
+  executed. Stdout output is saved.
+- Java source code is translated to EO using J2EO project, then compiled with EO
+  compiler and executed. Stdout output is stored.
+- Stdout outputs are compared. If they match — test is passed. If not — test is
+  failed.
 
 This scenario may be executed using `./test_candidates.sh` script.
 
-
 #### OpenJDK test suite
 
-J2EO contains tools for executing OpenJDK test suite. You can execute these tests using the following command:
+J2EO contains tools for executing OpenJDK test suite. You can execute these
+tests using the following command, where `<amount>` is the number of OpenJDK
+tests to process:
 
 ```shell
-./gradlew test --tests "open_jdk.TestJ2EOonOpenJDK" -Pamount=<number of tests from openjdk to process>
+./gradlew test --tests "open_jdk.TestJ2EOonOpenJDK" -Pamount=<amount>
 ```
 
-These tests follow the same execution flow as the bundled test suite. Since J2EO does not cover the language completely, some of these tests fail.
+These tests follow the same execution flow as the bundled test suite. Since J2EO
+does not cover the language completely, some of these tests fail.
 
 ---
 
 ## Working with J2EO
 
-J2EO is indended to be used on Java projects, not individual Java source code files.
+J2EO is intended to be used on Java projects, not individual Java source code
+files.
 
 You can use J2EO by executing the .jar file:
 

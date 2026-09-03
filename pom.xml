@@ -42,10 +42,10 @@ SOFTWARE.
     <junit-jupiter-engine.version>5.9.2</junit-jupiter-engine.version>
     <junit-platform.version>1.9.2</junit-platform.version>
     <kotlin.version>1.8.10</kotlin.version>
-    <kotlin-loggin.version>3.0.5</kotlin-loggin.version>
+    <kotlin-logging.version>3.0.5</kotlin-logging.version>
     <mvn.version>3.11.0</mvn.version>
     <qulice.version>0.35.1</qulice.version>
-    <slf4j.vesion>2.0.7</slf4j.vesion>
+    <slf4j.version>2.0.7</slf4j.version>
   </properties>
   <build>
     <pluginManagement>
@@ -361,13 +361,13 @@ SOFTWARE.
     <dependency>
       <groupId>org.slf4j</groupId>
       <artifactId>slf4j-simple</artifactId>
-      <version>${slf4j.vesion}</version>
+      <version>${slf4j.version}</version>
       <!-- <scope>test</scope> -->
     </dependency>
     <dependency>
       <groupId>io.github.microutils</groupId>
       <artifactId>kotlin-logging-jvm</artifactId>
-      <version>${kotlin-loggin.version}</version>
+      <version>${kotlin-logging.version}</version>
     </dependency>
     <dependency>
       <groupId>org.junit.platform</groupId>

@@ -1,3 +1,5 @@
+# SPDX-FileCopyrightText: Copyright (c) 2016-2022 Objectionary.com
+# SPDX-License-Identifier: MIT
 # inc_pre, dec_pre, inc_post, dec_post, add, sub, mul, div are not precise operators
 +package stdlib.primitives
 +alias stdlib.primitives.prim__num

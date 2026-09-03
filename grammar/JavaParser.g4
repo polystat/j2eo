@@ -1,4 +1,8 @@
 /*
+ * SPDX-FileCopyrightText: Copyright (c) 2016-2022 Objectionary.com
+ * SPDX-License-Identifier: MIT
+ */
+/*
  [The "BSD licence"]
  Copyright (c) 2013 Terence Parr, Sam Harwell
  Copyright (c) 2017 Ivan Kochurkin (upgrade to Java 8)
@@ -573,7 +577,7 @@ methodCall
     ;
 
 expression
-    : primary                                                                                       # primaryExpresion
+    : primary                                                                                       # primaryExpression
     | expression bop='.'
       (
          identifier
@@ -586,7 +590,7 @@ expression
     | expression '[' expression ']'                                                                 # arrayAccess
     | methodCall                                                                                    # methodInvocation
     | NEW creator                                                                                   # instanceCreation
-    | '(' annotation* typeType ('&' typeType)* ')' expression                                       # castExpresion
+    | '(' annotation* typeType ('&' typeType)* ')' expression                                       # castExpression
     | expression postfix=('++' | '--')                                                              # postfixExpression
     | prefix=('+'|'-'|'++'|'--') expression                                                         # prefixExpression
     | prefix=('~'|'!') expression                                                                   # prefixExpression
@@ -640,10 +644,10 @@ lambdaBody
 
 primary
     : '(' expression ')'                                                          # parenthesizedExpression
-    | THIS                                                                        # thisExpresion
+    | THIS                                                                        # thisExpression
     | SUPER                                                                       # superExpression
     | literal                                                                     # literalExpression
-    | identifier                                                                  # identifierExpresion
+    | identifier                                                                  # identifierExpression
     | typeTypeOrVoid '.' CLASS                                                    # classExpression
     | nonWildcardTypeArguments (explicitGenericInvocationSuffix | THIS arguments) # nonWildcardTypeArgumentsExpression
     ;

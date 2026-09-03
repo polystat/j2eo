@@ -83,7 +83,7 @@ java -jar j2eo.jar src/test/resources/SimpleTest.java -o output_eo
 ```
 
 You also can translate an entire folder. For example, the following command
-wil translate `test1` directory into `output_eo` directory:
+will translate `test1` directory into `output_eo` directory:
 
 ```shell
 java -jar j2eo.jar src/test/resources/polystat_tests/test1 -o output_eo
@@ -211,12 +211,13 @@ directory)
 
 - `which java`
 - `which javac`
-  - configure alternatives in case of
-      mismatch ([link](https://stackoverflow.com/a/47432365))
+  - [configure alternatives](https://stackoverflow.com/a/47432365) in case
+      of mismatch
 - `echo $JAVA_HOME`
-  - See how to set `$JAVA_HOME` ([link](https://stackoverflow.com/a/18972665))
-  - If it still points to a wrong directory, see where you might have set
-      it ([link](https://unix.stackexchange.com/a/154957)) and edit that place
+  - See how to [set `$JAVA_HOME`](https://stackoverflow.com/a/18972665)
+  - If it still points to a wrong directory, see
+      [where you might have set it](https://unix.stackexchange.com/a/154957)
+      and edit that place
 
 ---
 
@@ -242,8 +243,8 @@ Translations:
 
 ## Test Translations
 
-You can find all the `.java` tests translated to `.eo`
-files [here.](src/test/resources/translated_tests)
+You can find all the `.java` tests translated to `.eo` files in
+[translated_tests](src/test/resources/translated_tests).
 To translate `.java` tests into `.eo` files manually, you have to perform the
 following steps:
 
@@ -720,11 +721,11 @@ a.b.c;
 -->
 
 ```eo
-[] > fieldAcces_1
-  fieldAcess_2.c > @
-[] > fieldAcces_2
-  simpleRefence_1.b > @
-[] > simpleRefence_1
+[] > fieldAccess_1
+  fieldAccess_2.c > @
+[] > fieldAccess_2
+  simpleReference_1.b > @
+[] > simpleReference_1
   a
 ```
 
@@ -1338,11 +1339,11 @@ It's remaining unchanged.
 
 #### 15.8.5 Parenthesized Expressions
 
-`(expresion)` ->
+`(expression)` ->
 
 ```eo
 [] > parenthesized_1
-  expresion > @
+  expression > @
 ```
 
 It can be simplified, but we keep such translation to maintain more complex

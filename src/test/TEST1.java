@@ -1,3 +1,7 @@
+/*
+ * SPDX-FileCopyrightText: Copyright (c) 2016-2022 Objectionary.com
+ * SPDX-License-Identifier: MIT
+ */
 class Example extends Object
 {
     int m1;

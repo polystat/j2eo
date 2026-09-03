@@ -1,4 +1,8 @@
+# SPDX-FileCopyrightText: Copyright (c) 2016-2022 Objectionary.com
+# SPDX-License-Identifier: MIT
+# yamllint disable rule:line-length
 # Common configuration
+---
 - name: DIKTAT_COMMON
   enabled: true
   configuration:
@@ -37,7 +41,7 @@
 - name: FUNCTION_BOOLEAN_PREFIX
   enabled: true
   configuration:
-    allowedPrefixes: "" # A list of functions that return boolean and are allowed to use. Input is in a form "foo, bar".
+    allowedPrefixes: ""  # A list of functions that return boolean and are allowed to use. Input is in a form "foo, bar".
 # Checks that function/method name is in lowerCamelCase
 - name: FUNCTION_NAME_INCORRECT_CASE
   enabled: true
@@ -290,7 +294,7 @@
   enabled: true
   # all code blocks annotated with  @Nested, @ParameterizedTest (JUnit 5) will
   # be ignored and not checked.
-  ignoreAnnotated: [ Nested, ParameterizedTest, IndentationTest ]
+  ignoreAnnotated: [Nested, ParameterizedTest, IndentationTest]
 # Checks that a single line concatenation of strings is not used
 - name: STRING_CONCATENATION
   enabled: true
@@ -379,7 +383,7 @@
 - name: TYPE_ALIAS
   enabled: true
   configuration:
-    typeReferenceLength: '25' # max length of type reference
+    typeReferenceLength: '25'  # max length of type reference
 # Checks if casting can be omitted
 - name: SMART_CAST_NEEDED
   enabled: true
@@ -409,8 +413,8 @@
 - name: TOO_LONG_FUNCTION
   enabled: false
   configuration:
-    maxFunctionLength: 35 # max length of function
-    isIncludeHeader: false # count function's header
+    maxFunctionLength: 35  # max length of function
+    isIncludeHeader: false  # count function's header
 # Warns if there are nested functions
 - name: AVOID_NESTED_FUNCTIONS
   enabled: true
@@ -421,7 +425,7 @@
 - name: TOO_MANY_PARAMETERS
   enabled: true
   configuration:
-    maxParameterListSize: '5' # max parameters size
+    maxParameterListSize: '5'  # max parameters size
 # Checks that function doesn't have too many nested blocks
 - name: NESTED_BLOCK
   enabled: true
@@ -437,7 +441,7 @@
 - name: TOO_MANY_LINES_IN_LAMBDA
   enabled: false
   configuration:
-    maxLambdaLength: 10 # max length of lambda without parameters
+    maxLambdaLength: 10  # max length of lambda without parameters
 # Checks that using unnecessary, custom label
 - name: CUSTOM_LABEL
   enabled: true
