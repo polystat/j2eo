@@ -236,7 +236,7 @@ files.
 You can use J2EO by executing the .jar file:
 
 ```shell
-java -jar <path to J2EO .jar> -o <output directory> <source directory of a Java projects>
+java -jar <j2eo.jar> -o <output directory> <Java project directory>
 ```
 
 For example, if you have built J2EO 0.4.0 from source code using
