@@ -43,7 +43,7 @@ SOFTWARE.
     <junit-platform.version>1.9.2</junit-platform.version>
     <kotlin.version>1.8.10</kotlin.version>
     <kotlin-logging.version>3.0.5</kotlin-logging.version>
-    <mvn.version>3.11.0</mvn.version>
+    <mvn.version>3.16.0</mvn.version>
     <qulice.version>0.35.1</qulice.version>
     <slf4j.version>2.0.7</slf4j.version>
   </properties>
