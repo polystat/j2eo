@@ -15,13 +15,14 @@
     1 > address
     [this] > init
       seq > @
-        TRUE
-  # main :: String[] -> void
+        *
+          true
   [args] > main
     seq > @
-      statementExpression_1
-      statementExpression_2
-      statementExpression_3
+      *
+        statementExpression_1
+        statementExpression_2
+        statementExpression_3
     [] > statementExpression_1
       class__System.out.println > @
         class__System.out
@@ -56,39 +57,35 @@
       class__String.constructor_2 > @
         class__String.new
         "passed"
-  # method1 :: null -> int
   [] > method1
     seq > @
-      return_1
+      *
+        return_1
     [] > return_1
       literal_2 > @
     [] > literal_2
       prim__int.constructor_2 > @
         prim__int.new
         20
-  # method2 :: null -> int
   [] > method2
     seq > @
-      return_2
+      *
+        return_2
     [] > return_2
       literal_3 > @
     [] > literal_3
       prim__int.constructor_2 > @
         prim__int.new
         66
-  # null :: null -> void
   [this] > constructor
     seq > @
-      initialization
-      statementExpression_4
-      this
+      *
+        initialization
+        statementExpression_4
+        this
     [] > initialization
       this.init > @
         this
     [] > statementExpression_4
       this.super.constructor > @
         this.super
-
-[args...] > main
-  class__MethodAdditive.main > @
-    *

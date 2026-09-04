@@ -43,17 +43,22 @@ fun mapBlock(
         EOBndExpr(
             EOCopy(
                 "seq",
-                (firstStmts?.map { it.first.eoDot() } ?: listOf()) +
-                    if (parsedStatements.isNotEmpty()) {
-                        parsedStatements.keys.map { it.eoDot() }
-                    } else {
-                        if (firstStmts == null && lastStmts == null) {
-                            listOf("TRUE".eoDot())
-                        } else {
-                            listOf()
-                        }
-                    } +
-                    (lastStmts?.map { it.first.eoDot() } ?: listOf()),
+                listOf(
+                    EOCopy(
+                        "*",
+                        (firstStmts?.map { it.first.eoDot() } ?: listOf()) +
+                            if (parsedStatements.isNotEmpty()) {
+                                parsedStatements.keys.map { it.eoDot() }
+                            } else {
+                                if (firstStmts == null && lastStmts == null) {
+                                    listOf("true".eoDot())
+                                } else {
+                                    listOf()
+                                }
+                            } +
+                            (lastStmts?.map { it.first.eoDot() } ?: listOf()),
+                    ),
+                ),
             ),
             "@",
         ),

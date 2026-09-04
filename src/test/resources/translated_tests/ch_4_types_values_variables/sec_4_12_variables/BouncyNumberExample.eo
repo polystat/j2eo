@@ -17,13 +17,14 @@
     1 > address
     [this] > init
       seq > @
-        TRUE
-  # main :: String -> void
+        *
+          true
   [args[]] > main
     seq > @
-      variableDeclaration_1
-      ifThenElse_1
-      statementExpression_1
+      *
+        variableDeclaration_1
+        ifThenElse_1
+        statementExpression_1
     prim__int.constructor_1 > inputNumber
       prim__int.new
     [] > variableDeclaration_1
@@ -100,14 +101,14 @@
       class__String.constructor_2 > @
         class__String.new
         "passed"
-  # isIncreasing :: int -> boolean
   [inputNumber] > isIncreasing
     seq > @
-      variableDeclaration_2
-      variableDeclaration_3
-      variableDeclaration_4
-      statementExpression_4
-      return_1
+      *
+        variableDeclaration_2
+        variableDeclaration_3
+        variableDeclaration_4
+        statementExpression_4
+        return_1
     cage > str
     [] > variableDeclaration_2
       str.write > @
@@ -123,7 +124,7 @@
     prim__char.constructor_1 > digit
       prim__char.new
     [] > variableDeclaration_3
-      TRUE > @
+      true > @
     prim__boolean.constructor_1 > flag
       prim__boolean.new
     [] > variableDeclaration_4
@@ -141,14 +142,14 @@
       simpleReference_8 > @
     [] > simpleReference_8
       flag > @
-  # isDecreasing :: int -> boolean
   [inputNumber] > isDecreasing
     seq > @
-      variableDeclaration_5
-      variableDeclaration_6
-      variableDeclaration_7
-      statementExpression_5
-      return_2
+      *
+        variableDeclaration_5
+        variableDeclaration_6
+        variableDeclaration_7
+        statementExpression_5
+        return_2
     cage > str
     [] > variableDeclaration_5
       str.write > @
@@ -164,7 +165,7 @@
     prim__char.constructor_1 > digit
       prim__char.new
     [] > variableDeclaration_6
-      TRUE > @
+      true > @
     prim__boolean.constructor_1 > flag
       prim__boolean.new
     [] > variableDeclaration_7
@@ -182,12 +183,12 @@
       simpleReference_11 > @
     [] > simpleReference_11
       flag > @
-  # null :: null -> void
   [this] > constructor
     seq > @
-      initialization
-      statementExpression_6
-      this
+      *
+        initialization
+        statementExpression_6
+        this
     [] > initialization
       this.init > @
         this

@@ -17,14 +17,15 @@
     1 > address
     [this] > init
       seq > @
-        TRUE
+        *
+          true
   prim__boolean.constructor_1 > arr
     prim__boolean.new
-  # findPrime :: null -> void
   [] > findPrime
     seq > @
-      statementExpression_1
-      statementExpression_2
+      *
+        statementExpression_1
+        statementExpression_2
     [] > statementExpression_1
       class__Arrays.fill > @
         simpleReference_2
@@ -37,15 +38,15 @@
         TRUE
     [] > statementExpression_2
       for_loop_placeholder > @
-  # isSphenic :: int -> int
   [N] > isSphenic
     seq > @
-      variableDeclaration_1
-      variableDeclaration_2
-      variableDeclaration_3
-      statementExpression_3
-      ifThenElse_1
-      return_1
+      *
+        variableDeclaration_1
+        variableDeclaration_2
+        variableDeclaration_3
+        statementExpression_3
+        ifThenElse_1
+        return_1
     cage > arr1
     [] > variableDeclaration_1
       arr1.write > @
@@ -53,7 +54,7 @@
     [] > initializerSimple_2
       arrayCreation_1 > @
     [] > arrayCreation_1
-      FALSE > @
+      false > @
     prim__int.constructor_1 > count
       prim__int.new
     [] > variableDeclaration_2
@@ -151,21 +152,21 @@
         prim__int.new
         1
     [] > empty_1
-      TRUE > @
+      true > @
     [] > return_1
       literal_9 > @
     [] > literal_9
       prim__int.constructor_2 > @
         prim__int.new
         0
-  # main :: String -> void
   [args[]] > main
     seq > @
-      statementExpression_4
-      variableDeclaration_4
-      variableDeclaration_5
-      ifThenElse_2
-      statementExpression_5
+      *
+        statementExpression_4
+        variableDeclaration_4
+        variableDeclaration_5
+        ifThenElse_2
+        statementExpression_5
     [] > statementExpression_4
       this.findPrime > @
         this
@@ -230,12 +231,12 @@
       class__String.constructor_2 > @
         class__String.new
         "passed"
-  # null :: null -> void
   [this] > constructor
     seq > @
-      initialization
-      statementExpression_8
-      this
+      *
+        initialization
+        statementExpression_8
+        this
     [] > initialization
       this.init > @
         this

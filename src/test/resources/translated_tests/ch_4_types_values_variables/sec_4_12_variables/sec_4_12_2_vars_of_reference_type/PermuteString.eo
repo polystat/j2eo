@@ -16,16 +16,17 @@
     1 > address
     [this] > init
       seq > @
-        TRUE
-  # swapString :: String -> int -> int -> String
+        *
+          true
   [a i j] > swapString
     seq > @
-      variableDeclaration_1
-      variableDeclaration_2
-      statementExpression_1
-      statementExpression_2
-      statementExpression_3
-      return_1
+      *
+        variableDeclaration_1
+        variableDeclaration_2
+        statementExpression_1
+        statementExpression_2
+        statementExpression_3
+        return_1
     cage > b
     [] > variableDeclaration_1
       b.write > @
@@ -38,7 +39,7 @@
     prim__char.constructor_1 > ch
       prim__char.new
     [] > variableDeclaration_2
-      TRUE > @
+      true > @
     [] > statementExpression_1
       simpleReference_2.write > @
         arrayAccess_1
@@ -87,14 +88,14 @@
         simpleReference_13
     [] > simpleReference_13
       b > @
-  # main :: String[] -> void
   [args] > main
     seq > @
-      variableDeclaration_3
-      variableDeclaration_4
-      statementExpression_4
-      statementExpression_5
-      statementExpression_6
+      *
+        variableDeclaration_3
+        variableDeclaration_4
+        statementExpression_4
+        statementExpression_5
+        statementExpression_6
     cage > str
     [] > variableDeclaration_3
       str.write > @
@@ -145,10 +146,10 @@
       class__String.constructor_2 > @
         class__String.new
         "passed"
-  # generatePermutation :: String -> int -> int -> void
   [str start end] > generatePermutation
     seq > @
-      ifThenElse_1
+      *
+        ifThenElse_1
     [] > ifThenElse_1
       binary_1.if > @
         statementExpression_7
@@ -175,22 +176,19 @@
       str > @
     [] > block_1
       seq > @
-        statementExpression_8
+        *
+          statementExpression_8
       [] > statementExpression_8
         for_loop_placeholder > @
-  # null :: null -> void
   [this] > constructor
     seq > @
-      initialization
-      statementExpression_9
-      this
+      *
+        initialization
+        statementExpression_9
+        this
     [] > initialization
       this.init > @
         this
     [] > statementExpression_9
       this.super.constructor > @
         this.super
-
-[args...] > main
-  class__PermuteString.main > @
-    *

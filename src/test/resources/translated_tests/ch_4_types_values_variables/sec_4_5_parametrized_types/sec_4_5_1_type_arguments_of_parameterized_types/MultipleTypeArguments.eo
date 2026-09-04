@@ -16,16 +16,17 @@
     1 > address
     [this] > init
       seq > @
-        TRUE
-  # main :: String[] -> void
+        *
+          true
   [args] > main
     seq > @
-      variableDeclaration_1
-      statementExpression_1
-      statementExpression_2
-      statementExpression_3
-      statementExpression_4
-      statementExpression_5
+      *
+        variableDeclaration_1
+        statementExpression_1
+        statementExpression_2
+        statementExpression_3
+        statementExpression_4
+        statementExpression_5
     cage > some
     [] > variableDeclaration_1
       some.write > @
@@ -77,12 +78,12 @@
       class__String.constructor_2 > @
         class__String.new
         "passed"
-  # null :: null -> void
   [this] > constructor
     seq > @
-      initialization
-      statementExpression_6
-      this
+      *
+        initialization
+        statementExpression_6
+        this
     [] > initialization
       this.init > @
         this
@@ -100,15 +101,16 @@
     1 > address
     [this] > init
       seq > @
-        TRUE
+        *
+          true
     cage > valueX
     cage > valueY
     cage > valueZ
     cage > valueW
-    # printX :: null -> void
     [this] > printX
       seq > @
-        statementExpression_7
+        *
+          statementExpression_7
       [] > statementExpression_7
         class__System.out.println > @
           class__System.out
@@ -116,10 +118,10 @@
       [] > methodInvocation_3
         valueX.toString > @
           valueX
-    # printY :: null -> void
     [this] > printY
       seq > @
-        statementExpression_8
+        *
+          statementExpression_8
       [] > statementExpression_8
         class__System.out.println > @
           class__System.out
@@ -127,10 +129,10 @@
       [] > methodInvocation_4
         valueY.toString > @
           valueY
-    # printZ :: null -> void
     [this] > printZ
       seq > @
-        statementExpression_9
+        *
+          statementExpression_9
       [] > statementExpression_9
         class__System.out.println > @
           class__System.out
@@ -138,10 +140,10 @@
       [] > methodInvocation_5
         valueZ.toString > @
           valueZ
-    # printW :: null -> void
     [this] > printW
       seq > @
-        statementExpression_10
+        *
+          statementExpression_10
       [] > statementExpression_10
         class__System.out.println > @
           class__System.out
@@ -149,15 +151,15 @@
       [] > methodInvocation_6
         valueW.toString > @
           valueW
-  # null :: X -> Y -> Z -> W -> void
   [this x y z w] > constructor
     seq > @
-      initialization
-      statementExpression_11
-      statementExpression_12
-      statementExpression_13
-      statementExpression_14
-      this
+      *
+        initialization
+        statementExpression_11
+        statementExpression_12
+        statementExpression_13
+        statementExpression_14
+        this
     [] > initialization
       this.init > @
         this
@@ -189,7 +191,3 @@
       valueW > @
     [] > simpleReference_16
       w > @
-
-[args...] > main
-  class__MultipleTypeArguments.main > @
-    *

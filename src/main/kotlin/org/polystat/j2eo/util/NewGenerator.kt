@@ -65,11 +65,16 @@ fun generateInit(
                 EOBndExpr(
                     EOCopy(
                         "seq",
-                        if (parsedInits.isNotEmpty()) {
-                            parsedInits.keys.map { it.eoDot() }
-                        } else {
-                            listOf("TRUE".eoDot())
-                        },
+                        listOf(
+                            EOCopy(
+                                "*",
+                                if (parsedInits.isNotEmpty()) {
+                                    parsedInits.keys.map { it.eoDot() }
+                                } else {
+                                    listOf("true".eoDot())
+                                },
+                            ),
+                        ),
                     ),
                     "@",
                 ),

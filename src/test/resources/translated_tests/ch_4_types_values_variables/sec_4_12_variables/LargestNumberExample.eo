@@ -15,42 +15,43 @@
     1 > address
     [this] > init
       seq > @
-        TRUE
-  # main :: String[] -> void
+        *
+          true
   [args] > main
     seq > @
-      variableDeclaration_1
-      variableDeclaration_2
-      variableDeclaration_3
-      variableDeclaration_4
-      variableDeclaration_5
-      statementExpression_1
-      statementExpression_2
-      statementExpression_3
-      statementExpression_4
-      statementExpression_5
-      statementExpression_6
-      statementExpression_7
+      *
+        variableDeclaration_1
+        variableDeclaration_2
+        variableDeclaration_3
+        variableDeclaration_4
+        variableDeclaration_5
+        statementExpression_1
+        statementExpression_2
+        statementExpression_3
+        statementExpression_4
+        statementExpression_5
+        statementExpression_6
+        statementExpression_7
     prim__int.constructor_1 > a
       prim__int.new
     [] > variableDeclaration_1
-      TRUE > @
+      true > @
     prim__int.constructor_1 > b
       prim__int.new
     [] > variableDeclaration_2
-      TRUE > @
+      true > @
     prim__int.constructor_1 > c
       prim__int.new
     [] > variableDeclaration_3
-      TRUE > @
+      true > @
     prim__int.constructor_1 > largest
       prim__int.new
     [] > variableDeclaration_4
-      TRUE > @
+      true > @
     prim__int.constructor_1 > temp
       prim__int.new
     [] > variableDeclaration_5
-      TRUE > @
+      true > @
     [] > statementExpression_1
       simpleReference_1.write > @
         literal_1
@@ -113,19 +114,15 @@
       class__String.constructor_2 > @
         class__String.new
         "passed"
-  # null :: null -> void
   [this] > constructor
     seq > @
-      initialization
-      statementExpression_8
-      this
+      *
+        initialization
+        statementExpression_8
+        this
     [] > initialization
       this.init > @
         this
     [] > statementExpression_8
       this.super.constructor > @
         this.super
-
-[args...] > main
-  class__LargestNumberExample.main > @
-    *

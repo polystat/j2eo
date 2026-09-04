@@ -14,15 +14,16 @@
     1 > address
     [this] > init
       seq > @
-        TRUE
-  # main :: String[] -> void
+        *
+          true
   [args] > main
     seq > @
-      assert_1
-      statementExpression_1
+      *
+        assert_1
+        statementExpression_1
     [] > assert_1
       methodInvocation_1.if > @
-        TRUE
+        true
         []
           literal_1 > msg
     [] > methodInvocation_1
@@ -45,19 +46,15 @@
       class__String.constructor_2 > @
         class__String.new
         "passed"
-  # null :: null -> void
   [this] > constructor
     seq > @
-      initialization
-      statementExpression_2
-      this
+      *
+        initialization
+        statementExpression_2
+        this
     [] > initialization
       this.init > @
         this
     [] > statementExpression_2
       this.super.constructor > @
         this.super
-
-[args...] > main
-  class__AssertWithIdentityRefExpression.main > @
-    *

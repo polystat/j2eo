@@ -15,15 +15,16 @@
     1 > address
     [this] > init
       seq > @
-        TRUE
-  # main :: String[] -> void
+        *
+          true
   [args] > main
     seq > @
-      variableDeclaration_1
-      variableDeclaration_2
-      while_1
-      statementExpression_1
-      statementExpression_2
+      *
+        variableDeclaration_1
+        variableDeclaration_2
+        while_1
+        statementExpression_1
+        statementExpression_2
     prim__int.constructor_1 > number
       prim__int.new
     [] > variableDeclaration_1
@@ -61,9 +62,10 @@
         0
     [] > block_1
       seq > @
-        variableDeclaration_3
-        statementExpression_3
-        statementExpression_4
+        *
+          variableDeclaration_3
+          statementExpression_3
+          statementExpression_4
       prim__int.constructor_1 > remainder
         prim__int.new
       [] > variableDeclaration_3
@@ -134,19 +136,15 @@
       class__String.constructor_2 > @
         class__String.new
         "passed"
-  # null :: null -> void
   [this] > constructor
     seq > @
-      initialization
-      statementExpression_5
-      this
+      *
+        initialization
+        statementExpression_5
+        this
     [] > initialization
       this.init > @
         this
     [] > statementExpression_5
       this.super.constructor > @
         this.super
-
-[args...] > main
-  class__ReverseNumberExample.main > @
-    *

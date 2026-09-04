@@ -15,13 +15,14 @@
     1 > address
     [this] > init
       seq > @
-        TRUE
-  # main :: String[] -> void
+        *
+          true
   [args] > main
     seq > @
-      variableDeclaration_1
-      statementExpression_1
-      statementExpression_2
+      *
+        variableDeclaration_1
+        statementExpression_1
+        statementExpression_2
     cage > c
     [] > variableDeclaration_1
       c.write > @
@@ -52,12 +53,12 @@
       class__String.constructor_2 > @
         class__String.new
         "passed"
-  # null :: null -> void
   [this] > constructor
     seq > @
-      initialization
-      statementExpression_3
-      this
+      *
+        initialization
+        statementExpression_3
+        this
     [] > initialization
       this.init > @
         this
@@ -75,16 +76,17 @@
     1 > address
     [this] > init
       seq > @
-        TRUE
+        *
+          true
     prim__int.constructor_1 > x
       prim__int.new
     prim__int.constructor_1 > y
       prim__int.new
-    # reset :: null -> void
     [this] > reset
       seq > @
-        statementExpression_4
-        statementExpression_5
+        *
+          statementExpression_4
+          statementExpression_5
       [] > statementExpression_4
         fieldAccess_2.write > @
           literal_4
@@ -107,25 +109,25 @@
         prim__int.constructor_2 > @
           prim__int.new
           0
-  # null :: null -> void
   [this] > constructor
     seq > @
-      initialization
-      statementExpression_6
-      this
+      *
+        initialization
+        statementExpression_6
+        this
     [] > initialization
       this.init > @
         this
     [] > statementExpression_6
       this.reset > @
         this
-  # null :: int -> int -> void
   [this x y] > constructor
     seq > @
-      initialization
-      statementExpression_7
-      statementExpression_8
-      this
+      *
+        initialization
+        statementExpression_7
+        statementExpression_8
+        this
     [] > initialization
       this.init > @
         this
@@ -158,16 +160,17 @@
     1 > address
     [this] > init
       seq > @
-        TRUE
+        *
+          true
     prim__int.constructor_1 > color
       prim__int.new
-  # null :: int -> int -> void
   [this x y] > constructor
     seq > @
-      initialization
-      statementExpression_9
-      statementExpression_10
-      this
+      *
+        initialization
+        statementExpression_9
+        statementExpression_10
+        this
     [] > initialization
       this.init > @
         this
@@ -189,7 +192,3 @@
       prim__int.constructor_2 > @
         prim__int.new
         0
-
-[args...] > main
-  class__SimpleClassMembers.main > @
-    *

@@ -15,17 +15,18 @@
     1 > address
     [this] > init
       seq > @
-        TRUE
+        *
+          true
   prim__int.constructor_1 > x
     prim__int.new
-  # main :: String[] -> void
   [args] > main
     seq > @
-      statementExpression_1
-      variableDeclaration_1
-      variableDeclaration_2
-      statementExpression_2
-      statementExpression_3
+      *
+        statementExpression_1
+        variableDeclaration_1
+        variableDeclaration_2
+        statementExpression_2
+        statementExpression_3
     [] > statementExpression_1
       class__System.out.print > @
         class__System.out
@@ -75,19 +76,15 @@
       class__String.constructor_2 > @
         class__String.new
         "passed"
-  # null :: null -> void
   [this] > constructor
     seq > @
-      initialization
-      statementExpression_4
-      this
+      *
+        initialization
+        statementExpression_4
+        this
     [] > initialization
       this.init > @
         this
     [] > statementExpression_4
       this.super.constructor > @
         this.super
-
-[args...] > main
-  class__ScopeOfLocalVarDeclr1.main > @
-    *

@@ -15,21 +15,22 @@
     1 > address
     [this] > init
       seq > @
-        TRUE
-  # numberToWords :: char -> void
+        *
+          true
   [num[]] > numberToWords
     seq > @
-      variableDeclaration_1
-      ifThenElse_1
-      ifThenElse_2
-      variableDeclaration_2
-      variableDeclaration_3
-      variableDeclaration_4
-      variableDeclaration_5
-      statementExpression_1
-      ifThenElse_3
-      variableDeclaration_6
-      while_1
+      *
+        variableDeclaration_1
+        ifThenElse_1
+        ifThenElse_2
+        variableDeclaration_2
+        variableDeclaration_3
+        variableDeclaration_4
+        variableDeclaration_5
+        statementExpression_1
+        ifThenElse_3
+        variableDeclaration_6
+        while_1
     prim__int.constructor_1 > len
       prim__int.new
     [] > variableDeclaration_1
@@ -56,8 +57,9 @@
         0
     [] > block_1
       seq > @
-        statementExpression_2
-        return_1
+        *
+          statementExpression_2
+          return_1
       [] > statementExpression_2
         class__System.out.println > @
           class__System.out
@@ -67,7 +69,7 @@
           class__String.new
           "The string is empty."
     [] > empty_1
-      TRUE > @
+      true > @
     [] > ifThenElse_2
       binary_2.if > @
         block_2
@@ -83,8 +85,9 @@
         4
     [] > block_2
       seq > @
-        statementExpression_3
-        return_2
+        *
+          statementExpression_3
+          return_2
       [] > statementExpression_3
         class__System.out.println > @
           class__System.out
@@ -94,7 +97,7 @@
           class__String.new
           "\n The given number has more than 4 digits."
     [] > empty_2
-      TRUE > @
+      true > @
     cage > onedigit
     [] > variableDeclaration_2
       onedigit.write > @
@@ -102,7 +105,7 @@
     [] > initializerSimple_2
       arrayCreation_1 > @
     [] > arrayCreation_1
-      FALSE > @
+      false > @
     cage > twodigits
     [] > variableDeclaration_3
       twodigits.write > @
@@ -110,7 +113,7 @@
     [] > initializerSimple_3
       arrayCreation_2 > @
     [] > arrayCreation_2
-      FALSE > @
+      false > @
     cage > multipleoftens
     [] > variableDeclaration_4
       multipleoftens.write > @
@@ -118,7 +121,7 @@
     [] > initializerSimple_4
       arrayCreation_3 > @
     [] > arrayCreation_3
-      FALSE > @
+      false > @
     cage > poweroftens
     [] > variableDeclaration_5
       poweroftens.write > @
@@ -126,7 +129,7 @@
     [] > initializerSimple_5
       arrayCreation_4 > @
     [] > arrayCreation_4
-      FALSE > @
+      false > @
     [] > statementExpression_1
       class__System.out.print > @
         class__System.out
@@ -158,8 +161,9 @@
         1
     [] > block_3
       seq > @
-        statementExpression_4
-        return_3
+        *
+          statementExpression_4
+          return_3
       [] > statementExpression_4
         class__System.out.println > @
           class__System.out
@@ -186,7 +190,7 @@
           prim__int.new
           123456
     [] > empty_3
-      TRUE > @
+      true > @
     prim__int.constructor_1 > x
       prim__int.new
     [] > variableDeclaration_6
@@ -213,8 +217,9 @@
       num > @
     [] > block_4
       seq > @
-        ifThenElse_4
-        statementExpression_5
+        *
+          ifThenElse_4
+          statementExpression_5
       [] > ifThenElse_4
         binary_7.if > @
           block_5
@@ -230,8 +235,9 @@
           3
       [] > block_5
         seq > @
-          ifThenElse_5
-          statementExpression_6
+          *
+            ifThenElse_5
+            statementExpression_6
         [] > ifThenElse_5
           binary_8.if > @
             block_7
@@ -259,8 +265,9 @@
             0
         [] > block_7
           seq > @
-            statementExpression_7
-            statementExpression_8
+            *
+              statementExpression_7
+              statementExpression_8
           [] > statementExpression_7
             class__System.out.print > @
               class__System.out
@@ -317,14 +324,15 @@
               class__String.new
               " "
         [] > empty_6
-          TRUE > @
+          true > @
         [] > statementExpression_6
           simpleReference_19.dec_pre > @
         [] > simpleReference_19
           len > @
       [] > block_6
         seq > @
-          ifThenElse_6
+          *
+            ifThenElse_6
         [] > ifThenElse_6
           binary_14.if > @
             block_8
@@ -352,9 +360,10 @@
             1
         [] > block_8
           seq > @
-            variableDeclaration_7
-            statementExpression_9
-            return_4
+            *
+              variableDeclaration_7
+              statementExpression_9
+              return_4
           prim__int.constructor_1 > sum
             prim__int.new
           [] > variableDeclaration_7
@@ -469,8 +478,9 @@
             0
         [] > block_9
           seq > @
-            statementExpression_10
-            return_5
+            *
+              statementExpression_10
+              return_5
           [] > statementExpression_10
             class__System.out.println > @
               class__System.out
@@ -481,10 +491,11 @@
               "Twenty"
         [] > block_10
           seq > @
-            variableDeclaration_8
-            ifThenElse_8
-            statementExpression_11
-            ifThenElse_9
+            *
+              variableDeclaration_8
+              ifThenElse_8
+              statementExpression_11
+              ifThenElse_9
           prim__int.constructor_1 > i
             prim__int.new
           [] > variableDeclaration_8
@@ -600,24 +611,24 @@
               prim__int.new
               123456
           [] > empty_10
-            TRUE > @
+            true > @
       [] > statementExpression_5
         simpleReference_43.inc_pre > @
       [] > simpleReference_43
         x > @
-  # main :: String -> void
   [args[]] > main
     seq > @
-      statementExpression_15
-      statementExpression_16
-      statementExpression_17
-      statementExpression_18
-      statementExpression_19
-      statementExpression_20
-      statementExpression_21
-      statementExpression_22
-      statementExpression_23
-      statementExpression_24
+      *
+        statementExpression_15
+        statementExpression_16
+        statementExpression_17
+        statementExpression_18
+        statementExpression_19
+        statementExpression_20
+        statementExpression_21
+        statementExpression_22
+        statementExpression_23
+        statementExpression_24
     [] > statementExpression_15
       this.numberToWords > @
         this
@@ -689,12 +700,12 @@
       class__String.constructor_2 > @
         class__String.new
         "passed"
-  # null :: null -> void
   [this] > constructor
     seq > @
-      initialization
-      statementExpression_25
-      this
+      *
+        initialization
+        statementExpression_25
+        this
     [] > initialization
       this.init > @
         this

@@ -17,12 +17,13 @@
     1 > address
     [this] > init
       seq > @
-        TRUE
-  # checkPerfectSquare :: double -> boolean
+        *
+          true
   [number] > checkPerfectSquare
     seq > @
-      variableDeclaration_1
-      return_1
+      *
+        variableDeclaration_1
+        return_1
     prim__double.constructor_1 > sqrt
       prim__double.new
     [] > variableDeclaration_1
@@ -60,13 +61,13 @@
       prim__int.constructor_2 > @
         prim__int.new
         0
-  # main :: String[] -> void
   [args] > main
     seq > @
-      variableDeclaration_2
-      ifThenElse_1
-      statementExpression_1
-      statementExpression_2
+      *
+        variableDeclaration_2
+        ifThenElse_1
+        statementExpression_1
+        statementExpression_2
     prim__double.constructor_1 > number
       prim__double.new
     [] > variableDeclaration_2
@@ -115,19 +116,15 @@
       class__String.constructor_2 > @
         class__String.new
         "passed"
-  # null :: null -> void
   [this] > constructor
     seq > @
-      initialization
-      statementExpression_5
-      this
+      *
+        initialization
+        statementExpression_5
+        this
     [] > initialization
       this.init > @
         this
     [] > statementExpression_5
       this.super.constructor > @
         this.super
-
-[args...] > main
-  class__CheckPerfectSquareExample.main > @
-    *

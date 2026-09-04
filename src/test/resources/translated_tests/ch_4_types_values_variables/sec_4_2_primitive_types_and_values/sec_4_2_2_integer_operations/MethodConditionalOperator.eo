@@ -16,13 +16,14 @@
     1 > address
     [this] > init
       seq > @
-        TRUE
-  # main :: String[] -> void
+        *
+          true
   [args] > main
     seq > @
-      variableDeclaration_1
-      statementExpression_1
-      statementExpression_2
+      *
+        variableDeclaration_1
+        statementExpression_1
+        statementExpression_2
     prim__int.constructor_1 > b
       prim__int.new
     [] > variableDeclaration_1
@@ -46,49 +47,45 @@
       class__String.constructor_2 > @
         class__String.new
         "passed"
-  # methodBool :: null -> boolean
   [] > methodBool
     seq > @
-      return_1
+      *
+        return_1
     [] > return_1
       literal_2 > @
     [] > literal_2
       prim__boolean.constructor_2 > @
         prim__boolean.new
         FALSE
-  # method1 :: null -> int
   [] > method1
     seq > @
-      return_2
+      *
+        return_2
     [] > return_2
       literal_3 > @
     [] > literal_3
       prim__int.constructor_2 > @
         prim__int.new
         12
-  # method2 :: null -> int
   [] > method2
     seq > @
-      return_3
+      *
+        return_3
     [] > return_3
       literal_4 > @
     [] > literal_4
       prim__int.constructor_2 > @
         prim__int.new
         25
-  # null :: null -> void
   [this] > constructor
     seq > @
-      initialization
-      statementExpression_3
-      this
+      *
+        initialization
+        statementExpression_3
+        this
     [] > initialization
       this.init > @
         this
     [] > statementExpression_3
       this.super.constructor > @
         this.super
-
-[args...] > main
-  class__MethodConditionalOperator.main > @
-    *

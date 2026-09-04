@@ -16,19 +16,20 @@
     1 > address
     [this] > init
       seq > @
-        TRUE
-  # main :: String[] -> void
+        *
+          true
   [args] > main
     seq > @
-      variableDeclaration_1
-      statementExpression_1
-      statementExpression_2
-      variableDeclaration_2
-      statementExpression_3
-      statementExpression_4
-      statementExpression_5
-      statementExpression_6
-      statementExpression_7
+      *
+        variableDeclaration_1
+        statementExpression_1
+        statementExpression_2
+        variableDeclaration_2
+        statementExpression_3
+        statementExpression_4
+        statementExpression_5
+        statementExpression_6
+        statementExpression_7
     cage > cs
     [] > variableDeclaration_1
       cs.write > @
@@ -95,18 +96,18 @@
       class__String.constructor_2 > @
         class__String.new
         "passed"
-  # print :: Collection -> void
   [list] > print
     seq > @
-      statementExpression_8
+      *
+        statementExpression_8
     [] > statementExpression_8
       for_loop_placeholder > @
-  # null :: null -> void
   [this] > constructor
     seq > @
-      initialization
-      statementExpression_9
-      this
+      *
+        initialization
+        statementExpression_9
+        this
     [] > initialization
       this.init > @
         this
@@ -124,23 +125,24 @@
     1 > address
     [this] > init
       seq > @
-        TRUE
-    # print :: null -> String
+        *
+          true
     [this] > print
       seq > @
-        return_1
+        *
+          return_1
       [] > return_1
         literal_2 > @
       [] > literal_2
         class__String.constructor_2 > @
           class__String.new
           "someBase"
-  # null :: null -> void
   [this] > constructor
     seq > @
-      initialization
-      statementExpression_10
-      this
+      *
+        initialization
+        statementExpression_10
+        this
     [] > initialization
       this.init > @
         this
@@ -158,23 +160,24 @@
     1 > address
     [this] > init
       seq > @
-        TRUE
-    # print :: null -> String
+        *
+          true
     [this] > print
       seq > @
-        return_2
+        *
+          return_2
       [] > return_2
         literal_3 > @
       [] > literal_3
         class__String.constructor_2 > @
           class__String.new
           "someSub1"
-  # null :: null -> void
   [this] > constructor
     seq > @
-      initialization
-      statementExpression_11
-      this
+      *
+        initialization
+        statementExpression_11
+        this
     [] > initialization
       this.init > @
         this
@@ -192,30 +195,27 @@
     1 > address
     [this] > init
       seq > @
-        TRUE
-    # print :: null -> String
+        *
+          true
     [this] > print
       seq > @
-        return_3
+        *
+          return_3
       [] > return_3
         literal_4 > @
       [] > literal_4
         class__String.constructor_2 > @
           class__String.new
           "someSub2"
-  # null :: null -> void
   [this] > constructor
     seq > @
-      initialization
-      statementExpression_12
-      this
+      *
+        initialization
+        statementExpression_12
+        this
     [] > initialization
       this.init > @
         this
     [] > statementExpression_12
       this.super.constructor > @
         this.super
-
-[args...] > main
-  class__UpperBoundWildcard.main > @
-    *

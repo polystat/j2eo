@@ -15,16 +15,17 @@
     1 > address
     [this] > init
       seq > @
-        TRUE
-  # main :: String[] -> void
+        *
+          true
   [args] > main
     seq > @
-      variableDeclaration_1
-      statementExpression_1
-      statementExpression_2
-      statementExpression_3
-      statementExpression_4
-      statementExpression_5
+      *
+        variableDeclaration_1
+        statementExpression_1
+        statementExpression_2
+        statementExpression_3
+        statementExpression_4
+        statementExpression_5
     cage > p
     [] > variableDeclaration_1
       p.write > @
@@ -108,12 +109,12 @@
       class__String.constructor_2 > @
         class__String.new
         "passed"
-  # null :: null -> void
   [this] > constructor
     seq > @
-      initialization
-      statementExpression_6
-      this
+      *
+        initialization
+        statementExpression_6
+        this
     [] > initialization
       this.init > @
         this
@@ -131,8 +132,9 @@
     1 > address
     [this] > init
       seq > @
-        variableDeclaration_2
-        variableDeclaration_3
+        *
+          variableDeclaration_2
+          variableDeclaration_3
       [] > variableDeclaration_2
         this.x.write > @
           initializerSimple_2
@@ -155,11 +157,11 @@
       prim__int.new
     prim__int.constructor_1 > y
       prim__int.new
-    # move :: int -> int -> void
     [this dx dy] > move
       seq > @
-        statementExpression_7
-        statementExpression_8
+        *
+          statementExpression_7
+          statementExpression_8
       [] > statementExpression_7
         simpleReference_6.add_equal > @
           simpleReference_7
@@ -174,12 +176,12 @@
         y > @
       [] > simpleReference_9
         dy > @
-  # null :: null -> void
   [this] > constructor
     seq > @
-      initialization
-      statementExpression_9
-      this
+      *
+        initialization
+        statementExpression_9
+        this
     [] > initialization
       this.init > @
         this
@@ -197,15 +199,16 @@
     1 > address
     [this] > init
       seq > @
-        TRUE
+        *
+          true
     prim__int.constructor_1 > xLimit
       prim__int.new
     prim__int.constructor_1 > yLimit
       prim__int.new
-    # move :: int -> int -> void
     [this dx dy] > move
       seq > @
-        statementExpression_10
+        *
+          statementExpression_10
       [] > statementExpression_10
         super.move > @
           super
@@ -229,27 +232,23 @@
         dy > @
       [] > simpleReference_14
         yLimit > @
-  # limit :: int -> int -> int
   [d limit] > limit
     seq > @
-      return_1
+      *
+        return_1
     [] > return_1
       simpleReference_15 > @
     [] > simpleReference_15
       expression_placeholder > @
-  # null :: null -> void
   [this] > constructor
     seq > @
-      initialization
-      statementExpression_11
-      this
+      *
+        initialization
+        statementExpression_11
+        this
     [] > initialization
       this.init > @
         this
     [] > statementExpression_11
       this.super.constructor > @
         this.super
-
-[args...] > main
-  class__SimpleOverriding.main > @
-    *

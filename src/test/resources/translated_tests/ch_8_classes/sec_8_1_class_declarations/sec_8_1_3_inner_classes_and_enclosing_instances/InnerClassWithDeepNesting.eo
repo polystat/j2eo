@@ -15,15 +15,16 @@
     1 > address
     [this] > init
       seq > @
-        TRUE
+        *
+          true
     prim__boolean.constructor_1 > toBe
       prim__boolean.new
-  # null :: boolean -> void
   [this b] > constructor
     seq > @
-      initialization
-      statementExpression_1
-      this
+      *
+        initialization
+        statementExpression_1
+        this
     [] > initialization
       this.init > @
         this
@@ -44,7 +45,8 @@
       1 > address
       [this] > init
         seq > @
-          TRUE
+          *
+            true
       prim__boolean.constructor_1 > theQuestion
         prim__boolean.new
     [] > class__DeeplyNested
@@ -57,13 +59,14 @@
         1 > address
         [this] > init
           seq > @
-            TRUE
-      # null :: null -> void
+            *
+              true
       [this] > constructor
         seq > @
-          initialization
-          statementExpression_2
-          this
+          *
+            initialization
+            statementExpression_2
+            this
         [] > initialization
           this.init > @
             this
@@ -81,12 +84,12 @@
           simpleReference_5.unary_placeholder > @
         [] > simpleReference_5
           toBe > @
-    # null :: null -> void
     [this] > constructor
       seq > @
-        initialization
-        statementExpression_3
-        this
+        *
+          initialization
+          statementExpression_3
+          this
       [] > initialization
         this.init > @
           this
@@ -104,16 +107,17 @@
     1 > address
     [this] > init
       seq > @
-        TRUE
-  # main :: String[] -> void
+        *
+          true
   [args] > main
     seq > @
-      variableDeclaration_1
-      variableDeclaration_2
-      statementExpression_4
-      variableDeclaration_3
-      statementExpression_5
-      statementExpression_6
+      *
+        variableDeclaration_1
+        variableDeclaration_2
+        statementExpression_4
+        variableDeclaration_3
+        statementExpression_5
+        statementExpression_6
     cage > wdn
     [] > variableDeclaration_1
       wdn.write > @
@@ -171,19 +175,15 @@
       class__String.constructor_2 > @
         class__String.new
         "passed"
-  # null :: null -> void
   [this] > constructor
     seq > @
-      initialization
-      statementExpression_7
-      this
+      *
+        initialization
+        statementExpression_7
+        this
     [] > initialization
       this.init > @
         this
     [] > statementExpression_7
       this.super.constructor > @
         this.super
-
-[args...] > main
-  class__InnerClassWithDeepNesting.main > @
-    *

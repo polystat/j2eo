@@ -15,16 +15,17 @@
     1 > address
     [this] > init
       seq > @
-        TRUE
-  # main :: String[] -> void
+        *
+          true
   [args] > main
     seq > @
-      variableDeclaration_1
-      variableDeclaration_2
-      variableDeclaration_3
-      variableDeclaration_4
-      do_1
-      statementExpression_1
+      *
+        variableDeclaration_1
+        variableDeclaration_2
+        variableDeclaration_3
+        variableDeclaration_4
+        do_1
+        statementExpression_1
     cage > printer
     [] > variableDeclaration_1
       printer.write > @
@@ -40,7 +41,7 @@
     [] > initializerSimple_2
       arrayCreation_1 > @
     [] > arrayCreation_1
-      FALSE > @
+      false > @
     prim__int.constructor_1 > index
       prim__int.new
     [] > variableDeclaration_3
@@ -54,7 +55,7 @@
         0
     cage > obj
     [] > variableDeclaration_4
-      TRUE > @
+      true > @
     [] > do_1
       binary_1.do > @
         [do_i]
@@ -72,8 +73,9 @@
       i > @
     [] > block_1
       seq > @
-        statementExpression_2
-        statementExpression_3
+        *
+          statementExpression_2
+          statementExpression_3
       [] > statementExpression_2
         simpleReference_4.inc_post > @
       [] > simpleReference_4
@@ -96,19 +98,15 @@
         simpleReference_8
     [] > simpleReference_8
       obj > @
-  # null :: null -> void
   [this] > constructor
     seq > @
-      initialization
-      statementExpression_4
-      this
+      *
+        initialization
+        statementExpression_4
+        this
     [] > initialization
       this.init > @
         this
     [] > statementExpression_4
       this.super.constructor > @
         this.super
-
-[args...] > main
-  class__DoPatternScope.main > @
-    *

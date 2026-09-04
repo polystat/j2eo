@@ -14,11 +14,12 @@
     1 > address
     [this] > init
       seq > @
-        TRUE
-  # main :: String[] -> void
+        *
+          true
   [args] > main
     seq > @
-      statementExpression_1
+      *
+        statementExpression_1
     [] > statementExpression_1
       class__System.out.println > @
         class__System.out
@@ -27,19 +28,15 @@
       class__String.constructor_2 > @
         class__String.new
         "passed"
-  # null :: null -> void
   [this] > constructor
     seq > @
-      initialization
-      statementExpression_2
-      this
+      *
+        initialization
+        statementExpression_2
+        this
     [] > initialization
       this.init > @
         this
     [] > statementExpression_2
       this.super.constructor > @
         this.super
-
-[args...] > main
-  class__SimpleCompilationUnit.main > @
-    *

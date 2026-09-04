@@ -14,14 +14,15 @@
     1 > address
     [this] > init
       seq > @
-        TRUE
-  # main :: String[] -> void
+        *
+          true
   [args] > main
     seq > @
-      variableDeclaration_1
-      statementExpression_1
-      statementExpression_2
-      statementExpression_3
+      *
+        variableDeclaration_1
+        statementExpression_1
+        statementExpression_2
+        statementExpression_3
     cage > p
     [] > variableDeclaration_1
       p.write > @
@@ -63,23 +64,19 @@
       class__String.constructor_2 > @
         class__String.new
         "passed"
-  # Person :: String -> String -> record
   [name address] > Person
     seq > @
-      TRUE
-  # null :: null -> void
+      *
+        true
   [this] > constructor
     seq > @
-      initialization
-      statementExpression_4
-      this
+      *
+        initialization
+        statementExpression_4
+        this
     [] > initialization
       this.init > @
         this
     [] > statementExpression_4
       this.super.constructor > @
         this.super
-
-[args...] > main
-  class__PrivateRecordClass.main > @
-    *

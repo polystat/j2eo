@@ -16,21 +16,22 @@
     1 > address
     [this] > init
       seq > @
-        TRUE
-  # main :: String[] -> void
+        *
+          true
   [args] > main
     seq > @
-      variableDeclaration_1
-      statementExpression_1
-      variableDeclaration_2
-      variableDeclaration_3
-      variableDeclaration_4
-      variableDeclaration_5
-      variableDeclaration_6
-      variableDeclaration_7
-      variableDeclaration_8
-      variableDeclaration_9
-      statementExpression_2
+      *
+        variableDeclaration_1
+        statementExpression_1
+        variableDeclaration_2
+        variableDeclaration_3
+        variableDeclaration_4
+        variableDeclaration_5
+        variableDeclaration_6
+        variableDeclaration_7
+        variableDeclaration_8
+        variableDeclaration_9
+        statementExpression_2
     cage > p
     [] > variableDeclaration_1
       p.write > @
@@ -63,7 +64,7 @@
     [] > initializerSimple_3
       arrayCreation_1 > @
     [] > arrayCreation_1
-      FALSE > @
+      false > @
     cage > o2
     [] > variableDeclaration_4
       o2.write > @
@@ -96,7 +97,7 @@
     [] > initializerSimple_7
       arrayCreation_2 > @
     [] > arrayCreation_2
-      FALSE > @
+      false > @
     cage > p3da
     [] > variableDeclaration_8
       p3da.write > @
@@ -104,7 +105,7 @@
     [] > initializerSimple_8
       arrayCreation_3 > @
     [] > arrayCreation_3
-      FALSE > @
+      false > @
     cage > pa
     [] > variableDeclaration_9
       pa.write > @
@@ -121,12 +122,12 @@
       class__String.constructor_2 > @
         class__String.new
         "passed"
-  # null :: null -> void
   [this] > constructor
     seq > @
-      initialization
-      statementExpression_3
-      this
+      *
+        initialization
+        statementExpression_3
+        this
     [] > initialization
       this.init > @
         this
@@ -144,17 +145,18 @@
     1 > address
     [this] > init
       seq > @
-        TRUE
+        *
+          true
     prim__int.constructor_1 > x
       prim__int.new
     prim__int.constructor_1 > y
       prim__int.new
-  # null :: null -> void
   [this] > constructor
     seq > @
-      initialization
-      statementExpression_4
-      this
+      *
+        initialization
+        statementExpression_4
+        this
     [] > initialization
       this.init > @
         this
@@ -172,15 +174,16 @@
     1 > address
     [this] > init
       seq > @
-        TRUE
+        *
+          true
     prim__int.constructor_1 > z
       prim__int.new
-  # null :: null -> void
   [this] > constructor
     seq > @
-      initialization
-      statementExpression_5
-      this
+      *
+        initialization
+        statementExpression_5
+        this
     [] > initialization
       this.init > @
         this
@@ -198,13 +201,14 @@
     1 > address
     [this] > init
       seq > @
-        TRUE
+        *
+          true
     prim__int.constructor_1 > color
       prim__int.new
-    # setColor :: int -> void
     [this color] > setColor
       seq > @
-        statementExpression_6
+        *
+          statementExpression_6
       [] > statementExpression_6
         fieldAccess_2.write > @
           simpleReference_6
@@ -214,19 +218,15 @@
         this > @
       [] > simpleReference_6
         color > @
-  # null :: null -> void
   [this] > constructor
     seq > @
-      initialization
-      statementExpression_7
-      this
+      *
+        initialization
+        statementExpression_7
+        this
     [] > initialization
       this.init > @
         this
     [] > statementExpression_7
       this.super.constructor > @
         this.super
-
-[args...] > main
-  class__AssignmentForReferenceTypes.main > @
-    *

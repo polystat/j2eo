@@ -17,17 +17,18 @@
     1 > address
     [this] > init
       seq > @
-        TRUE
-  # main :: String[] -> void
+        *
+          true
   [args] > main
     seq > @
-      variableDeclaration_1
-      variableDeclaration_2
-      variableDeclaration_3
-      statementExpression_1
-      statementExpression_2
-      statementExpression_3
-      statementExpression_4
+      *
+        variableDeclaration_1
+        variableDeclaration_2
+        variableDeclaration_3
+        statementExpression_1
+        statementExpression_2
+        statementExpression_3
+        statementExpression_4
     prim__double.constructor_1 > array
       prim__double.new
     [] > variableDeclaration_1
@@ -129,19 +130,15 @@
       class__String.constructor_2 > @
         class__String.new
         "passed"
-  # null :: null -> void
   [this] > constructor
     seq > @
-      initialization
-      statementExpression_5
-      this
+      *
+        initialization
+        statementExpression_5
+        this
     [] > initialization
       this.init > @
         this
     [] > statementExpression_5
       this.super.constructor > @
         this.super
-
-[args...] > main
-  class__ArrayAverage.main > @
-    *

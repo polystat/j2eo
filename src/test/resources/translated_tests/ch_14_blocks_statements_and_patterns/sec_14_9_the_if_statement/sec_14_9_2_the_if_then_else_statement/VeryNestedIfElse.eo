@@ -14,12 +14,13 @@
     1 > address
     [this] > init
       seq > @
-        TRUE
-  # main :: String[] -> void
+        *
+          true
   [args] > main
     seq > @
-      variableDeclaration_1
-      ifThenElse_1
+      *
+        variableDeclaration_1
+        ifThenElse_1
     prim__boolean.constructor_1 > lie
       prim__boolean.new
     [] > variableDeclaration_1
@@ -39,7 +40,8 @@
       lie > @
     [] > block_1
       seq > @
-        statementExpression_1
+        *
+          statementExpression_1
       [] > statementExpression_1
         class__System.out.println > @
           class__System.out
@@ -50,7 +52,8 @@
           "not passed"
     [] > block_2
       seq > @
-        ifThenElse_2
+        *
+          ifThenElse_2
       [] > ifThenElse_2
         simpleReference_2.if > @
           block_3
@@ -59,7 +62,8 @@
         lie > @
       [] > block_3
         seq > @
-          statementExpression_2
+          *
+            statementExpression_2
         [] > statementExpression_2
           class__System.out.println > @
             class__System.out
@@ -70,7 +74,8 @@
             "not passed"
       [] > block_4
         seq > @
-          ifThenElse_3
+          *
+            ifThenElse_3
         [] > ifThenElse_3
           simpleReference_3.if > @
             block_5
@@ -79,7 +84,8 @@
           lie > @
         [] > block_5
           seq > @
-            statementExpression_3
+            *
+              statementExpression_3
           [] > statementExpression_3
             class__System.out.println > @
               class__System.out
@@ -90,7 +96,8 @@
               "not passed"
         [] > block_6
           seq > @
-            statementExpression_4
+            *
+              statementExpression_4
           [] > statementExpression_4
             class__System.out.println > @
               class__System.out
@@ -99,19 +106,15 @@
             class__String.constructor_2 > @
               class__String.new
               "passed"
-  # null :: null -> void
   [this] > constructor
     seq > @
-      initialization
-      statementExpression_5
-      this
+      *
+        initialization
+        statementExpression_5
+        this
     [] > initialization
       this.init > @
         this
     [] > statementExpression_5
       this.super.constructor > @
         this.super
-
-[args...] > main
-  class__VeryNestedIfElse.main > @
-    *

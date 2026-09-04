@@ -15,13 +15,14 @@
     1 > address
     [this] > init
       seq > @
-        TRUE
-  # main :: String[] -> void
+        *
+          true
   [args] > main
     seq > @
-      variableDeclaration_1
-      statementExpression_1
-      statementExpression_2
+      *
+        variableDeclaration_1
+        statementExpression_1
+        statementExpression_2
     cage > o
     [] > variableDeclaration_1
       o.write > @
@@ -42,12 +43,12 @@
       class__String.constructor_2 > @
         class__String.new
         "passed"
-  # null :: null -> void
   [this] > constructor
     seq > @
-      initialization
-      statementExpression_3
-      this
+      *
+        initialization
+        statementExpression_3
+        this
     [] > initialization
       this.init > @
         this
@@ -65,15 +66,16 @@
     1 > address
     [this] > init
       seq > @
-        TRUE
+        *
+          true
   prim__int.constructor_1 > j
     prim__int.new
-  # null :: null -> void
   [this] > constructor
     seq > @
-      initialization
-      statementExpression_4
-      this
+      *
+        initialization
+        statementExpression_4
+        this
     [] > initialization
       this.init > @
         this
@@ -91,7 +93,8 @@
     1 > address
     [this] > init
       seq > @
-        TRUE
+        *
+          true
   [] > class__Inner
     class__HasStatic > super
     super > @
@@ -102,15 +105,16 @@
       1 > address
       [this] > init
         seq > @
-          TRUE
+          *
+            true
     prim__int.constructor_1 > x
       prim__int.new
     prim__int.constructor_1 > y
       prim__int.new
-    # hello :: null -> void
     [] > hello
       seq > @
-        statementExpression_5
+        *
+          statementExpression_5
       [] > statementExpression_5
         class__System.out.println > @
           class__System.out
@@ -129,25 +133,26 @@
         1 > address
         [this] > init
           seq > @
-            TRUE
-      # null :: null -> void
+            *
+              true
       [this] > constructor
         seq > @
-          initialization
-          statementExpression_6
-          this
+          *
+            initialization
+            statementExpression_6
+            this
         [] > initialization
           this.init > @
             this
         [] > statementExpression_6
           this.super.constructor > @
             this.super
-    # null :: null -> void
     [this] > constructor
       seq > @
-        initialization
-        statementExpression_7
-        this
+        *
+          initialization
+          statementExpression_7
+          this
       [] > initialization
         this.init > @
           this
@@ -164,7 +169,8 @@
       1 > address
       [this] > init
         seq > @
-          variableDeclaration_2
+          *
+            variableDeclaration_2
         [] > variableDeclaration_2
           this.z.write > @
             initializerSimple_5
@@ -176,31 +182,27 @@
           class__Inner > @
       prim__int.constructor_1 > z
         prim__int.new
-    # null :: null -> void
     [this] > constructor
       seq > @
-        initialization
-        statementExpression_8
-        this
+        *
+          initialization
+          statementExpression_8
+          this
       [] > initialization
         this.init > @
           this
       [] > statementExpression_8
         this.super.constructor > @
           this.super
-  # null :: null -> void
   [this] > constructor
     seq > @
-      initialization
-      statementExpression_9
-      this
+      *
+        initialization
+        statementExpression_9
+        this
     [] > initialization
       this.init > @
         this
     [] > statementExpression_9
       this.super.constructor > @
         this.super
-
-[args...] > main
-  class__SimpleInnerClass.main > @
-    *

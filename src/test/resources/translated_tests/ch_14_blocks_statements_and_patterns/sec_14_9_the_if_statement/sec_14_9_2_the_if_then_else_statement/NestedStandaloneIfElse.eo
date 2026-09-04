@@ -15,13 +15,14 @@
     1 > address
     [this] > init
       seq > @
-        TRUE
-  # main :: String[] -> void
+        *
+          true
   [args] > main
     seq > @
-      variableDeclaration_1
-      ifThenElse_1
-      statementExpression_1
+      *
+        variableDeclaration_1
+        ifThenElse_1
+        statementExpression_1
     prim__boolean.constructor_1 > lie
       prim__boolean.new
     [] > variableDeclaration_1
@@ -49,7 +50,8 @@
         "fail"
     [] > block_1
       seq > @
-        ifThenElse_2
+        *
+          ifThenElse_2
       [] > ifThenElse_2
         simpleReference_2.if > @
           statementExpression_3
@@ -80,19 +82,15 @@
       class__String.constructor_2 > @
         class__String.new
         "passed"
-  # null :: null -> void
   [this] > constructor
     seq > @
-      initialization
-      statementExpression_5
-      this
+      *
+        initialization
+        statementExpression_5
+        this
     [] > initialization
       this.init > @
         this
     [] > statementExpression_5
       this.super.constructor > @
         this.super
-
-[args...] > main
-  class__NestedStandaloneIfElse.main > @
-    *

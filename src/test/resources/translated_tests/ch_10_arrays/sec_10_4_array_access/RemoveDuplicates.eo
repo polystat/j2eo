@@ -16,15 +16,16 @@
     1 > address
     [this] > init
       seq > @
-        TRUE
-  # main :: String[] -> void
+        *
+          true
   [args] > main
     seq > @
-      variableDeclaration_1
-      variableDeclaration_2
-      statementExpression_1
-      statementExpression_2
-      statementExpression_3
+      *
+        variableDeclaration_1
+        variableDeclaration_2
+        statementExpression_1
+        statementExpression_2
+        statementExpression_3
     prim__int.constructor_1 > arr
       prim__int.new
     [] > variableDeclaration_1
@@ -134,14 +135,14 @@
       class__String.constructor_2 > @
         class__String.new
         "passed"
-  # removeDuplicates :: int[] -> int[]
   [arr] > removeDuplicates
     seq > @
-      variableDeclaration_3
-      variableDeclaration_4
-      statementExpression_4
-      ifThenElse_1
-      return_1
+      *
+        variableDeclaration_3
+        variableDeclaration_4
+        statementExpression_4
+        ifThenElse_1
+        return_1
     prim__int.constructor_1 > j
       prim__int.new
     [] > variableDeclaration_3
@@ -214,7 +215,7 @@
     [] > simpleReference_14
       lastIndex > @
     [] > empty_1
-      TRUE > @
+      true > @
     [] > return_1
       methodInvocation_4 > @
     [] > methodInvocation_4
@@ -225,19 +226,15 @@
       arr > @
     [] > simpleReference_17
       j > @
-  # null :: null -> void
   [this] > constructor
     seq > @
-      initialization
-      statementExpression_6
-      this
+      *
+        initialization
+        statementExpression_6
+        this
     [] > initialization
       this.init > @
         this
     [] > statementExpression_6
       this.super.constructor > @
         this.super
-
-[args...] > main
-  class__RemoveDuplicates.main > @
-    *

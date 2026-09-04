@@ -15,11 +15,12 @@
     1 > address
     [this] > init
       seq > @
-        TRUE
-  # print3 :: int -> int -> int -> void
+        *
+          true
   [a b c] > print3
     seq > @
-      statementExpression_1
+      *
+        statementExpression_1
     [] > statementExpression_1
       class__System.out.println > @
         class__System.out
@@ -50,12 +51,12 @@
       b > @
     [] > simpleReference_1
       c > @
-  # main :: String[] -> void
   [args] > main
     seq > @
-      variableDeclaration_1
-      statementExpression_2
-      statementExpression_3
+      *
+        variableDeclaration_1
+        statementExpression_2
+        statementExpression_3
     prim__int.constructor_1 > s
       prim__int.new
     [] > variableDeclaration_1
@@ -94,19 +95,15 @@
       class__String.constructor_2 > @
         class__String.new
         "passed"
-  # null :: null -> void
   [this] > constructor
     seq > @
-      initialization
-      statementExpression_4
-      this
+      *
+        initialization
+        statementExpression_4
+        this
     [] > initialization
       this.init > @
         this
     [] > statementExpression_4
       this.super.constructor > @
         this.super
-
-[args...] > main
-  class__SimpleEvaluationOrderAtMethodInvocationValueCase.main > @
-    *

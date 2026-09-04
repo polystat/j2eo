@@ -15,17 +15,18 @@
     1 > address
     [this] > init
       seq > @
-        TRUE
-  # main :: String[] -> void
+        *
+          true
   [args] > main
     seq > @
-      variableDeclaration_1
-      statementExpression_1
-      variableDeclaration_2
-      statementExpression_2
-      statementExpression_3
-      statementExpression_4
-      statementExpression_5
+      *
+        variableDeclaration_1
+        statementExpression_1
+        variableDeclaration_2
+        statementExpression_2
+        statementExpression_3
+        statementExpression_4
+        statementExpression_5
     cage > t
     [] > variableDeclaration_1
       t.write > @
@@ -83,12 +84,12 @@
       class__String.constructor_2 > @
         class__String.new
         "passed"
-  # null :: null -> void
   [this] > constructor
     seq > @
-      initialization
-      statementExpression_6
-      this
+      *
+        initialization
+        statementExpression_6
+        this
     [] > initialization
       this.init > @
         this
@@ -106,7 +107,8 @@
     1 > address
     [this] > init
       seq > @
-        variableDeclaration_3
+        *
+          variableDeclaration_3
       [] > variableDeclaration_3
         this.x.write > @
           initializerSimple_3
@@ -118,12 +120,12 @@
           0
     prim__int.constructor_1 > x
       prim__int.new
-  # null :: null -> void
   [this] > constructor
     seq > @
-      initialization
-      statementExpression_7
-      this
+      *
+        initialization
+        statementExpression_7
+        this
     [] > initialization
       this.init > @
         this
@@ -141,7 +143,8 @@
     1 > address
     [this] > init
       seq > @
-        variableDeclaration_4
+        *
+          variableDeclaration_4
       [] > variableDeclaration_4
         this.x.write > @
           initializerSimple_5
@@ -153,19 +156,15 @@
           1
     prim__int.constructor_1 > x
       prim__int.new
-  # null :: null -> void
   [this] > constructor
     seq > @
-      initialization
-      statementExpression_8
-      this
+      *
+        initialization
+        statementExpression_8
+        this
     [] > initialization
       this.init > @
         this
     [] > statementExpression_8
       this.super.constructor > @
         this.super
-
-[args...] > main
-  class__StaticBindingForFieldAccess.main > @
-    *

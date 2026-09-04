@@ -14,13 +14,14 @@
     1 > address
     [this] > init
       seq > @
-        TRUE
-  # main :: String[] -> void
+        *
+          true
   [args] > main
     seq > @
-      variableDeclaration_1
-      statementExpression_1
-      statementExpression_2
+      *
+        variableDeclaration_1
+        statementExpression_1
+        statementExpression_2
     cage > s
     [] > variableDeclaration_1
       s.write > @
@@ -58,12 +59,12 @@
       class__String.constructor_2 > @
         class__String.new
         "passed"
-  # null :: null -> void
   [this] > constructor
     seq > @
-      initialization
-      statementExpression_3
-      this
+      *
+        initialization
+        statementExpression_3
+        this
     [] > initialization
       this.init > @
         this
@@ -81,33 +82,34 @@
     1 > address
     [this] > init
       seq > @
-        TRUE
-    # name :: null -> String
+        *
+          true
     [this] > name
       seq > @
-        return_1
+        *
+          return_1
       [] > return_1
         literal_3 > @
       [] > literal_3
         class__String.constructor_2 > @
           class__String.new
           "Richard"
-  # greeting :: null -> String
   [] > greeting
     seq > @
-      return_2
+      *
+        return_2
     [] > return_2
       literal_4 > @
     [] > literal_4
       class__String.constructor_2 > @
         class__String.new
         "Goodnight"
-  # null :: null -> void
   [this] > constructor
     seq > @
-      initialization
-      statementExpression_4
-      this
+      *
+        initialization
+        statementExpression_4
+        this
     [] > initialization
       this.init > @
         this
@@ -125,40 +127,37 @@
     1 > address
     [this] > init
       seq > @
-        TRUE
-    # name :: null -> String
+        *
+          true
     [this] > name
       seq > @
-        return_3
+        *
+          return_3
       [] > return_3
         literal_5 > @
       [] > literal_5
         class__String.constructor_2 > @
           class__String.new
           "Dick"
-  # greeting :: null -> String
   [] > greeting
     seq > @
-      return_4
+      *
+        return_4
     [] > return_4
       literal_6 > @
     [] > literal_6
       class__String.constructor_2 > @
         class__String.new
         "Hello"
-  # null :: null -> void
   [this] > constructor
     seq > @
-      initialization
-      statementExpression_5
-      this
+      *
+        initialization
+        statementExpression_5
+        this
     [] > initialization
       this.init > @
         this
     [] > statementExpression_5
       this.super.constructor > @
         this.super
-
-[args...] > main
-  class__SimpleHiding.main > @
-    *

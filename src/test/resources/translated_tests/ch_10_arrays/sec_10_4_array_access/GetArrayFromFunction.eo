@@ -15,13 +15,14 @@
     1 > address
     [this] > init
       seq > @
-        TRUE
-  # main :: String[] -> void
+        *
+          true
   [args] > main
     seq > @
-      variableDeclaration_1
-      statementExpression_1
-      statementExpression_2
+      *
+        variableDeclaration_1
+        statementExpression_1
+        statementExpression_2
     cage > a
     [] > variableDeclaration_1
       a.write > @
@@ -41,11 +42,11 @@
       class__String.constructor_2 > @
         class__String.new
         "passed"
-  # readArray :: null -> int[]
   [] > readArray
     seq > @
-      variableDeclaration_2
-      return_1
+      *
+        variableDeclaration_2
+        return_1
     cage > arr
     [] > variableDeclaration_2
       arr.write > @
@@ -84,19 +85,15 @@
       simpleReference_1 > @
     [] > simpleReference_1
       arr > @
-  # null :: null -> void
   [this] > constructor
     seq > @
-      initialization
-      statementExpression_3
-      this
+      *
+        initialization
+        statementExpression_3
+        this
     [] > initialization
       this.init > @
         this
     [] > statementExpression_3
       this.super.constructor > @
         this.super
-
-[args...] > main
-  class__GetArrayFromFunction.main > @
-    *

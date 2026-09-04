@@ -14,12 +14,13 @@
     1 > address
     [this] > init
       seq > @
-        TRUE
-  # main :: String[] -> void
+        *
+          true
   [args] > main
     seq > @
-      statementExpression_1
-      statementExpression_2
+      *
+        statementExpression_1
+        statementExpression_2
     [] > statementExpression_1
       this.method > @
         this
@@ -31,10 +32,10 @@
       class__String.constructor_2 > @
         class__String.new
         "passed"
-  # method :: null -> void
   [] > method
     seq > @
-      statementExpression_3
+      *
+        statementExpression_3
     [] > statementExpression_3
       class__System.out.println > @
         class__System.out
@@ -43,19 +44,15 @@
       class__String.constructor_2 > @
         class__String.new
         "working my work..."
-  # null :: null -> void
   [this] > constructor
     seq > @
-      initialization
-      statementExpression_4
-      this
+      *
+        initialization
+        statementExpression_4
+        this
     [] > initialization
       this.init > @
         this
     [] > statementExpression_4
       this.super.constructor > @
         this.super
-
-[args...] > main
-  class__SimpleAnnotationInterface.main > @
-    *

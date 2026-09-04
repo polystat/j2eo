@@ -16,16 +16,17 @@
     1 > address
     [this] > init
       seq > @
-        TRUE
-  # main :: String[] -> void
+        *
+          true
   [args] > main
     seq > @
-      variableDeclaration_1
-      variableDeclaration_2
-      statementExpression_1
-      statementExpression_2
-      statementExpression_3
-      statementExpression_4
+      *
+        variableDeclaration_1
+        variableDeclaration_2
+        statementExpression_1
+        statementExpression_2
+        statementExpression_3
+        statementExpression_4
     prim__int.constructor_1 > arr
       prim__int.new
     [] > variableDeclaration_1
@@ -133,13 +134,13 @@
       class__String.constructor_2 > @
         class__String.new
         "passed"
-  # removeElement :: int[] -> int -> int[]
   [arr index] > removeElement
     seq > @
-      ifThenElse_1
-      variableDeclaration_3
-      statementExpression_5
-      return_1
+      *
+        ifThenElse_1
+        variableDeclaration_3
+        statementExpression_5
+        return_1
     [] > ifThenElse_1
       binary_3.if > @
         block_1
@@ -177,8 +178,9 @@
       arr > @
     [] > block_1
       seq > @
-        statementExpression_6
-        return_2
+        *
+          statementExpression_6
+          return_2
       [] > statementExpression_6
         class__System.out.println > @
           class__System.out
@@ -192,7 +194,7 @@
       [] > simpleReference_12
         arr > @
     [] > empty_1
-      TRUE > @
+      true > @
     prim__int.constructor_1 > temp
       prim__int.new
     [] > variableDeclaration_3
@@ -201,26 +203,22 @@
     [] > initializerSimple_7
       arrayCreation_1 > @
     [] > arrayCreation_1
-      FALSE > @
+      false > @
     [] > statementExpression_5
       for_loop_placeholder > @
     [] > return_1
       simpleReference_13 > @
     [] > simpleReference_13
       temp > @
-  # null :: null -> void
   [this] > constructor
     seq > @
-      initialization
-      statementExpression_7
-      this
+      *
+        initialization
+        statementExpression_7
+        this
     [] > initialization
       this.init > @
         this
     [] > statementExpression_7
       this.super.constructor > @
         this.super
-
-[args...] > main
-  class__RemoveElementByIndex.main > @
-    *

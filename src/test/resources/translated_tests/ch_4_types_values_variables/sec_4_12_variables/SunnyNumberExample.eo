@@ -17,13 +17,14 @@
     1 > address
     [this] > init
       seq > @
-        TRUE
-  # main :: String -> void
+        *
+          true
   [args[]] > main
     seq > @
-      variableDeclaration_1
-      statementExpression_1
-      statementExpression_2
+      *
+        variableDeclaration_1
+        statementExpression_1
+        statementExpression_2
     prim__int.constructor_1 > N
       prim__int.new
     [] > variableDeclaration_1
@@ -49,11 +50,11 @@
       class__String.constructor_2 > @
         class__String.new
         "passed"
-  # findPerfectSquare :: double -> boolean
   [num] > findPerfectSquare
     seq > @
-      variableDeclaration_2
-      return_1
+      *
+        variableDeclaration_2
+        return_1
     prim__double.constructor_1 > square_root
       prim__double.new
     [] > variableDeclaration_2
@@ -91,10 +92,10 @@
       prim__int.constructor_2 > @
         prim__int.new
         0
-  # isSunnyNumber :: int -> void
   [N] > isSunnyNumber
     seq > @
-      ifThenElse_1
+      *
+        ifThenElse_1
     [] > ifThenElse_1
       methodInvocation_3.if > @
         block_1
@@ -114,7 +115,8 @@
         1
     [] > block_1
       seq > @
-        statementExpression_3
+        *
+          statementExpression_3
       [] > statementExpression_3
         class__System.out.println > @
           class__System.out
@@ -125,7 +127,8 @@
           "The given number is a sunny number."
     [] > block_2
       seq > @
-        statementExpression_4
+        *
+          statementExpression_4
       [] > statementExpression_4
         class__System.out.println > @
           class__System.out
@@ -134,12 +137,12 @@
         class__String.constructor_2 > @
           class__String.new
           "The given number is not a sunny number."
-  # null :: null -> void
   [this] > constructor
     seq > @
-      initialization
-      statementExpression_5
-      this
+      *
+        initialization
+        statementExpression_5
+        this
     [] > initialization
       this.init > @
         this

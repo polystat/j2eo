@@ -15,11 +15,12 @@
     1 > address
     [this] > init
       seq > @
-        TRUE
-    # add :: int -> int -> int
+        *
+          true
     [this a b] > add
       seq > @
-        return_1
+        *
+          return_1
       [] > return_1
         binary_1 > @
       [] > binary_1
@@ -29,22 +30,22 @@
         a > @
       [] > simpleReference_2
         b > @
-    # printInt :: int -> void
     [this v] > printInt
       seq > @
-        statementExpression_1
+        *
+          statementExpression_1
       [] > statementExpression_1
         class__System.out.println > @
           class__System.out
           simpleReference_3
       [] > simpleReference_3
         v > @
-  # null :: null -> void
   [this] > constructor
     seq > @
-      initialization
-      statementExpression_2
-      this
+      *
+        initialization
+        statementExpression_2
+        this
     [] > initialization
       this.init > @
         this
@@ -62,13 +63,14 @@
     1 > address
     [this] > init
       seq > @
-        TRUE
-  # null :: T -> int -> int -> void
+        *
+          true
   [this t a b] > constructor
     seq > @
-      initialization
-      statementExpression_3
-      this
+      *
+        initialization
+        statementExpression_3
+        this
     [] > initialization
       this.init > @
         this
@@ -96,12 +98,13 @@
     1 > address
     [this] > init
       seq > @
-        TRUE
-  # main :: String[] -> void
+        *
+          true
   [args] > main
     seq > @
-      variableDeclaration_1
-      statementExpression_4
+      *
+        variableDeclaration_1
+        statementExpression_4
     cage > d
     [] > variableDeclaration_1
       d.write > @
@@ -133,19 +136,15 @@
       class__String.constructor_2 > @
         class__String.new
         "passed"
-  # null :: null -> void
   [this] > constructor
     seq > @
-      initialization
-      statementExpression_5
-      this
+      *
+        initialization
+        statementExpression_5
+        this
     [] > initialization
       this.init > @
         this
     [] > statementExpression_5
       this.super.constructor > @
         this.super
-
-[args...] > main
-  class__GenericClassBoundByIntersection.main > @
-    *

@@ -15,16 +15,17 @@
     1 > address
     [this] > init
       seq > @
-        TRUE
-  # main :: String -> void
+        *
+          true
   [args[]] > main
     seq > @
-      variableDeclaration_1
-      variableDeclaration_2
-      variableDeclaration_3
-      variableDeclaration_4
-      statementExpression_1
-      statementExpression_2
+      *
+        variableDeclaration_1
+        variableDeclaration_2
+        variableDeclaration_3
+        variableDeclaration_4
+        statementExpression_1
+        statementExpression_2
     prim__int.constructor_1 > balance
       prim__int.new
     [] > variableDeclaration_1
@@ -39,11 +40,11 @@
     prim__int.constructor_1 > withdraw
       prim__int.new
     [] > variableDeclaration_2
-      TRUE > @
+      true > @
     prim__int.constructor_1 > deposit
       prim__int.new
     [] > variableDeclaration_3
-      TRUE > @
+      true > @
     cage > choices
     [] > variableDeclaration_4
       choices.write > @
@@ -88,12 +89,12 @@
       class__String.constructor_2 > @
         class__String.new
         "passed"
-  # null :: null -> void
   [this] > constructor
     seq > @
-      initialization
-      statementExpression_3
-      this
+      *
+        initialization
+        statementExpression_3
+        this
     [] > initialization
       this.init > @
         this

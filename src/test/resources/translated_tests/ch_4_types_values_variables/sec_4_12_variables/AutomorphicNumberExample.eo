@@ -16,13 +16,14 @@
     1 > address
     [this] > init
       seq > @
-        TRUE
-  # isAutomorphic :: int -> boolean
+        *
+          true
   [num] > isAutomorphic
     seq > @
-      variableDeclaration_1
-      while_1
-      return_1
+      *
+        variableDeclaration_1
+        while_1
+        return_1
     prim__int.constructor_1 > square
       prim__int.new
     [] > variableDeclaration_1
@@ -52,9 +53,10 @@
         0
     [] > block_1
       seq > @
-        ifThenElse_1
-        statementExpression_1
-        statementExpression_2
+        *
+          ifThenElse_1
+          statementExpression_1
+          statementExpression_2
       [] > ifThenElse_1
         binary_3.if > @
           return_2
@@ -87,7 +89,7 @@
           prim__boolean.new
           FALSE
       [] > empty_2
-        TRUE > @
+        true > @
       [] > statementExpression_1
         simpleReference_6.write > @
           binary_6
@@ -122,12 +124,12 @@
       prim__boolean.constructor_2 > @
         prim__boolean.new
         TRUE
-  # main :: String -> void
   [args[]] > main
     seq > @
-      statementExpression_3
-      statementExpression_4
-      statementExpression_5
+      *
+        statementExpression_3
+        statementExpression_4
+        statementExpression_5
     [] > statementExpression_3
       class__System.out.println > @
         class__System.out
@@ -148,12 +150,12 @@
       class__String.constructor_2 > @
         class__String.new
         "passed"
-  # null :: null -> void
   [this] > constructor
     seq > @
-      initialization
-      statementExpression_6
-      this
+      *
+        initialization
+        statementExpression_6
+        this
     [] > initialization
       this.init > @
         this

@@ -15,7 +15,8 @@
     1 > address
     [this] > init
       seq > @
-        variableDeclaration_1
+        *
+          variableDeclaration_1
       [] > variableDeclaration_1
         this.b.write > @
           initializerSimple_1
@@ -29,13 +30,13 @@
       prim__int.new
     prim__int.constructor_1 > b
       prim__int.new
-  # main :: String[] -> void
   [args] > main
     seq > @
-      variableDeclaration_2
-      statementExpression_1
-      statementExpression_2
-      statementExpression_3
+      *
+        variableDeclaration_2
+        statementExpression_1
+        statementExpression_2
+        statementExpression_3
     cage > s
     [] > variableDeclaration_2
       s.write > @
@@ -69,19 +70,15 @@
       class__String.constructor_2 > @
         class__String.new
         "passed"
-  # null :: null -> void
   [this] > constructor
     seq > @
-      initialization
-      statementExpression_4
-      this
+      *
+        initialization
+        statementExpression_4
+        this
     [] > initialization
       this.init > @
         this
     [] > statementExpression_4
       this.super.constructor > @
         this.super
-
-[args...] > main
-  class__SimpleInstanceInit.main > @
-    *

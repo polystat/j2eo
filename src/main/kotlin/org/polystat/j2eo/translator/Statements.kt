@@ -46,7 +46,7 @@ fun mapEmptyStmt(name: String): EOBndExpr =
             listOf(
                 EOBndExpr(
                     EOCopy(
-                        "TRUE",
+                        "true",
                     ),
                     "@",
                 ),
@@ -72,7 +72,7 @@ fun mapAssert(
                     EOBndExpr(
                         EOCopy(
                             listOf(assertExprName, "if").eoDot(),
-                            "TRUE".eoDot(),
+                            "true".eoDot(),
                             EOObject(
                                 listOf(),
                                 None,

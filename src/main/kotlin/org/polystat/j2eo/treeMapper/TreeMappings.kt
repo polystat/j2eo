@@ -268,7 +268,7 @@ fun StatementContext.toStatement(): Statement =
         is StatementSemiContext ->
             StatementExpression(
                 null,
-                SimpleReference(CompoundName("FALSE")),
+                SimpleReference(CompoundName("false")),
                 // SimpleReference(CompoundName("semi_noop_placeholder"))
             ) // FIXME
         is StatementSwitchContext ->

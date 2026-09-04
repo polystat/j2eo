@@ -15,17 +15,18 @@
     1 > address
     [this] > init
       seq > @
-        TRUE
-  # main :: String -> void
+        *
+          true
   [args[]] > main
     seq > @
-      variableDeclaration_1
-      variableDeclaration_2
-      statementExpression_1
-      variableDeclaration_3
-      while_1
-      ifThenElse_1
-      statementExpression_2
+      *
+        variableDeclaration_1
+        variableDeclaration_2
+        statementExpression_1
+        variableDeclaration_3
+        while_1
+        ifThenElse_1
+        statementExpression_2
     prim__int.constructor_1 > sum
       prim__int.new
     [] > variableDeclaration_1
@@ -40,7 +41,7 @@
     prim__int.constructor_1 > n
       prim__int.new
     [] > variableDeclaration_2
-      TRUE > @
+      true > @
     [] > statementExpression_1
       simpleReference_1.write > @
         literal_2
@@ -79,9 +80,10 @@
         0
     [] > block_1
       seq > @
-        variableDeclaration_4
-        statementExpression_3
-        statementExpression_4
+        *
+          variableDeclaration_4
+          statementExpression_3
+          statementExpression_4
       prim__int.constructor_1 > digit
         prim__int.new
       [] > variableDeclaration_4
@@ -169,12 +171,12 @@
       class__String.constructor_2 > @
         class__String.new
         "passed"
-  # null :: null -> void
   [this] > constructor
     seq > @
-      initialization
-      statementExpression_7
-      this
+      *
+        initialization
+        statementExpression_7
+        this
     [] > initialization
       this.init > @
         this

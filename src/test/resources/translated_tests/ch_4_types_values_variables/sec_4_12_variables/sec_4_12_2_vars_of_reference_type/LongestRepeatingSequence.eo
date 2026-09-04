@@ -15,13 +15,14 @@
     1 > address
     [this] > init
       seq > @
-        TRUE
-  # lcp :: String -> String -> String
+        *
+          true
   [s t] > lcp
     seq > @
-      variableDeclaration_1
-      statementExpression_1
-      return_1
+      *
+        variableDeclaration_1
+        statementExpression_1
+        return_1
     prim__int.constructor_1 > n
       prim__int.new
     [] > variableDeclaration_1
@@ -55,15 +56,15 @@
         0
     [] > simpleReference_5
       n > @
-  # main :: String[] -> void
   [args] > main
     seq > @
-      variableDeclaration_2
-      variableDeclaration_3
-      variableDeclaration_4
-      statementExpression_2
-      statementExpression_3
-      statementExpression_4
+      *
+        variableDeclaration_2
+        variableDeclaration_3
+        variableDeclaration_4
+        statementExpression_2
+        statementExpression_3
+        statementExpression_4
     cage > str
     [] > variableDeclaration_2
       str.write > @
@@ -117,19 +118,15 @@
       class__String.constructor_2 > @
         class__String.new
         "passed"
-  # null :: null -> void
   [this] > constructor
     seq > @
-      initialization
-      statementExpression_5
-      this
+      *
+        initialization
+        statementExpression_5
+        this
     [] > initialization
       this.init > @
         this
     [] > statementExpression_5
       this.super.constructor > @
         this.super
-
-[args...] > main
-  class__LongestRepeatingSequence.main > @
-    *

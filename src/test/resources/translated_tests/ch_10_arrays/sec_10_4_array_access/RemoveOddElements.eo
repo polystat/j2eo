@@ -17,16 +17,17 @@
     1 > address
     [this] > init
       seq > @
-        TRUE
-  # main :: String[] -> void
+        *
+          true
   [args] > main
     seq > @
-      variableDeclaration_1
-      variableDeclaration_2
-      statementExpression_1
-      variableDeclaration_3
-      statementExpression_2
-      statementExpression_3
+      *
+        variableDeclaration_1
+        variableDeclaration_2
+        statementExpression_1
+        variableDeclaration_3
+        statementExpression_2
+        statementExpression_3
     prim__int.constructor_1 > n
       prim__int.new
     [] > variableDeclaration_1
@@ -46,7 +47,7 @@
     [] > initializerSimple_2
       arrayCreation_1 > @
     [] > arrayCreation_1
-      FALSE > @
+      false > @
     [] > statementExpression_1
       for_loop_placeholder > @
     prim__int.constructor_1 > newArr
@@ -86,16 +87,16 @@
       class__String.constructor_2 > @
         class__String.new
         "passed"
-  # removeOdd :: int[] -> int[]
   [numbers] > removeOdd
     seq > @
-      variableDeclaration_4
-      variableDeclaration_5
-      statementExpression_4
-      statementExpression_5
-      variableDeclaration_6
-      statementExpression_6
-      return_1
+      *
+        variableDeclaration_4
+        variableDeclaration_5
+        statementExpression_4
+        statementExpression_5
+        variableDeclaration_6
+        statementExpression_6
+        return_1
     prim__int.constructor_1 > countEven
       prim__int.new
     [] > variableDeclaration_4
@@ -124,7 +125,7 @@
     [] > simpleReference_4
       even > @
     [] > arrayCreation_2
-      FALSE > @
+      false > @
     prim__int.constructor_1 > i
       prim__int.new
     [] > variableDeclaration_6
@@ -142,19 +143,15 @@
       simpleReference_5 > @
     [] > simpleReference_5
       even > @
-  # null :: null -> void
   [this] > constructor
     seq > @
-      initialization
-      statementExpression_7
-      this
+      *
+        initialization
+        statementExpression_7
+        this
     [] > initialization
       this.init > @
         this
     [] > statementExpression_7
       this.super.constructor > @
         this.super
-
-[args...] > main
-  class__RemoveOddElements.main > @
-    *

@@ -16,16 +16,17 @@
     1 > address
     [this] > init
       seq > @
-        TRUE
-  # main :: String[] -> void
+        *
+          true
   [args] > main
     seq > @
-      variableDeclaration_1
-      variableDeclaration_2
-      variableDeclaration_3
-      statementExpression_1
-      statementExpression_2
-      statementExpression_3
+      *
+        variableDeclaration_1
+        variableDeclaration_2
+        variableDeclaration_3
+        statementExpression_1
+        statementExpression_2
+        statementExpression_3
     cage > string1
     [] > variableDeclaration_1
       string1.write > @
@@ -39,7 +40,7 @@
     prim__int.constructor_1 > count
       prim__int.new
     [] > variableDeclaration_2
-      TRUE > @
+      true > @
     prim__char.constructor_1 > string
       prim__char.new
     [] > variableDeclaration_3
@@ -68,19 +69,15 @@
       class__String.constructor_2 > @
         class__String.new
         "passed"
-  # null :: null -> void
   [this] > constructor
     seq > @
-      initialization
-      statementExpression_4
-      this
+      *
+        initialization
+        statementExpression_4
+        this
     [] > initialization
       this.init > @
         this
     [] > statementExpression_4
       this.super.constructor > @
         this.super
-
-[args...] > main
-  class__DuplicateCharacters.main > @
-    *

@@ -15,12 +15,13 @@
     1 > address
     [this] > init
       seq > @
-        TRUE
-  # main :: String[] -> void
+        *
+          true
   [args] > main
     seq > @
-      statementExpression_1
-      statementExpression_2
+      *
+        statementExpression_1
+        statementExpression_2
     [] > statementExpression_1
       class__System.out.println > @
         class__System.out
@@ -42,39 +43,35 @@
       class__String.constructor_2 > @
         class__String.new
         "passed"
-  # method1 :: null -> float
   [] > method1
     seq > @
-      return_1
+      *
+        return_1
     [] > return_1
       literal_2 > @
     [] > literal_2
       prim__float.constructor_2 > @
         prim__float.new
         0.225
-  # method2 :: null -> float
   [] > method2
     seq > @
-      return_2
+      *
+        return_2
     [] > return_2
       literal_3 > @
     [] > literal_3
       prim__float.constructor_2 > @
         prim__float.new
         0.234
-  # null :: null -> void
   [this] > constructor
     seq > @
-      initialization
-      statementExpression_3
-      this
+      *
+        initialization
+        statementExpression_3
+        this
     [] > initialization
       this.init > @
         this
     [] > statementExpression_3
       this.super.constructor > @
         this.super
-
-[args...] > main
-  class__MethodLeqOperator.main > @
-    *

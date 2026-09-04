@@ -16,21 +16,22 @@
     1 > address
     [this] > init
       seq > @
-        TRUE
-  # main :: String[] -> void
+        *
+          true
   [args] > main
     seq > @
-      variableDeclaration_1
-      variableDeclaration_2
-      variableDeclaration_3
-      statementExpression_1
-      statementExpression_2
-      statementExpression_3
-      statementExpression_4
-      variableDeclaration_4
-      variableDeclaration_5
-      statementExpression_5
-      statementExpression_6
+      *
+        variableDeclaration_1
+        variableDeclaration_2
+        variableDeclaration_3
+        statementExpression_1
+        statementExpression_2
+        statementExpression_3
+        statementExpression_4
+        variableDeclaration_4
+        variableDeclaration_5
+        statementExpression_5
+        statementExpression_6
     prim__int.constructor_1 > row
       prim__int.new
     [] > variableDeclaration_1
@@ -86,17 +87,17 @@
     [] > simpleReference_3
       a > @
     [] > arrayCreation_1
-      FALSE > @
+      false > @
     [] > statementExpression_4
       for_loop_placeholder > @
     prim__int.constructor_1 > rowsum
       prim__int.new
     [] > variableDeclaration_4
-      TRUE > @
+      true > @
     prim__int.constructor_1 > columnsum
       prim__int.new
     [] > variableDeclaration_5
-      TRUE > @
+      true > @
     [] > statementExpression_5
       for_loop_placeholder > @
     [] > statementExpression_6
@@ -107,19 +108,15 @@
       class__String.constructor_2 > @
         class__String.new
         "passed"
-  # null :: null -> void
   [this] > constructor
     seq > @
-      initialization
-      statementExpression_7
-      this
+      *
+        initialization
+        statementExpression_7
+        this
     [] > initialization
       this.init > @
         this
     [] > statementExpression_7
       this.super.constructor > @
         this.super
-
-[args...] > main
-  class__MatrixRowAndColumnSum.main > @
-    *

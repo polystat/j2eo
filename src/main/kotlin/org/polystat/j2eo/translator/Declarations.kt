@@ -62,6 +62,13 @@ fun mapDeclaration(
         }
     }
 
+// @todo #330:300m Model mutable variables without cage.
+//  EO 0.63.1 dropped cage and turned memory into the scoped malloc.of,
+//  so a mutable cell cannot be an attribute any more. Every local and
+//  every field needs a chunk allocated by an enclosing malloc.of scope
+//  and threaded into the object that owns it, and the stdlib in
+//  src/main/eo has to be rewritten against that model. Until then no
+//  translated program runs, see #330.
 fun mapVariableDeclaration(
     dec: VariableDeclaration,
     name: String,
@@ -141,7 +148,7 @@ fun mapVariableDeclaration(
                             listOf(
                                 EOBndExpr(
                                     EOCopy(
-                                        "TRUE",
+                                        "true",
                                     ),
                                     "@",
                                 ),

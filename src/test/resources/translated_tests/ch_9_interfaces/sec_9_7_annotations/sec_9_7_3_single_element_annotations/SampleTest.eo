@@ -10,19 +10,21 @@
     class__Object.new > super
     super > @
     "class__SampleTest" > className
+    1 > address
     [this] > init
       seq > @
-        TRUE
-  # Main :: String[] -> void
+        *
+          true
   [args] > Main
     seq > @
-      TRUE
-  # null :: null -> void
+      *
+        true
   [this] > constructor
     seq > @
-      initialization
-      statementExpression_1
-      this
+      *
+        initialization
+        statementExpression_1
+        this
     [] > initialization
       this.init > @
         this

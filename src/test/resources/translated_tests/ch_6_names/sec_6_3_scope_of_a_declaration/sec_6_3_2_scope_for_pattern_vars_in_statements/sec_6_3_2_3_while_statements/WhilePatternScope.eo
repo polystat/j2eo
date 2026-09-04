@@ -14,15 +14,16 @@
     1 > address
     [this] > init
       seq > @
-        TRUE
-  # main :: String[] -> void
+        *
+          true
   [args] > main
     seq > @
-      variableDeclaration_1
-      variableDeclaration_2
-      variableDeclaration_3
-      while_1
-      statementExpression_1
+      *
+        variableDeclaration_1
+        variableDeclaration_2
+        variableDeclaration_3
+        while_1
+        statementExpression_1
     cage > objs
     [] > variableDeclaration_1
       objs.write > @
@@ -30,7 +31,7 @@
     [] > initializerSimple_1
       arrayCreation_1 > @
     [] > arrayCreation_1
-      FALSE > @
+      false > @
     prim__int.constructor_1 > index
       prim__int.new
     [] > variableDeclaration_2
@@ -63,9 +64,10 @@
       instance_of_placeholder > @
     [] > block_1
       seq > @
-        statementExpression_2
-        statementExpression_3
-        statementExpression_4
+        *
+          statementExpression_2
+          statementExpression_3
+          statementExpression_4
       [] > statementExpression_2
         simpleReference_3.inc_post > @
       [] > simpleReference_3
@@ -101,19 +103,15 @@
         simpleReference_8
     [] > simpleReference_8
       obj > @
-  # null :: null -> void
   [this] > constructor
     seq > @
-      initialization
-      statementExpression_5
-      this
+      *
+        initialization
+        statementExpression_5
+        this
     [] > initialization
       this.init > @
         this
     [] > statementExpression_5
       this.super.constructor > @
         this.super
-
-[args...] > main
-  class__WhilePatternScope.main > @
-    *

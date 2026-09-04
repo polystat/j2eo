@@ -14,13 +14,14 @@
     1 > address
     [this] > init
       seq > @
-        TRUE
-  # main :: String[] -> void
+        *
+          true
   [args] > main
     seq > @
-      variableDeclaration_1
-      statementExpression_1
-      statementExpression_2
+      *
+        variableDeclaration_1
+        statementExpression_1
+        statementExpression_2
     cage > gen
     [] > variableDeclaration_1
       gen.write > @
@@ -50,12 +51,12 @@
       class__String.constructor_2 > @
         class__String.new
         "passed"
-  # null :: null -> void
   [this] > constructor
     seq > @
-      initialization
-      statementExpression_3
-      this
+      *
+        initialization
+        statementExpression_3
+        this
     [] > initialization
       this.init > @
         this
@@ -73,30 +74,27 @@
     1 > address
     [this] > init
       seq > @
-        TRUE
+        *
+          true
     cage > some
-    # getSome :: null -> String
     [this] > getSome
       seq > @
-        return_1
+        *
+          return_1
       [] > return_1
         methodInvocation_2 > @
       [] > methodInvocation_2
         some.toString > @
           some
-  # null :: null -> void
   [this] > constructor
     seq > @
-      initialization
-      statementExpression_4
-      this
+      *
+        initialization
+        statementExpression_4
+        this
     [] > initialization
       this.init > @
         this
     [] > statementExpression_4
       this.super.constructor > @
         this.super
-
-[args...] > main
-  class__SimpleGenericConstructor.main > @
-    *

@@ -15,16 +15,17 @@
     1 > address
     [this] > init
       seq > @
-        TRUE
-  # main :: String[] -> void
+        *
+          true
   [args] > main
     seq > @
-      variableDeclaration_1
-      variableDeclaration_2
-      variableDeclaration_3
-      variableDeclaration_4
-      ifThenElse_1
-      statementExpression_1
+      *
+        variableDeclaration_1
+        variableDeclaration_2
+        variableDeclaration_3
+        variableDeclaration_4
+        ifThenElse_1
+        statementExpression_1
     prim__int.constructor_1 > arr
       prim__int.new
     [] > variableDeclaration_1
@@ -162,11 +163,11 @@
       class__String.constructor_2 > @
         class__String.new
         "passed"
-  # linearSearch :: int[] -> int -> int -> int
   [arr size key] > linearSearch
     seq > @
-      statementExpression_4
-      return_1
+      *
+        statementExpression_4
+        return_1
     [] > statementExpression_4
       for_loop_placeholder > @
     [] > return_1
@@ -177,19 +178,15 @@
       prim__int.constructor_2 > @
         prim__int.new
         1
-  # null :: null -> void
   [this] > constructor
     seq > @
-      initialization
-      statementExpression_5
-      this
+      *
+        initialization
+        statementExpression_5
+        this
     [] > initialization
       this.init > @
         this
     [] > statementExpression_5
       this.super.constructor > @
         this.super
-
-[args...] > main
-  class__LinearSearch.main > @
-    *

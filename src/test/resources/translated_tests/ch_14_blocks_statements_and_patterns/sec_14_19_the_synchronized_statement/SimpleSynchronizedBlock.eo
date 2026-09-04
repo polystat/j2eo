@@ -12,12 +12,13 @@
     1 > address
     [this] > init
       seq > @
-        TRUE
-  # main :: String[] -> void
+        *
+          true
   [args] > main
     seq > @
-      variableDeclaration_1
-      statementExpression_1
+      *
+        variableDeclaration_1
+        statementExpression_1
     cage > obj
     [] > variableDeclaration_1
       obj.write > @
@@ -29,19 +30,15 @@
         class__Object.new
     [] > statementExpression_1
       statement_placeholder > @
-  # null :: null -> void
   [this] > constructor
     seq > @
-      initialization
-      statementExpression_2
-      this
+      *
+        initialization
+        statementExpression_2
+        this
     [] > initialization
       this.init > @
         this
     [] > statementExpression_2
       this.super.constructor > @
         this.super
-
-[args...] > main
-  class__SimpleSynchronizedBlock.main > @
-    *

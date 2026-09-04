@@ -16,19 +16,20 @@
     1 > address
     [this] > init
       seq > @
-        TRUE
-  # main :: String[] -> void
+        *
+          true
   [args] > main
     seq > @
-      variableDeclaration_1
-      variableDeclaration_2
-      variableDeclaration_3
-      variableDeclaration_4
-      variableDeclaration_5
-      statementExpression_1
-      statementExpression_2
-      statementExpression_3
-      statementExpression_4
+      *
+        variableDeclaration_1
+        variableDeclaration_2
+        variableDeclaration_3
+        variableDeclaration_4
+        variableDeclaration_5
+        statementExpression_1
+        statementExpression_2
+        statementExpression_3
+        statementExpression_4
     cage > str
     [] > variableDeclaration_1
       str.write > @
@@ -46,15 +47,15 @@
     [] > initializerSimple_2
       arrayCreation_1 > @
     [] > arrayCreation_1
-      FALSE > @
+      false > @
     prim__int.constructor_1 > i
       prim__int.new
     [] > variableDeclaration_3
-      TRUE > @
+      true > @
     prim__int.constructor_1 > j
       prim__int.new
     [] > variableDeclaration_4
-      TRUE > @
+      true > @
     prim__char.constructor_1 > string
       prim__char.new
     [] > variableDeclaration_5
@@ -85,19 +86,15 @@
       class__String.constructor_2 > @
         class__String.new
         "passed"
-  # null :: null -> void
   [this] > constructor
     seq > @
-      initialization
-      statementExpression_5
-      this
+      *
+        initialization
+        statementExpression_5
+        this
     [] > initialization
       this.init > @
         this
     [] > statementExpression_5
       this.super.constructor > @
         this.super
-
-[args...] > main
-  class__FrequencyCharacter.main > @
-    *

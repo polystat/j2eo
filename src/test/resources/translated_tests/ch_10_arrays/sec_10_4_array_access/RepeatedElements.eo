@@ -15,18 +15,19 @@
     1 > address
     [this] > init
       seq > @
-        TRUE
-  # main :: String[] -> void
+        *
+          true
   [args] > main
     seq > @
-      variableDeclaration_1
-      variableDeclaration_2
-      variableDeclaration_3
-      statementExpression_1
-      statementExpression_2
-      statementExpression_3
-      statementExpression_4
-      statementExpression_5
+      *
+        variableDeclaration_1
+        variableDeclaration_2
+        variableDeclaration_3
+        statementExpression_1
+        statementExpression_2
+        statementExpression_3
+        statementExpression_4
+        statementExpression_5
     prim__int.constructor_1 > arr
       prim__int.new
     [] > variableDeclaration_1
@@ -112,7 +113,7 @@
     [] > initializerSimple_11
       arrayCreation_1 > @
     [] > arrayCreation_1
-      FALSE > @
+      false > @
     prim__int.constructor_1 > count
       prim__int.new
     [] > variableDeclaration_3
@@ -157,19 +158,15 @@
       class__String.constructor_2 > @
         class__String.new
         "passed"
-  # null :: null -> void
   [this] > constructor
     seq > @
-      initialization
-      statementExpression_6
-      this
+      *
+        initialization
+        statementExpression_6
+        this
     [] > initialization
       this.init > @
         this
     [] > statementExpression_6
       this.super.constructor > @
         this.super
-
-[args...] > main
-  class__RepeatedElements.main > @
-    *

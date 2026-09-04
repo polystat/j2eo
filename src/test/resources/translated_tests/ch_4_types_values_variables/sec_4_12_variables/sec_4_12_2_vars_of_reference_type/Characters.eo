@@ -16,25 +16,26 @@
     1 > address
     [this] > init
       seq > @
-        TRUE
-  # main :: String[] -> void
+        *
+          true
   [args] > main
     seq > @
-      variableDeclaration_1
-      variableDeclaration_2
-      variableDeclaration_3
-      variableDeclaration_4
-      variableDeclaration_5
-      variableDeclaration_6
-      variableDeclaration_7
-      variableDeclaration_8
-      variableDeclaration_9
-      statementExpression_1
-      statementExpression_2
-      statementExpression_3
-      statementExpression_4
-      statementExpression_5
-      statementExpression_6
+      *
+        variableDeclaration_1
+        variableDeclaration_2
+        variableDeclaration_3
+        variableDeclaration_4
+        variableDeclaration_5
+        variableDeclaration_6
+        variableDeclaration_7
+        variableDeclaration_8
+        variableDeclaration_9
+        statementExpression_1
+        statementExpression_2
+        statementExpression_3
+        statementExpression_4
+        statementExpression_5
+        statementExpression_6
     cage > str
     [] > variableDeclaration_1
       str.write > @
@@ -52,7 +53,7 @@
     [] > initializerSimple_2
       arrayCreation_1 > @
     [] > arrayCreation_1
-      FALSE > @
+      false > @
     prim__char.constructor_1 > minChar
       prim__char.new
     [] > variableDeclaration_3
@@ -86,19 +87,19 @@
     prim__int.constructor_1 > i
       prim__int.new
     [] > variableDeclaration_5
-      TRUE > @
+      true > @
     prim__int.constructor_1 > j
       prim__int.new
     [] > variableDeclaration_6
-      TRUE > @
+      true > @
     prim__int.constructor_1 > min
       prim__int.new
     [] > variableDeclaration_7
-      TRUE > @
+      true > @
     prim__int.constructor_1 > max
       prim__int.new
     [] > variableDeclaration_8
-      TRUE > @
+      true > @
     prim__char.constructor_1 > string
       prim__char.new
     [] > variableDeclaration_9
@@ -166,19 +167,15 @@
       class__String.constructor_2 > @
         class__String.new
         "passed"
-  # null :: null -> void
   [this] > constructor
     seq > @
-      initialization
-      statementExpression_7
-      this
+      *
+        initialization
+        statementExpression_7
+        this
     [] > initialization
       this.init > @
         this
     [] > statementExpression_7
       this.super.constructor > @
         this.super
-
-[args...] > main
-  class__Characters.main > @
-    *

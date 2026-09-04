@@ -16,14 +16,15 @@
     1 > address
     [this] > init
       seq > @
-        TRUE
-  # main :: String[] -> void
+        *
+          true
   [args] > main
     seq > @
-      variableDeclaration_1
-      variableDeclaration_2
-      statementExpression_1
-      statementExpression_2
+      *
+        variableDeclaration_1
+        variableDeclaration_2
+        statementExpression_1
+        statementExpression_2
     cage > v1
     [] > variableDeclaration_1
       v1.write > @
@@ -70,12 +71,12 @@
       class__String.constructor_2 > @
         class__String.new
         "passed"
-  # null :: null -> void
   [this] > constructor
     seq > @
-      initialization
-      statementExpression_3
-      this
+      *
+        initialization
+        statementExpression_3
+        this
     [] > initialization
       this.init > @
         this
@@ -93,15 +94,16 @@
     1 > address
     [this] > init
       seq > @
-        TRUE
+        *
+          true
     cage > v
-    # equals :: IntVector -> boolean
     [this other] > equals
       seq > @
-        ifThenElse_1
-        ifThenElse_2
-        statementExpression_4
-        return_1
+        *
+          ifThenElse_1
+          ifThenElse_2
+          statementExpression_4
+          return_1
       [] > ifThenElse_1
         binary_1.if > @
           block_1
@@ -115,7 +117,8 @@
         other > @
       [] > block_1
         seq > @
-          return_2
+          *
+            return_2
         [] > return_2
           literal_4 > @
         [] > literal_4
@@ -123,7 +126,7 @@
             prim__boolean.new
             TRUE
       [] > empty_1
-        TRUE > @
+        true > @
       [] > ifThenElse_2
         binary_2.if > @
           block_2
@@ -143,7 +146,8 @@
         other > @
       [] > block_2
         seq > @
-          return_3
+          *
+            return_3
         [] > return_3
           literal_5 > @
         [] > literal_5
@@ -151,7 +155,7 @@
             prim__boolean.new
             FALSE
       [] > empty_2
-        TRUE > @
+        true > @
       [] > statementExpression_4
         for_loop_placeholder > @
       [] > return_1
@@ -160,12 +164,12 @@
         prim__boolean.constructor_2 > @
           prim__boolean.new
           TRUE
-  # null :: int -> void
   [this size] > constructor
     seq > @
-      initialization
-      statementExpression_5
-      this
+      *
+        initialization
+        statementExpression_5
+        this
     [] > initialization
       this.init > @
         this
@@ -175,8 +179,4 @@
     [] > simpleReference_6
       v > @
     [] > arrayCreation_1
-      FALSE > @
-
-[args...] > main
-  class__SimpleThis.main > @
-    *
+      false > @

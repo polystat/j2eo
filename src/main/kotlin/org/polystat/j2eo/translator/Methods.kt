@@ -85,23 +85,13 @@ fun mapMethodDeclaration(
                 listOf(
                     EOBndExpr(
                         EOCopy(
-                            "TRUE",
+                            "true",
                             ArrayList(),
                         ),
                         "@",
                     ),
                 )
             },
-            "${dec.name} :: ${
-                dec.parameters?.parameters
-                    ?.joinToString(" -> ") { param ->
-                        param.type.getTypeName() + param.signEllipsis.let { if (it) "..." else "" }
-                    }
-            } -> ${
-                Option.fromNullable(dec.type)
-                    .map { it.getTypeName() }
-                    .getOrElse { "void" }
-            }",
         )
 
     // Contract to check parameter count

@@ -15,17 +15,18 @@
     1 > address
     [this] > init
       seq > @
-        TRUE
-  # main :: String[] -> void
+        *
+          true
   [args] > main
     seq > @
-      variableDeclaration_1
-      variableDeclaration_2
-      statementExpression_1
-      variableDeclaration_3
-      statementExpression_2
-      statementExpression_3
-      statementExpression_4
+      *
+        variableDeclaration_1
+        variableDeclaration_2
+        statementExpression_1
+        variableDeclaration_3
+        statementExpression_2
+        statementExpression_3
+        statementExpression_4
     prim__int.constructor_1 > n
       prim__int.new
     [] > variableDeclaration_1
@@ -45,7 +46,7 @@
     [] > initializerSimple_2
       arrayCreation_1 > @
     [] > arrayCreation_1
-      FALSE > @
+      false > @
     [] > statementExpression_1
       for_loop_placeholder > @
     prim__int.constructor_1 > num
@@ -84,25 +85,21 @@
       class__String.constructor_2 > @
         class__String.new
         "passed"
-  # display :: int[] -> int -> void
   [numbers num] > display
     seq > @
-      statementExpression_5
+      *
+        statementExpression_5
     [] > statementExpression_5
       for_loop_placeholder > @
-  # null :: null -> void
   [this] > constructor
     seq > @
-      initialization
-      statementExpression_6
-      this
+      *
+        initialization
+        statementExpression_6
+        this
     [] > initialization
       this.init > @
         this
     [] > statementExpression_6
       this.super.constructor > @
         this.super
-
-[args...] > main
-  class__DisplayGreaterThanGivenNum.main > @
-    *

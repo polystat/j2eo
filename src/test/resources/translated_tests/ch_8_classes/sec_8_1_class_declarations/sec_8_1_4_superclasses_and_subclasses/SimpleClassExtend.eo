@@ -14,12 +14,13 @@
     1 > address
     [this] > init
       seq > @
-        TRUE
-  # main :: String[] -> void
+        *
+          true
   [args] > main
     seq > @
-      variableDeclaration_1
-      statementExpression_1
+      *
+        variableDeclaration_1
+        statementExpression_1
     cage > s
     [] > variableDeclaration_1
       s.write > @
@@ -32,12 +33,12 @@
     [] > statementExpression_1
       s.method > @
         s
-  # null :: null -> void
   [this] > constructor
     seq > @
-      initialization
-      statementExpression_2
-      this
+      *
+        initialization
+        statementExpression_2
+        this
     [] > initialization
       this.init > @
         this
@@ -55,11 +56,12 @@
     1 > address
     [this] > init
       seq > @
-        TRUE
-    # method :: null -> void
+        *
+          true
     [this] > method
       seq > @
-        statementExpression_3
+        *
+          statementExpression_3
       [] > statementExpression_3
         class__System.out.println > @
           class__System.out
@@ -68,12 +70,12 @@
         class__String.constructor_2 > @
           class__String.new
           "passed"
-  # null :: null -> void
   [this] > constructor
     seq > @
-      initialization
-      statementExpression_4
-      this
+      *
+        initialization
+        statementExpression_4
+        this
     [] > initialization
       this.init > @
         this
@@ -91,24 +93,21 @@
     1 > address
     [this] > init
       seq > @
-        TRUE
-    # otherMethod :: null -> void
+        *
+          true
     [this] > otherMethod
       seq > @
-        TRUE
-  # null :: null -> void
+        *
+          true
   [this] > constructor
     seq > @
-      initialization
-      statementExpression_5
-      this
+      *
+        initialization
+        statementExpression_5
+        this
     [] > initialization
       this.init > @
         this
     [] > statementExpression_5
       this.super.constructor > @
         this.super
-
-[args...] > main
-  class__SimpleClassExtend.main > @
-    *

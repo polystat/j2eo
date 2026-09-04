@@ -16,18 +16,19 @@
     1 > address
     [this] > init
       seq > @
-        TRUE
-  # main :: String[] -> void
+        *
+          true
   [args] > main
     seq > @
-      variableDeclaration_1
-      variableDeclaration_2
-      variableDeclaration_3
-      variableDeclaration_4
-      statementExpression_1
-      statementExpression_2
-      statementExpression_3
-      statementExpression_4
+      *
+        variableDeclaration_1
+        variableDeclaration_2
+        variableDeclaration_3
+        variableDeclaration_4
+        statementExpression_1
+        statementExpression_2
+        statementExpression_3
+        statementExpression_4
     prim__int.constructor_1 > a
       prim__int.new
     [] > variableDeclaration_1
@@ -106,7 +107,7 @@
     [] > initializerSimple_7
       arrayCreation_1 > @
     [] > arrayCreation_1
-      FALSE > @
+      false > @
     [] > statementExpression_1
       simpleReference_3.write > @
         methodInvocation_1
@@ -158,14 +159,14 @@
       class__String.constructor_2 > @
         class__String.new
         "passed"
-  # transposeMatrix :: int[][] -> int[][]
   [a] > transposeMatrix
     seq > @
-      variableDeclaration_5
-      variableDeclaration_6
-      variableDeclaration_7
-      statementExpression_5
-      return_1
+      *
+        variableDeclaration_5
+        variableDeclaration_6
+        variableDeclaration_7
+        statementExpression_5
+        return_1
     prim__int.constructor_1 > row
       prim__int.new
     [] > variableDeclaration_5
@@ -203,26 +204,22 @@
     [] > initializerSimple_10
       arrayCreation_2 > @
     [] > arrayCreation_2
-      FALSE > @
+      false > @
     [] > statementExpression_5
       for_loop_placeholder > @
     [] > return_1
       simpleReference_11 > @
     [] > simpleReference_11
       temp > @
-  # null :: null -> void
   [this] > constructor
     seq > @
-      initialization
-      statementExpression_6
-      this
+      *
+        initialization
+        statementExpression_6
+        this
     [] > initialization
       this.init > @
         this
     [] > statementExpression_6
       this.super.constructor > @
         this.super
-
-[args...] > main
-  class__MatrixTransposition.main > @
-    *

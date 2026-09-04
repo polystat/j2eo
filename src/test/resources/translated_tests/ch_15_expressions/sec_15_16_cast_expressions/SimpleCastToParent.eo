@@ -15,13 +15,14 @@
     1 > address
     [this] > init
       seq > @
-        TRUE
-  # main :: String[] -> void
+        *
+          true
   [args] > main
     seq > @
-      variableDeclaration_1
-      statementExpression_1
-      statementExpression_2
+      *
+        variableDeclaration_1
+        statementExpression_1
+        statementExpression_2
     cage > t
     [] > variableDeclaration_1
       t.write > @
@@ -52,12 +53,12 @@
       class__String.constructor_2 > @
         class__String.new
         "passed"
-  # null :: null -> void
   [this] > constructor
     seq > @
-      initialization
-      statementExpression_3
-      this
+      *
+        initialization
+        statementExpression_3
+        this
     [] > initialization
       this.init > @
         this
@@ -75,7 +76,8 @@
     1 > address
     [this] > init
       seq > @
-        variableDeclaration_2
+        *
+          variableDeclaration_2
       [] > variableDeclaration_2
         this.x.write > @
           initializerSimple_2
@@ -87,12 +89,12 @@
           0
     prim__int.constructor_1 > x
       prim__int.new
-  # null :: null -> void
   [this] > constructor
     seq > @
-      initialization
-      statementExpression_4
-      this
+      *
+        initialization
+        statementExpression_4
+        this
     [] > initialization
       this.init > @
         this
@@ -110,7 +112,8 @@
     1 > address
     [this] > init
       seq > @
-        variableDeclaration_3
+        *
+          variableDeclaration_3
       [] > variableDeclaration_3
         this.x.write > @
           initializerSimple_4
@@ -122,19 +125,15 @@
           1
     prim__int.constructor_1 > x
       prim__int.new
-  # null :: null -> void
   [this] > constructor
     seq > @
-      initialization
-      statementExpression_5
-      this
+      *
+        initialization
+        statementExpression_5
+        this
     [] > initialization
       this.init > @
         this
     [] > statementExpression_5
       this.super.constructor > @
         this.super
-
-[args...] > main
-  class__SimpleCastToParent.main > @
-    *

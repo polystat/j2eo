@@ -16,15 +16,16 @@
     1 > address
     [this] > init
       seq > @
-        TRUE
-  # main :: String[] -> void
+        *
+          true
   [args] > main
     seq > @
-      variableDeclaration_1
-      variableDeclaration_2
-      statementExpression_1
-      statementExpression_2
-      statementExpression_3
+      *
+        variableDeclaration_1
+        variableDeclaration_2
+        statementExpression_1
+        statementExpression_2
+        statementExpression_3
     prim__int.constructor_1 > n
       prim__int.new
     [] > variableDeclaration_1
@@ -44,7 +45,7 @@
     [] > initializerSimple_2
       arrayCreation_1 > @
     [] > arrayCreation_1
-      FALSE > @
+      false > @
     [] > statementExpression_1
       for_loop_placeholder > @
     [] > statementExpression_2
@@ -61,15 +62,15 @@
       class__String.constructor_2 > @
         class__String.new
         "passed"
-  # displayNegative :: int[] -> void
   [numbers] > displayNegative
     seq > @
-      variableDeclaration_3
-      variableDeclaration_4
-      statementExpression_4
-      ifThenElse_1
-      statementExpression_5
-      statementExpression_6
+      *
+        variableDeclaration_3
+        variableDeclaration_4
+        statementExpression_4
+        ifThenElse_1
+        statementExpression_5
+        statementExpression_6
     prim__boolean.constructor_1 > flag
       prim__boolean.new
     [] > variableDeclaration_3
@@ -104,8 +105,9 @@
       flag > @
     [] > block_1
       seq > @
-        statementExpression_7
-        return_1
+        *
+          statementExpression_7
+          return_1
       [] > statementExpression_7
         class__System.out.println > @
           class__System.out
@@ -115,7 +117,7 @@
           class__String.new
           "Array doesn’t contain negative number."
     [] > empty_1
-      TRUE > @
+      true > @
     [] > statementExpression_5
       class__System.out.println > @
         class__System.out
@@ -126,19 +128,15 @@
         "Negative numbers = "
     [] > statementExpression_6
       for_loop_placeholder > @
-  # null :: null -> void
   [this] > constructor
     seq > @
-      initialization
-      statementExpression_8
-      this
+      *
+        initialization
+        statementExpression_8
+        this
     [] > initialization
       this.init > @
         this
     [] > statementExpression_8
       this.super.constructor > @
         this.super
-
-[args...] > main
-  class__DisplayNegativeNumbers.main > @
-    *

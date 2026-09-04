@@ -15,23 +15,24 @@
     1 > address
     [this] > init
       seq > @
-        TRUE
-    # m :: null -> int
+        *
+          true
     [this] > m
       seq > @
-        return_1
+        *
+          return_1
       [] > return_1
         literal_1 > @
       [] > literal_1
         prim__int.constructor_2 > @
           prim__int.new
           10
-  # null :: null -> void
   [this] > constructor
     seq > @
-      initialization
-      statementExpression_1
-      this
+      *
+        initialization
+        statementExpression_1
+        this
     [] > initialization
       this.init > @
         this
@@ -49,12 +50,13 @@
     1 > address
     [this] > init
       seq > @
-        TRUE
-  # main :: String[] -> void
+        *
+          true
   [args] > main
     seq > @
-      statementExpression_2
-      statementExpression_3
+      *
+        statementExpression_2
+        statementExpression_3
     [] > statementExpression_2
       class__System.out.println > @
         class__System.out
@@ -70,19 +72,15 @@
       class__String.constructor_2 > @
         class__String.new
         "passed"
-  # null :: null -> void
   [this] > constructor
     seq > @
-      initialization
-      statementExpression_4
-      this
+      *
+        initialization
+        statementExpression_4
+        this
     [] > initialization
       this.init > @
         this
     [] > statementExpression_4
       this.super.constructor > @
         this.super
-
-[args...] > main
-  class__ImplementingInterface.main > @
-    *

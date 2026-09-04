@@ -17,6 +17,7 @@ import org.polystat.j2eo.antlrParser.JavaParser
 import org.polystat.j2eo.translator.Context
 import org.polystat.j2eo.translator.Translator
 import org.polystat.j2eo.treeMapper.Visitor
+import org.polystat.j2eo.util.genClassName
 import org.polystat.j2eo.util.logger
 import tree.Compilation.CompilationUnit
 import java.io.BufferedReader
@@ -128,7 +129,7 @@ class TestJ2EORuntimeCheck {
                     val eval = Visitor()
                     val cu = eval.visit(tree) as CompilationUnit
                     val genEOLangText = Translator(path.relativeTo(testFolderRoot)).translate(cu, Context(HashMap()))
-                    val newFileName = path.fileName.name.removeSuffix(".java") + ".eo"
+                    val newFileName = genClassName(path.fileName.name.removeSuffix(".java")) + ".eo"
                     val newPath = File(path.parent.toString() + fileSep + newFileName).toPath()
                     Files.writeString(newPath, genEOLangText.generateEO(0))
                     assert(true)
@@ -240,7 +241,11 @@ class TestJ2EORuntimeCheck {
 
                 // Execute EO
                 val relPath = path.relativeTo(testFolderRoot)
-                val pkg = relPath.toList().dropLast(1).joinToString(".")
+                val pkg =
+                    (
+                        relPath.toList().dropLast(1) +
+                            genClassName(path.fileName.name.removeSuffix(".java"))
+                    ).joinToString(".")
                 val execPb =
                     ProcessBuilder(
                         "java",

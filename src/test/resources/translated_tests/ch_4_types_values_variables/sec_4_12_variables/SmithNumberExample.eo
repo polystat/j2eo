@@ -16,14 +16,15 @@
     1 > address
     [this] > init
       seq > @
-        TRUE
-  # findSumPrimeFactors :: int -> int
+        *
+          true
   [n] > findSumPrimeFactors
     seq > @
-      variableDeclaration_1
-      variableDeclaration_2
-      while_1
-      return_1
+      *
+        variableDeclaration_1
+        variableDeclaration_2
+        while_1
+        return_1
     prim__int.constructor_1 > i
       prim__int.new
     [] > variableDeclaration_1
@@ -61,7 +62,8 @@
         1
     [] > block_1
       seq > @
-        ifThenElse_1
+        *
+          ifThenElse_1
       [] > ifThenElse_1
         binary_2.if > @
           block_2
@@ -82,8 +84,9 @@
           0
       [] > block_2
         seq > @
-          statementExpression_1
-          statementExpression_2
+          *
+            statementExpression_1
+            statementExpression_2
         [] > statementExpression_1
           simpleReference_4.write > @
             binary_4
@@ -114,7 +117,8 @@
           i > @
       [] > block_3
         seq > @
-          do_1
+          *
+            do_1
         [] > do_1
           unaryPrefix_1.do > @
             [do_i]
@@ -129,7 +133,8 @@
           i > @
         [] > block_4
           seq > @
-            statementExpression_3
+            *
+              statementExpression_3
           [] > statementExpression_3
             simpleReference_11.inc_post > @
           [] > simpleReference_11
@@ -138,12 +143,12 @@
       simpleReference_12 > @
     [] > simpleReference_12
       sum > @
-  # findSumOfDigit :: int -> int
   [n] > findSumOfDigit
     seq > @
-      variableDeclaration_3
-      while_2
-      return_2
+      *
+        variableDeclaration_3
+        while_2
+        return_2
     prim__int.constructor_1 > s
       prim__int.new
     [] > variableDeclaration_3
@@ -170,8 +175,9 @@
         0
     [] > block_5
       seq > @
-        statementExpression_4
-        statementExpression_5
+        *
+          statementExpression_4
+          statementExpression_5
       [] > statementExpression_4
         simpleReference_14.write > @
           binary_7
@@ -209,13 +215,13 @@
       simpleReference_19 > @
     [] > simpleReference_19
       s > @
-  # isPrime :: int -> boolean
   [k] > isPrime
     seq > @
-      variableDeclaration_4
-      variableDeclaration_5
-      while_3
-      return_3
+      *
+        variableDeclaration_4
+        variableDeclaration_5
+        while_3
+        return_3
     prim__boolean.constructor_1 > b
       prim__boolean.new
     [] > variableDeclaration_4
@@ -255,8 +261,9 @@
       k > @
     [] > block_6
       seq > @
-        ifThenElse_2
-        statementExpression_6
+        *
+          ifThenElse_2
+          statementExpression_6
       [] > ifThenElse_2
         binary_11.if > @
           block_7
@@ -277,7 +284,8 @@
           0
       [] > block_7
         seq > @
-          statementExpression_7
+          *
+            statementExpression_7
         [] > statementExpression_7
           simpleReference_25.write > @
             literal_12
@@ -288,7 +296,7 @@
             prim__boolean.new
             FALSE
       [] > empty_6
-        TRUE > @
+        true > @
       [] > statementExpression_6
         simpleReference_26.inc_post > @
       [] > simpleReference_26
@@ -297,17 +305,17 @@
       simpleReference_27 > @
     [] > simpleReference_27
       b > @
-  # main :: String -> void
   [args[]] > main
     seq > @
-      variableDeclaration_6
-      variableDeclaration_7
-      variableDeclaration_8
-      statementExpression_8
-      statementExpression_9
-      ifThenElse_3
-      statementExpression_10
-      statementExpression_11
+      *
+        variableDeclaration_6
+        variableDeclaration_7
+        variableDeclaration_8
+        statementExpression_8
+        statementExpression_9
+        ifThenElse_3
+        statementExpression_10
+        statementExpression_11
     prim__int.constructor_1 > n
       prim__int.new
     [] > variableDeclaration_6
@@ -409,12 +417,12 @@
       class__String.constructor_2 > @
         class__String.new
         "passed"
-  # null :: null -> void
   [this] > constructor
     seq > @
-      initialization
-      statementExpression_14
-      this
+      *
+        initialization
+        statementExpression_14
+        this
     [] > initialization
       this.init > @
         this

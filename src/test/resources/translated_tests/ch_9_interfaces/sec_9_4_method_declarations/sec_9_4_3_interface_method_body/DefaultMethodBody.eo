@@ -12,20 +12,21 @@
     1 > address
     [this] > init
       seq > @
-        TRUE
-  # main :: String[] -> void
+        *
+          true
   [args] > main
     seq > @
-      statementExpression_1
+      *
+        statementExpression_1
     [] > statementExpression_1
       unsupported_qualifier.printMsg > @
         unsupported_qualifier
-  # null :: null -> void
   [this] > constructor
     seq > @
-      initialization
-      statementExpression_2
-      this
+      *
+        initialization
+        statementExpression_2
+        this
     [] > initialization
       this.init > @
         this
@@ -43,20 +44,17 @@
     1 > address
     [this] > init
       seq > @
-        TRUE
-  # null :: null -> void
+        *
+          true
   [this] > constructor
     seq > @
-      initialization
-      statementExpression_3
-      this
+      *
+        initialization
+        statementExpression_3
+        this
     [] > initialization
       this.init > @
         this
     [] > statementExpression_3
       this.super.constructor > @
         this.super
-
-[args...] > main
-  class__DefaultMethodBody.main > @
-    *

@@ -15,18 +15,19 @@
     1 > address
     [this] > init
       seq > @
-        TRUE
-  # main :: String[] -> void
+        *
+          true
   [args] > main
     seq > @
-      variableDeclaration_1
-      variableDeclaration_2
-      variableDeclaration_3
-      variableDeclaration_4
-      variableDeclaration_5
-      variableDeclaration_6
-      ifThenElse_1
-      statementExpression_1
+      *
+        variableDeclaration_1
+        variableDeclaration_2
+        variableDeclaration_3
+        variableDeclaration_4
+        variableDeclaration_5
+        variableDeclaration_6
+        ifThenElse_1
+        statementExpression_1
     cage > str
     [] > variableDeclaration_1
       str.write > @
@@ -90,7 +91,7 @@
     [] > initializerSimple_6
       arrayCreation_1 > @
     [] > arrayCreation_1
-      FALSE > @
+      false > @
     [] > ifThenElse_1
       binary_2.if > @
         block_1
@@ -111,7 +112,8 @@
         0
     [] > block_1
       seq > @
-        statementExpression_2
+        *
+          statementExpression_2
       [] > statementExpression_2
         class__System.out.println > @
           class__System.out
@@ -134,9 +136,10 @@
           " equal parts."
     [] > block_2
       seq > @
-        statementExpression_3
-        statementExpression_4
-        statementExpression_5
+        *
+          statementExpression_3
+          statementExpression_4
+          statementExpression_5
       [] > statementExpression_3
         for_loop_placeholder > @
       [] > statementExpression_4
@@ -162,19 +165,15 @@
       class__String.constructor_2 > @
         class__String.new
         "passed"
-  # null :: null -> void
   [this] > constructor
     seq > @
-      initialization
-      statementExpression_6
-      this
+      *
+        initialization
+        statementExpression_6
+        this
     [] > initialization
       this.init > @
         this
     [] > statementExpression_6
       this.super.constructor > @
         this.super
-
-[args...] > main
-  class__DivideString.main > @
-    *

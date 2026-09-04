@@ -14,14 +14,15 @@
     1 > address
     [this] > init
       seq > @
-        TRUE
-  # main :: String[] -> void
+        *
+          true
   [args] > main
     seq > @
-      variableDeclaration_1
-      variableDeclaration_2
-      statementExpression_1
-      statementExpression_2
+      *
+        variableDeclaration_1
+        variableDeclaration_2
+        statementExpression_1
+        statementExpression_2
     cage > raw
     [] > variableDeclaration_1
       raw.write > @
@@ -70,12 +71,12 @@
       class__String.constructor_2 > @
         class__String.new
         "passed"
-  # null :: null -> void
   [this] > constructor
     seq > @
-      initialization
-      statementExpression_3
-      this
+      *
+        initialization
+        statementExpression_3
+        this
     [] > initialization
       this.init > @
         this
@@ -93,14 +94,15 @@
     1 > address
     [this] > init
       seq > @
-        TRUE
+        *
+          true
     cage > value
-  # null :: T -> void
   [this v] > constructor
     seq > @
-      initialization
-      statementExpression_4
-      this
+      *
+        initialization
+        statementExpression_4
+        this
     [] > initialization
       this.init > @
         this
@@ -111,7 +113,3 @@
       value > @
     [] > simpleReference_4
       v > @
-
-[args...] > main
-  class__SimpleUncheckedConversion.main > @
-    *

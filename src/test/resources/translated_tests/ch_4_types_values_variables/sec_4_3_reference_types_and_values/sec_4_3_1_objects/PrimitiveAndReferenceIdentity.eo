@@ -15,22 +15,23 @@
     1 > address
     [this] > init
       seq > @
-        TRUE
-  # main :: String[] -> void
+        *
+          true
   [args] > main
     seq > @
-      variableDeclaration_1
-      variableDeclaration_2
-      statementExpression_1
-      statementExpression_2
-      statementExpression_3
-      variableDeclaration_3
-      statementExpression_4
-      variableDeclaration_4
-      statementExpression_5
-      statementExpression_6
-      statementExpression_7
-      statementExpression_8
+      *
+        variableDeclaration_1
+        variableDeclaration_2
+        statementExpression_1
+        statementExpression_2
+        statementExpression_3
+        variableDeclaration_3
+        statementExpression_4
+        variableDeclaration_4
+        statementExpression_5
+        statementExpression_6
+        statementExpression_7
+        statementExpression_8
     prim__int.constructor_1 > i1
       prim__int.new
     [] > variableDeclaration_1
@@ -163,12 +164,12 @@
       class__String.constructor_2 > @
         class__String.new
         "passed"
-  # null :: null -> void
   [this] > constructor
     seq > @
-      initialization
-      statementExpression_9
-      this
+      *
+        initialization
+        statementExpression_9
+        this
     [] > initialization
       this.init > @
         this
@@ -186,22 +187,19 @@
     1 > address
     [this] > init
       seq > @
-        TRUE
+        *
+          true
     prim__int.constructor_1 > val
       prim__int.new
-  # null :: null -> void
   [this] > constructor
     seq > @
-      initialization
-      statementExpression_10
-      this
+      *
+        initialization
+        statementExpression_10
+        this
     [] > initialization
       this.init > @
         this
     [] > statementExpression_10
       this.super.constructor > @
         this.super
-
-[args...] > main
-  class__PrimitiveAndReferenceIdentity.main > @
-    *

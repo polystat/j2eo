@@ -16,13 +16,14 @@
     1 > address
     [this] > init
       seq > @
-        TRUE
-  # main :: String[] -> void
+        *
+          true
   [args] > main
     seq > @
-      variableDeclaration_1
-      statementExpression_1
-      statementExpression_2
+      *
+        variableDeclaration_1
+        statementExpression_1
+        statementExpression_2
     cage > v
     [] > variableDeclaration_1
       v.write > @
@@ -55,12 +56,12 @@
       class__String.constructor_2 > @
         class__String.new
         "passed"
-  # null :: null -> void
   [this] > constructor
     seq > @
-      initialization
-      statementExpression_3
-      this
+      *
+        initialization
+        statementExpression_3
+        this
     [] > initialization
       this.init > @
         this
@@ -78,7 +79,8 @@
     1 > address
     [this] > init
       seq > @
-        variableDeclaration_2
+        *
+          variableDeclaration_2
       [] > variableDeclaration_2
         this.val.write > @
           initializerArray_1
@@ -100,19 +102,15 @@
           2
     prim__int.constructor_1 > val
       prim__int.new
-  # null :: null -> void
   [this] > constructor
     seq > @
-      initialization
-      statementExpression_4
-      this
+      *
+        initialization
+        statementExpression_4
+        this
     [] > initialization
       this.init > @
         this
     [] > statementExpression_4
       this.super.constructor > @
         this.super
-
-[args...] > main
-  class__ShadowingOfTypeDeclrByAnotherTypeDeclr.main > @
-    *

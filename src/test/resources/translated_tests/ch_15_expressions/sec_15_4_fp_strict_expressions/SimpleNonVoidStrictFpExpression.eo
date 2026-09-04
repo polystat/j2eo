@@ -15,23 +15,24 @@
     1 > address
     [this] > init
       seq > @
-        TRUE
-  # test :: null -> float
+        *
+          true
   [] > test
     seq > @
-      return_1
+      *
+        return_1
     [] > return_1
       literal_1 > @
     [] > literal_1
       prim__float.constructor_2 > @
         prim__float.new
         0.0
-  # main :: String[] -> void
   [args] > main
     seq > @
-      variableDeclaration_1
-      statementExpression_1
-      statementExpression_2
+      *
+        variableDeclaration_1
+        statementExpression_1
+        statementExpression_2
     prim__float.constructor_1 > f
       prim__float.new
     [] > variableDeclaration_1
@@ -56,19 +57,15 @@
       class__String.constructor_2 > @
         class__String.new
         "passed"
-  # null :: null -> void
   [this] > constructor
     seq > @
-      initialization
-      statementExpression_3
-      this
+      *
+        initialization
+        statementExpression_3
+        this
     [] > initialization
       this.init > @
         this
     [] > statementExpression_3
       this.super.constructor > @
         this.super
-
-[args...] > main
-  class__SimpleNonVoidStrictFpExpression.main > @
-    *

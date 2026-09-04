@@ -15,14 +15,15 @@
     1 > address
     [this] > init
       seq > @
-        TRUE
-  # main :: String[] -> void
+        *
+          true
   [args] > main
     seq > @
-      variableDeclaration_1
-      variableDeclaration_2
-      while_1
-      statementExpression_1
+      *
+        variableDeclaration_1
+        variableDeclaration_2
+        while_1
+        statementExpression_1
     prim__int.constructor_1 > a
       prim__int.new
     [] > variableDeclaration_1
@@ -58,8 +59,9 @@
       b > @
     [] > block_1
       seq > @
-        statementExpression_2
-        statementExpression_3
+        *
+          statementExpression_2
+          statementExpression_3
       [] > statementExpression_2
         class__System.out.println > @
           class__System.out
@@ -97,19 +99,15 @@
       class__String.constructor_2 > @
         class__String.new
         "passed"
-  # null :: null -> void
   [this] > constructor
     seq > @
-      initialization
-      statementExpression_4
-      this
+      *
+        initialization
+        statementExpression_4
+        this
     [] > initialization
       this.init > @
         this
     [] > statementExpression_4
       this.super.constructor > @
         this.super
-
-[args...] > main
-  class__SimpleWhile.main > @
-    *

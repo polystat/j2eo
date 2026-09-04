@@ -15,14 +15,15 @@
     1 > address
     [this] > init
       seq > @
-        TRUE
-  # main :: String[] -> void
+        *
+          true
   [args] > main
     seq > @
-      variableDeclaration_1
-      variableDeclaration_2
-      statementExpression_1
-      statementExpression_2
+      *
+        variableDeclaration_1
+        variableDeclaration_2
+        statementExpression_1
+        statementExpression_2
     prim__int.constructor_1 > a
       prim__int.new
     [] > variableDeclaration_1
@@ -68,39 +69,35 @@
       class__String.constructor_2 > @
         class__String.new
         "passed"
-  # method1 :: null -> String
   [] > method1
     seq > @
-      return_1
+      *
+        return_1
     [] > return_1
       literal_3 > @
     [] > literal_3
       class__String.constructor_2 > @
         class__String.new
         "We had "
-  # method2 :: null -> String
   [] > method2
     seq > @
-      return_2
+      *
+        return_2
     [] > return_2
       literal_4 > @
     [] > literal_4
       class__String.constructor_2 > @
         class__String.new
         " cucumbers."
-  # null :: null -> void
   [this] > constructor
     seq > @
-      initialization
-      statementExpression_3
-      this
+      *
+        initialization
+        statementExpression_3
+        this
     [] > initialization
       this.init > @
         this
     [] > statementExpression_3
       this.super.constructor > @
         this.super
-
-[args...] > main
-  class__MethodStringConcat.main > @
-    *

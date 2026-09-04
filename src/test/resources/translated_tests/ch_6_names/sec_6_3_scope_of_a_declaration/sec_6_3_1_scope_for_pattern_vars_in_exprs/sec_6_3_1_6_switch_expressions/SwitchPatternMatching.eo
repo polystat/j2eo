@@ -13,15 +13,16 @@
     1 > address
     [this] > init
       seq > @
-        TRUE
-  # main :: String[] -> void
+        *
+          true
   [args] > main
     seq > @
-      variableDeclaration_1
-      variableDeclaration_2
-      variableDeclaration_3
-      variableDeclaration_4
-      statementExpression_1
+      *
+        variableDeclaration_1
+        variableDeclaration_2
+        variableDeclaration_3
+        variableDeclaration_4
+        statementExpression_1
     cage > io
     [] > variableDeclaration_1
       io.write > @
@@ -64,12 +65,12 @@
         6
     [] > statementExpression_1
       switch_expression_placeholder > @
-  # null :: null -> void
   [this] > constructor
     seq > @
-      initialization
-      statementExpression_2
-      this
+      *
+        initialization
+        statementExpression_2
+        this
     [] > initialization
       this.init > @
         this
@@ -87,23 +88,24 @@
     1 > address
     [this] > init
       seq > @
-        TRUE
-    # read :: null -> String
+        *
+          true
     [this] > read
       seq > @
-        return_1
+        *
+          return_1
       [] > return_1
         literal_3 > @
       [] > literal_3
         class__String.constructor_2 > @
           class__String.new
           "passed"
-  # null :: null -> void
   [this] > constructor
     seq > @
-      initialization
-      statementExpression_3
-      this
+      *
+        initialization
+        statementExpression_3
+        this
     [] > initialization
       this.init > @
         this
@@ -121,20 +123,17 @@
     1 > address
     [this] > init
       seq > @
-        TRUE
-  # null :: null -> void
+        *
+          true
   [this] > constructor
     seq > @
-      initialization
-      statementExpression_4
-      this
+      *
+        initialization
+        statementExpression_4
+        this
     [] > initialization
       this.init > @
         this
     [] > statementExpression_4
       this.super.constructor > @
         this.super
-
-[args...] > main
-  class__SwitchPatternMatching.main > @
-    *

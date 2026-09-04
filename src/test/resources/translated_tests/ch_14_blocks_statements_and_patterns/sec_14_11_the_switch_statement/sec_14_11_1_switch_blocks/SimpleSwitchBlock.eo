@@ -13,12 +13,13 @@
     1 > address
     [this] > init
       seq > @
-        TRUE
-  # main :: String[] -> void
+        *
+          true
   [args] > main
     seq > @
-      variableDeclaration_1
-      statementExpression_1
+      *
+        variableDeclaration_1
+        statementExpression_1
     prim__int.constructor_1 > a
       prim__int.new
     [] > variableDeclaration_1
@@ -32,19 +33,15 @@
         5
     [] > statementExpression_1
       switch_statement_placeholder > @
-  # null :: null -> void
   [this] > constructor
     seq > @
-      initialization
-      statementExpression_2
-      this
+      *
+        initialization
+        statementExpression_2
+        this
     [] > initialization
       this.init > @
         this
     [] > statementExpression_2
       this.super.constructor > @
         this.super
-
-[args...] > main
-  class__SimpleSwitchBlock.main > @
-    *

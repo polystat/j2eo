@@ -15,31 +15,32 @@
     1 > address
     [this] > init
       seq > @
-        TRUE
-  # main :: String -> void
+        *
+          true
   [args[]] > main
     seq > @
-      variableDeclaration_1
-      variableDeclaration_2
-      statementExpression_1
-      statementExpression_2
-      statementExpression_3
-      statementExpression_4
-      statementExpression_5
-      statementExpression_6
-      statementExpression_7
-      statementExpression_8
-      statementExpression_9
-      statementExpression_10
-      statementExpression_11
+      *
+        variableDeclaration_1
+        variableDeclaration_2
+        statementExpression_1
+        statementExpression_2
+        statementExpression_3
+        statementExpression_4
+        statementExpression_5
+        statementExpression_6
+        statementExpression_7
+        statementExpression_8
+        statementExpression_9
+        statementExpression_10
+        statementExpression_11
     prim__int.constructor_1 > a
       prim__int.new
     [] > variableDeclaration_1
-      TRUE > @
+      true > @
     prim__int.constructor_1 > b
       prim__int.new
     [] > variableDeclaration_2
-      TRUE > @
+      true > @
     [] > statementExpression_1
       simpleReference_1.write > @
         literal_1
@@ -171,12 +172,12 @@
       class__String.constructor_2 > @
         class__String.new
         "passed"
-  # null :: null -> void
   [this] > constructor
     seq > @
-      initialization
-      statementExpression_12
-      this
+      *
+        initialization
+        statementExpression_12
+        this
     [] > initialization
       this.init > @
         this

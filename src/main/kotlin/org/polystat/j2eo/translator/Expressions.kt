@@ -134,7 +134,7 @@ fun mapArrayCreation(
                     EOBndExpr(
                         EOCopy(
                             // "cannot_get_access_to_array_initializer" // FIXME
-                            "FALSE",
+                            "false",
                         ),
                         "@",
                     ),

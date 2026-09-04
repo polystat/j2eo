@@ -14,12 +14,13 @@
     1 > address
     [this] > init
       seq > @
-        TRUE
-  # main :: String[] -> void
+        *
+          true
   [args] > main
     seq > @
-      variableDeclaration_1
-      ifThenElse_1
+      *
+        variableDeclaration_1
+        ifThenElse_1
     prim__boolean.constructor_1 > truth
       prim__boolean.new
     [] > variableDeclaration_1
@@ -39,7 +40,8 @@
       truth > @
     [] > block_1
       seq > @
-        ifThenElse_2
+        *
+          ifThenElse_2
       [] > ifThenElse_2
         simpleReference_2.if > @
           block_2
@@ -48,7 +50,8 @@
         truth > @
       [] > block_2
         seq > @
-          ifThenElse_3
+          *
+            ifThenElse_3
         [] > ifThenElse_3
           simpleReference_3.if > @
             block_3
@@ -57,7 +60,8 @@
           truth > @
         [] > block_3
           seq > @
-            statementExpression_1
+            *
+              statementExpression_1
           [] > statementExpression_1
             class__System.out.println > @
               class__System.out
@@ -67,24 +71,20 @@
               class__String.new
               "passed"
         [] > empty_3
-          TRUE > @
+          true > @
       [] > empty_2
-        TRUE > @
+        true > @
     [] > empty_1
-      TRUE > @
-  # null :: null -> void
+      true > @
   [this] > constructor
     seq > @
-      initialization
-      statementExpression_2
-      this
+      *
+        initialization
+        statementExpression_2
+        this
     [] > initialization
       this.init > @
         this
     [] > statementExpression_2
       this.super.constructor > @
         this.super
-
-[args...] > main
-  class__VeryNestedIf.main > @
-    *

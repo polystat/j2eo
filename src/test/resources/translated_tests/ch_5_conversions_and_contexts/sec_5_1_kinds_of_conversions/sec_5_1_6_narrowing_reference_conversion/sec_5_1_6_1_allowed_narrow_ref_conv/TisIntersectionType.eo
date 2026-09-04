@@ -14,11 +14,12 @@
     1 > address
     [this] > init
       seq > @
-        TRUE
-    # s :: null -> void
+        *
+          true
     [this] > s
       seq > @
-        statementExpression_1
+        *
+          statementExpression_1
       [] > statementExpression_1
         class__System.out.println > @
           class__System.out
@@ -27,10 +28,10 @@
         class__String.constructor_2 > @
           class__String.new
           "s.s()"
-    # t1 :: null -> void
     [this] > t1
       seq > @
-        statementExpression_2
+        *
+          statementExpression_2
       [] > statementExpression_2
         class__System.out.println > @
           class__System.out
@@ -39,10 +40,10 @@
         class__String.constructor_2 > @
           class__String.new
           "t.t1()"
-    # t2 :: null -> void
     [this] > t2
       seq > @
-        statementExpression_3
+        *
+          statementExpression_3
       [] > statementExpression_3
         class__System.out.println > @
           class__System.out
@@ -51,12 +52,12 @@
         class__String.constructor_2 > @
           class__String.new
           "t.t2()"
-  # null :: null -> void
   [this] > constructor
     seq > @
-      initialization
-      statementExpression_4
-      this
+      *
+        initialization
+        statementExpression_4
+        this
     [] > initialization
       this.init > @
         this
@@ -74,11 +75,12 @@
     1 > address
     [this] > init
       seq > @
-        TRUE
-  # main :: String[] -> void
+        *
+          true
   [args] > main
     seq > @
-      statementExpression_5
+      *
+        statementExpression_5
     [] > statementExpression_5
       this.foo > @
         this
@@ -86,19 +88,15 @@
     [] > instanceCreation_1
       class__T.constructor > @
         class__T.new
-  # null :: null -> void
   [this] > constructor
     seq > @
-      initialization
-      statementExpression_6
-      this
+      *
+        initialization
+        statementExpression_6
+        this
     [] > initialization
       this.init > @
         this
     [] > statementExpression_6
       this.super.constructor > @
         this.super
-
-[args...] > main
-  class__TisIntersectionType.main > @
-    *

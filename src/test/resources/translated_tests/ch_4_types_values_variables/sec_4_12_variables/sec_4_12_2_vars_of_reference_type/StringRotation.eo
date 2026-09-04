@@ -14,14 +14,15 @@
     1 > address
     [this] > init
       seq > @
-        TRUE
-  # main :: String[] -> void
+        *
+          true
   [args] > main
     seq > @
-      variableDeclaration_1
-      variableDeclaration_2
-      ifThenElse_1
-      statementExpression_1
+      *
+        variableDeclaration_1
+        variableDeclaration_2
+        ifThenElse_1
+        statementExpression_1
     cage > str1
     [] > variableDeclaration_1
       str1.write > @
@@ -57,7 +58,8 @@
         str2
     [] > block_1
       seq > @
-        statementExpression_2
+        *
+          statementExpression_2
       [] > statementExpression_2
         class__System.out.println > @
           class__System.out
@@ -68,8 +70,9 @@
           "Second string is not a rotation of first string"
     [] > block_2
       seq > @
-        statementExpression_3
-        ifThenElse_2
+        *
+          statementExpression_3
+          ifThenElse_2
       [] > statementExpression_3
         simpleReference_3.write > @
           methodInvocation_3
@@ -124,19 +127,15 @@
       class__String.constructor_2 > @
         class__String.new
         "passed"
-  # null :: null -> void
   [this] > constructor
     seq > @
-      initialization
-      statementExpression_6
-      this
+      *
+        initialization
+        statementExpression_6
+        this
     [] > initialization
       this.init > @
         this
     [] > statementExpression_6
       this.super.constructor > @
         this.super
-
-[args...] > main
-  class__StringRotation.main > @
-    *

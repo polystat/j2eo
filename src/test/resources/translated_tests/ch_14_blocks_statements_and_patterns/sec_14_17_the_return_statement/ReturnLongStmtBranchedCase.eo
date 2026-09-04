@@ -16,12 +16,13 @@
     1 > address
     [this] > init
       seq > @
-        TRUE
-  # max :: long -> long -> long
+        *
+          true
   [a b] > max
     seq > @
-      ifThenElse_1
-      return_1
+      *
+        ifThenElse_1
+        return_1
     [] > ifThenElse_1
       binary_1.if > @
         block_1
@@ -35,22 +36,23 @@
       b > @
     [] > block_1
       seq > @
-        return_2
+        *
+          return_2
       [] > return_2
         simpleReference_3 > @
       [] > simpleReference_3
         b > @
     [] > empty_1
-      TRUE > @
+      true > @
     [] > return_1
       simpleReference_4 > @
     [] > simpleReference_4
       a > @
-  # main :: String[] -> void
   [args] > main
     seq > @
-      statementExpression_1
-      statementExpression_2
+      *
+        statementExpression_1
+        statementExpression_2
     [] > statementExpression_1
       class__System.out.println > @
         class__System.out
@@ -76,19 +78,15 @@
       class__String.constructor_2 > @
         class__String.new
         "passed"
-  # null :: null -> void
   [this] > constructor
     seq > @
-      initialization
-      statementExpression_3
-      this
+      *
+        initialization
+        statementExpression_3
+        this
     [] > initialization
       this.init > @
         this
     [] > statementExpression_3
       this.super.constructor > @
         this.super
-
-[args...] > main
-  class__ReturnLongStmtBranchedCase.main > @
-    *

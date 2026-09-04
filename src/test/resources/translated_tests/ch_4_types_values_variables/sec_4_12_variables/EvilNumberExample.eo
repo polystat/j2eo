@@ -17,15 +17,16 @@
     1 > address
     [this] > init
       seq > @
-        TRUE
-  # checkNumber :: int -> boolean
+        *
+          true
   [n] > checkNumber
     seq > @
-      variableDeclaration_1
-      variableDeclaration_2
-      while_1
-      ifThenElse_1
-      return_1
+      *
+        variableDeclaration_1
+        variableDeclaration_2
+        while_1
+        ifThenElse_1
+        return_1
     prim__long.constructor_1 > binaryNumber
       prim__long.new
     [] > variableDeclaration_1
@@ -65,8 +66,9 @@
         0
     [] > block_1
       seq > @
-        ifThenElse_2
-        statementExpression_1
+        *
+          ifThenElse_2
+          statementExpression_1
       [] > ifThenElse_2
         binary_2.if > @
           statementExpression_2
@@ -92,7 +94,7 @@
       [] > simpleReference_4
         count > @
       [] > empty_2
-        TRUE > @
+        true > @
       [] > statementExpression_1
         simpleReference_5.write > @
           binary_4
@@ -134,21 +136,21 @@
         prim__boolean.new
         TRUE
     [] > empty_3
-      TRUE > @
+      true > @
     [] > return_1
       literal_9 > @
     [] > literal_9
       prim__boolean.constructor_2 > @
         prim__boolean.new
         FALSE
-  # convertToBinary :: int -> long
   [number] > convertToBinary
     seq > @
-      variableDeclaration_3
-      variableDeclaration_4
-      variableDeclaration_5
-      while_2
-      return_3
+      *
+        variableDeclaration_3
+        variableDeclaration_4
+        variableDeclaration_5
+        while_2
+        return_3
     prim__long.constructor_1 > binaryNumber
       prim__long.new
     [] > variableDeclaration_3
@@ -197,10 +199,11 @@
         0
     [] > block_2
       seq > @
-        statementExpression_3
-        statementExpression_4
-        statementExpression_5
-        statementExpression_6
+        *
+          statementExpression_3
+          statementExpression_4
+          statementExpression_5
+          statementExpression_6
       [] > statementExpression_3
         simpleReference_9.write > @
           binary_8
@@ -259,13 +262,13 @@
       simpleReference_18 > @
     [] > simpleReference_18
       binaryNumber > @
-  # main :: String[] -> void
   [args] > main
     seq > @
-      variableDeclaration_6
-      statementExpression_7
-      ifThenElse_3
-      statementExpression_8
+      *
+        variableDeclaration_6
+        statementExpression_7
+        ifThenElse_3
+        statementExpression_8
     prim__int.constructor_1 > num
       prim__int.new
     [] > variableDeclaration_6
@@ -330,19 +333,15 @@
       class__String.constructor_2 > @
         class__String.new
         "passed"
-  # null :: null -> void
   [this] > constructor
     seq > @
-      initialization
-      statementExpression_11
-      this
+      *
+        initialization
+        statementExpression_11
+        this
     [] > initialization
       this.init > @
         this
     [] > statementExpression_11
       this.super.constructor > @
         this.super
-
-[args...] > main
-  class__EvilNumberExample.main > @
-    *

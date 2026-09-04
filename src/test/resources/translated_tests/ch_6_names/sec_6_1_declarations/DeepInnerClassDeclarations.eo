@@ -14,7 +14,8 @@
     1 > address
     [this] > init
       seq > @
-        TRUE
+        *
+          true
   [] > class__B
     class__Object > super
     super > @
@@ -25,7 +26,8 @@
       1 > address
       [this] > init
         seq > @
-          TRUE
+          *
+            true
     [] > class__C
       class__Object > super
       super > @
@@ -36,7 +38,8 @@
         1 > address
         [this] > init
           seq > @
-            TRUE
+            *
+              true
       [] > class__D
         class__Object > super
         super > @
@@ -47,7 +50,8 @@
           1 > address
           [this] > init
             seq > @
-              TRUE
+              *
+                true
         [] > class__E
           class__Object > super
           super > @
@@ -58,61 +62,62 @@
             1 > address
             [this] > init
               seq > @
-                TRUE
-          # null :: null -> void
+                *
+                  true
           [this] > constructor
             seq > @
-              initialization
-              statementExpression_1
-              this
+              *
+                initialization
+                statementExpression_1
+                this
             [] > initialization
               this.init > @
                 this
             [] > statementExpression_1
               this.super.constructor > @
                 this.super
-        # null :: null -> void
         [this] > constructor
           seq > @
-            initialization
-            statementExpression_2
-            this
+            *
+              initialization
+              statementExpression_2
+              this
           [] > initialization
             this.init > @
               this
           [] > statementExpression_2
             this.super.constructor > @
               this.super
-      # null :: null -> void
       [this] > constructor
         seq > @
-          initialization
-          statementExpression_3
-          this
+          *
+            initialization
+            statementExpression_3
+            this
         [] > initialization
           this.init > @
             this
         [] > statementExpression_3
           this.super.constructor > @
             this.super
-    # null :: null -> void
     [this] > constructor
       seq > @
-        initialization
-        statementExpression_4
-        this
+        *
+          initialization
+          statementExpression_4
+          this
       [] > initialization
         this.init > @
           this
       [] > statementExpression_4
         this.super.constructor > @
           this.super
-  # null :: null -> void
   [this] > constructor
     seq > @
-      initialization
-      statementExpression_5
-      this
+      *
+        initialization
+        statementExpression_5
+        this
     [] > initialization
       this.init > @
         this
@@ -130,11 +135,12 @@
     1 > address
     [this] > init
       seq > @
-        TRUE
-  # main :: String[] -> void
+        *
+          true
   [args] > main
     seq > @
-      statementExpression_6
+      *
+        statementExpression_6
     [] > statementExpression_6
       class__System.out.println > @
         class__System.out
@@ -143,19 +149,15 @@
       class__String.constructor_2 > @
         class__String.new
         "passed"
-  # null :: null -> void
   [this] > constructor
     seq > @
-      initialization
-      statementExpression_7
-      this
+      *
+        initialization
+        statementExpression_7
+        this
     [] > initialization
       this.init > @
         this
     [] > statementExpression_7
       this.super.constructor > @
         this.super
-
-[args...] > main
-  class__DeepInnerClassDeclarations.main > @
-    *

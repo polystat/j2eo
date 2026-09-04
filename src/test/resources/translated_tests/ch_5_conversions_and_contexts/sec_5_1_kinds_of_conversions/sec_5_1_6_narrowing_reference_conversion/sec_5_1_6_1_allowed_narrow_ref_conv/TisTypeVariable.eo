@@ -14,23 +14,24 @@
     1 > address
     [this] > init
       seq > @
-        TRUE
-    # f :: null -> String
+        *
+          true
     [this] > f
       seq > @
-        return_1
+        *
+          return_1
       [] > return_1
         literal_1 > @
       [] > literal_1
         class__String.constructor_2 > @
           class__String.new
           "s.f()"
-  # null :: null -> void
   [this] > constructor
     seq > @
-      initialization
-      statementExpression_1
-      this
+      *
+        initialization
+        statementExpression_1
+        this
     [] > initialization
       this.init > @
         this
@@ -48,23 +49,24 @@
     1 > address
     [this] > init
       seq > @
-        TRUE
-    # f :: null -> String
+        *
+          true
     [this] > f
       seq > @
-        return_2
+        *
+          return_2
       [] > return_2
         literal_2 > @
       [] > literal_2
         class__String.constructor_2 > @
           class__String.new
           "t.f()"
-  # null :: null -> void
   [this] > constructor
     seq > @
-      initialization
-      statementExpression_2
-      this
+      *
+        initialization
+        statementExpression_2
+        this
     [] > initialization
       this.init > @
         this
@@ -82,12 +84,13 @@
     1 > address
     [this] > init
       seq > @
-        TRUE
-  # main :: String[] -> void
+        *
+          true
   [args] > main
     seq > @
-      statementExpression_3
-      statementExpression_4
+      *
+        statementExpression_3
+        statementExpression_4
     [] > statementExpression_3
       this.foo > @
         this
@@ -99,19 +102,15 @@
       class__String.constructor_2 > @
         class__String.new
         "passed"
-  # null :: null -> void
   [this] > constructor
     seq > @
-      initialization
-      statementExpression_5
-      this
+      *
+        initialization
+        statementExpression_5
+        this
     [] > initialization
       this.init > @
         this
     [] > statementExpression_5
       this.super.constructor > @
         this.super
-
-[args...] > main
-  class__TisTypeVariable.main > @
-    *

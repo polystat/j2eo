@@ -17,19 +17,20 @@
     1 > address
     [this] > init
       seq > @
-        TRUE
-  # isKeith :: int -> boolean
+        *
+          true
   [x] > isKeith
     seq > @
-      variableDeclaration_1
-      variableDeclaration_2
-      variableDeclaration_3
-      while_1
-      statementExpression_1
-      variableDeclaration_4
-      variableDeclaration_5
-      while_2
-      return_1
+      *
+        variableDeclaration_1
+        variableDeclaration_2
+        variableDeclaration_3
+        while_1
+        statementExpression_1
+        variableDeclaration_4
+        variableDeclaration_5
+        while_2
+        return_1
     cage > terms
     [] > variableDeclaration_1
       terms.write > @
@@ -74,9 +75,10 @@
         0
     [] > block_1
       seq > @
-        statementExpression_2
-        statementExpression_3
-        statementExpression_4
+        *
+          statementExpression_2
+          statementExpression_3
+          statementExpression_4
       [] > statementExpression_2
         terms.add > @
           terms
@@ -147,10 +149,11 @@
       x > @
     [] > block_2
       seq > @
-        statementExpression_5
-        statementExpression_6
-        statementExpression_7
-        statementExpression_8
+        *
+          statementExpression_5
+          statementExpression_6
+          statementExpression_7
+          statementExpression_8
       [] > statementExpression_5
         simpleReference_13.write > @
           literal_6
@@ -183,13 +186,13 @@
       next_term > @
     [] > simpleReference_18
       x > @
-  # main :: String[] -> void
   [args] > main
     seq > @
-      ifThenElse_1
-      ifThenElse_2
-      ifThenElse_3
-      statementExpression_9
+      *
+        ifThenElse_1
+        ifThenElse_2
+        ifThenElse_3
+        statementExpression_9
     [] > ifThenElse_1
       methodInvocation_1.if > @
         statementExpression_10
@@ -282,19 +285,15 @@
       class__String.constructor_2 > @
         class__String.new
         "passed"
-  # null :: null -> void
   [this] > constructor
     seq > @
-      initialization
-      statementExpression_16
-      this
+      *
+        initialization
+        statementExpression_16
+        this
     [] > initialization
       this.init > @
         this
     [] > statementExpression_16
       this.super.constructor > @
         this.super
-
-[args...] > main
-  class__KeithNumberExample.main > @
-    *

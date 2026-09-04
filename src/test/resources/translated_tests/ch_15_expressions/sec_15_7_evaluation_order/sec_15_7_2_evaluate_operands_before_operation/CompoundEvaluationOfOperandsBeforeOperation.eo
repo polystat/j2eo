@@ -15,12 +15,13 @@
     1 > address
     [this] > init
       seq > @
-        TRUE
-  # returnInt2 :: Integer -> Integer
+        *
+          true
   [integer] > returnInt2
     seq > @
-      statementExpression_1
-      return_1
+      *
+        statementExpression_1
+        return_1
     [] > statementExpression_1
       class__System.out.println > @
         class__System.out
@@ -31,11 +32,11 @@
       simpleReference_2 > @
     [] > simpleReference_2
       integer > @
-  # returnInt1 :: Integer -> Integer
   [integer] > returnInt1
     seq > @
-      statementExpression_2
-      return_2
+      *
+        statementExpression_2
+        return_2
     [] > statementExpression_2
       class__System.out.println > @
         class__System.out
@@ -55,13 +56,13 @@
         simpleReference_5
     [] > simpleReference_5
       integer > @
-  # main :: String[] -> void
   [args] > main
     seq > @
-      variableDeclaration_1
-      statementExpression_3
-      statementExpression_4
-      statementExpression_5
+      *
+        variableDeclaration_1
+        statementExpression_3
+        statementExpression_4
+        statementExpression_5
     cage > integer
     [] > variableDeclaration_1
       integer.write > @
@@ -102,19 +103,15 @@
       class__String.constructor_2 > @
         class__String.new
         "passed"
-  # null :: null -> void
   [this] > constructor
     seq > @
-      initialization
-      statementExpression_6
-      this
+      *
+        initialization
+        statementExpression_6
+        this
     [] > initialization
       this.init > @
         this
     [] > statementExpression_6
       this.super.constructor > @
         this.super
-
-[args...] > main
-  class__CompoundEvaluationOfOperandsBeforeOperation.main > @
-    *

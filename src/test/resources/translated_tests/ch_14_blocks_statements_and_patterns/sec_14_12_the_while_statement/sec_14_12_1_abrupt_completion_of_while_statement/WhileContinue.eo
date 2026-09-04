@@ -15,13 +15,14 @@
     1 > address
     [this] > init
       seq > @
-        TRUE
-  # main :: String[] -> void
+        *
+          true
   [args] > main
     seq > @
-      variableDeclaration_1
-      while_1
-      statementExpression_1
+      *
+        variableDeclaration_1
+        while_1
+        statementExpression_1
     prim__int.constructor_1 > i
       prim__int.new
     [] > variableDeclaration_1
@@ -50,8 +51,9 @@
         10
     [] > block_1
       seq > @
-        ifThenElse_1
-        statementExpression_2
+        *
+          ifThenElse_1
+          statementExpression_2
       [] > ifThenElse_1
         binary_2.if > @
           block_2
@@ -67,9 +69,10 @@
           5
       [] > block_2
         seq > @
-          continue_1
+          *
+            continue_1
       [] > empty_2
-        TRUE > @
+        true > @
       [] > statementExpression_2
         class__System.out.println > @
           class__System.out
@@ -84,19 +87,15 @@
       class__String.constructor_2 > @
         class__String.new
         "passed"
-  # null :: null -> void
   [this] > constructor
     seq > @
-      initialization
-      statementExpression_3
-      this
+      *
+        initialization
+        statementExpression_3
+        this
     [] > initialization
       this.init > @
         this
     [] > statementExpression_3
       this.super.constructor > @
         this.super
-
-[args...] > main
-  class__WhileContinue.main > @
-    *

@@ -14,12 +14,13 @@
     1 > address
     [this] > init
       seq > @
-        TRUE
-    # m :: null -> void
+        *
+          true
     [this] > m
       seq > @
-        variableDeclaration_1
-        statementExpression_1
+        *
+          variableDeclaration_1
+          statementExpression_1
       cage > p
       [] > variableDeclaration_1
         p.write > @
@@ -37,12 +38,12 @@
         class__String.constructor_2 > @
           class__String.new
           "Hello, world!"
-  # null :: null -> void
   [this] > constructor
     seq > @
-      initialization
-      statementExpression_2
-      this
+      *
+        initialization
+        statementExpression_2
+        this
     [] > initialization
       this.init > @
         this
@@ -60,12 +61,13 @@
     1 > address
     [this] > init
       seq > @
-        TRUE
-  # main :: String[] -> void
+        *
+          true
   [args] > main
     seq > @
-      statementExpression_3
-      statementExpression_4
+      *
+        statementExpression_3
+        statementExpression_4
     [] > statementExpression_3
       unsupported_qualifier.m > @
         unsupported_qualifier
@@ -77,19 +79,15 @@
       class__String.constructor_2 > @
         class__String.new
         "passed"
-  # null :: null -> void
   [this] > constructor
     seq > @
-      initialization
-      statementExpression_5
-      this
+      *
+        initialization
+        statementExpression_5
+        this
     [] > initialization
       this.init > @
         this
     [] > statementExpression_5
       this.super.constructor > @
         this.super
-
-[args...] > main
-  class__InnerClassAnonymousCase.main > @
-    *

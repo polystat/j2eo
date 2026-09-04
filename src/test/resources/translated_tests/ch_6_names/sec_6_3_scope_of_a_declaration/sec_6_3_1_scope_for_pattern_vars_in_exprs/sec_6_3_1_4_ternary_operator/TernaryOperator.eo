@@ -15,15 +15,16 @@
     1 > address
     [this] > init
       seq > @
-        TRUE
-  # main :: String[] -> void
+        *
+          true
   [args] > main
     seq > @
-      variableDeclaration_1
-      variableDeclaration_2
-      statementExpression_1
-      variableDeclaration_3
-      statementExpression_2
+      *
+        variableDeclaration_1
+        variableDeclaration_2
+        statementExpression_1
+        variableDeclaration_3
+        statementExpression_2
     cage > readerObj
     [] > variableDeclaration_1
       readerObj.write > @
@@ -64,12 +65,12 @@
       class__String.constructor_2 > @
         class__String.new
         "pa"
-  # null :: null -> void
   [this] > constructor
     seq > @
-      initialization
-      statementExpression_3
-      this
+      *
+        initialization
+        statementExpression_3
+        this
     [] > initialization
       this.init > @
         this
@@ -87,23 +88,24 @@
     1 > address
     [this] > init
       seq > @
-        TRUE
-    # read :: null -> String
+        *
+          true
     [this] > read
       seq > @
-        return_1
+        *
+          return_1
       [] > return_1
         literal_2 > @
       [] > literal_2
         class__String.constructor_2 > @
           class__String.new
           "not passed"
-  # null :: null -> void
   [this] > constructor
     seq > @
-      initialization
-      statementExpression_4
-      this
+      *
+        initialization
+        statementExpression_4
+        this
     [] > initialization
       this.init > @
         this
@@ -121,30 +123,27 @@
     1 > address
     [this] > init
       seq > @
-        TRUE
-    # read :: null -> String
+        *
+          true
     [this] > read
       seq > @
-        return_2
+        *
+          return_2
       [] > return_2
         literal_3 > @
       [] > literal_3
         class__String.constructor_2 > @
           class__String.new
           "ssed"
-  # null :: null -> void
   [this] > constructor
     seq > @
-      initialization
-      statementExpression_5
-      this
+      *
+        initialization
+        statementExpression_5
+        this
     [] > initialization
       this.init > @
         this
     [] > statementExpression_5
       this.super.constructor > @
         this.super
-
-[args...] > main
-  class__TernaryOperator.main > @
-    *

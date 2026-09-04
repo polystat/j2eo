@@ -16,16 +16,17 @@
     1 > address
     [this] > init
       seq > @
-        TRUE
-  # secondLargest :: int[] -> int
+        *
+          true
   [arr] > secondLargest
     seq > @
-      variableDeclaration_1
-      variableDeclaration_2
-      statementExpression_1
-      statementExpression_2
-      statementExpression_3
-      return_1
+      *
+        variableDeclaration_1
+        variableDeclaration_2
+        statementExpression_1
+        statementExpression_2
+        statementExpression_3
+        return_1
     prim__int.constructor_1 > fmax
       prim__int.new
     [] > variableDeclaration_1
@@ -82,15 +83,15 @@
       simpleReference_5 > @
     [] > simpleReference_5
       smax > @
-  # main :: String[] -> void
   [args] > main
     seq > @
-      variableDeclaration_3
-      variableDeclaration_4
-      statementExpression_4
-      statementExpression_5
-      statementExpression_6
-      statementExpression_7
+      *
+        variableDeclaration_3
+        variableDeclaration_4
+        statementExpression_4
+        statementExpression_5
+        statementExpression_6
+        statementExpression_7
     prim__int.constructor_1 > length
       prim__int.new
     [] > variableDeclaration_3
@@ -117,7 +118,7 @@
     [] > simpleReference_6
       numbers > @
     [] > arrayCreation_1
-      FALSE > @
+      false > @
     [] > statementExpression_5
       for_loop_placeholder > @
     [] > statementExpression_6
@@ -145,19 +146,15 @@
       class__String.constructor_2 > @
         class__String.new
         "passed"
-  # null :: null -> void
   [this] > constructor
     seq > @
-      initialization
-      statementExpression_8
-      this
+      *
+        initialization
+        statementExpression_8
+        this
     [] > initialization
       this.init > @
         this
     [] > statementExpression_8
       this.super.constructor > @
         this.super
-
-[args...] > main
-  class__SecondLargestElement.main > @
-    *

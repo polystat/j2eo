@@ -22,12 +22,13 @@ class TestEOMetaObjects {
         assertEquals(
             """
             seq > @
-              function1
-                arg1
-                arg2
-              function2
-                arg1
-                arg2
+              *
+                function1
+                  arg1
+                  arg2
+                function2
+                  arg1
+                  arg2
             """.trimIndent(),
             expr.generateEO(0),
         )
@@ -48,22 +49,21 @@ class TestEOMetaObjects {
                     EOCopy("call1", "arg1".eoDot(), "arg2".eoDot()),
                     EOCopy("call2", "arg1".eoDot(), "arg2".eoDot()),
                 ),
-                "comment",
             )
 
         assertEquals(
             """
-            # comment
-            [arg1 arg2 vararg...] > function
+            [arg1 arg2 vararg] > function
               1 > bnd1
               2 > bnd2
               seq > @
-                call1
-                  arg1
-                  arg2
-                call2
-                  arg1
-                  arg2
+                *
+                  call1
+                    arg1
+                    arg2
+                  call2
+                    arg1
+                    arg2
             """.trimIndent(),
             expr.generateEO(0),
         )

@@ -14,23 +14,24 @@
     1 > address
     [this] > init
       seq > @
-        TRUE
-    # f :: null -> String
+        *
+          true
     [this] > f
       seq > @
-        return_1
+        *
+          return_1
       [] > return_1
         literal_1 > @
       [] > literal_1
         class__String.constructor_2 > @
           class__String.new
           "b.f()"
-  # null :: null -> void
   [this] > constructor
     seq > @
-      initialization
-      statementExpression_1
-      this
+      *
+        initialization
+        statementExpression_1
+        this
     [] > initialization
       this.init > @
         this
@@ -48,15 +49,16 @@
     1 > address
     [this] > init
       seq > @
-        TRUE
-  # main :: String[] -> void
+        *
+          true
   [args] > main
     seq > @
-      variableDeclaration_1
-      statementExpression_2
-      statementExpression_3
-      statementExpression_4
-      statementExpression_5
+      *
+        variableDeclaration_1
+        statementExpression_2
+        statementExpression_3
+        statementExpression_4
+        statementExpression_5
     cage > array
     [] > variableDeclaration_1
       array.write > @
@@ -110,19 +112,15 @@
       class__String.constructor_2 > @
         class__String.new
         "passed"
-  # null :: null -> void
   [this] > constructor
     seq > @
-      initialization
-      statementExpression_6
-      this
+      *
+        initialization
+        statementExpression_6
+        this
     [] > initialization
       this.init > @
         this
     [] > statementExpression_6
       this.super.constructor > @
         this.super
-
-[args...] > main
-  class__RefTypeArrayImplementVar.main > @
-    *

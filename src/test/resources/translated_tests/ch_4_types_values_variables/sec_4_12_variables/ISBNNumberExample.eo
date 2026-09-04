@@ -17,21 +17,22 @@
     1 > address
     [this] > init
       seq > @
-        TRUE
-  # checkISBNNumber :: long -> boolean
+        *
+          true
   [number] > checkISBNNumber
     seq > @
-      variableDeclaration_1
-      variableDeclaration_2
-      variableDeclaration_3
-      variableDeclaration_4
-      variableDeclaration_5
-      variableDeclaration_6
-      statementExpression_1
-      ifThenElse_1
-      statementExpression_2
-      ifThenElse_2
-      return_1
+      *
+        variableDeclaration_1
+        variableDeclaration_2
+        variableDeclaration_3
+        variableDeclaration_4
+        variableDeclaration_5
+        variableDeclaration_6
+        statementExpression_1
+        ifThenElse_1
+        statementExpression_2
+        ifThenElse_2
+        return_1
     prim__int.constructor_1 > sum
       prim__int.new
     [] > variableDeclaration_1
@@ -46,22 +47,22 @@
     prim__int.constructor_1 > i
       prim__int.new
     [] > variableDeclaration_2
-      TRUE > @
+      true > @
     prim__int.constructor_1 > t
       prim__int.new
     [] > variableDeclaration_3
-      TRUE > @
+      true > @
     prim__int.constructor_1 > intNumber
       prim__int.new
     [] > variableDeclaration_4
-      TRUE > @
+      true > @
     prim__int.constructor_1 > dNumber
       prim__int.new
     [] > variableDeclaration_5
-      TRUE > @
+      true > @
     cage > strNumber
     [] > variableDeclaration_6
-      TRUE > @
+      true > @
     [] > statementExpression_1
       simpleReference_1.write > @
         binary_1
@@ -92,7 +93,8 @@
         10
     [] > block_1
       seq > @
-        return_2
+        *
+          return_2
       [] > return_2
         literal_4 > @
       [] > literal_4
@@ -100,7 +102,7 @@
           prim__boolean.new
           FALSE
     [] > empty_1
-      TRUE > @
+      true > @
     [] > statementExpression_2
       for_loop_placeholder > @
     [] > ifThenElse_2
@@ -127,7 +129,8 @@
         0
     [] > block_2
       seq > @
-        return_3
+        *
+          return_3
       [] > return_3
         literal_7 > @
       [] > literal_7
@@ -135,31 +138,31 @@
           prim__boolean.new
           TRUE
     [] > empty_2
-      TRUE > @
+      true > @
     [] > return_1
       literal_8 > @
     [] > literal_8
       prim__boolean.constructor_2 > @
         prim__boolean.new
         FALSE
-  # main :: String -> void
   [args[]] > main
     seq > @
-      variableDeclaration_7
-      variableDeclaration_8
-      statementExpression_3
-      statementExpression_4
-      ifThenElse_3
-      ifThenElse_4
-      statementExpression_5
+      *
+        variableDeclaration_7
+        variableDeclaration_8
+        statementExpression_3
+        statementExpression_4
+        ifThenElse_3
+        ifThenElse_4
+        statementExpression_5
     prim__long.constructor_1 > n1
       prim__long.new
     [] > variableDeclaration_7
-      TRUE > @
+      true > @
     prim__long.constructor_1 > n2
       prim__long.new
     [] > variableDeclaration_8
-      TRUE > @
+      true > @
     [] > statementExpression_3
       simpleReference_5.write > @
         literal_9
@@ -258,12 +261,12 @@
       class__String.constructor_2 > @
         class__String.new
         "passed"
-  # null :: null -> void
   [this] > constructor
     seq > @
-      initialization
-      statementExpression_10
-      this
+      *
+        initialization
+        statementExpression_10
+        this
     [] > initialization
       this.init > @
         this

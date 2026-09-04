@@ -16,13 +16,14 @@
     1 > address
     [this] > init
       seq > @
-        TRUE
-  # isPrime :: int -> boolean
+        *
+          true
   [n] > isPrime
     seq > @
-      ifThenElse_1
-      statementExpression_1
-      return_1
+      *
+        ifThenElse_1
+        statementExpression_1
+        return_1
     [] > ifThenElse_1
       binary_1.if > @
         return_2
@@ -43,7 +44,7 @@
         prim__boolean.new
         FALSE
     [] > empty_1
-      TRUE > @
+      true > @
     [] > statementExpression_1
       for_loop_placeholder > @
     [] > return_1
@@ -52,13 +53,13 @@
       prim__boolean.constructor_2 > @
         prim__boolean.new
         TRUE
-  # isEmirp :: int -> boolean
   [n] > isEmirp
     seq > @
-      ifThenElse_2
-      variableDeclaration_1
-      while_1
-      return_3
+      *
+        ifThenElse_2
+        variableDeclaration_1
+        while_1
+        return_3
     [] > ifThenElse_2
       binary_2.if > @
         return_4
@@ -83,7 +84,7 @@
         prim__boolean.new
         FALSE
     [] > empty_2
-      TRUE > @
+      true > @
     prim__int.constructor_1 > reverse
       prim__int.new
     [] > variableDeclaration_1
@@ -110,9 +111,10 @@
         0
     [] > block_1
       seq > @
-        variableDeclaration_2
-        statementExpression_2
-        statementExpression_3
+        *
+          variableDeclaration_2
+          statementExpression_2
+          statementExpression_3
       prim__int.constructor_1 > digit
         prim__int.new
       [] > variableDeclaration_2
@@ -170,12 +172,12 @@
         simpleReference_10
     [] > simpleReference_10
       reverse > @
-  # main :: String -> void
   [args[]] > main
     seq > @
-      variableDeclaration_3
-      ifThenElse_3
-      statementExpression_4
+      *
+        variableDeclaration_3
+        ifThenElse_3
+        statementExpression_4
     prim__int.constructor_1 > n
       prim__int.new
     [] > variableDeclaration_3
@@ -228,12 +230,12 @@
       class__String.constructor_2 > @
         class__String.new
         "passed"
-  # null :: null -> void
   [this] > constructor
     seq > @
-      initialization
-      statementExpression_7
-      this
+      *
+        initialization
+        statementExpression_7
+        this
     [] > initialization
       this.init > @
         this

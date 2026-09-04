@@ -28,10 +28,8 @@ SOFTWARE.
   <artifactId>j2eo-testing</artifactId>
   <version>1.0-SNAPSHOT</version>
   <properties>
-    <eolang.version>0.23.19</eolang.version>
-    <maven.compiler.source>16</maven.compiler.source>
-    <maven.compiler.target>16</maven.compiler.target>
-    <java.version>16</java.version>
+    <eolang.version>0.63.1</eolang.version>
+    <maven.compiler.release>17</maven.compiler.release>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
   </properties>
@@ -47,7 +45,7 @@ SOFTWARE.
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-dependency-plugin</artifactId>
-        <version>3.6.1</version>
+        <version>3.9.0</version>
         <executions>
           <execution>
             <phase>process-resources</phase>
@@ -69,32 +67,24 @@ SOFTWARE.
         </executions>
       </plugin>
       <plugin>
-        <artifactId>maven-compiler-plugin</artifactId>
-        <version>3.8.1</version>
-        <configuration>
-          <source>16</source>
-          <target>16</target>
-        </configuration>
-      </plugin>
-      <plugin>
         <groupId>org.eolang</groupId>
         <artifactId>eo-maven-plugin</artifactId>
         <version>${eolang.version}</version>
         <configuration>
-          <failOnError>true</failOnError>
+          <sourcesDir>${project.basedir}</sourcesDir>
+          <targetDir>${project.basedir}/target</targetDir>
+          <strictFileNames>false</strictFileNames>
+          <skipLinting>true</skipLinting>
+          <failOnWarning>false</failOnWarning>
+          <transpileTests>false</transpileTests>
         </configuration>
         <executions>
           <execution>
             <goals>
               <goal>register</goal>
-              <goal>assemble</goal>
+              <goal>compile</goal>
               <goal>transpile</goal>
             </goals>
-            <configuration>
-              <sourcesDir>${project.basedir}</sourcesDir>
-              <targetDir>${project.basedir}/target</targetDir>
-              <hash>0.23.19</hash>
-            </configuration>
           </execution>
         </executions>
       </plugin>

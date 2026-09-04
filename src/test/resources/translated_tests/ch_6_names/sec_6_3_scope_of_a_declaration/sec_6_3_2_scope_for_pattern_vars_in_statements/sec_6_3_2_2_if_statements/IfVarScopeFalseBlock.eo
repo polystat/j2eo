@@ -14,13 +14,14 @@
     1 > address
     [this] > init
       seq > @
-        TRUE
-  # main :: String[] -> void
+        *
+          true
   [args] > main
     seq > @
-      variableDeclaration_1
-      ifThenElse_1
-      statementExpression_1
+      *
+        variableDeclaration_1
+        ifThenElse_1
+        statementExpression_1
     cage > str
     [] > variableDeclaration_1
       str.write > @
@@ -43,7 +44,8 @@
       instance_of_placeholder > @
     [] > block_1
       seq > @
-        statementExpression_2
+        *
+          statementExpression_2
       [] > statementExpression_2
         class__System.out.println > @
           class__System.out
@@ -54,8 +56,9 @@
           "failed"
     [] > block_2
       seq > @
-        statementExpression_3
-        statementExpression_4
+        *
+          statementExpression_3
+          statementExpression_4
       [] > statementExpression_3
         simpleReference_1.write > @
           binary_1
@@ -91,19 +94,15 @@
       class__String.constructor_2 > @
         class__String.new
         "passed"
-  # null :: null -> void
   [this] > constructor
     seq > @
-      initialization
-      statementExpression_5
-      this
+      *
+        initialization
+        statementExpression_5
+        this
     [] > initialization
       this.init > @
         this
     [] > statementExpression_5
       this.super.constructor > @
         this.super
-
-[args...] > main
-  class__IfVarScopeTrueBlock.main > @
-    *

@@ -15,12 +15,13 @@
     1 > address
     [this] > init
       seq > @
-        TRUE
-  # main :: String[] -> void
+        *
+          true
   [args] > main
     seq > @
-      statementExpression_1
-      statementExpression_2
+      *
+        statementExpression_1
+        statementExpression_2
     [] > statementExpression_1
       unsupported_qualifier.test > @
         unsupported_qualifier
@@ -32,12 +33,12 @@
       class__String.constructor_2 > @
         class__String.new
         "passed"
-  # null :: null -> void
   [this] > constructor
     seq > @
-      initialization
-      statementExpression_3
-      this
+      *
+        initialization
+        statementExpression_3
+        this
     [] > initialization
       this.init > @
         this
@@ -55,23 +56,24 @@
     1 > address
     [this] > init
       seq > @
-        TRUE
-    # x :: null -> int
+        *
+          true
     [this] > x
       seq > @
-        return_1
+        *
+          return_1
       [] > return_1
         literal_2 > @
       [] > literal_2
         prim__int.constructor_2 > @
           prim__int.new
           0
-  # null :: null -> void
   [this] > constructor
     seq > @
-      initialization
-      statementExpression_4
-      this
+      *
+        initialization
+        statementExpression_4
+        this
     [] > initialization
       this.init > @
         this
@@ -89,23 +91,24 @@
     1 > address
     [this] > init
       seq > @
-        TRUE
-    # x :: null -> int
+        *
+          true
     [this] > x
       seq > @
-        return_2
+        *
+          return_2
       [] > return_2
         literal_3 > @
       [] > literal_3
         prim__int.constructor_2 > @
           prim__int.new
           1
-  # null :: null -> void
   [this] > constructor
     seq > @
-      initialization
-      statementExpression_5
-      this
+      *
+        initialization
+        statementExpression_5
+        this
     [] > initialization
       this.init > @
         this
@@ -123,23 +126,24 @@
     1 > address
     [this] > init
       seq > @
-        TRUE
-    # x :: null -> int
+        *
+          true
     [this] > x
       seq > @
-        return_3
+        *
+          return_3
       [] > return_3
         literal_4 > @
       [] > literal_4
         prim__int.constructor_2 > @
           prim__int.new
           2
-  # null :: null -> void
   [this] > constructor
     seq > @
-      initialization
-      statementExpression_6
-      this
+      *
+        initialization
+        statementExpression_6
+        this
     [] > initialization
       this.init > @
         this
@@ -157,25 +161,26 @@
     1 > address
     [this] > init
       seq > @
-        TRUE
-    # x :: null -> int
+        *
+          true
     [this] > x
       seq > @
-        return_4
+        *
+          return_4
       [] > return_4
         literal_5 > @
       [] > literal_5
         prim__int.constructor_2 > @
           prim__int.new
           3
-    # test :: null -> void
     [this] > test
       seq > @
-        statementExpression_7
-        statementExpression_8
-        statementExpression_9
-        statementExpression_10
-        statementExpression_11
+        *
+          statementExpression_7
+          statementExpression_8
+          statementExpression_9
+          statementExpression_10
+          statementExpression_11
       [] > statementExpression_7
         class__System.out.println > @
           class__System.out
@@ -211,19 +216,15 @@
       [] > methodInvocation_5
         unsupported_qualifier.x > @
           unsupported_qualifier
-  # null :: null -> void
   [this] > constructor
     seq > @
-      initialization
-      statementExpression_12
-      this
+      *
+        initialization
+        statementExpression_12
+        this
     [] > initialization
       this.init > @
         this
     [] > statementExpression_12
       this.super.constructor > @
         this.super
-
-[args...] > main
-  class__SimpleSuperExpressionMethodCase.main > @
-    *

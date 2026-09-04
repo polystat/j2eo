@@ -14,20 +14,21 @@
     1 > address
     [this] > init
       seq > @
-        TRUE
-  # main :: String[] -> void
+        *
+          true
   [args] > main
     seq > @
-      statementExpression_1
+      *
+        statementExpression_1
     [] > statementExpression_1
       unsupported_qualifier.method > @
         unsupported_qualifier
-  # null :: null -> void
   [this] > constructor
     seq > @
-      initialization
-      statementExpression_2
-      this
+      *
+        initialization
+        statementExpression_2
+        this
     [] > initialization
       this.init > @
         this
@@ -45,11 +46,12 @@
     1 > address
     [this] > init
       seq > @
-        TRUE
-    # method :: null -> void
+        *
+          true
     [this] > method
       seq > @
-        statementExpression_3
+        *
+          statementExpression_3
       [] > statementExpression_3
         class__System.out.println > @
           class__System.out
@@ -68,39 +70,36 @@
       1 > address
       [this] > init
         seq > @
-          TRUE
-      # method :: null -> void
+          *
+            true
       [this] > method
         seq > @
-          statementExpression_4
+          *
+            statementExpression_4
         [] > statementExpression_4
           class__SomeClass.this.method > @
             class__SomeClass.this
-    # null :: null -> void
     [this] > constructor
       seq > @
-        initialization
-        statementExpression_5
-        this
+        *
+          initialization
+          statementExpression_5
+          this
       [] > initialization
         this.init > @
           this
       [] > statementExpression_5
         this.super.constructor > @
           this.super
-  # null :: null -> void
   [this] > constructor
     seq > @
-      initialization
-      statementExpression_6
-      this
+      *
+        initialization
+        statementExpression_6
+        this
     [] > initialization
       this.init > @
         this
     [] > statementExpression_6
       this.super.constructor > @
         this.super
-
-[args...] > main
-  class__SimpleQualifiedThis.main > @
-    *

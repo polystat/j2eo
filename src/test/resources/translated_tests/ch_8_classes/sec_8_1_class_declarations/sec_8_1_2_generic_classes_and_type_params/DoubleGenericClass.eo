@@ -15,12 +15,13 @@
     1 > address
     [this] > init
       seq > @
-        TRUE
-  # main :: String[] -> void
+        *
+          true
   [args] > main
     seq > @
-      variableDeclaration_1
-      statementExpression_1
+      *
+        variableDeclaration_1
+        statementExpression_1
     cage > g
     [] > variableDeclaration_1
       g.write > @
@@ -43,12 +44,12 @@
       prim__int.constructor_2 > @
         prim__int.new
         123
-  # null :: null -> void
   [this] > constructor
     seq > @
-      initialization
-      statementExpression_2
-      this
+      *
+        initialization
+        statementExpression_2
+        this
     [] > initialization
       this.init > @
         this
@@ -66,12 +67,13 @@
     1 > address
     [this] > init
       seq > @
-        TRUE
-    # method :: T -> K -> void
+        *
+          true
     [this arg1 arg2] > method
       seq > @
-        statementExpression_3
-        statementExpression_4
+        *
+          statementExpression_3
+          statementExpression_4
       [] > statementExpression_3
         class__System.out.println > @
           class__System.out
@@ -90,19 +92,15 @@
           simpleReference_3
       [] > simpleReference_3
         arg1 > @
-  # null :: null -> void
   [this] > constructor
     seq > @
-      initialization
-      statementExpression_5
-      this
+      *
+        initialization
+        statementExpression_5
+        this
     [] > initialization
       this.init > @
         this
     [] > statementExpression_5
       this.super.constructor > @
         this.super
-
-[args...] > main
-  class__DoubleGenericClass.main > @
-    *

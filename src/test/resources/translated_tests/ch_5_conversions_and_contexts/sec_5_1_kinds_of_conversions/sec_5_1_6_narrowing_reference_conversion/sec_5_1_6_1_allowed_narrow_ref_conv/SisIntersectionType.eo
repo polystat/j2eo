@@ -14,11 +14,12 @@
     1 > address
     [this] > init
       seq > @
-        TRUE
-    # s1 :: null -> void
+        *
+          true
     [this] > s1
       seq > @
-        statementExpression_1
+        *
+          statementExpression_1
       [] > statementExpression_1
         class__System.out.println > @
           class__System.out
@@ -27,12 +28,12 @@
         class__String.constructor_2 > @
           class__String.new
           "s1.s1()"
-  # null :: null -> void
   [this] > constructor
     seq > @
-      initialization
-      statementExpression_2
-      this
+      *
+        initialization
+        statementExpression_2
+        this
     [] > initialization
       this.init > @
         this
@@ -50,11 +51,12 @@
     1 > address
     [this] > init
       seq > @
-        TRUE
-    # s1 :: null -> void
+        *
+          true
     [this] > s1
       seq > @
-        statementExpression_3
+        *
+          statementExpression_3
       [] > statementExpression_3
         class__System.out.println > @
           class__System.out
@@ -63,10 +65,10 @@
         class__String.constructor_2 > @
           class__String.new
           "t.s1()"
-    # s2 :: null -> void
     [this] > s2
       seq > @
-        statementExpression_4
+        *
+          statementExpression_4
       [] > statementExpression_4
         class__System.out.println > @
           class__System.out
@@ -75,12 +77,12 @@
         class__String.constructor_2 > @
           class__String.new
           "t.s2()"
-  # null :: null -> void
   [this] > constructor
     seq > @
-      initialization
-      statementExpression_5
-      this
+      *
+        initialization
+        statementExpression_5
+        this
     [] > initialization
       this.init > @
         this
@@ -98,12 +100,13 @@
     1 > address
     [this] > init
       seq > @
-        TRUE
-  # main :: String[] -> void
+        *
+          true
   [args] > main
     seq > @
-      variableDeclaration_1
-      statementExpression_6
+      *
+        variableDeclaration_1
+        statementExpression_6
     cage > t
     [] > variableDeclaration_1
       t.write > @
@@ -119,19 +122,15 @@
         simpleReference_1
     [] > simpleReference_1
       t > @
-  # null :: null -> void
   [this] > constructor
     seq > @
-      initialization
-      statementExpression_7
-      this
+      *
+        initialization
+        statementExpression_7
+        this
     [] > initialization
       this.init > @
         this
     [] > statementExpression_7
       this.super.constructor > @
         this.super
-
-[args...] > main
-  class__SisIntersectionType.main > @
-    *

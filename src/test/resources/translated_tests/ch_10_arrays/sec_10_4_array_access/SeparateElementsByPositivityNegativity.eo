@@ -17,15 +17,16 @@
     1 > address
     [this] > init
       seq > @
-        TRUE
-  # main :: String[] -> void
+        *
+          true
   [args] > main
     seq > @
-      variableDeclaration_1
-      variableDeclaration_2
-      statementExpression_1
-      statementExpression_2
-      statementExpression_3
+      *
+        variableDeclaration_1
+        variableDeclaration_2
+        statementExpression_1
+        statementExpression_2
+        statementExpression_3
     prim__int.constructor_1 > n
       prim__int.new
     [] > variableDeclaration_1
@@ -45,7 +46,7 @@
     [] > initializerSimple_2
       arrayCreation_1 > @
     [] > arrayCreation_1
-      FALSE > @
+      false > @
     [] > statementExpression_1
       for_loop_placeholder > @
     [] > statementExpression_2
@@ -62,22 +63,22 @@
       class__String.constructor_2 > @
         class__String.new
         "passed"
-  # seperate :: int[] -> void
   [numbers] > seperate
     seq > @
-      variableDeclaration_3
-      variableDeclaration_4
-      variableDeclaration_5
-      variableDeclaration_6
-      statementExpression_4
-      ifThenElse_1
-      statementExpression_5
-      statementExpression_6
-      variableDeclaration_7
-      variableDeclaration_8
-      statementExpression_7
-      statementExpression_8
-      statementExpression_9
+      *
+        variableDeclaration_3
+        variableDeclaration_4
+        variableDeclaration_5
+        variableDeclaration_6
+        statementExpression_4
+        ifThenElse_1
+        statementExpression_5
+        statementExpression_6
+        variableDeclaration_7
+        variableDeclaration_8
+        statementExpression_7
+        statementExpression_8
+        statementExpression_9
     prim__int.constructor_1 > posCount
       prim__int.new
     [] > variableDeclaration_3
@@ -135,9 +136,10 @@
         0
     [] > block_1
       seq > @
-        statementExpression_10
-        statementExpression_11
-        return_1
+        *
+          statementExpression_10
+          statementExpression_11
+          return_1
       [] > statementExpression_10
         class__System.out.println > @
           class__System.out
@@ -177,9 +179,10 @@
         0
     [] > block_2
       seq > @
-        statementExpression_12
-        statementExpression_13
-        return_2
+        *
+          statementExpression_12
+          statementExpression_13
+          return_2
       [] > statementExpression_12
         class__System.out.println > @
           class__System.out
@@ -205,21 +208,21 @@
       [] > simpleReference_7
         numbers > @
     [] > empty_2
-      TRUE > @
+      true > @
     [] > statementExpression_5
       simpleReference_8.write > @
         arrayCreation_2
     [] > simpleReference_8
       positive > @
     [] > arrayCreation_2
-      FALSE > @
+      false > @
     [] > statementExpression_6
       simpleReference_9.write > @
         arrayCreation_3
     [] > simpleReference_9
       negative > @
     [] > arrayCreation_3
-      FALSE > @
+      false > @
     prim__int.constructor_1 > i
       prim__int.new
     [] > variableDeclaration_7
@@ -276,19 +279,15 @@
         simpleReference_13
     [] > simpleReference_13
       positive > @
-  # null :: null -> void
   [this] > constructor
     seq > @
-      initialization
-      statementExpression_14
-      this
+      *
+        initialization
+        statementExpression_14
+        this
     [] > initialization
       this.init > @
         this
     [] > statementExpression_14
       this.super.constructor > @
         this.super
-
-[args...] > main
-  class__SeparateElementsByPositivityNegativity.main > @
-    *

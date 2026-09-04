@@ -17,20 +17,21 @@
     1 > address
     [this] > init
       seq > @
-        TRUE
-  # main :: String[] -> void
+        *
+          true
   [args] > main
     seq > @
-      variableDeclaration_1
-      variableDeclaration_2
-      variableDeclaration_3
-      statementExpression_1
-      statementExpression_2
-      statementExpression_3
-      statementExpression_4
-      variableDeclaration_4
-      statementExpression_5
-      statementExpression_6
+      *
+        variableDeclaration_1
+        variableDeclaration_2
+        variableDeclaration_3
+        statementExpression_1
+        statementExpression_2
+        statementExpression_3
+        statementExpression_4
+        variableDeclaration_4
+        statementExpression_5
+        statementExpression_6
     prim__byte.constructor_1 > b
       prim__byte.new
     [] > variableDeclaration_1
@@ -50,7 +51,7 @@
     [] > initializerSimple_2
       arrayCreation_1 > @
     [] > arrayCreation_1
-      FALSE > @
+      false > @
     prim__char.constructor_1 > c
       prim__char.new
     [] > variableDeclaration_3
@@ -194,19 +195,15 @@
       class__String.constructor_2 > @
         class__String.new
         "passed"
-  # null :: null -> void
   [this] > constructor
     seq > @
-      initialization
-      statementExpression_7
-      this
+      *
+        initialization
+        statementExpression_7
+        this
     [] > initialization
       this.init > @
         this
     [] > statementExpression_7
       this.super.constructor > @
         this.super
-
-[args...] > main
-  class__BitwiseComplPromotion.main > @
-    *

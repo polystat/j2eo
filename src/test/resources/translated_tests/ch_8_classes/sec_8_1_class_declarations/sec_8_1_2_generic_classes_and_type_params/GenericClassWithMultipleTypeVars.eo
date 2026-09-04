@@ -15,11 +15,12 @@
     1 > address
     [this] > init
       seq > @
-        TRUE
-    # add :: int -> int -> int
+        *
+          true
     [this a b] > add
       seq > @
-        return_1
+        *
+          return_1
       [] > return_1
         binary_1 > @
       [] > binary_1
@@ -29,12 +30,12 @@
         a > @
       [] > simpleReference_2
         b > @
-  # null :: null -> void
   [this] > constructor
     seq > @
-      initialization
-      statementExpression_1
-      this
+      *
+        initialization
+        statementExpression_1
+        this
     [] > initialization
       this.init > @
         this
@@ -52,23 +53,24 @@
     1 > address
     [this] > init
       seq > @
-        TRUE
-    # printInt :: int -> void
+        *
+          true
     [this v] > printInt
       seq > @
-        statementExpression_2
+        *
+          statementExpression_2
       [] > statementExpression_2
         class__System.out.println > @
           class__System.out
           simpleReference_3
       [] > simpleReference_3
         v > @
-  # null :: null -> void
   [this] > constructor
     seq > @
-      initialization
-      statementExpression_3
-      this
+      *
+        initialization
+        statementExpression_3
+        this
     [] > initialization
       this.init > @
         this
@@ -86,16 +88,17 @@
     1 > address
     [this] > init
       seq > @
-        TRUE
+        *
+          true
     cage > t
     cage > e
-  # null :: T -> E -> void
   [this t e] > constructor
     seq > @
-      initialization
-      statementExpression_4
-      statementExpression_5
-      this
+      *
+        initialization
+        statementExpression_4
+        statementExpression_5
+        this
     [] > initialization
       this.init > @
         this
@@ -128,13 +131,14 @@
     1 > address
     [this] > init
       seq > @
-        TRUE
-  # main :: String[] -> void
+        *
+          true
   [args] > main
     seq > @
-      variableDeclaration_1
-      statementExpression_6
-      statementExpression_7
+      *
+        variableDeclaration_1
+        statementExpression_6
+        statementExpression_7
     cage > c
     [] > variableDeclaration_1
       c.write > @
@@ -177,19 +181,15 @@
       class__String.constructor_2 > @
         class__String.new
         "passed"
-  # null :: null -> void
   [this] > constructor
     seq > @
-      initialization
-      statementExpression_8
-      this
+      *
+        initialization
+        statementExpression_8
+        this
     [] > initialization
       this.init > @
         this
     [] > statementExpression_8
       this.super.constructor > @
         this.super
-
-[args...] > main
-  class__GenericClassWithMultipleTypeVars.main > @
-    *

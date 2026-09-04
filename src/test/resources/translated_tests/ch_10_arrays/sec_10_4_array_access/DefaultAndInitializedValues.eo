@@ -15,18 +15,19 @@
     1 > address
     [this] > init
       seq > @
-        TRUE
-  # main :: String[] -> void
+        *
+          true
   [args] > main
     seq > @
-      variableDeclaration_1
-      statementExpression_1
-      statementExpression_2
-      statementExpression_3
-      statementExpression_4
-      statementExpression_5
-      statementExpression_6
-      statementExpression_7
+      *
+        variableDeclaration_1
+        statementExpression_1
+        statementExpression_2
+        statementExpression_3
+        statementExpression_4
+        statementExpression_5
+        statementExpression_6
+        statementExpression_7
     cage > arr
     [] > variableDeclaration_1
       arr.write > @
@@ -34,7 +35,7 @@
     [] > initializerSimple_1
       arrayCreation_1 > @
     [] > arrayCreation_1
-      FALSE > @
+      false > @
     [] > statementExpression_1
       class__System.out.println > @
         class__System.out
@@ -73,19 +74,15 @@
       class__String.constructor_2 > @
         class__String.new
         "passed"
-  # null :: null -> void
   [this] > constructor
     seq > @
-      initialization
-      statementExpression_8
-      this
+      *
+        initialization
+        statementExpression_8
+        this
     [] > initialization
       this.init > @
         this
     [] > statementExpression_8
       this.super.constructor > @
         this.super
-
-[args...] > main
-  class__DefaultAndInitializedValues.main > @
-    *

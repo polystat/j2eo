@@ -15,37 +15,38 @@
     1 > address
     [this] > init
       seq > @
-        TRUE
-  # main :: String -> void
+        *
+          true
   [args[]] > main
     seq > @
-      variableDeclaration_1
-      variableDeclaration_2
-      variableDeclaration_3
-      variableDeclaration_4
-      variableDeclaration_5
-      variableDeclaration_6
-      statementExpression_1
-      statementExpression_2
-      while_1
-      ifThenElse_1
-      statementExpression_3
+      *
+        variableDeclaration_1
+        variableDeclaration_2
+        variableDeclaration_3
+        variableDeclaration_4
+        variableDeclaration_5
+        variableDeclaration_6
+        statementExpression_1
+        statementExpression_2
+        while_1
+        ifThenElse_1
+        statementExpression_3
     prim__int.constructor_1 > n
       prim__int.new
     [] > variableDeclaration_1
-      TRUE > @
+      true > @
     prim__int.constructor_1 > num
       prim__int.new
     [] > variableDeclaration_2
-      TRUE > @
+      true > @
     prim__int.constructor_1 > firstHalf
       prim__int.new
     [] > variableDeclaration_3
-      TRUE > @
+      true > @
     prim__int.constructor_1 > secondHalf
       prim__int.new
     [] > variableDeclaration_4
-      TRUE > @
+      true > @
     prim__int.constructor_1 > digits
       prim__int.new
     [] > variableDeclaration_5
@@ -99,8 +100,9 @@
         0
     [] > block_1
       seq > @
-        statementExpression_4
-        statementExpression_5
+        *
+          statementExpression_4
+          statementExpression_5
       [] > statementExpression_4
         simpleReference_5.inc_post > @
       [] > simpleReference_5
@@ -141,11 +143,12 @@
         0
     [] > block_2
       seq > @
-        statementExpression_6
-        statementExpression_7
-        statementExpression_8
-        statementExpression_9
-        ifThenElse_2
+        *
+          statementExpression_6
+          statementExpression_7
+          statementExpression_8
+          statementExpression_9
+          ifThenElse_2
       [] > statementExpression_6
         simpleReference_9.write > @
           simpleReference_10
@@ -254,7 +257,8 @@
         squareOfSum > @
       [] > block_4
         seq > @
-          statementExpression_10
+          *
+            statementExpression_10
         [] > statementExpression_10
           class__System.out.println > @
             class__System.out
@@ -270,7 +274,8 @@
             " is a tech number."
       [] > block_5
         seq > @
-          statementExpression_11
+          *
+            statementExpression_11
         [] > statementExpression_11
           class__System.out.println > @
             class__System.out
@@ -286,7 +291,8 @@
             " is not a tech number."
     [] > block_3
       seq > @
-        statementExpression_12
+        *
+          statementExpression_12
       [] > statementExpression_12
         class__System.out.println > @
           class__System.out
@@ -308,12 +314,12 @@
       class__String.constructor_2 > @
         class__String.new
         "passed"
-  # null :: null -> void
   [this] > constructor
     seq > @
-      initialization
-      statementExpression_13
-      this
+      *
+        initialization
+        statementExpression_13
+        this
     [] > initialization
       this.init > @
         this

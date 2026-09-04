@@ -15,17 +15,18 @@
     1 > address
     [this] > init
       seq > @
-        TRUE
-  # main :: String[] -> void
+        *
+          true
   [args] > main
     seq > @
-      variableDeclaration_1
-      variableDeclaration_2
-      variableDeclaration_3
-      variableDeclaration_4
-      while_1
-      statementExpression_1
-      statementExpression_2
+      *
+        variableDeclaration_1
+        variableDeclaration_2
+        variableDeclaration_3
+        variableDeclaration_4
+        while_1
+        statementExpression_1
+        statementExpression_2
     prim__int.constructor_1 > n
       prim__int.new
     [] > variableDeclaration_1
@@ -62,7 +63,7 @@
     prim__int.constructor_1 > i
       prim__int.new
     [] > variableDeclaration_4
-      TRUE > @
+      true > @
     [] > while_1
       binary_1.while > @
         [while_i]
@@ -76,9 +77,10 @@
       n > @
     [] > block_1
       seq > @
-        statementExpression_3
-        statementExpression_4
-        ifThenElse_1
+        *
+          statementExpression_3
+          statementExpression_4
+          ifThenElse_1
       [] > statementExpression_3
         simpleReference_3.write > @
           binary_2
@@ -108,7 +110,8 @@
         num > @
       [] > block_2
         seq > @
-          statementExpression_5
+          *
+            statementExpression_5
         [] > statementExpression_5
           simpleReference_7.write > @
             binary_4
@@ -124,7 +127,7 @@
             prim__int.new
             1
       [] > empty_2
-        TRUE > @
+        true > @
     [] > statementExpression_1
       class__System.out.println > @
         class__System.out
@@ -158,19 +161,15 @@
       class__String.constructor_2 > @
         class__String.new
         "passed"
-  # null :: null -> void
   [this] > constructor
     seq > @
-      initialization
-      statementExpression_6
-      this
+      *
+        initialization
+        statementExpression_6
+        this
     [] > initialization
       this.init > @
         this
     [] > statementExpression_6
       this.super.constructor > @
         this.super
-
-[args...] > main
-  class__NthPrimeNumberExample.main > @
-    *

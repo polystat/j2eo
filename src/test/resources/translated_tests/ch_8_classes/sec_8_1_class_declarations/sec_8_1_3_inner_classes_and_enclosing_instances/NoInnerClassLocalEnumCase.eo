@@ -14,17 +14,18 @@
     1 > address
     [this] > init
       seq > @
-        TRUE
-    # m :: null -> void
+        *
+          true
     [this] > m
       seq > @
-        declaration_1
-        statementExpression_1
-        variableDeclaration_1
-        statementExpression_2
-        statementExpression_3
+        *
+          declaration_1
+          statementExpression_1
+          variableDeclaration_1
+          statementExpression_2
+          statementExpression_3
       [] > statementExpression_1
-        FALSE > @
+        false > @
       cage > e
       [] > variableDeclaration_1
         e.write > @
@@ -61,12 +62,12 @@
         simpleReference_5.D > @
       [] > simpleReference_5
         class__B > @
-  # null :: null -> void
   [this] > constructor
     seq > @
-      initialization
-      statementExpression_4
-      this
+      *
+        initialization
+        statementExpression_4
+        this
     [] > initialization
       this.init > @
         this
@@ -84,12 +85,13 @@
     1 > address
     [this] > init
       seq > @
-        TRUE
-  # main :: String[] -> void
+        *
+          true
   [args] > main
     seq > @
-      statementExpression_5
-      statementExpression_6
+      *
+        statementExpression_5
+        statementExpression_6
     [] > statementExpression_5
       unsupported_qualifier.m > @
         unsupported_qualifier
@@ -101,19 +103,15 @@
       class__String.constructor_2 > @
         class__String.new
         "passed"
-  # null :: null -> void
   [this] > constructor
     seq > @
-      initialization
-      statementExpression_7
-      this
+      *
+        initialization
+        statementExpression_7
+        this
     [] > initialization
       this.init > @
         this
     [] > statementExpression_7
       this.super.constructor > @
         this.super
-
-[args...] > main
-  class__NoInnerClassLocalEnumCase.main > @
-    *

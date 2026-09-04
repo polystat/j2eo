@@ -15,14 +15,15 @@
     1 > address
     [this] > init
       seq > @
-        TRUE
-  # main :: String[] -> void
+        *
+          true
   [args] > main
     seq > @
-      variableDeclaration_1
-      statementExpression_1
-      statementExpression_2
-      statementExpression_3
+      *
+        variableDeclaration_1
+        statementExpression_1
+        statementExpression_2
+        statementExpression_3
     prim__int.constructor_1 > num
       prim__int.new
     [] > variableDeclaration_1
@@ -68,17 +69,17 @@
       class__String.constructor_2 > @
         class__String.new
         "passed"
-  # checkPrime :: int -> int
   [num] > checkPrime
     seq > @
-      variableDeclaration_2
-      variableDeclaration_3
-      statementExpression_4
-      ifThenElse_1
+      *
+        variableDeclaration_2
+        variableDeclaration_3
+        statementExpression_4
+        ifThenElse_1
     prim__int.constructor_1 > i
       prim__int.new
     [] > variableDeclaration_2
-      TRUE > @
+      true > @
     prim__int.constructor_1 > flag
       prim__int.new
     [] > variableDeclaration_3
@@ -117,12 +118,12 @@
       prim__int.constructor_2 > @
         prim__int.new
         0
-  # printAlternatePrimeNumber :: int -> void
   [n] > printAlternatePrimeNumber
     seq > @
-      variableDeclaration_4
-      statementExpression_5
-      statementExpression_6
+      *
+        variableDeclaration_4
+        statementExpression_5
+        statementExpression_6
     prim__int.constructor_1 > temp
       prim__int.new
     [] > variableDeclaration_4
@@ -139,19 +140,15 @@
     [] > statementExpression_6
       class__System.out.println > @
         class__System.out
-  # null :: null -> void
   [this] > constructor
     seq > @
-      initialization
-      statementExpression_7
-      this
+      *
+        initialization
+        statementExpression_7
+        this
     [] > initialization
       this.init > @
         this
     [] > statementExpression_7
       this.super.constructor > @
         this.super
-
-[args...] > main
-  class__AlternatePrimeNumberExample.main > @
-    *

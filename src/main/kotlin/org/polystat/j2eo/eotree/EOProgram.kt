@@ -13,9 +13,11 @@ class EOProgram(
 ) : EONode() {
     override fun generateEO(indent: Int): String =
         """${license.generateEO(indent)}
+
 ${metas.generateEO(indent)}
 
-${bnds.joinToString("\n\n") { bnd: EOBnd -> bnd.generateEO(indent) }}"""
+${bnds.joinToString("\n\n") { bnd: EOBnd -> bnd.generateEO(indent) }}
+"""
 
     override fun toString(): String = "[Program]"
 }

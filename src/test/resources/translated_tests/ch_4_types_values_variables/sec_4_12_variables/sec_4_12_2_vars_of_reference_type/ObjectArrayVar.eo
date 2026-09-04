@@ -14,13 +14,14 @@
     1 > address
     [this] > init
       seq > @
-        TRUE
-  # null :: null -> void
+        *
+          true
   [this] > constructor
     seq > @
-      initialization
-      statementExpression_1
-      this
+      *
+        initialization
+        statementExpression_1
+        this
     [] > initialization
       this.init > @
         this
@@ -38,13 +39,14 @@
     1 > address
     [this] > init
       seq > @
-        TRUE
-  # null :: null -> void
+        *
+          true
   [this] > constructor
     seq > @
-      initialization
-      statementExpression_2
-      this
+      *
+        initialization
+        statementExpression_2
+        this
     [] > initialization
       this.init > @
         this
@@ -62,15 +64,16 @@
     1 > address
     [this] > init
       seq > @
-        TRUE
-  # main :: String[] -> void
+        *
+          true
   [args] > main
     seq > @
-      variableDeclaration_1
-      statementExpression_3
-      statementExpression_4
-      statementExpression_5
-      statementExpression_6
+      *
+        variableDeclaration_1
+        statementExpression_3
+        statementExpression_4
+        statementExpression_5
+        statementExpression_6
     cage > array
     [] > variableDeclaration_1
       array.write > @
@@ -122,19 +125,15 @@
       class__String.constructor_2 > @
         class__String.new
         "passed"
-  # null :: null -> void
   [this] > constructor
     seq > @
-      initialization
-      statementExpression_7
-      this
+      *
+        initialization
+        statementExpression_7
+        this
     [] > initialization
       this.init > @
         this
     [] > statementExpression_7
       this.super.constructor > @
         this.super
-
-[args...] > main
-  class__ObjectArrayVar.main > @
-    *

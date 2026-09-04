@@ -16,20 +16,21 @@
     1 > address
     [this] > init
       seq > @
-        TRUE
-  # main :: String[] -> void
+        *
+          true
   [args] > main
     seq > @
-      variableDeclaration_1
-      variableDeclaration_2
-      variableDeclaration_3
-      variableDeclaration_4
-      variableDeclaration_5
-      statementExpression_1
-      statementExpression_2
-      statementExpression_3
-      statementExpression_4
-      statementExpression_5
+      *
+        variableDeclaration_1
+        variableDeclaration_2
+        variableDeclaration_3
+        variableDeclaration_4
+        variableDeclaration_5
+        statementExpression_1
+        statementExpression_2
+        statementExpression_3
+        statementExpression_4
+        statementExpression_5
     prim__int.constructor_1 > a
       prim__int.new
     [] > variableDeclaration_1
@@ -149,7 +150,7 @@
     [] > initializerSimple_11
       arrayCreation_1 > @
     [] > arrayCreation_1
-      FALSE > @
+      false > @
     [] > statementExpression_1
       simpleReference_3.write > @
         methodInvocation_1
@@ -220,14 +221,14 @@
       class__String.constructor_2 > @
         class__String.new
         "passed"
-  # addMatrix :: int[][] -> int[][] -> int[][]
   [a b] > addMatrix
     seq > @
-      variableDeclaration_6
-      variableDeclaration_7
-      variableDeclaration_8
-      statementExpression_6
-      return_1
+      *
+        variableDeclaration_6
+        variableDeclaration_7
+        variableDeclaration_8
+        statementExpression_6
+        return_1
     prim__int.constructor_1 > row
       prim__int.new
     [] > variableDeclaration_6
@@ -265,26 +266,22 @@
     [] > initializerSimple_14
       arrayCreation_2 > @
     [] > arrayCreation_2
-      FALSE > @
+      false > @
     [] > statementExpression_6
       for_loop_placeholder > @
     [] > return_1
       simpleReference_14 > @
     [] > simpleReference_14
       sum > @
-  # null :: null -> void
   [this] > constructor
     seq > @
-      initialization
-      statementExpression_7
-      this
+      *
+        initialization
+        statementExpression_7
+        this
     [] > initialization
       this.init > @
         this
     [] > statementExpression_7
       this.super.constructor > @
         this.super
-
-[args...] > main
-  class__MatrixAddition.main > @
-    *

@@ -15,7 +15,8 @@
     1 > address
     [this] > init
       seq > @
-        variableDeclaration_1
+        *
+          variableDeclaration_1
       [] > variableDeclaration_1
         this.a.write > @
           initializerSimple_1
@@ -27,10 +28,10 @@
           10
     prim__int.constructor_1 > a
       prim__int.new
-    # m :: int -> int
     [this p] > m
       seq > @
-        return_1
+        *
+          return_1
       [] > return_1
         binary_1 > @
       [] > binary_1
@@ -42,13 +43,13 @@
         this > @
       [] > simpleReference_1
         p > @
-  # null :: int -> void
   [this k] > constructor
     seq > @
-      initialization
-      statementExpression_1
-      statementExpression_2
-      this
+      *
+        initialization
+        statementExpression_1
+        statementExpression_2
+        this
     [] > initialization
       this.init > @
         this
@@ -74,38 +75,39 @@
       1 > address
       [this] > init
         seq > @
-          TRUE
-      # p :: null -> int
+          *
+            true
       [this] > p
         seq > @
-          return_2
+          *
+            return_2
         [] > return_2
           unaryPrefix_1 > @
         [] > unaryPrefix_1
           simpleReference_3.neg > @
         [] > simpleReference_3
           a > @
-    # null :: null -> void
     [this] > constructor
       seq > @
-        initialization
-        statementExpression_3
-        this
+        *
+          initialization
+          statementExpression_3
+          this
       [] > initialization
         this.init > @
           this
       [] > statementExpression_3
         this.super.constructor > @
           this.super
-  # main :: String[] -> void
   [args] > main
     seq > @
-      variableDeclaration_2
-      variableDeclaration_3
-      statementExpression_4
-      statementExpression_5
-      statementExpression_6
-      statementExpression_7
+      *
+        variableDeclaration_2
+        variableDeclaration_3
+        statementExpression_4
+        statementExpression_5
+        statementExpression_6
+        statementExpression_7
     cage > o
     [] > variableDeclaration_2
       o.write > @
@@ -163,7 +165,3 @@
       class__String.constructor_2 > @
         class__String.new
         "passed"
-
-[args...] > main
-  class__ClassBodyDecls.main > @
-    *

@@ -15,15 +15,16 @@
     1 > address
     [this] > init
       seq > @
-        TRUE
-  # main :: String[] -> void
+        *
+          true
   [args] > main
     seq > @
-      variableDeclaration_1
-      variableDeclaration_2
-      statementExpression_1
-      statementExpression_2
-      statementExpression_3
+      *
+        variableDeclaration_1
+        variableDeclaration_2
+        statementExpression_1
+        statementExpression_2
+        statementExpression_3
     cage > s1
     [] > variableDeclaration_1
       s1.write > @
@@ -86,12 +87,12 @@
       class__String.constructor_2 > @
         class__String.new
         "passed"
-  # null :: null -> void
   [this] > constructor
     seq > @
-      initialization
-      statementExpression_4
-      this
+      *
+        initialization
+        statementExpression_4
+        this
     [] > initialization
       this.init > @
         this
@@ -109,13 +110,14 @@
     1 > address
     [this] > init
       seq > @
-        TRUE
+        *
+          true
     prim__int.constructor_1 > a
       prim__int.new
-    # toString :: null -> String
     [this] > toString
       seq > @
-        return_1
+        *
+          return_1
       [] > return_1
         binary_3 > @
       [] > binary_3
@@ -127,10 +129,10 @@
           "some = "
       [] > simpleReference_4
         a > @
-    # clone :: null -> Object
     [this] > clone
       seq > @
-        return_2
+        *
+          return_2
       [] > return_2
         instanceCreation_2 > @
       [] > instanceCreation_2
@@ -139,12 +141,12 @@
           simpleReference_5
       [] > simpleReference_5
         a > @
-  # null :: int -> void
   [this val] > constructor
     seq > @
-      initialization
-      statementExpression_5
-      this
+      *
+        initialization
+        statementExpression_5
+        this
     [] > initialization
       this.init > @
         this
@@ -155,7 +157,3 @@
       a > @
     [] > simpleReference_7
       val > @
-
-[args...] > main
-  class__ObjectClone.main > @
-    *

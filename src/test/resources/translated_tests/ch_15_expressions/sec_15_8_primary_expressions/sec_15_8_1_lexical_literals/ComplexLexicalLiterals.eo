@@ -21,21 +21,22 @@
     1 > address
     [this] > init
       seq > @
-        TRUE
-  # main :: String[] -> void
+        *
+          true
   [args] > main
     seq > @
-      variableDeclaration_1
-      variableDeclaration_2
-      variableDeclaration_3
-      variableDeclaration_4
-      variableDeclaration_5
-      variableDeclaration_6
-      variableDeclaration_7
-      variableDeclaration_8
-      variableDeclaration_9
-      variableDeclaration_10
-      statementExpression_1
+      *
+        variableDeclaration_1
+        variableDeclaration_2
+        variableDeclaration_3
+        variableDeclaration_4
+        variableDeclaration_5
+        variableDeclaration_6
+        variableDeclaration_7
+        variableDeclaration_8
+        variableDeclaration_9
+        variableDeclaration_10
+        statementExpression_1
     prim__int.constructor_1 > v1
       prim__int.new
     [] > variableDeclaration_1
@@ -153,19 +154,15 @@
       class__String.constructor_2 > @
         class__String.new
         "passed"
-  # null :: null -> void
   [this] > constructor
     seq > @
-      initialization
-      statementExpression_2
-      this
+      *
+        initialization
+        statementExpression_2
+        this
     [] > initialization
       this.init > @
         this
     [] > statementExpression_2
       this.super.constructor > @
         this.super
-
-[args...] > main
-  class__SimpleLexicalLiterals.main > @
-    *

@@ -14,6 +14,7 @@ import org.polystat.j2eo.eotree.EOProgram
 import org.polystat.j2eo.translator.Context
 import org.polystat.j2eo.translator.Translator
 import org.polystat.j2eo.treeMapper.Visitor
+import org.polystat.j2eo.util.genClassName
 import org.polystat.j2eo.util.logger
 import tree.Compilation.CompilationUnit
 import tree.Compilation.SimpleCompilationUnit
@@ -143,10 +144,14 @@ object Main2 {
                         file.toRelativeString(File(cmd.args[0]))
                     },
                 )
+            // @todo #330:90m Write one file per top-level Java class.
+            //  EO 0.63.1 allows exactly one object per source file, named
+            //  after it, so a .java file declaring two top-level classes
+            //  has to become two .eo files instead of one.
             val outputFile =
                 Paths.get(
                     outputPath.toString(),
-                    file.name.replace(".java", ".eo"),
+                    genClassName(file.nameWithoutExtension) + ".eo",
                 )
 
             if (cmd.hasOption("d")) {

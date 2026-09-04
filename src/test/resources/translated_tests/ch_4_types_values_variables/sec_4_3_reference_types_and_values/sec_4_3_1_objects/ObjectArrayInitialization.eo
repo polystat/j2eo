@@ -15,13 +15,14 @@
     1 > address
     [this] > init
       seq > @
-        TRUE
-  # main :: String[] -> void
+        *
+          true
   [args] > main
     seq > @
-      variableDeclaration_1
-      statementExpression_1
-      statementExpression_2
+      *
+        variableDeclaration_1
+        statementExpression_1
+        statementExpression_2
     cage > a
     [] > variableDeclaration_1
       a.write > @
@@ -90,12 +91,12 @@
       class__String.constructor_2 > @
         class__String.new
         "passed"
-  # null :: null -> void
   [this] > constructor
     seq > @
-      initialization
-      statementExpression_3
-      this
+      *
+        initialization
+        statementExpression_3
+        this
     [] > initialization
       this.init > @
         this
@@ -113,17 +114,18 @@
     1 > address
     [this] > init
       seq > @
-        TRUE
+        *
+          true
     prim__int.constructor_1 > x
       prim__int.new
     prim__int.constructor_1 > y
       prim__int.new
-  # null :: null -> void
   [this] > constructor
     seq > @
-      initialization
-      statementExpression_4
-      this
+      *
+        initialization
+        statementExpression_4
+        this
     [] > initialization
       this.init > @
         this
@@ -135,13 +137,13 @@
       class__String.constructor_2 > @
         class__String.new
         "default"
-  # null :: int -> int -> void
   [this x y] > constructor
     seq > @
-      initialization
-      statementExpression_5
-      statementExpression_6
-      this
+      *
+        initialization
+        statementExpression_5
+        statementExpression_6
+        this
     [] > initialization
       this.init > @
         this
@@ -164,7 +166,3 @@
     [] > simpleReference_3
       y > @
   cage > origin
-
-[args...] > main
-  class__ObjectArrayInitialization.main > @
-    *

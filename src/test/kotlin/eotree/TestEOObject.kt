@@ -31,11 +31,9 @@ class TestEOObject {
                         "bnd2",
                     ),
                 ),
-                "comment",
             )
         Assertions.assertEquals(
-            "# comment\n" +
-                "[free1 free2 vararg...]\n" +
+            "[free1 free2 vararg]\n" +
                 "  memory > bnd1\n" +
                 "  memory > bnd2",
             eoObject.generateEO(0),
@@ -58,11 +56,9 @@ class TestEOObject {
                         "bnd2",
                     ),
                 ),
-                "comment",
             )
         Assertions.assertEquals(
-            """  # comment
-  [free1 free2 vararg...]
+            """  [free1 free2 vararg]
     memory > bnd1
     memory > bnd2""",
             eoObject.generateEO(1),

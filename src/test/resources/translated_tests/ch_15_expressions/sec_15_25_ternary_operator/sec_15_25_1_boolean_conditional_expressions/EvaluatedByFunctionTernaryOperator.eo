@@ -16,11 +16,12 @@
     1 > address
     [this] > init
       seq > @
-        TRUE
-  # f :: int -> int -> boolean
+        *
+          true
   [a b] > f
     seq > @
-      return_1
+      *
+        return_1
     [] > return_1
       binary_1 > @
     [] > binary_1
@@ -37,14 +38,14 @@
         1
     [] > simpleReference_1
       b > @
-  # main :: String[] -> void
   [args] > main
     seq > @
-      variableDeclaration_1
-      variableDeclaration_2
-      variableDeclaration_3
-      statementExpression_1
-      statementExpression_2
+      *
+        variableDeclaration_1
+        variableDeclaration_2
+        variableDeclaration_3
+        statementExpression_1
+        statementExpression_2
     prim__int.constructor_1 > a
       prim__int.new
     [] > variableDeclaration_1
@@ -90,19 +91,15 @@
       class__String.constructor_2 > @
         class__String.new
         "passed"
-  # null :: null -> void
   [this] > constructor
     seq > @
-      initialization
-      statementExpression_3
-      this
+      *
+        initialization
+        statementExpression_3
+        this
     [] > initialization
       this.init > @
         this
     [] > statementExpression_3
       this.super.constructor > @
         this.super
-
-[args...] > main
-  class__EvaluatedByFunctionTernaryOperator.main > @
-    *

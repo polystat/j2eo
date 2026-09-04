@@ -15,15 +15,16 @@
     1 > address
     [this] > init
       seq > @
-        TRUE
-  # main :: String[] -> void
+        *
+          true
   [args] > main
     seq > @
-      variableDeclaration_1
-      variableDeclaration_2
-      statementExpression_1
-      statementExpression_2
-      statementExpression_3
+      *
+        variableDeclaration_1
+        variableDeclaration_2
+        statementExpression_1
+        statementExpression_2
+        statementExpression_3
     prim__int.constructor_1 > n
       prim__int.new
     [] > variableDeclaration_1
@@ -43,7 +44,7 @@
     [] > initializerSimple_2
       arrayCreation_1 > @
     [] > arrayCreation_1
-      FALSE > @
+      false > @
     [] > statementExpression_1
       for_loop_placeholder > @
     [] > statementExpression_2
@@ -60,16 +61,16 @@
       class__String.constructor_2 > @
         class__String.new
         "passed"
-  # checkNumbers :: int[] -> void
   [numbers] > checkNumbers
     seq > @
-      variableDeclaration_3
-      variableDeclaration_4
-      variableDeclaration_5
-      statementExpression_4
-      statementExpression_5
-      statementExpression_6
-      statementExpression_7
+      *
+        variableDeclaration_3
+        variableDeclaration_4
+        variableDeclaration_5
+        statementExpression_4
+        statementExpression_5
+        statementExpression_6
+        statementExpression_7
     prim__int.constructor_1 > positive
       prim__int.new
     [] > variableDeclaration_3
@@ -144,19 +145,15 @@
         "Zeros = "
     [] > simpleReference_4
       zero > @
-  # null :: null -> void
   [this] > constructor
     seq > @
-      initialization
-      statementExpression_8
-      this
+      *
+        initialization
+        statementExpression_8
+        this
     [] > initialization
       this.init > @
         this
     [] > statementExpression_8
       this.super.constructor > @
         this.super
-
-[args...] > main
-  class__PositiveNegativeNumbers.main > @
-    *

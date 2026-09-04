@@ -14,18 +14,19 @@
     1 > address
     [this] > init
       seq > @
-        TRUE
-  # main :: String[] -> void
+        *
+          true
   [args] > main
     seq > @
-      variableDeclaration_1
-      statementExpression_1
-      statementExpression_2
-      statementExpression_3
-      statementExpression_4
-      statementExpression_5
-      statementExpression_6
-      statementExpression_7
+      *
+        variableDeclaration_1
+        statementExpression_1
+        statementExpression_2
+        statementExpression_3
+        statementExpression_4
+        statementExpression_5
+        statementExpression_6
+        statementExpression_7
     cage > obj
     [] > variableDeclaration_1
       obj.write > @
@@ -121,12 +122,12 @@
       class__String.constructor_2 > @
         class__String.new
         "passed"
-  # null :: null -> void
   [this] > constructor
     seq > @
-      initialization
-      statementExpression_8
-      this
+      *
+        initialization
+        statementExpression_8
+        this
     [] > initialization
       this.init > @
         this
@@ -144,18 +145,19 @@
     1 > address
     [this] > init
       seq > @
-        TRUE
+        *
+          true
     cage > mem3
     cage > mem1
     cage > mem2
-  # null :: A -> B -> C -> void
   [this m1 m2 m3] > constructor
     seq > @
-      initialization
-      statementExpression_9
-      statementExpression_10
-      statementExpression_11
-      this
+      *
+        initialization
+        statementExpression_9
+        statementExpression_10
+        statementExpression_11
+        this
     [] > initialization
       this.init > @
         this
@@ -191,19 +193,20 @@
     1 > address
     [this] > init
       seq > @
-        TRUE
+        *
+          true
     cage > mem1
     cage > mem2
     cage > mem3
-  # null :: X -> Y -> Z -> void
   [this m1 m2 m3] > constructor
     seq > @
-      initialization
-      statementExpression_12
-      statementExpression_13
-      statementExpression_14
-      statementExpression_15
-      this
+      *
+        initialization
+        statementExpression_12
+        statementExpression_13
+        statementExpression_14
+        statementExpression_15
+        this
     [] > initialization
       this.init > @
         this
@@ -240,7 +243,3 @@
       mem3 > @
     [] > simpleReference_21
       m3 > @
-
-[args...] > main
-  class__ParametrizedInheritance.main > @
-    *

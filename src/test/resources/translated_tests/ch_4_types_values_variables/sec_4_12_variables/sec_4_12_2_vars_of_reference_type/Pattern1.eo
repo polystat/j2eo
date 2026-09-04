@@ -15,15 +15,16 @@
     1 > address
     [this] > init
       seq > @
-        TRUE
-  # main :: String[] -> void
+        *
+          true
   [args] > main
     seq > @
-      variableDeclaration_1
-      variableDeclaration_2
-      variableDeclaration_3
-      statementExpression_1
-      statementExpression_2
+      *
+        variableDeclaration_1
+        variableDeclaration_2
+        variableDeclaration_3
+        statementExpression_1
+        statementExpression_2
     prim__int.constructor_1 > lines
       prim__int.new
     [] > variableDeclaration_1
@@ -38,11 +39,11 @@
     prim__int.constructor_1 > i
       prim__int.new
     [] > variableDeclaration_2
-      TRUE > @
+      true > @
     prim__int.constructor_1 > j
       prim__int.new
     [] > variableDeclaration_3
-      TRUE > @
+      true > @
     [] > statementExpression_1
       for_loop_placeholder > @
     [] > statementExpression_2
@@ -53,19 +54,15 @@
       class__String.constructor_2 > @
         class__String.new
         "passed"
-  # null :: null -> void
   [this] > constructor
     seq > @
-      initialization
-      statementExpression_3
-      this
+      *
+        initialization
+        statementExpression_3
+        this
     [] > initialization
       this.init > @
         this
     [] > statementExpression_3
       this.super.constructor > @
         this.super
-
-[args...] > main
-  class__Pattern1.main > @
-    *

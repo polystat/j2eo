@@ -14,12 +14,13 @@
     1 > address
     [this] > init
       seq > @
-        TRUE
-  # main :: String[] -> void
+        *
+          true
   [args] > main
     seq > @
-      while_1
-      statementExpression_1
+      *
+        while_1
+        statementExpression_1
     [] > while_1
       literal_1.while > @
         [while_i]
@@ -30,7 +31,8 @@
         TRUE
     [] > block_1
       seq > @
-        break_1
+        *
+          break_1
     [] > statementExpression_1
       class__System.out.println > @
         class__System.out
@@ -39,19 +41,15 @@
       class__String.constructor_2 > @
         class__String.new
         "passed"
-  # null :: null -> void
   [this] > constructor
     seq > @
-      initialization
-      statementExpression_2
-      this
+      *
+        initialization
+        statementExpression_2
+        this
     [] > initialization
       this.init > @
         this
     [] > statementExpression_2
       this.super.constructor > @
         this.super
-
-[args...] > main
-  class__WhileBreak.main > @
-    *

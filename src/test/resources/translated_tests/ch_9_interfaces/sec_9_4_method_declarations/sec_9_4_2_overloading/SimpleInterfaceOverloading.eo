@@ -16,14 +16,15 @@
     1 > address
     [this] > init
       seq > @
-        TRUE
-  # main :: String[] -> void
+        *
+          true
   [args] > main
     seq > @
-      statementExpression_1
-      statementExpression_2
-      statementExpression_3
-      statementExpression_4
+      *
+        statementExpression_1
+        statementExpression_2
+        statementExpression_3
+        statementExpression_4
     [] > statementExpression_1
       unsupported_qualifier.move > @
         unsupported_qualifier
@@ -71,12 +72,12 @@
       class__String.constructor_2 > @
         class__String.new
         "passed"
-  # null :: null -> void
   [this] > constructor
     seq > @
-      initialization
-      statementExpression_5
-      this
+      *
+        initialization
+        statementExpression_5
+        this
     [] > initialization
       this.init > @
         this
@@ -94,11 +95,12 @@
     1 > address
     [this] > init
       seq > @
-        TRUE
-    # move :: int -> int -> void
+        *
+          true
     [this dx dy] > move
       seq > @
-        statementExpression_6
+        *
+          statementExpression_6
       [] > statementExpression_6
         class__System.out.println > @
           class__System.out
@@ -107,10 +109,10 @@
         class__String.constructor_2 > @
           class__String.new
           "int move"
-    # move :: float -> float -> void
     [this dx dy] > move
       seq > @
-        statementExpression_7
+        *
+          statementExpression_7
       [] > statementExpression_7
         class__System.out.println > @
           class__System.out
@@ -119,10 +121,10 @@
         class__String.constructor_2 > @
           class__String.new
           "float move"
-    # move :: double -> double -> void
     [this dx dy] > move
       seq > @
-        statementExpression_8
+        *
+          statementExpression_8
       [] > statementExpression_8
         class__System.out.println > @
           class__System.out
@@ -131,19 +133,15 @@
         class__String.constructor_2 > @
           class__String.new
           "double move"
-  # null :: null -> void
   [this] > constructor
     seq > @
-      initialization
-      statementExpression_9
-      this
+      *
+        initialization
+        statementExpression_9
+        this
     [] > initialization
       this.init > @
         this
     [] > statementExpression_9
       this.super.constructor > @
         this.super
-
-[args...] > main
-  class__SimpleInterfaceOverloading.main > @
-    *

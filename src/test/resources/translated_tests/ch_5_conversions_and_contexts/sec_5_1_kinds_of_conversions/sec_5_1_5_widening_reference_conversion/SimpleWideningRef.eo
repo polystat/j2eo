@@ -14,14 +14,15 @@
     1 > address
     [this] > init
       seq > @
-        TRUE
-  # main :: String[] -> void
+        *
+          true
   [args] > main
     seq > @
-      variableDeclaration_1
-      variableDeclaration_2
-      statementExpression_1
-      statementExpression_2
+      *
+        variableDeclaration_1
+        variableDeclaration_2
+        statementExpression_1
+        statementExpression_2
     cage > s
     [] > variableDeclaration_1
       s.write > @
@@ -53,12 +54,12 @@
       class__String.constructor_2 > @
         class__String.new
         "passed"
-  # null :: null -> void
   [this] > constructor
     seq > @
-      initialization
-      statementExpression_3
-      this
+      *
+        initialization
+        statementExpression_3
+        this
     [] > initialization
       this.init > @
         this
@@ -76,11 +77,12 @@
     1 > address
     [this] > init
       seq > @
-        TRUE
-    # print :: null -> void
+        *
+          true
     [this] > print
       seq > @
-        statementExpression_4
+        *
+          statementExpression_4
       [] > statementExpression_4
         class__System.out.println > @
           class__System.out
@@ -89,12 +91,12 @@
         class__String.constructor_2 > @
           class__String.new
           "base"
-  # null :: null -> void
   [this] > constructor
     seq > @
-      initialization
-      statementExpression_5
-      this
+      *
+        initialization
+        statementExpression_5
+        this
     [] > initialization
       this.init > @
         this
@@ -112,11 +114,12 @@
     1 > address
     [this] > init
       seq > @
-        TRUE
-    # print :: null -> void
+        *
+          true
     [this] > print
       seq > @
-        statementExpression_6
+        *
+          statementExpression_6
       [] > statementExpression_6
         class__System.out.println > @
           class__System.out
@@ -125,19 +128,15 @@
         class__String.constructor_2 > @
           class__String.new
           "sub"
-  # null :: null -> void
   [this] > constructor
     seq > @
-      initialization
-      statementExpression_7
-      this
+      *
+        initialization
+        statementExpression_7
+        this
     [] > initialization
       this.init > @
         this
     [] > statementExpression_7
       this.super.constructor > @
         this.super
-
-[args...] > main
-  class__SimpleWideningRef.main > @
-    *

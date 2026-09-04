@@ -16,12 +16,13 @@
     1 > address
     [this] > init
       seq > @
-        TRUE
-  # main :: String[] -> void
+        *
+          true
   [args] > main
     seq > @
-      statementExpression_1
-      statementExpression_2
+      *
+        statementExpression_1
+        statementExpression_2
     [] > statementExpression_1
       unsupported_qualifier.doSomething > @
         unsupported_qualifier
@@ -43,12 +44,13 @@
       1 > address
       [this] > init
         seq > @
-          TRUE
-      # doSomething :: null -> void
+          *
+            true
       [this] > doSomething
         seq > @
-          variableDeclaration_1
-          statementExpression_3
+          *
+            variableDeclaration_1
+            statementExpression_3
         prim__double.constructor_1 > some_val
           prim__double.new
         [] > variableDeclaration_1
@@ -80,31 +82,27 @@
             "working... "
         [] > simpleReference_1
           some_val > @
-    # null :: null -> void
     [this] > constructor
       seq > @
-        initialization
-        statementExpression_4
-        this
+        *
+          initialization
+          statementExpression_4
+          this
       [] > initialization
         this.init > @
           this
       [] > statementExpression_4
         this.super.constructor > @
           this.super
-  # null :: null -> void
   [this] > constructor
     seq > @
-      initialization
-      statementExpression_5
-      this
+      *
+        initialization
+        statementExpression_5
+        this
     [] > initialization
       this.init > @
         this
     [] > statementExpression_5
       this.super.constructor > @
         this.super
-
-[args...] > main
-  class__PrivateStrictfpInterface.main > @
-    *

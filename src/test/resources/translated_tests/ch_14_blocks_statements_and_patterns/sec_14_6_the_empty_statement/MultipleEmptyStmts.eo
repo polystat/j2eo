@@ -14,23 +14,24 @@
     1 > address
     [this] > init
       seq > @
-        TRUE
-  # main :: String[] -> void
+        *
+          true
   [args] > main
     seq > @
-      statementExpression_1
-      statementExpression_2
-      statementExpression_3
-      statementExpression_4
-      statementExpression_5
+      *
+        statementExpression_1
+        statementExpression_2
+        statementExpression_3
+        statementExpression_4
+        statementExpression_5
     [] > statementExpression_1
-      FALSE > @
+      false > @
     [] > statementExpression_2
-      FALSE > @
+      false > @
     [] > statementExpression_3
-      FALSE > @
+      false > @
     [] > statementExpression_4
-      FALSE > @
+      false > @
     [] > statementExpression_5
       class__System.out.println > @
         class__System.out
@@ -39,19 +40,15 @@
       class__String.constructor_2 > @
         class__String.new
         "passed"
-  # null :: null -> void
   [this] > constructor
     seq > @
-      initialization
-      statementExpression_6
-      this
+      *
+        initialization
+        statementExpression_6
+        this
     [] > initialization
       this.init > @
         this
     [] > statementExpression_6
       this.super.constructor > @
         this.super
-
-[args...] > main
-  class__MultipleEmptyStmts.main > @
-    *

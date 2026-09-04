@@ -16,14 +16,15 @@
     1 > address
     [this] > init
       seq > @
-        TRUE
-  # cond :: int -> int -> boolean
+        *
+          true
   [a b] > cond
     seq > @
-      statementExpression_1
-      ifThenElse_1
-      ifThenElse_2
-      ifThenElse_3
+      *
+        statementExpression_1
+        ifThenElse_1
+        ifThenElse_2
+        ifThenElse_3
     [] > statementExpression_1
       class__System.out.println > @
         class__System.out
@@ -57,7 +58,8 @@
         0
     [] > block_1
       seq > @
-        return_1
+        *
+          return_1
       [] > return_1
         literal_3 > @
       [] > literal_3
@@ -65,7 +67,7 @@
           prim__boolean.new
           FALSE
     [] > empty_1
-      TRUE > @
+      true > @
     [] > ifThenElse_2
       binary_4.if > @
         block_2
@@ -81,7 +83,8 @@
         10
     [] > block_2
       seq > @
-        return_2
+        *
+          return_2
       [] > return_2
         literal_5 > @
       [] > literal_5
@@ -89,7 +92,7 @@
           prim__boolean.new
           TRUE
     [] > empty_2
-      TRUE > @
+      true > @
     [] > ifThenElse_3
       binary_5.if > @
         block_3
@@ -122,8 +125,9 @@
         1
     [] > block_3
       seq > @
-        statementExpression_2
-        return_3
+        *
+          statementExpression_2
+          return_3
       [] > statementExpression_2
         simpleReference_8.inc_post > @
       [] > simpleReference_8
@@ -145,8 +149,9 @@
         b > @
     [] > block_4
       seq > @
-        statementExpression_3
-        return_4
+        *
+          statementExpression_3
+          return_4
       [] > statementExpression_3
         simpleReference_11.dec_post > @
       [] > simpleReference_11
@@ -166,12 +171,12 @@
         simpleReference_13.dec_pre > @
       [] > simpleReference_13
         b > @
-  # main :: String[] -> void
   [args] > main
     seq > @
-      statementExpression_4
-      statementExpression_5
-      statementExpression_6
+      *
+        statementExpression_4
+        statementExpression_5
+        statementExpression_6
     [] > statementExpression_4
       class__System.out.println > @
         class__System.out
@@ -228,19 +233,15 @@
       class__String.constructor_2 > @
         class__String.new
         "passed"
-  # null :: null -> void
   [this] > constructor
     seq > @
-      initialization
-      statementExpression_7
-      this
+      *
+        initialization
+        statementExpression_7
+        this
     [] > initialization
       this.init > @
         this
     [] > statementExpression_7
       this.super.constructor > @
         this.super
-
-[args...] > main
-  class__ConditionComplexIfElse.main > @
-    *

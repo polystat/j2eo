@@ -7,26 +7,14 @@ open class EOObject(
     var freeAttrs: List<String>,
     var varargAttr: Option<String>,
     var bndAttrs: List<EOBndExpr>,
-    var comment: String = "",
 ) : EOExpr() {
     override fun generateEO(indent: Int): String =
         listOfNotNull(
-            comment.let {
-                if (it.isNotEmpty()) {
-                    it
-                        .split("\n")
-                        .joinToString("") { line ->
-                            "${indent(indent)}# $line\n"
-                        }
-                } else {
-                    null
-                }
-            },
             indent(indent),
             "[",
             freeAttrs.joinToString(" "),
             varargAttr
-                .map { attr -> (if (freeAttrs.isNotEmpty()) " " else "") + attr + "..." }
+                .map { attr -> (if (freeAttrs.isNotEmpty()) " " else "") + attr }
                 .getOrElse { null },
             "]",
             bndAttrs

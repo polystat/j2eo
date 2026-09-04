@@ -15,14 +15,15 @@
     1 > address
     [this] > init
       seq > @
-        TRUE
-  # main :: String[] -> void
+        *
+          true
   [args] > main
     seq > @
-      variableDeclaration_1
-      statementExpression_1
-      statementExpression_2
-      statementExpression_3
+      *
+        variableDeclaration_1
+        statementExpression_1
+        statementExpression_2
+        statementExpression_3
     cage > t
     [] > variableDeclaration_1
       t.write > @
@@ -86,12 +87,12 @@
       class__String.constructor_2 > @
         class__String.new
         "passed"
-  # null :: null -> void
   [this] > constructor
     seq > @
-      initialization
-      statementExpression_4
-      this
+      *
+        initialization
+        statementExpression_4
+        this
     [] > initialization
       this.init > @
         this
@@ -109,16 +110,17 @@
     1 > address
     [this] > init
       seq > @
-        TRUE
+        *
+          true
     prim__int.constructor_1 > id
       prim__int.new
-  # null :: int -> Test -> void
   [this id t] > constructor
     seq > @
-      initialization
-      statementExpression_5
-      ifThenElse_1
-      this
+      *
+        initialization
+        statementExpression_5
+        ifThenElse_1
+        this
     [] > initialization
       this.init > @
         this
@@ -144,7 +146,8 @@
       null > @
     [] > block_1
       seq > @
-        statementExpression_6
+        *
+          statementExpression_6
       [] > statementExpression_6
         class__System.out.println > @
           class__System.out
@@ -154,8 +157,4 @@
       [] > simpleReference_8
         t > @
     [] > empty_1
-      TRUE > @
-
-[args...] > main
-  class__CompoundClassLeftHandOperandIsEvaluatedFirst.main > @
-    *
+      true > @

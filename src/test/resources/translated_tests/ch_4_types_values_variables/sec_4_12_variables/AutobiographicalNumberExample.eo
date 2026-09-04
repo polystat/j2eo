@@ -16,20 +16,21 @@
     1 > address
     [this] > init
       seq > @
-        TRUE
-  # main :: String -> void
+        *
+          true
   [args[]] > main
     seq > @
-      variableDeclaration_1
-      statementExpression_1
-      variableDeclaration_2
-      variableDeclaration_3
-      variableDeclaration_4
-      statementExpression_2
-      variableDeclaration_5
-      statementExpression_3
-      ifThenElse_1
-      statementExpression_4
+      *
+        variableDeclaration_1
+        statementExpression_1
+        variableDeclaration_2
+        variableDeclaration_3
+        variableDeclaration_4
+        statementExpression_2
+        variableDeclaration_5
+        statementExpression_3
+        ifThenElse_1
+        statementExpression_4
     prim__int.constructor_1 > num
       prim__int.new
     [] > variableDeclaration_1
@@ -80,7 +81,7 @@
     [] > initializerSimple_4
       arrayCreation_1 > @
     [] > arrayCreation_1
-      FALSE > @
+      false > @
     [] > statementExpression_2
       for_loop_placeholder > @
     prim__boolean.constructor_1 > flag
@@ -136,12 +137,12 @@
       class__String.constructor_2 > @
         class__String.new
         "passed"
-  # null :: null -> void
   [this] > constructor
     seq > @
-      initialization
-      statementExpression_7
-      this
+      *
+        initialization
+        statementExpression_7
+        this
     [] > initialization
       this.init > @
         this

@@ -17,7 +17,7 @@ fun eoSeqCall(vararg statements: EOCopy): EOBndExpr = eoSeqCall(statements.toLis
 /**
  * Generator of seq > @ blocks.
  */
-fun eoSeqCall(statements: List<EOCopy>): EOBndExpr = EOBndExpr(EOCopy("seq", statements), "@")
+fun eoSeqCall(statements: List<EOCopy>): EOBndExpr = EOBndExpr(EOCopy("seq", listOf(EOCopy("*", statements))), "@")
 
 /**
  * Generator for EO functions.
@@ -34,14 +34,12 @@ fun eoFunctionDeclaration(
     vararg: Option<String> = None,
     bnds: List<EOBndExpr> = emptyList(),
     statements: List<EOCopy> = emptyList(),
-    comment: String = "",
 ): EOBndExpr =
     EOBndExpr(
         EOObject(
             args,
             vararg,
             bnds + eoSeqCall(statements),
-            comment,
         ),
         name,
     )

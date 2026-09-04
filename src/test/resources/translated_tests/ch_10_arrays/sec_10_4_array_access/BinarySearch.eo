@@ -15,15 +15,16 @@
     1 > address
     [this] > init
       seq > @
-        TRUE
-  # main :: String[] -> void
+        *
+          true
   [args] > main
     seq > @
-      variableDeclaration_1
-      variableDeclaration_2
-      variableDeclaration_3
-      ifThenElse_1
-      statementExpression_1
+      *
+        variableDeclaration_1
+        variableDeclaration_2
+        variableDeclaration_3
+        ifThenElse_1
+        statementExpression_1
     prim__int.constructor_1 > arr
       prim__int.new
     [] > variableDeclaration_1
@@ -192,11 +193,11 @@
       class__String.constructor_2 > @
         class__String.new
         "passed"
-  # binarySearch :: int[] -> int -> int -> int -> int
   [arr low high key] > binarySearch
     seq > @
-      ifThenElse_2
-      return_1
+      *
+        ifThenElse_2
+        return_1
     [] > ifThenElse_2
       binary_5.if > @
         block_1
@@ -210,10 +211,11 @@
       low > @
     [] > block_1
       seq > @
-        variableDeclaration_4
-        ifThenElse_3
-        ifThenElse_4
-        return_2
+        *
+          variableDeclaration_4
+          ifThenElse_3
+          ifThenElse_4
+          return_2
       prim__int.constructor_1 > mid
         prim__int.new
       [] > variableDeclaration_4
@@ -263,7 +265,7 @@
       [] > simpleReference_16
         mid > @
       [] > empty_3
-        TRUE > @
+        true > @
       [] > ifThenElse_4
         binary_10.if > @
           return_4
@@ -305,7 +307,7 @@
       [] > simpleReference_22
         key > @
       [] > empty_4
-        TRUE > @
+        true > @
       [] > return_2
         methodInvocation_3 > @
       [] > methodInvocation_3
@@ -331,7 +333,7 @@
       [] > simpleReference_26
         key > @
     [] > empty_2
-      TRUE > @
+      true > @
     [] > return_1
       unaryPrefix_2 > @
     [] > unaryPrefix_2
@@ -340,19 +342,15 @@
       prim__int.constructor_2 > @
         prim__int.new
         1
-  # null :: null -> void
   [this] > constructor
     seq > @
-      initialization
-      statementExpression_4
-      this
+      *
+        initialization
+        statementExpression_4
+        this
     [] > initialization
       this.init > @
         this
     [] > statementExpression_4
       this.super.constructor > @
         this.super
-
-[args...] > main
-  class__BinarySearch.main > @
-    *

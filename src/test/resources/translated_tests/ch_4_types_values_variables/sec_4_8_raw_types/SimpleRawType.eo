@@ -14,20 +14,21 @@
     1 > address
     [this] > init
       seq > @
-        TRUE
+        *
+          true
     cage > value
-    # get :: null -> E
     [this] > get
       seq > @
-        return_1
+        *
+          return_1
       [] > return_1
         simpleReference_1 > @
       [] > simpleReference_1
         value > @
-    # set :: E -> void
     [this v] > set
       seq > @
-        statementExpression_1
+        *
+          statementExpression_1
       [] > statementExpression_1
         simpleReference_2.write > @
           simpleReference_3
@@ -35,12 +36,12 @@
         value > @
       [] > simpleReference_3
         v > @
-  # null :: E -> void
   [this v] > constructor
     seq > @
-      initialization
-      statementExpression_2
-      this
+      *
+        initialization
+        statementExpression_2
+        this
     [] > initialization
       this.init > @
         this
@@ -51,15 +52,15 @@
       value > @
     [] > simpleReference_5
       v > @
-  # main :: String[] -> void
   [args] > main
     seq > @
-      variableDeclaration_1
-      statementExpression_3
-      statementExpression_4
-      statementExpression_5
-      statementExpression_6
-      statementExpression_7
+      *
+        variableDeclaration_1
+        statementExpression_3
+        statementExpression_4
+        statementExpression_5
+        statementExpression_6
+        statementExpression_7
     cage > x
     [] > variableDeclaration_1
       x.write > @
@@ -112,7 +113,3 @@
       class__String.constructor_2 > @
         class__String.new
         "passed"
-
-[args...] > main
-  class__SimpleRawType.main > @
-    *

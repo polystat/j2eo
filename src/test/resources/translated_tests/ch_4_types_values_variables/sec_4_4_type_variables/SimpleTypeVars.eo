@@ -14,13 +14,14 @@
     1 > address
     [this] > init
       seq > @
-        TRUE
-  # main :: String[] -> void
+        *
+          true
   [args] > main
     seq > @
-      variableDeclaration_1
-      statementExpression_1
-      statementExpression_2
+      *
+        variableDeclaration_1
+        statementExpression_1
+        statementExpression_2
     cage > ct
     [] > variableDeclaration_1
       ct.write > @
@@ -44,12 +45,12 @@
       class__String.constructor_2 > @
         class__String.new
         "passed"
-  # null :: null -> void
   [this] > constructor
     seq > @
-      initialization
-      statementExpression_3
-      this
+      *
+        initialization
+        statementExpression_3
+        this
     [] > initialization
       this.init > @
         this
@@ -67,11 +68,12 @@
     1 > address
     [this] > init
       seq > @
-        TRUE
-    # mCPublic :: null -> void
+        *
+          true
     [this] > mCPublic
       seq > @
-        statementExpression_4
+        *
+          statementExpression_4
       [] > statementExpression_4
         class__System.out.println > @
           class__System.out
@@ -80,10 +82,10 @@
         class__String.constructor_2 > @
           class__String.new
           "mCPublic()"
-    # mCProtected :: null -> void
     [this] > mCProtected
       seq > @
-        statementExpression_5
+        *
+          statementExpression_5
       [] > statementExpression_5
         class__System.out.println > @
           class__System.out
@@ -92,10 +94,10 @@
         class__String.constructor_2 > @
           class__String.new
           "mCProtected()"
-    # mCPackage :: null -> void
     [this] > mCPackage
       seq > @
-        statementExpression_6
+        *
+          statementExpression_6
       [] > statementExpression_6
         class__System.out.println > @
           class__System.out
@@ -104,10 +106,10 @@
         class__String.constructor_2 > @
           class__String.new
           "mCPackage()"
-    # mCPrivate :: null -> void
     [this] > mCPrivate
       seq > @
-        statementExpression_7
+        *
+          statementExpression_7
       [] > statementExpression_7
         class__System.out.println > @
           class__System.out
@@ -116,12 +118,12 @@
         class__String.constructor_2 > @
           class__String.new
           "mCPrivate()"
-  # null :: null -> void
   [this] > constructor
     seq > @
-      initialization
-      statementExpression_8
-      this
+      *
+        initialization
+        statementExpression_8
+        this
     [] > initialization
       this.init > @
         this
@@ -139,11 +141,12 @@
     1 > address
     [this] > init
       seq > @
-        TRUE
-    # mI :: null -> void
+        *
+          true
     [this] > mI
       seq > @
-        statementExpression_9
+        *
+          statementExpression_9
       [] > statementExpression_9
         class__System.out.println > @
           class__System.out
@@ -152,19 +155,15 @@
         class__String.constructor_2 > @
           class__String.new
           "mI()"
-  # null :: null -> void
   [this] > constructor
     seq > @
-      initialization
-      statementExpression_10
-      this
+      *
+        initialization
+        statementExpression_10
+        this
     [] > initialization
       this.init > @
         this
     [] > statementExpression_10
       this.super.constructor > @
         this.super
-
-[args...] > main
-  class__SimpleTypeVars.main > @
-    *

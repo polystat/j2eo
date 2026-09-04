@@ -16,12 +16,13 @@
     1 > address
     [this] > init
       seq > @
-        TRUE
-  # checkNumber :: int -> boolean
+        *
+          true
   [number] > checkNumber
     seq > @
-      while_1
-      return_1
+      *
+        while_1
+        return_1
     [] > while_1
       binary_1.while > @
         [while_i]
@@ -37,8 +38,9 @@
         0
     [] > block_1
       seq > @
-        ifThenElse_1
-        statementExpression_1
+        *
+          ifThenElse_1
+          statementExpression_1
       [] > ifThenElse_1
         binary_2.if > @
           return_2
@@ -66,7 +68,7 @@
           prim__boolean.new
           TRUE
       [] > empty_2
-        TRUE > @
+        true > @
       [] > statementExpression_1
         simpleReference_3.write > @
           binary_4
@@ -87,24 +89,24 @@
       prim__boolean.constructor_2 > @
         prim__boolean.new
         FALSE
-  # main :: String -> void
   [args[]] > main
     seq > @
-      variableDeclaration_1
-      variableDeclaration_2
-      statementExpression_2
-      statementExpression_3
-      ifThenElse_2
-      ifThenElse_3
-      statementExpression_4
+      *
+        variableDeclaration_1
+        variableDeclaration_2
+        statementExpression_2
+        statementExpression_3
+        ifThenElse_2
+        ifThenElse_3
+        statementExpression_4
     prim__int.constructor_1 > n1
       prim__int.new
     [] > variableDeclaration_1
-      TRUE > @
+      true > @
     prim__int.constructor_1 > n2
       prim__int.new
     [] > variableDeclaration_2
-      TRUE > @
+      true > @
     [] > statementExpression_2
       simpleReference_5.write > @
         literal_7
@@ -203,12 +205,12 @@
       class__String.constructor_2 > @
         class__String.new
         "passed"
-  # null :: null -> void
   [this] > constructor
     seq > @
-      initialization
-      statementExpression_9
-      this
+      *
+        initialization
+        statementExpression_9
+        this
     [] > initialization
       this.init > @
         this

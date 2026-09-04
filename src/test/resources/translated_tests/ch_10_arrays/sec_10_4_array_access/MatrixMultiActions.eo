@@ -16,31 +16,32 @@
     1 > address
     [this] > init
       seq > @
-        TRUE
-  # main :: String[] -> void
+        *
+          true
   [args] > main
     seq > @
-      variableDeclaration_1
-      variableDeclaration_2
-      variableDeclaration_3
-      statementExpression_1
-      statementExpression_2
-      statementExpression_3
-      statementExpression_4
-      statementExpression_5
-      statementExpression_6
-      statementExpression_7
-      statementExpression_8
-      statementExpression_9
-      statementExpression_10
-      statementExpression_11
-      statementExpression_12
-      statementExpression_13
-      statementExpression_14
-      statementExpression_15
-      statementExpression_16
-      statementExpression_17
-      statementExpression_18
+      *
+        variableDeclaration_1
+        variableDeclaration_2
+        variableDeclaration_3
+        statementExpression_1
+        statementExpression_2
+        statementExpression_3
+        statementExpression_4
+        statementExpression_5
+        statementExpression_6
+        statementExpression_7
+        statementExpression_8
+        statementExpression_9
+        statementExpression_10
+        statementExpression_11
+        statementExpression_12
+        statementExpression_13
+        statementExpression_14
+        statementExpression_15
+        statementExpression_16
+        statementExpression_17
+        statementExpression_18
     prim__int.constructor_1 > a
       prim__int.new
     [] > variableDeclaration_1
@@ -207,7 +208,7 @@
     [] > initializerSimple_19
       arrayCreation_1 > @
     [] > arrayCreation_1
-      FALSE > @
+      false > @
     [] > statementExpression_1
       class__System.out.println > @
         class__System.out
@@ -397,14 +398,14 @@
       class__String.constructor_2 > @
         class__String.new
         "passed"
-  # add :: int[][] -> int[][] -> int[][]
   [a b] > add
     seq > @
-      variableDeclaration_4
-      variableDeclaration_5
-      variableDeclaration_6
-      statementExpression_19
-      return_1
+      *
+        variableDeclaration_4
+        variableDeclaration_5
+        variableDeclaration_6
+        statementExpression_19
+        return_1
     prim__int.constructor_1 > row
       prim__int.new
     [] > variableDeclaration_4
@@ -442,21 +443,21 @@
     [] > initializerSimple_22
       arrayCreation_2 > @
     [] > arrayCreation_2
-      FALSE > @
+      false > @
     [] > statementExpression_19
       for_loop_placeholder > @
     [] > return_1
       simpleReference_30 > @
     [] > simpleReference_30
       sum > @
-  # subtract :: int[][] -> int[][] -> int[][]
   [a b] > subtract
     seq > @
-      variableDeclaration_7
-      variableDeclaration_8
-      variableDeclaration_9
-      statementExpression_20
-      return_2
+      *
+        variableDeclaration_7
+        variableDeclaration_8
+        variableDeclaration_9
+        statementExpression_20
+        return_2
     prim__int.constructor_1 > row
       prim__int.new
     [] > variableDeclaration_7
@@ -494,21 +495,21 @@
     [] > initializerSimple_25
       arrayCreation_3 > @
     [] > arrayCreation_3
-      FALSE > @
+      false > @
     [] > statementExpression_20
       for_loop_placeholder > @
     [] > return_2
       simpleReference_33 > @
     [] > simpleReference_33
       sub > @
-  # multiply :: int[][] -> int[][] -> int[][]
   [a b] > multiply
     seq > @
-      variableDeclaration_10
-      variableDeclaration_11
-      variableDeclaration_12
-      statementExpression_21
-      return_3
+      *
+        variableDeclaration_10
+        variableDeclaration_11
+        variableDeclaration_12
+        statementExpression_21
+        return_3
     prim__int.constructor_1 > row
       prim__int.new
     [] > variableDeclaration_10
@@ -546,21 +547,21 @@
     [] > initializerSimple_28
       arrayCreation_4 > @
     [] > arrayCreation_4
-      FALSE > @
+      false > @
     [] > statementExpression_21
       for_loop_placeholder > @
     [] > return_3
       simpleReference_36 > @
     [] > simpleReference_36
       product > @
-  # transpose :: int[][] -> int[][]
   [a] > transpose
     seq > @
-      variableDeclaration_13
-      variableDeclaration_14
-      variableDeclaration_15
-      statementExpression_22
-      return_4
+      *
+        variableDeclaration_13
+        variableDeclaration_14
+        variableDeclaration_15
+        statementExpression_22
+        return_4
     prim__int.constructor_1 > row
       prim__int.new
     [] > variableDeclaration_13
@@ -598,26 +599,22 @@
     [] > initializerSimple_31
       arrayCreation_5 > @
     [] > arrayCreation_5
-      FALSE > @
+      false > @
     [] > statementExpression_22
       for_loop_placeholder > @
     [] > return_4
       simpleReference_39 > @
     [] > simpleReference_39
       temp > @
-  # null :: null -> void
   [this] > constructor
     seq > @
-      initialization
-      statementExpression_23
-      this
+      *
+        initialization
+        statementExpression_23
+        this
     [] > initialization
       this.init > @
         this
     [] > statementExpression_23
       this.super.constructor > @
         this.super
-
-[args...] > main
-  class__MatrixMultiActions.main > @
-    *

@@ -16,16 +16,17 @@
     1 > address
     [this] > init
       seq > @
-        TRUE
-  # main :: String[] -> void
+        *
+          true
   [args] > main
     seq > @
-      variableDeclaration_1
-      statementExpression_1
-      statementExpression_2
-      statementExpression_3
-      statementExpression_4
-      statementExpression_5
+      *
+        variableDeclaration_1
+        statementExpression_1
+        statementExpression_2
+        statementExpression_3
+        statementExpression_4
+        statementExpression_5
     cage > p
     [] > variableDeclaration_1
       p.write > @
@@ -86,12 +87,12 @@
       class__String.constructor_2 > @
         class__String.new
         "passed"
-  # null :: null -> void
   [this] > constructor
     seq > @
-      initialization
-      statementExpression_6
-      this
+      *
+        initialization
+        statementExpression_6
+        this
     [] > initialization
       this.init > @
         this
@@ -109,16 +110,17 @@
     1 > address
     [this] > init
       seq > @
-        TRUE
+        *
+          true
     prim__float.constructor_1 > x
       prim__float.new
     prim__float.constructor_1 > y
       prim__float.new
-    # move :: int -> int -> void
     [this dx dy] > move
       seq > @
-        statementExpression_7
-        statementExpression_8
+        *
+          statementExpression_7
+          statementExpression_8
       [] > statementExpression_7
         simpleReference_5.add_equal > @
           simpleReference_6
@@ -133,11 +135,11 @@
         y > @
       [] > simpleReference_8
         dy > @
-    # move :: float -> float -> void
     [this dx dy] > move
       seq > @
-        statementExpression_9
-        statementExpression_10
+        *
+          statementExpression_9
+          statementExpression_10
       [] > statementExpression_9
         simpleReference_9.add_equal > @
           simpleReference_10
@@ -152,10 +154,10 @@
         y > @
       [] > simpleReference_12
         dy > @
-    # toString :: null -> String
     [this] > toString
       seq > @
-        return_1
+        *
+          return_1
       [] > return_1
         binary_1 > @
       [] > binary_1
@@ -186,19 +188,15 @@
         class__String.constructor_2 > @
           class__String.new
           ")"
-  # null :: null -> void
   [this] > constructor
     seq > @
-      initialization
-      statementExpression_11
-      this
+      *
+        initialization
+        statementExpression_11
+        this
     [] > initialization
       this.init > @
         this
     [] > statementExpression_11
       this.super.constructor > @
         this.super
-
-[args...] > main
-  class__SimpleOverloading.main > @
-    *

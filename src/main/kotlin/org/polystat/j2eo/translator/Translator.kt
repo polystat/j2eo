@@ -7,9 +7,6 @@ import arrow.core.Some
 import org.polystat.j2eo.eotree.*
 import org.polystat.j2eo.translator.preprocessor.PreprocessorState
 import org.polystat.j2eo.translator.preprocessor.preprocess
-import org.polystat.j2eo.util.findMainClass
-import org.polystat.j2eo.util.generateEntryPoint
-import org.polystat.j2eo.util.logger
 import tree.Compilation.CompilationUnit
 import tree.Compilation.Package
 import tree.Compilation.SimpleCompilationUnit
@@ -64,19 +61,6 @@ class Translator(
                 .map { obj: TopLevelComponent? -> mapTopLevelComponent(obj!!, context) }
                 .map { bnd: org.polystat.j2eo.eotree.EOBnd -> bnd as EOBndExpr }
 
-        // FIXME: assuming there is only one top-level component and it is a class
-        val mainClassName = findMainClass(unit)
-        val entrypointBnds =
-            if (mainClassName != null) {
-                generateEntryPoint(mainClassName)
-            } else {
-                logger.info { "No entry point here!" }
-                listOf()
-            }
-
-        // FIXME: assuming there is only one top-level component and it is a class
-        // Always calling the 'main' method
-
         val stdAliases =
             (
                 preprocessorState.stdTokensForCurrentAlias
@@ -100,7 +84,7 @@ class Translator(
                 if (pkg.isNotEmpty()) Some(pkg) else None,
                 stdAliases + eoAliases,
             ),
-            bnds + entrypointBnds,
+            bnds,
         )
     }
 

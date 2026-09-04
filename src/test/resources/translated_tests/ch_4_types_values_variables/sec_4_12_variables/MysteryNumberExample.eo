@@ -16,15 +16,16 @@
     1 > address
     [this] > init
       seq > @
-        TRUE
-  # reverse :: int -> int
+        *
+          true
   [x] > reverse
     seq > @
-      variableDeclaration_1
-      variableDeclaration_2
-      statementExpression_1
-      variableDeclaration_3
-      return_1
+      *
+        variableDeclaration_1
+        variableDeclaration_2
+        statementExpression_1
+        variableDeclaration_3
+        return_1
     cage > str
     [] > variableDeclaration_1
       str.write > @
@@ -66,12 +67,12 @@
       simpleReference_5 > @
     [] > simpleReference_5
       rev > @
-  # isMysteryNo :: int -> boolean
   [num] > isMysteryNo
     seq > @
-      statementExpression_2
-      statementExpression_3
-      return_2
+      *
+        statementExpression_2
+        statementExpression_3
+        return_2
     [] > statementExpression_2
       for_loop_placeholder > @
     [] > statementExpression_3
@@ -88,12 +89,12 @@
       prim__boolean.constructor_2 > @
         prim__boolean.new
         FALSE
-  # main :: String -> void
   [args[]] > main
     seq > @
-      variableDeclaration_4
-      statementExpression_4
-      statementExpression_5
+      *
+        variableDeclaration_4
+        statementExpression_4
+        statementExpression_5
     prim__int.constructor_1 > num
       prim__int.new
     [] > variableDeclaration_4
@@ -119,12 +120,12 @@
       class__String.constructor_2 > @
         class__String.new
         "passed"
-  # null :: null -> void
   [this] > constructor
     seq > @
-      initialization
-      statementExpression_6
-      this
+      *
+        initialization
+        statementExpression_6
+        this
     [] > initialization
       this.init > @
         this
