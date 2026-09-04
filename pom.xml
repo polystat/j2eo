@@ -42,7 +42,7 @@ SOFTWARE.
     <junit-jupiter-engine.version>6.1.3</junit-jupiter-engine.version>
     <junit-platform.version>6.1.3</junit-platform.version>
     <kotlin.version>2.4.10</kotlin.version>
-    <kotlin-logging.version>3.0.5</kotlin-logging.version>
+    <kotlin-logging.version>5.1.4</kotlin-logging.version>
     <mvn.version>3.16.0</mvn.version>
     <qulice.version>0.35.1</qulice.version>
     <slf4j.version>2.0.18</slf4j.version>
