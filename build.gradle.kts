@@ -9,9 +9,9 @@ plugins {
     jacoco
     `maven-publish`
     signing
-    id("org.jlleitschuh.gradle.ktlint") version "13.1.0"
+    id("org.jlleitschuh.gradle.ktlint") version "14.2.0"
     // id("org.cqfn.diktat.diktat-gradle-plugin") version "1.0.2"
-    kotlin("jvm") version "2.2.20"
+    kotlin("jvm") version "2.4.10"
     id("com.github.dawnwords.jacoco.badge") version "0.2.4"
 }
 
@@ -21,12 +21,15 @@ val mvnPublicationVersion: String? by project
 val candidates: String? by project
 val amount: String? by project
 
+// @todo #162:90m Add subprojects for runtime and plugins here.
+//  The location of files in src/main and in src/test should be rewatched.
+// @todo #162:30m Add CI management with bot rultor.
 group = "org.polystat"
 version = mvnPublicationVersion ?: "0.6.0"
 
 tasks.withType<KotlinCompile>().configureEach {
     compilerOptions {
-        jvmTarget.set(org.jetbrains.kotlin.gradle.dsl.JvmTarget.JVM_11)
+        jvmTarget.set(org.jetbrains.kotlin.gradle.dsl.JvmTarget.JVM_17)
     }
 }
 
@@ -44,30 +47,31 @@ repositories {
 }
 
 dependencies {
-    implementation(platform("com.jcabi:parent:0.69.4"))
+    implementation(platform("com.jcabi:parent:0.73.4"))
     // Library for command-line arguments support
-    implementation("commons-cli:commons-cli:1.5.0")
+    implementation("commons-cli:commons-cli:1.11.0")
     // Functional stuff
-    implementation("io.arrow-kt:arrow-core:1.1.5")
+    implementation("io.arrow-kt:arrow-core:2.2.3")
     // Kotlin logger
-    implementation("org.slf4j:slf4j-simple:2.0.7")
+    implementation("org.slf4j:slf4j-simple:2.0.18")
     implementation("io.github.microutils:kotlin-logging-jvm:3.0.5")
 
-    implementation("org.junit.platform:junit-platform-commons:1.9.2")
-    testImplementation("org.junit.jupiter:junit-jupiter-api:5.9.2")
-    testRuntimeOnly("org.junit.jupiter:junit-jupiter-engine:5.9.2")
-    testRuntimeOnly("org.junit.platform:junit-platform-launcher:1.9.2")
+    implementation("org.junit.platform:junit-platform-commons:6.1.3")
+    testImplementation("org.junit.jupiter:junit-jupiter-api:6.1.3")
+    testRuntimeOnly("org.junit.jupiter:junit-jupiter-engine:6.1.3")
+    testRuntimeOnly("org.junit.platform:junit-platform-launcher:6.1.3")
     implementation(kotlin("stdlib-jdk8"))
 
     // Use ANTLR for parser generation
     antlr("org.antlr:antlr4:4.13.2")
 
+    // @todo #181:90m Add dependency from j2ast repo.
     implementation("org.polystat:j2ast:0.2.0")
 }
 
 java {
-    sourceCompatibility = JavaVersion.VERSION_11
-    targetCompatibility = JavaVersion.VERSION_11
+    sourceCompatibility = JavaVersion.VERSION_17
+    targetCompatibility = JavaVersion.VERSION_17
 
     withJavadocJar()
     withSourcesJar()

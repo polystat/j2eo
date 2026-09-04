@@ -108,11 +108,11 @@ fun mapMethodDeclaration(
     if (dec.parameters != null) {
         assert(
             dec.parameters.parameters.size + (if (isStatic) 0 else 1) ==
-                obj.freeAttrs.size + if (obj.varargAttr.nonEmpty()) 1 else 0,
+                obj.freeAttrs.size + if (obj.varargAttr.isSome()) 1 else 0,
         ) {
             "Parameters count of Java method and EO method do not match: ${dec.parameters.parameters.size} vs ${obj.freeAttrs.size +
                 if (obj.varargAttr
-                        .nonEmpty()
+                        .isSome()
                 ) {
                     1
                 } else {

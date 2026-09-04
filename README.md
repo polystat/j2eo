@@ -20,7 +20,7 @@ docker run -v $(pwd):/eo yegor256/j2eo hello.java --target output
 
 Alternatively, download `j2eo.jar` from the
   [releases](https://github.com/polystat/j2eo/releases) page
-  and run it with **Java 11+**:
+  and run it with **Java 17+**:
 
 ```shell
 java -jar j2eo.jar <input> -o <output directory>
@@ -31,7 +31,7 @@ Here, `<input>` is either a single `.java` file or a directory
 
 ## How to Contribute
 
-You will need **Java 11+**, **Gradle 7.4+**, **Maven 3.8+**,
+You will need **Java 17+**, **Gradle 9.6+**, **Maven 3.8+**,
   and **ANTLR4 4.13.2**.
 See [ACCEPTANCE.md](ACCEPTANCE.md) for instructions on installing them.
 
