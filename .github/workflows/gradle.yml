@@ -41,7 +41,7 @@ jobs:
         run: gradle build
 
       - name: Upload Gradle test report
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v7
         if: ${{ always() }}
         with:
           name: gradle-test-report-${{ matrix.os }}
