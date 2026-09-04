@@ -33,7 +33,7 @@ jobs:
         shell: bash
         run: curl -fsSL -o antlr-4.13.2-complete.jar https://www.antlr.org/download/antlr-4.13.2-complete.jar
 
-      - uses: gradle/actions/setup-gradle@v4
+      - uses: gradle/actions/setup-gradle@v6
         with:
           gradle-version: "9.6.0"
 
