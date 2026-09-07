@@ -11,7 +11,7 @@ plugins {
     signing
     id("org.jlleitschuh.gradle.ktlint") version "14.2.0"
     // id("org.cqfn.diktat.diktat-gradle-plugin") version "1.0.2"
-    kotlin("jvm") version "2.4.10"
+    kotlin("jvm") version "2.4.20"
     id("com.github.dawnwords.jacoco.badge") version "0.2.4"
 }
 
